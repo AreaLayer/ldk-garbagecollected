@@ -69,7 +69,7 @@ public class TwoTuple_ThirtyTwoBytesCVec_C2Tuple_u32CVec_u8ZZZZ extends CommonBa
 	 * Creates a new C2Tuple_ThirtyTwoBytesCVec_C2Tuple_u32CVec_u8ZZZZ from the contained elements.
 	 */
 	public static TwoTuple_ThirtyTwoBytesCVec_C2Tuple_u32CVec_u8ZZZZ of(byte[] a, TwoTuple_u32CVec_u8ZZ[] b) {
-		long ret = bindings.C2Tuple_ThirtyTwoBytesCVec_C2Tuple_u32CVec_u8ZZZZ_new(InternalUtils.check_arr_len(a, 32), b != null ? Arrays.stream(b).mapToLong(b_conv_23 -> b_conv_23 != null ? b_conv_23.ptr : 0).toArray() : null);
+		long ret = bindings.C2Tuple_ThirtyTwoBytesCVec_C2Tuple_u32CVec_u8ZZZZ_new(InternalUtils.check_arr_len(a, 32), b != null ? Arrays.stream(b).mapToLong(b_conv_23 -> b_conv_23.ptr).toArray() : null);
 		Reference.reachabilityFence(a);
 		Reference.reachabilityFence(b);
 		if (ret >= 0 && ret <= 4096) { return null; }

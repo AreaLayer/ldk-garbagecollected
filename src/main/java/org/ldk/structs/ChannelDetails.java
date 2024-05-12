@@ -26,10 +26,13 @@ public class ChannelDetails extends CommonBase {
 	 * Note that this means this value is *not* persistent - it can change once during the
 	 * lifetime of the channel.
 	 */
-	public byte[] get_channel_id() {
-		byte[] ret = bindings.ChannelDetails_get_channel_id(this.ptr);
+	public ChannelId get_channel_id() {
+		long ret = bindings.ChannelDetails_get_channel_id(this.ptr);
 		Reference.reachabilityFence(this);
-		return ret;
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
 	}
 
 	/**
@@ -38,10 +41,11 @@ public class ChannelDetails extends CommonBase {
 	 * Note that this means this value is *not* persistent - it can change once during the
 	 * lifetime of the channel.
 	 */
-	public void set_channel_id(byte[] val) {
-		bindings.ChannelDetails_set_channel_id(this.ptr, InternalUtils.check_arr_len(val, 32));
+	public void set_channel_id(org.ldk.structs.ChannelId val) {
+		bindings.ChannelDetails_set_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
+		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -60,7 +64,7 @@ public class ChannelDetails extends CommonBase {
 	 * Parameters which apply to our counterparty. See individual fields for more information.
 	 */
 	public void set_counterparty(org.ldk.structs.ChannelCounterparty val) {
-		bindings.ChannelDetails_set_counterparty(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChannelDetails_set_counterparty(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -69,9 +73,6 @@ public class ChannelDetails extends CommonBase {
 	/**
 	 * The Channel's funding transaction output, if we've negotiated the funding transaction with
 	 * our counterparty already.
-	 * 
-	 * Note that, if this has been set, `channel_id` will be equivalent to
-	 * `funding_txo.unwrap().to_channel_id()`.
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
@@ -88,9 +89,6 @@ public class ChannelDetails extends CommonBase {
 	/**
 	 * The Channel's funding transaction output, if we've negotiated the funding transaction with
 	 * our counterparty already.
-	 * 
-	 * Note that, if this has been set, `channel_id` will be equivalent to
-	 * `funding_txo.unwrap().to_channel_id()`.
 	 * 
 	 * Note that val (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
@@ -828,63 +826,6 @@ public class ChannelDetails extends CommonBase {
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
-	}
-
-	/**
-	 * Constructs a new ChannelDetails given each field
-	 * 
-	 * Note that funding_txo_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
-	 * Note that channel_type_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
-	 * Note that config_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
-	 */
-	public static ChannelDetails of(byte[] channel_id_arg, org.ldk.structs.ChannelCounterparty counterparty_arg, @Nullable org.ldk.structs.OutPoint funding_txo_arg, @Nullable org.ldk.structs.ChannelTypeFeatures channel_type_arg, org.ldk.structs.Option_u64Z short_channel_id_arg, org.ldk.structs.Option_u64Z outbound_scid_alias_arg, org.ldk.structs.Option_u64Z inbound_scid_alias_arg, long channel_value_satoshis_arg, org.ldk.structs.Option_u64Z unspendable_punishment_reserve_arg, org.ldk.util.UInt128 user_channel_id_arg, org.ldk.structs.Option_u32Z feerate_sat_per_1000_weight_arg, long balance_msat_arg, long outbound_capacity_msat_arg, long next_outbound_htlc_limit_msat_arg, long next_outbound_htlc_minimum_msat_arg, long inbound_capacity_msat_arg, org.ldk.structs.Option_u32Z confirmations_required_arg, org.ldk.structs.Option_u32Z confirmations_arg, org.ldk.structs.Option_u16Z force_close_spend_delay_arg, boolean is_outbound_arg, boolean is_channel_ready_arg, org.ldk.structs.Option_ChannelShutdownStateZ channel_shutdown_state_arg, boolean is_usable_arg, boolean is_public_arg, org.ldk.structs.Option_u64Z inbound_htlc_minimum_msat_arg, org.ldk.structs.Option_u64Z inbound_htlc_maximum_msat_arg, @Nullable org.ldk.structs.ChannelConfig config_arg) {
-		long ret = bindings.ChannelDetails_new(InternalUtils.check_arr_len(channel_id_arg, 32), counterparty_arg == null ? 0 : counterparty_arg.ptr, funding_txo_arg == null ? 0 : funding_txo_arg.ptr, channel_type_arg == null ? 0 : channel_type_arg.ptr, short_channel_id_arg.ptr, outbound_scid_alias_arg.ptr, inbound_scid_alias_arg.ptr, channel_value_satoshis_arg, unspendable_punishment_reserve_arg.ptr, user_channel_id_arg.getLEBytes(), feerate_sat_per_1000_weight_arg.ptr, balance_msat_arg, outbound_capacity_msat_arg, next_outbound_htlc_limit_msat_arg, next_outbound_htlc_minimum_msat_arg, inbound_capacity_msat_arg, confirmations_required_arg.ptr, confirmations_arg.ptr, force_close_spend_delay_arg.ptr, is_outbound_arg, is_channel_ready_arg, channel_shutdown_state_arg.ptr, is_usable_arg, is_public_arg, inbound_htlc_minimum_msat_arg.ptr, inbound_htlc_maximum_msat_arg.ptr, config_arg == null ? 0 : config_arg.ptr);
-		Reference.reachabilityFence(channel_id_arg);
-		Reference.reachabilityFence(counterparty_arg);
-		Reference.reachabilityFence(funding_txo_arg);
-		Reference.reachabilityFence(channel_type_arg);
-		Reference.reachabilityFence(short_channel_id_arg);
-		Reference.reachabilityFence(outbound_scid_alias_arg);
-		Reference.reachabilityFence(inbound_scid_alias_arg);
-		Reference.reachabilityFence(channel_value_satoshis_arg);
-		Reference.reachabilityFence(unspendable_punishment_reserve_arg);
-		Reference.reachabilityFence(user_channel_id_arg);
-		Reference.reachabilityFence(feerate_sat_per_1000_weight_arg);
-		Reference.reachabilityFence(balance_msat_arg);
-		Reference.reachabilityFence(outbound_capacity_msat_arg);
-		Reference.reachabilityFence(next_outbound_htlc_limit_msat_arg);
-		Reference.reachabilityFence(next_outbound_htlc_minimum_msat_arg);
-		Reference.reachabilityFence(inbound_capacity_msat_arg);
-		Reference.reachabilityFence(confirmations_required_arg);
-		Reference.reachabilityFence(confirmations_arg);
-		Reference.reachabilityFence(force_close_spend_delay_arg);
-		Reference.reachabilityFence(is_outbound_arg);
-		Reference.reachabilityFence(is_channel_ready_arg);
-		Reference.reachabilityFence(channel_shutdown_state_arg);
-		Reference.reachabilityFence(is_usable_arg);
-		Reference.reachabilityFence(is_public_arg);
-		Reference.reachabilityFence(inbound_htlc_minimum_msat_arg);
-		Reference.reachabilityFence(inbound_htlc_maximum_msat_arg);
-		Reference.reachabilityFence(config_arg);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.ChannelDetails ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelDetails(null, ret); }
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(counterparty_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(funding_txo_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_type_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(short_channel_id_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(outbound_scid_alias_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(inbound_scid_alias_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(unspendable_punishment_reserve_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(feerate_sat_per_1000_weight_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(confirmations_required_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(confirmations_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(force_close_spend_delay_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_shutdown_state_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(inbound_htlc_minimum_msat_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(inbound_htlc_maximum_msat_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(config_arg); };
-		return ret_hu_conv;
 	}
 
 	long clone_ptr() {

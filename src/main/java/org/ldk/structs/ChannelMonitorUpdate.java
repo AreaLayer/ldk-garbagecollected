@@ -72,6 +72,39 @@ public class ChannelMonitorUpdate extends CommonBase {
 		Reference.reachabilityFence(val);
 	}
 
+	/**
+	 * The channel ID associated with these updates.
+	 * 
+	 * Will be `None` for `ChannelMonitorUpdate`s constructed on LDK versions prior to 0.0.121 and
+	 * always `Some` otherwise.
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	@Nullable
+	public ChannelId get_channel_id() {
+		long ret = bindings.ChannelMonitorUpdate_get_channel_id(this.ptr);
+		Reference.reachabilityFence(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * The channel ID associated with these updates.
+	 * 
+	 * Will be `None` for `ChannelMonitorUpdate`s constructed on LDK versions prior to 0.0.121 and
+	 * always `Some` otherwise.
+	 * 
+	 * Note that val (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	public void set_channel_id(@Nullable org.ldk.structs.ChannelId val) {
+		bindings.ChannelMonitorUpdate_set_channel_id(this.ptr, val == null ? 0 : val.ptr);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
+		if (this != null) { this.ptrs_to.add(val); };
+	}
+
 	long clone_ptr() {
 		long ret = bindings.ChannelMonitorUpdate_clone_ptr(this.ptr);
 		Reference.reachabilityFence(this);
@@ -96,7 +129,7 @@ public class ChannelMonitorUpdate extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.ChannelMonitorUpdate b) {
-		boolean ret = bindings.ChannelMonitorUpdate_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.ChannelMonitorUpdate_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

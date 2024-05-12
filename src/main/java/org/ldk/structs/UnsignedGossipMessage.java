@@ -94,7 +94,7 @@ public class UnsignedGossipMessage extends CommonBase {
 	 * Utility method to constructs a new ChannelAnnouncement-variant UnsignedGossipMessage
 	 */
 	public static UnsignedGossipMessage channel_announcement(org.ldk.structs.UnsignedChannelAnnouncement a) {
-		long ret = bindings.UnsignedGossipMessage_channel_announcement(a == null ? 0 : a.ptr);
+		long ret = bindings.UnsignedGossipMessage_channel_announcement(a.ptr);
 		Reference.reachabilityFence(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.UnsignedGossipMessage ret_hu_conv = org.ldk.structs.UnsignedGossipMessage.constr_from_ptr(ret);
@@ -107,7 +107,7 @@ public class UnsignedGossipMessage extends CommonBase {
 	 * Utility method to constructs a new ChannelUpdate-variant UnsignedGossipMessage
 	 */
 	public static UnsignedGossipMessage channel_update(org.ldk.structs.UnsignedChannelUpdate a) {
-		long ret = bindings.UnsignedGossipMessage_channel_update(a == null ? 0 : a.ptr);
+		long ret = bindings.UnsignedGossipMessage_channel_update(a.ptr);
 		Reference.reachabilityFence(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.UnsignedGossipMessage ret_hu_conv = org.ldk.structs.UnsignedGossipMessage.constr_from_ptr(ret);
@@ -120,7 +120,7 @@ public class UnsignedGossipMessage extends CommonBase {
 	 * Utility method to constructs a new NodeAnnouncement-variant UnsignedGossipMessage
 	 */
 	public static UnsignedGossipMessage node_announcement(org.ldk.structs.UnsignedNodeAnnouncement a) {
-		long ret = bindings.UnsignedGossipMessage_node_announcement(a == null ? 0 : a.ptr);
+		long ret = bindings.UnsignedGossipMessage_node_announcement(a.ptr);
 		Reference.reachabilityFence(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.UnsignedGossipMessage ret_hu_conv = org.ldk.structs.UnsignedGossipMessage.constr_from_ptr(ret);

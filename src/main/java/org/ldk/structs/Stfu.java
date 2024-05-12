@@ -23,19 +23,23 @@ public class Stfu extends CommonBase {
 	/**
 	 * The channel ID where quiescence is intended
 	 */
-	public byte[] get_channel_id() {
-		byte[] ret = bindings.Stfu_get_channel_id(this.ptr);
+	public ChannelId get_channel_id() {
+		long ret = bindings.Stfu_get_channel_id(this.ptr);
 		Reference.reachabilityFence(this);
-		return ret;
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
 	}
 
 	/**
 	 * The channel ID where quiescence is intended
 	 */
-	public void set_channel_id(byte[] val) {
-		bindings.Stfu_set_channel_id(this.ptr, InternalUtils.check_arr_len(val, 32));
+	public void set_channel_id(org.ldk.structs.ChannelId val) {
+		bindings.Stfu_set_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
+		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -59,13 +63,14 @@ public class Stfu extends CommonBase {
 	/**
 	 * Constructs a new Stfu given each field
 	 */
-	public static Stfu of(byte[] channel_id_arg, byte initiator_arg) {
-		long ret = bindings.Stfu_new(InternalUtils.check_arr_len(channel_id_arg, 32), initiator_arg);
+	public static Stfu of(org.ldk.structs.ChannelId channel_id_arg, byte initiator_arg) {
+		long ret = bindings.Stfu_new(channel_id_arg.ptr, initiator_arg);
 		Reference.reachabilityFence(channel_id_arg);
 		Reference.reachabilityFence(initiator_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Stfu ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Stfu(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id_arg); };
 		return ret_hu_conv;
 	}
 
@@ -93,7 +98,7 @@ public class Stfu extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.Stfu b) {
-		boolean ret = bindings.Stfu_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.Stfu_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

@@ -68,7 +68,7 @@ public class TxCreationKeys extends CommonBase {
 	 * an old state.
 	 */
 	public void set_revocation_key(org.ldk.structs.RevocationKey val) {
-		bindings.TxCreationKeys_set_revocation_key(this.ptr, val == null ? 0 : val.ptr);
+		bindings.TxCreationKeys_set_revocation_key(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -90,7 +90,7 @@ public class TxCreationKeys extends CommonBase {
 	 * Broadcaster's HTLC Key
 	 */
 	public void set_broadcaster_htlc_key(org.ldk.structs.HtlcKey val) {
-		bindings.TxCreationKeys_set_broadcaster_htlc_key(this.ptr, val == null ? 0 : val.ptr);
+		bindings.TxCreationKeys_set_broadcaster_htlc_key(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -112,7 +112,7 @@ public class TxCreationKeys extends CommonBase {
 	 * Countersignatory's HTLC Key
 	 */
 	public void set_countersignatory_htlc_key(org.ldk.structs.HtlcKey val) {
-		bindings.TxCreationKeys_set_countersignatory_htlc_key(this.ptr, val == null ? 0 : val.ptr);
+		bindings.TxCreationKeys_set_countersignatory_htlc_key(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -134,7 +134,7 @@ public class TxCreationKeys extends CommonBase {
 	 * Broadcaster's Payment Key (which isn't allowed to be spent from for some delay)
 	 */
 	public void set_broadcaster_delayed_payment_key(org.ldk.structs.DelayedPaymentKey val) {
-		bindings.TxCreationKeys_set_broadcaster_delayed_payment_key(this.ptr, val == null ? 0 : val.ptr);
+		bindings.TxCreationKeys_set_broadcaster_delayed_payment_key(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -144,7 +144,7 @@ public class TxCreationKeys extends CommonBase {
 	 * Constructs a new TxCreationKeys given each field
 	 */
 	public static TxCreationKeys of(byte[] per_commitment_point_arg, org.ldk.structs.RevocationKey revocation_key_arg, org.ldk.structs.HtlcKey broadcaster_htlc_key_arg, org.ldk.structs.HtlcKey countersignatory_htlc_key_arg, org.ldk.structs.DelayedPaymentKey broadcaster_delayed_payment_key_arg) {
-		long ret = bindings.TxCreationKeys_new(InternalUtils.check_arr_len(per_commitment_point_arg, 33), revocation_key_arg == null ? 0 : revocation_key_arg.ptr, broadcaster_htlc_key_arg == null ? 0 : broadcaster_htlc_key_arg.ptr, countersignatory_htlc_key_arg == null ? 0 : countersignatory_htlc_key_arg.ptr, broadcaster_delayed_payment_key_arg == null ? 0 : broadcaster_delayed_payment_key_arg.ptr);
+		long ret = bindings.TxCreationKeys_new(InternalUtils.check_arr_len(per_commitment_point_arg, 33), revocation_key_arg.ptr, broadcaster_htlc_key_arg.ptr, countersignatory_htlc_key_arg.ptr, broadcaster_delayed_payment_key_arg.ptr);
 		Reference.reachabilityFence(per_commitment_point_arg);
 		Reference.reachabilityFence(revocation_key_arg);
 		Reference.reachabilityFence(broadcaster_htlc_key_arg);
@@ -166,7 +166,7 @@ public class TxCreationKeys extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.TxCreationKeys b) {
-		boolean ret = bindings.TxCreationKeys_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.TxCreationKeys_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };
@@ -220,7 +220,7 @@ public class TxCreationKeys extends CommonBase {
 	 * Key set is asymmetric and can't be used as part of counter-signatory set of transactions.
 	 */
 	public static TxCreationKeys derive_new(byte[] per_commitment_point, org.ldk.structs.DelayedPaymentBasepoint broadcaster_delayed_payment_base, org.ldk.structs.HtlcBasepoint broadcaster_htlc_base, org.ldk.structs.RevocationBasepoint countersignatory_revocation_base, org.ldk.structs.HtlcBasepoint countersignatory_htlc_base) {
-		long ret = bindings.TxCreationKeys_derive_new(InternalUtils.check_arr_len(per_commitment_point, 33), broadcaster_delayed_payment_base == null ? 0 : broadcaster_delayed_payment_base.ptr, broadcaster_htlc_base == null ? 0 : broadcaster_htlc_base.ptr, countersignatory_revocation_base == null ? 0 : countersignatory_revocation_base.ptr, countersignatory_htlc_base == null ? 0 : countersignatory_htlc_base.ptr);
+		long ret = bindings.TxCreationKeys_derive_new(InternalUtils.check_arr_len(per_commitment_point, 33), broadcaster_delayed_payment_base.ptr, broadcaster_htlc_base.ptr, countersignatory_revocation_base.ptr, countersignatory_htlc_base.ptr);
 		Reference.reachabilityFence(per_commitment_point);
 		Reference.reachabilityFence(broadcaster_delayed_payment_base);
 		Reference.reachabilityFence(broadcaster_htlc_base);
@@ -241,7 +241,7 @@ public class TxCreationKeys extends CommonBase {
 	 * Key set is asymmetric and can't be used as part of counter-signatory set of transactions.
 	 */
 	public static TxCreationKeys from_channel_static_keys(byte[] per_commitment_point, org.ldk.structs.ChannelPublicKeys broadcaster_keys, org.ldk.structs.ChannelPublicKeys countersignatory_keys) {
-		long ret = bindings.TxCreationKeys_from_channel_static_keys(InternalUtils.check_arr_len(per_commitment_point, 33), broadcaster_keys == null ? 0 : broadcaster_keys.ptr, countersignatory_keys == null ? 0 : countersignatory_keys.ptr);
+		long ret = bindings.TxCreationKeys_from_channel_static_keys(InternalUtils.check_arr_len(per_commitment_point, 33), broadcaster_keys.ptr, countersignatory_keys.ptr);
 		Reference.reachabilityFence(per_commitment_point);
 		Reference.reachabilityFence(broadcaster_keys);
 		Reference.reachabilityFence(countersignatory_keys);

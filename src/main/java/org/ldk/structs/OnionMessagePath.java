@@ -128,7 +128,10 @@ public class OnionMessagePath extends CommonBase {
 
 	/**
 	 * Returns the first node in the path.
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
+	@Nullable
 	public byte[] first_node() {
 		byte[] ret = bindings.OnionMessagePath_first_node(this.ptr);
 		Reference.reachabilityFence(this);

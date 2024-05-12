@@ -13,6 +13,10 @@ public class Result_TxCompleteDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_TxCompleteDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_TxCompleteDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_TxCompleteDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_TxCompleteDecodeErrorZ_is_ok(ptr)) {
 			return new Result_TxCompleteDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_TxCompleteDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_TxCompleteDecodeErrorZ in the success state.
 	 */
 	public static Result_TxCompleteDecodeErrorZ ok(org.ldk.structs.TxComplete o) {
-		long ret = bindings.CResult_TxCompleteDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_TxCompleteDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_TxCompleteDecodeErrorZ ret_hu_conv = Result_TxCompleteDecodeErrorZ.constr_from_ptr(ret);

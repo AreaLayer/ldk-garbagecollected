@@ -13,6 +13,10 @@ public class Result_RouteLightningErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_RouteLightningErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_RouteLightningErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_RouteLightningErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_RouteLightningErrorZ_is_ok(ptr)) {
 			return new Result_RouteLightningErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_RouteLightningErrorZ extends CommonBase {
 	 * Creates a new CResult_RouteLightningErrorZ in the success state.
 	 */
 	public static Result_RouteLightningErrorZ ok(org.ldk.structs.Route o) {
-		long ret = bindings.CResult_RouteLightningErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_RouteLightningErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RouteLightningErrorZ ret_hu_conv = Result_RouteLightningErrorZ.constr_from_ptr(ret);
@@ -58,7 +62,7 @@ public class Result_RouteLightningErrorZ extends CommonBase {
 	 * Creates a new CResult_RouteLightningErrorZ in the error state.
 	 */
 	public static Result_RouteLightningErrorZ err(org.ldk.structs.LightningError e) {
-		long ret = bindings.CResult_RouteLightningErrorZ_err(e == null ? 0 : e.ptr);
+		long ret = bindings.CResult_RouteLightningErrorZ_err(e.ptr);
 		Reference.reachabilityFence(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RouteLightningErrorZ ret_hu_conv = Result_RouteLightningErrorZ.constr_from_ptr(ret);

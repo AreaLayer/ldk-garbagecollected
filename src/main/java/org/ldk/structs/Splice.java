@@ -23,19 +23,23 @@ public class Splice extends CommonBase {
 	/**
 	 * The channel ID where splicing is intended
 	 */
-	public byte[] get_channel_id() {
-		byte[] ret = bindings.Splice_get_channel_id(this.ptr);
+	public ChannelId get_channel_id() {
+		long ret = bindings.Splice_get_channel_id(this.ptr);
 		Reference.reachabilityFence(this);
-		return ret;
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
 	}
 
 	/**
 	 * The channel ID where splicing is intended
 	 */
-	public void set_channel_id(byte[] val) {
-		bindings.Splice_set_channel_id(this.ptr, InternalUtils.check_arr_len(val, 32));
+	public void set_channel_id(org.ldk.structs.ChannelId val) {
+		bindings.Splice_set_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
+		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -133,8 +137,8 @@ public class Splice extends CommonBase {
 	/**
 	 * Constructs a new Splice given each field
 	 */
-	public static Splice of(byte[] channel_id_arg, byte[] chain_hash_arg, long relative_satoshis_arg, int funding_feerate_perkw_arg, int locktime_arg, byte[] funding_pubkey_arg) {
-		long ret = bindings.Splice_new(InternalUtils.check_arr_len(channel_id_arg, 32), InternalUtils.check_arr_len(chain_hash_arg, 32), relative_satoshis_arg, funding_feerate_perkw_arg, locktime_arg, InternalUtils.check_arr_len(funding_pubkey_arg, 33));
+	public static Splice of(org.ldk.structs.ChannelId channel_id_arg, byte[] chain_hash_arg, long relative_satoshis_arg, int funding_feerate_perkw_arg, int locktime_arg, byte[] funding_pubkey_arg) {
+		long ret = bindings.Splice_new(channel_id_arg.ptr, InternalUtils.check_arr_len(chain_hash_arg, 32), relative_satoshis_arg, funding_feerate_perkw_arg, locktime_arg, InternalUtils.check_arr_len(funding_pubkey_arg, 33));
 		Reference.reachabilityFence(channel_id_arg);
 		Reference.reachabilityFence(chain_hash_arg);
 		Reference.reachabilityFence(relative_satoshis_arg);
@@ -144,6 +148,7 @@ public class Splice extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Splice ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Splice(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id_arg); };
 		return ret_hu_conv;
 	}
 
@@ -171,7 +176,7 @@ public class Splice extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.Splice b) {
-		boolean ret = bindings.Splice_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.Splice_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

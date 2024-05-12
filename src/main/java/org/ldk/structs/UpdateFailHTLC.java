@@ -25,19 +25,23 @@ public class UpdateFailHTLC extends CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public byte[] get_channel_id() {
-		byte[] ret = bindings.UpdateFailHTLC_get_channel_id(this.ptr);
+	public ChannelId get_channel_id() {
+		long ret = bindings.UpdateFailHTLC_get_channel_id(this.ptr);
 		Reference.reachabilityFence(this);
-		return ret;
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
 	}
 
 	/**
 	 * The channel ID
 	 */
-	public void set_channel_id(byte[] val) {
-		bindings.UpdateFailHTLC_set_channel_id(this.ptr, InternalUtils.check_arr_len(val, 32));
+	public void set_channel_id(org.ldk.structs.ChannelId val) {
+		bindings.UpdateFailHTLC_set_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
+		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -94,7 +98,7 @@ public class UpdateFailHTLC extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.UpdateFailHTLC b) {
-		boolean ret = bindings.UpdateFailHTLC_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.UpdateFailHTLC_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

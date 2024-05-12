@@ -58,7 +58,7 @@ public class HtlcKey extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.HtlcKey b) {
-		boolean ret = bindings.HtlcKey_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.HtlcKey_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };
@@ -91,7 +91,7 @@ public class HtlcKey extends CommonBase {
 	 * Derive a public htlcpubkey using one node\'s `per_commitment_point` and its countersignatory\'s `basepoint`
 	 */
 	public static HtlcKey from_basepoint(org.ldk.structs.HtlcBasepoint countersignatory_basepoint, byte[] per_commitment_point) {
-		long ret = bindings.HtlcKey_from_basepoint(countersignatory_basepoint == null ? 0 : countersignatory_basepoint.ptr, InternalUtils.check_arr_len(per_commitment_point, 33));
+		long ret = bindings.HtlcKey_from_basepoint(countersignatory_basepoint.ptr, InternalUtils.check_arr_len(per_commitment_point, 33));
 		Reference.reachabilityFence(countersignatory_basepoint);
 		Reference.reachabilityFence(per_commitment_point);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -38,7 +38,7 @@ public class StaticPaymentOutputDescriptor extends CommonBase {
 	 * The outpoint which is spendable.
 	 */
 	public void set_outpoint(org.ldk.structs.OutPoint val) {
-		bindings.StaticPaymentOutputDescriptor_set_outpoint(this.ptr, val == null ? 0 : val.ptr);
+		bindings.StaticPaymentOutputDescriptor_set_outpoint(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -141,7 +141,7 @@ public class StaticPaymentOutputDescriptor extends CommonBase {
 	 * Note that channel_transaction_parameters_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public static StaticPaymentOutputDescriptor of(org.ldk.structs.OutPoint outpoint_arg, org.ldk.structs.TxOut output_arg, byte[] channel_keys_id_arg, long channel_value_satoshis_arg, @Nullable org.ldk.structs.ChannelTransactionParameters channel_transaction_parameters_arg) {
-		long ret = bindings.StaticPaymentOutputDescriptor_new(outpoint_arg == null ? 0 : outpoint_arg.ptr, output_arg.ptr, InternalUtils.check_arr_len(channel_keys_id_arg, 32), channel_value_satoshis_arg, channel_transaction_parameters_arg == null ? 0 : channel_transaction_parameters_arg.ptr);
+		long ret = bindings.StaticPaymentOutputDescriptor_new(outpoint_arg.ptr, output_arg.ptr, InternalUtils.check_arr_len(channel_keys_id_arg, 32), channel_value_satoshis_arg, channel_transaction_parameters_arg == null ? 0 : channel_transaction_parameters_arg.ptr);
 		Reference.reachabilityFence(outpoint_arg);
 		Reference.reachabilityFence(output_arg);
 		Reference.reachabilityFence(channel_keys_id_arg);
@@ -191,7 +191,7 @@ public class StaticPaymentOutputDescriptor extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.StaticPaymentOutputDescriptor b) {
-		boolean ret = bindings.StaticPaymentOutputDescriptor_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.StaticPaymentOutputDescriptor_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

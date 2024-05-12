@@ -13,6 +13,10 @@ public class Result_MaxDustHTLCExposureDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_MaxDustHTLCExposureDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_MaxDustHTLCExposureDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_MaxDustHTLCExposureDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_MaxDustHTLCExposureDecodeErrorZ_is_ok(ptr)) {
 			return new Result_MaxDustHTLCExposureDecodeErrorZ_OK(null, ptr);

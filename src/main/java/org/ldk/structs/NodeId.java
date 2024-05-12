@@ -51,6 +51,17 @@ public class NodeId extends CommonBase {
 	}
 
 	/**
+	 * Create a new NodeId from a slice of bytes
+	 */
+	public static Result_NodeIdDecodeErrorZ from_slice(byte[] bytes) {
+		long ret = bindings.NodeId_from_slice(bytes);
+		Reference.reachabilityFence(bytes);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_NodeIdDecodeErrorZ ret_hu_conv = Result_NodeIdDecodeErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Get the public key slice from this NodeId
 	 */
 	public byte[] as_slice() {

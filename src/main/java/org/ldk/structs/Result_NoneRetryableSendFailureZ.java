@@ -13,6 +13,10 @@ public class Result_NoneRetryableSendFailureZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_NoneRetryableSendFailureZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_NoneRetryableSendFailureZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_NoneRetryableSendFailureZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_NoneRetryableSendFailureZ_is_ok(ptr)) {
 			return new Result_NoneRetryableSendFailureZ_OK(null, ptr);

@@ -83,25 +83,25 @@ public class CustomMessageHandler extends CommonBase {
 				if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
 				Result_NoneLightningErrorZ ret = arg.handle_custom_message(ret_hu_conv, sender_node_id);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long[] get_and_clear_pending_msg() {
 				TwoTuple_PublicKeyTypeZ[] ret = arg.get_and_clear_pending_msg();
 				Reference.reachabilityFence(arg);
-				long[] result = ret != null ? Arrays.stream(ret).mapToLong(ret_conv_25 -> ret_conv_25 == null ? 0 : ret_conv_25.clone_ptr()).toArray() : null;
+				long[] result = ret != null ? Arrays.stream(ret).mapToLong(ret_conv_25 -> ret_conv_25.clone_ptr()).toArray() : null;
 				return result;
 			}
 			@Override public long provided_node_features() {
 				NodeFeatures ret = arg.provided_node_features();
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long provided_init_features(byte[] their_node_id) {
 				InitFeatures ret = arg.provided_init_features(their_node_id);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 		}, CustomMessageReader.new_impl(CustomMessageReader_impl).bindings_instance);

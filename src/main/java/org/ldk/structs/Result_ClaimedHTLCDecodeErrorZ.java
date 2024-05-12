@@ -13,6 +13,10 @@ public class Result_ClaimedHTLCDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_ClaimedHTLCDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_ClaimedHTLCDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_ClaimedHTLCDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_ClaimedHTLCDecodeErrorZ_is_ok(ptr)) {
 			return new Result_ClaimedHTLCDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_ClaimedHTLCDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_ClaimedHTLCDecodeErrorZ in the success state.
 	 */
 	public static Result_ClaimedHTLCDecodeErrorZ ok(org.ldk.structs.ClaimedHTLC o) {
-		long ret = bindings.CResult_ClaimedHTLCDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_ClaimedHTLCDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ClaimedHTLCDecodeErrorZ ret_hu_conv = Result_ClaimedHTLCDecodeErrorZ.constr_from_ptr(ret);

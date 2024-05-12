@@ -30,6 +30,9 @@ public class HTLCDestination extends CommonBase {
 		if (raw_val.getClass() == bindings.LDKHTLCDestination.InvalidForward.class) {
 			return new InvalidForward(ptr, (bindings.LDKHTLCDestination.InvalidForward)raw_val);
 		}
+		if (raw_val.getClass() == bindings.LDKHTLCDestination.InvalidOnion.class) {
+			return new InvalidOnion(ptr, (bindings.LDKHTLCDestination.InvalidOnion)raw_val);
+		}
 		if (raw_val.getClass() == bindings.LDKHTLCDestination.FailedPayment.class) {
 			return new FailedPayment(ptr, (bindings.LDKHTLCDestination.FailedPayment)raw_val);
 		}
@@ -52,11 +55,14 @@ public class HTLCDestination extends CommonBase {
 		/**
 		 * The outgoing `channel_id` between us and the next node.
 		*/
-		public final byte[] channel_id;
+		public final org.ldk.structs.ChannelId channel_id;
 		private NextHopChannel(long ptr, bindings.LDKHTLCDestination.NextHopChannel obj) {
 			super(null, ptr);
 			this.node_id = obj.node_id;
-			this.channel_id = obj.channel_id;
+			long channel_id = obj.channel_id;
+			org.ldk.structs.ChannelId channel_id_hu_conv = null; if (channel_id < 0 || channel_id > 4096) { channel_id_hu_conv = new org.ldk.structs.ChannelId(null, channel_id); }
+			if (channel_id_hu_conv != null) { channel_id_hu_conv.ptrs_to.add(this); };
+			this.channel_id = channel_id_hu_conv;
 		}
 	}
 	/**
@@ -84,6 +90,14 @@ public class HTLCDestination extends CommonBase {
 		private InvalidForward(long ptr, bindings.LDKHTLCDestination.InvalidForward obj) {
 			super(null, ptr);
 			this.requested_forward_scid = obj.requested_forward_scid;
+		}
+	}
+	/**
+	 * We couldn't decode the incoming onion to obtain the forwarding details.
+	 */
+	public final static class InvalidOnion extends HTLCDestination {
+		private InvalidOnion(long ptr, bindings.LDKHTLCDestination.InvalidOnion obj) {
+			super(null, ptr);
 		}
 	}
 	/**
@@ -129,13 +143,14 @@ public class HTLCDestination extends CommonBase {
 	/**
 	 * Utility method to constructs a new NextHopChannel-variant HTLCDestination
 	 */
-	public static HTLCDestination next_hop_channel(byte[] node_id, byte[] channel_id) {
-		long ret = bindings.HTLCDestination_next_hop_channel(InternalUtils.check_arr_len(node_id, 33), InternalUtils.check_arr_len(channel_id, 32));
+	public static HTLCDestination next_hop_channel(byte[] node_id, org.ldk.structs.ChannelId channel_id) {
+		long ret = bindings.HTLCDestination_next_hop_channel(InternalUtils.check_arr_len(node_id, 33), channel_id.ptr);
 		Reference.reachabilityFence(node_id);
 		Reference.reachabilityFence(channel_id);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.HTLCDestination ret_hu_conv = org.ldk.structs.HTLCDestination.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id); };
 		return ret_hu_conv;
 	}
 
@@ -164,6 +179,17 @@ public class HTLCDestination extends CommonBase {
 	}
 
 	/**
+	 * Utility method to constructs a new InvalidOnion-variant HTLCDestination
+	 */
+	public static HTLCDestination invalid_onion() {
+		long ret = bindings.HTLCDestination_invalid_onion();
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.HTLCDestination ret_hu_conv = org.ldk.structs.HTLCDestination.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Utility method to constructs a new FailedPayment-variant HTLCDestination
 	 */
 	public static HTLCDestination failed_payment(byte[] payment_hash) {
@@ -180,7 +206,7 @@ public class HTLCDestination extends CommonBase {
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public boolean eq(org.ldk.structs.HTLCDestination b) {
-		boolean ret = bindings.HTLCDestination_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.HTLCDestination_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		return ret;

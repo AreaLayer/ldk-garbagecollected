@@ -13,6 +13,10 @@ public class Result_COption_ClosureReasonZDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_COption_ClosureReasonZDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_COption_ClosureReasonZDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_COption_ClosureReasonZDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_COption_ClosureReasonZDecodeErrorZ_is_ok(ptr)) {
 			return new Result_COption_ClosureReasonZDecodeErrorZ_OK(null, ptr);

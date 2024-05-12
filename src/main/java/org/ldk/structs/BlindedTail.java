@@ -48,7 +48,7 @@ public class BlindedTail extends CommonBase {
 	 * [`BlindedPath`]: crate::blinded_path::BlindedPath
 	 */
 	public void set_hops(BlindedHop[] val) {
-		bindings.BlindedTail_set_hops(this.ptr, val != null ? Arrays.stream(val).mapToLong(val_conv_12 -> val_conv_12 == null ? 0 : val_conv_12.ptr).toArray() : null);
+		bindings.BlindedTail_set_hops(this.ptr, val != null ? Arrays.stream(val).mapToLong(val_conv_12 -> val_conv_12.ptr).toArray() : null);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		for (BlindedHop val_conv_12: val) { if (this != null) { this.ptrs_to.add(val_conv_12); }; };
@@ -118,7 +118,7 @@ public class BlindedTail extends CommonBase {
 	 * Constructs a new BlindedTail given each field
 	 */
 	public static BlindedTail of(BlindedHop[] hops_arg, byte[] blinding_point_arg, int excess_final_cltv_expiry_delta_arg, long final_value_msat_arg) {
-		long ret = bindings.BlindedTail_new(hops_arg != null ? Arrays.stream(hops_arg).mapToLong(hops_arg_conv_12 -> hops_arg_conv_12 == null ? 0 : hops_arg_conv_12.ptr).toArray() : null, InternalUtils.check_arr_len(blinding_point_arg, 33), excess_final_cltv_expiry_delta_arg, final_value_msat_arg);
+		long ret = bindings.BlindedTail_new(hops_arg != null ? Arrays.stream(hops_arg).mapToLong(hops_arg_conv_12 -> hops_arg_conv_12.ptr).toArray() : null, InternalUtils.check_arr_len(blinding_point_arg, 33), excess_final_cltv_expiry_delta_arg, final_value_msat_arg);
 		Reference.reachabilityFence(hops_arg);
 		Reference.reachabilityFence(blinding_point_arg);
 		Reference.reachabilityFence(excess_final_cltv_expiry_delta_arg);
@@ -166,7 +166,7 @@ public class BlindedTail extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.BlindedTail b) {
-		boolean ret = bindings.BlindedTail_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.BlindedTail_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

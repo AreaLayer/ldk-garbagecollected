@@ -38,7 +38,7 @@ public class Input extends CommonBase {
 	 * The unique identifier of the input.
 	 */
 	public void set_outpoint(org.ldk.structs.OutPoint val) {
-		bindings.Input_set_outpoint(this.ptr, val == null ? 0 : val.ptr);
+		bindings.Input_set_outpoint(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -90,7 +90,7 @@ public class Input extends CommonBase {
 	 * Constructs a new Input given each field
 	 */
 	public static Input of(org.ldk.structs.OutPoint outpoint_arg, org.ldk.structs.TxOut previous_utxo_arg, long satisfaction_weight_arg) {
-		long ret = bindings.Input_new(outpoint_arg == null ? 0 : outpoint_arg.ptr, previous_utxo_arg.ptr, satisfaction_weight_arg);
+		long ret = bindings.Input_new(outpoint_arg.ptr, previous_utxo_arg.ptr, satisfaction_weight_arg);
 		Reference.reachabilityFence(outpoint_arg);
 		Reference.reachabilityFence(previous_utxo_arg);
 		Reference.reachabilityFence(satisfaction_weight_arg);
@@ -137,7 +137,7 @@ public class Input extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.Input b) {
-		boolean ret = bindings.Input_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.Input_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

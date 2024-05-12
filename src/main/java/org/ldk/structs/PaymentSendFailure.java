@@ -216,7 +216,7 @@ public class PaymentSendFailure extends CommonBase {
 	 * Utility method to constructs a new PathParameterError-variant PaymentSendFailure
 	 */
 	public static PaymentSendFailure path_parameter_error(Result_NoneAPIErrorZ[] a) {
-		long ret = bindings.PaymentSendFailure_path_parameter_error(a != null ? Arrays.stream(a).mapToLong(a_conv_22 -> a_conv_22 != null ? a_conv_22.ptr : 0).toArray() : null);
+		long ret = bindings.PaymentSendFailure_path_parameter_error(a != null ? Arrays.stream(a).mapToLong(a_conv_22 -> a_conv_22.ptr).toArray() : null);
 		Reference.reachabilityFence(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PaymentSendFailure ret_hu_conv = org.ldk.structs.PaymentSendFailure.constr_from_ptr(ret);
@@ -252,7 +252,7 @@ public class PaymentSendFailure extends CommonBase {
 	 * Utility method to constructs a new PartialFailure-variant PaymentSendFailure
 	 */
 	public static PaymentSendFailure partial_failure(Result_NoneAPIErrorZ[] results, org.ldk.structs.RouteParameters failed_paths_retry, byte[] payment_id) {
-		long ret = bindings.PaymentSendFailure_partial_failure(results != null ? Arrays.stream(results).mapToLong(results_conv_22 -> results_conv_22 != null ? results_conv_22.ptr : 0).toArray() : null, failed_paths_retry == null ? 0 : failed_paths_retry.ptr, InternalUtils.check_arr_len(payment_id, 32));
+		long ret = bindings.PaymentSendFailure_partial_failure(results != null ? Arrays.stream(results).mapToLong(results_conv_22 -> results_conv_22.ptr).toArray() : null, failed_paths_retry.ptr, InternalUtils.check_arr_len(payment_id, 32));
 		Reference.reachabilityFence(results);
 		Reference.reachabilityFence(failed_paths_retry);
 		Reference.reachabilityFence(payment_id);
@@ -268,7 +268,7 @@ public class PaymentSendFailure extends CommonBase {
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public boolean eq(org.ldk.structs.PaymentSendFailure b) {
-		boolean ret = bindings.PaymentSendFailure_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.PaymentSendFailure_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		return ret;

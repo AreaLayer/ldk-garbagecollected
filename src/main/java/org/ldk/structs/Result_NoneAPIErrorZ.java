@@ -13,6 +13,10 @@ public class Result_NoneAPIErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_NoneAPIErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_NoneAPIErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_NoneAPIErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_NoneAPIErrorZ_is_ok(ptr)) {
 			return new Result_NoneAPIErrorZ_OK(null, ptr);

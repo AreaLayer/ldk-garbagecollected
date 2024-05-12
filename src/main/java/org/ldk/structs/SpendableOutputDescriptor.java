@@ -186,7 +186,7 @@ public class SpendableOutputDescriptor extends CommonBase {
 	 * Utility method to constructs a new StaticOutput-variant SpendableOutputDescriptor
 	 */
 	public static SpendableOutputDescriptor static_output(org.ldk.structs.OutPoint outpoint, org.ldk.structs.TxOut output, byte[] channel_keys_id) {
-		long ret = bindings.SpendableOutputDescriptor_static_output(outpoint == null ? 0 : outpoint.ptr, output.ptr, InternalUtils.check_arr_len(channel_keys_id, 32));
+		long ret = bindings.SpendableOutputDescriptor_static_output(outpoint.ptr, output.ptr, InternalUtils.check_arr_len(channel_keys_id, 32));
 		Reference.reachabilityFence(outpoint);
 		Reference.reachabilityFence(output);
 		Reference.reachabilityFence(channel_keys_id);
@@ -201,7 +201,7 @@ public class SpendableOutputDescriptor extends CommonBase {
 	 * Utility method to constructs a new DelayedPaymentOutput-variant SpendableOutputDescriptor
 	 */
 	public static SpendableOutputDescriptor delayed_payment_output(org.ldk.structs.DelayedPaymentOutputDescriptor a) {
-		long ret = bindings.SpendableOutputDescriptor_delayed_payment_output(a == null ? 0 : a.ptr);
+		long ret = bindings.SpendableOutputDescriptor_delayed_payment_output(a.ptr);
 		Reference.reachabilityFence(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.SpendableOutputDescriptor ret_hu_conv = org.ldk.structs.SpendableOutputDescriptor.constr_from_ptr(ret);
@@ -214,7 +214,7 @@ public class SpendableOutputDescriptor extends CommonBase {
 	 * Utility method to constructs a new StaticPaymentOutput-variant SpendableOutputDescriptor
 	 */
 	public static SpendableOutputDescriptor static_payment_output(org.ldk.structs.StaticPaymentOutputDescriptor a) {
-		long ret = bindings.SpendableOutputDescriptor_static_payment_output(a == null ? 0 : a.ptr);
+		long ret = bindings.SpendableOutputDescriptor_static_payment_output(a.ptr);
 		Reference.reachabilityFence(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.SpendableOutputDescriptor ret_hu_conv = org.ldk.structs.SpendableOutputDescriptor.constr_from_ptr(ret);
@@ -240,7 +240,7 @@ public class SpendableOutputDescriptor extends CommonBase {
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public boolean eq(org.ldk.structs.SpendableOutputDescriptor b) {
-		boolean ret = bindings.SpendableOutputDescriptor_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.SpendableOutputDescriptor_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		return ret;

@@ -13,6 +13,10 @@ public class Result_PendingHTLCRoutingDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_PendingHTLCRoutingDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_PendingHTLCRoutingDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_PendingHTLCRoutingDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_PendingHTLCRoutingDecodeErrorZ_is_ok(ptr)) {
 			return new Result_PendingHTLCRoutingDecodeErrorZ_OK(null, ptr);

@@ -102,15 +102,12 @@ public class Bolt12Invoice extends CommonBase {
 	 * 
 	 * [`Offer`]: crate::offers::offer::Offer
 	 * [`Offer::amount`]: crate::offers::offer::Offer::amount
-	 * 
-	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	@Nullable
-	public Amount amount() {
+	public Option_AmountZ amount() {
 		long ret = bindings.Bolt12Invoice_amount(this.ptr);
 		Reference.reachabilityFence(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.Amount ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Amount(null, ret); }
+		org.ldk.structs.Option_AmountZ ret_hu_conv = org.ldk.structs.Option_AmountZ.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
 		return ret_hu_conv;
 	}
@@ -142,7 +139,10 @@ public class Bolt12Invoice extends CommonBase {
 	 * From [`Offer::description`] or [`Refund::description`].
 	 * 
 	 * [`Offer::description`]: crate::offers::offer::Offer::description
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
+	@Nullable
 	public PrintableString description() {
 		long ret = bindings.Bolt12Invoice_description(this.ptr);
 		Reference.reachabilityFence(this);
@@ -215,15 +215,12 @@ public class Bolt12Invoice extends CommonBase {
 	 * [`Refund`].
 	 * 
 	 * [`Offer::supported_quantity`]: crate::offers::offer::Offer::supported_quantity
-	 * 
-	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	@Nullable
-	public Quantity supported_quantity() {
+	public Option_QuantityZ supported_quantity() {
 		long ret = bindings.Bolt12Invoice_supported_quantity(this.ptr);
 		Reference.reachabilityFence(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.Quantity ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Quantity(null, ret); }
+		org.ldk.structs.Option_QuantityZ ret_hu_conv = org.ldk.structs.Option_QuantityZ.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
 		return ret_hu_conv;
 	}
@@ -386,7 +383,7 @@ public class Bolt12Invoice extends CommonBase {
 	 * the associated [`PaymentId`] to use when sending the payment.
 	 */
 	public Result_ThirtyTwoBytesNoneZ verify(org.ldk.structs.ExpandedKey key) {
-		long ret = bindings.Bolt12Invoice_verify(this.ptr, key == null ? 0 : key.ptr);
+		long ret = bindings.Bolt12Invoice_verify(this.ptr, key.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(key);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -395,6 +392,18 @@ public class Bolt12Invoice extends CommonBase {
 		return ret_hu_conv;
 	}
 
+	/**
+	 * Generates a non-cryptographic 64-bit hash of the Bolt12Invoice.
+	 */
+	public long hash() {
+		long ret = bindings.Bolt12Invoice_hash(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	@Override public int hashCode() {
+		return (int)this.hash();
+	}
 	/**
 	 * Serialize the Bolt12Invoice object into a byte array which can be read by Bolt12Invoice_read
 	 */

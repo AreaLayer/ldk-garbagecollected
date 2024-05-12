@@ -39,7 +39,7 @@ public class UserConfig extends CommonBase {
 	 * Channel handshake config that we propose to our counterparty.
 	 */
 	public void set_channel_handshake_config(org.ldk.structs.ChannelHandshakeConfig val) {
-		bindings.UserConfig_set_channel_handshake_config(this.ptr, val == null ? 0 : val.ptr);
+		bindings.UserConfig_set_channel_handshake_config(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -61,7 +61,7 @@ public class UserConfig extends CommonBase {
 	 * Limits applied to our counterparty's proposed channel handshake config settings.
 	 */
 	public void set_channel_handshake_limits(org.ldk.structs.ChannelHandshakeLimits val) {
-		bindings.UserConfig_set_channel_handshake_limits(this.ptr, val == null ? 0 : val.ptr);
+		bindings.UserConfig_set_channel_handshake_limits(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -83,7 +83,7 @@ public class UserConfig extends CommonBase {
 	 * Channel config which affects behavior during channel lifetime.
 	 */
 	public void set_channel_config(org.ldk.structs.ChannelConfig val) {
-		bindings.UserConfig_set_channel_config(this.ptr, val == null ? 0 : val.ptr);
+		bindings.UserConfig_set_channel_config(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -275,7 +275,7 @@ public class UserConfig extends CommonBase {
 	 * Constructs a new UserConfig given each field
 	 */
 	public static UserConfig of(org.ldk.structs.ChannelHandshakeConfig channel_handshake_config_arg, org.ldk.structs.ChannelHandshakeLimits channel_handshake_limits_arg, org.ldk.structs.ChannelConfig channel_config_arg, boolean accept_forwards_to_priv_channels_arg, boolean accept_inbound_channels_arg, boolean manually_accept_inbound_channels_arg, boolean accept_intercept_htlcs_arg, boolean accept_mpp_keysend_arg) {
-		long ret = bindings.UserConfig_new(channel_handshake_config_arg == null ? 0 : channel_handshake_config_arg.ptr, channel_handshake_limits_arg == null ? 0 : channel_handshake_limits_arg.ptr, channel_config_arg == null ? 0 : channel_config_arg.ptr, accept_forwards_to_priv_channels_arg, accept_inbound_channels_arg, manually_accept_inbound_channels_arg, accept_intercept_htlcs_arg, accept_mpp_keysend_arg);
+		long ret = bindings.UserConfig_new(channel_handshake_config_arg.ptr, channel_handshake_limits_arg.ptr, channel_config_arg.ptr, accept_forwards_to_priv_channels_arg, accept_inbound_channels_arg, manually_accept_inbound_channels_arg, accept_intercept_htlcs_arg, accept_mpp_keysend_arg);
 		Reference.reachabilityFence(channel_handshake_config_arg);
 		Reference.reachabilityFence(channel_handshake_limits_arg);
 		Reference.reachabilityFence(channel_config_arg);

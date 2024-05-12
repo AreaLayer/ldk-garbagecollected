@@ -54,7 +54,7 @@ public class ForwardTlvs extends CommonBase {
 	 * Payment parameters for relaying over [`Self::short_channel_id`].
 	 */
 	public void set_payment_relay(org.ldk.structs.PaymentRelay val) {
-		bindings.ForwardTlvs_set_payment_relay(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ForwardTlvs_set_payment_relay(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -76,7 +76,7 @@ public class ForwardTlvs extends CommonBase {
 	 * Payment constraints for relaying over [`Self::short_channel_id`].
 	 */
 	public void set_payment_constraints(org.ldk.structs.PaymentConstraints val) {
-		bindings.ForwardTlvs_set_payment_constraints(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ForwardTlvs_set_payment_constraints(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -104,7 +104,7 @@ public class ForwardTlvs extends CommonBase {
 	 * [`BlindedHop::encrypted_payload`]: crate::blinded_path::BlindedHop::encrypted_payload
 	 */
 	public void set_features(org.ldk.structs.BlindedHopFeatures val) {
-		bindings.ForwardTlvs_set_features(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ForwardTlvs_set_features(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -114,7 +114,7 @@ public class ForwardTlvs extends CommonBase {
 	 * Constructs a new ForwardTlvs given each field
 	 */
 	public static ForwardTlvs of(long short_channel_id_arg, org.ldk.structs.PaymentRelay payment_relay_arg, org.ldk.structs.PaymentConstraints payment_constraints_arg, org.ldk.structs.BlindedHopFeatures features_arg) {
-		long ret = bindings.ForwardTlvs_new(short_channel_id_arg, payment_relay_arg == null ? 0 : payment_relay_arg.ptr, payment_constraints_arg == null ? 0 : payment_constraints_arg.ptr, features_arg == null ? 0 : features_arg.ptr);
+		long ret = bindings.ForwardTlvs_new(short_channel_id_arg, payment_relay_arg.ptr, payment_constraints_arg.ptr, features_arg.ptr);
 		Reference.reachabilityFence(short_channel_id_arg);
 		Reference.reachabilityFence(payment_relay_arg);
 		Reference.reachabilityFence(payment_constraints_arg);

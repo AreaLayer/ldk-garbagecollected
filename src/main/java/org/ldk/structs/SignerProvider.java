@@ -114,19 +114,19 @@ public class SignerProvider extends CommonBase {
 			@Override public long read_chan_signer(byte[] reader) {
 				Result_WriteableEcdsaChannelSignerDecodeErrorZ ret = arg.read_chan_signer(reader);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long get_destination_script(byte[] channel_keys_id) {
 				Result_CVec_u8ZNoneZ ret = arg.get_destination_script(channel_keys_id);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long get_shutdown_scriptpubkey() {
 				Result_ShutdownScriptNoneZ ret = arg.get_shutdown_scriptpubkey();
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 		});

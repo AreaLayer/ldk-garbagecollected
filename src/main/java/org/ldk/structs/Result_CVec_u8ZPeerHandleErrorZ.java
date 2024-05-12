@@ -13,6 +13,10 @@ public class Result_CVec_u8ZPeerHandleErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_CVec_u8ZPeerHandleErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_CVec_u8ZPeerHandleErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_CVec_u8ZPeerHandleErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_CVec_u8ZPeerHandleErrorZ_is_ok(ptr)) {
 			return new Result_CVec_u8ZPeerHandleErrorZ_OK(null, ptr);
@@ -54,7 +58,7 @@ public class Result_CVec_u8ZPeerHandleErrorZ extends CommonBase {
 	 * Creates a new CResult_CVec_u8ZPeerHandleErrorZ in the error state.
 	 */
 	public static Result_CVec_u8ZPeerHandleErrorZ err(org.ldk.structs.PeerHandleError e) {
-		long ret = bindings.CResult_CVec_u8ZPeerHandleErrorZ_err(e == null ? 0 : e.ptr);
+		long ret = bindings.CResult_CVec_u8ZPeerHandleErrorZ_err(e.ptr);
 		Reference.reachabilityFence(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CVec_u8ZPeerHandleErrorZ ret_hu_conv = Result_CVec_u8ZPeerHandleErrorZ.constr_from_ptr(ret);

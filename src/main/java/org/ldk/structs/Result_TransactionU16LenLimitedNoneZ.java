@@ -13,6 +13,10 @@ public class Result_TransactionU16LenLimitedNoneZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_TransactionU16LenLimitedNoneZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_TransactionU16LenLimitedNoneZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_TransactionU16LenLimitedNoneZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_TransactionU16LenLimitedNoneZ_is_ok(ptr)) {
 			return new Result_TransactionU16LenLimitedNoneZ_OK(null, ptr);
@@ -41,7 +45,7 @@ public class Result_TransactionU16LenLimitedNoneZ extends CommonBase {
 	 * Creates a new CResult_TransactionU16LenLimitedNoneZ in the success state.
 	 */
 	public static Result_TransactionU16LenLimitedNoneZ ok(org.ldk.structs.TransactionU16LenLimited o) {
-		long ret = bindings.CResult_TransactionU16LenLimitedNoneZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_TransactionU16LenLimitedNoneZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_TransactionU16LenLimitedNoneZ ret_hu_conv = Result_TransactionU16LenLimitedNoneZ.constr_from_ptr(ret);

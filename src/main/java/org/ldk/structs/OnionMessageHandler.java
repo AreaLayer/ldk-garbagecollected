@@ -98,7 +98,7 @@ public class OnionMessageHandler extends CommonBase {
 			@Override public long[] get_and_clear_connections_needed() {
 				TwoTuple_PublicKeyCVec_SocketAddressZZ[] ret = arg.get_and_clear_connections_needed();
 				Reference.reachabilityFence(arg);
-				long[] result = ret != null ? Arrays.stream(ret).mapToLong(ret_conv_40 -> ret_conv_40 == null ? 0 : ret_conv_40.clone_ptr()).toArray() : null;
+				long[] result = ret != null ? Arrays.stream(ret).mapToLong(ret_conv_40 -> ret_conv_40.clone_ptr()).toArray() : null;
 				return result;
 			}
 			@Override public void handle_onion_message(byte[] peer_node_id, long msg) {
@@ -116,7 +116,7 @@ public class OnionMessageHandler extends CommonBase {
 				org.ldk.structs.Init init_hu_conv = null; if (init < 0 || init > 4096) { init_hu_conv = new org.ldk.structs.Init(null, init); }
 				Result_NoneNoneZ ret = arg.peer_connected(their_node_id, init_hu_conv, inbound);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public void peer_disconnected(byte[] their_node_id) {
@@ -130,13 +130,13 @@ public class OnionMessageHandler extends CommonBase {
 			@Override public long provided_node_features() {
 				NodeFeatures ret = arg.provided_node_features();
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long provided_init_features(byte[] their_node_id) {
 				InitFeatures ret = arg.provided_init_features(their_node_id);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 		});
@@ -169,7 +169,7 @@ public class OnionMessageHandler extends CommonBase {
 	 * Handle an incoming `onion_message` message from the given peer.
 	 */
 	public void handle_onion_message(byte[] peer_node_id, org.ldk.structs.OnionMessage msg) {
-		bindings.OnionMessageHandler_handle_onion_message(this.ptr, InternalUtils.check_arr_len(peer_node_id, 33), msg == null ? 0 : msg.ptr);
+		bindings.OnionMessageHandler_handle_onion_message(this.ptr, InternalUtils.check_arr_len(peer_node_id, 33), msg.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(peer_node_id);
 		Reference.reachabilityFence(msg);
@@ -201,7 +201,7 @@ public class OnionMessageHandler extends CommonBase {
 	 * message handlers may still wish to communicate with this peer.
 	 */
 	public Result_NoneNoneZ peer_connected(byte[] their_node_id, org.ldk.structs.Init init, boolean inbound) {
-		long ret = bindings.OnionMessageHandler_peer_connected(this.ptr, InternalUtils.check_arr_len(their_node_id, 33), init == null ? 0 : init.ptr, inbound);
+		long ret = bindings.OnionMessageHandler_peer_connected(this.ptr, InternalUtils.check_arr_len(their_node_id, 33), init.ptr, inbound);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(their_node_id);
 		Reference.reachabilityFence(init);

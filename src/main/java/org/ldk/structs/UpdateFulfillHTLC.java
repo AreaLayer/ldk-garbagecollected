@@ -25,19 +25,23 @@ public class UpdateFulfillHTLC extends CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public byte[] get_channel_id() {
-		byte[] ret = bindings.UpdateFulfillHTLC_get_channel_id(this.ptr);
+	public ChannelId get_channel_id() {
+		long ret = bindings.UpdateFulfillHTLC_get_channel_id(this.ptr);
 		Reference.reachabilityFence(this);
-		return ret;
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
 	}
 
 	/**
 	 * The channel ID
 	 */
-	public void set_channel_id(byte[] val) {
-		bindings.UpdateFulfillHTLC_set_channel_id(this.ptr, InternalUtils.check_arr_len(val, 32));
+	public void set_channel_id(org.ldk.structs.ChannelId val) {
+		bindings.UpdateFulfillHTLC_set_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
+		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -79,14 +83,15 @@ public class UpdateFulfillHTLC extends CommonBase {
 	/**
 	 * Constructs a new UpdateFulfillHTLC given each field
 	 */
-	public static UpdateFulfillHTLC of(byte[] channel_id_arg, long htlc_id_arg, byte[] payment_preimage_arg) {
-		long ret = bindings.UpdateFulfillHTLC_new(InternalUtils.check_arr_len(channel_id_arg, 32), htlc_id_arg, InternalUtils.check_arr_len(payment_preimage_arg, 32));
+	public static UpdateFulfillHTLC of(org.ldk.structs.ChannelId channel_id_arg, long htlc_id_arg, byte[] payment_preimage_arg) {
+		long ret = bindings.UpdateFulfillHTLC_new(channel_id_arg.ptr, htlc_id_arg, InternalUtils.check_arr_len(payment_preimage_arg, 32));
 		Reference.reachabilityFence(channel_id_arg);
 		Reference.reachabilityFence(htlc_id_arg);
 		Reference.reachabilityFence(payment_preimage_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.UpdateFulfillHTLC ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.UpdateFulfillHTLC(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id_arg); };
 		return ret_hu_conv;
 	}
 
@@ -126,7 +131,7 @@ public class UpdateFulfillHTLC extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.UpdateFulfillHTLC b) {
-		boolean ret = bindings.UpdateFulfillHTLC_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.UpdateFulfillHTLC_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

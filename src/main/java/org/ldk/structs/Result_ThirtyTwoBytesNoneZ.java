@@ -13,6 +13,10 @@ public class Result_ThirtyTwoBytesNoneZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_ThirtyTwoBytesNoneZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_ThirtyTwoBytesNoneZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_ThirtyTwoBytesNoneZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_ThirtyTwoBytesNoneZ_is_ok(ptr)) {
 			return new Result_ThirtyTwoBytesNoneZ_OK(null, ptr);

@@ -13,6 +13,10 @@ public class Result_PhantomRouteHintsDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_PhantomRouteHintsDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_PhantomRouteHintsDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_PhantomRouteHintsDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_PhantomRouteHintsDecodeErrorZ_is_ok(ptr)) {
 			return new Result_PhantomRouteHintsDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_PhantomRouteHintsDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_PhantomRouteHintsDecodeErrorZ in the success state.
 	 */
 	public static Result_PhantomRouteHintsDecodeErrorZ ok(org.ldk.structs.PhantomRouteHints o) {
-		long ret = bindings.CResult_PhantomRouteHintsDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_PhantomRouteHintsDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_PhantomRouteHintsDecodeErrorZ ret_hu_conv = Result_PhantomRouteHintsDecodeErrorZ.constr_from_ptr(ret);

@@ -27,10 +27,13 @@ public class WarningMessage extends CommonBase {
 	 * 
 	 * All-0s indicates a warning unrelated to a specific channel.
 	 */
-	public byte[] get_channel_id() {
-		byte[] ret = bindings.WarningMessage_get_channel_id(this.ptr);
+	public ChannelId get_channel_id() {
+		long ret = bindings.WarningMessage_get_channel_id(this.ptr);
 		Reference.reachabilityFence(this);
-		return ret;
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
 	}
 
 	/**
@@ -38,10 +41,11 @@ public class WarningMessage extends CommonBase {
 	 * 
 	 * All-0s indicates a warning unrelated to a specific channel.
 	 */
-	public void set_channel_id(byte[] val) {
-		bindings.WarningMessage_set_channel_id(this.ptr, InternalUtils.check_arr_len(val, 32));
+	public void set_channel_id(org.ldk.structs.ChannelId val) {
+		bindings.WarningMessage_set_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
+		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -73,13 +77,14 @@ public class WarningMessage extends CommonBase {
 	/**
 	 * Constructs a new WarningMessage given each field
 	 */
-	public static WarningMessage of(byte[] channel_id_arg, java.lang.String data_arg) {
-		long ret = bindings.WarningMessage_new(InternalUtils.check_arr_len(channel_id_arg, 32), data_arg);
+	public static WarningMessage of(org.ldk.structs.ChannelId channel_id_arg, java.lang.String data_arg) {
+		long ret = bindings.WarningMessage_new(channel_id_arg.ptr, data_arg);
 		Reference.reachabilityFence(channel_id_arg);
 		Reference.reachabilityFence(data_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.WarningMessage ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.WarningMessage(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id_arg); };
 		return ret_hu_conv;
 	}
 
@@ -119,7 +124,7 @@ public class WarningMessage extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.WarningMessage b) {
-		boolean ret = bindings.WarningMessage_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.WarningMessage_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

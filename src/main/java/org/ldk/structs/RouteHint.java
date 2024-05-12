@@ -35,7 +35,7 @@ public class RouteHint extends CommonBase {
 	}
 
 	public void set_a(RouteHintHop[] val) {
-		bindings.RouteHint_set_a(this.ptr, val != null ? Arrays.stream(val).mapToLong(val_conv_14 -> val_conv_14 == null ? 0 : val_conv_14.ptr).toArray() : null);
+		bindings.RouteHint_set_a(this.ptr, val != null ? Arrays.stream(val).mapToLong(val_conv_14 -> val_conv_14.ptr).toArray() : null);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		for (RouteHintHop val_conv_14: val) { if (this != null) { this.ptrs_to.add(val_conv_14); }; };
@@ -45,7 +45,7 @@ public class RouteHint extends CommonBase {
 	 * Constructs a new RouteHint given each field
 	 */
 	public static RouteHint of(RouteHintHop[] a_arg) {
-		long ret = bindings.RouteHint_new(a_arg != null ? Arrays.stream(a_arg).mapToLong(a_arg_conv_14 -> a_arg_conv_14 == null ? 0 : a_arg_conv_14.ptr).toArray() : null);
+		long ret = bindings.RouteHint_new(a_arg != null ? Arrays.stream(a_arg).mapToLong(a_arg_conv_14 -> a_arg_conv_14.ptr).toArray() : null);
 		Reference.reachabilityFence(a_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.RouteHint ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.RouteHint(null, ret); }
@@ -90,7 +90,7 @@ public class RouteHint extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.RouteHint b) {
-		boolean ret = bindings.RouteHint_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.RouteHint_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

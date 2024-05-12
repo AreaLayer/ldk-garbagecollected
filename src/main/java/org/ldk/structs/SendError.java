@@ -47,6 +47,9 @@ public class SendError extends CommonBase {
 		if (raw_val.getClass() == bindings.LDKSendError.GetNodeIdFailed.class) {
 			return new GetNodeIdFailed(ptr, (bindings.LDKSendError.GetNodeIdFailed)raw_val);
 		}
+		if (raw_val.getClass() == bindings.LDKSendError.UnresolvedIntroductionNode.class) {
+			return new UnresolvedIntroductionNode(ptr, (bindings.LDKSendError.UnresolvedIntroductionNode)raw_val);
+		}
 		if (raw_val.getClass() == bindings.LDKSendError.BlindedPathAdvanceFailed.class) {
 			return new BlindedPathAdvanceFailed(ptr, (bindings.LDKSendError.BlindedPathAdvanceFailed)raw_val);
 		}
@@ -122,6 +125,16 @@ public class SendError extends CommonBase {
 	 */
 	public final static class GetNodeIdFailed extends SendError {
 		private GetNodeIdFailed(long ptr, bindings.LDKSendError.GetNodeIdFailed obj) {
+			super(null, ptr);
+		}
+	}
+	/**
+	 * The provided [`Destination`] has a blinded path with an unresolved introduction node. An
+	 * attempt to resolve it in the [`MessageRouter`] when finding an [`OnionMessagePath`] likely
+	 * failed.
+	 */
+	public final static class UnresolvedIntroductionNode extends SendError {
+		private UnresolvedIntroductionNode(long ptr, bindings.LDKSendError.UnresolvedIntroductionNode obj) {
 			super(null, ptr);
 		}
 	}
@@ -245,6 +258,17 @@ public class SendError extends CommonBase {
 	}
 
 	/**
+	 * Utility method to constructs a new UnresolvedIntroductionNode-variant SendError
+	 */
+	public static SendError unresolved_introduction_node() {
+		long ret = bindings.SendError_unresolved_introduction_node();
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.SendError ret_hu_conv = org.ldk.structs.SendError.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Utility method to constructs a new BlindedPathAdvanceFailed-variant SendError
 	 */
 	public static SendError blinded_path_advance_failed() {
@@ -256,11 +280,23 @@ public class SendError extends CommonBase {
 	}
 
 	/**
+	 * Generates a non-cryptographic 64-bit hash of the SendError.
+	 */
+	public long hash() {
+		long ret = bindings.SendError_hash(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	@Override public int hashCode() {
+		return (int)this.hash();
+	}
+	/**
 	 * Checks if two SendErrors contain equal inner contents.
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public boolean eq(org.ldk.structs.SendError b) {
-		boolean ret = bindings.SendError_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.SendError_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		return ret;

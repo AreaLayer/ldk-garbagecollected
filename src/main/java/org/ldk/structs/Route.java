@@ -46,7 +46,7 @@ public class Route extends CommonBase {
 	 * the same.
 	 */
 	public void set_paths(Path[] val) {
-		bindings.Route_set_paths(this.ptr, val != null ? Arrays.stream(val).mapToLong(val_conv_6 -> val_conv_6 == null ? 0 : val_conv_6.ptr).toArray() : null);
+		bindings.Route_set_paths(this.ptr, val != null ? Arrays.stream(val).mapToLong(val_conv_6 -> val_conv_6.ptr).toArray() : null);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		for (Path val_conv_6: val) { if (this != null) { this.ptrs_to.add(val_conv_6); }; };
@@ -93,7 +93,7 @@ public class Route extends CommonBase {
 	 * Note that route_params_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public static Route of(Path[] paths_arg, @Nullable org.ldk.structs.RouteParameters route_params_arg) {
-		long ret = bindings.Route_new(paths_arg != null ? Arrays.stream(paths_arg).mapToLong(paths_arg_conv_6 -> paths_arg_conv_6 == null ? 0 : paths_arg_conv_6.ptr).toArray() : null, route_params_arg == null ? 0 : route_params_arg.ptr);
+		long ret = bindings.Route_new(paths_arg != null ? Arrays.stream(paths_arg).mapToLong(paths_arg_conv_6 -> paths_arg_conv_6.ptr).toArray() : null, route_params_arg == null ? 0 : route_params_arg.ptr);
 		Reference.reachabilityFence(paths_arg);
 		Reference.reachabilityFence(route_params_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -140,7 +140,7 @@ public class Route extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.Route b) {
-		boolean ret = bindings.Route_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.Route_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

@@ -13,6 +13,10 @@ public class Result_ProbabilisticScorerDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_ProbabilisticScorerDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_ProbabilisticScorerDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_ProbabilisticScorerDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_ProbabilisticScorerDecodeErrorZ_is_ok(ptr)) {
 			return new Result_ProbabilisticScorerDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_ProbabilisticScorerDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_ProbabilisticScorerDecodeErrorZ in the success state.
 	 */
 	public static Result_ProbabilisticScorerDecodeErrorZ ok(ProbabilisticScoringDecayParameters o_decay_params, NetworkGraph o_network_graph, Logger o_logger) {
-		long ret = bindings.CResult_ProbabilisticScorerDecodeErrorZ_ok(bindings.ProbabilisticScorer_new(o_decay_params == null ? 0 : o_decay_params.ptr, o_network_graph == null ? 0 : o_network_graph.ptr, o_logger.ptr));
+		long ret = bindings.CResult_ProbabilisticScorerDecodeErrorZ_ok(bindings.ProbabilisticScorer_new(o_decay_params.ptr, o_network_graph.ptr, o_logger.ptr));
 		Reference.reachabilityFence(o_decay_params);
 		Reference.reachabilityFence(o_network_graph);
 		Reference.reachabilityFence(o_logger);

@@ -13,6 +13,10 @@ public class Result_ECDSASignatureNoneZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_ECDSASignatureNoneZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_ECDSASignatureNoneZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_ECDSASignatureNoneZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_ECDSASignatureNoneZ_is_ok(ptr)) {
 			return new Result_ECDSASignatureNoneZ_OK(null, ptr);

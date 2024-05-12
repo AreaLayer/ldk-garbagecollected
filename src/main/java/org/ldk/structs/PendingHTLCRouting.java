@@ -91,6 +91,13 @@ public class PendingHTLCRouting extends CommonBase {
 		*/
 		public final org.ldk.structs.Option_CVec_u8ZZ payment_metadata;
 		/**
+		 * The context of the payment included by the recipient in a blinded path, or `None` if a
+		 * blinded path was not used.
+		 * 
+		 * Used in part to determine the [`events::PaymentPurpose`].
+		*/
+		public final org.ldk.structs.Option_PaymentContextZ payment_context;
+		/**
 		 * CLTV expiry of the received HTLC.
 		 * 
 		 * Used to track when we should expire pending HTLCs that go unclaimed.
@@ -126,6 +133,10 @@ public class PendingHTLCRouting extends CommonBase {
 			org.ldk.structs.Option_CVec_u8ZZ payment_metadata_hu_conv = org.ldk.structs.Option_CVec_u8ZZ.constr_from_ptr(payment_metadata);
 			if (payment_metadata_hu_conv != null) { payment_metadata_hu_conv.ptrs_to.add(this); };
 			this.payment_metadata = payment_metadata_hu_conv;
+			long payment_context = obj.payment_context;
+			org.ldk.structs.Option_PaymentContextZ payment_context_hu_conv = org.ldk.structs.Option_PaymentContextZ.constr_from_ptr(payment_context);
+			if (payment_context_hu_conv != null) { payment_context_hu_conv.ptrs_to.add(this); };
+			this.payment_context = payment_context_hu_conv;
 			this.incoming_cltv_expiry = obj.incoming_cltv_expiry;
 			this.phantom_shared_secret = obj.phantom_shared_secret;
 			long[] custom_tlvs = obj.custom_tlvs;
@@ -182,6 +193,10 @@ public class PendingHTLCRouting extends CommonBase {
 		 * [`RecipientOnionFields::custom_tlvs`].
 		*/
 		public final TwoTuple_u64CVec_u8ZZ[] custom_tlvs;
+		/**
+		 * Set if this HTLC is the final hop in a multi-hop blinded path.
+		*/
+		public final boolean requires_blinded_error;
 		private ReceiveKeysend(long ptr, bindings.LDKPendingHTLCRouting.ReceiveKeysend obj) {
 			super(null, ptr);
 			long payment_data = obj.payment_data;
@@ -204,6 +219,7 @@ public class PendingHTLCRouting extends CommonBase {
 				custom_tlvs_conv_23_arr[x] = custom_tlvs_conv_23_hu_conv;
 			}
 			this.custom_tlvs = custom_tlvs_conv_23_arr;
+			this.requires_blinded_error = obj.requires_blinded_error;
 		}
 	}
 	long clone_ptr() {
@@ -228,7 +244,7 @@ public class PendingHTLCRouting extends CommonBase {
 	 * Utility method to constructs a new Forward-variant PendingHTLCRouting
 	 */
 	public static PendingHTLCRouting forward(org.ldk.structs.OnionPacket onion_packet, long short_channel_id, org.ldk.structs.BlindedForward blinded) {
-		long ret = bindings.PendingHTLCRouting_forward(onion_packet == null ? 0 : onion_packet.ptr, short_channel_id, blinded == null ? 0 : blinded.ptr);
+		long ret = bindings.PendingHTLCRouting_forward(onion_packet.ptr, short_channel_id, blinded.ptr);
 		Reference.reachabilityFence(onion_packet);
 		Reference.reachabilityFence(short_channel_id);
 		Reference.reachabilityFence(blinded);
@@ -243,10 +259,11 @@ public class PendingHTLCRouting extends CommonBase {
 	/**
 	 * Utility method to constructs a new Receive-variant PendingHTLCRouting
 	 */
-	public static PendingHTLCRouting receive(org.ldk.structs.FinalOnionHopData payment_data, org.ldk.structs.Option_CVec_u8ZZ payment_metadata, int incoming_cltv_expiry, byte[] phantom_shared_secret, TwoTuple_u64CVec_u8ZZ[] custom_tlvs, boolean requires_blinded_error) {
-		long ret = bindings.PendingHTLCRouting_receive(payment_data == null ? 0 : payment_data.ptr, payment_metadata.ptr, incoming_cltv_expiry, InternalUtils.check_arr_len(phantom_shared_secret, 32), custom_tlvs != null ? Arrays.stream(custom_tlvs).mapToLong(custom_tlvs_conv_23 -> custom_tlvs_conv_23 != null ? custom_tlvs_conv_23.ptr : 0).toArray() : null, requires_blinded_error);
+	public static PendingHTLCRouting receive(org.ldk.structs.FinalOnionHopData payment_data, org.ldk.structs.Option_CVec_u8ZZ payment_metadata, org.ldk.structs.Option_PaymentContextZ payment_context, int incoming_cltv_expiry, byte[] phantom_shared_secret, TwoTuple_u64CVec_u8ZZ[] custom_tlvs, boolean requires_blinded_error) {
+		long ret = bindings.PendingHTLCRouting_receive(payment_data.ptr, payment_metadata.ptr, payment_context.ptr, incoming_cltv_expiry, InternalUtils.check_arr_len(phantom_shared_secret, 32), custom_tlvs != null ? Arrays.stream(custom_tlvs).mapToLong(custom_tlvs_conv_23 -> custom_tlvs_conv_23.ptr).toArray() : null, requires_blinded_error);
 		Reference.reachabilityFence(payment_data);
 		Reference.reachabilityFence(payment_metadata);
+		Reference.reachabilityFence(payment_context);
 		Reference.reachabilityFence(incoming_cltv_expiry);
 		Reference.reachabilityFence(phantom_shared_secret);
 		Reference.reachabilityFence(custom_tlvs);
@@ -256,19 +273,21 @@ public class PendingHTLCRouting extends CommonBase {
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payment_data); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payment_metadata); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payment_context); };
 		return ret_hu_conv;
 	}
 
 	/**
 	 * Utility method to constructs a new ReceiveKeysend-variant PendingHTLCRouting
 	 */
-	public static PendingHTLCRouting receive_keysend(org.ldk.structs.FinalOnionHopData payment_data, byte[] payment_preimage, org.ldk.structs.Option_CVec_u8ZZ payment_metadata, int incoming_cltv_expiry, TwoTuple_u64CVec_u8ZZ[] custom_tlvs) {
-		long ret = bindings.PendingHTLCRouting_receive_keysend(payment_data == null ? 0 : payment_data.ptr, InternalUtils.check_arr_len(payment_preimage, 32), payment_metadata.ptr, incoming_cltv_expiry, custom_tlvs != null ? Arrays.stream(custom_tlvs).mapToLong(custom_tlvs_conv_23 -> custom_tlvs_conv_23 != null ? custom_tlvs_conv_23.ptr : 0).toArray() : null);
+	public static PendingHTLCRouting receive_keysend(org.ldk.structs.FinalOnionHopData payment_data, byte[] payment_preimage, org.ldk.structs.Option_CVec_u8ZZ payment_metadata, int incoming_cltv_expiry, TwoTuple_u64CVec_u8ZZ[] custom_tlvs, boolean requires_blinded_error) {
+		long ret = bindings.PendingHTLCRouting_receive_keysend(payment_data.ptr, InternalUtils.check_arr_len(payment_preimage, 32), payment_metadata.ptr, incoming_cltv_expiry, custom_tlvs != null ? Arrays.stream(custom_tlvs).mapToLong(custom_tlvs_conv_23 -> custom_tlvs_conv_23.ptr).toArray() : null, requires_blinded_error);
 		Reference.reachabilityFence(payment_data);
 		Reference.reachabilityFence(payment_preimage);
 		Reference.reachabilityFence(payment_metadata);
 		Reference.reachabilityFence(incoming_cltv_expiry);
 		Reference.reachabilityFence(custom_tlvs);
+		Reference.reachabilityFence(requires_blinded_error);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PendingHTLCRouting ret_hu_conv = org.ldk.structs.PendingHTLCRouting.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };

@@ -13,6 +13,10 @@ public class Result_CVec_u8ZIOErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_CVec_u8ZIOErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_CVec_u8ZIOErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_CVec_u8ZIOErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_CVec_u8ZIOErrorZ_is_ok(ptr)) {
 			return new Result_CVec_u8ZIOErrorZ_OK(null, ptr);

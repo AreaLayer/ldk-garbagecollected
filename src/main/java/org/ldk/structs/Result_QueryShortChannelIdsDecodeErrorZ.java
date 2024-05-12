@@ -13,6 +13,10 @@ public class Result_QueryShortChannelIdsDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_QueryShortChannelIdsDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_QueryShortChannelIdsDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_QueryShortChannelIdsDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_QueryShortChannelIdsDecodeErrorZ_is_ok(ptr)) {
 			return new Result_QueryShortChannelIdsDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_QueryShortChannelIdsDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_QueryShortChannelIdsDecodeErrorZ in the success state.
 	 */
 	public static Result_QueryShortChannelIdsDecodeErrorZ ok(org.ldk.structs.QueryShortChannelIds o) {
-		long ret = bindings.CResult_QueryShortChannelIdsDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_QueryShortChannelIdsDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_QueryShortChannelIdsDecodeErrorZ ret_hu_conv = Result_QueryShortChannelIdsDecodeErrorZ.constr_from_ptr(ret);

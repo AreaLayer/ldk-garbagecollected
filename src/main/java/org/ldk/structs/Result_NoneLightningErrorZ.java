@@ -13,6 +13,10 @@ public class Result_NoneLightningErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_NoneLightningErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_NoneLightningErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_NoneLightningErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_NoneLightningErrorZ_is_ok(ptr)) {
 			return new Result_NoneLightningErrorZ_OK(null, ptr);
@@ -51,7 +55,7 @@ public class Result_NoneLightningErrorZ extends CommonBase {
 	 * Creates a new CResult_NoneLightningErrorZ in the error state.
 	 */
 	public static Result_NoneLightningErrorZ err(org.ldk.structs.LightningError e) {
-		long ret = bindings.CResult_NoneLightningErrorZ_err(e == null ? 0 : e.ptr);
+		long ret = bindings.CResult_NoneLightningErrorZ_err(e.ptr);
 		Reference.reachabilityFence(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneLightningErrorZ ret_hu_conv = Result_NoneLightningErrorZ.constr_from_ptr(ret);

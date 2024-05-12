@@ -13,6 +13,10 @@ public class Result_PublicKeyNoneZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_PublicKeyNoneZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_PublicKeyNoneZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_PublicKeyNoneZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_PublicKeyNoneZ_is_ok(ptr)) {
 			return new Result_PublicKeyNoneZ_OK(null, ptr);

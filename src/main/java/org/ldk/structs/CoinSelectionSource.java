@@ -100,13 +100,13 @@ public class CoinSelectionSource extends CommonBase {
 				}
 				Result_CoinSelectionNoneZ ret = arg.select_confirmed_utxos(claim_id, must_spend_conv_7_arr, must_pay_to_conv_7_arr, target_feerate_sat_per_1000_weight);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long sign_psbt(byte[] psbt) {
 				Result_TransactionNoneZ ret = arg.sign_psbt(psbt);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 		});
@@ -141,7 +141,7 @@ public class CoinSelectionSource extends CommonBase {
 	 * set of other claims being double spent to a minimum.
 	 */
 	public Result_CoinSelectionNoneZ select_confirmed_utxos(byte[] claim_id, Input[] must_spend, TxOut[] must_pay_to, int target_feerate_sat_per_1000_weight) {
-		long ret = bindings.CoinSelectionSource_select_confirmed_utxos(this.ptr, InternalUtils.check_arr_len(claim_id, 32), must_spend != null ? Arrays.stream(must_spend).mapToLong(must_spend_conv_7 -> must_spend_conv_7 == null ? 0 : must_spend_conv_7.ptr).toArray() : null, must_pay_to != null ? Arrays.stream(must_pay_to).mapToLong(must_pay_to_conv_7 -> must_pay_to_conv_7.ptr).toArray() : null, target_feerate_sat_per_1000_weight);
+		long ret = bindings.CoinSelectionSource_select_confirmed_utxos(this.ptr, InternalUtils.check_arr_len(claim_id, 32), must_spend != null ? Arrays.stream(must_spend).mapToLong(must_spend_conv_7 -> must_spend_conv_7.ptr).toArray() : null, must_pay_to != null ? Arrays.stream(must_pay_to).mapToLong(must_pay_to_conv_7 -> must_pay_to_conv_7.ptr).toArray() : null, target_feerate_sat_per_1000_weight);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(claim_id);
 		Reference.reachabilityFence(must_spend);

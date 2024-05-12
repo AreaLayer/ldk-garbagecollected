@@ -13,6 +13,10 @@ public class Result_FixedPenaltyScorerDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_FixedPenaltyScorerDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_FixedPenaltyScorerDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_FixedPenaltyScorerDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_FixedPenaltyScorerDecodeErrorZ_is_ok(ptr)) {
 			return new Result_FixedPenaltyScorerDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_FixedPenaltyScorerDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_FixedPenaltyScorerDecodeErrorZ in the success state.
 	 */
 	public static Result_FixedPenaltyScorerDecodeErrorZ ok(org.ldk.structs.FixedPenaltyScorer o) {
-		long ret = bindings.CResult_FixedPenaltyScorerDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_FixedPenaltyScorerDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_FixedPenaltyScorerDecodeErrorZ ret_hu_conv = Result_FixedPenaltyScorerDecodeErrorZ.constr_from_ptr(ret);

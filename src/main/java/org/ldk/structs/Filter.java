@@ -108,7 +108,7 @@ public class Filter extends CommonBase {
 	 * registered mid-processing.
 	 */
 	public void register_output(org.ldk.structs.WatchedOutput output) {
-		bindings.Filter_register_output(this.ptr, output == null ? 0 : output.ptr);
+		bindings.Filter_register_output(this.ptr, output.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(output);
 		if (this != null) { this.ptrs_to.add(output); };

@@ -38,7 +38,7 @@ public class UnsignedChannelAnnouncement extends CommonBase {
 	 * The advertised channel features
 	 */
 	public void set_features(org.ldk.structs.ChannelFeatures val) {
-		bindings.UnsignedChannelAnnouncement_set_features(this.ptr, val == null ? 0 : val.ptr);
+		bindings.UnsignedChannelAnnouncement_set_features(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -96,7 +96,7 @@ public class UnsignedChannelAnnouncement extends CommonBase {
 	 * One of the two `node_id`s which are endpoints of this channel
 	 */
 	public void set_node_id_1(org.ldk.structs.NodeId val) {
-		bindings.UnsignedChannelAnnouncement_set_node_id_1(this.ptr, val == null ? 0 : val.ptr);
+		bindings.UnsignedChannelAnnouncement_set_node_id_1(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -118,7 +118,7 @@ public class UnsignedChannelAnnouncement extends CommonBase {
 	 * The other of the two `node_id`s which are endpoints of this channel
 	 */
 	public void set_node_id_2(org.ldk.structs.NodeId val) {
-		bindings.UnsignedChannelAnnouncement_set_node_id_2(this.ptr, val == null ? 0 : val.ptr);
+		bindings.UnsignedChannelAnnouncement_set_node_id_2(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -140,7 +140,7 @@ public class UnsignedChannelAnnouncement extends CommonBase {
 	 * The funding key for the first node
 	 */
 	public void set_bitcoin_key_1(org.ldk.structs.NodeId val) {
-		bindings.UnsignedChannelAnnouncement_set_bitcoin_key_1(this.ptr, val == null ? 0 : val.ptr);
+		bindings.UnsignedChannelAnnouncement_set_bitcoin_key_1(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -162,7 +162,7 @@ public class UnsignedChannelAnnouncement extends CommonBase {
 	 * The funding key for the second node
 	 */
 	public void set_bitcoin_key_2(org.ldk.structs.NodeId val) {
-		bindings.UnsignedChannelAnnouncement_set_bitcoin_key_2(this.ptr, val == null ? 0 : val.ptr);
+		bindings.UnsignedChannelAnnouncement_set_bitcoin_key_2(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -198,7 +198,7 @@ public class UnsignedChannelAnnouncement extends CommonBase {
 	 * Constructs a new UnsignedChannelAnnouncement given each field
 	 */
 	public static UnsignedChannelAnnouncement of(org.ldk.structs.ChannelFeatures features_arg, byte[] chain_hash_arg, long short_channel_id_arg, org.ldk.structs.NodeId node_id_1_arg, org.ldk.structs.NodeId node_id_2_arg, org.ldk.structs.NodeId bitcoin_key_1_arg, org.ldk.structs.NodeId bitcoin_key_2_arg, byte[] excess_data_arg) {
-		long ret = bindings.UnsignedChannelAnnouncement_new(features_arg == null ? 0 : features_arg.ptr, InternalUtils.check_arr_len(chain_hash_arg, 32), short_channel_id_arg, node_id_1_arg == null ? 0 : node_id_1_arg.ptr, node_id_2_arg == null ? 0 : node_id_2_arg.ptr, bitcoin_key_1_arg == null ? 0 : bitcoin_key_1_arg.ptr, bitcoin_key_2_arg == null ? 0 : bitcoin_key_2_arg.ptr, excess_data_arg);
+		long ret = bindings.UnsignedChannelAnnouncement_new(features_arg.ptr, InternalUtils.check_arr_len(chain_hash_arg, 32), short_channel_id_arg, node_id_1_arg.ptr, node_id_2_arg.ptr, bitcoin_key_1_arg.ptr, bitcoin_key_2_arg.ptr, excess_data_arg);
 		Reference.reachabilityFence(features_arg);
 		Reference.reachabilityFence(chain_hash_arg);
 		Reference.reachabilityFence(short_channel_id_arg);
@@ -254,7 +254,7 @@ public class UnsignedChannelAnnouncement extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.UnsignedChannelAnnouncement b) {
-		boolean ret = bindings.UnsignedChannelAnnouncement_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.UnsignedChannelAnnouncement_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

@@ -108,25 +108,25 @@ public class KVStore extends CommonBase {
 			@Override public long read(String primary_namespace, String secondary_namespace, String key) {
 				Result_CVec_u8ZIOErrorZ ret = arg.read(primary_namespace, secondary_namespace, key);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long write(String primary_namespace, String secondary_namespace, String key, byte[] buf) {
 				Result_NoneIOErrorZ ret = arg.write(primary_namespace, secondary_namespace, key, buf);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long remove(String primary_namespace, String secondary_namespace, String key, boolean lazy) {
 				Result_NoneIOErrorZ ret = arg.remove(primary_namespace, secondary_namespace, key, lazy);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long list(String primary_namespace, String secondary_namespace) {
 				Result_CVec_StrZIOErrorZ ret = arg.list(primary_namespace, secondary_namespace);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 		});

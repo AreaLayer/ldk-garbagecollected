@@ -93,7 +93,7 @@ public class Listen extends CommonBase {
 	 * possibly filtered.
 	 */
 	public void filtered_block_connected(byte[] header, TwoTuple_usizeTransactionZ[] txdata, int height) {
-		bindings.Listen_filtered_block_connected(this.ptr, InternalUtils.check_arr_len(header, 80), txdata != null ? Arrays.stream(txdata).mapToLong(txdata_conv_28 -> txdata_conv_28 != null ? txdata_conv_28.ptr : 0).toArray() : null, height);
+		bindings.Listen_filtered_block_connected(this.ptr, InternalUtils.check_arr_len(header, 80), txdata != null ? Arrays.stream(txdata).mapToLong(txdata_conv_28 -> txdata_conv_28.ptr).toArray() : null, height);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(header);
 		Reference.reachabilityFence(txdata);

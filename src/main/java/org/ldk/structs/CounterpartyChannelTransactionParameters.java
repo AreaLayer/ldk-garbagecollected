@@ -36,7 +36,7 @@ public class CounterpartyChannelTransactionParameters extends CommonBase {
 	 * Counter-party public keys
 	 */
 	public void set_pubkeys(org.ldk.structs.ChannelPublicKeys val) {
-		bindings.CounterpartyChannelTransactionParameters_set_pubkeys(this.ptr, val == null ? 0 : val.ptr);
+		bindings.CounterpartyChannelTransactionParameters_set_pubkeys(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -64,7 +64,7 @@ public class CounterpartyChannelTransactionParameters extends CommonBase {
 	 * Constructs a new CounterpartyChannelTransactionParameters given each field
 	 */
 	public static CounterpartyChannelTransactionParameters of(org.ldk.structs.ChannelPublicKeys pubkeys_arg, short selected_contest_delay_arg) {
-		long ret = bindings.CounterpartyChannelTransactionParameters_new(pubkeys_arg == null ? 0 : pubkeys_arg.ptr, selected_contest_delay_arg);
+		long ret = bindings.CounterpartyChannelTransactionParameters_new(pubkeys_arg.ptr, selected_contest_delay_arg);
 		Reference.reachabilityFence(pubkeys_arg);
 		Reference.reachabilityFence(selected_contest_delay_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -110,7 +110,7 @@ public class CounterpartyChannelTransactionParameters extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.CounterpartyChannelTransactionParameters b) {
-		boolean ret = bindings.CounterpartyChannelTransactionParameters_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.CounterpartyChannelTransactionParameters_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

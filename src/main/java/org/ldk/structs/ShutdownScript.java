@@ -46,7 +46,7 @@ public class ShutdownScript extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.ShutdownScript b) {
-		boolean ret = bindings.ShutdownScript_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.ShutdownScript_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };
@@ -147,7 +147,7 @@ public class ShutdownScript extends CommonBase {
 	 * Specifically, checks for compliance with feature `option_shutdown_anysegwit`.
 	 */
 	public boolean is_compatible(org.ldk.structs.InitFeatures features) {
-		boolean ret = bindings.ShutdownScript_is_compatible(this.ptr, features == null ? 0 : features.ptr);
+		boolean ret = bindings.ShutdownScript_is_compatible(this.ptr, features.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(features);
 		if (this != null) { this.ptrs_to.add(features); };

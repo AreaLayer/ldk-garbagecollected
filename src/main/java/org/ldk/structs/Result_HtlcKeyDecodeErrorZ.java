@@ -13,6 +13,10 @@ public class Result_HtlcKeyDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_HtlcKeyDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_HtlcKeyDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_HtlcKeyDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_HtlcKeyDecodeErrorZ_is_ok(ptr)) {
 			return new Result_HtlcKeyDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_HtlcKeyDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_HtlcKeyDecodeErrorZ in the success state.
 	 */
 	public static Result_HtlcKeyDecodeErrorZ ok(org.ldk.structs.HtlcKey o) {
-		long ret = bindings.CResult_HtlcKeyDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_HtlcKeyDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_HtlcKeyDecodeErrorZ ret_hu_conv = Result_HtlcKeyDecodeErrorZ.constr_from_ptr(ret);

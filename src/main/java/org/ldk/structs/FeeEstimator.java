@@ -18,6 +18,10 @@ import javax.annotation.Nullable;
  * 
  * Note that all of the functions implemented here *must* be reentrant-safe (obviously - they're
  * called from inside the library in response to chain events, P2P events, or timer events).
+ * 
+ * LDK may generate a substantial number of fee-estimation calls in some cases. You should
+ * pre-calculate and cache the fee estimate results to ensure you don't substantially slow HTLC
+ * handling.
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class FeeEstimator extends CommonBase {

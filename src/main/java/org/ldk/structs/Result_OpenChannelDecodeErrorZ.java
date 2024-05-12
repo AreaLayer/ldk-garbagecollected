@@ -13,6 +13,10 @@ public class Result_OpenChannelDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_OpenChannelDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_OpenChannelDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_OpenChannelDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_OpenChannelDecodeErrorZ_is_ok(ptr)) {
 			return new Result_OpenChannelDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_OpenChannelDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_OpenChannelDecodeErrorZ in the success state.
 	 */
 	public static Result_OpenChannelDecodeErrorZ ok(org.ldk.structs.OpenChannel o) {
-		long ret = bindings.CResult_OpenChannelDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_OpenChannelDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_OpenChannelDecodeErrorZ ret_hu_conv = Result_OpenChannelDecodeErrorZ.constr_from_ptr(ret);

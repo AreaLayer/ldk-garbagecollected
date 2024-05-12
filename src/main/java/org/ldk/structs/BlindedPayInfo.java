@@ -140,7 +140,7 @@ public class BlindedPayInfo extends CommonBase {
 	 * onion payload.
 	 */
 	public void set_features(org.ldk.structs.BlindedHopFeatures val) {
-		bindings.BlindedPayInfo_set_features(this.ptr, val == null ? 0 : val.ptr);
+		bindings.BlindedPayInfo_set_features(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -150,7 +150,7 @@ public class BlindedPayInfo extends CommonBase {
 	 * Constructs a new BlindedPayInfo given each field
 	 */
 	public static BlindedPayInfo of(int fee_base_msat_arg, int fee_proportional_millionths_arg, short cltv_expiry_delta_arg, long htlc_minimum_msat_arg, long htlc_maximum_msat_arg, org.ldk.structs.BlindedHopFeatures features_arg) {
-		long ret = bindings.BlindedPayInfo_new(fee_base_msat_arg, fee_proportional_millionths_arg, cltv_expiry_delta_arg, htlc_minimum_msat_arg, htlc_maximum_msat_arg, features_arg == null ? 0 : features_arg.ptr);
+		long ret = bindings.BlindedPayInfo_new(fee_base_msat_arg, fee_proportional_millionths_arg, cltv_expiry_delta_arg, htlc_minimum_msat_arg, htlc_maximum_msat_arg, features_arg.ptr);
 		Reference.reachabilityFence(fee_base_msat_arg);
 		Reference.reachabilityFence(fee_proportional_millionths_arg);
 		Reference.reachabilityFence(cltv_expiry_delta_arg);
@@ -200,7 +200,7 @@ public class BlindedPayInfo extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.BlindedPayInfo b) {
-		boolean ret = bindings.BlindedPayInfo_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.BlindedPayInfo_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

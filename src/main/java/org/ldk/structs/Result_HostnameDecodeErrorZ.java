@@ -13,6 +13,10 @@ public class Result_HostnameDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_HostnameDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_HostnameDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_HostnameDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_HostnameDecodeErrorZ_is_ok(ptr)) {
 			return new Result_HostnameDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_HostnameDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_HostnameDecodeErrorZ in the success state.
 	 */
 	public static Result_HostnameDecodeErrorZ ok(org.ldk.structs.Hostname o) {
-		long ret = bindings.CResult_HostnameDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_HostnameDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_HostnameDecodeErrorZ ret_hu_conv = Result_HostnameDecodeErrorZ.constr_from_ptr(ret);

@@ -23,28 +23,32 @@ public class BlindedPath extends CommonBase {
 
 	/**
 	 * To send to a blinded path, the sender first finds a route to the unblinded
-	 * `introduction_node_id`, which can unblind its [`encrypted_payload`] to find out the onion
+	 * `introduction_node`, which can unblind its [`encrypted_payload`] to find out the onion
 	 * message or payment's next hop and forward it along.
 	 * 
 	 * [`encrypted_payload`]: BlindedHop::encrypted_payload
 	 */
-	public byte[] get_introduction_node_id() {
-		byte[] ret = bindings.BlindedPath_get_introduction_node_id(this.ptr);
+	public IntroductionNode get_introduction_node() {
+		long ret = bindings.BlindedPath_get_introduction_node(this.ptr);
 		Reference.reachabilityFence(this);
-		return ret;
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.IntroductionNode ret_hu_conv = org.ldk.structs.IntroductionNode.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
 	}
 
 	/**
 	 * To send to a blinded path, the sender first finds a route to the unblinded
-	 * `introduction_node_id`, which can unblind its [`encrypted_payload`] to find out the onion
+	 * `introduction_node`, which can unblind its [`encrypted_payload`] to find out the onion
 	 * message or payment's next hop and forward it along.
 	 * 
 	 * [`encrypted_payload`]: BlindedHop::encrypted_payload
 	 */
-	public void set_introduction_node_id(byte[] val) {
-		bindings.BlindedPath_set_introduction_node_id(this.ptr, InternalUtils.check_arr_len(val, 33));
+	public void set_introduction_node(org.ldk.structs.IntroductionNode val) {
+		bindings.BlindedPath_set_introduction_node(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
+		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -92,7 +96,7 @@ public class BlindedPath extends CommonBase {
 	 * The hops composing the blinded path.
 	 */
 	public void set_blinded_hops(BlindedHop[] val) {
-		bindings.BlindedPath_set_blinded_hops(this.ptr, val != null ? Arrays.stream(val).mapToLong(val_conv_12 -> val_conv_12 == null ? 0 : val_conv_12.ptr).toArray() : null);
+		bindings.BlindedPath_set_blinded_hops(this.ptr, val != null ? Arrays.stream(val).mapToLong(val_conv_12 -> val_conv_12.ptr).toArray() : null);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		for (BlindedHop val_conv_12: val) { if (this != null) { this.ptrs_to.add(val_conv_12); }; };
@@ -101,14 +105,15 @@ public class BlindedPath extends CommonBase {
 	/**
 	 * Constructs a new BlindedPath given each field
 	 */
-	public static BlindedPath of(byte[] introduction_node_id_arg, byte[] blinding_point_arg, BlindedHop[] blinded_hops_arg) {
-		long ret = bindings.BlindedPath_new(InternalUtils.check_arr_len(introduction_node_id_arg, 33), InternalUtils.check_arr_len(blinding_point_arg, 33), blinded_hops_arg != null ? Arrays.stream(blinded_hops_arg).mapToLong(blinded_hops_arg_conv_12 -> blinded_hops_arg_conv_12 == null ? 0 : blinded_hops_arg_conv_12.ptr).toArray() : null);
-		Reference.reachabilityFence(introduction_node_id_arg);
+	public static BlindedPath of(org.ldk.structs.IntroductionNode introduction_node_arg, byte[] blinding_point_arg, BlindedHop[] blinded_hops_arg) {
+		long ret = bindings.BlindedPath_new(introduction_node_arg.ptr, InternalUtils.check_arr_len(blinding_point_arg, 33), blinded_hops_arg != null ? Arrays.stream(blinded_hops_arg).mapToLong(blinded_hops_arg_conv_12 -> blinded_hops_arg_conv_12.ptr).toArray() : null);
+		Reference.reachabilityFence(introduction_node_arg);
 		Reference.reachabilityFence(blinding_point_arg);
 		Reference.reachabilityFence(blinded_hops_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.BlindedPath ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.BlindedPath(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(introduction_node_arg); };
 		for (BlindedHop blinded_hops_arg_conv_12: blinded_hops_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(blinded_hops_arg_conv_12); }; };
 		return ret_hu_conv;
 	}
@@ -149,7 +154,7 @@ public class BlindedPath extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.BlindedPath b) {
-		boolean ret = bindings.BlindedPath_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.BlindedPath_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };
@@ -186,6 +191,24 @@ public class BlindedPath extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_BlindedPathNoneZ ret_hu_conv = Result_BlindedPathNoneZ.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(entropy_source); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Returns the introduction [`NodeId`] of the blinded path, if it is publicly reachable (i.e.,
+	 * it is found in the network graph).
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	@Nullable
+	public NodeId public_introduction_node_id(org.ldk.structs.ReadOnlyNetworkGraph network_graph) {
+		long ret = bindings.BlindedPath_public_introduction_node_id(this.ptr, network_graph.ptr);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(network_graph);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.NodeId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.NodeId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		if (this != null) { this.ptrs_to.add(network_graph); };
 		return ret_hu_conv;
 	}
 

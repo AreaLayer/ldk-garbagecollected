@@ -62,7 +62,7 @@ public class ChannelPublicKeys extends CommonBase {
 	 * states.
 	 */
 	public void set_revocation_basepoint(org.ldk.structs.RevocationBasepoint val) {
-		bindings.ChannelPublicKeys_set_revocation_basepoint(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChannelPublicKeys_set_revocation_basepoint(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -110,7 +110,7 @@ public class ChannelPublicKeys extends CommonBase {
 	 * after some delay (or can be claimed via the revocation path).
 	 */
 	public void set_delayed_payment_basepoint(org.ldk.structs.DelayedPaymentBasepoint val) {
-		bindings.ChannelPublicKeys_set_delayed_payment_basepoint(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChannelPublicKeys_set_delayed_payment_basepoint(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -134,7 +134,7 @@ public class ChannelPublicKeys extends CommonBase {
 	 * which is used to encumber HTLC-in-flight outputs.
 	 */
 	public void set_htlc_basepoint(org.ldk.structs.HtlcBasepoint val) {
-		bindings.ChannelPublicKeys_set_htlc_basepoint(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChannelPublicKeys_set_htlc_basepoint(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -144,7 +144,7 @@ public class ChannelPublicKeys extends CommonBase {
 	 * Constructs a new ChannelPublicKeys given each field
 	 */
 	public static ChannelPublicKeys of(byte[] funding_pubkey_arg, org.ldk.structs.RevocationBasepoint revocation_basepoint_arg, byte[] payment_point_arg, org.ldk.structs.DelayedPaymentBasepoint delayed_payment_basepoint_arg, org.ldk.structs.HtlcBasepoint htlc_basepoint_arg) {
-		long ret = bindings.ChannelPublicKeys_new(InternalUtils.check_arr_len(funding_pubkey_arg, 33), revocation_basepoint_arg == null ? 0 : revocation_basepoint_arg.ptr, InternalUtils.check_arr_len(payment_point_arg, 33), delayed_payment_basepoint_arg == null ? 0 : delayed_payment_basepoint_arg.ptr, htlc_basepoint_arg == null ? 0 : htlc_basepoint_arg.ptr);
+		long ret = bindings.ChannelPublicKeys_new(InternalUtils.check_arr_len(funding_pubkey_arg, 33), revocation_basepoint_arg.ptr, InternalUtils.check_arr_len(payment_point_arg, 33), delayed_payment_basepoint_arg.ptr, htlc_basepoint_arg.ptr);
 		Reference.reachabilityFence(funding_pubkey_arg);
 		Reference.reachabilityFence(revocation_basepoint_arg);
 		Reference.reachabilityFence(payment_point_arg);
@@ -195,7 +195,7 @@ public class ChannelPublicKeys extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.ChannelPublicKeys b) {
-		boolean ret = bindings.ChannelPublicKeys_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.ChannelPublicKeys_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

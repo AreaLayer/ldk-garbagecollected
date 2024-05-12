@@ -37,7 +37,7 @@ public class ChannelInfo extends CommonBase {
 	 * Protocol features of a channel communicated during its announcement
 	 */
 	public void set_features(org.ldk.structs.ChannelFeatures val) {
-		bindings.ChannelInfo_set_features(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChannelInfo_set_features(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -59,7 +59,7 @@ public class ChannelInfo extends CommonBase {
 	 * Source node of the first direction of a channel
 	 */
 	public void set_node_one(org.ldk.structs.NodeId val) {
-		bindings.ChannelInfo_set_node_one(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChannelInfo_set_node_one(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -108,7 +108,7 @@ public class ChannelInfo extends CommonBase {
 	 * Source node of the second direction of a channel
 	 */
 	public void set_node_two(org.ldk.structs.NodeId val) {
-		bindings.ChannelInfo_set_node_two(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChannelInfo_set_node_two(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -220,7 +220,7 @@ public class ChannelInfo extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.ChannelInfo b) {
-		boolean ret = bindings.ChannelInfo_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.ChannelInfo_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

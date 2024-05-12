@@ -26,7 +26,7 @@ public class NodeFeatures extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.NodeFeatures b) {
-		boolean ret = bindings.NodeFeatures_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.NodeFeatures_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };
@@ -82,7 +82,7 @@ public class NodeFeatures extends CommonBase {
 	 * Returns true if this `Features` object contains required features unknown by `other`.
 	 */
 	public boolean requires_unknown_bits_from(org.ldk.structs.NodeFeatures other) {
-		boolean ret = bindings.NodeFeatures_requires_unknown_bits_from(this.ptr, other == null ? 0 : other.ptr);
+		boolean ret = bindings.NodeFeatures_requires_unknown_bits_from(this.ptr, other.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(other);
 		if (this != null) { this.ptrs_to.add(other); };
@@ -799,6 +799,40 @@ public class NodeFeatures extends CommonBase {
 	 */
 	public boolean requires_keysend() {
 		boolean ret = bindings.NodeFeatures_requires_keysend(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Set this feature as optional.
+	 */
+	public void set_trampoline_routing_optional() {
+		bindings.NodeFeatures_set_trampoline_routing_optional(this.ptr);
+		Reference.reachabilityFence(this);
+	}
+
+	/**
+	 * Set this feature as required.
+	 */
+	public void set_trampoline_routing_required() {
+		bindings.NodeFeatures_set_trampoline_routing_required(this.ptr);
+		Reference.reachabilityFence(this);
+	}
+
+	/**
+	 * Checks if this feature is supported.
+	 */
+	public boolean supports_trampoline_routing() {
+		boolean ret = bindings.NodeFeatures_supports_trampoline_routing(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Checks if this feature is required.
+	 */
+	public boolean requires_trampoline_routing() {
+		boolean ret = bindings.NodeFeatures_requires_trampoline_routing(this.ptr);
 		Reference.reachabilityFence(this);
 		return ret;
 	}

@@ -36,10 +36,28 @@ public class HTLCDescriptor extends CommonBase {
 	 * The parameters required to derive the signer for the HTLC input.
 	 */
 	public void set_channel_derivation_parameters(org.ldk.structs.ChannelDerivationParameters val) {
-		bindings.HTLCDescriptor_set_channel_derivation_parameters(this.ptr, val == null ? 0 : val.ptr);
+		bindings.HTLCDescriptor_set_channel_derivation_parameters(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
+	}
+
+	/**
+	 * The txid of the commitment transaction in which the HTLC output lives.
+	 */
+	public byte[] get_commitment_txid() {
+		byte[] ret = bindings.HTLCDescriptor_get_commitment_txid(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * The txid of the commitment transaction in which the HTLC output lives.
+	 */
+	public void set_commitment_txid(byte[] val) {
+		bindings.HTLCDescriptor_set_commitment_txid(this.ptr, InternalUtils.check_arr_len(val, 32));
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
 	}
 
 	/**
@@ -124,7 +142,7 @@ public class HTLCDescriptor extends CommonBase {
 	 * The details of the HTLC as it appears in the commitment transaction.
 	 */
 	public void set_htlc(org.ldk.structs.HTLCOutputInCommitment val) {
-		bindings.HTLCDescriptor_set_htlc(this.ptr, val == null ? 0 : val.ptr);
+		bindings.HTLCDescriptor_set_htlc(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -172,6 +190,28 @@ public class HTLCDescriptor extends CommonBase {
 		Reference.reachabilityFence(val);
 	}
 
+	/**
+	 * Constructs a new HTLCDescriptor given each field
+	 */
+	public static HTLCDescriptor of(org.ldk.structs.ChannelDerivationParameters channel_derivation_parameters_arg, byte[] commitment_txid_arg, long per_commitment_number_arg, byte[] per_commitment_point_arg, int feerate_per_kw_arg, org.ldk.structs.HTLCOutputInCommitment htlc_arg, org.ldk.structs.Option_ThirtyTwoBytesZ preimage_arg, byte[] counterparty_sig_arg) {
+		long ret = bindings.HTLCDescriptor_new(channel_derivation_parameters_arg.ptr, InternalUtils.check_arr_len(commitment_txid_arg, 32), per_commitment_number_arg, InternalUtils.check_arr_len(per_commitment_point_arg, 33), feerate_per_kw_arg, htlc_arg.ptr, preimage_arg.ptr, InternalUtils.check_arr_len(counterparty_sig_arg, 64));
+		Reference.reachabilityFence(channel_derivation_parameters_arg);
+		Reference.reachabilityFence(commitment_txid_arg);
+		Reference.reachabilityFence(per_commitment_number_arg);
+		Reference.reachabilityFence(per_commitment_point_arg);
+		Reference.reachabilityFence(feerate_per_kw_arg);
+		Reference.reachabilityFence(htlc_arg);
+		Reference.reachabilityFence(preimage_arg);
+		Reference.reachabilityFence(counterparty_sig_arg);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.HTLCDescriptor ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.HTLCDescriptor(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_derivation_parameters_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(htlc_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(preimage_arg); };
+		return ret_hu_conv;
+	}
+
 	long clone_ptr() {
 		long ret = bindings.HTLCDescriptor_clone_ptr(this.ptr);
 		Reference.reachabilityFence(this);
@@ -196,7 +236,7 @@ public class HTLCDescriptor extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.HTLCDescriptor b) {
-		boolean ret = bindings.HTLCDescriptor_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.HTLCDescriptor_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

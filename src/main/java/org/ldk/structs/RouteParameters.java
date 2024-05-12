@@ -38,7 +38,7 @@ public class RouteParameters extends CommonBase {
 	 * The parameters of the failed payment path.
 	 */
 	public void set_payment_params(org.ldk.structs.PaymentParameters val) {
-		bindings.RouteParameters_set_payment_params(this.ptr, val == null ? 0 : val.ptr);
+		bindings.RouteParameters_set_payment_params(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -98,7 +98,7 @@ public class RouteParameters extends CommonBase {
 	 * Constructs a new RouteParameters given each field
 	 */
 	public static RouteParameters of(org.ldk.structs.PaymentParameters payment_params_arg, long final_value_msat_arg, org.ldk.structs.Option_u64Z max_total_routing_fee_msat_arg) {
-		long ret = bindings.RouteParameters_new(payment_params_arg == null ? 0 : payment_params_arg.ptr, final_value_msat_arg, max_total_routing_fee_msat_arg.ptr);
+		long ret = bindings.RouteParameters_new(payment_params_arg.ptr, final_value_msat_arg, max_total_routing_fee_msat_arg.ptr);
 		Reference.reachabilityFence(payment_params_arg);
 		Reference.reachabilityFence(final_value_msat_arg);
 		Reference.reachabilityFence(max_total_routing_fee_msat_arg);
@@ -146,7 +146,7 @@ public class RouteParameters extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.RouteParameters b) {
-		boolean ret = bindings.RouteParameters_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.RouteParameters_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };
@@ -163,7 +163,7 @@ public class RouteParameters extends CommonBase {
 	 * [`Self::max_total_routing_fee_msat`] defaults to 1% of the payment amount + 50 sats
 	 */
 	public static RouteParameters from_payment_params_and_value(org.ldk.structs.PaymentParameters payment_params, long final_value_msat) {
-		long ret = bindings.RouteParameters_from_payment_params_and_value(payment_params == null ? 0 : payment_params.ptr, final_value_msat);
+		long ret = bindings.RouteParameters_from_payment_params_and_value(payment_params.ptr, final_value_msat);
 		Reference.reachabilityFence(payment_params);
 		Reference.reachabilityFence(final_value_msat);
 		if (ret >= 0 && ret <= 4096) { return null; }

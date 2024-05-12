@@ -62,7 +62,7 @@ public class ChainParameters extends CommonBase {
 	 * Used to track on-chain channel funding outputs and send payments with reliable timelocks.
 	 */
 	public void set_best_block(org.ldk.structs.BestBlock val) {
-		bindings.ChainParameters_set_best_block(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChainParameters_set_best_block(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -72,7 +72,7 @@ public class ChainParameters extends CommonBase {
 	 * Constructs a new ChainParameters given each field
 	 */
 	public static ChainParameters of(org.ldk.enums.Network network_arg, org.ldk.structs.BestBlock best_block_arg) {
-		long ret = bindings.ChainParameters_new(network_arg, best_block_arg == null ? 0 : best_block_arg.ptr);
+		long ret = bindings.ChainParameters_new(network_arg, best_block_arg.ptr);
 		Reference.reachabilityFence(network_arg);
 		Reference.reachabilityFence(best_block_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }

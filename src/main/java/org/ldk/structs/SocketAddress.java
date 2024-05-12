@@ -215,7 +215,7 @@ public class SocketAddress extends CommonBase {
 	 * Utility method to constructs a new Hostname-variant SocketAddress
 	 */
 	public static SocketAddress hostname(org.ldk.structs.Hostname hostname, short port) {
-		long ret = bindings.SocketAddress_hostname(hostname == null ? 0 : hostname.ptr, port);
+		long ret = bindings.SocketAddress_hostname(hostname.ptr, port);
 		Reference.reachabilityFence(hostname);
 		Reference.reachabilityFence(port);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -242,7 +242,7 @@ public class SocketAddress extends CommonBase {
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public boolean eq(org.ldk.structs.SocketAddress b) {
-		boolean ret = bindings.SocketAddress_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.SocketAddress_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		return ret;

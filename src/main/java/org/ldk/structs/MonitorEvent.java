@@ -24,6 +24,9 @@ public class MonitorEvent extends CommonBase {
 		if (raw_val.getClass() == bindings.LDKMonitorEvent.HTLCEvent.class) {
 			return new HTLCEvent(ptr, (bindings.LDKMonitorEvent.HTLCEvent)raw_val);
 		}
+		if (raw_val.getClass() == bindings.LDKMonitorEvent.HolderForceClosedWithInfo.class) {
+			return new HolderForceClosedWithInfo(ptr, (bindings.LDKMonitorEvent.HolderForceClosedWithInfo)raw_val);
+		}
 		if (raw_val.getClass() == bindings.LDKMonitorEvent.HolderForceClosed.class) {
 			return new HolderForceClosed(ptr, (bindings.LDKMonitorEvent.HolderForceClosed)raw_val);
 		}
@@ -44,6 +47,39 @@ public class MonitorEvent extends CommonBase {
 			org.ldk.structs.HTLCUpdate htlc_event_hu_conv = null; if (htlc_event < 0 || htlc_event > 4096) { htlc_event_hu_conv = new org.ldk.structs.HTLCUpdate(null, htlc_event); }
 			if (htlc_event_hu_conv != null) { htlc_event_hu_conv.ptrs_to.add(this); };
 			this.htlc_event = htlc_event_hu_conv;
+		}
+	}
+	/**
+	 * Indicates we broadcasted the channel's latest commitment transaction and thus closed the
+	 * channel. Holds information about the channel and why it was closed.
+	 */
+	public final static class HolderForceClosedWithInfo extends MonitorEvent {
+		/**
+		 * The reason the channel was closed.
+		*/
+		public final org.ldk.structs.ClosureReason reason;
+		/**
+		 * The funding outpoint of the channel.
+		*/
+		public final org.ldk.structs.OutPoint outpoint;
+		/**
+		 * The channel ID of the channel.
+		*/
+		public final org.ldk.structs.ChannelId channel_id;
+		private HolderForceClosedWithInfo(long ptr, bindings.LDKMonitorEvent.HolderForceClosedWithInfo obj) {
+			super(null, ptr);
+			long reason = obj.reason;
+			org.ldk.structs.ClosureReason reason_hu_conv = org.ldk.structs.ClosureReason.constr_from_ptr(reason);
+			if (reason_hu_conv != null) { reason_hu_conv.ptrs_to.add(this); };
+			this.reason = reason_hu_conv;
+			long outpoint = obj.outpoint;
+			org.ldk.structs.OutPoint outpoint_hu_conv = null; if (outpoint < 0 || outpoint > 4096) { outpoint_hu_conv = new org.ldk.structs.OutPoint(null, outpoint); }
+			if (outpoint_hu_conv != null) { outpoint_hu_conv.ptrs_to.add(this); };
+			this.outpoint = outpoint_hu_conv;
+			long channel_id = obj.channel_id;
+			org.ldk.structs.ChannelId channel_id_hu_conv = null; if (channel_id < 0 || channel_id > 4096) { channel_id_hu_conv = new org.ldk.structs.ChannelId(null, channel_id); }
+			if (channel_id_hu_conv != null) { channel_id_hu_conv.ptrs_to.add(this); };
+			this.channel_id = channel_id_hu_conv;
 		}
 	}
 	/**
@@ -72,6 +108,10 @@ public class MonitorEvent extends CommonBase {
 		*/
 		public final org.ldk.structs.OutPoint funding_txo;
 		/**
+		 * The channel ID of the channel associated with the [`ChannelMonitor`]
+		*/
+		public final org.ldk.structs.ChannelId channel_id;
+		/**
 		 * The Update ID from [`ChannelMonitorUpdate::update_id`] which was applied or
 		 * [`ChannelMonitor::get_latest_update_id`].
 		 * 
@@ -85,6 +125,10 @@ public class MonitorEvent extends CommonBase {
 			org.ldk.structs.OutPoint funding_txo_hu_conv = null; if (funding_txo < 0 || funding_txo > 4096) { funding_txo_hu_conv = new org.ldk.structs.OutPoint(null, funding_txo); }
 			if (funding_txo_hu_conv != null) { funding_txo_hu_conv.ptrs_to.add(this); };
 			this.funding_txo = funding_txo_hu_conv;
+			long channel_id = obj.channel_id;
+			org.ldk.structs.ChannelId channel_id_hu_conv = null; if (channel_id < 0 || channel_id > 4096) { channel_id_hu_conv = new org.ldk.structs.ChannelId(null, channel_id); }
+			if (channel_id_hu_conv != null) { channel_id_hu_conv.ptrs_to.add(this); };
+			this.channel_id = channel_id_hu_conv;
 			this.monitor_update_id = obj.monitor_update_id;
 		}
 	}
@@ -110,7 +154,7 @@ public class MonitorEvent extends CommonBase {
 	 * Utility method to constructs a new HTLCEvent-variant MonitorEvent
 	 */
 	public static MonitorEvent htlcevent(org.ldk.structs.HTLCUpdate a) {
-		long ret = bindings.MonitorEvent_htlcevent(a == null ? 0 : a.ptr);
+		long ret = bindings.MonitorEvent_htlcevent(a.ptr);
 		Reference.reachabilityFence(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MonitorEvent ret_hu_conv = org.ldk.structs.MonitorEvent.constr_from_ptr(ret);
@@ -120,10 +164,27 @@ public class MonitorEvent extends CommonBase {
 	}
 
 	/**
+	 * Utility method to constructs a new HolderForceClosedWithInfo-variant MonitorEvent
+	 */
+	public static MonitorEvent holder_force_closed_with_info(org.ldk.structs.ClosureReason reason, org.ldk.structs.OutPoint outpoint, org.ldk.structs.ChannelId channel_id) {
+		long ret = bindings.MonitorEvent_holder_force_closed_with_info(reason.ptr, outpoint.ptr, channel_id.ptr);
+		Reference.reachabilityFence(reason);
+		Reference.reachabilityFence(outpoint);
+		Reference.reachabilityFence(channel_id);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.MonitorEvent ret_hu_conv = org.ldk.structs.MonitorEvent.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(reason); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(outpoint); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id); };
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Utility method to constructs a new HolderForceClosed-variant MonitorEvent
 	 */
 	public static MonitorEvent holder_force_closed(org.ldk.structs.OutPoint a) {
-		long ret = bindings.MonitorEvent_holder_force_closed(a == null ? 0 : a.ptr);
+		long ret = bindings.MonitorEvent_holder_force_closed(a.ptr);
 		Reference.reachabilityFence(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MonitorEvent ret_hu_conv = org.ldk.structs.MonitorEvent.constr_from_ptr(ret);
@@ -135,14 +196,16 @@ public class MonitorEvent extends CommonBase {
 	/**
 	 * Utility method to constructs a new Completed-variant MonitorEvent
 	 */
-	public static MonitorEvent completed(org.ldk.structs.OutPoint funding_txo, long monitor_update_id) {
-		long ret = bindings.MonitorEvent_completed(funding_txo == null ? 0 : funding_txo.ptr, monitor_update_id);
+	public static MonitorEvent completed(org.ldk.structs.OutPoint funding_txo, org.ldk.structs.ChannelId channel_id, long monitor_update_id) {
+		long ret = bindings.MonitorEvent_completed(funding_txo.ptr, channel_id.ptr, monitor_update_id);
 		Reference.reachabilityFence(funding_txo);
+		Reference.reachabilityFence(channel_id);
 		Reference.reachabilityFence(monitor_update_id);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MonitorEvent ret_hu_conv = org.ldk.structs.MonitorEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(funding_txo); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id); };
 		return ret_hu_conv;
 	}
 
@@ -151,7 +214,7 @@ public class MonitorEvent extends CommonBase {
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public boolean eq(org.ldk.structs.MonitorEvent b) {
-		boolean ret = bindings.MonitorEvent_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.MonitorEvent_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		return ret;

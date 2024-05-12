@@ -13,6 +13,10 @@ public class Result_SocketAddressSocketAddressParseErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_SocketAddressSocketAddressParseErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_SocketAddressSocketAddressParseErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_SocketAddressSocketAddressParseErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_SocketAddressSocketAddressParseErrorZ_is_ok(ptr)) {
 			return new Result_SocketAddressSocketAddressParseErrorZ_OK(null, ptr);

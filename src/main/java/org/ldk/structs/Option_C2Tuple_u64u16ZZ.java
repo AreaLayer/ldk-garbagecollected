@@ -55,7 +55,7 @@ public class Option_C2Tuple_u64u16ZZ extends CommonBase {
 	 * Constructs a new COption_C2Tuple_u64u16ZZ containing a crate::c_types::derived::C2Tuple_u64u16Z
 	 */
 	public static Option_C2Tuple_u64u16ZZ some(org.ldk.structs.TwoTuple_u64u16Z o) {
-		long ret = bindings.COption_C2Tuple_u64u16ZZ_some(o != null ? o.ptr : 0);
+		long ret = bindings.COption_C2Tuple_u64u16ZZ_some(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_C2Tuple_u64u16ZZ ret_hu_conv = org.ldk.structs.Option_C2Tuple_u64u16ZZ.constr_from_ptr(ret);

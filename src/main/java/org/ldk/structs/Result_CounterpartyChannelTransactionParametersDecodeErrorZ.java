@@ -13,6 +13,10 @@ public class Result_CounterpartyChannelTransactionParametersDecodeErrorZ extends
 		if (ptr != 0) { bindings.CResult_CounterpartyChannelTransactionParametersDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_CounterpartyChannelTransactionParametersDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_CounterpartyChannelTransactionParametersDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_CounterpartyChannelTransactionParametersDecodeErrorZ_is_ok(ptr)) {
 			return new Result_CounterpartyChannelTransactionParametersDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_CounterpartyChannelTransactionParametersDecodeErrorZ extends
 	 * Creates a new CResult_CounterpartyChannelTransactionParametersDecodeErrorZ in the success state.
 	 */
 	public static Result_CounterpartyChannelTransactionParametersDecodeErrorZ ok(org.ldk.structs.CounterpartyChannelTransactionParameters o) {
-		long ret = bindings.CResult_CounterpartyChannelTransactionParametersDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_CounterpartyChannelTransactionParametersDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CounterpartyChannelTransactionParametersDecodeErrorZ ret_hu_conv = Result_CounterpartyChannelTransactionParametersDecodeErrorZ.constr_from_ptr(ret);

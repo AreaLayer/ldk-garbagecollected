@@ -13,6 +13,10 @@ public class Result_TxAbortDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_TxAbortDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_TxAbortDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_TxAbortDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_TxAbortDecodeErrorZ_is_ok(ptr)) {
 			return new Result_TxAbortDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_TxAbortDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_TxAbortDecodeErrorZ in the success state.
 	 */
 	public static Result_TxAbortDecodeErrorZ ok(org.ldk.structs.TxAbort o) {
-		long ret = bindings.CResult_TxAbortDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_TxAbortDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_TxAbortDecodeErrorZ ret_hu_conv = Result_TxAbortDecodeErrorZ.constr_from_ptr(ret);

@@ -64,7 +64,7 @@ public class ChannelMonitor extends CommonBase {
 	 * panics if the given update is not the next update by update_id.
 	 */
 	public Result_NoneNoneZ update_monitor(org.ldk.structs.ChannelMonitorUpdate updates, org.ldk.structs.BroadcasterInterface broadcaster, org.ldk.structs.FeeEstimator fee_estimator, org.ldk.structs.Logger logger) {
-		long ret = bindings.ChannelMonitor_update_monitor(this.ptr, updates == null ? 0 : updates.ptr, broadcaster.ptr, fee_estimator.ptr, logger.ptr);
+		long ret = bindings.ChannelMonitor_update_monitor(this.ptr, updates.ptr, broadcaster.ptr, fee_estimator.ptr, logger.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(updates);
 		Reference.reachabilityFence(broadcaster);
@@ -97,6 +97,18 @@ public class ChannelMonitor extends CommonBase {
 		Reference.reachabilityFence(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		TwoTuple_OutPointCVec_u8ZZ ret_hu_conv = new TwoTuple_OutPointCVec_u8ZZ(null, ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Gets the channel_id of the channel this ChannelMonitor is monitoring for.
+	 */
+	public ChannelId channel_id() {
+		long ret = bindings.ChannelMonitor_channel_id(this.ptr);
+		Reference.reachabilityFence(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
 		return ret_hu_conv;
 	}
@@ -222,7 +234,7 @@ public class ChannelMonitor extends CommonBase {
 	 * [`Persist::update_persisted_channel`]: crate::chain::chainmonitor::Persist::update_persisted_channel
 	 */
 	public CommitmentTransaction[] counterparty_commitment_txs_from_update(org.ldk.structs.ChannelMonitorUpdate update) {
-		long[] ret = bindings.ChannelMonitor_counterparty_commitment_txs_from_update(this.ptr, update == null ? 0 : update.ptr);
+		long[] ret = bindings.ChannelMonitor_counterparty_commitment_txs_from_update(this.ptr, update.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(update);
 		int ret_conv_23_len = ret.length;
@@ -284,27 +296,25 @@ public class ChannelMonitor extends CommonBase {
 	}
 
 	/**
-	 * Used by [`ChannelManager`] deserialization to broadcast the latest holder state if its copy
-	 * of the channel state was out-of-date.
-	 * 
-	 * You may also use this to broadcast the latest local commitment transaction, either because
+	 * You may use this to broadcast the latest local commitment transaction, either because
 	 * a monitor update failed or because we've fallen behind (i.e. we've received proof that our
 	 * counterparty side knows a revocation secret we gave them that they shouldn't know).
 	 * 
-	 * Broadcasting these transactions in the second case is UNSAFE, as they allow counterparty
+	 * Broadcasting these transactions in this manner is UNSAFE, as they allow counterparty
 	 * side to punish you. Nevertheless you may want to broadcast them if counterparty doesn't
 	 * close channel with their commitment transaction after a substantial amount of time. Best
 	 * may be to contact the other node operator out-of-band to coordinate other options available
 	 * to you.
-	 * 
-	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 */
-	public byte[][] get_latest_holder_commitment_txn(org.ldk.structs.Logger logger) {
-		byte[][] ret = bindings.ChannelMonitor_get_latest_holder_commitment_txn(this.ptr, logger.ptr);
+	public void broadcast_latest_holder_commitment_txn(org.ldk.structs.BroadcasterInterface broadcaster, org.ldk.structs.FeeEstimator fee_estimator, org.ldk.structs.Logger logger) {
+		bindings.ChannelMonitor_broadcast_latest_holder_commitment_txn(this.ptr, broadcaster.ptr, fee_estimator.ptr, logger.ptr);
 		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(broadcaster);
+		Reference.reachabilityFence(fee_estimator);
 		Reference.reachabilityFence(logger);
+		if (this != null) { this.ptrs_to.add(broadcaster); };
+		if (this != null) { this.ptrs_to.add(fee_estimator); };
 		if (this != null) { this.ptrs_to.add(logger); };
-		return ret;
 	}
 
 	/**
@@ -321,7 +331,7 @@ public class ChannelMonitor extends CommonBase {
 	 * [`get_outputs_to_watch`]: #method.get_outputs_to_watch
 	 */
 	public TwoTuple_ThirtyTwoBytesCVec_C2Tuple_u32TxOutZZZ[] block_connected(byte[] header, TwoTuple_usizeTransactionZ[] txdata, int height, org.ldk.structs.BroadcasterInterface broadcaster, org.ldk.structs.FeeEstimator fee_estimator, org.ldk.structs.Logger logger) {
-		long[] ret = bindings.ChannelMonitor_block_connected(this.ptr, InternalUtils.check_arr_len(header, 80), txdata != null ? Arrays.stream(txdata).mapToLong(txdata_conv_28 -> txdata_conv_28 != null ? txdata_conv_28.ptr : 0).toArray() : null, height, broadcaster.ptr, fee_estimator.ptr, logger.ptr);
+		long[] ret = bindings.ChannelMonitor_block_connected(this.ptr, InternalUtils.check_arr_len(header, 80), txdata != null ? Arrays.stream(txdata).mapToLong(txdata_conv_28 -> txdata_conv_28.ptr).toArray() : null, height, broadcaster.ptr, fee_estimator.ptr, logger.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(header);
 		Reference.reachabilityFence(txdata);
@@ -370,7 +380,7 @@ public class ChannelMonitor extends CommonBase {
 	 * [`block_connected`]: Self::block_connected
 	 */
 	public TwoTuple_ThirtyTwoBytesCVec_C2Tuple_u32TxOutZZZ[] transactions_confirmed(byte[] header, TwoTuple_usizeTransactionZ[] txdata, int height, org.ldk.structs.BroadcasterInterface broadcaster, org.ldk.structs.FeeEstimator fee_estimator, org.ldk.structs.Logger logger) {
-		long[] ret = bindings.ChannelMonitor_transactions_confirmed(this.ptr, InternalUtils.check_arr_len(header, 80), txdata != null ? Arrays.stream(txdata).mapToLong(txdata_conv_28 -> txdata_conv_28 != null ? txdata_conv_28.ptr : 0).toArray() : null, height, broadcaster.ptr, fee_estimator.ptr, logger.ptr);
+		long[] ret = bindings.ChannelMonitor_transactions_confirmed(this.ptr, InternalUtils.check_arr_len(header, 80), txdata != null ? Arrays.stream(txdata).mapToLong(txdata_conv_28 -> txdata_conv_28.ptr).toArray() : null, height, broadcaster.ptr, fee_estimator.ptr, logger.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(header);
 		Reference.reachabilityFence(txdata);
@@ -492,6 +502,21 @@ public class ChannelMonitor extends CommonBase {
 	}
 
 	/**
+	 * Triggers rebroadcasts of pending claims from a force-closed channel after a transaction
+	 * signature generation failure.
+	 */
+	public void signer_unblocked(org.ldk.structs.BroadcasterInterface broadcaster, org.ldk.structs.FeeEstimator fee_estimator, org.ldk.structs.Logger logger) {
+		bindings.ChannelMonitor_signer_unblocked(this.ptr, broadcaster.ptr, fee_estimator.ptr, logger.ptr);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(broadcaster);
+		Reference.reachabilityFence(fee_estimator);
+		Reference.reachabilityFence(logger);
+		if (this != null) { this.ptrs_to.add(broadcaster); };
+		if (this != null) { this.ptrs_to.add(fee_estimator); };
+		if (this != null) { this.ptrs_to.add(logger); };
+	}
+
+	/**
 	 * Returns the descriptors for relevant outputs (i.e., those that we can spend) within the
 	 * transaction if they exist and the transaction has at least [`ANTI_REORG_DELAY`]
 	 * confirmations. For [`SpendableOutputDescriptor::DelayedPaymentOutput`] descriptors to be
@@ -525,6 +550,21 @@ public class ChannelMonitor extends CommonBase {
 			ret_conv_27_arr[b] = ret_conv_27_hu_conv;
 		}
 		return ret_conv_27_arr;
+	}
+
+	/**
+	 * Checks if the monitor is fully resolved. Resolved monitor is one that has claimed all of
+	 * its outputs and balances (i.e. [`Self::get_claimable_balances`] returns an empty set).
+	 * 
+	 * This function returns true only if [`Self::get_claimable_balances`] has been empty for at least
+	 * 4032 blocks as an additional protection against any bugs resulting in spuriously empty balance sets.
+	 */
+	public boolean is_fully_resolved(org.ldk.structs.Logger logger) {
+		boolean ret = bindings.ChannelMonitor_is_fully_resolved(this.ptr, logger.ptr);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(logger);
+		if (this != null) { this.ptrs_to.add(logger); };
+		return ret;
 	}
 
 	/**

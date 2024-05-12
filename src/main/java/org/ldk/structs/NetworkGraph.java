@@ -28,7 +28,7 @@ public class NetworkGraph extends CommonBase {
 	 * [`Event`]: crate::events::Event
 	 */
 	public void handle_network_update(org.ldk.structs.NetworkUpdate network_update) {
-		bindings.NetworkGraph_handle_network_update(this.ptr, network_update == null ? 0 : network_update.ptr);
+		bindings.NetworkGraph_handle_network_update(this.ptr, network_update.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(network_update);
 	}
@@ -122,7 +122,7 @@ public class NetworkGraph extends CommonBase {
 	 * routing messages from a source using a protocol other than the lightning P2P protocol.
 	 */
 	public Result_NoneLightningErrorZ update_node_from_announcement(org.ldk.structs.NodeAnnouncement msg) {
-		long ret = bindings.NetworkGraph_update_node_from_announcement(this.ptr, msg == null ? 0 : msg.ptr);
+		long ret = bindings.NetworkGraph_update_node_from_announcement(this.ptr, msg.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -138,7 +138,7 @@ public class NetworkGraph extends CommonBase {
 	 * peers.
 	 */
 	public Result_NoneLightningErrorZ update_node_from_unsigned_announcement(org.ldk.structs.UnsignedNodeAnnouncement msg) {
-		long ret = bindings.NetworkGraph_update_node_from_unsigned_announcement(this.ptr, msg == null ? 0 : msg.ptr);
+		long ret = bindings.NetworkGraph_update_node_from_unsigned_announcement(this.ptr, msg.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -158,7 +158,7 @@ public class NetworkGraph extends CommonBase {
 	 * the corresponding UTXO exists on chain and is correctly-formatted.
 	 */
 	public Result_NoneLightningErrorZ update_channel_from_announcement(org.ldk.structs.ChannelAnnouncement msg, org.ldk.structs.Option_UtxoLookupZ utxo_lookup) {
-		long ret = bindings.NetworkGraph_update_channel_from_announcement(this.ptr, msg == null ? 0 : msg.ptr, utxo_lookup.ptr);
+		long ret = bindings.NetworkGraph_update_channel_from_announcement(this.ptr, msg.ptr, utxo_lookup.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(msg);
 		Reference.reachabilityFence(utxo_lookup);
@@ -179,7 +179,7 @@ public class NetworkGraph extends CommonBase {
 	 * This will skip verification of if the channel is actually on-chain.
 	 */
 	public Result_NoneLightningErrorZ update_channel_from_announcement_no_lookup(org.ldk.structs.ChannelAnnouncement msg) {
-		long ret = bindings.NetworkGraph_update_channel_from_announcement_no_lookup(this.ptr, msg == null ? 0 : msg.ptr);
+		long ret = bindings.NetworkGraph_update_channel_from_announcement_no_lookup(this.ptr, msg.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -197,7 +197,7 @@ public class NetworkGraph extends CommonBase {
 	 * the corresponding UTXO exists on chain and is correctly-formatted.
 	 */
 	public Result_NoneLightningErrorZ update_channel_from_unsigned_announcement(org.ldk.structs.UnsignedChannelAnnouncement msg, org.ldk.structs.Option_UtxoLookupZ utxo_lookup) {
-		long ret = bindings.NetworkGraph_update_channel_from_unsigned_announcement(this.ptr, msg == null ? 0 : msg.ptr, utxo_lookup.ptr);
+		long ret = bindings.NetworkGraph_update_channel_from_unsigned_announcement(this.ptr, msg.ptr, utxo_lookup.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(msg);
 		Reference.reachabilityFence(utxo_lookup);
@@ -217,7 +217,7 @@ public class NetworkGraph extends CommonBase {
 	 * All other parameters as used in [`msgs::UnsignedChannelAnnouncement`] fields.
 	 */
 	public Result_NoneLightningErrorZ add_channel_from_partial_announcement(long short_channel_id, long timestamp, org.ldk.structs.ChannelFeatures features, byte[] node_id_1, byte[] node_id_2) {
-		long ret = bindings.NetworkGraph_add_channel_from_partial_announcement(this.ptr, short_channel_id, timestamp, features == null ? 0 : features.ptr, InternalUtils.check_arr_len(node_id_1, 33), InternalUtils.check_arr_len(node_id_2, 33));
+		long ret = bindings.NetworkGraph_add_channel_from_partial_announcement(this.ptr, short_channel_id, timestamp, features.ptr, InternalUtils.check_arr_len(node_id_1, 33), InternalUtils.check_arr_len(node_id_2, 33));
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(short_channel_id);
 		Reference.reachabilityFence(timestamp);
@@ -307,7 +307,7 @@ public class NetworkGraph extends CommonBase {
 	 * materially in the future will be rejected.
 	 */
 	public Result_NoneLightningErrorZ update_channel(org.ldk.structs.ChannelUpdate msg) {
-		long ret = bindings.NetworkGraph_update_channel(this.ptr, msg == null ? 0 : msg.ptr);
+		long ret = bindings.NetworkGraph_update_channel(this.ptr, msg.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -325,7 +325,7 @@ public class NetworkGraph extends CommonBase {
 	 * materially in the future will be rejected.
 	 */
 	public Result_NoneLightningErrorZ update_channel_unsigned(org.ldk.structs.UnsignedChannelUpdate msg) {
-		long ret = bindings.NetworkGraph_update_channel_unsigned(this.ptr, msg == null ? 0 : msg.ptr);
+		long ret = bindings.NetworkGraph_update_channel_unsigned(this.ptr, msg.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -343,7 +343,7 @@ public class NetworkGraph extends CommonBase {
 	 * materially in the future will be rejected.
 	 */
 	public Result_NoneLightningErrorZ verify_channel_update(org.ldk.structs.ChannelUpdate msg) {
-		long ret = bindings.NetworkGraph_verify_channel_update(this.ptr, msg == null ? 0 : msg.ptr);
+		long ret = bindings.NetworkGraph_verify_channel_update(this.ptr, msg.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }

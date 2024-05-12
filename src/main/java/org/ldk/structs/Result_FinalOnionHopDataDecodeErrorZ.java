@@ -13,6 +13,10 @@ public class Result_FinalOnionHopDataDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_FinalOnionHopDataDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_FinalOnionHopDataDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_FinalOnionHopDataDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_FinalOnionHopDataDecodeErrorZ_is_ok(ptr)) {
 			return new Result_FinalOnionHopDataDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_FinalOnionHopDataDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_FinalOnionHopDataDecodeErrorZ in the success state.
 	 */
 	public static Result_FinalOnionHopDataDecodeErrorZ ok(org.ldk.structs.FinalOnionHopData o) {
-		long ret = bindings.CResult_FinalOnionHopDataDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_FinalOnionHopDataDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_FinalOnionHopDataDecodeErrorZ ret_hu_conv = Result_FinalOnionHopDataDecodeErrorZ.constr_from_ptr(ret);

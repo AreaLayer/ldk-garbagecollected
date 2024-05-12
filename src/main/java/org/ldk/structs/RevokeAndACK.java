@@ -25,19 +25,23 @@ public class RevokeAndACK extends CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public byte[] get_channel_id() {
-		byte[] ret = bindings.RevokeAndACK_get_channel_id(this.ptr);
+	public ChannelId get_channel_id() {
+		long ret = bindings.RevokeAndACK_get_channel_id(this.ptr);
 		Reference.reachabilityFence(this);
-		return ret;
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
 	}
 
 	/**
 	 * The channel ID
 	 */
-	public void set_channel_id(byte[] val) {
-		bindings.RevokeAndACK_set_channel_id(this.ptr, InternalUtils.check_arr_len(val, 32));
+	public void set_channel_id(org.ldk.structs.ChannelId val) {
+		bindings.RevokeAndACK_set_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
+		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -79,14 +83,15 @@ public class RevokeAndACK extends CommonBase {
 	/**
 	 * Constructs a new RevokeAndACK given each field
 	 */
-	public static RevokeAndACK of(byte[] channel_id_arg, byte[] per_commitment_secret_arg, byte[] next_per_commitment_point_arg) {
-		long ret = bindings.RevokeAndACK_new(InternalUtils.check_arr_len(channel_id_arg, 32), InternalUtils.check_arr_len(per_commitment_secret_arg, 32), InternalUtils.check_arr_len(next_per_commitment_point_arg, 33));
+	public static RevokeAndACK of(org.ldk.structs.ChannelId channel_id_arg, byte[] per_commitment_secret_arg, byte[] next_per_commitment_point_arg) {
+		long ret = bindings.RevokeAndACK_new(channel_id_arg.ptr, InternalUtils.check_arr_len(per_commitment_secret_arg, 32), InternalUtils.check_arr_len(next_per_commitment_point_arg, 33));
 		Reference.reachabilityFence(channel_id_arg);
 		Reference.reachabilityFence(per_commitment_secret_arg);
 		Reference.reachabilityFence(next_per_commitment_point_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.RevokeAndACK ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.RevokeAndACK(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id_arg); };
 		return ret_hu_conv;
 	}
 
@@ -126,7 +131,7 @@ public class RevokeAndACK extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.RevokeAndACK b) {
-		boolean ret = bindings.RevokeAndACK_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.RevokeAndACK_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

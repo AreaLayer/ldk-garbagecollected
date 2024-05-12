@@ -36,7 +36,7 @@ public class NodeAnnouncementInfo extends CommonBase {
 	 * Protocol features the node announced support for
 	 */
 	public void set_features(org.ldk.structs.NodeFeatures val) {
-		bindings.NodeAnnouncementInfo_set_features(this.ptr, val == null ? 0 : val.ptr);
+		bindings.NodeAnnouncementInfo_set_features(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -100,7 +100,7 @@ public class NodeAnnouncementInfo extends CommonBase {
 	 * should not be exposed to the user.
 	 */
 	public void set_alias(org.ldk.structs.NodeAlias val) {
-		bindings.NodeAnnouncementInfo_set_alias(this.ptr, val == null ? 0 : val.ptr);
+		bindings.NodeAnnouncementInfo_set_alias(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -145,7 +145,7 @@ public class NodeAnnouncementInfo extends CommonBase {
 	 * Note that announcement_message_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public static NodeAnnouncementInfo of(org.ldk.structs.NodeFeatures features_arg, int last_update_arg, byte[] rgb_arg, org.ldk.structs.NodeAlias alias_arg, @Nullable org.ldk.structs.NodeAnnouncement announcement_message_arg) {
-		long ret = bindings.NodeAnnouncementInfo_new(features_arg == null ? 0 : features_arg.ptr, last_update_arg, InternalUtils.check_arr_len(rgb_arg, 3), alias_arg == null ? 0 : alias_arg.ptr, announcement_message_arg == null ? 0 : announcement_message_arg.ptr);
+		long ret = bindings.NodeAnnouncementInfo_new(features_arg.ptr, last_update_arg, InternalUtils.check_arr_len(rgb_arg, 3), alias_arg.ptr, announcement_message_arg == null ? 0 : announcement_message_arg.ptr);
 		Reference.reachabilityFence(features_arg);
 		Reference.reachabilityFence(last_update_arg);
 		Reference.reachabilityFence(rgb_arg);
@@ -184,7 +184,7 @@ public class NodeAnnouncementInfo extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.NodeAnnouncementInfo b) {
-		boolean ret = bindings.NodeAnnouncementInfo_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.NodeAnnouncementInfo_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

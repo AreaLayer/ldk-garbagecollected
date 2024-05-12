@@ -26,7 +26,7 @@ public class Bolt12InvoiceFeatures extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.Bolt12InvoiceFeatures b) {
-		boolean ret = bindings.Bolt12InvoiceFeatures_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.Bolt12InvoiceFeatures_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };
@@ -82,7 +82,7 @@ public class Bolt12InvoiceFeatures extends CommonBase {
 	 * Returns true if this `Features` object contains required features unknown by `other`.
 	 */
 	public boolean requires_unknown_bits_from(org.ldk.structs.Bolt12InvoiceFeatures other) {
-		boolean ret = bindings.Bolt12InvoiceFeatures_requires_unknown_bits_from(this.ptr, other == null ? 0 : other.ptr);
+		boolean ret = bindings.Bolt12InvoiceFeatures_requires_unknown_bits_from(this.ptr, other.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(other);
 		if (this != null) { this.ptrs_to.add(other); };

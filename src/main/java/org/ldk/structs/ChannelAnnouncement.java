@@ -110,7 +110,7 @@ public class ChannelAnnouncement extends CommonBase {
 	 * The actual announcement
 	 */
 	public void set_contents(org.ldk.structs.UnsignedChannelAnnouncement val) {
-		bindings.ChannelAnnouncement_set_contents(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChannelAnnouncement_set_contents(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -120,7 +120,7 @@ public class ChannelAnnouncement extends CommonBase {
 	 * Constructs a new ChannelAnnouncement given each field
 	 */
 	public static ChannelAnnouncement of(byte[] node_signature_1_arg, byte[] node_signature_2_arg, byte[] bitcoin_signature_1_arg, byte[] bitcoin_signature_2_arg, org.ldk.structs.UnsignedChannelAnnouncement contents_arg) {
-		long ret = bindings.ChannelAnnouncement_new(InternalUtils.check_arr_len(node_signature_1_arg, 64), InternalUtils.check_arr_len(node_signature_2_arg, 64), InternalUtils.check_arr_len(bitcoin_signature_1_arg, 64), InternalUtils.check_arr_len(bitcoin_signature_2_arg, 64), contents_arg == null ? 0 : contents_arg.ptr);
+		long ret = bindings.ChannelAnnouncement_new(InternalUtils.check_arr_len(node_signature_1_arg, 64), InternalUtils.check_arr_len(node_signature_2_arg, 64), InternalUtils.check_arr_len(bitcoin_signature_1_arg, 64), InternalUtils.check_arr_len(bitcoin_signature_2_arg, 64), contents_arg.ptr);
 		Reference.reachabilityFence(node_signature_1_arg);
 		Reference.reachabilityFence(node_signature_2_arg);
 		Reference.reachabilityFence(bitcoin_signature_1_arg);
@@ -169,7 +169,7 @@ public class ChannelAnnouncement extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.ChannelAnnouncement b) {
-		boolean ret = bindings.ChannelAnnouncement_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.ChannelAnnouncement_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

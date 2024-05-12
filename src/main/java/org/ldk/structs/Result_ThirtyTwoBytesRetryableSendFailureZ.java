@@ -13,6 +13,10 @@ public class Result_ThirtyTwoBytesRetryableSendFailureZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_ThirtyTwoBytesRetryableSendFailureZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_ThirtyTwoBytesRetryableSendFailureZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_ThirtyTwoBytesRetryableSendFailureZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_ThirtyTwoBytesRetryableSendFailureZ_is_ok(ptr)) {
 			return new Result_ThirtyTwoBytesRetryableSendFailureZ_OK(null, ptr);

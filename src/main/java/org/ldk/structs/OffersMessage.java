@@ -100,7 +100,7 @@ public class OffersMessage extends CommonBase {
 	 * Utility method to constructs a new InvoiceRequest-variant OffersMessage
 	 */
 	public static OffersMessage invoice_request(org.ldk.structs.InvoiceRequest a) {
-		long ret = bindings.OffersMessage_invoice_request(a == null ? 0 : a.ptr);
+		long ret = bindings.OffersMessage_invoice_request(a.ptr);
 		Reference.reachabilityFence(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.OffersMessage ret_hu_conv = org.ldk.structs.OffersMessage.constr_from_ptr(ret);
@@ -113,7 +113,7 @@ public class OffersMessage extends CommonBase {
 	 * Utility method to constructs a new Invoice-variant OffersMessage
 	 */
 	public static OffersMessage invoice(org.ldk.structs.Bolt12Invoice a) {
-		long ret = bindings.OffersMessage_invoice(a == null ? 0 : a.ptr);
+		long ret = bindings.OffersMessage_invoice(a.ptr);
 		Reference.reachabilityFence(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.OffersMessage ret_hu_conv = org.ldk.structs.OffersMessage.constr_from_ptr(ret);
@@ -126,7 +126,7 @@ public class OffersMessage extends CommonBase {
 	 * Utility method to constructs a new InvoiceError-variant OffersMessage
 	 */
 	public static OffersMessage invoice_error(org.ldk.structs.InvoiceError a) {
-		long ret = bindings.OffersMessage_invoice_error(a == null ? 0 : a.ptr);
+		long ret = bindings.OffersMessage_invoice_error(a.ptr);
 		Reference.reachabilityFence(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.OffersMessage ret_hu_conv = org.ldk.structs.OffersMessage.constr_from_ptr(ret);

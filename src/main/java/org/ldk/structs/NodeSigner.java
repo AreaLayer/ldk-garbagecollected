@@ -134,7 +134,7 @@ public class NodeSigner extends CommonBase {
 			@Override public long get_node_id(Recipient recipient) {
 				Result_PublicKeyNoneZ ret = arg.get_node_id(recipient);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long ecdh(Recipient recipient, byte[] other_key, long tweak) {
@@ -142,7 +142,7 @@ public class NodeSigner extends CommonBase {
 				if (tweak_hu_conv != null) { tweak_hu_conv.ptrs_to.add(this); };
 				Result_ThirtyTwoBytesNoneZ ret = arg.ecdh(recipient, other_key, tweak_hu_conv);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long sign_invoice(byte[] hrp_bytes, byte[] invoice_data, Recipient recipient) {
@@ -155,21 +155,21 @@ public class NodeSigner extends CommonBase {
 				}
 				Result_RecoverableSignatureNoneZ ret = arg.sign_invoice(hrp_bytes, invoice_data_conv_7_arr, recipient);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long sign_bolt12_invoice_request(long invoice_request) {
 				org.ldk.structs.UnsignedInvoiceRequest invoice_request_hu_conv = null; if (invoice_request < 0 || invoice_request > 4096) { invoice_request_hu_conv = new org.ldk.structs.UnsignedInvoiceRequest(null, invoice_request); }
 				Result_SchnorrSignatureNoneZ ret = arg.sign_bolt12_invoice_request(invoice_request_hu_conv);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long sign_bolt12_invoice(long invoice) {
 				org.ldk.structs.UnsignedBolt12Invoice invoice_hu_conv = null; if (invoice < 0 || invoice > 4096) { invoice_hu_conv = new org.ldk.structs.UnsignedBolt12Invoice(null, invoice); }
 				Result_SchnorrSignatureNoneZ ret = arg.sign_bolt12_invoice(invoice_hu_conv);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long sign_gossip_message(long msg) {
@@ -177,7 +177,7 @@ public class NodeSigner extends CommonBase {
 				if (msg_hu_conv != null) { msg_hu_conv.ptrs_to.add(this); };
 				Result_ECDSASignatureNoneZ ret = arg.sign_gossip_message(msg_hu_conv);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 		});
@@ -277,7 +277,7 @@ public class NodeSigner extends CommonBase {
 	 * [`TaggedHash`]: crate::offers::merkle::TaggedHash
 	 */
 	public Result_SchnorrSignatureNoneZ sign_bolt12_invoice_request(org.ldk.structs.UnsignedInvoiceRequest invoice_request) {
-		long ret = bindings.NodeSigner_sign_bolt12_invoice_request(this.ptr, invoice_request == null ? 0 : invoice_request.ptr);
+		long ret = bindings.NodeSigner_sign_bolt12_invoice_request(this.ptr, invoice_request.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(invoice_request);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -300,7 +300,7 @@ public class NodeSigner extends CommonBase {
 	 * [`TaggedHash`]: crate::offers::merkle::TaggedHash
 	 */
 	public Result_SchnorrSignatureNoneZ sign_bolt12_invoice(org.ldk.structs.UnsignedBolt12Invoice invoice) {
-		long ret = bindings.NodeSigner_sign_bolt12_invoice(this.ptr, invoice == null ? 0 : invoice.ptr);
+		long ret = bindings.NodeSigner_sign_bolt12_invoice(this.ptr, invoice.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(invoice);
 		if (ret >= 0 && ret <= 4096) { return null; }

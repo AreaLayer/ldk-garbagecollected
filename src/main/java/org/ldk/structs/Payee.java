@@ -137,7 +137,7 @@ public class Payee extends CommonBase {
 	 * Utility method to constructs a new Blinded-variant Payee
 	 */
 	public static Payee blinded(TwoTuple_BlindedPayInfoBlindedPathZ[] route_hints, org.ldk.structs.Bolt12InvoiceFeatures features) {
-		long ret = bindings.Payee_blinded(route_hints != null ? Arrays.stream(route_hints).mapToLong(route_hints_conv_37 -> route_hints_conv_37 != null ? route_hints_conv_37.ptr : 0).toArray() : null, features == null ? 0 : features.ptr);
+		long ret = bindings.Payee_blinded(route_hints != null ? Arrays.stream(route_hints).mapToLong(route_hints_conv_37 -> route_hints_conv_37.ptr).toArray() : null, features.ptr);
 		Reference.reachabilityFence(route_hints);
 		Reference.reachabilityFence(features);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -151,7 +151,7 @@ public class Payee extends CommonBase {
 	 * Utility method to constructs a new Clear-variant Payee
 	 */
 	public static Payee clear(byte[] node_id, RouteHint[] route_hints, org.ldk.structs.Bolt11InvoiceFeatures features, int final_cltv_expiry_delta) {
-		long ret = bindings.Payee_clear(InternalUtils.check_arr_len(node_id, 33), route_hints != null ? Arrays.stream(route_hints).mapToLong(route_hints_conv_11 -> route_hints_conv_11 == null ? 0 : route_hints_conv_11.ptr).toArray() : null, features == null ? 0 : features.ptr, final_cltv_expiry_delta);
+		long ret = bindings.Payee_clear(InternalUtils.check_arr_len(node_id, 33), route_hints != null ? Arrays.stream(route_hints).mapToLong(route_hints_conv_11 -> route_hints_conv_11.ptr).toArray() : null, features.ptr, final_cltv_expiry_delta);
 		Reference.reachabilityFence(node_id);
 		Reference.reachabilityFence(route_hints);
 		Reference.reachabilityFence(features);
@@ -181,7 +181,7 @@ public class Payee extends CommonBase {
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public boolean eq(org.ldk.structs.Payee b) {
-		boolean ret = bindings.Payee_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.Payee_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		return ret;

@@ -55,7 +55,7 @@ public class ProbabilisticScorer extends CommonBase {
 	 * through a network graph.
 	 */
 	public static ProbabilisticScorer of(org.ldk.structs.ProbabilisticScoringDecayParameters decay_params, org.ldk.structs.NetworkGraph network_graph, org.ldk.structs.Logger logger) {
-		long ret = bindings.ProbabilisticScorer_new(decay_params == null ? 0 : decay_params.ptr, network_graph == null ? 0 : network_graph.ptr, logger.ptr);
+		long ret = bindings.ProbabilisticScorer_new(decay_params.ptr, network_graph.ptr, logger.ptr);
 		Reference.reachabilityFence(decay_params);
 		Reference.reachabilityFence(network_graph);
 		Reference.reachabilityFence(logger);
@@ -84,7 +84,7 @@ public class ProbabilisticScorer extends CommonBase {
 	 * channel with `scid` towards the given `target` node.
 	 */
 	public Option_C2Tuple_u64u64ZZ estimated_channel_liquidity_range(long scid, org.ldk.structs.NodeId target) {
-		long ret = bindings.ProbabilisticScorer_estimated_channel_liquidity_range(this.ptr, scid, target == null ? 0 : target.ptr);
+		long ret = bindings.ProbabilisticScorer_estimated_channel_liquidity_range(this.ptr, scid, target.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(scid);
 		Reference.reachabilityFence(target);
@@ -124,7 +124,7 @@ public class ProbabilisticScorer extends CommonBase {
 	 * the scoring model, see [`Self::historical_estimated_payment_success_probability`].
 	 */
 	public Option_C2Tuple_ThirtyTwoU16sThirtyTwoU16sZZ historical_estimated_channel_liquidity_probabilities(long scid, org.ldk.structs.NodeId target) {
-		long ret = bindings.ProbabilisticScorer_historical_estimated_channel_liquidity_probabilities(this.ptr, scid, target == null ? 0 : target.ptr);
+		long ret = bindings.ProbabilisticScorer_historical_estimated_channel_liquidity_probabilities(this.ptr, scid, target.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(scid);
 		Reference.reachabilityFence(target);
@@ -145,7 +145,7 @@ public class ProbabilisticScorer extends CommonBase {
 	 * [`Self::estimated_channel_liquidity_range`]).
 	 */
 	public Option_f64Z historical_estimated_payment_success_probability(long scid, org.ldk.structs.NodeId target, long amount_msat, org.ldk.structs.ProbabilisticScoringFeeParameters params) {
-		long ret = bindings.ProbabilisticScorer_historical_estimated_payment_success_probability(this.ptr, scid, target == null ? 0 : target.ptr, amount_msat, params == null ? 0 : params.ptr);
+		long ret = bindings.ProbabilisticScorer_historical_estimated_payment_success_probability(this.ptr, scid, target.ptr, amount_msat, params.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(scid);
 		Reference.reachabilityFence(target);
@@ -211,7 +211,7 @@ public class ProbabilisticScorer extends CommonBase {
 	 * Read a ProbabilisticScorer from a byte array, created by ProbabilisticScorer_write
 	 */
 	public static Result_ProbabilisticScorerDecodeErrorZ read(byte[] ser, org.ldk.structs.ProbabilisticScoringDecayParameters arg_a, org.ldk.structs.NetworkGraph arg_b, org.ldk.structs.Logger arg_c) {
-		long ret = bindings.ProbabilisticScorer_read(ser, arg_a == null ? 0 : arg_a.ptr, arg_b == null ? 0 : arg_b.ptr, arg_c.ptr);
+		long ret = bindings.ProbabilisticScorer_read(ser, arg_a.ptr, arg_b.ptr, arg_c.ptr);
 		Reference.reachabilityFence(ser);
 		Reference.reachabilityFence(arg_a);
 		Reference.reachabilityFence(arg_b);

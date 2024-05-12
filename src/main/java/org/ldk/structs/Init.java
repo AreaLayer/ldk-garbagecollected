@@ -38,7 +38,7 @@ public class Init extends CommonBase {
 	 * The relevant features which the sender supports.
 	 */
 	public void set_features(org.ldk.structs.InitFeatures val) {
-		bindings.Init_set_features(this.ptr, val == null ? 0 : val.ptr);
+		bindings.Init_set_features(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -108,7 +108,7 @@ public class Init extends CommonBase {
 	 * Constructs a new Init given each field
 	 */
 	public static Init of(org.ldk.structs.InitFeatures features_arg, org.ldk.structs.Option_CVec_ThirtyTwoBytesZZ networks_arg, org.ldk.structs.Option_SocketAddressZ remote_network_address_arg) {
-		long ret = bindings.Init_new(features_arg == null ? 0 : features_arg.ptr, networks_arg.ptr, remote_network_address_arg.ptr);
+		long ret = bindings.Init_new(features_arg.ptr, networks_arg.ptr, remote_network_address_arg.ptr);
 		Reference.reachabilityFence(features_arg);
 		Reference.reachabilityFence(networks_arg);
 		Reference.reachabilityFence(remote_network_address_arg);
@@ -157,7 +157,7 @@ public class Init extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.Init b) {
-		boolean ret = bindings.Init_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.Init_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

@@ -59,7 +59,7 @@ public class TransactionU16LenLimited extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.TransactionU16LenLimited b) {
-		boolean ret = bindings.TransactionU16LenLimited_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.TransactionU16LenLimited_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };
@@ -89,6 +89,15 @@ public class TransactionU16LenLimited extends CommonBase {
 		byte[] ret = bindings.TransactionU16LenLimited_into_transaction(this.ptr);
 		Reference.reachabilityFence(this);
 		if (this != null) { this.ptrs_to.add(this); };
+		return ret;
+	}
+
+	/**
+	 * Returns a reference to the contained `Transaction`
+	 */
+	public byte[] as_transaction() {
+		byte[] ret = bindings.TransactionU16LenLimited_as_transaction(this.ptr);
+		Reference.reachabilityFence(this);
 		return ret;
 	}
 

@@ -13,6 +13,10 @@ public class Result_WitnessNoneZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_WitnessNoneZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_WitnessNoneZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_WitnessNoneZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_WitnessNoneZ_is_ok(ptr)) {
 			return new Result_WitnessNoneZ_OK(null, ptr);

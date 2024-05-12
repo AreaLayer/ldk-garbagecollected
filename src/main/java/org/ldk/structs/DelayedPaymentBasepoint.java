@@ -54,7 +54,7 @@ public class DelayedPaymentBasepoint extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.DelayedPaymentBasepoint b) {
-		boolean ret = bindings.DelayedPaymentBasepoint_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.DelayedPaymentBasepoint_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };
@@ -101,6 +101,16 @@ public class DelayedPaymentBasepoint extends CommonBase {
 	public byte[] to_public_key() {
 		byte[] ret = bindings.DelayedPaymentBasepoint_to_public_key(this.ptr);
 		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Derives the \"tweak\" used in calculate [`DelayedPaymentKey::from_basepoint`].\n\n[`DelayedPaymentKey::from_basepoint`] calculates a private key as:\n`privkey = basepoint_secret + SHA256(per_commitment_point || basepoint)`\n\nThis calculates the hash part in the tweak derivation process, which is used to\nensure that each key is unique and cannot be guessed by an external party.
+	 */
+	public byte[] derive_add_tweak(byte[] per_commitment_point) {
+		byte[] ret = bindings.DelayedPaymentBasepoint_derive_add_tweak(this.ptr, InternalUtils.check_arr_len(per_commitment_point, 33));
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(per_commitment_point);
 		return ret;
 	}
 

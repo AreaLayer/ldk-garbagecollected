@@ -13,6 +13,10 @@ public class Result_CVec_BlindedPathZNoneZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_CVec_BlindedPathZNoneZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_CVec_BlindedPathZNoneZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_CVec_BlindedPathZNoneZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_CVec_BlindedPathZNoneZ_is_ok(ptr)) {
 			return new Result_CVec_BlindedPathZNoneZ_OK(null, ptr);
@@ -47,7 +51,7 @@ public class Result_CVec_BlindedPathZNoneZ extends CommonBase {
 	 * Creates a new CResult_CVec_BlindedPathZNoneZ in the success state.
 	 */
 	public static Result_CVec_BlindedPathZNoneZ ok(BlindedPath[] o) {
-		long ret = bindings.CResult_CVec_BlindedPathZNoneZ_ok(o != null ? Arrays.stream(o).mapToLong(o_conv_13 -> o_conv_13 == null ? 0 : o_conv_13.ptr).toArray() : null);
+		long ret = bindings.CResult_CVec_BlindedPathZNoneZ_ok(o != null ? Arrays.stream(o).mapToLong(o_conv_13 -> o_conv_13.ptr).toArray() : null);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CVec_BlindedPathZNoneZ ret_hu_conv = Result_CVec_BlindedPathZNoneZ.constr_from_ptr(ret);

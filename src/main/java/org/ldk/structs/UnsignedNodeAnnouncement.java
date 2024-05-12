@@ -38,7 +38,7 @@ public class UnsignedNodeAnnouncement extends CommonBase {
 	 * The advertised features
 	 */
 	public void set_features(org.ldk.structs.NodeFeatures val) {
-		bindings.UnsignedNodeAnnouncement_set_features(this.ptr, val == null ? 0 : val.ptr);
+		bindings.UnsignedNodeAnnouncement_set_features(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -80,7 +80,7 @@ public class UnsignedNodeAnnouncement extends CommonBase {
 	 * to this node).
 	 */
 	public void set_node_id(org.ldk.structs.NodeId val) {
-		bindings.UnsignedNodeAnnouncement_set_node_id(this.ptr, val == null ? 0 : val.ptr);
+		bindings.UnsignedNodeAnnouncement_set_node_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -124,7 +124,7 @@ public class UnsignedNodeAnnouncement extends CommonBase {
 	 * This should be sanitized before use. There is no guarantee of uniqueness.
 	 */
 	public void set_alias(org.ldk.structs.NodeAlias val) {
-		bindings.UnsignedNodeAnnouncement_set_alias(this.ptr, val == null ? 0 : val.ptr);
+		bindings.UnsignedNodeAnnouncement_set_alias(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -157,6 +157,81 @@ public class UnsignedNodeAnnouncement extends CommonBase {
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		for (SocketAddress val_conv_15: val) { if (this != null) { this.ptrs_to.add(val_conv_15); }; };
+	}
+
+	/**
+	 * Excess address data which was signed as a part of the message which we do not (yet) understand how
+	 * to decode.
+	 * 
+	 * This is stored to ensure forward-compatibility as new address types are added to the lightning gossip protocol.
+	 * 
+	 * Returns a copy of the field.
+	 */
+	public byte[] get_excess_address_data() {
+		byte[] ret = bindings.UnsignedNodeAnnouncement_get_excess_address_data(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Excess address data which was signed as a part of the message which we do not (yet) understand how
+	 * to decode.
+	 * 
+	 * This is stored to ensure forward-compatibility as new address types are added to the lightning gossip protocol.
+	 */
+	public void set_excess_address_data(byte[] val) {
+		bindings.UnsignedNodeAnnouncement_set_excess_address_data(this.ptr, val);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
+	}
+
+	/**
+	 * Excess data which was signed as a part of the message which we do not (yet) understand how
+	 * to decode.
+	 * 
+	 * This is stored to ensure forward-compatibility as new fields are added to the lightning gossip protocol.
+	 * 
+	 * Returns a copy of the field.
+	 */
+	public byte[] get_excess_data() {
+		byte[] ret = bindings.UnsignedNodeAnnouncement_get_excess_data(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Excess data which was signed as a part of the message which we do not (yet) understand how
+	 * to decode.
+	 * 
+	 * This is stored to ensure forward-compatibility as new fields are added to the lightning gossip protocol.
+	 */
+	public void set_excess_data(byte[] val) {
+		bindings.UnsignedNodeAnnouncement_set_excess_data(this.ptr, val);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
+	}
+
+	/**
+	 * Constructs a new UnsignedNodeAnnouncement given each field
+	 */
+	public static UnsignedNodeAnnouncement of(org.ldk.structs.NodeFeatures features_arg, int timestamp_arg, org.ldk.structs.NodeId node_id_arg, byte[] rgb_arg, org.ldk.structs.NodeAlias alias_arg, SocketAddress[] addresses_arg, byte[] excess_address_data_arg, byte[] excess_data_arg) {
+		long ret = bindings.UnsignedNodeAnnouncement_new(features_arg.ptr, timestamp_arg, node_id_arg.ptr, InternalUtils.check_arr_len(rgb_arg, 3), alias_arg.ptr, addresses_arg != null ? Arrays.stream(addresses_arg).mapToLong(addresses_arg_conv_15 -> addresses_arg_conv_15.ptr).toArray() : null, excess_address_data_arg, excess_data_arg);
+		Reference.reachabilityFence(features_arg);
+		Reference.reachabilityFence(timestamp_arg);
+		Reference.reachabilityFence(node_id_arg);
+		Reference.reachabilityFence(rgb_arg);
+		Reference.reachabilityFence(alias_arg);
+		Reference.reachabilityFence(addresses_arg);
+		Reference.reachabilityFence(excess_address_data_arg);
+		Reference.reachabilityFence(excess_data_arg);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.UnsignedNodeAnnouncement ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.UnsignedNodeAnnouncement(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(features_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(node_id_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(alias_arg); };
+		for (SocketAddress addresses_arg_conv_15: addresses_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(addresses_arg_conv_15); }; };
+		return ret_hu_conv;
 	}
 
 	long clone_ptr() {
@@ -195,7 +270,7 @@ public class UnsignedNodeAnnouncement extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.UnsignedNodeAnnouncement b) {
-		boolean ret = bindings.UnsignedNodeAnnouncement_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.UnsignedNodeAnnouncement_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

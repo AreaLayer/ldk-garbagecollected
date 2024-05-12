@@ -13,6 +13,10 @@ public class Result_CommitmentSignedDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_CommitmentSignedDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_CommitmentSignedDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_CommitmentSignedDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_CommitmentSignedDecodeErrorZ_is_ok(ptr)) {
 			return new Result_CommitmentSignedDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_CommitmentSignedDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_CommitmentSignedDecodeErrorZ in the success state.
 	 */
 	public static Result_CommitmentSignedDecodeErrorZ ok(org.ldk.structs.CommitmentSigned o) {
-		long ret = bindings.CResult_CommitmentSignedDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_CommitmentSignedDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CommitmentSignedDecodeErrorZ ret_hu_conv = Result_CommitmentSignedDecodeErrorZ.constr_from_ptr(ret);

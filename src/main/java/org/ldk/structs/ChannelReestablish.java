@@ -25,19 +25,23 @@ public class ChannelReestablish extends CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public byte[] get_channel_id() {
-		byte[] ret = bindings.ChannelReestablish_get_channel_id(this.ptr);
+	public ChannelId get_channel_id() {
+		long ret = bindings.ChannelReestablish_get_channel_id(this.ptr);
 		Reference.reachabilityFence(this);
-		return ret;
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
 	}
 
 	/**
 	 * The channel ID
 	 */
-	public void set_channel_id(byte[] val) {
-		bindings.ChannelReestablish_set_channel_id(this.ptr, InternalUtils.check_arr_len(val, 32));
+	public void set_channel_id(org.ldk.structs.ChannelId val) {
+		bindings.ChannelReestablish_set_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
+		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -139,8 +143,8 @@ public class ChannelReestablish extends CommonBase {
 	/**
 	 * Constructs a new ChannelReestablish given each field
 	 */
-	public static ChannelReestablish of(byte[] channel_id_arg, long next_local_commitment_number_arg, long next_remote_commitment_number_arg, byte[] your_last_per_commitment_secret_arg, byte[] my_current_per_commitment_point_arg, org.ldk.structs.Option_ThirtyTwoBytesZ next_funding_txid_arg) {
-		long ret = bindings.ChannelReestablish_new(InternalUtils.check_arr_len(channel_id_arg, 32), next_local_commitment_number_arg, next_remote_commitment_number_arg, InternalUtils.check_arr_len(your_last_per_commitment_secret_arg, 32), InternalUtils.check_arr_len(my_current_per_commitment_point_arg, 33), next_funding_txid_arg.ptr);
+	public static ChannelReestablish of(org.ldk.structs.ChannelId channel_id_arg, long next_local_commitment_number_arg, long next_remote_commitment_number_arg, byte[] your_last_per_commitment_secret_arg, byte[] my_current_per_commitment_point_arg, org.ldk.structs.Option_ThirtyTwoBytesZ next_funding_txid_arg) {
+		long ret = bindings.ChannelReestablish_new(channel_id_arg.ptr, next_local_commitment_number_arg, next_remote_commitment_number_arg, InternalUtils.check_arr_len(your_last_per_commitment_secret_arg, 32), InternalUtils.check_arr_len(my_current_per_commitment_point_arg, 33), next_funding_txid_arg.ptr);
 		Reference.reachabilityFence(channel_id_arg);
 		Reference.reachabilityFence(next_local_commitment_number_arg);
 		Reference.reachabilityFence(next_remote_commitment_number_arg);
@@ -150,6 +154,7 @@ public class ChannelReestablish extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ChannelReestablish ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelReestablish(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id_arg); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(next_funding_txid_arg); };
 		return ret_hu_conv;
 	}
@@ -190,7 +195,7 @@ public class ChannelReestablish extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.ChannelReestablish b) {
-		boolean ret = bindings.ChannelReestablish_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.ChannelReestablish_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

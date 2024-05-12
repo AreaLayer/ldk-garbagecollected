@@ -13,6 +13,10 @@ public class Result_WarningMessageDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_WarningMessageDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_WarningMessageDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_WarningMessageDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_WarningMessageDecodeErrorZ_is_ok(ptr)) {
 			return new Result_WarningMessageDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_WarningMessageDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_WarningMessageDecodeErrorZ in the success state.
 	 */
 	public static Result_WarningMessageDecodeErrorZ ok(org.ldk.structs.WarningMessage o) {
-		long ret = bindings.CResult_WarningMessageDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_WarningMessageDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_WarningMessageDecodeErrorZ ret_hu_conv = Result_WarningMessageDecodeErrorZ.constr_from_ptr(ret);

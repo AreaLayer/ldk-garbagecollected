@@ -13,6 +13,10 @@ public class Result_ChannelReestablishDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_ChannelReestablishDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_ChannelReestablishDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_ChannelReestablishDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_ChannelReestablishDecodeErrorZ_is_ok(ptr)) {
 			return new Result_ChannelReestablishDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_ChannelReestablishDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_ChannelReestablishDecodeErrorZ in the success state.
 	 */
 	public static Result_ChannelReestablishDecodeErrorZ ok(org.ldk.structs.ChannelReestablish o) {
-		long ret = bindings.CResult_ChannelReestablishDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_ChannelReestablishDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ChannelReestablishDecodeErrorZ ret_hu_conv = Result_ChannelReestablishDecodeErrorZ.constr_from_ptr(ret);

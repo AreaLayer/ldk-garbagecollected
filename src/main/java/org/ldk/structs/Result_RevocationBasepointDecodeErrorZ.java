@@ -13,6 +13,10 @@ public class Result_RevocationBasepointDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_RevocationBasepointDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_RevocationBasepointDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_RevocationBasepointDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_RevocationBasepointDecodeErrorZ_is_ok(ptr)) {
 			return new Result_RevocationBasepointDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_RevocationBasepointDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_RevocationBasepointDecodeErrorZ in the success state.
 	 */
 	public static Result_RevocationBasepointDecodeErrorZ ok(org.ldk.structs.RevocationBasepoint o) {
-		long ret = bindings.CResult_RevocationBasepointDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_RevocationBasepointDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RevocationBasepointDecodeErrorZ ret_hu_conv = Result_RevocationBasepointDecodeErrorZ.constr_from_ptr(ret);
