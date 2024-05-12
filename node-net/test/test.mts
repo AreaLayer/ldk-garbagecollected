@@ -57,7 +57,7 @@ await new Promise<void>(resolve => {
 	// Wait until the peers are connected and have exchanged the initial handshake
 	var timer: ReturnType<typeof setInterval>;
 	timer = setInterval(function() {
-		if (a_pm.get_peer_node_ids().length == 1 && b_pm.get_peer_node_ids().length == 1) {
+		if (a_pm.list_peers().length == 1 && b_pm.list_peers().length == 1) {
 			resolve();
 			clearInterval(timer);
 		}
@@ -69,7 +69,7 @@ await new Promise<void>(resolve => {
 	// Wait until A learns the connection is closed from the socket closure
 	var timer: ReturnType<typeof setInterval>;
 	timer = setInterval(function() {
-		if (a_pm.get_peer_node_ids().length == 0 && b_pm.get_peer_node_ids().length == 0) {
+		if (a_pm.list_peers().length == 0 && b_pm.list_peers().length == 0) {
 			resolve();
 			clearInterval(timer);
 		}
