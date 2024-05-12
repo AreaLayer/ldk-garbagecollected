@@ -51,5 +51,6 @@ DECL_IMPORT(u, u, b, u, u, u)
 DECL_IMPORT(u, u, b, b, u, u)
 DECL_IMPORT(u, u, b, u, b, u)
 DECL_IMPORT(u, b, u, b, u, u)
+DECL_IMPORT(u, u, u, u, b, u)
 
 #endif
