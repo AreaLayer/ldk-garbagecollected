@@ -11,6 +11,7 @@ import { ChannelShutdownState } from '../enums/ChannelShutdownState.mjs';
 import { ConfirmationTarget } from '../enums/ConfirmationTarget.mjs';
 import { CreationError } from '../enums/CreationError.mjs';
 import { Currency } from '../enums/Currency.mjs';
+import { Direction } from '../enums/Direction.mjs';
 import { HTLCClaim } from '../enums/HTLCClaim.mjs';
 import { IOError } from '../enums/IOError.mjs';
 import { Level } from '../enums/Level.mjs';
@@ -19,13 +20,17 @@ import { PaymentFailureReason } from '../enums/PaymentFailureReason.mjs';
 import { Recipient } from '../enums/Recipient.mjs';
 import { RetryableSendFailure } from '../enums/RetryableSendFailure.mjs';
 import { Secp256k1Error } from '../enums/Secp256k1Error.mjs';
+import { ShortChannelIdError } from '../enums/ShortChannelIdError.mjs';
 import { SiPrefix } from '../enums/SiPrefix.mjs';
 import { SocketAddressParseError } from '../enums/SocketAddressParseError.mjs';
 import { UtxoLookupError } from '../enums/UtxoLookupError.mjs';
 import { Bech32Error } from '../structs/Bech32Error.mjs';
+import { RefundMaybeWithDerivedMetadataBuilder } from '../structs/RefundMaybeWithDerivedMetadataBuilder.mjs';
+import { Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ } from '../structs/Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ.mjs';
+import { Refund } from '../structs/Refund.mjs';
+import { Result_RefundBolt12SemanticErrorZ } from '../structs/Result_RefundBolt12SemanticErrorZ.mjs';
 import { Option_u64Z } from '../structs/Option_u64Z.mjs';
 import { BlindedPath } from '../structs/BlindedPath.mjs';
-import { Refund } from '../structs/Refund.mjs';
 import { Bolt12ParseError } from '../structs/Bolt12ParseError.mjs';
 import { Result_RefundBolt12ParseErrorZ } from '../structs/Result_RefundBolt12ParseErrorZ.mjs';
 import { Retry } from '../structs/Retry.mjs';
@@ -40,7 +45,16 @@ import { RecipientOnionFields } from '../structs/RecipientOnionFields.mjs';
 import { Result_RecipientOnionFieldsDecodeErrorZ } from '../structs/Result_RecipientOnionFieldsDecodeErrorZ.mjs';
 import { TwoTuple_u64CVec_u8ZZ } from '../structs/TwoTuple_u64CVec_u8ZZ.mjs';
 import { Result_RecipientOnionFieldsNoneZ } from '../structs/Result_RecipientOnionFieldsNoneZ.mjs';
+import { UnsignedBolt12Invoice } from '../structs/UnsignedBolt12Invoice.mjs';
+import { Result_UnsignedBolt12InvoiceBolt12SemanticErrorZ } from '../structs/Result_UnsignedBolt12InvoiceBolt12SemanticErrorZ.mjs';
+import { Bolt12Invoice } from '../structs/Bolt12Invoice.mjs';
+import { Result_Bolt12InvoiceBolt12SemanticErrorZ } from '../structs/Result_Bolt12InvoiceBolt12SemanticErrorZ.mjs';
+import { Result_SchnorrSignatureNoneZ } from '../structs/Result_SchnorrSignatureNoneZ.mjs';
 import { Option_CVec_ThirtyTwoBytesZZ } from '../structs/Option_CVec_ThirtyTwoBytesZZ.mjs';
+import { Amount } from '../structs/Amount.mjs';
+import { Option_AmountZ } from '../structs/Option_AmountZ.mjs';
+import { Quantity } from '../structs/Quantity.mjs';
+import { Option_QuantityZ } from '../structs/Option_QuantityZ.mjs';
 import { Result_ThirtyTwoBytesNoneZ } from '../structs/Result_ThirtyTwoBytesNoneZ.mjs';
 import { BlindedPayInfo } from '../structs/BlindedPayInfo.mjs';
 import { Result_BlindedPayInfoDecodeErrorZ } from '../structs/Result_BlindedPayInfoDecodeErrorZ.mjs';
@@ -62,8 +76,8 @@ import { Result_NoneNoneZ } from '../structs/Result_NoneNoneZ.mjs';
 import { Result_PublicKeyNoneZ } from '../structs/Result_PublicKeyNoneZ.mjs';
 import { Option_BigEndianScalarZ } from '../structs/Option_BigEndianScalarZ.mjs';
 import { Result_RecoverableSignatureNoneZ } from '../structs/Result_RecoverableSignatureNoneZ.mjs';
-import { Result_SchnorrSignatureNoneZ } from '../structs/Result_SchnorrSignatureNoneZ.mjs';
 import { Result_ECDSASignatureNoneZ } from '../structs/Result_ECDSASignatureNoneZ.mjs';
+import { Result_TransactionNoneZ } from '../structs/Result_TransactionNoneZ.mjs';
 import { TwoTuple_ECDSASignatureCVec_ECDSASignatureZZ } from '../structs/TwoTuple_ECDSASignatureCVec_ECDSASignatureZZ.mjs';
 import { Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ } from '../structs/Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ.mjs';
 import { CommitmentTransaction } from '../structs/CommitmentTransaction.mjs';
@@ -84,7 +98,6 @@ import { Option_boolZ } from '../structs/Option_boolZ.mjs';
 import { Result_WitnessNoneZ } from '../structs/Result_WitnessNoneZ.mjs';
 import { InMemorySigner } from '../structs/InMemorySigner.mjs';
 import { Result_InMemorySignerDecodeErrorZ } from '../structs/Result_InMemorySignerDecodeErrorZ.mjs';
-import { Result_TransactionNoneZ } from '../structs/Result_TransactionNoneZ.mjs';
 import { ChannelDetails } from '../structs/ChannelDetails.mjs';
 import { Route } from '../structs/Route.mjs';
 import { LightningError } from '../structs/LightningError.mjs';
@@ -125,12 +138,17 @@ import { Logger, LoggerInterface } from '../structs/Logger.mjs';
 import { NetworkGraph } from '../structs/NetworkGraph.mjs';
 import { ProbabilisticScorer } from '../structs/ProbabilisticScorer.mjs';
 import { Result_ProbabilisticScorerDecodeErrorZ } from '../structs/Result_ProbabilisticScorerDecodeErrorZ.mjs';
+import { BestBlock } from '../structs/BestBlock.mjs';
+import { Result_BestBlockDecodeErrorZ } from '../structs/Result_BestBlockDecodeErrorZ.mjs';
 import { TwoTuple_usizeTransactionZ } from '../structs/TwoTuple_usizeTransactionZ.mjs';
 import { ThreeTuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ } from '../structs/ThreeTuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ.mjs';
 import { Result_ChannelMonitorUpdateStatusNoneZ } from '../structs/Result_ChannelMonitorUpdateStatusNoneZ.mjs';
 import { HTLCUpdate } from '../structs/HTLCUpdate.mjs';
+import { UntrustedString } from '../structs/UntrustedString.mjs';
+import { ClosureReason } from '../structs/ClosureReason.mjs';
+import { ChannelId } from '../structs/ChannelId.mjs';
 import { MonitorEvent } from '../structs/MonitorEvent.mjs';
-import { ThreeTuple_OutPointCVec_MonitorEventZPublicKeyZ } from '../structs/ThreeTuple_OutPointCVec_MonitorEventZPublicKeyZ.mjs';
+import { FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ } from '../structs/FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ.mjs';
 import { InitFeatures } from '../structs/InitFeatures.mjs';
 import { Result_InitFeaturesDecodeErrorZ } from '../structs/Result_InitFeaturesDecodeErrorZ.mjs';
 import { ChannelFeatures } from '../structs/ChannelFeatures.mjs';
@@ -145,10 +163,18 @@ import { BlindedHopFeatures } from '../structs/BlindedHopFeatures.mjs';
 import { Result_BlindedHopFeaturesDecodeErrorZ } from '../structs/Result_BlindedHopFeaturesDecodeErrorZ.mjs';
 import { ChannelTypeFeatures } from '../structs/ChannelTypeFeatures.mjs';
 import { Result_ChannelTypeFeaturesDecodeErrorZ } from '../structs/Result_ChannelTypeFeaturesDecodeErrorZ.mjs';
+import { OfferId } from '../structs/OfferId.mjs';
+import { Result_OfferIdDecodeErrorZ } from '../structs/Result_OfferIdDecodeErrorZ.mjs';
+import { Result_NoneBolt12SemanticErrorZ } from '../structs/Result_NoneBolt12SemanticErrorZ.mjs';
 import { Offer } from '../structs/Offer.mjs';
+import { Result_OfferBolt12SemanticErrorZ } from '../structs/Result_OfferBolt12SemanticErrorZ.mjs';
+import { InvoiceRequestWithDerivedPayerIdBuilder } from '../structs/InvoiceRequestWithDerivedPayerIdBuilder.mjs';
+import { Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ } from '../structs/Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ.mjs';
+import { InvoiceRequestWithExplicitPayerIdBuilder } from '../structs/InvoiceRequestWithExplicitPayerIdBuilder.mjs';
+import { Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ } from '../structs/Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ.mjs';
 import { Result_OfferBolt12ParseErrorZ } from '../structs/Result_OfferBolt12ParseErrorZ.mjs';
-import { Result_PublicKeySecp256k1ErrorZ } from '../structs/Result_PublicKeySecp256k1ErrorZ.mjs';
 import { Result_NodeIdDecodeErrorZ } from '../structs/Result_NodeIdDecodeErrorZ.mjs';
+import { Result_PublicKeySecp256k1ErrorZ } from '../structs/Result_PublicKeySecp256k1ErrorZ.mjs';
 import { ChannelUpdate } from '../structs/ChannelUpdate.mjs';
 import { NetworkUpdate } from '../structs/NetworkUpdate.mjs';
 import { Option_NetworkUpdateZ } from '../structs/Option_NetworkUpdateZ.mjs';
@@ -214,6 +240,7 @@ import { NodeInfo } from '../structs/NodeInfo.mjs';
 import { Result_NodeInfoDecodeErrorZ } from '../structs/Result_NodeInfoDecodeErrorZ.mjs';
 import { Result_NetworkGraphDecodeErrorZ } from '../structs/Result_NetworkGraphDecodeErrorZ.mjs';
 import { Option_CVec_SocketAddressZZ } from '../structs/Option_CVec_SocketAddressZZ.mjs';
+import { Result_u64ShortChannelIdErrorZ } from '../structs/Result_u64ShortChannelIdErrorZ.mjs';
 import { PendingHTLCInfo } from '../structs/PendingHTLCInfo.mjs';
 import { InboundHTLCErr } from '../structs/InboundHTLCErr.mjs';
 import { Result_PendingHTLCInfoInboundHTLCErrZ } from '../structs/Result_PendingHTLCInfoInboundHTLCErrZ.mjs';
@@ -223,10 +250,15 @@ import { Input } from '../structs/Input.mjs';
 import { CoinSelection } from '../structs/CoinSelection.mjs';
 import { Result_CoinSelectionNoneZ } from '../structs/Result_CoinSelectionNoneZ.mjs';
 import { Result_CVec_UtxoZNoneZ } from '../structs/Result_CVec_UtxoZNoneZ.mjs';
+import { UnknownPaymentContext } from '../structs/UnknownPaymentContext.mjs';
+import { Bolt12OfferContext } from '../structs/Bolt12OfferContext.mjs';
+import { Bolt12RefundContext } from '../structs/Bolt12RefundContext.mjs';
+import { PaymentContext } from '../structs/PaymentContext.mjs';
+import { Option_PaymentContextZ } from '../structs/Option_PaymentContextZ.mjs';
 import { TwoTuple_u64u16Z } from '../structs/TwoTuple_u64u16Z.mjs';
 import { Option_C2Tuple_u64u16ZZ } from '../structs/Option_C2Tuple_u64u16ZZ.mjs';
 import { Option_ChannelShutdownStateZ } from '../structs/Option_ChannelShutdownStateZ.mjs';
-import { Result_ThirtyTwoBytesAPIErrorZ } from '../structs/Result_ThirtyTwoBytesAPIErrorZ.mjs';
+import { Result_ChannelIdAPIErrorZ } from '../structs/Result_ChannelIdAPIErrorZ.mjs';
 import { RecentPaymentDetails } from '../structs/RecentPaymentDetails.mjs';
 import { PaymentSendFailure } from '../structs/PaymentSendFailure.mjs';
 import { Result_NonePaymentSendFailureZ } from '../structs/Result_NonePaymentSendFailureZ.mjs';
@@ -237,12 +269,13 @@ import { TwoTuple_ThirtyTwoBytesThirtyTwoBytesZ } from '../structs/TwoTuple_Thir
 import { Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ } from '../structs/Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ.mjs';
 import { ProbeSendFailure } from '../structs/ProbeSendFailure.mjs';
 import { Result_CVec_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZZProbeSendFailureZ } from '../structs/Result_CVec_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZZProbeSendFailureZ.mjs';
-import { TwoTuple_ThirtyTwoBytesPublicKeyZ } from '../structs/TwoTuple_ThirtyTwoBytesPublicKeyZ.mjs';
+import { TwoTuple_ChannelIdPublicKeyZ } from '../structs/TwoTuple_ChannelIdPublicKeyZ.mjs';
+import { OfferWithDerivedMetadataBuilder } from '../structs/OfferWithDerivedMetadataBuilder.mjs';
+import { Result_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ } from '../structs/Result_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ.mjs';
 import { Option_StrZ } from '../structs/Option_StrZ.mjs';
-import { Result_NoneBolt12SemanticErrorZ } from '../structs/Result_NoneBolt12SemanticErrorZ.mjs';
 import { Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ } from '../structs/Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ.mjs';
+import { Result_ThirtyTwoBytesAPIErrorZ } from '../structs/Result_ThirtyTwoBytesAPIErrorZ.mjs';
 import { InvoiceRequest } from '../structs/InvoiceRequest.mjs';
-import { Bolt12Invoice } from '../structs/Bolt12Invoice.mjs';
 import { InvoiceError } from '../structs/InvoiceError.mjs';
 import { OffersMessage } from '../structs/OffersMessage.mjs';
 import { Option_OffersMessageZ } from '../structs/Option_OffersMessageZ.mjs';
@@ -270,7 +303,6 @@ import { Watch, WatchInterface } from '../structs/Watch.mjs';
 import { BroadcasterInterface, BroadcasterInterfaceInterface } from '../structs/BroadcasterInterface.mjs';
 import { EntropySource, EntropySourceInterface } from '../structs/EntropySource.mjs';
 import { UnsignedInvoiceRequest } from '../structs/UnsignedInvoiceRequest.mjs';
-import { UnsignedBolt12Invoice } from '../structs/UnsignedBolt12Invoice.mjs';
 import { UnsignedChannelUpdate } from '../structs/UnsignedChannelUpdate.mjs';
 import { UnsignedNodeAnnouncement } from '../structs/UnsignedNodeAnnouncement.mjs';
 import { UnsignedGossipMessage } from '../structs/UnsignedGossipMessage.mjs';
@@ -311,7 +343,7 @@ import { ThreeTuple_OnionMessageContentsDestinationBlindedPathZ } from '../struc
 import { Option_TypeZ } from '../structs/Option_TypeZ.mjs';
 import { Result_COption_TypeZDecodeErrorZ } from '../structs/Result_COption_TypeZDecodeErrorZ.mjs';
 import { Option_SocketAddressZ } from '../structs/Option_SocketAddressZ.mjs';
-import { TwoTuple_PublicKeyCOption_SocketAddressZZ } from '../structs/TwoTuple_PublicKeyCOption_SocketAddressZZ.mjs';
+import { PeerDetails } from '../structs/PeerDetails.mjs';
 import { PeerHandleError } from '../structs/PeerHandleError.mjs';
 import { Result_CVec_u8ZPeerHandleErrorZ } from '../structs/Result_CVec_u8ZPeerHandleErrorZ.mjs';
 import { Result_NonePeerHandleErrorZ } from '../structs/Result_NonePeerHandleErrorZ.mjs';
@@ -323,9 +355,18 @@ import { Result_NoneIOErrorZ } from '../structs/Result_NoneIOErrorZ.mjs';
 import { Result_CVec_StrZIOErrorZ } from '../structs/Result_CVec_StrZIOErrorZ.mjs';
 import { Result_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ } from '../structs/Result_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ.mjs';
 import { Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ } from '../structs/Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ.mjs';
+import { Result_UnsignedInvoiceRequestBolt12SemanticErrorZ } from '../structs/Result_UnsignedInvoiceRequestBolt12SemanticErrorZ.mjs';
+import { Result_InvoiceRequestBolt12SemanticErrorZ } from '../structs/Result_InvoiceRequestBolt12SemanticErrorZ.mjs';
 import { Option_SecretKeyZ } from '../structs/Option_SecretKeyZ.mjs';
+import { InvoiceWithExplicitSigningPubkeyBuilder } from '../structs/InvoiceWithExplicitSigningPubkeyBuilder.mjs';
+import { Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ } from '../structs/Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ.mjs';
 import { VerifiedInvoiceRequest } from '../structs/VerifiedInvoiceRequest.mjs';
 import { Result_VerifiedInvoiceRequestNoneZ } from '../structs/Result_VerifiedInvoiceRequestNoneZ.mjs';
+import { InvoiceWithDerivedSigningPubkeyBuilder } from '../structs/InvoiceWithDerivedSigningPubkeyBuilder.mjs';
+import { Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ } from '../structs/Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ.mjs';
+import { InvoiceRequestFields } from '../structs/InvoiceRequestFields.mjs';
+import { Result_InvoiceRequestFieldsDecodeErrorZ } from '../structs/Result_InvoiceRequestFieldsDecodeErrorZ.mjs';
+import { Option_ECDSASignatureZ } from '../structs/Option_ECDSASignatureZ.mjs';
 import { Option_i64Z } from '../structs/Option_i64Z.mjs';
 import { Result_SocketAddressDecodeErrorZ } from '../structs/Result_SocketAddressDecodeErrorZ.mjs';
 import { Result_SocketAddressSocketAddressParseErrorZ } from '../structs/Result_SocketAddressSocketAddressParseErrorZ.mjs';
@@ -426,8 +467,6 @@ import { Result_ClaimedHTLCDecodeErrorZ } from '../structs/Result_ClaimedHTLCDec
 import { PathFailure } from '../structs/PathFailure.mjs';
 import { Option_PathFailureZ } from '../structs/Option_PathFailureZ.mjs';
 import { Result_COption_PathFailureZDecodeErrorZ } from '../structs/Result_COption_PathFailureZDecodeErrorZ.mjs';
-import { UntrustedString } from '../structs/UntrustedString.mjs';
-import { ClosureReason } from '../structs/ClosureReason.mjs';
 import { Option_ClosureReasonZ } from '../structs/Option_ClosureReasonZ.mjs';
 import { Result_COption_ClosureReasonZDecodeErrorZ } from '../structs/Result_COption_ClosureReasonZDecodeErrorZ.mjs';
 import { HTLCDestination } from '../structs/HTLCDestination.mjs';
@@ -468,17 +507,23 @@ import { TransactionU16LenLimited } from '../structs/TransactionU16LenLimited.mj
 import { Result_TransactionU16LenLimitedNoneZ } from '../structs/Result_TransactionU16LenLimitedNoneZ.mjs';
 import { Result_TransactionU16LenLimitedDecodeErrorZ } from '../structs/Result_TransactionU16LenLimitedDecodeErrorZ.mjs';
 import { Result_UntrustedStringDecodeErrorZ } from '../structs/Result_UntrustedStringDecodeErrorZ.mjs';
+import { Result_ChannelIdDecodeErrorZ } from '../structs/Result_ChannelIdDecodeErrorZ.mjs';
 import { TwoTuple__u832u16Z } from '../structs/TwoTuple__u832u16Z.mjs';
 import { PaymentRelay } from '../structs/PaymentRelay.mjs';
 import { Result_PaymentRelayDecodeErrorZ } from '../structs/Result_PaymentRelayDecodeErrorZ.mjs';
 import { PaymentConstraints } from '../structs/PaymentConstraints.mjs';
 import { Result_PaymentConstraintsDecodeErrorZ } from '../structs/Result_PaymentConstraintsDecodeErrorZ.mjs';
+import { Result_PaymentContextDecodeErrorZ } from '../structs/Result_PaymentContextDecodeErrorZ.mjs';
+import { Result_UnknownPaymentContextDecodeErrorZ } from '../structs/Result_UnknownPaymentContextDecodeErrorZ.mjs';
+import { Result_Bolt12OfferContextDecodeErrorZ } from '../structs/Result_Bolt12OfferContextDecodeErrorZ.mjs';
+import { Result_Bolt12RefundContextDecodeErrorZ } from '../structs/Result_Bolt12RefundContextDecodeErrorZ.mjs';
+import { Result_StrSecp256k1ErrorZ } from '../structs/Result_StrSecp256k1ErrorZ.mjs';
 import { ThreeTuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ } from '../structs/ThreeTuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ.mjs';
 import { Result_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ } from '../structs/Result_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ.mjs';
-import { Result_StrSecp256k1ErrorZ } from '../structs/Result_StrSecp256k1ErrorZ.mjs';
 import { ThreeTuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ } from '../structs/ThreeTuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ.mjs';
 import { SendError } from '../structs/SendError.mjs';
 import { Result_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ } from '../structs/Result_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ.mjs';
+import { NextMessageHop } from '../structs/NextMessageHop.mjs';
 import { ParsedOnionMessageContents } from '../structs/ParsedOnionMessageContents.mjs';
 import { PeeledOnion } from '../structs/PeeledOnion.mjs';
 import { Result_PeeledOnionNoneZ } from '../structs/Result_PeeledOnionNoneZ.mjs';
@@ -490,6 +535,20 @@ import { ForwardNode } from '../structs/ForwardNode.mjs';
 import { Result_BlindedPathDecodeErrorZ } from '../structs/Result_BlindedPathDecodeErrorZ.mjs';
 import { Result_BlindedHopDecodeErrorZ } from '../structs/Result_BlindedHopDecodeErrorZ.mjs';
 import { Result_InvoiceErrorDecodeErrorZ } from '../structs/Result_InvoiceErrorDecodeErrorZ.mjs';
+import { TrackedSpendableOutput } from '../structs/TrackedSpendableOutput.mjs';
+import { Result_TrackedSpendableOutputDecodeErrorZ } from '../structs/Result_TrackedSpendableOutputDecodeErrorZ.mjs';
+import { OutputSpendStatus } from '../structs/OutputSpendStatus.mjs';
+import { Result_OutputSpendStatusDecodeErrorZ } from '../structs/Result_OutputSpendStatusDecodeErrorZ.mjs';
+import { WatchedOutput } from '../structs/WatchedOutput.mjs';
+import { Filter, FilterInterface } from '../structs/Filter.mjs';
+import { Option_FilterZ } from '../structs/Option_FilterZ.mjs';
+import { ChangeDestinationSource, ChangeDestinationSourceInterface } from '../structs/ChangeDestinationSource.mjs';
+import { KVStore, KVStoreInterface } from '../structs/KVStore.mjs';
+import { OutputSpender, OutputSpenderInterface } from '../structs/OutputSpender.mjs';
+import { OutputSweeper } from '../structs/OutputSweeper.mjs';
+import { Result_OutputSweeperDecodeErrorZ } from '../structs/Result_OutputSweeperDecodeErrorZ.mjs';
+import { TwoTuple_BestBlockOutputSweeperZ } from '../structs/TwoTuple_BestBlockOutputSweeperZ.mjs';
+import { Result_C2Tuple_BestBlockOutputSweeperZDecodeErrorZ } from '../structs/Result_C2Tuple_BestBlockOutputSweeperZDecodeErrorZ.mjs';
 import { DelayedPaymentBasepoint } from '../structs/DelayedPaymentBasepoint.mjs';
 import { Result_DelayedPaymentBasepointDecodeErrorZ } from '../structs/Result_DelayedPaymentBasepointDecodeErrorZ.mjs';
 import { DelayedPaymentKey } from '../structs/DelayedPaymentKey.mjs';
@@ -502,14 +561,11 @@ import { RevocationBasepoint } from '../structs/RevocationBasepoint.mjs';
 import { Result_RevocationBasepointDecodeErrorZ } from '../structs/Result_RevocationBasepointDecodeErrorZ.mjs';
 import { RevocationKey } from '../structs/RevocationKey.mjs';
 import { Result_RevocationKeyDecodeErrorZ } from '../structs/Result_RevocationKeyDecodeErrorZ.mjs';
-import { WatchedOutput } from '../structs/WatchedOutput.mjs';
-import { Filter, FilterInterface } from '../structs/Filter.mjs';
-import { Option_FilterZ } from '../structs/Option_FilterZ.mjs';
 import { LockedChannelMonitor } from '../structs/LockedChannelMonitor.mjs';
 import { Result_LockedChannelMonitorNoneZ } from '../structs/Result_LockedChannelMonitorNoneZ.mjs';
+import { TwoTuple_OutPointChannelIdZ } from '../structs/TwoTuple_OutPointChannelIdZ.mjs';
 import { MonitorUpdateId } from '../structs/MonitorUpdateId.mjs';
 import { TwoTuple_OutPointCVec_MonitorUpdateIdZZ } from '../structs/TwoTuple_OutPointCVec_MonitorUpdateIdZZ.mjs';
-import { KVStore, KVStoreInterface } from '../structs/KVStore.mjs';
 import { FirstHopCandidate } from '../structs/FirstHopCandidate.mjs';
 import { PublicHopCandidate } from '../structs/PublicHopCandidate.mjs';
 import { PrivateHopCandidate } from '../structs/PrivateHopCandidate.mjs';
@@ -526,15 +582,15 @@ import { Persister, PersisterInterface } from '../structs/Persister.mjs';
 import { MonitorUpdatingPersister } from '../structs/MonitorUpdatingPersister.mjs';
 import { Persist, PersistInterface } from '../structs/Persist.mjs';
 import { PrintableString } from '../structs/PrintableString.mjs';
+import { Listen, ListenInterface } from '../structs/Listen.mjs';
+import { Confirm, ConfirmInterface } from '../structs/Confirm.mjs';
+import { SpendingDelay } from '../structs/SpendingDelay.mjs';
 import { FutureCallback, FutureCallbackInterface } from '../structs/FutureCallback.mjs';
 import { Future } from '../structs/Future.mjs';
 import { ChannelHandshakeConfig } from '../structs/ChannelHandshakeConfig.mjs';
 import { ChannelHandshakeLimits } from '../structs/ChannelHandshakeLimits.mjs';
 import { ChannelConfigUpdate } from '../structs/ChannelConfigUpdate.mjs';
 import { UserConfig } from '../structs/UserConfig.mjs';
-import { BestBlock } from '../structs/BestBlock.mjs';
-import { Listen, ListenInterface } from '../structs/Listen.mjs';
-import { Confirm, ConfirmInterface } from '../structs/Confirm.mjs';
 import { ChainMonitor } from '../structs/ChainMonitor.mjs';
 import { EventHandler, EventHandlerInterface } from '../structs/EventHandler.mjs';
 import { EventsProvider, EventsProviderInterface } from '../structs/EventsProvider.mjs';
@@ -543,11 +599,15 @@ import { ChainParameters } from '../structs/ChainParameters.mjs';
 import { MessageSendEventsProvider, MessageSendEventsProviderInterface } from '../structs/MessageSendEventsProvider.mjs';
 import { ChannelMessageHandler, ChannelMessageHandlerInterface } from '../structs/ChannelMessageHandler.mjs';
 import { OffersMessageHandler, OffersMessageHandlerInterface } from '../structs/OffersMessageHandler.mjs';
+import { NodeIdLookUp, NodeIdLookUpInterface } from '../structs/NodeIdLookUp.mjs';
 import { ChannelManagerReadArgs } from '../structs/ChannelManagerReadArgs.mjs';
 import { ExpandedKey } from '../structs/ExpandedKey.mjs';
+import { CommonOpenChannelFields } from '../structs/CommonOpenChannelFields.mjs';
+import { CommonAcceptChannelFields } from '../structs/CommonAcceptChannelFields.mjs';
 import { Packet } from '../structs/Packet.mjs';
 import { RoutingMessageHandler, RoutingMessageHandlerInterface } from '../structs/RoutingMessageHandler.mjs';
 import { OnionMessageHandler, OnionMessageHandlerInterface } from '../structs/OnionMessageHandler.mjs';
+import { TrampolineOnionPacket } from '../structs/TrampolineOnionPacket.mjs';
 import { CustomMessageReader, CustomMessageReaderInterface } from '../structs/CustomMessageReader.mjs';
 import { CustomMessageHandler, CustomMessageHandlerInterface } from '../structs/CustomMessageHandler.mjs';
 import { IgnoringMessageHandler } from '../structs/IgnoringMessageHandler.mjs';
@@ -559,10 +619,12 @@ import { PeerManager } from '../structs/PeerManager.mjs';
 import { DirectedChannelTransactionParameters } from '../structs/DirectedChannelTransactionParameters.mjs';
 import { OfferFeatures } from '../structs/OfferFeatures.mjs';
 import { InvoiceRequestFeatures } from '../structs/InvoiceRequestFeatures.mjs';
-import { Amount } from '../structs/Amount.mjs';
-import { Quantity } from '../structs/Quantity.mjs';
+import { OfferWithExplicitMetadataBuilder } from '../structs/OfferWithExplicitMetadataBuilder.mjs';
+import { SignBolt12InvoiceFn, SignBolt12InvoiceFnInterface } from '../structs/SignBolt12InvoiceFn.mjs';
 import { TaggedHash } from '../structs/TaggedHash.mjs';
 import { ErroneousField } from '../structs/ErroneousField.mjs';
+import { SignInvoiceRequestFn, SignInvoiceRequestFnInterface } from '../structs/SignInvoiceRequestFn.mjs';
+import { SignError } from '../structs/SignError.mjs';
 import { P2PGossipSync } from '../structs/P2PGossipSync.mjs';
 import { ReadOnlyNetworkGraph } from '../structs/ReadOnlyNetworkGraph.mjs';
 import { DirectedChannelInfo } from '../structs/DirectedChannelInfo.mjs';
@@ -577,8 +639,11 @@ import { MultiThreadedScoreLockWrite } from '../structs/MultiThreadedScoreLockWr
 import { ProbabilisticScoringDecayParameters } from '../structs/ProbabilisticScoringDecayParameters.mjs';
 import { KeysManager } from '../structs/KeysManager.mjs';
 import { PhantomKeysManager } from '../structs/PhantomKeysManager.mjs';
+import { RandomBytes } from '../structs/RandomBytes.mjs';
 import { OnionMessenger } from '../structs/OnionMessenger.mjs';
 import { DefaultMessageRouter } from '../structs/DefaultMessageRouter.mjs';
+import { IntroductionNode } from '../structs/IntroductionNode.mjs';
+import { EmptyNodeIdLookUp } from '../structs/EmptyNodeIdLookUp.mjs';
 import { ForwardTlvs } from '../structs/ForwardTlvs.mjs';
 import { CoinSelectionSource, CoinSelectionSourceInterface } from '../structs/CoinSelectionSource.mjs';
 import { WalletSource, WalletSourceInterface } from '../structs/WalletSource.mjs';
@@ -597,11 +662,629 @@ import * as bindings from '../bindings.mjs'
 
 
 /**
- * Manager which keeps track of a number of channels and sends messages to the appropriate
- * channel, also tracking HTLC preimages and forwarding onion packets appropriately.
+ * A lightning node's channel state machine and payment management logic, which facilitates
+ * sending, forwarding, and receiving payments through lightning channels.
  * 
- * Implements [`ChannelMessageHandler`], handling the multi-channel parts and passing things through
- * to individual Channels.
+ * [`ChannelManager`] is parameterized by a number of components to achieve this.
+ * - [`chain::Watch`] (typically [`ChainMonitor`]) for on-chain monitoring and enforcement of each
+ * channel
+ * - [`BroadcasterInterface`] for broadcasting transactions related to opening, funding, and
+ * closing channels
+ * - [`EntropySource`] for providing random data needed for cryptographic operations
+ * - [`NodeSigner`] for cryptographic operations scoped to the node
+ * - [`SignerProvider`] for providing signers whose operations are scoped to individual channels
+ * - [`FeeEstimator`] to determine transaction fee rates needed to have a transaction mined in a
+ * timely manner
+ * - [`Router`] for finding payment paths when initiating and retrying payments
+ * - [`Logger`] for logging operational information of varying degrees
+ * 
+ * Additionally, it implements the following traits:
+ * - [`ChannelMessageHandler`] to handle off-chain channel activity from peers
+ * - [`MessageSendEventsProvider`] to similarly send such messages to peers
+ * - [`OffersMessageHandler`] for BOLT 12 message handling and sending
+ * - [`EventsProvider`] to generate user-actionable [`Event`]s
+ * - [`chain::Listen`] and [`chain::Confirm`] for notification of on-chain activity
+ * 
+ * Thus, [`ChannelManager`] is typically used to parameterize a [`MessageHandler`] and an
+ * [`OnionMessenger`]. The latter is required to support BOLT 12 functionality.
+ * 
+ * # `ChannelManager` vs `ChannelMonitor`
+ * 
+ * It's important to distinguish between the *off-chain* management and *on-chain* enforcement of
+ * lightning channels. [`ChannelManager`] exchanges messages with peers to manage the off-chain
+ * state of each channel. During this process, it generates a [`ChannelMonitor`] for each channel
+ * and a [`ChannelMonitorUpdate`] for each relevant change, notifying its parameterized
+ * [`chain::Watch`] of them.
+ * 
+ * An implementation of [`chain::Watch`], such as [`ChainMonitor`], is responsible for aggregating
+ * these [`ChannelMonitor`]s and applying any [`ChannelMonitorUpdate`]s to them. It then monitors
+ * for any pertinent on-chain activity, enforcing claims as needed.
+ * 
+ * This division of off-chain management and on-chain enforcement allows for interesting node
+ * setups. For instance, on-chain enforcement could be moved to a separate host or have added
+ * redundancy, possibly as a watchtower. See [`chain::Watch`] for the relevant interface.
+ * 
+ * # Initialization
+ * 
+ * Use [`ChannelManager::new`] with the most recent [`BlockHash`] when creating a fresh instance.
+ * Otherwise, if restarting, construct [`ChannelManagerReadArgs`] with the necessary parameters and
+ * references to any deserialized [`ChannelMonitor`]s that were previously persisted. Use this to
+ * deserialize the [`ChannelManager`] and feed it any new chain data since it was last online, as
+ * detailed in the [`ChannelManagerReadArgs`] documentation.
+ * 
+ * ```
+ * use bitcoin::BlockHash;
+ * use bitcoin::network::constants::Network;
+ * use lightning::chain::BestBlock;
+ * # use lightning::chain::channelmonitor::ChannelMonitor;
+ * use lightning::ln::channelmanager::{ChainParameters, ChannelManager, ChannelManagerReadArgs};
+ * # use lightning::routing::gossip::NetworkGraph;
+ * use lightning::util::config::UserConfig;
+ * use lightning::util::ser::ReadableArgs;
+ * 
+ * # fn read_channel_monitors() -> Vec<ChannelMonitor<lightning::sign::InMemorySigner>> { vec![] }
+ * # fn example<
+ * #     'a,
+ * #     L: lightning::util::logger::Logger,
+ * #     ES: lightning::sign::EntropySource,
+ * #     S: for <'b> lightning::routing::scoring::LockableScore<'b, ScoreLookUp = SL>,
+ * #     SL: lightning::routing::scoring::ScoreLookUp<ScoreParams = SP>,
+ * #     SP: Sized,
+ * #     R: lightning::io::Read,
+ * # >(
+ * #     fee_estimator: &dyn lightning::chain::chaininterface::FeeEstimator,
+ * #     chain_monitor: &dyn lightning::chain::Watch<lightning::sign::InMemorySigner>,
+ * #     tx_broadcaster: &dyn lightning::chain::chaininterface::BroadcasterInterface,
+ * #     router: &lightning::routing::router::DefaultRouter<&NetworkGraph<&'a L>, &'a L, &ES, &S, SP, SL>,
+ * #     logger: &L,
+ * #     entropy_source: &ES,
+ * #     node_signer: &dyn lightning::sign::NodeSigner,
+ * #     signer_provider: &lightning::sign::DynSignerProvider,
+ * #     best_block: lightning::chain::BestBlock,
+ * #     current_timestamp: u32,
+ * #     mut reader: R,
+ * # ) -> Result<(), lightning::ln::msgs::DecodeError> {
+ * Fresh start with no channels
+ * let params = ChainParameters {
+ * network: Network::Bitcoin,
+ * best_block,
+ * };
+ * let default_config = UserConfig::default();
+ * let channel_manager = ChannelManager::new(
+ * fee_estimator, chain_monitor, tx_broadcaster, router, logger, entropy_source, node_signer,
+ * signer_provider, default_config, params, current_timestamp
+ * );
+ * 
+ * Restart from deserialized data
+ * let mut channel_monitors = read_channel_monitors();
+ * let args = ChannelManagerReadArgs::new(
+ * entropy_source, node_signer, signer_provider, fee_estimator, chain_monitor, tx_broadcaster,
+ * router, logger, default_config, channel_monitors.iter_mut().collect()
+ * );
+ * let (block_hash, channel_manager) =
+ * <(BlockHash, ChannelManager<_, _, _, _, _, _, _, _>)>::read(&mut reader, args)?;
+ * 
+ * Update the ChannelManager and ChannelMonitors with the latest chain data
+ * ...
+ * 
+ * Move the monitors to the ChannelManager's chain::Watch parameter
+ * for monitor in channel_monitors {
+ * chain_monitor.watch_channel(monitor.get_funding_txo().0, monitor);
+ * }
+ * # Ok(())
+ * # }
+ * ```
+ * 
+ * # Operation
+ * 
+ * The following is required for [`ChannelManager`] to function properly:
+ * - Handle messages from peers using its [`ChannelMessageHandler`] implementation (typically
+ * called by [`PeerManager::read_event`] when processing network I/O)
+ * - Send messages to peers obtained via its [`MessageSendEventsProvider`] implementation
+ * (typically initiated when [`PeerManager::process_events`] is called)
+ * - Feed on-chain activity using either its [`chain::Listen`] or [`chain::Confirm`] implementation
+ * as documented by those traits
+ * - Perform any periodic channel and payment checks by calling [`timer_tick_occurred`] roughly
+ * every minute
+ * - Persist to disk whenever [`get_and_clear_needs_persistence`] returns `true` using a
+ * [`Persister`] such as a [`KVStore`] implementation
+ * - Handle [`Event`]s obtained via its [`EventsProvider`] implementation
+ * 
+ * The [`Future`] returned by [`get_event_or_persistence_needed_future`] is useful in determining
+ * when the last two requirements need to be checked.
+ * 
+ * The [`lightning-block-sync`] and [`lightning-transaction-sync`] crates provide utilities that
+ * simplify feeding in on-chain activity using the [`chain::Listen`] and [`chain::Confirm`] traits,
+ * respectively. The remaining requirements can be met using the [`lightning-background-processor`]
+ * crate. For languages other than Rust, the availability of similar utilities may vary.
+ * 
+ * # Channels
+ * 
+ * [`ChannelManager`]'s primary function involves managing a channel state. Without channels,
+ * payments can't be sent. Use [`list_channels`] or [`list_usable_channels`] for a snapshot of the
+ * currently open channels.
+ * 
+ * ```
+ * # use lightning::ln::channelmanager::AChannelManager;
+ * #
+ * # fn example<T: AChannelManager>(channel_manager: T) {
+ * # let channel_manager = channel_manager.get_cm();
+ * let channels = channel_manager.list_usable_channels();
+ * for details in channels {
+ * println!(\"{:?}\", details);
+ * }
+ * # }
+ * ```
+ * 
+ * Each channel is identified using a [`ChannelId`], which will change throughout the channel's
+ * life cycle. Additionally, channels are assigned a `user_channel_id`, which is given in
+ * [`Event`]s associated with the channel and serves as a fixed identifier but is otherwise unused
+ * by [`ChannelManager`].
+ * 
+ * ## Opening Channels
+ * 
+ * To an open a channel with a peer, call [`create_channel`]. This will initiate the process of
+ * opening an outbound channel, which requires self-funding when handling
+ * [`Event::FundingGenerationReady`].
+ * 
+ * ```
+ * # use bitcoin::{ScriptBuf, Transaction};
+ * # use bitcoin::secp256k1::PublicKey;
+ * # use lightning::ln::channelmanager::AChannelManager;
+ * # use lightning::events::{Event, EventsProvider};
+ * #
+ * # trait Wallet {
+ * #     fn create_funding_transaction(
+ * #         &self, _amount_sats: u64, _output_script: ScriptBuf
+ * #     ) -> Transaction;
+ * # }
+ * #
+ * # fn example<T: AChannelManager, W: Wallet>(channel_manager: T, wallet: W, peer_id: PublicKey) {
+ * # let channel_manager = channel_manager.get_cm();
+ * let value_sats = 1_000_000;
+ * let push_msats = 10_000_000;
+ * match channel_manager.create_channel(peer_id, value_sats, push_msats, 42, None, None) {
+ * Ok(channel_id) => println!(\"Opening channel {}\", channel_id),
+ * Err(e) => println!(\"Error opening channel: {:?}\", e),
+ * }
+ * 
+ * On the event processing thread once the peer has responded
+ * channel_manager.process_pending_events(&|event| match event {
+ * Event::FundingGenerationReady {
+ * temporary_channel_id, counterparty_node_id, channel_value_satoshis, output_script,
+ * user_channel_id, ..
+ * } => {
+ * assert_eq!(user_channel_id, 42);
+ * let funding_transaction = wallet.create_funding_transaction(
+ * channel_value_satoshis, output_script
+ * );
+ * match channel_manager.funding_transaction_generated(
+ * &temporary_channel_id, &counterparty_node_id, funding_transaction
+ * ) {
+ * Ok(()) => println!(\"Funding channel {}\", temporary_channel_id),
+ * Err(e) => println!(\"Error funding channel {}: {:?}\", temporary_channel_id, e),
+ * }
+ * },
+ * Event::ChannelPending { channel_id, user_channel_id, former_temporary_channel_id, .. } => {
+ * assert_eq!(user_channel_id, 42);
+ * println!(
+ * \"Channel {} now {} pending (funding transaction has been broadcasted)\", channel_id,
+ * former_temporary_channel_id.unwrap()
+ * );
+ * },
+ * Event::ChannelReady { channel_id, user_channel_id, .. } => {
+ * assert_eq!(user_channel_id, 42);
+ * println!(\"Channel {} ready\", channel_id);
+ * },
+ * ...
+ * #     _ => {},
+ * });
+ * # }
+ * ```
+ * 
+ * ## Accepting Channels
+ * 
+ * Inbound channels are initiated by peers and are automatically accepted unless [`ChannelManager`]
+ * has [`UserConfig::manually_accept_inbound_channels`] set. In that case, the channel may be
+ * either accepted or rejected when handling [`Event::OpenChannelRequest`].
+ * 
+ * ```
+ * # use bitcoin::secp256k1::PublicKey;
+ * # use lightning::ln::channelmanager::AChannelManager;
+ * # use lightning::events::{Event, EventsProvider};
+ * #
+ * # fn is_trusted(counterparty_node_id: PublicKey) -> bool {
+ * #     // ...
+ * #     unimplemented!()
+ * # }
+ * #
+ * # fn example<T: AChannelManager>(channel_manager: T) {
+ * # let channel_manager = channel_manager.get_cm();
+ * channel_manager.process_pending_events(&|event| match event {
+ * Event::OpenChannelRequest { temporary_channel_id, counterparty_node_id, ..  } => {
+ * if !is_trusted(counterparty_node_id) {
+ * match channel_manager.force_close_without_broadcasting_txn(
+ * &temporary_channel_id, &counterparty_node_id
+ * ) {
+ * Ok(()) => println!(\"Rejecting channel {}\", temporary_channel_id),
+ * Err(e) => println!(\"Error rejecting channel {}: {:?}\", temporary_channel_id, e),
+ * }
+ * return;
+ * }
+ * 
+ * let user_channel_id = 43;
+ * match channel_manager.accept_inbound_channel(
+ * &temporary_channel_id, &counterparty_node_id, user_channel_id
+ * ) {
+ * Ok(()) => println!(\"Accepting channel {}\", temporary_channel_id),
+ * Err(e) => println!(\"Error accepting channel {}: {:?}\", temporary_channel_id, e),
+ * }
+ * },
+ * ...
+ * #     _ => {},
+ * });
+ * # }
+ * ```
+ * 
+ * ## Closing Channels
+ * 
+ * There are two ways to close a channel: either cooperatively using [`close_channel`] or
+ * unilaterally using [`force_close_broadcasting_latest_txn`]. The former is ideal as it makes for
+ * lower fees and immediate access to funds. However, the latter may be necessary if the
+ * counterparty isn't behaving properly or has gone offline. [`Event::ChannelClosed`] is generated
+ * once the channel has been closed successfully.
+ * 
+ * ```
+ * # use bitcoin::secp256k1::PublicKey;
+ * # use lightning::ln::types::ChannelId;
+ * # use lightning::ln::channelmanager::AChannelManager;
+ * # use lightning::events::{Event, EventsProvider};
+ * #
+ * # fn example<T: AChannelManager>(
+ * #     channel_manager: T, channel_id: ChannelId, counterparty_node_id: PublicKey
+ * # ) {
+ * # let channel_manager = channel_manager.get_cm();
+ * match channel_manager.close_channel(&channel_id, &counterparty_node_id) {
+ * Ok(()) => println!(\"Closing channel {}\", channel_id),
+ * Err(e) => println!(\"Error closing channel {}: {:?}\", channel_id, e),
+ * }
+ * 
+ * On the event processing thread
+ * channel_manager.process_pending_events(&|event| match event {
+ * Event::ChannelClosed { channel_id, user_channel_id, ..  } => {
+ * assert_eq!(user_channel_id, 42);
+ * println!(\"Channel {} closed\", channel_id);
+ * },
+ * ...
+ * #     _ => {},
+ * });
+ * # }
+ * ```
+ * 
+ * # Payments
+ * 
+ * [`ChannelManager`] is responsible for sending, forwarding, and receiving payments through its
+ * channels. A payment is typically initiated from a [BOLT 11] invoice or a [BOLT 12] offer, though
+ * spontaneous (i.e., keysend) payments are also possible. Incoming payments don't require
+ * maintaining any additional state as [`ChannelManager`] can reconstruct the [`PaymentPreimage`]
+ * from the [`PaymentSecret`]. Sending payments, however, require tracking in order to retry failed
+ * HTLCs.
+ * 
+ * After a payment is initiated, it will appear in [`list_recent_payments`] until a short time
+ * after either an [`Event::PaymentSent`] or [`Event::PaymentFailed`] is handled. Failed HTLCs
+ * for a payment will be retried according to the payment's [`Retry`] strategy or until
+ * [`abandon_payment`] is called.
+ * 
+ * ## BOLT 11 Invoices
+ * 
+ * The [`lightning-invoice`] crate is useful for creating BOLT 11 invoices. Specifically, use the
+ * functions in its `utils` module for constructing invoices that are compatible with
+ * [`ChannelManager`]. These functions serve as a convenience for building invoices with the
+ * [`PaymentHash`] and [`PaymentSecret`] returned from [`create_inbound_payment`]. To provide your
+ * own [`PaymentHash`], use [`create_inbound_payment_for_hash`] or the corresponding functions in
+ * the [`lightning-invoice`] `utils` module.
+ * 
+ * [`ChannelManager`] generates an [`Event::PaymentClaimable`] once the full payment has been
+ * received. Call [`claim_funds`] to release the [`PaymentPreimage`], which in turn will result in
+ * an [`Event::PaymentClaimed`].
+ * 
+ * ```
+ * # use lightning::events::{Event, EventsProvider, PaymentPurpose};
+ * # use lightning::ln::channelmanager::AChannelManager;
+ * #
+ * # fn example<T: AChannelManager>(channel_manager: T) {
+ * # let channel_manager = channel_manager.get_cm();
+ * Or use utils::create_invoice_from_channelmanager
+ * let known_payment_hash = match channel_manager.create_inbound_payment(
+ * Some(10_000_000), 3600, None
+ * ) {
+ * Ok((payment_hash, _payment_secret)) => {
+ * println!(\"Creating inbound payment {}\", payment_hash);
+ * payment_hash
+ * },
+ * Err(()) => panic!(\"Error creating inbound payment\"),
+ * };
+ * 
+ * On the event processing thread
+ * channel_manager.process_pending_events(&|event| match event {
+ * Event::PaymentClaimable { payment_hash, purpose, .. } => match purpose {
+ * PaymentPurpose::Bolt11InvoicePayment { payment_preimage: Some(payment_preimage), .. } => {
+ * assert_eq!(payment_hash, known_payment_hash);
+ * println!(\"Claiming payment {}\", payment_hash);
+ * channel_manager.claim_funds(payment_preimage);
+ * },
+ * PaymentPurpose::Bolt11InvoicePayment { payment_preimage: None, .. } => {
+ * println!(\"Unknown payment hash: {}\", payment_hash);
+ * },
+ * PaymentPurpose::SpontaneousPayment(payment_preimage) => {
+ * assert_ne!(payment_hash, known_payment_hash);
+ * println!(\"Claiming spontaneous payment {}\", payment_hash);
+ * channel_manager.claim_funds(payment_preimage);
+ * },
+ * ...
+ * #         _ => {},
+ * },
+ * Event::PaymentClaimed { payment_hash, amount_msat, .. } => {
+ * assert_eq!(payment_hash, known_payment_hash);
+ * println!(\"Claimed {} msats\", amount_msat);
+ * },
+ * ...
+ * #     _ => {},
+ * });
+ * # }
+ * ```
+ * 
+ * For paying an invoice, [`lightning-invoice`] provides a `payment` module with convenience
+ * functions for use with [`send_payment`].
+ * 
+ * ```
+ * # use lightning::events::{Event, EventsProvider};
+ * # use lightning::ln::types::PaymentHash;
+ * # use lightning::ln::channelmanager::{AChannelManager, PaymentId, RecentPaymentDetails, RecipientOnionFields, Retry};
+ * # use lightning::routing::router::RouteParameters;
+ * #
+ * # fn example<T: AChannelManager>(
+ * #     channel_manager: T, payment_hash: PaymentHash, recipient_onion: RecipientOnionFields,
+ * #     route_params: RouteParameters, retry: Retry
+ * # ) {
+ * # let channel_manager = channel_manager.get_cm();
+ * let (payment_hash, recipient_onion, route_params) =
+ * payment::payment_parameters_from_invoice(&invoice);
+ * let payment_id = PaymentId([42; 32]);
+ * match channel_manager.send_payment(
+ * payment_hash, recipient_onion, payment_id, route_params, retry
+ * ) {
+ * Ok(()) => println!(\"Sending payment with hash {}\", payment_hash),
+ * Err(e) => println!(\"Failed sending payment with hash {}: {:?}\", payment_hash, e),
+ * }
+ * 
+ * let expected_payment_id = payment_id;
+ * let expected_payment_hash = payment_hash;
+ * assert!(
+ * channel_manager.list_recent_payments().iter().find(|details| matches!(
+ * details,
+ * RecentPaymentDetails::Pending {
+ * payment_id: expected_payment_id,
+ * payment_hash: expected_payment_hash,
+ * ..
+ * }
+ * )).is_some()
+ * );
+ * 
+ * On the event processing thread
+ * channel_manager.process_pending_events(&|event| match event {
+ * Event::PaymentSent { payment_hash, .. } => println!(\"Paid {}\", payment_hash),
+ * Event::PaymentFailed { payment_hash, .. } => println!(\"Failed paying {}\", payment_hash),
+ * ...
+ * #     _ => {},
+ * });
+ * # }
+ * ```
+ * 
+ * ## BOLT 12 Offers
+ * 
+ * The [`offers`] module is useful for creating BOLT 12 offers. An [`Offer`] is a precursor to a
+ * [`Bolt12Invoice`], which must first be requested by the payer. The interchange of these messages
+ * as defined in the specification is handled by [`ChannelManager`] and its implementation of
+ * [`OffersMessageHandler`]. However, this only works with an [`Offer`] created using a builder
+ * returned by [`create_offer_builder`]. With this approach, BOLT 12 offers and invoices are
+ * stateless just as BOLT 11 invoices are.
+ * 
+ * ```
+ * # use lightning::events::{Event, EventsProvider, PaymentPurpose};
+ * # use lightning::ln::channelmanager::AChannelManager;
+ * # use lightning::offers::parse::Bolt12SemanticError;
+ * #
+ * # fn example<T: AChannelManager>(channel_manager: T) -> Result<(), Bolt12SemanticError> {
+ * # let channel_manager = channel_manager.get_cm();
+ * let offer = channel_manager
+ * .create_offer_builder()?
+ * # ;
+ * # // Needed for compiling for c_bindings
+ * # let builder: lightning::offers::offer::OfferBuilder<_, _> = offer.into();
+ * # let offer = builder
+ * .description(\"coffee\".to_string())
+ * .amount_msats(10_000_000)
+ * .build()?;
+ * let bech32_offer = offer.to_string();
+ * 
+ * On the event processing thread
+ * channel_manager.process_pending_events(&|event| match event {
+ * Event::PaymentClaimable { payment_hash, purpose, .. } => match purpose {
+ * PaymentPurpose::Bolt12OfferPayment { payment_preimage: Some(payment_preimage), .. } => {
+ * println!(\"Claiming payment {}\", payment_hash);
+ * channel_manager.claim_funds(payment_preimage);
+ * },
+ * PaymentPurpose::Bolt12OfferPayment { payment_preimage: None, .. } => {
+ * println!(\"Unknown payment hash: {}\", payment_hash);
+ * },
+ * ...
+ * #         _ => {},
+ * },
+ * Event::PaymentClaimed { payment_hash, amount_msat, .. } => {
+ * println!(\"Claimed {} msats\", amount_msat);
+ * },
+ * ...
+ * #     _ => {},
+ * });
+ * # Ok(())
+ * # }
+ * ```
+ * 
+ * Use [`pay_for_offer`] to initiated payment, which sends an [`InvoiceRequest`] for an [`Offer`]
+ * and pays the [`Bolt12Invoice`] response. In addition to success and failure events,
+ * [`ChannelManager`] may also generate an [`Event::InvoiceRequestFailed`].
+ * 
+ * ```
+ * # use lightning::events::{Event, EventsProvider};
+ * # use lightning::ln::channelmanager::{AChannelManager, PaymentId, RecentPaymentDetails, Retry};
+ * # use lightning::offers::offer::Offer;
+ * #
+ * # fn example<T: AChannelManager>(
+ * #     channel_manager: T, offer: &Offer, quantity: Option<u64>, amount_msats: Option<u64>,
+ * #     payer_note: Option<String>, retry: Retry, max_total_routing_fee_msat: Option<u64>
+ * # ) {
+ * # let channel_manager = channel_manager.get_cm();
+ * let payment_id = PaymentId([42; 32]);
+ * match channel_manager.pay_for_offer(
+ * offer, quantity, amount_msats, payer_note, payment_id, retry, max_total_routing_fee_msat
+ * ) {
+ * Ok(()) => println!(\"Requesting invoice for offer\"),
+ * Err(e) => println!(\"Unable to request invoice for offer: {:?}\", e),
+ * }
+ * 
+ * First the payment will be waiting on an invoice
+ * let expected_payment_id = payment_id;
+ * assert!(
+ * channel_manager.list_recent_payments().iter().find(|details| matches!(
+ * details,
+ * RecentPaymentDetails::AwaitingInvoice { payment_id: expected_payment_id }
+ * )).is_some()
+ * );
+ * 
+ * Once the invoice is received, a payment will be sent
+ * assert!(
+ * channel_manager.list_recent_payments().iter().find(|details| matches!(
+ * details,
+ * RecentPaymentDetails::Pending { payment_id: expected_payment_id, ..  }
+ * )).is_some()
+ * );
+ * 
+ * On the event processing thread
+ * channel_manager.process_pending_events(&|event| match event {
+ * Event::PaymentSent { payment_id: Some(payment_id), .. } => println!(\"Paid {}\", payment_id),
+ * Event::PaymentFailed { payment_id, .. } => println!(\"Failed paying {}\", payment_id),
+ * Event::InvoiceRequestFailed { payment_id, .. } => println!(\"Failed paying {}\", payment_id),
+ * ...
+ * #     _ => {},
+ * });
+ * # }
+ * ```
+ * 
+ * ## BOLT 12 Refunds
+ * 
+ * A [`Refund`] is a request for an invoice to be paid. Like *paying* for an [`Offer`], *creating*
+ * a [`Refund`] involves maintaining state since it represents a future outbound payment.
+ * Therefore, use [`create_refund_builder`] when creating one, otherwise [`ChannelManager`] will
+ * refuse to pay any corresponding [`Bolt12Invoice`] that it receives.
+ * 
+ * ```
+ * # use core::time::Duration;
+ * # use lightning::events::{Event, EventsProvider};
+ * # use lightning::ln::channelmanager::{AChannelManager, PaymentId, RecentPaymentDetails, Retry};
+ * # use lightning::offers::parse::Bolt12SemanticError;
+ * #
+ * # fn example<T: AChannelManager>(
+ * #     channel_manager: T, amount_msats: u64, absolute_expiry: Duration, retry: Retry,
+ * #     max_total_routing_fee_msat: Option<u64>
+ * # ) -> Result<(), Bolt12SemanticError> {
+ * # let channel_manager = channel_manager.get_cm();
+ * let payment_id = PaymentId([42; 32]);
+ * let refund = channel_manager
+ * .create_refund_builder(
+ * amount_msats, absolute_expiry, payment_id, retry, max_total_routing_fee_msat
+ * )?
+ * # ;
+ * # // Needed for compiling for c_bindings
+ * # let builder: lightning::offers::refund::RefundBuilder<_> = refund.into();
+ * # let refund = builder
+ * .description(\"coffee\".to_string())
+ * .payer_note(\"refund for order 1234\".to_string())
+ * .build()?;
+ * let bech32_refund = refund.to_string();
+ * 
+ * First the payment will be waiting on an invoice
+ * let expected_payment_id = payment_id;
+ * assert!(
+ * channel_manager.list_recent_payments().iter().find(|details| matches!(
+ * details,
+ * RecentPaymentDetails::AwaitingInvoice { payment_id: expected_payment_id }
+ * )).is_some()
+ * );
+ * 
+ * Once the invoice is received, a payment will be sent
+ * assert!(
+ * channel_manager.list_recent_payments().iter().find(|details| matches!(
+ * details,
+ * RecentPaymentDetails::Pending { payment_id: expected_payment_id, ..  }
+ * )).is_some()
+ * );
+ * 
+ * On the event processing thread
+ * channel_manager.process_pending_events(&|event| match event {
+ * Event::PaymentSent { payment_id: Some(payment_id), .. } => println!(\"Paid {}\", payment_id),
+ * Event::PaymentFailed { payment_id, .. } => println!(\"Failed paying {}\", payment_id),
+ * ...
+ * #     _ => {},
+ * });
+ * # Ok(())
+ * # }
+ * ```
+ * 
+ * Use [`request_refund_payment`] to send a [`Bolt12Invoice`] for receiving the refund. Similar to
+ * creating* an [`Offer`], this is stateless as it represents an inbound payment.
+ * 
+ * ```
+ * # use lightning::events::{Event, EventsProvider, PaymentPurpose};
+ * # use lightning::ln::channelmanager::AChannelManager;
+ * # use lightning::offers::refund::Refund;
+ * #
+ * # fn example<T: AChannelManager>(channel_manager: T, refund: &Refund) {
+ * # let channel_manager = channel_manager.get_cm();
+ * let known_payment_hash = match channel_manager.request_refund_payment(refund) {
+ * Ok(invoice) => {
+ * let payment_hash = invoice.payment_hash();
+ * println!(\"Requesting refund payment {}\", payment_hash);
+ * payment_hash
+ * },
+ * Err(e) => panic!(\"Unable to request payment for refund: {:?}\", e),
+ * };
+ * 
+ * On the event processing thread
+ * channel_manager.process_pending_events(&|event| match event {
+ * Event::PaymentClaimable { payment_hash, purpose, .. } => match purpose {
+ * \tPaymentPurpose::Bolt12RefundPayment { payment_preimage: Some(payment_preimage), .. } => {
+ * assert_eq!(payment_hash, known_payment_hash);
+ * println!(\"Claiming payment {}\", payment_hash);
+ * channel_manager.claim_funds(payment_preimage);
+ * },
+ * \tPaymentPurpose::Bolt12RefundPayment { payment_preimage: None, .. } => {
+ * println!(\"Unknown payment hash: {}\", payment_hash);
+ * \t},
+ * ...
+ * #         _ => {},
+ * },
+ * Event::PaymentClaimed { payment_hash, amount_msat, .. } => {
+ * assert_eq!(payment_hash, known_payment_hash);
+ * println!(\"Claimed {} msats\", amount_msat);
+ * },
+ * ...
+ * #     _ => {},
+ * });
+ * # }
+ * ```
+ * 
+ * # Persistence
  * 
  * Implements [`Writeable`] to write out all channel state to disk. Implies [`peer_disconnected`] for
  * all peers during write/read (though does not modify this instance, only the instance being
@@ -622,11 +1305,15 @@ import * as bindings from '../bindings.mjs'
  * tells you the last block hash which was connected. You should get the best block tip before using the manager.
  * See [`chain::Listen`] and [`chain::Confirm`] for more details.
  * 
+ * # `ChannelUpdate` Messages
+ * 
  * Note that `ChannelManager` is responsible for tracking liveness of its channels and generating
  * [`ChannelUpdate`] messages informing peers that the channel is temporarily disabled. To avoid
  * spam due to quick disconnection/reconnection, updates are not sent until the channel has been
  * offline for a full minute. In order to track this, you must call
  * [`timer_tick_occurred`] roughly once per minute, though it doesn't have to be perfect.
+ * 
+ * # DoS Mitigation
  * 
  * To avoid trivial DoS issues, `ChannelManager` limits the number of inbound connections and
  * inbound channels without confirmed funding transactions. This may result in nodes which we do
@@ -637,19 +1324,53 @@ import * as bindings from '../bindings.mjs'
  * exempted from the count of unfunded channels. Similarly, outbound channels and connections are
  * never limited. Please ensure you limit the count of such channels yourself.
  * 
+ * # Type Aliases
+ * 
  * Rather than using a plain `ChannelManager`, it is preferable to use either a [`SimpleArcChannelManager`]
  * a [`SimpleRefChannelManager`], for conciseness. See their documentation for more details, but
  * essentially you should default to using a [`SimpleRefChannelManager`], and use a
  * [`SimpleArcChannelManager`] when you require a `ChannelManager` with a static lifetime, such as when
  * you're using lightning-net-tokio.
  * 
+ * [`ChainMonitor`]: crate::chain::chainmonitor::ChainMonitor
+ * [`MessageHandler`]: crate::ln::peer_handler::MessageHandler
+ * [`OnionMessenger`]: crate::onion_message::messenger::OnionMessenger
+ * [`PeerManager::read_event`]: crate::ln::peer_handler::PeerManager::read_event
+ * [`PeerManager::process_events`]: crate::ln::peer_handler::PeerManager::process_events
+ * [`timer_tick_occurred`]: Self::timer_tick_occurred
+ * [`get_and_clear_needs_persistence`]: Self::get_and_clear_needs_persistence
+ * [`Persister`]: crate::util::persist::Persister
+ * [`KVStore`]: crate::util::persist::KVStore
+ * [`get_event_or_persistence_needed_future`]: Self::get_event_or_persistence_needed_future
+ * [`lightning-block-sync`]: https://docs.rs/lightning_block_sync/latest/lightning_block_sync
+ * [`lightning-transaction-sync`]: https://docs.rs/lightning_transaction_sync/latest/lightning_transaction_sync
+ * [`lightning-background-processor`]: https://docs.rs/lightning_background_processor/lightning_background_processor
+ * [`list_channels`]: Self::list_channels
+ * [`list_usable_channels`]: Self::list_usable_channels
+ * [`create_channel`]: Self::create_channel
+ * [`close_channel`]: Self::force_close_broadcasting_latest_txn
+ * [`force_close_broadcasting_latest_txn`]: Self::force_close_broadcasting_latest_txn
+ * [BOLT 11]: https://github.com/lightning/bolts/blob/master/11-payment-encoding.md
+ * [BOLT 12]: https://github.com/rustyrussell/lightning-rfc/blob/guilt/offers/12-offer-encoding.md
+ * [`list_recent_payments`]: Self::list_recent_payments
+ * [`abandon_payment`]: Self::abandon_payment
+ * [`lightning-invoice`]: https://docs.rs/lightning_invoice/latest/lightning_invoice
+ * [`create_inbound_payment`]: Self::create_inbound_payment
+ * [`create_inbound_payment_for_hash`]: Self::create_inbound_payment_for_hash
+ * [`claim_funds`]: Self::claim_funds
+ * [`send_payment`]: Self::send_payment
+ * [`offers`]: crate::offers
+ * [`create_offer_builder`]: Self::create_offer_builder
+ * [`pay_for_offer`]: Self::pay_for_offer
+ * [`InvoiceRequest`]: crate::offers::invoice_request::InvoiceRequest
+ * [`create_refund_builder`]: Self::create_refund_builder
+ * [`request_refund_payment`]: Self::request_refund_payment
  * [`peer_disconnected`]: msgs::ChannelMessageHandler::peer_disconnected
  * [`funding_created`]: msgs::FundingCreated
  * [`funding_transaction_generated`]: Self::funding_transaction_generated
  * [`BlockHash`]: bitcoin::hash_types::BlockHash
  * [`update_channel`]: chain::Watch::update_channel
  * [`ChannelUpdate`]: msgs::ChannelUpdate
- * [`timer_tick_occurred`]: Self::timer_tick_occurred
  * [`read`]: ReadableArgs::read
  */
 export class ChannelManager extends CommonBase {
@@ -678,7 +1399,7 @@ export class ChannelManager extends CommonBase {
 	 * [`params.best_block.block_hash`]: chain::BestBlock::block_hash
 	 */
 	public static constructor_new(fee_est: FeeEstimator, chain_monitor: Watch, tx_broadcaster: BroadcasterInterface, router: Router, logger: Logger, entropy_source: EntropySource, node_signer: NodeSigner, signer_provider: SignerProvider, config: UserConfig, params: ChainParameters, current_timestamp: number): ChannelManager {
-		const ret: bigint = bindings.ChannelManager_new(CommonBase.get_ptr_of(fee_est), CommonBase.get_ptr_of(chain_monitor), CommonBase.get_ptr_of(tx_broadcaster), CommonBase.get_ptr_of(router), CommonBase.get_ptr_of(logger), CommonBase.get_ptr_of(entropy_source), CommonBase.get_ptr_of(node_signer), CommonBase.get_ptr_of(signer_provider), config == null ? 0n : CommonBase.get_ptr_of(config), params == null ? 0n : CommonBase.get_ptr_of(params), current_timestamp);
+		const ret: bigint = bindings.ChannelManager_new(CommonBase.get_ptr_of(fee_est), CommonBase.get_ptr_of(chain_monitor), CommonBase.get_ptr_of(tx_broadcaster), CommonBase.get_ptr_of(router), CommonBase.get_ptr_of(logger), CommonBase.get_ptr_of(entropy_source), CommonBase.get_ptr_of(node_signer), CommonBase.get_ptr_of(signer_provider), CommonBase.get_ptr_of(config), CommonBase.get_ptr_of(params), current_timestamp);
 		const ret_hu_conv: ChannelManager = new ChannelManager(null, ret);
 		CommonBase.add_ref_from(ret_hu_conv, ret_hu_conv);
 		CommonBase.add_ref_from(ret_hu_conv, fee_est);
@@ -738,11 +1459,12 @@ export class ChannelManager extends CommonBase {
 	 * [`Event::FundingGenerationReady::temporary_channel_id`]: events::Event::FundingGenerationReady::temporary_channel_id
 	 * [`Event::ChannelClosed::channel_id`]: events::Event::ChannelClosed::channel_id
 	 * 
+	 * Note that temporary_channel_id (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 * Note that override_config (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public create_channel(their_network_key: Uint8Array, channel_value_satoshis: bigint, push_msat: bigint, user_channel_id: bigint, temporary_channel_id: Option_ThirtyTwoBytesZ, override_config: UserConfig|null): Result_ThirtyTwoBytesAPIErrorZ {
-		const ret: bigint = bindings.ChannelManager_create_channel(this.ptr, bindings.encodeUint8Array(bindings.check_arr_len(their_network_key, 33)), channel_value_satoshis, push_msat, bindings.encodeUint128(user_channel_id), CommonBase.get_ptr_of(temporary_channel_id), override_config == null ? 0n : CommonBase.get_ptr_of(override_config));
-		const ret_hu_conv: Result_ThirtyTwoBytesAPIErrorZ = Result_ThirtyTwoBytesAPIErrorZ.constr_from_ptr(ret);
+	public create_channel(their_network_key: Uint8Array, channel_value_satoshis: bigint, push_msat: bigint, user_channel_id: bigint, temporary_channel_id: ChannelId|null, override_config: UserConfig|null): Result_ChannelIdAPIErrorZ {
+		const ret: bigint = bindings.ChannelManager_create_channel(this.ptr, bindings.encodeUint8Array(bindings.check_arr_len(their_network_key, 33)), channel_value_satoshis, push_msat, bindings.encodeUint128(user_channel_id), temporary_channel_id == null ? 0n : CommonBase.get_ptr_of(temporary_channel_id), override_config == null ? 0n : CommonBase.get_ptr_of(override_config));
+		const ret_hu_conv: Result_ChannelIdAPIErrorZ = Result_ChannelIdAPIErrorZ.constr_from_ptr(ret);
 		CommonBase.add_ref_from(this, temporary_channel_id);
 		CommonBase.add_ref_from(this, override_config);
 		return ret_hu_conv;
@@ -854,9 +1576,10 @@ export class ChannelManager extends CommonBase {
 	 * [`NonAnchorChannelFee`]: crate::chain::chaininterface::ConfirmationTarget::NonAnchorChannelFee
 	 * [`SendShutdown`]: crate::events::MessageSendEvent::SendShutdown
 	 */
-	public close_channel(channel_id: Uint8Array, counterparty_node_id: Uint8Array): Result_NoneAPIErrorZ {
-		const ret: bigint = bindings.ChannelManager_close_channel(this.ptr, bindings.encodeUint8Array(bindings.check_arr_len(channel_id, 32)), bindings.encodeUint8Array(bindings.check_arr_len(counterparty_node_id, 33)));
+	public close_channel(channel_id: ChannelId, counterparty_node_id: Uint8Array): Result_NoneAPIErrorZ {
+		const ret: bigint = bindings.ChannelManager_close_channel(this.ptr, CommonBase.get_ptr_of(channel_id), bindings.encodeUint8Array(bindings.check_arr_len(counterparty_node_id, 33)));
 		const ret_hu_conv: Result_NoneAPIErrorZ = Result_NoneAPIErrorZ.constr_from_ptr(ret);
+		CommonBase.add_ref_from(this, channel_id);
 		return ret_hu_conv;
 	}
 
@@ -893,9 +1616,10 @@ export class ChannelManager extends CommonBase {
 	 * 
 	 * Note that shutdown_script (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public close_channel_with_feerate_and_script(channel_id: Uint8Array, counterparty_node_id: Uint8Array, target_feerate_sats_per_1000_weight: Option_u32Z, shutdown_script: ShutdownScript|null): Result_NoneAPIErrorZ {
-		const ret: bigint = bindings.ChannelManager_close_channel_with_feerate_and_script(this.ptr, bindings.encodeUint8Array(bindings.check_arr_len(channel_id, 32)), bindings.encodeUint8Array(bindings.check_arr_len(counterparty_node_id, 33)), CommonBase.get_ptr_of(target_feerate_sats_per_1000_weight), shutdown_script == null ? 0n : CommonBase.get_ptr_of(shutdown_script));
+	public close_channel_with_feerate_and_script(channel_id: ChannelId, counterparty_node_id: Uint8Array, target_feerate_sats_per_1000_weight: Option_u32Z, shutdown_script: ShutdownScript|null): Result_NoneAPIErrorZ {
+		const ret: bigint = bindings.ChannelManager_close_channel_with_feerate_and_script(this.ptr, CommonBase.get_ptr_of(channel_id), bindings.encodeUint8Array(bindings.check_arr_len(counterparty_node_id, 33)), CommonBase.get_ptr_of(target_feerate_sats_per_1000_weight), shutdown_script == null ? 0n : CommonBase.get_ptr_of(shutdown_script));
 		const ret_hu_conv: Result_NoneAPIErrorZ = Result_NoneAPIErrorZ.constr_from_ptr(ret);
+		CommonBase.add_ref_from(this, channel_id);
 		CommonBase.add_ref_from(this, target_feerate_sats_per_1000_weight);
 		CommonBase.add_ref_from(this, shutdown_script);
 		return ret_hu_conv;
@@ -907,9 +1631,10 @@ export class ChannelManager extends CommonBase {
 	 * the manager, or if the `counterparty_node_id` isn't the counterparty of the corresponding
 	 * channel.
 	 */
-	public force_close_broadcasting_latest_txn(channel_id: Uint8Array, counterparty_node_id: Uint8Array): Result_NoneAPIErrorZ {
-		const ret: bigint = bindings.ChannelManager_force_close_broadcasting_latest_txn(this.ptr, bindings.encodeUint8Array(bindings.check_arr_len(channel_id, 32)), bindings.encodeUint8Array(bindings.check_arr_len(counterparty_node_id, 33)));
+	public force_close_broadcasting_latest_txn(channel_id: ChannelId, counterparty_node_id: Uint8Array): Result_NoneAPIErrorZ {
+		const ret: bigint = bindings.ChannelManager_force_close_broadcasting_latest_txn(this.ptr, CommonBase.get_ptr_of(channel_id), bindings.encodeUint8Array(bindings.check_arr_len(counterparty_node_id, 33)));
 		const ret_hu_conv: Result_NoneAPIErrorZ = Result_NoneAPIErrorZ.constr_from_ptr(ret);
+		CommonBase.add_ref_from(this, channel_id);
 		return ret_hu_conv;
 	}
 
@@ -918,12 +1643,13 @@ export class ChannelManager extends CommonBase {
 	 * the latest local transaction(s). Fails if `channel_id` is unknown to the manager, or if the
 	 * `counterparty_node_id` isn't the counterparty of the corresponding channel.
 	 * 
-	 * You can always get the latest local transaction(s) to broadcast from
-	 * [`ChannelMonitor::get_latest_holder_commitment_txn`].
+	 * You can always broadcast the latest local transaction(s) via
+	 * [`ChannelMonitor::broadcast_latest_holder_commitment_txn`].
 	 */
-	public force_close_without_broadcasting_txn(channel_id: Uint8Array, counterparty_node_id: Uint8Array): Result_NoneAPIErrorZ {
-		const ret: bigint = bindings.ChannelManager_force_close_without_broadcasting_txn(this.ptr, bindings.encodeUint8Array(bindings.check_arr_len(channel_id, 32)), bindings.encodeUint8Array(bindings.check_arr_len(counterparty_node_id, 33)));
+	public force_close_without_broadcasting_txn(channel_id: ChannelId, counterparty_node_id: Uint8Array): Result_NoneAPIErrorZ {
+		const ret: bigint = bindings.ChannelManager_force_close_without_broadcasting_txn(this.ptr, CommonBase.get_ptr_of(channel_id), bindings.encodeUint8Array(bindings.check_arr_len(counterparty_node_id, 33)));
 		const ret_hu_conv: Result_NoneAPIErrorZ = Result_NoneAPIErrorZ.constr_from_ptr(ret);
+		CommonBase.add_ref_from(this, channel_id);
 		return ret_hu_conv;
 	}
 
@@ -997,7 +1723,7 @@ export class ChannelManager extends CommonBase {
 	 * [`ChannelMonitorUpdateStatus::InProgress`]: crate::chain::ChannelMonitorUpdateStatus::InProgress
 	 */
 	public send_payment_with_route(route: Route, payment_hash: Uint8Array, recipient_onion: RecipientOnionFields, payment_id: Uint8Array): Result_NonePaymentSendFailureZ {
-		const ret: bigint = bindings.ChannelManager_send_payment_with_route(this.ptr, route == null ? 0n : CommonBase.get_ptr_of(route), bindings.encodeUint8Array(bindings.check_arr_len(payment_hash, 32)), recipient_onion == null ? 0n : CommonBase.get_ptr_of(recipient_onion), bindings.encodeUint8Array(bindings.check_arr_len(payment_id, 32)));
+		const ret: bigint = bindings.ChannelManager_send_payment_with_route(this.ptr, CommonBase.get_ptr_of(route), bindings.encodeUint8Array(bindings.check_arr_len(payment_hash, 32)), CommonBase.get_ptr_of(recipient_onion), bindings.encodeUint8Array(bindings.check_arr_len(payment_id, 32)));
 		const ret_hu_conv: Result_NonePaymentSendFailureZ = Result_NonePaymentSendFailureZ.constr_from_ptr(ret);
 		CommonBase.add_ref_from(this, route);
 		CommonBase.add_ref_from(this, recipient_onion);
@@ -1009,7 +1735,7 @@ export class ChannelManager extends CommonBase {
 	 * `route_params` and retry failed payment paths based on `retry_strategy`.
 	 */
 	public send_payment(payment_hash: Uint8Array, recipient_onion: RecipientOnionFields, payment_id: Uint8Array, route_params: RouteParameters, retry_strategy: Retry): Result_NoneRetryableSendFailureZ {
-		const ret: bigint = bindings.ChannelManager_send_payment(this.ptr, bindings.encodeUint8Array(bindings.check_arr_len(payment_hash, 32)), recipient_onion == null ? 0n : CommonBase.get_ptr_of(recipient_onion), bindings.encodeUint8Array(bindings.check_arr_len(payment_id, 32)), route_params == null ? 0n : CommonBase.get_ptr_of(route_params), CommonBase.get_ptr_of(retry_strategy));
+		const ret: bigint = bindings.ChannelManager_send_payment(this.ptr, bindings.encodeUint8Array(bindings.check_arr_len(payment_hash, 32)), CommonBase.get_ptr_of(recipient_onion), bindings.encodeUint8Array(bindings.check_arr_len(payment_id, 32)), CommonBase.get_ptr_of(route_params), CommonBase.get_ptr_of(retry_strategy));
 		const ret_hu_conv: Result_NoneRetryableSendFailureZ = Result_NoneRetryableSendFailureZ.constr_from_ptr(ret);
 		CommonBase.add_ref_from(this, recipient_onion);
 		CommonBase.add_ref_from(this, route_params);
@@ -1066,7 +1792,7 @@ export class ChannelManager extends CommonBase {
 	 * [`send_payment`]: Self::send_payment
 	 */
 	public send_spontaneous_payment(route: Route, payment_preimage: Option_ThirtyTwoBytesZ, recipient_onion: RecipientOnionFields, payment_id: Uint8Array): Result_ThirtyTwoBytesPaymentSendFailureZ {
-		const ret: bigint = bindings.ChannelManager_send_spontaneous_payment(this.ptr, route == null ? 0n : CommonBase.get_ptr_of(route), CommonBase.get_ptr_of(payment_preimage), recipient_onion == null ? 0n : CommonBase.get_ptr_of(recipient_onion), bindings.encodeUint8Array(bindings.check_arr_len(payment_id, 32)));
+		const ret: bigint = bindings.ChannelManager_send_spontaneous_payment(this.ptr, CommonBase.get_ptr_of(route), CommonBase.get_ptr_of(payment_preimage), CommonBase.get_ptr_of(recipient_onion), bindings.encodeUint8Array(bindings.check_arr_len(payment_id, 32)));
 		const ret_hu_conv: Result_ThirtyTwoBytesPaymentSendFailureZ = Result_ThirtyTwoBytesPaymentSendFailureZ.constr_from_ptr(ret);
 		CommonBase.add_ref_from(this, route);
 		CommonBase.add_ref_from(this, payment_preimage);
@@ -1084,7 +1810,7 @@ export class ChannelManager extends CommonBase {
 	 * [`PaymentParameters::for_keysend`]: crate::routing::router::PaymentParameters::for_keysend
 	 */
 	public send_spontaneous_payment_with_retry(payment_preimage: Option_ThirtyTwoBytesZ, recipient_onion: RecipientOnionFields, payment_id: Uint8Array, route_params: RouteParameters, retry_strategy: Retry): Result_ThirtyTwoBytesRetryableSendFailureZ {
-		const ret: bigint = bindings.ChannelManager_send_spontaneous_payment_with_retry(this.ptr, CommonBase.get_ptr_of(payment_preimage), recipient_onion == null ? 0n : CommonBase.get_ptr_of(recipient_onion), bindings.encodeUint8Array(bindings.check_arr_len(payment_id, 32)), route_params == null ? 0n : CommonBase.get_ptr_of(route_params), CommonBase.get_ptr_of(retry_strategy));
+		const ret: bigint = bindings.ChannelManager_send_spontaneous_payment_with_retry(this.ptr, CommonBase.get_ptr_of(payment_preimage), CommonBase.get_ptr_of(recipient_onion), bindings.encodeUint8Array(bindings.check_arr_len(payment_id, 32)), CommonBase.get_ptr_of(route_params), CommonBase.get_ptr_of(retry_strategy));
 		const ret_hu_conv: Result_ThirtyTwoBytesRetryableSendFailureZ = Result_ThirtyTwoBytesRetryableSendFailureZ.constr_from_ptr(ret);
 		CommonBase.add_ref_from(this, payment_preimage);
 		CommonBase.add_ref_from(this, recipient_onion);
@@ -1099,7 +1825,7 @@ export class ChannelManager extends CommonBase {
 	 * us to easily discern them from real payments.
 	 */
 	public send_probe(path: Path): Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ {
-		const ret: bigint = bindings.ChannelManager_send_probe(this.ptr, path == null ? 0n : CommonBase.get_ptr_of(path));
+		const ret: bigint = bindings.ChannelManager_send_probe(this.ptr, CommonBase.get_ptr_of(path));
 		const ret_hu_conv: Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ = Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ.constr_from_ptr(ret);
 		CommonBase.add_ref_from(this, path);
 		return ret_hu_conv;
@@ -1135,7 +1861,7 @@ export class ChannelManager extends CommonBase {
 	 * probes. If `None` is given as `liquidity_limit_multiplier`, it defaults to `3`.
 	 */
 	public send_preflight_probes(route_params: RouteParameters, liquidity_limit_multiplier: Option_u64Z): Result_CVec_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZZProbeSendFailureZ {
-		const ret: bigint = bindings.ChannelManager_send_preflight_probes(this.ptr, route_params == null ? 0n : CommonBase.get_ptr_of(route_params), CommonBase.get_ptr_of(liquidity_limit_multiplier));
+		const ret: bigint = bindings.ChannelManager_send_preflight_probes(this.ptr, CommonBase.get_ptr_of(route_params), CommonBase.get_ptr_of(liquidity_limit_multiplier));
 		const ret_hu_conv: Result_CVec_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZZProbeSendFailureZ = Result_CVec_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZZProbeSendFailureZ.constr_from_ptr(ret);
 		CommonBase.add_ref_from(this, route_params);
 		CommonBase.add_ref_from(this, liquidity_limit_multiplier);
@@ -1174,9 +1900,10 @@ export class ChannelManager extends CommonBase {
 	 * [`Event::FundingGenerationReady`]: crate::events::Event::FundingGenerationReady
 	 * [`Event::ChannelClosed`]: crate::events::Event::ChannelClosed
 	 */
-	public funding_transaction_generated(temporary_channel_id: Uint8Array, counterparty_node_id: Uint8Array, funding_transaction: Uint8Array): Result_NoneAPIErrorZ {
-		const ret: bigint = bindings.ChannelManager_funding_transaction_generated(this.ptr, bindings.encodeUint8Array(bindings.check_arr_len(temporary_channel_id, 32)), bindings.encodeUint8Array(bindings.check_arr_len(counterparty_node_id, 33)), bindings.encodeUint8Array(funding_transaction));
+	public funding_transaction_generated(temporary_channel_id: ChannelId, counterparty_node_id: Uint8Array, funding_transaction: Uint8Array): Result_NoneAPIErrorZ {
+		const ret: bigint = bindings.ChannelManager_funding_transaction_generated(this.ptr, CommonBase.get_ptr_of(temporary_channel_id), bindings.encodeUint8Array(bindings.check_arr_len(counterparty_node_id, 33)), bindings.encodeUint8Array(funding_transaction));
 		const ret_hu_conv: Result_NoneAPIErrorZ = Result_NoneAPIErrorZ.constr_from_ptr(ret);
+		CommonBase.add_ref_from(this, temporary_channel_id);
 		return ret_hu_conv;
 	}
 
@@ -1192,8 +1919,8 @@ export class ChannelManager extends CommonBase {
 	 * 
 	 * If there is an error, all channels in the batch are to be considered closed.
 	 */
-	public batch_funding_transaction_generated(temporary_channels: TwoTuple_ThirtyTwoBytesPublicKeyZ[], funding_transaction: Uint8Array): Result_NoneAPIErrorZ {
-		const ret: bigint = bindings.ChannelManager_batch_funding_transaction_generated(this.ptr, bindings.encodeUint64Array(temporary_channels.map(temporary_channels_conv_35 => temporary_channels_conv_35 != null ? CommonBase.get_ptr_of(temporary_channels_conv_35) : 0n)), bindings.encodeUint8Array(funding_transaction));
+	public batch_funding_transaction_generated(temporary_channels: TwoTuple_ChannelIdPublicKeyZ[], funding_transaction: Uint8Array): Result_NoneAPIErrorZ {
+		const ret: bigint = bindings.ChannelManager_batch_funding_transaction_generated(this.ptr, bindings.encodeUint64Array(temporary_channels.map(temporary_channels_conv_30 => CommonBase.get_ptr_of(temporary_channels_conv_30))), bindings.encodeUint8Array(funding_transaction));
 		const ret_hu_conv: Result_NoneAPIErrorZ = Result_NoneAPIErrorZ.constr_from_ptr(ret);
 		return ret_hu_conv;
 	}
@@ -1222,9 +1949,10 @@ export class ChannelManager extends CommonBase {
 	 * [`ChannelUnavailable`]: APIError::ChannelUnavailable
 	 * [`APIMisuseError`]: APIError::APIMisuseError
 	 */
-	public update_partial_channel_config(counterparty_node_id: Uint8Array, channel_ids: Uint8Array[], config_update: ChannelConfigUpdate): Result_NoneAPIErrorZ {
-		const ret: bigint = bindings.ChannelManager_update_partial_channel_config(this.ptr, bindings.encodeUint8Array(bindings.check_arr_len(counterparty_node_id, 33)), bindings.encodeUint32Array(channel_ids.map(channel_ids_conv_12 => bindings.encodeUint8Array(bindings.check_arr_len(channel_ids_conv_12, 32)))), config_update == null ? 0n : CommonBase.get_ptr_of(config_update));
+	public update_partial_channel_config(counterparty_node_id: Uint8Array, channel_ids: ChannelId[], config_update: ChannelConfigUpdate): Result_NoneAPIErrorZ {
+		const ret: bigint = bindings.ChannelManager_update_partial_channel_config(this.ptr, bindings.encodeUint8Array(bindings.check_arr_len(counterparty_node_id, 33)), bindings.encodeUint64Array(channel_ids.map(channel_ids_conv_11 => CommonBase.get_ptr_of(channel_ids_conv_11))), CommonBase.get_ptr_of(config_update));
 		const ret_hu_conv: Result_NoneAPIErrorZ = Result_NoneAPIErrorZ.constr_from_ptr(ret);
+		channel_ids.forEach((channel_ids_conv_11: ChannelId) => { CommonBase.add_ref_from(this, channel_ids_conv_11); });
 		CommonBase.add_ref_from(this, config_update);
 		return ret_hu_conv;
 	}
@@ -1253,9 +1981,10 @@ export class ChannelManager extends CommonBase {
 	 * [`ChannelUnavailable`]: APIError::ChannelUnavailable
 	 * [`APIMisuseError`]: APIError::APIMisuseError
 	 */
-	public update_channel_config(counterparty_node_id: Uint8Array, channel_ids: Uint8Array[], config: ChannelConfig): Result_NoneAPIErrorZ {
-		const ret: bigint = bindings.ChannelManager_update_channel_config(this.ptr, bindings.encodeUint8Array(bindings.check_arr_len(counterparty_node_id, 33)), bindings.encodeUint32Array(channel_ids.map(channel_ids_conv_12 => bindings.encodeUint8Array(bindings.check_arr_len(channel_ids_conv_12, 32)))), config == null ? 0n : CommonBase.get_ptr_of(config));
+	public update_channel_config(counterparty_node_id: Uint8Array, channel_ids: ChannelId[], config: ChannelConfig): Result_NoneAPIErrorZ {
+		const ret: bigint = bindings.ChannelManager_update_channel_config(this.ptr, bindings.encodeUint8Array(bindings.check_arr_len(counterparty_node_id, 33)), bindings.encodeUint64Array(channel_ids.map(channel_ids_conv_11 => CommonBase.get_ptr_of(channel_ids_conv_11))), CommonBase.get_ptr_of(config));
 		const ret_hu_conv: Result_NoneAPIErrorZ = Result_NoneAPIErrorZ.constr_from_ptr(ret);
+		channel_ids.forEach((channel_ids_conv_11: ChannelId) => { CommonBase.add_ref_from(this, channel_ids_conv_11); });
 		CommonBase.add_ref_from(this, config);
 		return ret_hu_conv;
 	}
@@ -1285,9 +2014,10 @@ export class ChannelManager extends CommonBase {
 	 * [`HTLCIntercepted`]: events::Event::HTLCIntercepted
 	 * [`HTLCIntercepted::expected_outbound_amount_msat`]: events::Event::HTLCIntercepted::expected_outbound_amount_msat
 	 */
-	public forward_intercepted_htlc(intercept_id: Uint8Array, next_hop_channel_id: Uint8Array, next_node_id: Uint8Array, amt_to_forward_msat: bigint): Result_NoneAPIErrorZ {
-		const ret: bigint = bindings.ChannelManager_forward_intercepted_htlc(this.ptr, bindings.encodeUint8Array(bindings.check_arr_len(intercept_id, 32)), bindings.encodeUint8Array(bindings.check_arr_len(next_hop_channel_id, 32)), bindings.encodeUint8Array(bindings.check_arr_len(next_node_id, 33)), amt_to_forward_msat);
+	public forward_intercepted_htlc(intercept_id: Uint8Array, next_hop_channel_id: ChannelId, next_node_id: Uint8Array, amt_to_forward_msat: bigint): Result_NoneAPIErrorZ {
+		const ret: bigint = bindings.ChannelManager_forward_intercepted_htlc(this.ptr, bindings.encodeUint8Array(bindings.check_arr_len(intercept_id, 32)), CommonBase.get_ptr_of(next_hop_channel_id), bindings.encodeUint8Array(bindings.check_arr_len(next_node_id, 33)), amt_to_forward_msat);
 		const ret_hu_conv: Result_NoneAPIErrorZ = Result_NoneAPIErrorZ.constr_from_ptr(ret);
+		CommonBase.add_ref_from(this, next_hop_channel_id);
 		return ret_hu_conv;
 	}
 
@@ -1445,9 +2175,10 @@ export class ChannelManager extends CommonBase {
 	 * [`Event::OpenChannelRequest`]: events::Event::OpenChannelRequest
 	 * [`Event::ChannelClosed::user_channel_id`]: events::Event::ChannelClosed::user_channel_id
 	 */
-	public accept_inbound_channel(temporary_channel_id: Uint8Array, counterparty_node_id: Uint8Array, user_channel_id: bigint): Result_NoneAPIErrorZ {
-		const ret: bigint = bindings.ChannelManager_accept_inbound_channel(this.ptr, bindings.encodeUint8Array(bindings.check_arr_len(temporary_channel_id, 32)), bindings.encodeUint8Array(bindings.check_arr_len(counterparty_node_id, 33)), bindings.encodeUint128(user_channel_id));
+	public accept_inbound_channel(temporary_channel_id: ChannelId, counterparty_node_id: Uint8Array, user_channel_id: bigint): Result_NoneAPIErrorZ {
+		const ret: bigint = bindings.ChannelManager_accept_inbound_channel(this.ptr, CommonBase.get_ptr_of(temporary_channel_id), bindings.encodeUint8Array(bindings.check_arr_len(counterparty_node_id, 33)), bindings.encodeUint128(user_channel_id));
 		const ret_hu_conv: Result_NoneAPIErrorZ = Result_NoneAPIErrorZ.constr_from_ptr(ret);
+		CommonBase.add_ref_from(this, temporary_channel_id);
 		return ret_hu_conv;
 	}
 
@@ -1471,9 +2202,99 @@ export class ChannelManager extends CommonBase {
 	 * [`Event::OpenChannelRequest`]: events::Event::OpenChannelRequest
 	 * [`Event::ChannelClosed::user_channel_id`]: events::Event::ChannelClosed::user_channel_id
 	 */
-	public accept_inbound_channel_from_trusted_peer_0conf(temporary_channel_id: Uint8Array, counterparty_node_id: Uint8Array, user_channel_id: bigint): Result_NoneAPIErrorZ {
-		const ret: bigint = bindings.ChannelManager_accept_inbound_channel_from_trusted_peer_0conf(this.ptr, bindings.encodeUint8Array(bindings.check_arr_len(temporary_channel_id, 32)), bindings.encodeUint8Array(bindings.check_arr_len(counterparty_node_id, 33)), bindings.encodeUint128(user_channel_id));
+	public accept_inbound_channel_from_trusted_peer_0conf(temporary_channel_id: ChannelId, counterparty_node_id: Uint8Array, user_channel_id: bigint): Result_NoneAPIErrorZ {
+		const ret: bigint = bindings.ChannelManager_accept_inbound_channel_from_trusted_peer_0conf(this.ptr, CommonBase.get_ptr_of(temporary_channel_id), bindings.encodeUint8Array(bindings.check_arr_len(counterparty_node_id, 33)), bindings.encodeUint128(user_channel_id));
 		const ret_hu_conv: Result_NoneAPIErrorZ = Result_NoneAPIErrorZ.constr_from_ptr(ret);
+		CommonBase.add_ref_from(this, temporary_channel_id);
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Creates an [`OfferBuilder`] such that the [`Offer`] it builds is recognized by the
+	 * [`ChannelManager`] when handling [`InvoiceRequest`] messages for the offer. The offer will
+	 * not have an expiration unless otherwise set on the builder.
+	 * 
+	 * # Privacy
+	 * 
+	 * Uses [`MessageRouter::create_blinded_paths`] to construct a [`BlindedPath`] for the offer.
+	 * However, if one is not found, uses a one-hop [`BlindedPath`] with
+	 * [`ChannelManager::get_our_node_id`] as the introduction node instead. In the latter case,
+	 * the node must be announced, otherwise, there is no way to find a path to the introduction in
+	 * order to send the [`InvoiceRequest`].
+	 * 
+	 * Also, uses a derived signing pubkey in the offer for recipient privacy.
+	 * 
+	 * # Limitations
+	 * 
+	 * Requires a direct connection to the introduction node in the responding [`InvoiceRequest`]'s
+	 * reply path.
+	 * 
+	 * # Errors
+	 * 
+	 * Errors if the parameterized [`Router`] is unable to create a blinded path for the offer.
+	 * 
+	 * [`Offer`]: crate::offers::offer::Offer
+	 * [`InvoiceRequest`]: crate::offers::invoice_request::InvoiceRequest
+	 */
+	public create_offer_builder(): Result_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ {
+		const ret: bigint = bindings.ChannelManager_create_offer_builder(this.ptr);
+		const ret_hu_conv: Result_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ = Result_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Creates a [`RefundBuilder`] such that the [`Refund`] it builds is recognized by the
+	 * [`ChannelManager`] when handling [`Bolt12Invoice`] messages for the refund.
+	 * 
+	 * # Payment
+	 * 
+	 * The provided `payment_id` is used to ensure that only one invoice is paid for the refund.
+	 * See [Avoiding Duplicate Payments] for other requirements once the payment has been sent.
+	 * 
+	 * The builder will have the provided expiration set. Any changes to the expiration on the
+	 * returned builder will not be honored by [`ChannelManager`]. For `no-std`, the highest seen
+	 * block time minus two hours is used for the current time when determining if the refund has
+	 * expired.
+	 * 
+	 * To revoke the refund, use [`ChannelManager::abandon_payment`] prior to receiving the
+	 * invoice. If abandoned, or an invoice isn't received before expiration, the payment will fail
+	 * with an [`Event::InvoiceRequestFailed`].
+	 * 
+	 * If `max_total_routing_fee_msat` is not specified, The default from
+	 * [`RouteParameters::from_payment_params_and_value`] is applied.
+	 * 
+	 * # Privacy
+	 * 
+	 * Uses [`MessageRouter::create_blinded_paths`] to construct a [`BlindedPath`] for the refund.
+	 * However, if one is not found, uses a one-hop [`BlindedPath`] with
+	 * [`ChannelManager::get_our_node_id`] as the introduction node instead. In the latter case,
+	 * the node must be announced, otherwise, there is no way to find a path to the introduction in
+	 * order to send the [`Bolt12Invoice`].
+	 * 
+	 * Also, uses a derived payer id in the refund for payer privacy.
+	 * 
+	 * # Limitations
+	 * 
+	 * Requires a direct connection to an introduction node in the responding
+	 * [`Bolt12Invoice::payment_paths`].
+	 * 
+	 * # Errors
+	 * 
+	 * Errors if:
+	 * - a duplicate `payment_id` is provided given the caveats in the aforementioned link,
+	 * - `amount_msats` is invalid, or
+	 * - the parameterized [`Router`] is unable to create a blinded path for the refund.
+	 * 
+	 * [`Refund`]: crate::offers::refund::Refund
+	 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
+	 * [`Bolt12Invoice::payment_paths`]: crate::offers::invoice::Bolt12Invoice::payment_paths
+	 * [Avoiding Duplicate Payments]: #avoiding-duplicate-payments
+	 */
+	public create_refund_builder(amount_msats: bigint, absolute_expiry: bigint, payment_id: Uint8Array, retry_strategy: Retry, max_total_routing_fee_msat: Option_u64Z): Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ {
+		const ret: bigint = bindings.ChannelManager_create_refund_builder(this.ptr, amount_msats, absolute_expiry, bindings.encodeUint8Array(bindings.check_arr_len(payment_id, 32)), CommonBase.get_ptr_of(retry_strategy), CommonBase.get_ptr_of(max_total_routing_fee_msat));
+		const ret_hu_conv: Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ = Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
+		CommonBase.add_ref_from(this, retry_strategy);
+		CommonBase.add_ref_from(this, max_total_routing_fee_msat);
 		return ret_hu_conv;
 	}
 
@@ -1521,6 +2342,7 @@ export class ChannelManager extends CommonBase {
 	 * Errors if:
 	 * - a duplicate `payment_id` is provided given the caveats in the aforementioned link,
 	 * - the provided parameters are invalid for the offer,
+	 * - the offer is for an unsupported chain, or
 	 * - the parameterized [`Router`] is unable to create a blinded reply path for the invoice
 	 * request.
 	 * 
@@ -1533,7 +2355,7 @@ export class ChannelManager extends CommonBase {
 	 * [Avoiding Duplicate Payments]: #avoiding-duplicate-payments
 	 */
 	public pay_for_offer(offer: Offer, quantity: Option_u64Z, amount_msats: Option_u64Z, payer_note: Option_StrZ, payment_id: Uint8Array, retry_strategy: Retry, max_total_routing_fee_msat: Option_u64Z): Result_NoneBolt12SemanticErrorZ {
-		const ret: bigint = bindings.ChannelManager_pay_for_offer(this.ptr, offer == null ? 0n : CommonBase.get_ptr_of(offer), CommonBase.get_ptr_of(quantity), CommonBase.get_ptr_of(amount_msats), CommonBase.get_ptr_of(payer_note), bindings.encodeUint8Array(bindings.check_arr_len(payment_id, 32)), CommonBase.get_ptr_of(retry_strategy), CommonBase.get_ptr_of(max_total_routing_fee_msat));
+		const ret: bigint = bindings.ChannelManager_pay_for_offer(this.ptr, CommonBase.get_ptr_of(offer), CommonBase.get_ptr_of(quantity), CommonBase.get_ptr_of(amount_msats), CommonBase.get_ptr_of(payer_note), bindings.encodeUint8Array(bindings.check_arr_len(payment_id, 32)), CommonBase.get_ptr_of(retry_strategy), CommonBase.get_ptr_of(max_total_routing_fee_msat));
 		const ret_hu_conv: Result_NoneBolt12SemanticErrorZ = Result_NoneBolt12SemanticErrorZ.constr_from_ptr(ret);
 		CommonBase.add_ref_from(this, offer);
 		CommonBase.add_ref_from(this, quantity);
@@ -1550,7 +2372,7 @@ export class ChannelManager extends CommonBase {
 	 * 
 	 * The resulting invoice uses a [`PaymentHash`] recognized by the [`ChannelManager`] and a
 	 * [`BlindedPath`] containing the [`PaymentSecret`] needed to reconstruct the corresponding
-	 * [`PaymentPreimage`].
+	 * [`PaymentPreimage`]. It is returned purely for informational purposes.
 	 * 
 	 * # Limitations
 	 * 
@@ -1561,14 +2383,16 @@ export class ChannelManager extends CommonBase {
 	 * 
 	 * # Errors
 	 * 
-	 * Errors if the parameterized [`Router`] is unable to create a blinded payment path or reply
-	 * path for the invoice.
+	 * Errors if:
+	 * - the refund is for an unsupported chain, or
+	 * - the parameterized [`Router`] is unable to create a blinded payment path or reply path for
+	 * the invoice.
 	 * 
 	 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
 	 */
-	public request_refund_payment(refund: Refund): Result_NoneBolt12SemanticErrorZ {
-		const ret: bigint = bindings.ChannelManager_request_refund_payment(this.ptr, refund == null ? 0n : CommonBase.get_ptr_of(refund));
-		const ret_hu_conv: Result_NoneBolt12SemanticErrorZ = Result_NoneBolt12SemanticErrorZ.constr_from_ptr(ret);
+	public request_refund_payment(refund: Refund): Result_Bolt12InvoiceBolt12SemanticErrorZ {
+		const ret: bigint = bindings.ChannelManager_request_refund_payment(this.ptr, CommonBase.get_ptr_of(refund));
+		const ret_hu_conv: Result_Bolt12InvoiceBolt12SemanticErrorZ = Result_Bolt12InvoiceBolt12SemanticErrorZ.constr_from_ptr(ret);
 		CommonBase.add_ref_from(this, refund);
 		return ret_hu_conv;
 	}
@@ -1580,10 +2404,9 @@ export class ChannelManager extends CommonBase {
 	 * This differs from [`create_inbound_payment_for_hash`] only in that it generates the
 	 * [`PaymentHash`] and [`PaymentPreimage`] for you.
 	 * 
-	 * The [`PaymentPreimage`] will ultimately be returned to you in the [`PaymentClaimable`], which
-	 * will have the [`PaymentClaimable::purpose`] be [`PaymentPurpose::InvoicePayment`] with
-	 * its [`PaymentPurpose::InvoicePayment::payment_preimage`] field filled in. That should then be
-	 * passed directly to [`claim_funds`].
+	 * The [`PaymentPreimage`] will ultimately be returned to you in the [`PaymentClaimable`] event, which
+	 * will have the [`PaymentClaimable::purpose`] return `Some` for [`PaymentPurpose::preimage`]. That
+	 * should then be passed directly to [`claim_funds`].
 	 * 
 	 * See [`create_inbound_payment_for_hash`] for detailed documentation on behavior and requirements.
 	 * 
@@ -1603,8 +2426,7 @@ export class ChannelManager extends CommonBase {
 	 * [`claim_funds`]: Self::claim_funds
 	 * [`PaymentClaimable`]: events::Event::PaymentClaimable
 	 * [`PaymentClaimable::purpose`]: events::Event::PaymentClaimable::purpose
-	 * [`PaymentPurpose::InvoicePayment`]: events::PaymentPurpose::InvoicePayment
-	 * [`PaymentPurpose::InvoicePayment::payment_preimage`]: events::PaymentPurpose::InvoicePayment::payment_preimage
+	 * [`PaymentPurpose::preimage`]: events::PaymentPurpose::preimage
 	 * [`create_inbound_payment_for_hash`]: Self::create_inbound_payment_for_hash
 	 */
 	public create_inbound_payment(min_value_msat: Option_u64Z, invoice_expiry_delta_secs: number, min_final_cltv_expiry_delta: Option_u16Z): Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ {
@@ -1793,6 +2615,9 @@ export class ChannelManager extends CommonBase {
 
 	/**
 	 * Returns true if this [`ChannelManager`] needs to be persisted.
+	 * 
+	 * See [`Self::get_event_or_persistence_needed_future`] for retrieving a [`Future`] that
+	 * indicates this should be checked.
 	 */
 	public get_and_clear_needs_persistence(): boolean {
 		const ret: boolean = bindings.ChannelManager_get_and_clear_needs_persistence(this.ptr);
@@ -1872,6 +2697,17 @@ export class ChannelManager extends CommonBase {
 	public as_OffersMessageHandler(): OffersMessageHandler {
 		const ret: bigint = bindings.ChannelManager_as_OffersMessageHandler(this.ptr);
 		const ret_hu_conv: OffersMessageHandler = new OffersMessageHandler(null, ret);
+		CommonBase.add_ref_from(ret_hu_conv, this);
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Constructs a new NodeIdLookUp which calls the relevant methods on this_arg.
+	 * This copies the `inner` pointer in this_arg and thus the returned NodeIdLookUp must be freed before this_arg is
+	 */
+	public as_NodeIdLookUp(): NodeIdLookUp {
+		const ret: bigint = bindings.ChannelManager_as_NodeIdLookUp(this.ptr);
+		const ret_hu_conv: NodeIdLookUp = new NodeIdLookUp(null, ret);
 		CommonBase.add_ref_from(ret_hu_conv, this);
 		return ret_hu_conv;
 	}
