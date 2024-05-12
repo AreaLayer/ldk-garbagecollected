@@ -1390,7 +1390,7 @@ import javax.annotation.Nullable;
         out_opaque_struct_human += self.hu_struct_file_prefix
         out_opaque_struct_human += "\n/**\n * " + struct_doc_comment.replace("\n", "\n * ") + "\n */\n"
         out_opaque_struct_human += "@SuppressWarnings(\"unchecked\") // We correctly assign various generic arrays\n"
-        hu_name = struct_name.replace("LDKC2Tuple", "TwoTuple").replace("LDKC3Tuple", "ThreeTuple").replace("LDK", "")
+        hu_name = struct_name.replace("LDKC2Tuple", "TwoTuple").replace("LDKC4Tuple", "FourTuple").replace("LDKC3Tuple", "ThreeTuple").replace("LDK", "")
         out_opaque_struct_human += ("public class " + hu_name + " extends CommonBase")
         if struct_name.startswith("LDKLocked") or struct_name.startswith("LDKReadOnly"):
             out_opaque_struct_human += (" implements AutoCloseable")

@@ -403,6 +403,7 @@ def java_c_types(fn_arg, ret_arr_len):
             java_hu_ty = java_hu_ty.replace("LDKCResult", "Result")
             java_hu_ty = java_hu_ty.replace("LDKC2Tuple", "TwoTuple")
             java_hu_ty = java_hu_ty.replace("LDKC3Tuple", "ThreeTuple")
+            java_hu_ty = java_hu_ty.replace("LDKC4Tuple", "FourTuple")
             java_hu_ty = java_hu_ty.replace("LDK", "")
             fn_ty_arg = "J"
             fn_arg = ma.group(2).strip()
@@ -571,14 +572,17 @@ with open(sys.argv[1]) as in_h, open(f"{sys.argv[2]}/bindings{consts.file_ext}",
             struct_meth = method_name.rsplit("Z", 1)[0][1:] + "Z"
             expected_struct = "LDKC" + struct_meth
             struct_meth_name = method_name[len(struct_meth) + 1:].strip("_")
-        elif method_name.startswith("C2Tuple") or method_name.startswith("C3Tuple"):
+        elif method_name.startswith("C2Tuple") or method_name.startswith("C3Tuple") or method_name.startswith("C4Tuple"):
             tuple_name = method_name.rsplit("Z", 1)[0][2:] + "Z"
             if method_name.startswith("C2Tuple"):
                 struct_meth = "Two" + tuple_name
                 expected_struct = "LDKC2" + tuple_name
-            else:
+            elif method_name.startswith("C3Tuple"):
                 struct_meth = "Three" + tuple_name
                 expected_struct = "LDKC3" + tuple_name
+            else:
+                struct_meth = "Four" + tuple_name
+                expected_struct = "LDKC4" + tuple_name
             struct_meth_name = method_name[len(tuple_name) + 2:].strip("_")
         else:
             struct_meth = method_name.split("_")[0]
@@ -666,7 +670,7 @@ with open(sys.argv[1]) as in_h, open(f"{sys.argv[2]}/bindings{consts.file_ext}",
             not method_name.startswith("_") and
             method_name != "check_platform" and method_name != "Result_read" and
             not expected_struct in unitary_enums and
-            ((not method_name.startswith("C2Tuple_") and not method_name.startswith("C3Tuple_"))
+            ((not method_name.startswith("C2Tuple_") and not method_name.startswith("C3Tuple_") and not method_name.startswith("C4Tuple_"))
               or method_name.endswith("_read")))
 
         # If we're adding a static method, and it returns a primitive or an array of primitives,
@@ -909,7 +913,7 @@ with open(sys.argv[1]) as in_h, open(f"{sys.argv[2]}/bindings{consts.file_ext}",
         map_fn_with_ref_option(dummy_line, reg_fn_regex.match(dummy_line), None, None, "", holds_ref)
 
     def map_tuple(struct_name, field_lines):
-        human_ty = struct_name.replace("LDKC2Tuple", "TwoTuple").replace("LDKC3Tuple", "ThreeTuple")
+        human_ty = struct_name.replace("LDKC2Tuple", "TwoTuple").replace("LDKC3Tuple", "ThreeTuple").replace("LDKC4Tuple", "FourTuple")
         with open(f"{sys.argv[3]}/structs/{human_ty}{consts.file_ext}", "w") as out_java_struct:
             out_java_struct.write(consts.map_tuple(struct_name))
             ty_list = []
@@ -1008,7 +1012,7 @@ with open(sys.argv[1]) as in_h, open(f"{sys.argv[2]}/bindings{consts.file_ext}",
                         vec_ty_match = line_indicates_vec_regex.match(struct_line)
                         if vec_ty_match is not None and struct_name.startswith("LDKCVec_"):
                             vec_ty = vec_ty_match.group(2)
-                        elif struct_name.startswith("LDKC2Tuple_") or struct_name.startswith("LDKC3Tuple_"):
+                        elif struct_name.startswith("LDKC2Tuple_") or struct_name.startswith("LDKC3Tuple_") or struct_name.startswith("LDKC4Tuple_"):
                             is_tuple = True
                         trait_fn_match = line_indicates_trait_regex.match(struct_line)
                         if trait_fn_match is not None:
@@ -1186,7 +1190,7 @@ with open(sys.argv[1]) as in_h, open(f"{sys.argv[2]}/bindings{consts.file_ext}",
         with open(f"{sys.argv[3]}/structs/{struct_name.replace('LDKCResult', 'Result')}{consts.file_ext}", "a") as out_java_struct:
             out_java_struct.write("}\n" + consts.hu_struct_file_suffix)
     for struct_name in tuple_types:
-        struct_hu_name = struct_name.replace("LDKC2Tuple", "TwoTuple").replace("LDKC3Tuple", "ThreeTuple")
+        struct_hu_name = struct_name.replace("LDKC2Tuple", "TwoTuple").replace("LDKC3Tuple", "ThreeTuple").replace("LDKC4Tuple", "FourTuple")
         with open(f"{sys.argv[3]}/structs/{struct_hu_name}{consts.file_ext}", "a") as out_java_struct:
             out_java_struct.write("}\n" + consts.hu_struct_file_suffix)
 

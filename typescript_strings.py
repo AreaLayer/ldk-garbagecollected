@@ -1409,7 +1409,7 @@ export class {struct_name.replace("LDK","")} extends CommonBase {{
     def map_opaque_struct(self, struct_name, struct_doc_comment):
         method_header = ""
 
-        hu_name = struct_name.replace("LDKC2Tuple", "TwoTuple").replace("LDKC3Tuple", "ThreeTuple").replace("LDK", "")
+        hu_name = struct_name.replace("LDKC2Tuple", "TwoTuple").replace("LDKC3Tuple", "ThreeTuple").replace("LDKC4Tuple", "FourTuple").replace("LDK", "")
         out_opaque_struct_human = f"{self.hu_struct_file_prefix}"
         constructor_body = "super(ptr, bindings." + struct_name.replace("LDK","") + "_free);"
         extra_docs = ""
