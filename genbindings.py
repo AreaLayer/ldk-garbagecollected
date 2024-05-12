@@ -165,6 +165,11 @@ def java_c_types(fn_arg, ret_arr_len):
         assert var_is_arr_regex.match(fn_arg[8:])
         rust_obj = "LDKPublicKey"
         arr_access = "compressed_form"
+    elif fn_arg.startswith("LDKTweakedPublicKey"):
+        fn_arg = "uint8_t (*" + fn_arg[21:] + ")[32]"
+        assert var_is_arr_regex.match(fn_arg[8:])
+        rust_obj = "LDKTweakedPublicKey"
+        arr_access = "x_coordinate"
     elif fn_arg.startswith("LDKSecretKey"):
         fn_arg = "uint8_t (*" + fn_arg[13:] + ")[32]"
         assert var_is_arr_regex.match(fn_arg[8:])
