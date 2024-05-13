@@ -7,6 +7,39 @@ The auto-generated code contains copies of the Rust documentation, which can als
 [docs.rs/lightning](https://docs.rs/lightning). High-level documentation of the API can be found at
 [lightningdevkit.org](https://lightningdevkit.org).
 
+API Mappings
+============
+
+As the bindings are auto-generated, they often read fairly verbose with lots of additional type
+information compared to what might be expected with a native interface. A brief understanding of
+some Rust nomenclature will help read bindings:
+
+## `Result`
+
+Rust APIs make heavy use of the `Result` enum. They can either be in an `Ok` state, with an
+optional value or an `Err` state, with an optional error value. These often appear as
+`Result_OKValueTypeErrValueTypeZ` in bindings. Subclasses are build for the `Ok` and `Err` states,
+with the appropriate values available in the subclasses which all instances will be of.
+
+## `Option`
+
+Similar to `Result`, Rust APIs make heavy use of the `Option` enum. Like `Result`, they may contain
+a value in the `Some` state, but may contain no value in the `None` state. They are mapped
+similarly to `Result`s, usually as `Option_SomeValueTypeZ`.
+
+## Tuples
+
+Rust APIs occasionally use tuples, which are simply mapped as a tuple type like
+`TwoTuple_FirstValueTypeSecondValueTypeZ`. Individual elements can be fetched or set with `get_a()`,
+`get_b()`, `set_a(..)`, etc.
+
+## Tuple Types
+
+Rust APIs occasionally build structs which are simply a named tuple type. These appear in rust as,
+eg, `struct PrintableString(String)`, and in the bindings as simply the class name (eg
+`class PrintableString`). The value(s) in the tuple can be fetched or set with `get_a()`,
+`get_b()`, `set_a(..)`, etc.
+
 Building
 ========
 
@@ -42,8 +75,8 @@ the browser you will need to provide your own bridge from `SocketDescriptor` to 
 
 # C#
 
-The C# bindings are functionally complete, but should be considered alpha quality. They are brand
-new and likely contain bugs or memory leaks.
+The C# bindings are functionally complete, but should be considered beta quality. As they are
+relatively new, unexpected issues remain possible, and bug reports are welcome.
 
 ## General
 
