@@ -295,7 +295,10 @@ class TypeMappingGenerator:
                 ty_info.var_name = "ret"
 
             if ty_info.rust_obj in self.opaque_structs:
-                from_hu_conv = (ty_info.var_name + " == null ? " + self.consts.native_zero_ptr + " : " + self.consts.get_ptr(ty_info.var_name), self.consts.add_ref("this", ty_info.var_name))
+                if is_nullable:
+                    from_hu_conv = (ty_info.var_name + " == null ? " + self.consts.native_zero_ptr + " : " + self.consts.get_ptr(ty_info.var_name), self.consts.add_ref("this", ty_info.var_name))
+                else:
+                    from_hu_conv = (self.consts.get_ptr(ty_info.var_name), self.consts.add_ref("this", ty_info.var_name))
                 opaque_arg_conv = ty_info.rust_obj + " " + ty_info.var_name + "_conv;\n"
                 opaque_arg_conv = opaque_arg_conv + ty_info.var_name + "_conv.inner = untag_ptr(" + ty_info.var_name + ");\n"
                 opaque_arg_conv += ty_info.var_name + "_conv.is_owned = ptr_is_owned(" + ty_info.var_name + ");\n"
@@ -310,8 +313,10 @@ class TypeMappingGenerator:
                         # whereas in the first we prefer to clone in C to avoid additional Java code as much as possible.
                         if holds_ref:
                             opaque_arg_conv += "\n" + ty_info.var_name + "_conv = " + ty_info.rust_obj.replace("LDK", "") + "_clone(&" + ty_info.var_name + "_conv);"
-                        else:
+                        elif is_nullable:
                             from_hu_conv = (ty_info.var_name + " == null ? " + self.consts.native_zero_ptr + " : " + ty_info.var_name + ".clone_ptr()", "")
+                        else:
+                            from_hu_conv = (ty_info.var_name + ".clone_ptr()", "")
                     elif ty_info.passed_as_ptr:
                         opaque_arg_conv += "\n// WARNING: we need a move here but no clone is available for " + ty_info.rust_obj + "\n"
                         # TODO: Once we support features cloning (which just isn't in C yet), we can make this a compile error instead!
@@ -421,7 +426,7 @@ class TypeMappingGenerator:
                         if holds_ref:
                             base_conv += "\n" + ty_info.var_name + "_conv = " + ty_info.rust_obj.replace("LDK", "") + "_clone((" + ty_info.rust_obj + "*)untag_ptr(" + ty_info.var_name + "));"
                         else:
-                            from_hu_conv = (ty_info.var_name + " == null ? " + self.consts.native_zero_ptr + " : " + ty_info.var_name + ".clone_ptr()", "")
+                            from_hu_conv = (ty_info.var_name + ".clone_ptr()", "")
                             base_conv += "\n" + "FREE(untag_ptr(" + ty_info.var_name + "));"
                     elif needs_full_clone:
                         base_conv = base_conv + "\n// WARNING: we may need a move here but no clone is available for " + ty_info.rust_obj
@@ -467,7 +472,7 @@ class TypeMappingGenerator:
                     else:
                         ret_conv = (ty_info.rust_obj + "* " + ty_info.var_name + "_conv = MALLOC(sizeof(" + ty_info.rust_obj + "), \"" + ty_info.rust_obj + "\");\n*" + ty_info.var_name + "_conv = ", ";")
                     if from_hu_conv is None:
-                        from_hu_conv = (ty_info.var_name + " != null ? " + self.consts.get_ptr(ty_info.var_name) + " : " + self.consts.native_zero_ptr, "")
+                        from_hu_conv = (self.consts.get_ptr(ty_info.var_name), "")
                     return ConvInfo(ty_info = ty_info, arg_name = ty_info.var_name,
                         arg_conv = base_conv, arg_conv_name = ty_info.var_name + "_conv", arg_conv_cleanup = None,
                         ret_conv = ret_conv, ret_conv_name = "tag_ptr(" + ty_info.var_name + "_conv, true)",
@@ -493,7 +498,7 @@ class TypeMappingGenerator:
                     else:
                         to_hu_conv_sfx = ""
                     if from_hu_conv is None:
-                        from_hu_conv = (ty_info.var_name + " != null ? " + self.consts.get_ptr(ty_info.var_name) + " : " + self.consts.native_zero_ptr, "")
+                        from_hu_conv = (self.consts.get_ptr(ty_info.var_name), "")
                     return ConvInfo(ty_info = ty_info, arg_name = ty_info.var_name,
                         arg_conv = base_conv, arg_conv_name = ty_info.var_name + "_conv", arg_conv_cleanup = None,
                         ret_conv = ret_conv, ret_conv_name = ret_conv_name,
@@ -546,7 +551,7 @@ class TypeMappingGenerator:
                         ret_conv = ret_conv, ret_conv_name = "ref_" + ty_info.var_name,
                         to_hu_conv = self.consts.var_decl_statement(ty_info.java_hu_ty, ty_info.var_name + "_hu_conv", ty_info.java_hu_ty + ".constr_from_ptr(" + ty_info.var_name + ")") + ";",
                         to_hu_conv_name = ty_info.var_name + "_hu_conv",
-                        from_hu_conv = (ty_info.var_name + " == null ? " + self.consts.native_zero_ptr + " : " + self.consts.get_ptr(ty_info.var_name), from_hu_sfx))
+                        from_hu_conv = (self.consts.get_ptr(ty_info.var_name), from_hu_sfx))
                 elif ty_info.rust_obj in self.trait_structs:
                     if ty_info.nonnull_ptr:
                         arg_conv = "void* " + ty_info.var_name + "_ptr = untag_ptr(" + ty_info.var_name + ");\n"
@@ -568,7 +573,7 @@ class TypeMappingGenerator:
                         arg_conv += "\t*" + ty_info.var_name + "_conv_ptr = " + ty_info.var_name + "_conv;\n"
                         arg_conv += "}"
                         arg_conv_name = ty_info.var_name + "_conv_ptr"
-                        from_hu_conv_pfx = ty_info.var_name + " == null ? " + self.consts.native_zero_ptr + " : " + self.consts.get_ptr(ty_info.var_name)
+                        from_hu_conv_pfx = self.consts.get_ptr(ty_info.var_name)
                     if ty_info.rust_obj.replace("LDK", "") + "_clone" in self.clone_fns:
                         return ConvInfo(ty_info = ty_info, arg_name = ty_info.var_name,
                             arg_conv = arg_conv, arg_conv_name = arg_conv_name, arg_conv_cleanup = None,
