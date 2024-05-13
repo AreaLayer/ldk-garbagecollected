@@ -42,7 +42,7 @@ public class Result_UnsignedChannelUpdateDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_UnsignedChannelUpdateDecodeErrorZ in the success state.
 	 */
 	public static Result_UnsignedChannelUpdateDecodeErrorZ ok(org.ldk.structs.UnsignedChannelUpdate o) {
-		long ret = bindings.CResult_UnsignedChannelUpdateDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_UnsignedChannelUpdateDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_UnsignedChannelUpdateDecodeErrorZ ret_hu_conv = Result_UnsignedChannelUpdateDecodeErrorZ.constr_from_ptr(ret);

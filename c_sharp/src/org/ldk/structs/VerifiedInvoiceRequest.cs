@@ -17,6 +17,28 @@ public class VerifiedInvoiceRequest : CommonBase {
 	}
 
 	/**
+	 * The identifier of the [`Offer`] for which the [`InvoiceRequest`] was made.
+	 */
+	public OfferId get_offer_id() {
+		long ret = bindings.VerifiedInvoiceRequest_get_offer_id(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.OfferId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.OfferId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * The identifier of the [`Offer`] for which the [`InvoiceRequest`] was made.
+	 */
+	public void set_offer_id(org.ldk.structs.OfferId val) {
+		bindings.VerifiedInvoiceRequest_set_offer_id(this.ptr, val.ptr);
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
+		if (this != null) { this.ptrs_to.AddLast(val); };
+	}
+
+	/**
 	 * Keys used for signing a [`Bolt12Invoice`] if they can be derived.
 	 * 
 	 * If `Some`, must call [`respond_using_derived_keys`] when responding. Otherwise, call
@@ -105,14 +127,12 @@ public class VerifiedInvoiceRequest : CommonBase {
 
 	/**
 	 * The minimum amount required for a successful payment of a single item.
-	 * 
-	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public Amount amount() {
+	public Option_AmountZ amount() {
 		long ret = bindings.VerifiedInvoiceRequest_amount(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.Amount ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Amount(null, ret); }
+		org.ldk.structs.Option_AmountZ ret_hu_conv = org.ldk.structs.Option_AmountZ.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
 		return ret_hu_conv;
 	}
@@ -120,6 +140,8 @@ public class VerifiedInvoiceRequest : CommonBase {
 	/**
 	 * A complete description of the purpose of the payment. Intended to be displayed to the user
 	 * but with the caveat that it has not been verified in any way.
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public PrintableString description() {
 		long ret = bindings.VerifiedInvoiceRequest_description(this.ptr);
@@ -198,13 +220,15 @@ public class VerifiedInvoiceRequest : CommonBase {
 		long ret = bindings.VerifiedInvoiceRequest_supported_quantity(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.Quantity ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Quantity(null, ret); }
+		org.ldk.structs.Quantity ret_hu_conv = org.ldk.structs.Quantity.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
 		return ret_hu_conv;
 	}
 
 	/**
 	 * The public key used by the recipient to sign invoices.
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public byte[] signing_pubkey() {
 		long ret = bindings.VerifiedInvoiceRequest_signing_pubkey(this.ptr);
@@ -301,6 +325,100 @@ public class VerifiedInvoiceRequest : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PrintableString ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.PrintableString(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Creates an [`InvoiceBuilder`] for the request with the given required fields and using the
+	 * [`Duration`] since [`std::time::SystemTime::UNIX_EPOCH`] as the creation time.
+	 * 
+	 * See [`InvoiceRequest::respond_with_no_std`] for further details where the aforementioned
+	 * creation time is used for the `created_at` parameter.
+	 * 
+	 * [`Duration`]: core::time::Duration
+	 */
+	public Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ respond_with(TwoTuple_BlindedPayInfoBlindedPathZ[] payment_paths, byte[] payment_hash) {
+		long ret = bindings.VerifiedInvoiceRequest_respond_with(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(payment_paths, payment_paths_conv_37 => payment_paths_conv_37.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)));
+		GC.KeepAlive(this);
+		GC.KeepAlive(payment_paths);
+		GC.KeepAlive(payment_hash);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ ret_hu_conv = Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Creates an [`InvoiceBuilder`] for the request with the given required fields.
+	 * 
+	 * Unless [`InvoiceBuilder::relative_expiry`] is set, the invoice will expire two hours after
+	 * `created_at`, which is used to set [`Bolt12Invoice::created_at`]. Useful for `no-std` builds
+	 * where [`std::time::SystemTime`] is not available.
+	 * 
+	 * The caller is expected to remember the preimage of `payment_hash` in order to claim a payment
+	 * for the invoice.
+	 * 
+	 * The `payment_paths` parameter is useful for maintaining the payment recipient's privacy. It
+	 * must contain one or more elements ordered from most-preferred to least-preferred, if there's
+	 * a preference. Note, however, that any privacy is lost if a public node id was used for
+	 * [`Offer::signing_pubkey`].
+	 * 
+	 * Errors if the request contains unknown required features.
+	 * 
+	 * # Note
+	 * 
+	 * If the originating [`Offer`] was created using [`OfferBuilder::deriving_signing_pubkey`],
+	 * then use [`InvoiceRequest::verify`] and [`VerifiedInvoiceRequest`] methods instead.
+	 * 
+	 * [`Bolt12Invoice::created_at`]: crate::offers::invoice::Bolt12Invoice::created_at
+	 * [`OfferBuilder::deriving_signing_pubkey`]: crate::offers::offer::OfferBuilder::deriving_signing_pubkey
+	 */
+	public Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ respond_with_no_std(TwoTuple_BlindedPayInfoBlindedPathZ[] payment_paths, byte[] payment_hash, long created_at) {
+		long ret = bindings.VerifiedInvoiceRequest_respond_with_no_std(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(payment_paths, payment_paths_conv_37 => payment_paths_conv_37.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), created_at);
+		GC.KeepAlive(this);
+		GC.KeepAlive(payment_paths);
+		GC.KeepAlive(payment_hash);
+		GC.KeepAlive(created_at);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ ret_hu_conv = Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Creates an [`InvoiceBuilder`] for the request using the given required fields and that uses
+	 * derived signing keys from the originating [`Offer`] to sign the [`Bolt12Invoice`]. Must use
+	 * the same [`ExpandedKey`] as the one used to create the offer.
+	 * 
+	 * See [`InvoiceRequest::respond_with`] for further details.
+	 * 
+	 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
+	 */
+	public Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ respond_using_derived_keys(TwoTuple_BlindedPayInfoBlindedPathZ[] payment_paths, byte[] payment_hash) {
+		long ret = bindings.VerifiedInvoiceRequest_respond_using_derived_keys(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(payment_paths, payment_paths_conv_37 => payment_paths_conv_37.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)));
+		GC.KeepAlive(this);
+		GC.KeepAlive(payment_paths);
+		GC.KeepAlive(payment_hash);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ ret_hu_conv = Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Creates an [`InvoiceBuilder`] for the request using the given required fields and that uses
+	 * derived signing keys from the originating [`Offer`] to sign the [`Bolt12Invoice`]. Must use
+	 * the same [`ExpandedKey`] as the one used to create the offer.
+	 * 
+	 * See [`InvoiceRequest::respond_with_no_std`] for further details.
+	 * 
+	 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
+	 */
+	public Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ respond_using_derived_keys_no_std(TwoTuple_BlindedPayInfoBlindedPathZ[] payment_paths, byte[] payment_hash, long created_at) {
+		long ret = bindings.VerifiedInvoiceRequest_respond_using_derived_keys_no_std(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(payment_paths, payment_paths_conv_37 => payment_paths_conv_37.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), created_at);
+		GC.KeepAlive(this);
+		GC.KeepAlive(payment_paths);
+		GC.KeepAlive(payment_hash);
+		GC.KeepAlive(created_at);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ ret_hu_conv = Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
 		return ret_hu_conv;
 	}
 

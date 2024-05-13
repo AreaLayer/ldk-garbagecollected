@@ -42,7 +42,7 @@ public class Result_RevocationBasepointDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_RevocationBasepointDecodeErrorZ in the success state.
 	 */
 	public static Result_RevocationBasepointDecodeErrorZ ok(org.ldk.structs.RevocationBasepoint o) {
-		long ret = bindings.CResult_RevocationBasepointDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_RevocationBasepointDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RevocationBasepointDecodeErrorZ ret_hu_conv = Result_RevocationBasepointDecodeErrorZ.constr_from_ptr(ret);

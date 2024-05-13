@@ -37,7 +37,7 @@ public class Result_TransactionU16LenLimitedNoneZ : CommonBase {
 	 * Creates a new CResult_TransactionU16LenLimitedNoneZ in the success state.
 	 */
 	public static Result_TransactionU16LenLimitedNoneZ ok(org.ldk.structs.TransactionU16LenLimited o) {
-		long ret = bindings.CResult_TransactionU16LenLimitedNoneZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_TransactionU16LenLimitedNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_TransactionU16LenLimitedNoneZ ret_hu_conv = Result_TransactionU16LenLimitedNoneZ.constr_from_ptr(ret);

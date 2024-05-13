@@ -32,7 +32,7 @@ public class RouteHint : CommonBase {
 	}
 
 	public void set_a(RouteHintHop[] val) {
-		bindings.RouteHint_set_a(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_14 => val_conv_14 == null ? 0 : val_conv_14.ptr)));
+		bindings.RouteHint_set_a(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_14 => val_conv_14.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		foreach (RouteHintHop val_conv_14 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_14); }; };
@@ -42,7 +42,7 @@ public class RouteHint : CommonBase {
 	 * Constructs a new RouteHint given each field
 	 */
 	public static RouteHint of(RouteHintHop[] a_arg) {
-		long ret = bindings.RouteHint_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(a_arg, a_arg_conv_14 => a_arg_conv_14 == null ? 0 : a_arg_conv_14.ptr)));
+		long ret = bindings.RouteHint_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(a_arg, a_arg_conv_14 => a_arg_conv_14.ptr)));
 		GC.KeepAlive(a_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.RouteHint ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.RouteHint(null, ret); }
@@ -87,7 +87,7 @@ public class RouteHint : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.RouteHint b) {
-		bool ret = bindings.RouteHint_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.RouteHint_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

@@ -73,7 +73,7 @@ public class ThreeTuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ : Com
 	 * Creates a new C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ from the contained elements.
 	 */
 	public static ThreeTuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ of(byte[] a, org.ldk.structs.OnionMessage b, org.ldk.structs.Option_CVec_SocketAddressZZ c) {
-		long ret = bindings.C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 33)), b == null ? 0 : b.ptr, c.ptr);
+		long ret = bindings.C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 33)), b.ptr, c.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);
 		GC.KeepAlive(c);

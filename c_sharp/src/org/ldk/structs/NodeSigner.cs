@@ -114,7 +114,7 @@ public class NodeSigner : CommonBase {
 		public long get_node_id(Recipient _recipient) {
 			Result_PublicKeyNoneZ ret = arg.get_node_id(_recipient);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long ecdh(Recipient _recipient, long _other_key, long _tweak) {
@@ -123,7 +123,7 @@ public class NodeSigner : CommonBase {
 			if (_tweak_hu_conv != null) { _tweak_hu_conv.ptrs_to.AddLast(this); };
 			Result_ThirtyTwoBytesNoneZ ret = arg.ecdh(_recipient, _other_key_conv, _tweak_hu_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long sign_invoice(long _hrp_bytes, long _invoice_data, Recipient _recipient) {
@@ -138,21 +138,21 @@ public class NodeSigner : CommonBase {
 			bindings.free_buffer(_invoice_data);
 			Result_RecoverableSignatureNoneZ ret = arg.sign_invoice(_hrp_bytes_conv, _invoice_data_conv_7_arr, _recipient);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long sign_bolt12_invoice_request(long _invoice_request) {
 			org.ldk.structs.UnsignedInvoiceRequest _invoice_request_hu_conv = null; if (_invoice_request < 0 || _invoice_request > 4096) { _invoice_request_hu_conv = new org.ldk.structs.UnsignedInvoiceRequest(null, _invoice_request); }
 			Result_SchnorrSignatureNoneZ ret = arg.sign_bolt12_invoice_request(_invoice_request_hu_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long sign_bolt12_invoice(long _invoice) {
 			org.ldk.structs.UnsignedBolt12Invoice _invoice_hu_conv = null; if (_invoice < 0 || _invoice > 4096) { _invoice_hu_conv = new org.ldk.structs.UnsignedBolt12Invoice(null, _invoice); }
 			Result_SchnorrSignatureNoneZ ret = arg.sign_bolt12_invoice(_invoice_hu_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long sign_gossip_message(long _msg) {
@@ -160,7 +160,7 @@ public class NodeSigner : CommonBase {
 			if (_msg_hu_conv != null) { _msg_hu_conv.ptrs_to.AddLast(this); };
 			Result_ECDSASignatureNoneZ ret = arg.sign_gossip_message(_msg_hu_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 	}
@@ -273,7 +273,7 @@ public class NodeSigner : CommonBase {
 	 * [`TaggedHash`]: crate::offers::merkle::TaggedHash
 	 */
 	public Result_SchnorrSignatureNoneZ sign_bolt12_invoice_request(org.ldk.structs.UnsignedInvoiceRequest invoice_request) {
-		long ret = bindings.NodeSigner_sign_bolt12_invoice_request(this.ptr, invoice_request == null ? 0 : invoice_request.ptr);
+		long ret = bindings.NodeSigner_sign_bolt12_invoice_request(this.ptr, invoice_request.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(invoice_request);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -296,7 +296,7 @@ public class NodeSigner : CommonBase {
 	 * [`TaggedHash`]: crate::offers::merkle::TaggedHash
 	 */
 	public Result_SchnorrSignatureNoneZ sign_bolt12_invoice(org.ldk.structs.UnsignedBolt12Invoice invoice) {
-		long ret = bindings.NodeSigner_sign_bolt12_invoice(this.ptr, invoice == null ? 0 : invoice.ptr);
+		long ret = bindings.NodeSigner_sign_bolt12_invoice(this.ptr, invoice.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(invoice);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -25,7 +25,7 @@ public class SignedRawBolt11Invoice : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.SignedRawBolt11Invoice b) {
-		bool ret = bindings.SignedRawBolt11Invoice_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.SignedRawBolt11Invoice_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

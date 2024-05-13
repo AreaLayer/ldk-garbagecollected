@@ -42,7 +42,7 @@ public class Result_ClosingSignedDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_ClosingSignedDecodeErrorZ in the success state.
 	 */
 	public static Result_ClosingSignedDecodeErrorZ ok(org.ldk.structs.ClosingSigned o) {
-		long ret = bindings.CResult_ClosingSignedDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_ClosingSignedDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ClosingSignedDecodeErrorZ ret_hu_conv = Result_ClosingSignedDecodeErrorZ.constr_from_ptr(ret);

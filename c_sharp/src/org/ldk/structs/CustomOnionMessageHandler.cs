@@ -58,7 +58,7 @@ public class CustomOnionMessageHandler : CommonBase {
 			if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
 			Option_OnionMessageContentsZ ret = arg.handle_custom_message(ret_hu_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			if (impl_holder.held != null) { impl_holder.held.ptrs_to.AddLast(ret); };
 			return result;
 		}
@@ -66,13 +66,13 @@ public class CustomOnionMessageHandler : CommonBase {
 			byte[] _buffer_conv = InternalUtils.decodeUint8Array(_buffer);
 			Result_COption_OnionMessageContentsZDecodeErrorZ ret = arg.read_custom_message(_message_type, _buffer_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long release_pending_custom_messages() {
 			ThreeTuple_OnionMessageContentsDestinationBlindedPathZ[] ret = arg.release_pending_custom_messages();
 				GC.KeepAlive(arg);
-			long result = InternalUtils.encodeUint64Array(InternalUtils.mapArray(ret, ret_conv_56 => ret_conv_56 == null ? 0 : ret_conv_56.clone_ptr()));
+			long result = InternalUtils.encodeUint64Array(InternalUtils.mapArray(ret, ret_conv_56 => ret_conv_56.clone_ptr()));
 			return result;
 		}
 	}

@@ -50,7 +50,7 @@ public class Result_boolPeerHandleErrorZ : CommonBase {
 	 * Creates a new CResult_boolPeerHandleErrorZ in the error state.
 	 */
 	public static Result_boolPeerHandleErrorZ err(org.ldk.structs.PeerHandleError e) {
-		long ret = bindings.CResult_boolPeerHandleErrorZ_err(e == null ? 0 : e.ptr);
+		long ret = bindings.CResult_boolPeerHandleErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_boolPeerHandleErrorZ ret_hu_conv = Result_boolPeerHandleErrorZ.constr_from_ptr(ret);

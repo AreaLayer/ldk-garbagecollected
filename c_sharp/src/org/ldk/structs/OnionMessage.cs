@@ -51,7 +51,7 @@ public class OnionMessage : CommonBase {
 	 * The full onion packet including hop data, pubkey, and hmac
 	 */
 	public void set_onion_routing_packet(org.ldk.structs.Packet val) {
-		bindings.OnionMessage_set_onion_routing_packet(this.ptr, val == null ? 0 : val.ptr);
+		bindings.OnionMessage_set_onion_routing_packet(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -61,7 +61,7 @@ public class OnionMessage : CommonBase {
 	 * Constructs a new OnionMessage given each field
 	 */
 	public static OnionMessage of(byte[] blinding_point_arg, org.ldk.structs.Packet onion_routing_packet_arg) {
-		long ret = bindings.OnionMessage_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(blinding_point_arg, 33)), onion_routing_packet_arg == null ? 0 : onion_routing_packet_arg.ptr);
+		long ret = bindings.OnionMessage_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(blinding_point_arg, 33)), onion_routing_packet_arg.ptr);
 		GC.KeepAlive(blinding_point_arg);
 		GC.KeepAlive(onion_routing_packet_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -107,7 +107,7 @@ public class OnionMessage : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.OnionMessage b) {
-		bool ret = bindings.OnionMessage_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.OnionMessage_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

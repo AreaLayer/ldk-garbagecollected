@@ -77,13 +77,52 @@ public class Destination : CommonBase {
 	 * Utility method to constructs a new BlindedPath-variant Destination
 	 */
 	public static Destination blinded_path(org.ldk.structs.BlindedPath a) {
-		long ret = bindings.Destination_blinded_path(a == null ? 0 : a.ptr);
+		long ret = bindings.Destination_blinded_path(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Destination ret_hu_conv = org.ldk.structs.Destination.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(a); };
 		return ret_hu_conv;
+	}
+
+	/**
+	 * Generates a non-cryptographic 64-bit hash of the Destination.
+	 */
+	public long hash() {
+		long ret = bindings.Destination_hash(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	public override int GetHashCode() {
+		return (int)this.hash();
+	}
+	/**
+	 * Checks if two Destinations contain equal inner contents.
+	 * This ignores pointers and is_owned flags and looks at the values in fields.
+	 */
+	public bool eq(org.ldk.structs.Destination b) {
+		bool ret = bindings.Destination_eq(this.ptr, b.ptr);
+		GC.KeepAlive(this);
+		GC.KeepAlive(b);
+		return ret;
+	}
+
+	public override bool Equals(object o) {
+		if (!(o is Destination)) return false;
+		return this.eq((Destination)o);
+	}
+	/**
+	 * Attempts to resolve the [`IntroductionNode::DirectedShortChannelId`] of a
+	 * [`Destination::BlindedPath`] to a [`IntroductionNode::NodeId`], if applicable, using the
+	 * provided [`ReadOnlyNetworkGraph`].
+	 */
+	public void resolve(org.ldk.structs.ReadOnlyNetworkGraph network_graph) {
+		bindings.Destination_resolve(this.ptr, network_graph.ptr);
+		GC.KeepAlive(this);
+		GC.KeepAlive(network_graph);
+		if (this != null) { this.ptrs_to.AddLast(network_graph); };
 	}
 
 }

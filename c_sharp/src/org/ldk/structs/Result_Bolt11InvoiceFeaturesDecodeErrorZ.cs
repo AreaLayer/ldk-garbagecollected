@@ -42,7 +42,7 @@ public class Result_Bolt11InvoiceFeaturesDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_Bolt11InvoiceFeaturesDecodeErrorZ in the success state.
 	 */
 	public static Result_Bolt11InvoiceFeaturesDecodeErrorZ ok(org.ldk.structs.Bolt11InvoiceFeatures o) {
-		long ret = bindings.CResult_Bolt11InvoiceFeaturesDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_Bolt11InvoiceFeaturesDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_Bolt11InvoiceFeaturesDecodeErrorZ ret_hu_conv = Result_Bolt11InvoiceFeaturesDecodeErrorZ.constr_from_ptr(ret);

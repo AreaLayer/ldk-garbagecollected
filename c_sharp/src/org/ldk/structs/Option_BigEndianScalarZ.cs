@@ -41,13 +41,12 @@ public class Option_BigEndianScalarZ : CommonBase {
 	/**
 	 * Constructs a new COption_BigEndianScalarZ containing a crate::c_types::BigEndianScalar
 	 */
-	public static Option_BigEndianScalarZ some(byte[] o_big_endian_bytes) {
-		long ret = bindings.COption_BigEndianScalarZ_some(bindings.BigEndianScalar_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(o_big_endian_bytes, 32))));
-		GC.KeepAlive(o_big_endian_bytes);
+	public static Option_BigEndianScalarZ some(org.ldk.structs.BigEndianScalar o) {
+		long ret = bindings.COption_BigEndianScalarZ_some(o.ptr);
+		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_BigEndianScalarZ ret_hu_conv = org.ldk.structs.Option_BigEndianScalarZ.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		;
 		return ret_hu_conv;
 	}
 

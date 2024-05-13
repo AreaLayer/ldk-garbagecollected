@@ -54,7 +54,7 @@ public class TransactionU16LenLimited : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.TransactionU16LenLimited b) {
-		bool ret = bindings.TransactionU16LenLimited_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.TransactionU16LenLimited_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };
@@ -86,6 +86,17 @@ public class TransactionU16LenLimited : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
 		if (this != null) { this.ptrs_to.AddLast(this); };
+		return ret_conv;
+	}
+
+	/**
+	 * Returns a reference to the contained `Transaction`
+	 */
+	public byte[] as_transaction() {
+		long ret = bindings.TransactionU16LenLimited_as_transaction(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
 		return ret_conv;
 	}
 

@@ -37,7 +37,7 @@ public class Result_LockedChannelMonitorNoneZ : CommonBase {
 	 * Creates a new CResult_LockedChannelMonitorNoneZ in the success state.
 	 */
 	public static Result_LockedChannelMonitorNoneZ ok(org.ldk.structs.LockedChannelMonitor o) {
-		long ret = bindings.CResult_LockedChannelMonitorNoneZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_LockedChannelMonitorNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_LockedChannelMonitorNoneZ ret_hu_conv = Result_LockedChannelMonitorNoneZ.constr_from_ptr(ret);

@@ -53,7 +53,7 @@ public class ChannelUpdate : CommonBase {
 	 * The actual channel update
 	 */
 	public void set_contents(org.ldk.structs.UnsignedChannelUpdate val) {
-		bindings.ChannelUpdate_set_contents(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChannelUpdate_set_contents(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -63,7 +63,7 @@ public class ChannelUpdate : CommonBase {
 	 * Constructs a new ChannelUpdate given each field
 	 */
 	public static ChannelUpdate of(byte[] signature_arg, org.ldk.structs.UnsignedChannelUpdate contents_arg) {
-		long ret = bindings.ChannelUpdate_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(signature_arg, 64)), contents_arg == null ? 0 : contents_arg.ptr);
+		long ret = bindings.ChannelUpdate_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(signature_arg, 64)), contents_arg.ptr);
 		GC.KeepAlive(signature_arg);
 		GC.KeepAlive(contents_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -109,7 +109,7 @@ public class ChannelUpdate : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.ChannelUpdate b) {
-		bool ret = bindings.ChannelUpdate_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.ChannelUpdate_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

@@ -44,7 +44,7 @@ public class Result_CVec_UtxoZNoneZ : CommonBase {
 	 * Creates a new CResult_CVec_UtxoZNoneZ in the success state.
 	 */
 	public static Result_CVec_UtxoZNoneZ ok(Utxo[] o) {
-		long ret = bindings.CResult_CVec_UtxoZNoneZ_ok(InternalUtils.encodeUint64Array(InternalUtils.mapArray(o, o_conv_6 => o_conv_6 == null ? 0 : o_conv_6.ptr)));
+		long ret = bindings.CResult_CVec_UtxoZNoneZ_ok(InternalUtils.encodeUint64Array(InternalUtils.mapArray(o, o_conv_6 => o_conv_6.ptr)));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CVec_UtxoZNoneZ ret_hu_conv = Result_CVec_UtxoZNoneZ.constr_from_ptr(ret);

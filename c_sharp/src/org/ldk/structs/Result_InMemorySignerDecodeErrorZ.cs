@@ -42,7 +42,7 @@ public class Result_InMemorySignerDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_InMemorySignerDecodeErrorZ in the success state.
 	 */
 	public static Result_InMemorySignerDecodeErrorZ ok(org.ldk.structs.InMemorySigner o) {
-		long ret = bindings.CResult_InMemorySignerDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_InMemorySignerDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_InMemorySignerDecodeErrorZ ret_hu_conv = Result_InMemorySignerDecodeErrorZ.constr_from_ptr(ret);

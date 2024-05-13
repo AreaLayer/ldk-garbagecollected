@@ -42,7 +42,7 @@ public class Result_TxAbortDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_TxAbortDecodeErrorZ in the success state.
 	 */
 	public static Result_TxAbortDecodeErrorZ ok(org.ldk.structs.TxAbort o) {
-		long ret = bindings.CResult_TxAbortDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_TxAbortDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_TxAbortDecodeErrorZ ret_hu_conv = Result_TxAbortDecodeErrorZ.constr_from_ptr(ret);

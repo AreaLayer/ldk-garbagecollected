@@ -122,6 +122,72 @@ public class UtilMethods {
 	}
 
 	/**
+	 * Extracts the block height (most significant 3-bytes) from the `short_channel_id`
+	 */
+	public static int block_from_scid(long short_channel_id) {
+		int ret = bindings.block_from_scid(short_channel_id);
+		GC.KeepAlive(short_channel_id);
+		return ret;
+	}
+
+	/**
+	 * Extracts the tx index (bytes [2..4]) from the `short_channel_id`
+	 */
+	public static int tx_index_from_scid(long short_channel_id) {
+		int ret = bindings.tx_index_from_scid(short_channel_id);
+		GC.KeepAlive(short_channel_id);
+		return ret;
+	}
+
+	/**
+	 * Extracts the vout (bytes [0..2]) from the `short_channel_id`
+	 */
+	public static short vout_from_scid(long short_channel_id) {
+		short ret = bindings.vout_from_scid(short_channel_id);
+		GC.KeepAlive(short_channel_id);
+		return ret;
+	}
+
+	/**
+	 * Constructs a `short_channel_id` using the components pieces. Results in an error
+	 * if the block height, tx index, or vout index overflow the maximum sizes.
+	 */
+	public static Result_u64ShortChannelIdErrorZ scid_from_parts(long block, long tx_index, long vout_index) {
+		long ret = bindings.scid_from_parts(block, tx_index, vout_index);
+		GC.KeepAlive(block);
+		GC.KeepAlive(tx_index);
+		GC.KeepAlive(vout_index);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_u64ShortChannelIdErrorZ ret_hu_conv = Result_u64ShortChannelIdErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Read a C2Tuple_BestBlockOutputSweeperZ from a byte array, created by C2Tuple_BestBlockOutputSweeperZ_write
+	 */
+	public static Result_C2Tuple_BestBlockOutputSweeperZDecodeErrorZ C2Tuple_BestBlockOutputSweeperZ_read(byte[] ser, org.ldk.structs.BroadcasterInterface arg_a, org.ldk.structs.FeeEstimator arg_b, org.ldk.structs.Option_FilterZ arg_c, org.ldk.structs.OutputSpender arg_d, org.ldk.structs.ChangeDestinationSource arg_e, org.ldk.structs.KVStore arg_f, org.ldk.structs.Logger arg_g) {
+		long ret = bindings.C2Tuple_BestBlockOutputSweeperZ_read(InternalUtils.encodeUint8Array(ser), arg_a.ptr, arg_b.ptr, arg_c.ptr, arg_d.ptr, arg_e.ptr, arg_f.ptr, arg_g.ptr);
+		GC.KeepAlive(ser);
+		GC.KeepAlive(arg_a);
+		GC.KeepAlive(arg_b);
+		GC.KeepAlive(arg_c);
+		GC.KeepAlive(arg_d);
+		GC.KeepAlive(arg_e);
+		GC.KeepAlive(arg_f);
+		GC.KeepAlive(arg_g);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_C2Tuple_BestBlockOutputSweeperZDecodeErrorZ ret_hu_conv = Result_C2Tuple_BestBlockOutputSweeperZDecodeErrorZ.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(arg_a); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(arg_b); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(arg_c); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(arg_d); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(arg_e); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(arg_f); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(arg_g); };
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Read a MonitorEvent from a byte array, created by MonitorEvent_write
 	 */
 	public static Result_COption_MonitorEventZDecodeErrorZ MonitorEvent_read(byte[] ser) {
@@ -159,7 +225,7 @@ public class UtilMethods {
 	 * [`Event::PaymentClaimable`]: crate::events::Event::PaymentClaimable
 	 */
 	public static Result_PendingHTLCInfoInboundHTLCErrZ peel_payment_onion(org.ldk.structs.UpdateAddHTLC msg, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.Logger logger, int cur_height, bool accept_mpp_keysend, bool allow_skimmed_fees) {
-		long ret = bindings.peel_payment_onion(msg == null ? 0 : msg.ptr, node_signer.ptr, logger.ptr, cur_height, accept_mpp_keysend, allow_skimmed_fees);
+		long ret = bindings.peel_payment_onion(msg.ptr, node_signer.ptr, logger.ptr, cur_height, accept_mpp_keysend, allow_skimmed_fees);
 		GC.KeepAlive(msg);
 		GC.KeepAlive(node_signer);
 		GC.KeepAlive(logger);
@@ -179,7 +245,7 @@ public class UtilMethods {
 	 * [`ChannelManager`].
 	 */
 	public static InitFeatures provided_init_features(org.ldk.structs.UserConfig config) {
-		long ret = bindings.provided_init_features(config == null ? 0 : config.ptr);
+		long ret = bindings.provided_init_features(config.ptr);
 		GC.KeepAlive(config);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.InitFeatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.InitFeatures(null, ret); }
@@ -192,7 +258,7 @@ public class UtilMethods {
 	 * Read a C2Tuple_ThirtyTwoBytesChannelManagerZ from a byte array, created by C2Tuple_ThirtyTwoBytesChannelManagerZ_write
 	 */
 	public static Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ C2Tuple_ThirtyTwoBytesChannelManagerZ_read(byte[] ser, EntropySource arg_entropy_source, NodeSigner arg_node_signer, SignerProvider arg_signer_provider, FeeEstimator arg_fee_estimator, Watch arg_chain_monitor, BroadcasterInterface arg_tx_broadcaster, Router arg_router, Logger arg_logger, UserConfig arg_default_config, ChannelMonitor[] arg_channel_monitors) {
-		long ret = bindings.C2Tuple_ThirtyTwoBytesChannelManagerZ_read(InternalUtils.encodeUint8Array(ser), bindings.ChannelManagerReadArgs_new(arg_entropy_source.ptr, arg_node_signer.ptr, arg_signer_provider.ptr, arg_fee_estimator.ptr, arg_chain_monitor.ptr, arg_tx_broadcaster.ptr, arg_router.ptr, arg_logger.ptr, arg_default_config == null ? 0 : arg_default_config.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(arg_channel_monitors, arg_channel_monitors_conv_16 => arg_channel_monitors_conv_16 == null ? 0 : arg_channel_monitors_conv_16.ptr))));
+		long ret = bindings.C2Tuple_ThirtyTwoBytesChannelManagerZ_read(InternalUtils.encodeUint8Array(ser), bindings.ChannelManagerReadArgs_new(arg_entropy_source.ptr, arg_node_signer.ptr, arg_signer_provider.ptr, arg_fee_estimator.ptr, arg_chain_monitor.ptr, arg_tx_broadcaster.ptr, arg_router.ptr, arg_logger.ptr, arg_default_config.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(arg_channel_monitors, arg_channel_monitors_conv_16 => arg_channel_monitors_conv_16.ptr))));
 		GC.KeepAlive(ser);
 		GC.KeepAlive(arg_entropy_source);
 		GC.KeepAlive(arg_node_signer);
@@ -220,6 +286,20 @@ public class UtilMethods {
 	}
 
 	/**
+	 * Adds a tweak to a public key to derive a new public key.
+	 * 
+	 * May panic if `tweak` is not the output of a SHA-256 hash.
+	 */
+	public static byte[] add_public_key_tweak(byte[] base_point, byte[] tweak) {
+		long ret = bindings.add_public_key_tweak(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(base_point, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(tweak, 32)));
+		GC.KeepAlive(base_point);
+		GC.KeepAlive(tweak);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
+		return ret_conv;
+	}
+
+	/**
 	 * Equivalent to [`crate::ln::channelmanager::ChannelManager::create_inbound_payment`], but no
 	 * `ChannelManager` is required. Useful for generating invoices for [phantom node payments] without
 	 * a `ChannelManager`.
@@ -237,7 +317,7 @@ public class UtilMethods {
 	 * [`NodeSigner::get_inbound_payment_key_material`]: crate::sign::NodeSigner::get_inbound_payment_key_material
 	 */
 	public static Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ create(org.ldk.structs.ExpandedKey keys, org.ldk.structs.Option_u64Z min_value_msat, int invoice_expiry_delta_secs, org.ldk.structs.EntropySource entropy_source, long current_time, org.ldk.structs.Option_u16Z min_final_cltv_expiry_delta) {
-		long ret = bindings.create(keys == null ? 0 : keys.ptr, min_value_msat.ptr, invoice_expiry_delta_secs, entropy_source.ptr, current_time, min_final_cltv_expiry_delta.ptr);
+		long ret = bindings.create(keys.ptr, min_value_msat.ptr, invoice_expiry_delta_secs, entropy_source.ptr, current_time, min_final_cltv_expiry_delta.ptr);
 		GC.KeepAlive(keys);
 		GC.KeepAlive(min_value_msat);
 		GC.KeepAlive(invoice_expiry_delta_secs);
@@ -266,7 +346,7 @@ public class UtilMethods {
 	 * [phantom node payments]: crate::sign::PhantomKeysManager
 	 */
 	public static Result_ThirtyTwoBytesNoneZ create_from_hash(org.ldk.structs.ExpandedKey keys, org.ldk.structs.Option_u64Z min_value_msat, byte[] payment_hash, int invoice_expiry_delta_secs, long current_time, org.ldk.structs.Option_u16Z min_final_cltv_expiry_delta) {
-		long ret = bindings.create_from_hash(keys == null ? 0 : keys.ptr, min_value_msat.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), invoice_expiry_delta_secs, current_time, min_final_cltv_expiry_delta.ptr);
+		long ret = bindings.create_from_hash(keys.ptr, min_value_msat.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), invoice_expiry_delta_secs, current_time, min_final_cltv_expiry_delta.ptr);
 		GC.KeepAlive(keys);
 		GC.KeepAlive(min_value_msat);
 		GC.KeepAlive(payment_hash);
@@ -299,7 +379,7 @@ public class UtilMethods {
 	 * Gets the weight for an HTLC-Success transaction.
 	 */
 	public static long htlc_success_tx_weight(org.ldk.structs.ChannelTypeFeatures channel_type_features) {
-		long ret = bindings.htlc_success_tx_weight(channel_type_features == null ? 0 : channel_type_features.ptr);
+		long ret = bindings.htlc_success_tx_weight(channel_type_features.ptr);
 		GC.KeepAlive(channel_type_features);
 		return ret;
 	}
@@ -308,7 +388,7 @@ public class UtilMethods {
 	 * Gets the weight for an HTLC-Timeout transaction.
 	 */
 	public static long htlc_timeout_tx_weight(org.ldk.structs.ChannelTypeFeatures channel_type_features) {
-		long ret = bindings.htlc_timeout_tx_weight(channel_type_features == null ? 0 : channel_type_features.ptr);
+		long ret = bindings.htlc_timeout_tx_weight(channel_type_features.ptr);
 		GC.KeepAlive(channel_type_features);
 		return ret;
 	}
@@ -341,7 +421,7 @@ public class UtilMethods {
 	 * Build a closing transaction
 	 */
 	public static byte[] build_closing_transaction(long to_holder_value_sat, long to_counterparty_value_sat, byte[] to_holder_script, byte[] to_counterparty_script, org.ldk.structs.OutPoint funding_outpoint) {
-		long ret = bindings.build_closing_transaction(to_holder_value_sat, to_counterparty_value_sat, InternalUtils.encodeUint8Array(to_holder_script), InternalUtils.encodeUint8Array(to_counterparty_script), funding_outpoint == null ? 0 : funding_outpoint.ptr);
+		long ret = bindings.build_closing_transaction(to_holder_value_sat, to_counterparty_value_sat, InternalUtils.encodeUint8Array(to_holder_script), InternalUtils.encodeUint8Array(to_counterparty_script), funding_outpoint.ptr);
 		GC.KeepAlive(to_holder_value_sat);
 		GC.KeepAlive(to_counterparty_value_sat);
 		GC.KeepAlive(to_holder_script);
@@ -388,7 +468,7 @@ public class UtilMethods {
 	 * Encumbering a `to_holder` output on a commitment transaction or 2nd-stage HTLC transactions.
 	 */
 	public static byte[] get_revokeable_redeemscript(org.ldk.structs.RevocationKey revocation_key, short contest_delay, org.ldk.structs.DelayedPaymentKey broadcaster_delayed_payment_key) {
-		long ret = bindings.get_revokeable_redeemscript(revocation_key == null ? 0 : revocation_key.ptr, contest_delay, broadcaster_delayed_payment_key == null ? 0 : broadcaster_delayed_payment_key.ptr);
+		long ret = bindings.get_revokeable_redeemscript(revocation_key.ptr, contest_delay, broadcaster_delayed_payment_key.ptr);
 		GC.KeepAlive(revocation_key);
 		GC.KeepAlive(contest_delay);
 		GC.KeepAlive(broadcaster_delayed_payment_key);
@@ -402,7 +482,7 @@ public class UtilMethods {
 	 * the channel type.
 	 */
 	public static byte[] get_counterparty_payment_script(org.ldk.structs.ChannelTypeFeatures channel_type_features, byte[] payment_key) {
-		long ret = bindings.get_counterparty_payment_script(channel_type_features == null ? 0 : channel_type_features.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_key, 33)));
+		long ret = bindings.get_counterparty_payment_script(channel_type_features.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_key, 33)));
 		GC.KeepAlive(channel_type_features);
 		GC.KeepAlive(payment_key);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -415,7 +495,7 @@ public class UtilMethods {
 	 * does not need to have its previous_output_index filled.
 	 */
 	public static byte[] get_htlc_redeemscript(org.ldk.structs.HTLCOutputInCommitment htlc, org.ldk.structs.ChannelTypeFeatures channel_type_features, org.ldk.structs.TxCreationKeys keys) {
-		long ret = bindings.get_htlc_redeemscript(htlc == null ? 0 : htlc.ptr, channel_type_features == null ? 0 : channel_type_features.ptr, keys == null ? 0 : keys.ptr);
+		long ret = bindings.get_htlc_redeemscript(htlc.ptr, channel_type_features.ptr, keys.ptr);
 		GC.KeepAlive(htlc);
 		GC.KeepAlive(channel_type_features);
 		GC.KeepAlive(keys);
@@ -447,7 +527,7 @@ public class UtilMethods {
 	 * commitment transaction).
 	 */
 	public static byte[] build_htlc_transaction(byte[] commitment_txid, int feerate_per_kw, short contest_delay, org.ldk.structs.HTLCOutputInCommitment htlc, org.ldk.structs.ChannelTypeFeatures channel_type_features, org.ldk.structs.DelayedPaymentKey broadcaster_delayed_payment_key, org.ldk.structs.RevocationKey revocation_key) {
-		long ret = bindings.build_htlc_transaction(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(commitment_txid, 32)), feerate_per_kw, contest_delay, htlc == null ? 0 : htlc.ptr, channel_type_features == null ? 0 : channel_type_features.ptr, broadcaster_delayed_payment_key == null ? 0 : broadcaster_delayed_payment_key.ptr, revocation_key == null ? 0 : revocation_key.ptr);
+		long ret = bindings.build_htlc_transaction(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(commitment_txid, 32)), feerate_per_kw, contest_delay, htlc.ptr, channel_type_features.ptr, broadcaster_delayed_payment_key.ptr, revocation_key.ptr);
 		GC.KeepAlive(commitment_txid);
 		GC.KeepAlive(feerate_per_kw);
 		GC.KeepAlive(contest_delay);
@@ -464,7 +544,7 @@ public class UtilMethods {
 	 * Returns the witness required to satisfy and spend a HTLC input.
 	 */
 	public static byte[] build_htlc_input_witness(byte[] local_sig, byte[] remote_sig, org.ldk.structs.Option_ThirtyTwoBytesZ preimage, byte[] redeem_script, org.ldk.structs.ChannelTypeFeatures channel_type_features) {
-		long ret = bindings.build_htlc_input_witness(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(local_sig, 64)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(remote_sig, 64)), preimage.ptr, InternalUtils.encodeUint8Array(redeem_script), channel_type_features == null ? 0 : channel_type_features.ptr);
+		long ret = bindings.build_htlc_input_witness(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(local_sig, 64)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(remote_sig, 64)), preimage.ptr, InternalUtils.encodeUint8Array(redeem_script), channel_type_features.ptr);
 		GC.KeepAlive(local_sig);
 		GC.KeepAlive(remote_sig);
 		GC.KeepAlive(preimage);
@@ -547,7 +627,7 @@ public class UtilMethods {
 	 * Returns an error if it is invalid.
 	 */
 	public static Result_NoneLightningErrorZ verify_node_announcement(org.ldk.structs.NodeAnnouncement msg) {
-		long ret = bindings.verify_node_announcement(msg == null ? 0 : msg.ptr);
+		long ret = bindings.verify_node_announcement(msg.ptr);
 		GC.KeepAlive(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneLightningErrorZ ret_hu_conv = Result_NoneLightningErrorZ.constr_from_ptr(ret);
@@ -561,7 +641,7 @@ public class UtilMethods {
 	 * Returns an error if one of the signatures is invalid.
 	 */
 	public static Result_NoneLightningErrorZ verify_channel_announcement(org.ldk.structs.ChannelAnnouncement msg) {
-		long ret = bindings.verify_channel_announcement(msg == null ? 0 : msg.ptr);
+		long ret = bindings.verify_channel_announcement(msg.ptr);
 		GC.KeepAlive(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneLightningErrorZ ret_hu_conv = Result_NoneLightningErrorZ.constr_from_ptr(ret);
@@ -599,7 +679,7 @@ public class UtilMethods {
 	 * Note that first_hops (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public static Result_RouteLightningErrorZ find_route(byte[] our_node_pubkey, org.ldk.structs.RouteParameters route_params, org.ldk.structs.NetworkGraph network_graph, ChannelDetails[] first_hops, org.ldk.structs.Logger logger, org.ldk.structs.ScoreLookUp scorer, org.ldk.structs.ProbabilisticScoringFeeParameters score_params, byte[] random_seed_bytes) {
-		long ret = bindings.find_route(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(our_node_pubkey, 33)), route_params == null ? 0 : route_params.ptr, network_graph == null ? 0 : network_graph.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(first_hops, first_hops_conv_16 => first_hops_conv_16 == null ? 0 : first_hops_conv_16.ptr)), logger.ptr, scorer.ptr, score_params == null ? 0 : score_params.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(random_seed_bytes, 32)));
+		long ret = bindings.find_route(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(our_node_pubkey, 33)), route_params.ptr, network_graph.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(first_hops, first_hops_conv_16 => first_hops_conv_16.ptr)), logger.ptr, scorer.ptr, score_params.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(random_seed_bytes, 32)));
 		GC.KeepAlive(our_node_pubkey);
 		GC.KeepAlive(route_params);
 		GC.KeepAlive(network_graph);
@@ -626,7 +706,7 @@ public class UtilMethods {
 	 * Re-uses logic from `find_route`, so the restrictions described there also apply here.
 	 */
 	public static Result_RouteLightningErrorZ build_route_from_hops(byte[] our_node_pubkey, byte[][] hops, org.ldk.structs.RouteParameters route_params, org.ldk.structs.NetworkGraph network_graph, org.ldk.structs.Logger logger, byte[] random_seed_bytes) {
-		long ret = bindings.build_route_from_hops(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(our_node_pubkey, 33)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(hops, hops_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(hops_conv_8, 33)))), route_params == null ? 0 : route_params.ptr, network_graph == null ? 0 : network_graph.ptr, logger.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(random_seed_bytes, 32)));
+		long ret = bindings.build_route_from_hops(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(our_node_pubkey, 33)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(hops, hops_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(hops_conv_8, 33)))), route_params.ptr, network_graph.ptr, logger.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(random_seed_bytes, 32)));
 		GC.KeepAlive(our_node_pubkey);
 		GC.KeepAlive(hops);
 		GC.KeepAlive(route_params);
@@ -675,17 +755,20 @@ public class UtilMethods {
 
 	/**
 	 * Creates an [`OnionMessage`] with the given `contents` for sending to the destination of
-	 * `path`.
+	 * `path`, first calling [`Destination::resolve`] on `path.destination` with the given
+	 * [`ReadOnlyNetworkGraph`].
 	 * 
 	 * Returns the node id of the peer to send the message to, the message itself, and any addresses
-	 * need to connect to the first node.
+	 * needed to connect to the first node.
 	 * 
 	 * Note that reply_path (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static Result_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ create_onion_message(org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.OnionMessagePath path, org.ldk.structs.OnionMessageContents contents, org.ldk.structs.BlindedPath reply_path) {
-		long ret = bindings.create_onion_message(entropy_source.ptr, node_signer.ptr, path == null ? 0 : path.ptr, contents.ptr, reply_path == null ? 0 : reply_path.ptr);
+	public static Result_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ create_onion_message_resolving_destination(org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.NodeIdLookUp node_id_lookup, org.ldk.structs.ReadOnlyNetworkGraph network_graph, org.ldk.structs.OnionMessagePath path, org.ldk.structs.OnionMessageContents contents, org.ldk.structs.BlindedPath reply_path) {
+		long ret = bindings.create_onion_message_resolving_destination(entropy_source.ptr, node_signer.ptr, node_id_lookup.ptr, network_graph.ptr, path.ptr, contents.ptr, reply_path == null ? 0 : reply_path.ptr);
 		GC.KeepAlive(entropy_source);
 		GC.KeepAlive(node_signer);
+		GC.KeepAlive(node_id_lookup);
+		GC.KeepAlive(network_graph);
 		GC.KeepAlive(path);
 		GC.KeepAlive(contents);
 		GC.KeepAlive(reply_path);
@@ -693,6 +776,42 @@ public class UtilMethods {
 		Result_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ ret_hu_conv = Result_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(entropy_source); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(node_signer); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(node_id_lookup); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(network_graph); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(path); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(contents); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(reply_path); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Creates an [`OnionMessage`] with the given `contents` for sending to the destination of
+	 * `path`.
+	 * 
+	 * Returns the node id of the peer to send the message to, the message itself, and any addresses
+	 * needed to connect to the first node.
+	 * 
+	 * Returns [`SendError::UnresolvedIntroductionNode`] if:
+	 * - `destination` contains a blinded path with an [`IntroductionNode::DirectedShortChannelId`],
+	 * - unless it can be resolved by [`NodeIdLookUp::next_node_id`].
+	 * Use [`create_onion_message_resolving_destination`] instead to resolve the introduction node
+	 * first with a [`ReadOnlyNetworkGraph`].
+	 * 
+	 * Note that reply_path (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	public static Result_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ create_onion_message(org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.NodeIdLookUp node_id_lookup, org.ldk.structs.OnionMessagePath path, org.ldk.structs.OnionMessageContents contents, org.ldk.structs.BlindedPath reply_path) {
+		long ret = bindings.create_onion_message(entropy_source.ptr, node_signer.ptr, node_id_lookup.ptr, path.ptr, contents.ptr, reply_path == null ? 0 : reply_path.ptr);
+		GC.KeepAlive(entropy_source);
+		GC.KeepAlive(node_signer);
+		GC.KeepAlive(node_id_lookup);
+		GC.KeepAlive(path);
+		GC.KeepAlive(contents);
+		GC.KeepAlive(reply_path);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ ret_hu_conv = Result_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(entropy_source); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(node_signer); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(node_id_lookup); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(path); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(contents); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(reply_path); };
@@ -706,7 +825,7 @@ public class UtilMethods {
 	 * receiver.
 	 */
 	public static Result_PeeledOnionNoneZ peel_onion_message(org.ldk.structs.OnionMessage msg, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.Logger logger, org.ldk.structs.CustomOnionMessageHandler custom_handler) {
-		long ret = bindings.peel_onion_message(msg == null ? 0 : msg.ptr, node_signer.ptr, logger.ptr, custom_handler.ptr);
+		long ret = bindings.peel_onion_message(msg.ptr, node_signer.ptr, logger.ptr, custom_handler.ptr);
 		GC.KeepAlive(msg);
 		GC.KeepAlive(node_signer);
 		GC.KeepAlive(logger);
@@ -732,10 +851,11 @@ public class UtilMethods {
 	/**
 	 * Create a one-hop blinded path for a payment.
 	 */
-	public static Result_C2Tuple_BlindedPayInfoBlindedPathZNoneZ BlindedPath_one_hop_for_payment(byte[] payee_node_id, org.ldk.structs.ReceiveTlvs payee_tlvs, org.ldk.structs.EntropySource entropy_source) {
-		long ret = bindings.BlindedPath_one_hop_for_payment(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payee_node_id, 33)), payee_tlvs == null ? 0 : payee_tlvs.ptr, entropy_source.ptr);
+	public static Result_C2Tuple_BlindedPayInfoBlindedPathZNoneZ BlindedPath_one_hop_for_payment(byte[] payee_node_id, org.ldk.structs.ReceiveTlvs payee_tlvs, short min_final_cltv_expiry_delta, org.ldk.structs.EntropySource entropy_source) {
+		long ret = bindings.BlindedPath_one_hop_for_payment(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payee_node_id, 33)), payee_tlvs.ptr, min_final_cltv_expiry_delta, entropy_source.ptr);
 		GC.KeepAlive(payee_node_id);
 		GC.KeepAlive(payee_tlvs);
+		GC.KeepAlive(min_final_cltv_expiry_delta);
 		GC.KeepAlive(entropy_source);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_C2Tuple_BlindedPayInfoBlindedPathZNoneZ ret_hu_conv = Result_C2Tuple_BlindedPayInfoBlindedPathZNoneZ.constr_from_ptr(ret);
@@ -754,12 +874,13 @@ public class UtilMethods {
 	 * 
 	 * [`ForwardTlvs`]: crate::blinded_path::payment::ForwardTlvs
 	 */
-	public static Result_C2Tuple_BlindedPayInfoBlindedPathZNoneZ BlindedPath_new_for_payment(ForwardNode[] intermediate_nodes, byte[] payee_node_id, org.ldk.structs.ReceiveTlvs payee_tlvs, long htlc_maximum_msat, org.ldk.structs.EntropySource entropy_source) {
-		long ret = bindings.BlindedPath_new_for_payment(InternalUtils.encodeUint64Array(InternalUtils.mapArray(intermediate_nodes, intermediate_nodes_conv_13 => intermediate_nodes_conv_13 == null ? 0 : intermediate_nodes_conv_13.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payee_node_id, 33)), payee_tlvs == null ? 0 : payee_tlvs.ptr, htlc_maximum_msat, entropy_source.ptr);
+	public static Result_C2Tuple_BlindedPayInfoBlindedPathZNoneZ BlindedPath_new_for_payment(ForwardNode[] intermediate_nodes, byte[] payee_node_id, org.ldk.structs.ReceiveTlvs payee_tlvs, long htlc_maximum_msat, short min_final_cltv_expiry_delta, org.ldk.structs.EntropySource entropy_source) {
+		long ret = bindings.BlindedPath_new_for_payment(InternalUtils.encodeUint64Array(InternalUtils.mapArray(intermediate_nodes, intermediate_nodes_conv_13 => intermediate_nodes_conv_13.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payee_node_id, 33)), payee_tlvs.ptr, htlc_maximum_msat, min_final_cltv_expiry_delta, entropy_source.ptr);
 		GC.KeepAlive(intermediate_nodes);
 		GC.KeepAlive(payee_node_id);
 		GC.KeepAlive(payee_tlvs);
 		GC.KeepAlive(htlc_maximum_msat);
+		GC.KeepAlive(min_final_cltv_expiry_delta);
 		GC.KeepAlive(entropy_source);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_C2Tuple_BlindedPayInfoBlindedPathZNoneZ ret_hu_conv = Result_C2Tuple_BlindedPayInfoBlindedPathZNoneZ.constr_from_ptr(ret);
@@ -828,7 +949,7 @@ public class UtilMethods {
 	 * [`ChannelManager::send_preflight_probes`]: lightning::ln::channelmanager::ChannelManager::send_preflight_probes
 	 */
 	public static Result_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ payment_parameters_from_zero_amount_invoice(org.ldk.structs.Bolt11Invoice invoice, long amount_msat) {
-		long ret = bindings.payment_parameters_from_zero_amount_invoice(invoice == null ? 0 : invoice.ptr, amount_msat);
+		long ret = bindings.payment_parameters_from_zero_amount_invoice(invoice.ptr, amount_msat);
 		GC.KeepAlive(invoice);
 		GC.KeepAlive(amount_msat);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -851,7 +972,7 @@ public class UtilMethods {
 	 * [`ChannelManager::send_preflight_probes`]: lightning::ln::channelmanager::ChannelManager::send_preflight_probes
 	 */
 	public static Result_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ payment_parameters_from_invoice(org.ldk.structs.Bolt11Invoice invoice) {
-		long ret = bindings.payment_parameters_from_invoice(invoice == null ? 0 : invoice.ptr);
+		long ret = bindings.payment_parameters_from_invoice(invoice.ptr);
 		GC.KeepAlive(invoice);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ ret_hu_conv = Result_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ.constr_from_ptr(ret);
@@ -902,7 +1023,7 @@ public class UtilMethods {
 	 * available and the current time is supplied by the caller.
 	 */
 	public static Result_Bolt11InvoiceSignOrCreationErrorZ create_phantom_invoice(org.ldk.structs.Option_u64Z amt_msat, org.ldk.structs.Option_ThirtyTwoBytesZ payment_hash, string description, int invoice_expiry_delta_secs, PhantomRouteHints[] phantom_route_hints, org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.Logger logger, Currency network, org.ldk.structs.Option_u16Z min_final_cltv_expiry_delta, long duration_since_epoch) {
-		long ret = bindings.create_phantom_invoice(amt_msat.ptr, payment_hash.ptr, InternalUtils.encodeString(description), invoice_expiry_delta_secs, InternalUtils.encodeUint64Array(InternalUtils.mapArray(phantom_route_hints, phantom_route_hints_conv_19 => phantom_route_hints_conv_19 == null ? 0 : phantom_route_hints_conv_19.ptr)), entropy_source.ptr, node_signer.ptr, logger.ptr, network, min_final_cltv_expiry_delta.ptr, duration_since_epoch);
+		long ret = bindings.create_phantom_invoice(amt_msat.ptr, payment_hash.ptr, InternalUtils.encodeString(description), invoice_expiry_delta_secs, InternalUtils.encodeUint64Array(InternalUtils.mapArray(phantom_route_hints, phantom_route_hints_conv_19 => phantom_route_hints_conv_19.ptr)), entropy_source.ptr, node_signer.ptr, logger.ptr, network, min_final_cltv_expiry_delta.ptr, duration_since_epoch);
 		GC.KeepAlive(amt_msat);
 		GC.KeepAlive(payment_hash);
 		GC.KeepAlive(description);
@@ -967,7 +1088,7 @@ public class UtilMethods {
 	 * available and the current time is supplied by the caller.
 	 */
 	public static Result_Bolt11InvoiceSignOrCreationErrorZ create_phantom_invoice_with_description_hash(org.ldk.structs.Option_u64Z amt_msat, org.ldk.structs.Option_ThirtyTwoBytesZ payment_hash, int invoice_expiry_delta_secs, org.ldk.structs.Sha256 description_hash, PhantomRouteHints[] phantom_route_hints, org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.Logger logger, Currency network, org.ldk.structs.Option_u16Z min_final_cltv_expiry_delta, long duration_since_epoch) {
-		long ret = bindings.create_phantom_invoice_with_description_hash(amt_msat.ptr, payment_hash.ptr, invoice_expiry_delta_secs, description_hash == null ? 0 : description_hash.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(phantom_route_hints, phantom_route_hints_conv_19 => phantom_route_hints_conv_19 == null ? 0 : phantom_route_hints_conv_19.ptr)), entropy_source.ptr, node_signer.ptr, logger.ptr, network, min_final_cltv_expiry_delta.ptr, duration_since_epoch);
+		long ret = bindings.create_phantom_invoice_with_description_hash(amt_msat.ptr, payment_hash.ptr, invoice_expiry_delta_secs, description_hash.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(phantom_route_hints, phantom_route_hints_conv_19 => phantom_route_hints_conv_19.ptr)), entropy_source.ptr, node_signer.ptr, logger.ptr, network, min_final_cltv_expiry_delta.ptr, duration_since_epoch);
 		GC.KeepAlive(amt_msat);
 		GC.KeepAlive(payment_hash);
 		GC.KeepAlive(invoice_expiry_delta_secs);
@@ -1010,7 +1131,7 @@ public class UtilMethods {
 	 * [`MIN_FINAL_CLTV_EXPIRY_DETLA`]: lightning::ln::channelmanager::MIN_FINAL_CLTV_EXPIRY_DELTA
 	 */
 	public static Result_Bolt11InvoiceSignOrCreationErrorZ create_invoice_from_channelmanager(org.ldk.structs.ChannelManager channelmanager, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.Logger logger, Currency network, org.ldk.structs.Option_u64Z amt_msat, string description, int invoice_expiry_delta_secs, org.ldk.structs.Option_u16Z min_final_cltv_expiry_delta) {
-		long ret = bindings.create_invoice_from_channelmanager(channelmanager == null ? 0 : channelmanager.ptr, node_signer.ptr, logger.ptr, network, amt_msat.ptr, InternalUtils.encodeString(description), invoice_expiry_delta_secs, min_final_cltv_expiry_delta.ptr);
+		long ret = bindings.create_invoice_from_channelmanager(channelmanager.ptr, node_signer.ptr, logger.ptr, network, amt_msat.ptr, InternalUtils.encodeString(description), invoice_expiry_delta_secs, min_final_cltv_expiry_delta.ptr);
 		GC.KeepAlive(channelmanager);
 		GC.KeepAlive(node_signer);
 		GC.KeepAlive(logger);
@@ -1048,7 +1169,7 @@ public class UtilMethods {
 	 * [`MIN_FINAL_CLTV_EXPIRY_DETLA`]: lightning::ln::channelmanager::MIN_FINAL_CLTV_EXPIRY_DELTA
 	 */
 	public static Result_Bolt11InvoiceSignOrCreationErrorZ create_invoice_from_channelmanager_with_description_hash(org.ldk.structs.ChannelManager channelmanager, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.Logger logger, Currency network, org.ldk.structs.Option_u64Z amt_msat, org.ldk.structs.Sha256 description_hash, int invoice_expiry_delta_secs, org.ldk.structs.Option_u16Z min_final_cltv_expiry_delta) {
-		long ret = bindings.create_invoice_from_channelmanager_with_description_hash(channelmanager == null ? 0 : channelmanager.ptr, node_signer.ptr, logger.ptr, network, amt_msat.ptr, description_hash == null ? 0 : description_hash.ptr, invoice_expiry_delta_secs, min_final_cltv_expiry_delta.ptr);
+		long ret = bindings.create_invoice_from_channelmanager_with_description_hash(channelmanager.ptr, node_signer.ptr, logger.ptr, network, amt_msat.ptr, description_hash.ptr, invoice_expiry_delta_secs, min_final_cltv_expiry_delta.ptr);
 		GC.KeepAlive(channelmanager);
 		GC.KeepAlive(node_signer);
 		GC.KeepAlive(logger);
@@ -1074,7 +1195,7 @@ public class UtilMethods {
 	 * available and the current time is supplied by the caller.
 	 */
 	public static Result_Bolt11InvoiceSignOrCreationErrorZ create_invoice_from_channelmanager_with_description_hash_and_duration_since_epoch(org.ldk.structs.ChannelManager channelmanager, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.Logger logger, Currency network, org.ldk.structs.Option_u64Z amt_msat, org.ldk.structs.Sha256 description_hash, long duration_since_epoch, int invoice_expiry_delta_secs, org.ldk.structs.Option_u16Z min_final_cltv_expiry_delta) {
-		long ret = bindings.create_invoice_from_channelmanager_with_description_hash_and_duration_since_epoch(channelmanager == null ? 0 : channelmanager.ptr, node_signer.ptr, logger.ptr, network, amt_msat.ptr, description_hash == null ? 0 : description_hash.ptr, duration_since_epoch, invoice_expiry_delta_secs, min_final_cltv_expiry_delta.ptr);
+		long ret = bindings.create_invoice_from_channelmanager_with_description_hash_and_duration_since_epoch(channelmanager.ptr, node_signer.ptr, logger.ptr, network, amt_msat.ptr, description_hash.ptr, duration_since_epoch, invoice_expiry_delta_secs, min_final_cltv_expiry_delta.ptr);
 		GC.KeepAlive(channelmanager);
 		GC.KeepAlive(node_signer);
 		GC.KeepAlive(logger);
@@ -1101,7 +1222,7 @@ public class UtilMethods {
 	 * available and the current time is supplied by the caller.
 	 */
 	public static Result_Bolt11InvoiceSignOrCreationErrorZ create_invoice_from_channelmanager_and_duration_since_epoch(org.ldk.structs.ChannelManager channelmanager, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.Logger logger, Currency network, org.ldk.structs.Option_u64Z amt_msat, string description, long duration_since_epoch, int invoice_expiry_delta_secs, org.ldk.structs.Option_u16Z min_final_cltv_expiry_delta) {
-		long ret = bindings.create_invoice_from_channelmanager_and_duration_since_epoch(channelmanager == null ? 0 : channelmanager.ptr, node_signer.ptr, logger.ptr, network, amt_msat.ptr, InternalUtils.encodeString(description), duration_since_epoch, invoice_expiry_delta_secs, min_final_cltv_expiry_delta.ptr);
+		long ret = bindings.create_invoice_from_channelmanager_and_duration_since_epoch(channelmanager.ptr, node_signer.ptr, logger.ptr, network, amt_msat.ptr, InternalUtils.encodeString(description), duration_since_epoch, invoice_expiry_delta_secs, min_final_cltv_expiry_delta.ptr);
 		GC.KeepAlive(channelmanager);
 		GC.KeepAlive(node_signer);
 		GC.KeepAlive(logger);
@@ -1128,7 +1249,7 @@ public class UtilMethods {
 	 * the payment hash is also involved outside the scope of lightning.
 	 */
 	public static Result_Bolt11InvoiceSignOrCreationErrorZ create_invoice_from_channelmanager_and_duration_since_epoch_with_payment_hash(org.ldk.structs.ChannelManager channelmanager, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.Logger logger, Currency network, org.ldk.structs.Option_u64Z amt_msat, string description, long duration_since_epoch, int invoice_expiry_delta_secs, byte[] payment_hash, org.ldk.structs.Option_u16Z min_final_cltv_expiry_delta) {
-		long ret = bindings.create_invoice_from_channelmanager_and_duration_since_epoch_with_payment_hash(channelmanager == null ? 0 : channelmanager.ptr, node_signer.ptr, logger.ptr, network, amt_msat.ptr, InternalUtils.encodeString(description), duration_since_epoch, invoice_expiry_delta_secs, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), min_final_cltv_expiry_delta.ptr);
+		long ret = bindings.create_invoice_from_channelmanager_and_duration_since_epoch_with_payment_hash(channelmanager.ptr, node_signer.ptr, logger.ptr, network, amt_msat.ptr, InternalUtils.encodeString(description), duration_since_epoch, invoice_expiry_delta_secs, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), min_final_cltv_expiry_delta.ptr);
 		GC.KeepAlive(channelmanager);
 		GC.KeepAlive(node_signer);
 		GC.KeepAlive(logger);

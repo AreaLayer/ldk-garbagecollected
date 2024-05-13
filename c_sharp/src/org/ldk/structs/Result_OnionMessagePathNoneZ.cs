@@ -37,7 +37,7 @@ public class Result_OnionMessagePathNoneZ : CommonBase {
 	 * Creates a new CResult_OnionMessagePathNoneZ in the success state.
 	 */
 	public static Result_OnionMessagePathNoneZ ok(org.ldk.structs.OnionMessagePath o) {
-		long ret = bindings.CResult_OnionMessagePathNoneZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_OnionMessagePathNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_OnionMessagePathNoneZ ret_hu_conv = Result_OnionMessagePathNoneZ.constr_from_ptr(ret);

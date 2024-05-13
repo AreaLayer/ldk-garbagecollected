@@ -28,7 +28,7 @@ public class Bolt11Invoice : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.Bolt11Invoice b) {
-		bool ret = bindings.Bolt11Invoice_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.Bolt11Invoice_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };
@@ -127,7 +127,7 @@ public class Bolt11Invoice : CommonBase {
 	 * ```
 	 */
 	public static Result_Bolt11InvoiceBolt11SemanticErrorZ from_signed(org.ldk.structs.SignedRawBolt11Invoice signed_invoice) {
-		long ret = bindings.Bolt11Invoice_from_signed(signed_invoice == null ? 0 : signed_invoice.ptr);
+		long ret = bindings.Bolt11Invoice_from_signed(signed_invoice.ptr);
 		GC.KeepAlive(signed_invoice);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_Bolt11InvoiceBolt11SemanticErrorZ ret_hu_conv = Result_Bolt11InvoiceBolt11SemanticErrorZ.constr_from_ptr(ret);
@@ -219,6 +219,18 @@ public class Bolt11Invoice : CommonBase {
 	 */
 	public byte[] recover_payee_pub_key() {
 		long ret = bindings.Bolt11Invoice_recover_payee_pub_key(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
+		return ret_conv;
+	}
+
+	/**
+	 * Recover the payee's public key if one was included in the invoice, otherwise return the
+	 * recovered public key from the signature
+	 */
+	public byte[] get_payee_pub_key() {
+		long ret = bindings.Bolt11Invoice_get_payee_pub_key(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);

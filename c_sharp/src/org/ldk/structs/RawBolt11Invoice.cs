@@ -35,7 +35,7 @@ public class RawBolt11Invoice : CommonBase {
 	 * data part
 	 */
 	public void set_data(org.ldk.structs.RawDataPart val) {
-		bindings.RawBolt11Invoice_set_data(this.ptr, val == null ? 0 : val.ptr);
+		bindings.RawBolt11Invoice_set_data(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -47,7 +47,7 @@ public class RawBolt11Invoice : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.RawBolt11Invoice b) {
-		bool ret = bindings.RawBolt11Invoice_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.RawBolt11Invoice_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };
@@ -217,6 +217,9 @@ public class RawBolt11Invoice : CommonBase {
 		return ret_conv_14_arr;
 	}
 
+	/**
+	 * Returns `None` if no amount is set or on overflow.
+	 */
 	public Option_u64Z amount_pico_btc() {
 		long ret = bindings.RawBolt11Invoice_amount_pico_btc(this.ptr);
 		GC.KeepAlive(this);

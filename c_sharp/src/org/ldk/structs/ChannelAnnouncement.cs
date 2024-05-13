@@ -113,7 +113,7 @@ public class ChannelAnnouncement : CommonBase {
 	 * The actual announcement
 	 */
 	public void set_contents(org.ldk.structs.UnsignedChannelAnnouncement val) {
-		bindings.ChannelAnnouncement_set_contents(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChannelAnnouncement_set_contents(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -123,7 +123,7 @@ public class ChannelAnnouncement : CommonBase {
 	 * Constructs a new ChannelAnnouncement given each field
 	 */
 	public static ChannelAnnouncement of(byte[] node_signature_1_arg, byte[] node_signature_2_arg, byte[] bitcoin_signature_1_arg, byte[] bitcoin_signature_2_arg, org.ldk.structs.UnsignedChannelAnnouncement contents_arg) {
-		long ret = bindings.ChannelAnnouncement_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_signature_1_arg, 64)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_signature_2_arg, 64)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(bitcoin_signature_1_arg, 64)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(bitcoin_signature_2_arg, 64)), contents_arg == null ? 0 : contents_arg.ptr);
+		long ret = bindings.ChannelAnnouncement_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_signature_1_arg, 64)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_signature_2_arg, 64)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(bitcoin_signature_1_arg, 64)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(bitcoin_signature_2_arg, 64)), contents_arg.ptr);
 		GC.KeepAlive(node_signature_1_arg);
 		GC.KeepAlive(node_signature_2_arg);
 		GC.KeepAlive(bitcoin_signature_1_arg);
@@ -172,7 +172,7 @@ public class ChannelAnnouncement : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.ChannelAnnouncement b) {
-		bool ret = bindings.ChannelAnnouncement_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.ChannelAnnouncement_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

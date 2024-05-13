@@ -37,7 +37,7 @@ public class Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ : CommonBase {
 	 * Creates a new CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ in the success state.
 	 */
 	public static Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ ok(org.ldk.structs.TwoTuple_ThirtyTwoBytesThirtyTwoBytesZ o) {
-		long ret = bindings.CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ_ok(o != null ? o.ptr : 0);
+		long ret = bindings.CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ ret_hu_conv = Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ.constr_from_ptr(ret);

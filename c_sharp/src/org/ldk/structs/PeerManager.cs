@@ -67,31 +67,40 @@ public class PeerManager : CommonBase {
 	}
 
 	/**
-	 * Get a list of tuples mapping from node id to network addresses for peers which have
-	 * completed the initial handshake.
-	 * 
-	 * For outbound connections, the [`PublicKey`] will be the same as the `their_node_id` parameter
-	 * passed in to [`Self::new_outbound_connection`], however entries will only appear once the initial
-	 * handshake has completed and we are sure the remote peer has the private key for the given
-	 * [`PublicKey`].
-	 * 
-	 * The returned `Option`s will only be `Some` if an address had been previously given via
-	 * [`Self::new_outbound_connection`] or [`Self::new_inbound_connection`].
+	 * Returns a list of [`PeerDetails`] for connected peers that have completed the initial
+	 * handshake.
 	 */
-	public TwoTuple_PublicKeyCOption_SocketAddressZZ[] get_peer_node_ids() {
-		long ret = bindings.PeerManager_get_peer_node_ids(this.ptr);
+	public PeerDetails[] list_peers() {
+		long ret = bindings.PeerManager_list_peers(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		int ret_conv_43_len = InternalUtils.getArrayLength(ret);
-		TwoTuple_PublicKeyCOption_SocketAddressZZ[] ret_conv_43_arr = new TwoTuple_PublicKeyCOption_SocketAddressZZ[ret_conv_43_len];
-		for (int r = 0; r < ret_conv_43_len; r++) {
-			long ret_conv_43 = InternalUtils.getU64ArrayElem(ret, r);
-			TwoTuple_PublicKeyCOption_SocketAddressZZ ret_conv_43_hu_conv = new TwoTuple_PublicKeyCOption_SocketAddressZZ(null, ret_conv_43);
-			if (ret_conv_43_hu_conv != null) { ret_conv_43_hu_conv.ptrs_to.AddLast(this); };
-			ret_conv_43_arr[r] = ret_conv_43_hu_conv;
+		int ret_conv_13_len = InternalUtils.getArrayLength(ret);
+		PeerDetails[] ret_conv_13_arr = new PeerDetails[ret_conv_13_len];
+		for (int n = 0; n < ret_conv_13_len; n++) {
+			long ret_conv_13 = InternalUtils.getU64ArrayElem(ret, n);
+			org.ldk.structs.PeerDetails ret_conv_13_hu_conv = null; if (ret_conv_13 < 0 || ret_conv_13 > 4096) { ret_conv_13_hu_conv = new org.ldk.structs.PeerDetails(null, ret_conv_13); }
+			if (ret_conv_13_hu_conv != null) { ret_conv_13_hu_conv.ptrs_to.AddLast(this); };
+			ret_conv_13_arr[n] = ret_conv_13_hu_conv;
 		}
 		bindings.free_buffer(ret);
-		return ret_conv_43_arr;
+		return ret_conv_13_arr;
+	}
+
+	/**
+	 * Returns the [`PeerDetails`] of a connected peer that has completed the initial handshake.
+	 * 
+	 * Will return `None` if the peer is unknown or it hasn't completed the initial handshake.
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	public PeerDetails peer_by_node_id(byte[] their_node_id) {
+		long ret = bindings.PeerManager_peer_by_node_id(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)));
+		GC.KeepAlive(this);
+		GC.KeepAlive(their_node_id);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.PeerDetails ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.PeerDetails(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
 	}
 
 	/**

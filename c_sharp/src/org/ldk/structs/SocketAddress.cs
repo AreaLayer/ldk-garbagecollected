@@ -190,7 +190,7 @@ public class SocketAddress : CommonBase {
 	 * Utility method to constructs a new Hostname-variant SocketAddress
 	 */
 	public static SocketAddress hostname(org.ldk.structs.Hostname hostname, short port) {
-		long ret = bindings.SocketAddress_hostname(hostname == null ? 0 : hostname.ptr, port);
+		long ret = bindings.SocketAddress_hostname(hostname.ptr, port);
 		GC.KeepAlive(hostname);
 		GC.KeepAlive(port);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -217,7 +217,7 @@ public class SocketAddress : CommonBase {
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public bool eq(org.ldk.structs.SocketAddress b) {
-		bool ret = bindings.SocketAddress_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.SocketAddress_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		return ret;

@@ -37,7 +37,7 @@ public class Result_RecipientOnionFieldsNoneZ : CommonBase {
 	 * Creates a new CResult_RecipientOnionFieldsNoneZ in the success state.
 	 */
 	public static Result_RecipientOnionFieldsNoneZ ok(org.ldk.structs.RecipientOnionFields o) {
-		long ret = bindings.CResult_RecipientOnionFieldsNoneZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_RecipientOnionFieldsNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RecipientOnionFieldsNoneZ ret_hu_conv = Result_RecipientOnionFieldsNoneZ.constr_from_ptr(ret);

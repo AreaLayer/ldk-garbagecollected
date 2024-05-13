@@ -42,7 +42,7 @@ public class Result_TxInitRbfDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_TxInitRbfDecodeErrorZ in the success state.
 	 */
 	public static Result_TxInitRbfDecodeErrorZ ok(org.ldk.structs.TxInitRbf o) {
-		long ret = bindings.CResult_TxInitRbfDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_TxInitRbfDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_TxInitRbfDecodeErrorZ ret_hu_conv = Result_TxInitRbfDecodeErrorZ.constr_from_ptr(ret);

@@ -37,7 +37,7 @@ public class Result_BlindedPathNoneZ : CommonBase {
 	 * Creates a new CResult_BlindedPathNoneZ in the success state.
 	 */
 	public static Result_BlindedPathNoneZ ok(org.ldk.structs.BlindedPath o) {
-		long ret = bindings.CResult_BlindedPathNoneZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_BlindedPathNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_BlindedPathNoneZ ret_hu_conv = Result_BlindedPathNoneZ.constr_from_ptr(ret);

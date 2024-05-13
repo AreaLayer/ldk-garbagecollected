@@ -146,7 +146,7 @@ public class Confirm : CommonBase {
 		public long get_relevant_txids() {
 			ThreeTuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ[] ret = arg.get_relevant_txids();
 				GC.KeepAlive(arg);
-			long result = InternalUtils.encodeUint64Array(InternalUtils.mapArray(ret, ret_conv_54 => ret_conv_54 == null ? 0 : ret_conv_54.clone_ptr()));
+			long result = InternalUtils.encodeUint64Array(InternalUtils.mapArray(ret, ret_conv_54 => ret_conv_54.clone_ptr()));
 			return result;
 		}
 	}
@@ -179,7 +179,7 @@ public class Confirm : CommonBase {
 	 * [`best_block_updated`]: Self::best_block_updated
 	 */
 	public void transactions_confirmed(byte[] header, TwoTuple_usizeTransactionZ[] txdata, int height) {
-		bindings.Confirm_transactions_confirmed(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(header, 80)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(txdata, txdata_conv_28 => txdata_conv_28 != null ? txdata_conv_28.ptr : 0)), height);
+		bindings.Confirm_transactions_confirmed(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(header, 80)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(txdata, txdata_conv_28 => txdata_conv_28.ptr)), height);
 		GC.KeepAlive(this);
 		GC.KeepAlive(header);
 		GC.KeepAlive(txdata);

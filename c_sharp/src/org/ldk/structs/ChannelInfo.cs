@@ -32,7 +32,7 @@ public class ChannelInfo : CommonBase {
 	 * Protocol features of a channel communicated during its announcement
 	 */
 	public void set_features(org.ldk.structs.ChannelFeatures val) {
-		bindings.ChannelInfo_set_features(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChannelInfo_set_features(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -54,7 +54,7 @@ public class ChannelInfo : CommonBase {
 	 * Source node of the first direction of a channel
 	 */
 	public void set_node_one(org.ldk.structs.NodeId val) {
-		bindings.ChannelInfo_set_node_one(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChannelInfo_set_node_one(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -102,7 +102,7 @@ public class ChannelInfo : CommonBase {
 	 * Source node of the second direction of a channel
 	 */
 	public void set_node_two(org.ldk.structs.NodeId val) {
-		bindings.ChannelInfo_set_node_two(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChannelInfo_set_node_two(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -212,7 +212,7 @@ public class ChannelInfo : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.ChannelInfo b) {
-		bool ret = bindings.ChannelInfo_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.ChannelInfo_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

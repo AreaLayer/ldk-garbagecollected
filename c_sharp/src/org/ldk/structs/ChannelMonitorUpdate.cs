@@ -67,6 +67,38 @@ public class ChannelMonitorUpdate : CommonBase {
 		GC.KeepAlive(val);
 	}
 
+	/**
+	 * The channel ID associated with these updates.
+	 * 
+	 * Will be `None` for `ChannelMonitorUpdate`s constructed on LDK versions prior to 0.0.121 and
+	 * always `Some` otherwise.
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	public ChannelId get_channel_id() {
+		long ret = bindings.ChannelMonitorUpdate_get_channel_id(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * The channel ID associated with these updates.
+	 * 
+	 * Will be `None` for `ChannelMonitorUpdate`s constructed on LDK versions prior to 0.0.121 and
+	 * always `Some` otherwise.
+	 * 
+	 * Note that val (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	public void set_channel_id(org.ldk.structs.ChannelId val) {
+		bindings.ChannelMonitorUpdate_set_channel_id(this.ptr, val == null ? 0 : val.ptr);
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
+		if (this != null) { this.ptrs_to.AddLast(val); };
+	}
+
 	internal long clone_ptr() {
 		long ret = bindings.ChannelMonitorUpdate_clone_ptr(this.ptr);
 		GC.KeepAlive(this);
@@ -91,7 +123,7 @@ public class ChannelMonitorUpdate : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.ChannelMonitorUpdate b) {
-		bool ret = bindings.ChannelMonitorUpdate_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.ChannelMonitorUpdate_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

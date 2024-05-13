@@ -37,7 +37,7 @@ public class Result_TrustedClosingTransactionNoneZ : CommonBase {
 	 * Creates a new CResult_TrustedClosingTransactionNoneZ in the success state.
 	 */
 	public static Result_TrustedClosingTransactionNoneZ ok(org.ldk.structs.TrustedClosingTransaction o) {
-		long ret = bindings.CResult_TrustedClosingTransactionNoneZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_TrustedClosingTransactionNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_TrustedClosingTransactionNoneZ ret_hu_conv = Result_TrustedClosingTransactionNoneZ.constr_from_ptr(ret);

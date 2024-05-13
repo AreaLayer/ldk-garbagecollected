@@ -45,7 +45,7 @@ public class BlindedTail : CommonBase {
 	 * [`BlindedPath`]: crate::blinded_path::BlindedPath
 	 */
 	public void set_hops(BlindedHop[] val) {
-		bindings.BlindedTail_set_hops(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_12 => val_conv_12 == null ? 0 : val_conv_12.ptr)));
+		bindings.BlindedTail_set_hops(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_12 => val_conv_12.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		foreach (BlindedHop val_conv_12 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_12); }; };
@@ -117,7 +117,7 @@ public class BlindedTail : CommonBase {
 	 * Constructs a new BlindedTail given each field
 	 */
 	public static BlindedTail of(BlindedHop[] hops_arg, byte[] blinding_point_arg, int excess_final_cltv_expiry_delta_arg, long final_value_msat_arg) {
-		long ret = bindings.BlindedTail_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(hops_arg, hops_arg_conv_12 => hops_arg_conv_12 == null ? 0 : hops_arg_conv_12.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(blinding_point_arg, 33)), excess_final_cltv_expiry_delta_arg, final_value_msat_arg);
+		long ret = bindings.BlindedTail_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(hops_arg, hops_arg_conv_12 => hops_arg_conv_12.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(blinding_point_arg, 33)), excess_final_cltv_expiry_delta_arg, final_value_msat_arg);
 		GC.KeepAlive(hops_arg);
 		GC.KeepAlive(blinding_point_arg);
 		GC.KeepAlive(excess_final_cltv_expiry_delta_arg);
@@ -165,7 +165,7 @@ public class BlindedTail : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.BlindedTail b) {
-		bool ret = bindings.BlindedTail_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.BlindedTail_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

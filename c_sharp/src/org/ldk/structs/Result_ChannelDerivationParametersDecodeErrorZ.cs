@@ -42,7 +42,7 @@ public class Result_ChannelDerivationParametersDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_ChannelDerivationParametersDecodeErrorZ in the success state.
 	 */
 	public static Result_ChannelDerivationParametersDecodeErrorZ ok(org.ldk.structs.ChannelDerivationParameters o) {
-		long ret = bindings.CResult_ChannelDerivationParametersDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_ChannelDerivationParametersDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ChannelDerivationParametersDecodeErrorZ ret_hu_conv = Result_ChannelDerivationParametersDecodeErrorZ.constr_from_ptr(ret);

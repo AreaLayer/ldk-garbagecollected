@@ -21,7 +21,7 @@ public class BlindedHopFeatures : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.BlindedHopFeatures b) {
-		bool ret = bindings.BlindedHopFeatures_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.BlindedHopFeatures_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };
@@ -77,7 +77,7 @@ public class BlindedHopFeatures : CommonBase {
 	 * Returns true if this `Features` object contains required features unknown by `other`.
 	 */
 	public bool requires_unknown_bits_from(org.ldk.structs.BlindedHopFeatures other) {
-		bool ret = bindings.BlindedHopFeatures_requires_unknown_bits_from(this.ptr, other == null ? 0 : other.ptr);
+		bool ret = bindings.BlindedHopFeatures_requires_unknown_bits_from(this.ptr, other.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(other);
 		if (this != null) { this.ptrs_to.AddLast(other); };

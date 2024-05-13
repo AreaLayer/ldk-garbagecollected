@@ -43,7 +43,7 @@ public class Option_C2Tuple_ThirtyTwoU16sThirtyTwoU16sZZ : CommonBase {
 	 * Constructs a new COption_C2Tuple_ThirtyTwoU16sThirtyTwoU16sZZ containing a crate::c_types::derived::C2Tuple__u1632_u1632Z
 	 */
 	public static Option_C2Tuple_ThirtyTwoU16sThirtyTwoU16sZZ some(org.ldk.structs.TwoTuple__u1632_u1632Z o) {
-		long ret = bindings.COption_C2Tuple_ThirtyTwoU16sThirtyTwoU16sZZ_some(o != null ? o.ptr : 0);
+		long ret = bindings.COption_C2Tuple_ThirtyTwoU16sThirtyTwoU16sZZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_C2Tuple_ThirtyTwoU16sThirtyTwoU16sZZ ret_hu_conv = org.ldk.structs.Option_C2Tuple_ThirtyTwoU16sThirtyTwoU16sZZ.constr_from_ptr(ret);

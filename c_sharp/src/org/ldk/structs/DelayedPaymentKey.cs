@@ -55,7 +55,7 @@ public class DelayedPaymentKey : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.DelayedPaymentKey b) {
-		bool ret = bindings.DelayedPaymentKey_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.DelayedPaymentKey_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };
@@ -88,7 +88,7 @@ public class DelayedPaymentKey : CommonBase {
 	 * Derive a public delayedpubkey using one node\'s `per_commitment_point` and its countersignatory\'s `basepoint`
 	 */
 	public static DelayedPaymentKey from_basepoint(org.ldk.structs.DelayedPaymentBasepoint countersignatory_basepoint, byte[] per_commitment_point) {
-		long ret = bindings.DelayedPaymentKey_from_basepoint(countersignatory_basepoint == null ? 0 : countersignatory_basepoint.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(per_commitment_point, 33)));
+		long ret = bindings.DelayedPaymentKey_from_basepoint(countersignatory_basepoint.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(per_commitment_point, 33)));
 		GC.KeepAlive(countersignatory_basepoint);
 		GC.KeepAlive(per_commitment_point);
 		if (ret >= 0 && ret <= 4096) { return null; }

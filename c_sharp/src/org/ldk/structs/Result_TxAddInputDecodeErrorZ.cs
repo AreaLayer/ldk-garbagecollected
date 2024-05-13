@@ -42,7 +42,7 @@ public class Result_TxAddInputDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_TxAddInputDecodeErrorZ in the success state.
 	 */
 	public static Result_TxAddInputDecodeErrorZ ok(org.ldk.structs.TxAddInput o) {
-		long ret = bindings.CResult_TxAddInputDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_TxAddInputDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_TxAddInputDecodeErrorZ ret_hu_conv = Result_TxAddInputDecodeErrorZ.constr_from_ptr(ret);

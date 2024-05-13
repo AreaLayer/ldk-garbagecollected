@@ -42,7 +42,7 @@ public class Result_RevocationKeyDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_RevocationKeyDecodeErrorZ in the success state.
 	 */
 	public static Result_RevocationKeyDecodeErrorZ ok(org.ldk.structs.RevocationKey o) {
-		long ret = bindings.CResult_RevocationKeyDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_RevocationKeyDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RevocationKeyDecodeErrorZ ret_hu_conv = Result_RevocationKeyDecodeErrorZ.constr_from_ptr(ret);

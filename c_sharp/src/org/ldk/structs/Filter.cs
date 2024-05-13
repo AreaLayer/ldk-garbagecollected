@@ -106,7 +106,7 @@ public class Filter : CommonBase {
 	 * registered mid-processing.
 	 */
 	public void register_output(org.ldk.structs.WatchedOutput output) {
-		bindings.Filter_register_output(this.ptr, output == null ? 0 : output.ptr);
+		bindings.Filter_register_output(this.ptr, output.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(output);
 		if (this != null) { this.ptrs_to.AddLast(output); };

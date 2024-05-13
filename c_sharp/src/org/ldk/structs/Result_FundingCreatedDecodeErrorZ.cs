@@ -42,7 +42,7 @@ public class Result_FundingCreatedDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_FundingCreatedDecodeErrorZ in the success state.
 	 */
 	public static Result_FundingCreatedDecodeErrorZ ok(org.ldk.structs.FundingCreated o) {
-		long ret = bindings.CResult_FundingCreatedDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_FundingCreatedDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_FundingCreatedDecodeErrorZ ret_hu_conv = Result_FundingCreatedDecodeErrorZ.constr_from_ptr(ret);

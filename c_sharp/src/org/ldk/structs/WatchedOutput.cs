@@ -63,7 +63,7 @@ public class WatchedOutput : CommonBase {
 	 * Outpoint identifying the transaction output.
 	 */
 	public void set_outpoint(org.ldk.structs.OutPoint val) {
-		bindings.WatchedOutput_set_outpoint(this.ptr, val == null ? 0 : val.ptr);
+		bindings.WatchedOutput_set_outpoint(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -93,7 +93,7 @@ public class WatchedOutput : CommonBase {
 	 * Constructs a new WatchedOutput given each field
 	 */
 	public static WatchedOutput of(org.ldk.structs.Option_ThirtyTwoBytesZ block_hash_arg, org.ldk.structs.OutPoint outpoint_arg, byte[] script_pubkey_arg) {
-		long ret = bindings.WatchedOutput_new(block_hash_arg.ptr, outpoint_arg == null ? 0 : outpoint_arg.ptr, InternalUtils.encodeUint8Array(script_pubkey_arg));
+		long ret = bindings.WatchedOutput_new(block_hash_arg.ptr, outpoint_arg.ptr, InternalUtils.encodeUint8Array(script_pubkey_arg));
 		GC.KeepAlive(block_hash_arg);
 		GC.KeepAlive(outpoint_arg);
 		GC.KeepAlive(script_pubkey_arg);
@@ -129,7 +129,7 @@ public class WatchedOutput : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.WatchedOutput b) {
-		bool ret = bindings.WatchedOutput_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.WatchedOutput_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

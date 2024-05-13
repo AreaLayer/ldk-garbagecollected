@@ -42,7 +42,7 @@ public class Result_NodeInfoDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_NodeInfoDecodeErrorZ in the success state.
 	 */
 	public static Result_NodeInfoDecodeErrorZ ok(org.ldk.structs.NodeInfo o) {
-		long ret = bindings.CResult_NodeInfoDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_NodeInfoDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NodeInfoDecodeErrorZ ret_hu_conv = Result_NodeInfoDecodeErrorZ.constr_from_ptr(ret);

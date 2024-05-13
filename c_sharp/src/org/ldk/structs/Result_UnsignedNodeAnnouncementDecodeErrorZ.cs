@@ -42,7 +42,7 @@ public class Result_UnsignedNodeAnnouncementDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_UnsignedNodeAnnouncementDecodeErrorZ in the success state.
 	 */
 	public static Result_UnsignedNodeAnnouncementDecodeErrorZ ok(org.ldk.structs.UnsignedNodeAnnouncement o) {
-		long ret = bindings.CResult_UnsignedNodeAnnouncementDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_UnsignedNodeAnnouncementDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_UnsignedNodeAnnouncementDecodeErrorZ ret_hu_conv = Result_UnsignedNodeAnnouncementDecodeErrorZ.constr_from_ptr(ret);

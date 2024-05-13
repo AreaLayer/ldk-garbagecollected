@@ -89,7 +89,7 @@ public class ScoreUpdate : CommonBase {
 	 * Handles updating channel penalties after failing to route through a channel.
 	 */
 	public void payment_path_failed(org.ldk.structs.Path path, long short_channel_id, long duration_since_epoch) {
-		bindings.ScoreUpdate_payment_path_failed(this.ptr, path == null ? 0 : path.ptr, short_channel_id, duration_since_epoch);
+		bindings.ScoreUpdate_payment_path_failed(this.ptr, path.ptr, short_channel_id, duration_since_epoch);
 		GC.KeepAlive(this);
 		GC.KeepAlive(path);
 		GC.KeepAlive(short_channel_id);
@@ -101,7 +101,7 @@ public class ScoreUpdate : CommonBase {
 	 * Handles updating channel penalties after successfully routing along a path.
 	 */
 	public void payment_path_successful(org.ldk.structs.Path path, long duration_since_epoch) {
-		bindings.ScoreUpdate_payment_path_successful(this.ptr, path == null ? 0 : path.ptr, duration_since_epoch);
+		bindings.ScoreUpdate_payment_path_successful(this.ptr, path.ptr, duration_since_epoch);
 		GC.KeepAlive(this);
 		GC.KeepAlive(path);
 		GC.KeepAlive(duration_since_epoch);
@@ -112,7 +112,7 @@ public class ScoreUpdate : CommonBase {
 	 * Handles updating channel penalties after a probe over the given path failed.
 	 */
 	public void probe_failed(org.ldk.structs.Path path, long short_channel_id, long duration_since_epoch) {
-		bindings.ScoreUpdate_probe_failed(this.ptr, path == null ? 0 : path.ptr, short_channel_id, duration_since_epoch);
+		bindings.ScoreUpdate_probe_failed(this.ptr, path.ptr, short_channel_id, duration_since_epoch);
 		GC.KeepAlive(this);
 		GC.KeepAlive(path);
 		GC.KeepAlive(short_channel_id);
@@ -124,7 +124,7 @@ public class ScoreUpdate : CommonBase {
 	 * Handles updating channel penalties after a probe over the given path succeeded.
 	 */
 	public void probe_successful(org.ldk.structs.Path path, long duration_since_epoch) {
-		bindings.ScoreUpdate_probe_successful(this.ptr, path == null ? 0 : path.ptr, duration_since_epoch);
+		bindings.ScoreUpdate_probe_successful(this.ptr, path.ptr, duration_since_epoch);
 		GC.KeepAlive(this);
 		GC.KeepAlive(path);
 		GC.KeepAlive(duration_since_epoch);

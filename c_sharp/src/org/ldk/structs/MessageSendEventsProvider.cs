@@ -36,7 +36,7 @@ public class MessageSendEventsProvider : CommonBase {
 		public long get_and_clear_pending_msg_events() {
 			MessageSendEvent[] ret = arg.get_and_clear_pending_msg_events();
 				GC.KeepAlive(arg);
-			long result = InternalUtils.encodeUint64Array(InternalUtils.mapArray(ret, ret_conv_18 => ret_conv_18 == null ? 0 : ret_conv_18.clone_ptr()));
+			long result = InternalUtils.encodeUint64Array(InternalUtils.mapArray(ret, ret_conv_18 => ret_conv_18.clone_ptr()));
 			foreach (MessageSendEvent ret_conv_18 in ret) { if (impl_holder.held != null) { impl_holder.held.ptrs_to.AddLast(ret_conv_18); }; };
 			return result;
 		}

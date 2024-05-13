@@ -24,6 +24,7 @@ public class DecodeError : CommonBase {
 			case 4: return new DecodeError_BadLengthDescriptor(ptr);
 			case 5: return new DecodeError_Io(ptr);
 			case 6: return new DecodeError_UnsupportedCompression(ptr);
+			case 7: return new DecodeError_DangerousValue(ptr);
 			default:
 				throw new ArgumentException("Impossible enum variant");
 		}
@@ -64,6 +65,11 @@ public class DecodeError : CommonBase {
 	/** A DecodeError of type UnsupportedCompression */
 	public class DecodeError_UnsupportedCompression : DecodeError {
 		internal DecodeError_UnsupportedCompression(long ptr) : base(null, ptr) {
+		}
+	}
+	/** A DecodeError of type DangerousValue */
+	public class DecodeError_DangerousValue : DecodeError {
+		internal DecodeError_DangerousValue(long ptr) : base(null, ptr) {
 		}
 	}
 	internal long clone_ptr() {
@@ -163,6 +169,17 @@ public class DecodeError : CommonBase {
 	}
 
 	/**
+	 * Utility method to constructs a new DangerousValue-variant DecodeError
+	 */
+	public static DecodeError dangerous_value() {
+		long ret = bindings.DecodeError_dangerous_value();
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.DecodeError ret_hu_conv = org.ldk.structs.DecodeError.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Generates a non-cryptographic 64-bit hash of the DecodeError.
 	 */
 	public long hash() {
@@ -179,7 +196,7 @@ public class DecodeError : CommonBase {
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public bool eq(org.ldk.structs.DecodeError b) {
-		bool ret = bindings.DecodeError_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.DecodeError_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		return ret;

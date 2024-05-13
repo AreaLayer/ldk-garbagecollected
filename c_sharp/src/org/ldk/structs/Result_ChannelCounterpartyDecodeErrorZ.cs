@@ -42,7 +42,7 @@ public class Result_ChannelCounterpartyDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_ChannelCounterpartyDecodeErrorZ in the success state.
 	 */
 	public static Result_ChannelCounterpartyDecodeErrorZ ok(org.ldk.structs.ChannelCounterparty o) {
-		long ret = bindings.CResult_ChannelCounterpartyDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_ChannelCounterpartyDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ChannelCounterpartyDecodeErrorZ ret_hu_conv = Result_ChannelCounterpartyDecodeErrorZ.constr_from_ptr(ret);

@@ -50,14 +50,14 @@ public class OffersMessageHandler : CommonBase {
 			if (_message_hu_conv != null) { _message_hu_conv.ptrs_to.AddLast(this); };
 			Option_OffersMessageZ ret = arg.handle_message(_message_hu_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			if (impl_holder.held != null) { impl_holder.held.ptrs_to.AddLast(ret); };
 			return result;
 		}
 		public long release_pending_messages() {
 			ThreeTuple_OffersMessageDestinationBlindedPathZ[] ret = arg.release_pending_messages();
 				GC.KeepAlive(arg);
-			long result = InternalUtils.encodeUint64Array(InternalUtils.mapArray(ret, ret_conv_49 => ret_conv_49 == null ? 0 : ret_conv_49.clone_ptr()));
+			long result = InternalUtils.encodeUint64Array(InternalUtils.mapArray(ret, ret_conv_49 => ret_conv_49.clone_ptr()));
 			return result;
 		}
 	}

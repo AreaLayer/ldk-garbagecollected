@@ -48,20 +48,20 @@ public class WalletSource : CommonBase {
 		public long list_confirmed_utxos() {
 			Result_CVec_UtxoZNoneZ ret = arg.list_confirmed_utxos();
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long get_change_script() {
 			Result_CVec_u8ZNoneZ ret = arg.get_change_script();
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long sign_psbt(long _psbt) {
 			byte[] _psbt_conv = InternalUtils.decodeUint8Array(_psbt);
 			Result_TransactionNoneZ ret = arg.sign_psbt(_psbt_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 	}

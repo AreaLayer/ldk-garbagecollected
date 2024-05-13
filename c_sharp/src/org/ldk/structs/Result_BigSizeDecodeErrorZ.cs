@@ -42,7 +42,7 @@ public class Result_BigSizeDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_BigSizeDecodeErrorZ in the success state.
 	 */
 	public static Result_BigSizeDecodeErrorZ ok(org.ldk.structs.BigSize o) {
-		long ret = bindings.CResult_BigSizeDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_BigSizeDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_BigSizeDecodeErrorZ ret_hu_conv = Result_BigSizeDecodeErrorZ.constr_from_ptr(ret);

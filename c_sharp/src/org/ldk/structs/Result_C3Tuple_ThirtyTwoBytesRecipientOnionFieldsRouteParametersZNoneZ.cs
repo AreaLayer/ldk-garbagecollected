@@ -37,7 +37,7 @@ public class Result_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNo
 	 * Creates a new CResult_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ in the success state.
 	 */
 	public static Result_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ ok(org.ldk.structs.ThreeTuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ o) {
-		long ret = bindings.CResult_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ_ok(o != null ? o.ptr : 0);
+		long ret = bindings.CResult_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ ret_hu_conv = Result_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ.constr_from_ptr(ret);

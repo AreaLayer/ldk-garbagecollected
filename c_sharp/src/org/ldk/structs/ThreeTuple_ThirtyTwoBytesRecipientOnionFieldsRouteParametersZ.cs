@@ -73,7 +73,7 @@ public class ThreeTuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ : Com
 	 * Creates a new C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ from the contained elements.
 	 */
 	public static ThreeTuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ of(byte[] a, org.ldk.structs.RecipientOnionFields b, org.ldk.structs.RouteParameters c) {
-		long ret = bindings.C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 32)), b == null ? 0 : b.ptr, c == null ? 0 : c.ptr);
+		long ret = bindings.C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 32)), b.ptr, c.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);
 		GC.KeepAlive(c);

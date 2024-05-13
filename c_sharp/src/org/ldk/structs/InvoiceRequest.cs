@@ -74,14 +74,12 @@ public class InvoiceRequest : CommonBase {
 
 	/**
 	 * The minimum amount required for a successful payment of a single item.
-	 * 
-	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public Amount amount() {
+	public Option_AmountZ amount() {
 		long ret = bindings.InvoiceRequest_amount(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.Amount ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Amount(null, ret); }
+		org.ldk.structs.Option_AmountZ ret_hu_conv = org.ldk.structs.Option_AmountZ.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
 		return ret_hu_conv;
 	}
@@ -89,6 +87,8 @@ public class InvoiceRequest : CommonBase {
 	/**
 	 * A complete description of the purpose of the payment. Intended to be displayed to the user
 	 * but with the caveat that it has not been verified in any way.
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public PrintableString description() {
 		long ret = bindings.InvoiceRequest_description(this.ptr);
@@ -167,13 +167,15 @@ public class InvoiceRequest : CommonBase {
 		long ret = bindings.InvoiceRequest_supported_quantity(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.Quantity ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Quantity(null, ret); }
+		org.ldk.structs.Quantity ret_hu_conv = org.ldk.structs.Quantity.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
 		return ret_hu_conv;
 	}
 
 	/**
 	 * The public key used by the recipient to sign invoices.
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public byte[] signing_pubkey() {
 		long ret = bindings.InvoiceRequest_signing_pubkey(this.ptr);
@@ -274,16 +276,58 @@ public class InvoiceRequest : CommonBase {
 	}
 
 	/**
-	 * Signature of the invoice request using [`payer_id`].
+	 * Creates an [`InvoiceBuilder`] for the request with the given required fields and using the
+	 * [`Duration`] since [`std::time::SystemTime::UNIX_EPOCH`] as the creation time.
 	 * 
-	 * [`payer_id`]: Self::payer_id
+	 * See [`InvoiceRequest::respond_with_no_std`] for further details where the aforementioned
+	 * creation time is used for the `created_at` parameter.
+	 * 
+	 * [`Duration`]: core::time::Duration
 	 */
-	public byte[] signature() {
-		long ret = bindings.InvoiceRequest_signature(this.ptr);
+	public Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ respond_with(TwoTuple_BlindedPayInfoBlindedPathZ[] payment_paths, byte[] payment_hash) {
+		long ret = bindings.InvoiceRequest_respond_with(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(payment_paths, payment_paths_conv_37 => payment_paths_conv_37.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)));
 		GC.KeepAlive(this);
+		GC.KeepAlive(payment_paths);
+		GC.KeepAlive(payment_hash);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
-		return ret_conv;
+		Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ ret_hu_conv = Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Creates an [`InvoiceBuilder`] for the request with the given required fields.
+	 * 
+	 * Unless [`InvoiceBuilder::relative_expiry`] is set, the invoice will expire two hours after
+	 * `created_at`, which is used to set [`Bolt12Invoice::created_at`]. Useful for `no-std` builds
+	 * where [`std::time::SystemTime`] is not available.
+	 * 
+	 * The caller is expected to remember the preimage of `payment_hash` in order to claim a payment
+	 * for the invoice.
+	 * 
+	 * The `payment_paths` parameter is useful for maintaining the payment recipient's privacy. It
+	 * must contain one or more elements ordered from most-preferred to least-preferred, if there's
+	 * a preference. Note, however, that any privacy is lost if a public node id was used for
+	 * [`Offer::signing_pubkey`].
+	 * 
+	 * Errors if the request contains unknown required features.
+	 * 
+	 * # Note
+	 * 
+	 * If the originating [`Offer`] was created using [`OfferBuilder::deriving_signing_pubkey`],
+	 * then use [`InvoiceRequest::verify`] and [`VerifiedInvoiceRequest`] methods instead.
+	 * 
+	 * [`Bolt12Invoice::created_at`]: crate::offers::invoice::Bolt12Invoice::created_at
+	 * [`OfferBuilder::deriving_signing_pubkey`]: crate::offers::offer::OfferBuilder::deriving_signing_pubkey
+	 */
+	public Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ respond_with_no_std(TwoTuple_BlindedPayInfoBlindedPathZ[] payment_paths, byte[] payment_hash, long created_at) {
+		long ret = bindings.InvoiceRequest_respond_with_no_std(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(payment_paths, payment_paths_conv_37 => payment_paths_conv_37.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), created_at);
+		GC.KeepAlive(this);
+		GC.KeepAlive(payment_paths);
+		GC.KeepAlive(payment_hash);
+		GC.KeepAlive(created_at);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ ret_hu_conv = Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
 	}
 
 	/**
@@ -294,7 +338,7 @@ public class InvoiceRequest : CommonBase {
 	 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
 	 */
 	public Result_VerifiedInvoiceRequestNoneZ verify(org.ldk.structs.ExpandedKey key) {
-		long ret = bindings.InvoiceRequest_verify(this.ptr, key == null ? 0 : key.ptr);
+		long ret = bindings.InvoiceRequest_verify(this.ptr, key.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(key);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -302,6 +346,19 @@ public class InvoiceRequest : CommonBase {
 		if (this != null) { this.ptrs_to.AddLast(key); };
 		if (this != null) { this.ptrs_to.AddLast(this); };
 		return ret_hu_conv;
+	}
+
+	/**
+	 * Signature of the invoice request using [`payer_id`].
+	 * 
+	 * [`payer_id`]: Self::payer_id
+	 */
+	public byte[] signature() {
+		long ret = bindings.InvoiceRequest_signature(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
+		return ret_conv;
 	}
 
 	/**

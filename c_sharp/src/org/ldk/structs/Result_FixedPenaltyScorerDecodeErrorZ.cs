@@ -42,7 +42,7 @@ public class Result_FixedPenaltyScorerDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_FixedPenaltyScorerDecodeErrorZ in the success state.
 	 */
 	public static Result_FixedPenaltyScorerDecodeErrorZ ok(org.ldk.structs.FixedPenaltyScorer o) {
-		long ret = bindings.CResult_FixedPenaltyScorerDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_FixedPenaltyScorerDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_FixedPenaltyScorerDecodeErrorZ ret_hu_conv = Result_FixedPenaltyScorerDecodeErrorZ.constr_from_ptr(ret);

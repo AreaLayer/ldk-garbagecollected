@@ -42,7 +42,7 @@ public class Result_RevokeAndACKDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_RevokeAndACKDecodeErrorZ in the success state.
 	 */
 	public static Result_RevokeAndACKDecodeErrorZ ok(org.ldk.structs.RevokeAndACK o) {
-		long ret = bindings.CResult_RevokeAndACKDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_RevokeAndACKDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RevokeAndACKDecodeErrorZ ret_hu_conv = Result_RevokeAndACKDecodeErrorZ.constr_from_ptr(ret);

@@ -42,7 +42,7 @@ public class Result_StaticPaymentOutputDescriptorDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_StaticPaymentOutputDescriptorDecodeErrorZ in the success state.
 	 */
 	public static Result_StaticPaymentOutputDescriptorDecodeErrorZ ok(org.ldk.structs.StaticPaymentOutputDescriptor o) {
-		long ret = bindings.CResult_StaticPaymentOutputDescriptorDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_StaticPaymentOutputDescriptorDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_StaticPaymentOutputDescriptorDecodeErrorZ ret_hu_conv = Result_StaticPaymentOutputDescriptorDecodeErrorZ.constr_from_ptr(ret);

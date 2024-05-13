@@ -41,7 +41,7 @@ public class ShutdownScript : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.ShutdownScript b) {
-		bool ret = bindings.ShutdownScript_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.ShutdownScript_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };
@@ -147,7 +147,7 @@ public class ShutdownScript : CommonBase {
 	 * Specifically, checks for compliance with feature `option_shutdown_anysegwit`.
 	 */
 	public bool is_compatible(org.ldk.structs.InitFeatures features) {
-		bool ret = bindings.ShutdownScript_is_compatible(this.ptr, features == null ? 0 : features.ptr);
+		bool ret = bindings.ShutdownScript_is_compatible(this.ptr, features.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(features);
 		if (this != null) { this.ptrs_to.AddLast(features); };

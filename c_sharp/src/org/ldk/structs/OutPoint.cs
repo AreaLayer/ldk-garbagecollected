@@ -93,7 +93,7 @@ public class OutPoint : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.OutPoint b) {
-		bool ret = bindings.OutPoint_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.OutPoint_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };
@@ -116,17 +116,6 @@ public class OutPoint : CommonBase {
 	public override int GetHashCode() {
 		return (int)this.hash();
 	}
-	/**
-	 * Convert an `OutPoint` to a lightning channel id.
-	 */
-	public byte[] to_channel_id() {
-		long ret = bindings.OutPoint_to_channel_id(this.ptr);
-		GC.KeepAlive(this);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
-		return ret_conv;
-	}
-
 	/**
 	 * Serialize the OutPoint object into a byte array which can be read by OutPoint_read
 	 */

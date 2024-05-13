@@ -66,7 +66,7 @@ public class InvoiceError : CommonBase {
 	 * An explanation of the error.
 	 */
 	public void set_message(org.ldk.structs.UntrustedString val) {
-		bindings.InvoiceError_set_message(this.ptr, val == null ? 0 : val.ptr);
+		bindings.InvoiceError_set_message(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -78,7 +78,7 @@ public class InvoiceError : CommonBase {
 	 * Note that erroneous_field_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public static InvoiceError of(org.ldk.structs.ErroneousField erroneous_field_arg, org.ldk.structs.UntrustedString message_arg) {
-		long ret = bindings.InvoiceError_new(erroneous_field_arg == null ? 0 : erroneous_field_arg.ptr, message_arg == null ? 0 : message_arg.ptr);
+		long ret = bindings.InvoiceError_new(erroneous_field_arg == null ? 0 : erroneous_field_arg.ptr, message_arg.ptr);
 		GC.KeepAlive(erroneous_field_arg);
 		GC.KeepAlive(message_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }

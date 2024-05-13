@@ -42,7 +42,7 @@ public class Result_CounterpartyCommitmentSecretsDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_CounterpartyCommitmentSecretsDecodeErrorZ in the success state.
 	 */
 	public static Result_CounterpartyCommitmentSecretsDecodeErrorZ ok(org.ldk.structs.CounterpartyCommitmentSecrets o) {
-		long ret = bindings.CResult_CounterpartyCommitmentSecretsDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_CounterpartyCommitmentSecretsDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CounterpartyCommitmentSecretsDecodeErrorZ ret_hu_conv = Result_CounterpartyCommitmentSecretsDecodeErrorZ.constr_from_ptr(ret);

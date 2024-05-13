@@ -42,7 +42,7 @@ public class Result_UpdateFeeDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_UpdateFeeDecodeErrorZ in the success state.
 	 */
 	public static Result_UpdateFeeDecodeErrorZ ok(org.ldk.structs.UpdateFee o) {
-		long ret = bindings.CResult_UpdateFeeDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_UpdateFeeDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_UpdateFeeDecodeErrorZ ret_hu_conv = Result_UpdateFeeDecodeErrorZ.constr_from_ptr(ret);

@@ -30,7 +30,7 @@ namespace org { namespace ldk { namespace structs {
  * # use bitcoin::hashes::_export::_core::time::Duration;
  * # use bitcoin::hashes::hex::FromHex;
  * # use bitcoin::secp256k1::{PublicKey, Secp256k1, SecretKey, self};
- * # use lightning::blinded_path::BlindedPath;
+ * # use lightning::blinded_path::{BlindedPath, EmptyNodeIdLookUp};
  * # use lightning::sign::{EntropySource, KeysManager};
  * # use lightning::ln::peer_handler::IgnoringMessageHandler;
  * # use lightning::onion_message::messenger::{Destination, MessageRouter, OnionMessagePath, OnionMessenger};
@@ -71,14 +71,15 @@ namespace org { namespace ldk { namespace structs {
  * # let hop_node_id1 = PublicKey::from_secret_key(&secp_ctx, &node_secret);
  * # let (hop_node_id3, hop_node_id4) = (hop_node_id1, hop_node_id1);
  * # let destination_node_id = hop_node_id1;
+ * # let node_id_lookup = EmptyNodeIdLookUp {};
  * # let message_router = Arc::new(FakeMessageRouter {});
  * # let custom_message_handler = IgnoringMessageHandler {};
  * # let offers_message_handler = IgnoringMessageHandler {};
  * Create the onion messenger. This must use the same `keys_manager` as is passed to your
  * ChannelManager.
  * let onion_messenger = OnionMessenger::new(
- * &keys_manager, &keys_manager, logger, message_router, &offers_message_handler,
- * &custom_message_handler
+ * &keys_manager, &keys_manager, logger, &node_id_lookup, message_router,
+ * &offers_message_handler, &custom_message_handler
  * );
  * 
  * # #[derive(Debug, Clone)]
@@ -126,11 +127,12 @@ public class OnionMessenger : CommonBase {
 	 * Constructs a new `OnionMessenger` to send, forward, and delegate received onion messages to
 	 * their respective handlers.
 	 */
-	public static OnionMessenger of(org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.Logger logger, org.ldk.structs.MessageRouter message_router, org.ldk.structs.OffersMessageHandler offers_handler, org.ldk.structs.CustomOnionMessageHandler custom_handler) {
-		long ret = bindings.OnionMessenger_new(entropy_source.ptr, node_signer.ptr, logger.ptr, message_router.ptr, offers_handler.ptr, custom_handler.ptr);
+	public static OnionMessenger of(org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.Logger logger, org.ldk.structs.NodeIdLookUp node_id_lookup, org.ldk.structs.MessageRouter message_router, org.ldk.structs.OffersMessageHandler offers_handler, org.ldk.structs.CustomOnionMessageHandler custom_handler) {
+		long ret = bindings.OnionMessenger_new(entropy_source.ptr, node_signer.ptr, logger.ptr, node_id_lookup.ptr, message_router.ptr, offers_handler.ptr, custom_handler.ptr);
 		GC.KeepAlive(entropy_source);
 		GC.KeepAlive(node_signer);
 		GC.KeepAlive(logger);
+		GC.KeepAlive(node_id_lookup);
 		GC.KeepAlive(message_router);
 		GC.KeepAlive(offers_handler);
 		GC.KeepAlive(custom_handler);
@@ -140,6 +142,7 @@ public class OnionMessenger : CommonBase {
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(entropy_source); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(node_signer); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(logger); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(node_id_lookup); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(message_router); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(offers_handler); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(custom_handler); };

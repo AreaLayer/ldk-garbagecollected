@@ -97,7 +97,7 @@ public class NetworkUpdate : CommonBase {
 	 * Utility method to constructs a new ChannelUpdateMessage-variant NetworkUpdate
 	 */
 	public static NetworkUpdate channel_update_message(org.ldk.structs.ChannelUpdate msg) {
-		long ret = bindings.NetworkUpdate_channel_update_message(msg == null ? 0 : msg.ptr);
+		long ret = bindings.NetworkUpdate_channel_update_message(msg.ptr);
 		GC.KeepAlive(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.NetworkUpdate ret_hu_conv = org.ldk.structs.NetworkUpdate.constr_from_ptr(ret);
@@ -137,7 +137,7 @@ public class NetworkUpdate : CommonBase {
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public bool eq(org.ldk.structs.NetworkUpdate b) {
-		bool ret = bindings.NetworkUpdate_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.NetworkUpdate_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		return ret;

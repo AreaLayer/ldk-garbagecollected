@@ -67,7 +67,7 @@ public class UtxoResult : CommonBase {
 	 * Utility method to constructs a new Sync-variant UtxoResult
 	 */
 	public static UtxoResult sync(org.ldk.structs.Result_TxOutUtxoLookupErrorZ a) {
-		long ret = bindings.UtxoResult_sync(a != null ? a.ptr : 0);
+		long ret = bindings.UtxoResult_sync(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.UtxoResult ret_hu_conv = org.ldk.structs.UtxoResult.constr_from_ptr(ret);
@@ -79,7 +79,7 @@ public class UtxoResult : CommonBase {
 	 * Utility method to constructs a new Async-variant UtxoResult
 	 */
 	public static UtxoResult async(org.ldk.structs.UtxoFuture a) {
-		long ret = bindings.UtxoResult_async(a == null ? 0 : a.ptr);
+		long ret = bindings.UtxoResult_async(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.UtxoResult ret_hu_conv = org.ldk.structs.UtxoResult.constr_from_ptr(ret);

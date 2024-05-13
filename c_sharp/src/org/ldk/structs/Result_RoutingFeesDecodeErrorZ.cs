@@ -42,7 +42,7 @@ public class Result_RoutingFeesDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_RoutingFeesDecodeErrorZ in the success state.
 	 */
 	public static Result_RoutingFeesDecodeErrorZ ok(org.ldk.structs.RoutingFees o) {
-		long ret = bindings.CResult_RoutingFeesDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_RoutingFeesDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RoutingFeesDecodeErrorZ ret_hu_conv = Result_RoutingFeesDecodeErrorZ.constr_from_ptr(ret);

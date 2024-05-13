@@ -42,7 +42,7 @@ public class Result_PendingHTLCInfoInboundHTLCErrZ : CommonBase {
 	 * Creates a new CResult_PendingHTLCInfoInboundHTLCErrZ in the success state.
 	 */
 	public static Result_PendingHTLCInfoInboundHTLCErrZ ok(org.ldk.structs.PendingHTLCInfo o) {
-		long ret = bindings.CResult_PendingHTLCInfoInboundHTLCErrZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_PendingHTLCInfoInboundHTLCErrZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_PendingHTLCInfoInboundHTLCErrZ ret_hu_conv = Result_PendingHTLCInfoInboundHTLCErrZ.constr_from_ptr(ret);
@@ -53,15 +53,12 @@ public class Result_PendingHTLCInfoInboundHTLCErrZ : CommonBase {
 	/**
 	 * Creates a new CResult_PendingHTLCInfoInboundHTLCErrZ in the error state.
 	 */
-	public static Result_PendingHTLCInfoInboundHTLCErrZ err(short e_err_code_arg, byte[] e_err_data_arg, string e_msg_arg) {
-		long ret = bindings.CResult_PendingHTLCInfoInboundHTLCErrZ_err(bindings.InboundHTLCErr_new(e_err_code_arg, InternalUtils.encodeUint8Array(e_err_data_arg), InternalUtils.encodeString(e_msg_arg)));
-		GC.KeepAlive(e_err_code_arg);
-		GC.KeepAlive(e_err_data_arg);
-		GC.KeepAlive(e_msg_arg);
+	public static Result_PendingHTLCInfoInboundHTLCErrZ err(org.ldk.structs.InboundHTLCErr e) {
+		long ret = bindings.CResult_PendingHTLCInfoInboundHTLCErrZ_err(e.ptr);
+		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_PendingHTLCInfoInboundHTLCErrZ ret_hu_conv = Result_PendingHTLCInfoInboundHTLCErrZ.constr_from_ptr(ret);
-		;
-		;
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(e); };
 		return ret_hu_conv;
 	}
 
@@ -72,6 +69,24 @@ public class Result_PendingHTLCInfoInboundHTLCErrZ : CommonBase {
 		bool ret = bindings.CResult_PendingHTLCInfoInboundHTLCErrZ_is_ok(this.ptr);
 		GC.KeepAlive(this);
 		return ret;
+	}
+
+	internal long clone_ptr() {
+		long ret = bindings.CResult_PendingHTLCInfoInboundHTLCErrZ_clone_ptr(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Creates a new CResult_PendingHTLCInfoInboundHTLCErrZ which has the same data as `orig`
+	 * but with all dynamically-allocated buffers duplicated in new buffers.
+	 */
+	public Result_PendingHTLCInfoInboundHTLCErrZ clone() {
+		long ret = bindings.CResult_PendingHTLCInfoInboundHTLCErrZ_clone(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_PendingHTLCInfoInboundHTLCErrZ ret_hu_conv = Result_PendingHTLCInfoInboundHTLCErrZ.constr_from_ptr(ret);
+		return ret_hu_conv;
 	}
 
 }

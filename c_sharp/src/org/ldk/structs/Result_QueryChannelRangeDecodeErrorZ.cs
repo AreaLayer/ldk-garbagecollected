@@ -42,7 +42,7 @@ public class Result_QueryChannelRangeDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_QueryChannelRangeDecodeErrorZ in the success state.
 	 */
 	public static Result_QueryChannelRangeDecodeErrorZ ok(org.ldk.structs.QueryChannelRange o) {
-		long ret = bindings.CResult_QueryChannelRangeDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_QueryChannelRangeDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_QueryChannelRangeDecodeErrorZ ret_hu_conv = Result_QueryChannelRangeDecodeErrorZ.constr_from_ptr(ret);

@@ -18,21 +18,23 @@ public class TxAddInput : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public byte[] get_channel_id() {
+	public ChannelId get_channel_id() {
 		long ret = bindings.TxAddInput_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
-		return ret_conv;
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
 	}
 
 	/**
 	 * The channel ID
 	 */
-	public void set_channel_id(byte[] val) {
-		bindings.TxAddInput_set_channel_id(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(val, 32)));
+	public void set_channel_id(org.ldk.structs.ChannelId val) {
+		bindings.TxAddInput_set_channel_id(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
+		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -73,7 +75,7 @@ public class TxAddInput : CommonBase {
 	 * malleable.
 	 */
 	public void set_prevtx(org.ldk.structs.TransactionU16LenLimited val) {
-		bindings.TxAddInput_set_prevtx(this.ptr, val == null ? 0 : val.ptr);
+		bindings.TxAddInput_set_prevtx(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -118,8 +120,8 @@ public class TxAddInput : CommonBase {
 	/**
 	 * Constructs a new TxAddInput given each field
 	 */
-	public static TxAddInput of(byte[] channel_id_arg, long serial_id_arg, org.ldk.structs.TransactionU16LenLimited prevtx_arg, int prevtx_out_arg, int sequence_arg) {
-		long ret = bindings.TxAddInput_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(channel_id_arg, 32)), serial_id_arg, prevtx_arg == null ? 0 : prevtx_arg.ptr, prevtx_out_arg, sequence_arg);
+	public static TxAddInput of(org.ldk.structs.ChannelId channel_id_arg, long serial_id_arg, org.ldk.structs.TransactionU16LenLimited prevtx_arg, int prevtx_out_arg, int sequence_arg) {
+		long ret = bindings.TxAddInput_new(channel_id_arg.ptr, serial_id_arg, prevtx_arg.ptr, prevtx_out_arg, sequence_arg);
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(serial_id_arg);
 		GC.KeepAlive(prevtx_arg);
@@ -128,6 +130,7 @@ public class TxAddInput : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.TxAddInput ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.TxAddInput(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id_arg); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(prevtx_arg); };
 		return ret_hu_conv;
 	}
@@ -168,7 +171,7 @@ public class TxAddInput : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.TxAddInput b) {
-		bool ret = bindings.TxAddInput_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.TxAddInput_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

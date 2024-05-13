@@ -42,7 +42,7 @@ public class Result_DelayedPaymentKeyDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_DelayedPaymentKeyDecodeErrorZ in the success state.
 	 */
 	public static Result_DelayedPaymentKeyDecodeErrorZ ok(org.ldk.structs.DelayedPaymentKey o) {
-		long ret = bindings.CResult_DelayedPaymentKeyDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_DelayedPaymentKeyDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_DelayedPaymentKeyDecodeErrorZ ret_hu_conv = Result_DelayedPaymentKeyDecodeErrorZ.constr_from_ptr(ret);

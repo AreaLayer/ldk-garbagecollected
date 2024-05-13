@@ -42,7 +42,7 @@ public class Result_BlindedPayInfoDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_BlindedPayInfoDecodeErrorZ in the success state.
 	 */
 	public static Result_BlindedPayInfoDecodeErrorZ ok(org.ldk.structs.BlindedPayInfo o) {
-		long ret = bindings.CResult_BlindedPayInfoDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_BlindedPayInfoDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_BlindedPayInfoDecodeErrorZ ret_hu_conv = Result_BlindedPayInfoDecodeErrorZ.constr_from_ptr(ret);

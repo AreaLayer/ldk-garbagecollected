@@ -60,7 +60,7 @@ public class UtxoFuture : CommonBase {
 	 * [`PeerManager::process_events`]: crate::ln::peer_handler::PeerManager::process_events
 	 */
 	public void resolve_without_forwarding(org.ldk.structs.NetworkGraph graph, org.ldk.structs.Result_TxOutUtxoLookupErrorZ result) {
-		bindings.UtxoFuture_resolve_without_forwarding(this.ptr, graph == null ? 0 : graph.ptr, result != null ? result.ptr : 0);
+		bindings.UtxoFuture_resolve_without_forwarding(this.ptr, graph.ptr, result.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(graph);
 		GC.KeepAlive(result);
@@ -81,7 +81,7 @@ public class UtxoFuture : CommonBase {
 	 * [`PeerManager::process_events`]: crate::ln::peer_handler::PeerManager::process_events
 	 */
 	public void resolve(org.ldk.structs.NetworkGraph graph, org.ldk.structs.P2PGossipSync gossip, org.ldk.structs.Result_TxOutUtxoLookupErrorZ result) {
-		bindings.UtxoFuture_resolve(this.ptr, graph == null ? 0 : graph.ptr, gossip == null ? 0 : gossip.ptr, result != null ? result.ptr : 0);
+		bindings.UtxoFuture_resolve(this.ptr, graph.ptr, gossip.ptr, result.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(graph);
 		GC.KeepAlive(gossip);

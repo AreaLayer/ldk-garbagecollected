@@ -102,7 +102,7 @@ public class CandidateRouteHop : CommonBase {
 	 * Utility method to constructs a new FirstHop-variant CandidateRouteHop
 	 */
 	public static CandidateRouteHop first_hop(org.ldk.structs.FirstHopCandidate a) {
-		long ret = bindings.CandidateRouteHop_first_hop(a == null ? 0 : a.ptr);
+		long ret = bindings.CandidateRouteHop_first_hop(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CandidateRouteHop ret_hu_conv = org.ldk.structs.CandidateRouteHop.constr_from_ptr(ret);
@@ -115,7 +115,7 @@ public class CandidateRouteHop : CommonBase {
 	 * Utility method to constructs a new PublicHop-variant CandidateRouteHop
 	 */
 	public static CandidateRouteHop public_hop(org.ldk.structs.PublicHopCandidate a) {
-		long ret = bindings.CandidateRouteHop_public_hop(a == null ? 0 : a.ptr);
+		long ret = bindings.CandidateRouteHop_public_hop(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CandidateRouteHop ret_hu_conv = org.ldk.structs.CandidateRouteHop.constr_from_ptr(ret);
@@ -128,7 +128,7 @@ public class CandidateRouteHop : CommonBase {
 	 * Utility method to constructs a new PrivateHop-variant CandidateRouteHop
 	 */
 	public static CandidateRouteHop private_hop(org.ldk.structs.PrivateHopCandidate a) {
-		long ret = bindings.CandidateRouteHop_private_hop(a == null ? 0 : a.ptr);
+		long ret = bindings.CandidateRouteHop_private_hop(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CandidateRouteHop ret_hu_conv = org.ldk.structs.CandidateRouteHop.constr_from_ptr(ret);
@@ -141,7 +141,7 @@ public class CandidateRouteHop : CommonBase {
 	 * Utility method to constructs a new Blinded-variant CandidateRouteHop
 	 */
 	public static CandidateRouteHop blinded(org.ldk.structs.BlindedPathCandidate a) {
-		long ret = bindings.CandidateRouteHop_blinded(a == null ? 0 : a.ptr);
+		long ret = bindings.CandidateRouteHop_blinded(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CandidateRouteHop ret_hu_conv = org.ldk.structs.CandidateRouteHop.constr_from_ptr(ret);
@@ -154,7 +154,7 @@ public class CandidateRouteHop : CommonBase {
 	 * Utility method to constructs a new OneHopBlinded-variant CandidateRouteHop
 	 */
 	public static CandidateRouteHop one_hop_blinded(org.ldk.structs.OneHopBlindedPathCandidate a) {
-		long ret = bindings.CandidateRouteHop_one_hop_blinded(a == null ? 0 : a.ptr);
+		long ret = bindings.CandidateRouteHop_one_hop_blinded(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CandidateRouteHop ret_hu_conv = org.ldk.structs.CandidateRouteHop.constr_from_ptr(ret);

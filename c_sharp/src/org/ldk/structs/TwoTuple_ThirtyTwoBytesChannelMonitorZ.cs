@@ -61,7 +61,7 @@ public class TwoTuple_ThirtyTwoBytesChannelMonitorZ : CommonBase {
 	 * Creates a new C2Tuple_ThirtyTwoBytesChannelMonitorZ from the contained elements.
 	 */
 	public static TwoTuple_ThirtyTwoBytesChannelMonitorZ of(byte[] a, org.ldk.structs.ChannelMonitor b) {
-		long ret = bindings.C2Tuple_ThirtyTwoBytesChannelMonitorZ_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 32)), b == null ? 0 : b.ptr);
+		long ret = bindings.C2Tuple_ThirtyTwoBytesChannelMonitorZ_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 32)), b.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);
 		if (ret >= 0 && ret <= 4096) { return null; }

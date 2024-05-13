@@ -33,7 +33,7 @@ public class RouteParameters : CommonBase {
 	 * The parameters of the failed payment path.
 	 */
 	public void set_payment_params(org.ldk.structs.PaymentParameters val) {
-		bindings.RouteParameters_set_payment_params(this.ptr, val == null ? 0 : val.ptr);
+		bindings.RouteParameters_set_payment_params(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -93,7 +93,7 @@ public class RouteParameters : CommonBase {
 	 * Constructs a new RouteParameters given each field
 	 */
 	public static RouteParameters of(org.ldk.structs.PaymentParameters payment_params_arg, long final_value_msat_arg, org.ldk.structs.Option_u64Z max_total_routing_fee_msat_arg) {
-		long ret = bindings.RouteParameters_new(payment_params_arg == null ? 0 : payment_params_arg.ptr, final_value_msat_arg, max_total_routing_fee_msat_arg.ptr);
+		long ret = bindings.RouteParameters_new(payment_params_arg.ptr, final_value_msat_arg, max_total_routing_fee_msat_arg.ptr);
 		GC.KeepAlive(payment_params_arg);
 		GC.KeepAlive(final_value_msat_arg);
 		GC.KeepAlive(max_total_routing_fee_msat_arg);
@@ -141,7 +141,7 @@ public class RouteParameters : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.RouteParameters b) {
-		bool ret = bindings.RouteParameters_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.RouteParameters_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };
@@ -158,7 +158,7 @@ public class RouteParameters : CommonBase {
 	 * [`Self::max_total_routing_fee_msat`] defaults to 1% of the payment amount + 50 sats
 	 */
 	public static RouteParameters from_payment_params_and_value(org.ldk.structs.PaymentParameters payment_params, long final_value_msat) {
-		long ret = bindings.RouteParameters_from_payment_params_and_value(payment_params == null ? 0 : payment_params.ptr, final_value_msat);
+		long ret = bindings.RouteParameters_from_payment_params_and_value(payment_params.ptr, final_value_msat);
 		GC.KeepAlive(payment_params);
 		GC.KeepAlive(final_value_msat);
 		if (ret >= 0 && ret <= 4096) { return null; }

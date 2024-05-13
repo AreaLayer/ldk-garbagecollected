@@ -52,7 +52,7 @@ public class WriteableEcdsaChannelSigner : CommonBase {
 		LDKWriteableEcdsaChannelSignerImpl impl = new LDKWriteableEcdsaChannelSignerImpl(arg, impl_holder);
 		EcdsaChannelSigner ecdsaChannelSigner = EcdsaChannelSigner.new_impl(ecdsaChannelSigner_impl, channelSigner_impl, pubkeys);
 		ChannelSigner channelSigner = ChannelSigner.new_impl(channelSigner_impl, pubkeys);
-		long[] ptr_idx = bindings.LDKWriteableEcdsaChannelSigner_new(impl, ecdsaChannelSigner.instance_idx, channelSigner.instance_idx, pubkeys == null ? 0 : pubkeys.clone_ptr());
+		long[] ptr_idx = bindings.LDKWriteableEcdsaChannelSigner_new(impl, ecdsaChannelSigner.instance_idx, channelSigner.instance_idx, pubkeys.clone_ptr());
 
 		impl_holder.held = new WriteableEcdsaChannelSigner(null, ptr_idx[0]);
 		impl_holder.held.instance_idx = ptr_idx[1];

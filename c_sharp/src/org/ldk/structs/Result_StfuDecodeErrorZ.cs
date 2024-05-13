@@ -42,7 +42,7 @@ public class Result_StfuDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_StfuDecodeErrorZ in the success state.
 	 */
 	public static Result_StfuDecodeErrorZ ok(org.ldk.structs.Stfu o) {
-		long ret = bindings.CResult_StfuDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_StfuDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_StfuDecodeErrorZ ret_hu_conv = Result_StfuDecodeErrorZ.constr_from_ptr(ret);

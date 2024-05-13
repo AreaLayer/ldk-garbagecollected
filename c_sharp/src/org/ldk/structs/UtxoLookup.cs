@@ -40,7 +40,7 @@ public class UtxoLookup : CommonBase {
 			byte[] _chain_hash_conv = InternalUtils.decodeUint8Array(_chain_hash);
 			UtxoResult ret = arg.get_utxo(_chain_hash_conv, _short_channel_id);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			if (impl_holder.held != null) { impl_holder.held.ptrs_to.AddLast(ret); };
 			return result;
 		}

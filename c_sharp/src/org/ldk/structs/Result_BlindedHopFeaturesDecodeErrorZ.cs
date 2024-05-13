@@ -42,7 +42,7 @@ public class Result_BlindedHopFeaturesDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_BlindedHopFeaturesDecodeErrorZ in the success state.
 	 */
 	public static Result_BlindedHopFeaturesDecodeErrorZ ok(org.ldk.structs.BlindedHopFeatures o) {
-		long ret = bindings.CResult_BlindedHopFeaturesDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_BlindedHopFeaturesDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_BlindedHopFeaturesDecodeErrorZ ret_hu_conv = Result_BlindedHopFeaturesDecodeErrorZ.constr_from_ptr(ret);

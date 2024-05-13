@@ -308,7 +308,7 @@ public class InMemorySigner : CommonBase {
 	 * [`descriptor.outpoint`]: StaticPaymentOutputDescriptor::outpoint
 	 */
 	public Result_WitnessNoneZ sign_counterparty_payment_input(byte[] spend_tx, long input_idx, org.ldk.structs.StaticPaymentOutputDescriptor descriptor) {
-		long ret = bindings.InMemorySigner_sign_counterparty_payment_input(this.ptr, InternalUtils.encodeUint8Array(spend_tx), input_idx, descriptor == null ? 0 : descriptor.ptr);
+		long ret = bindings.InMemorySigner_sign_counterparty_payment_input(this.ptr, InternalUtils.encodeUint8Array(spend_tx), input_idx, descriptor.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(spend_tx);
 		GC.KeepAlive(input_idx);
@@ -332,7 +332,7 @@ public class InMemorySigner : CommonBase {
 	 * [`descriptor.to_self_delay`]: DelayedPaymentOutputDescriptor::to_self_delay
 	 */
 	public Result_WitnessNoneZ sign_dynamic_p2wsh_input(byte[] spend_tx, long input_idx, org.ldk.structs.DelayedPaymentOutputDescriptor descriptor) {
-		long ret = bindings.InMemorySigner_sign_dynamic_p2wsh_input(this.ptr, InternalUtils.encodeUint8Array(spend_tx), input_idx, descriptor == null ? 0 : descriptor.ptr);
+		long ret = bindings.InMemorySigner_sign_dynamic_p2wsh_input(this.ptr, InternalUtils.encodeUint8Array(spend_tx), input_idx, descriptor.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(spend_tx);
 		GC.KeepAlive(input_idx);

@@ -42,7 +42,7 @@ public class Result_PendingHTLCInfoDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_PendingHTLCInfoDecodeErrorZ in the success state.
 	 */
 	public static Result_PendingHTLCInfoDecodeErrorZ ok(org.ldk.structs.PendingHTLCInfo o) {
-		long ret = bindings.CResult_PendingHTLCInfoDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_PendingHTLCInfoDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_PendingHTLCInfoDecodeErrorZ ret_hu_conv = Result_PendingHTLCInfoDecodeErrorZ.constr_from_ptr(ret);

@@ -66,26 +66,26 @@ public class CustomMessageHandler : CommonBase {
 			byte[] _sender_node_id_conv = InternalUtils.decodeUint8Array(_sender_node_id);
 			Result_NoneLightningErrorZ ret = arg.handle_custom_message(ret_hu_conv, _sender_node_id_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long get_and_clear_pending_msg() {
 			TwoTuple_PublicKeyTypeZ[] ret = arg.get_and_clear_pending_msg();
 				GC.KeepAlive(arg);
-			long result = InternalUtils.encodeUint64Array(InternalUtils.mapArray(ret, ret_conv_25 => ret_conv_25 == null ? 0 : ret_conv_25.clone_ptr()));
+			long result = InternalUtils.encodeUint64Array(InternalUtils.mapArray(ret, ret_conv_25 => ret_conv_25.clone_ptr()));
 			return result;
 		}
 		public long provided_node_features() {
 			NodeFeatures ret = arg.provided_node_features();
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long provided_init_features(long _their_node_id) {
 			byte[] _their_node_id_conv = InternalUtils.decodeUint8Array(_their_node_id);
 			InitFeatures ret = arg.provided_init_features(_their_node_id_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 	}

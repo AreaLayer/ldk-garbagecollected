@@ -27,6 +27,14 @@ public class BumpTransactionEvent : CommonBase {
 	/** A BumpTransactionEvent of type ChannelClose */
 	public class BumpTransactionEvent_ChannelClose : BumpTransactionEvent {
 		/**
+		 * The `channel_id` of the channel which has been closed.
+		 */
+		public ChannelId channel_id;
+		/**
+		 * Counterparty in the closed channel.
+		 */
+		public byte[] counterparty_node_id;
+		/**
 		 * The unique identifier for the claim of the anchor output in the commitment transaction.
 		 * 
 		 * The identifier must map to the set of external UTXOs assigned to the claim, such that
@@ -61,6 +69,13 @@ public class BumpTransactionEvent : CommonBase {
 		 */
 		public HTLCOutputInCommitment[] pending_htlcs;
 		internal BumpTransactionEvent_ChannelClose(long ptr) : base(null, ptr) {
+			long channel_id = bindings.LDKBumpTransactionEvent_ChannelClose_get_channel_id(ptr);
+			org.ldk.structs.ChannelId channel_id_hu_conv = null; if (channel_id < 0 || channel_id > 4096) { channel_id_hu_conv = new org.ldk.structs.ChannelId(null, channel_id); }
+			if (channel_id_hu_conv != null) { channel_id_hu_conv.ptrs_to.AddLast(this); };
+			this.channel_id = channel_id_hu_conv;
+			long counterparty_node_id = bindings.LDKBumpTransactionEvent_ChannelClose_get_counterparty_node_id(ptr);
+			byte[] counterparty_node_id_conv = InternalUtils.decodeUint8Array(counterparty_node_id);
+			this.counterparty_node_id = counterparty_node_id_conv;
 			long claim_id = bindings.LDKBumpTransactionEvent_ChannelClose_get_claim_id(ptr);
 			byte[] claim_id_conv = InternalUtils.decodeUint8Array(claim_id);
 			this.claim_id = claim_id_conv;
@@ -89,6 +104,14 @@ public class BumpTransactionEvent : CommonBase {
 	/** A BumpTransactionEvent of type HTLCResolution */
 	public class BumpTransactionEvent_HTLCResolution : BumpTransactionEvent {
 		/**
+		 * The `channel_id` of the channel which has been closed.
+		 */
+		public ChannelId channel_id;
+		/**
+		 * Counterparty in the closed channel.
+		 */
+		public byte[] counterparty_node_id;
+		/**
 		 * The unique identifier for the claim of the HTLCs in the confirmed commitment
 		 * transaction.
 		 * 
@@ -111,6 +134,13 @@ public class BumpTransactionEvent : CommonBase {
 		 */
 		public int tx_lock_time;
 		internal BumpTransactionEvent_HTLCResolution(long ptr) : base(null, ptr) {
+			long channel_id = bindings.LDKBumpTransactionEvent_HTLCResolution_get_channel_id(ptr);
+			org.ldk.structs.ChannelId channel_id_hu_conv = null; if (channel_id < 0 || channel_id > 4096) { channel_id_hu_conv = new org.ldk.structs.ChannelId(null, channel_id); }
+			if (channel_id_hu_conv != null) { channel_id_hu_conv.ptrs_to.AddLast(this); };
+			this.channel_id = channel_id_hu_conv;
+			long counterparty_node_id = bindings.LDKBumpTransactionEvent_HTLCResolution_get_counterparty_node_id(ptr);
+			byte[] counterparty_node_id_conv = InternalUtils.decodeUint8Array(counterparty_node_id);
+			this.counterparty_node_id = counterparty_node_id_conv;
 			long claim_id = bindings.LDKBumpTransactionEvent_HTLCResolution_get_claim_id(ptr);
 			byte[] claim_id_conv = InternalUtils.decodeUint8Array(claim_id);
 			this.claim_id = claim_id_conv;
@@ -150,8 +180,10 @@ public class BumpTransactionEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new ChannelClose-variant BumpTransactionEvent
 	 */
-	public static BumpTransactionEvent channel_close(byte[] claim_id, int package_target_feerate_sat_per_1000_weight, byte[] commitment_tx, long commitment_tx_fee_satoshis, org.ldk.structs.AnchorDescriptor anchor_descriptor, HTLCOutputInCommitment[] pending_htlcs) {
-		long ret = bindings.BumpTransactionEvent_channel_close(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(claim_id, 32)), package_target_feerate_sat_per_1000_weight, InternalUtils.encodeUint8Array(commitment_tx), commitment_tx_fee_satoshis, anchor_descriptor == null ? 0 : anchor_descriptor.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(pending_htlcs, pending_htlcs_conv_24 => pending_htlcs_conv_24 == null ? 0 : pending_htlcs_conv_24.ptr)));
+	public static BumpTransactionEvent channel_close(org.ldk.structs.ChannelId channel_id, byte[] counterparty_node_id, byte[] claim_id, int package_target_feerate_sat_per_1000_weight, byte[] commitment_tx, long commitment_tx_fee_satoshis, org.ldk.structs.AnchorDescriptor anchor_descriptor, HTLCOutputInCommitment[] pending_htlcs) {
+		long ret = bindings.BumpTransactionEvent_channel_close(channel_id.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(claim_id, 32)), package_target_feerate_sat_per_1000_weight, InternalUtils.encodeUint8Array(commitment_tx), commitment_tx_fee_satoshis, anchor_descriptor.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(pending_htlcs, pending_htlcs_conv_24 => pending_htlcs_conv_24.ptr)));
+		GC.KeepAlive(channel_id);
+		GC.KeepAlive(counterparty_node_id);
 		GC.KeepAlive(claim_id);
 		GC.KeepAlive(package_target_feerate_sat_per_1000_weight);
 		GC.KeepAlive(commitment_tx);
@@ -161,6 +193,7 @@ public class BumpTransactionEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.BumpTransactionEvent ret_hu_conv = org.ldk.structs.BumpTransactionEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(anchor_descriptor); };
 		foreach (HTLCOutputInCommitment pending_htlcs_conv_24 in pending_htlcs) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(pending_htlcs_conv_24); }; };
 		return ret_hu_conv;
@@ -169,8 +202,10 @@ public class BumpTransactionEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new HTLCResolution-variant BumpTransactionEvent
 	 */
-	public static BumpTransactionEvent htlcresolution(byte[] claim_id, int target_feerate_sat_per_1000_weight, HTLCDescriptor[] htlc_descriptors, int tx_lock_time) {
-		long ret = bindings.BumpTransactionEvent_htlcresolution(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(claim_id, 32)), target_feerate_sat_per_1000_weight, InternalUtils.encodeUint64Array(InternalUtils.mapArray(htlc_descriptors, htlc_descriptors_conv_16 => htlc_descriptors_conv_16 == null ? 0 : htlc_descriptors_conv_16.ptr)), tx_lock_time);
+	public static BumpTransactionEvent htlcresolution(org.ldk.structs.ChannelId channel_id, byte[] counterparty_node_id, byte[] claim_id, int target_feerate_sat_per_1000_weight, HTLCDescriptor[] htlc_descriptors, int tx_lock_time) {
+		long ret = bindings.BumpTransactionEvent_htlcresolution(channel_id.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(claim_id, 32)), target_feerate_sat_per_1000_weight, InternalUtils.encodeUint64Array(InternalUtils.mapArray(htlc_descriptors, htlc_descriptors_conv_16 => htlc_descriptors_conv_16.ptr)), tx_lock_time);
+		GC.KeepAlive(channel_id);
+		GC.KeepAlive(counterparty_node_id);
 		GC.KeepAlive(claim_id);
 		GC.KeepAlive(target_feerate_sat_per_1000_weight);
 		GC.KeepAlive(htlc_descriptors);
@@ -178,6 +213,7 @@ public class BumpTransactionEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.BumpTransactionEvent ret_hu_conv = org.ldk.structs.BumpTransactionEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id); };
 		foreach (HTLCDescriptor htlc_descriptors_conv_16 in htlc_descriptors) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(htlc_descriptors_conv_16); }; };
 		return ret_hu_conv;
 	}
@@ -187,7 +223,7 @@ public class BumpTransactionEvent : CommonBase {
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public bool eq(org.ldk.structs.BumpTransactionEvent b) {
-		bool ret = bindings.BumpTransactionEvent_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.BumpTransactionEvent_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		return ret;

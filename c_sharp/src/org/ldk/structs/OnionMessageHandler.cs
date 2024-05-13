@@ -77,7 +77,7 @@ public class OnionMessageHandler : CommonBase {
 		public long get_and_clear_connections_needed() {
 			TwoTuple_PublicKeyCVec_SocketAddressZZ[] ret = arg.get_and_clear_connections_needed();
 				GC.KeepAlive(arg);
-			long result = InternalUtils.encodeUint64Array(InternalUtils.mapArray(ret, ret_conv_40 => ret_conv_40 == null ? 0 : ret_conv_40.clone_ptr()));
+			long result = InternalUtils.encodeUint64Array(InternalUtils.mapArray(ret, ret_conv_40 => ret_conv_40.clone_ptr()));
 			return result;
 		}
 		public void handle_onion_message(long _peer_node_id, long _msg) {
@@ -98,7 +98,7 @@ public class OnionMessageHandler : CommonBase {
 			org.ldk.structs.Init _init_hu_conv = null; if (_init < 0 || _init > 4096) { _init_hu_conv = new org.ldk.structs.Init(null, _init); }
 			Result_NoneNoneZ ret = arg.peer_connected(_their_node_id_conv, _init_hu_conv, _inbound);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public void peer_disconnected(long _their_node_id) {
@@ -113,14 +113,14 @@ public class OnionMessageHandler : CommonBase {
 		public long provided_node_features() {
 			NodeFeatures ret = arg.provided_node_features();
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long provided_init_features(long _their_node_id) {
 			byte[] _their_node_id_conv = InternalUtils.decodeUint8Array(_their_node_id);
 			InitFeatures ret = arg.provided_init_features(_their_node_id_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 	}
@@ -166,7 +166,7 @@ public class OnionMessageHandler : CommonBase {
 	 * Handle an incoming `onion_message` message from the given peer.
 	 */
 	public void handle_onion_message(byte[] peer_node_id, org.ldk.structs.OnionMessage msg) {
-		bindings.OnionMessageHandler_handle_onion_message(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(peer_node_id, 33)), msg == null ? 0 : msg.ptr);
+		bindings.OnionMessageHandler_handle_onion_message(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(peer_node_id, 33)), msg.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(peer_node_id);
 		GC.KeepAlive(msg);
@@ -197,7 +197,7 @@ public class OnionMessageHandler : CommonBase {
 	 * message handlers may still wish to communicate with this peer.
 	 */
 	public Result_NoneNoneZ peer_connected(byte[] their_node_id, org.ldk.structs.Init init, bool inbound) {
-		long ret = bindings.OnionMessageHandler_peer_connected(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)), init == null ? 0 : init.ptr, inbound);
+		long ret = bindings.OnionMessageHandler_peer_connected(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)), init.ptr, inbound);
 		GC.KeepAlive(this);
 		GC.KeepAlive(their_node_id);
 		GC.KeepAlive(init);

@@ -44,7 +44,7 @@ public class Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ : CommonBase {
 	 * Creates a new CResult_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ in the success state.
 	 */
 	public static Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ ok(TwoTuple_BlindedPayInfoBlindedPathZ[] o) {
-		long ret = bindings.CResult_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ_ok(InternalUtils.encodeUint64Array(InternalUtils.mapArray(o, o_conv_37 => o_conv_37 != null ? o_conv_37.ptr : 0)));
+		long ret = bindings.CResult_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ_ok(InternalUtils.encodeUint64Array(InternalUtils.mapArray(o, o_conv_37 => o_conv_37.ptr)));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ ret_hu_conv = Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ.constr_from_ptr(ret);

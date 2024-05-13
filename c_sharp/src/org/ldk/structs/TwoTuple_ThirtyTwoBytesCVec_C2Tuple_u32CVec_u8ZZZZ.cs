@@ -68,7 +68,7 @@ public class TwoTuple_ThirtyTwoBytesCVec_C2Tuple_u32CVec_u8ZZZZ : CommonBase {
 	 * Creates a new C2Tuple_ThirtyTwoBytesCVec_C2Tuple_u32CVec_u8ZZZZ from the contained elements.
 	 */
 	public static TwoTuple_ThirtyTwoBytesCVec_C2Tuple_u32CVec_u8ZZZZ of(byte[] a, TwoTuple_u32CVec_u8ZZ[] b) {
-		long ret = bindings.C2Tuple_ThirtyTwoBytesCVec_C2Tuple_u32CVec_u8ZZZZ_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 32)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(b, b_conv_23 => b_conv_23 != null ? b_conv_23.ptr : 0)));
+		long ret = bindings.C2Tuple_ThirtyTwoBytesCVec_C2Tuple_u32CVec_u8ZZZZ_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 32)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(b, b_conv_23 => b_conv_23.ptr)));
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -85,7 +85,7 @@ public class Retry : CommonBase {
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public bool eq(org.ldk.structs.Retry b) {
-		bool ret = bindings.Retry_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.Retry_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		return ret;

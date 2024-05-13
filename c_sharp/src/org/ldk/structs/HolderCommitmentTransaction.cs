@@ -111,7 +111,7 @@ public class HolderCommitmentTransaction : CommonBase {
 	 * The funding keys are used to figure out which signature should go first when building the transaction for broadcast.
 	 */
 	public static HolderCommitmentTransaction of(org.ldk.structs.CommitmentTransaction commitment_tx, byte[] counterparty_sig, byte[][] counterparty_htlc_sigs, byte[] holder_funding_key, byte[] counterparty_funding_key) {
-		long ret = bindings.HolderCommitmentTransaction_new(commitment_tx == null ? 0 : commitment_tx.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_sig, 64)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(counterparty_htlc_sigs, counterparty_htlc_sigs_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_htlc_sigs_conv_8, 64)))), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(holder_funding_key, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_funding_key, 33)));
+		long ret = bindings.HolderCommitmentTransaction_new(commitment_tx.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_sig, 64)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(counterparty_htlc_sigs, counterparty_htlc_sigs_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_htlc_sigs_conv_8, 64)))), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(holder_funding_key, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_funding_key, 33)));
 		GC.KeepAlive(commitment_tx);
 		GC.KeepAlive(counterparty_sig);
 		GC.KeepAlive(counterparty_htlc_sigs);

@@ -61,7 +61,7 @@ public class TwoTuple_OutPointCVec_u8ZZ : CommonBase {
 	 * Creates a new C2Tuple_OutPointCVec_u8ZZ from the contained elements.
 	 */
 	public static TwoTuple_OutPointCVec_u8ZZ of(org.ldk.structs.OutPoint a, byte[] b) {
-		long ret = bindings.C2Tuple_OutPointCVec_u8ZZ_new(a == null ? 0 : a.ptr, InternalUtils.encodeUint8Array(b));
+		long ret = bindings.C2Tuple_OutPointCVec_u8ZZ_new(a.ptr, InternalUtils.encodeUint8Array(b));
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);
 		if (ret >= 0 && ret <= 4096) { return null; }

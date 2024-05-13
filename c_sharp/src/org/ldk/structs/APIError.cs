@@ -182,7 +182,7 @@ public class APIError : CommonBase {
 	 * Utility method to constructs a new IncompatibleShutdownScript-variant APIError
 	 */
 	public static APIError incompatible_shutdown_script(org.ldk.structs.ShutdownScript script) {
-		long ret = bindings.APIError_incompatible_shutdown_script(script == null ? 0 : script.ptr);
+		long ret = bindings.APIError_incompatible_shutdown_script(script.ptr);
 		GC.KeepAlive(script);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.APIError ret_hu_conv = org.ldk.structs.APIError.constr_from_ptr(ret);
@@ -196,7 +196,7 @@ public class APIError : CommonBase {
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public bool eq(org.ldk.structs.APIError b) {
-		bool ret = bindings.APIError_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.APIError_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		return ret;

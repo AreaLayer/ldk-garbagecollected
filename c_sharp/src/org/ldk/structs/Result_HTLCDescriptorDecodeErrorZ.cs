@@ -42,7 +42,7 @@ public class Result_HTLCDescriptorDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_HTLCDescriptorDecodeErrorZ in the success state.
 	 */
 	public static Result_HTLCDescriptorDecodeErrorZ ok(org.ldk.structs.HTLCDescriptor o) {
-		long ret = bindings.CResult_HTLCDescriptorDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_HTLCDescriptorDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_HTLCDescriptorDecodeErrorZ ret_hu_conv = Result_HTLCDescriptorDecodeErrorZ.constr_from_ptr(ret);

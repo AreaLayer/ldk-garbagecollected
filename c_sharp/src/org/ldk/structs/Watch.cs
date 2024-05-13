@@ -54,7 +54,7 @@ public interface WatchInterface {
 	 * For details on asynchronous [`ChannelMonitor`] updating and returning
 	 * [`MonitorEvent::Completed`] here, see [`ChannelMonitorUpdateStatus::InProgress`].
 	 */
-	ThreeTuple_OutPointCVec_MonitorEventZPublicKeyZ[] release_pending_monitor_events();
+	FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ[] release_pending_monitor_events();
 }
 
 /**
@@ -90,7 +90,7 @@ public class Watch : CommonBase {
 			if (_monitor_hu_conv != null) { _monitor_hu_conv.ptrs_to.AddLast(this); };
 			Result_ChannelMonitorUpdateStatusNoneZ ret = arg.watch_channel(_funding_txo_hu_conv, _monitor_hu_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public ChannelMonitorUpdateStatus update_channel(long _funding_txo, long _update) {
@@ -102,9 +102,9 @@ public class Watch : CommonBase {
 			return ret;
 		}
 		public long release_pending_monitor_events() {
-			ThreeTuple_OutPointCVec_MonitorEventZPublicKeyZ[] ret = arg.release_pending_monitor_events();
+			FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ[] ret = arg.release_pending_monitor_events();
 				GC.KeepAlive(arg);
-			long result = InternalUtils.encodeUint64Array(InternalUtils.mapArray(ret, ret_conv_49 => ret_conv_49 == null ? 0 : ret_conv_49.clone_ptr()));
+			long result = InternalUtils.encodeUint64Array(InternalUtils.mapArray(ret, ret_conv_57 => ret_conv_57.clone_ptr()));
 			return result;
 		}
 	}
@@ -139,7 +139,7 @@ public class Watch : CommonBase {
 	 * [`block_disconnected`]: channelmonitor::ChannelMonitor::block_disconnected
 	 */
 	public Result_ChannelMonitorUpdateStatusNoneZ watch_channel(org.ldk.structs.OutPoint funding_txo, org.ldk.structs.ChannelMonitor monitor) {
-		long ret = bindings.Watch_watch_channel(this.ptr, funding_txo == null ? 0 : funding_txo.ptr, monitor == null ? 0 : monitor.ptr);
+		long ret = bindings.Watch_watch_channel(this.ptr, funding_txo.ptr, monitor.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(funding_txo);
 		GC.KeepAlive(monitor);
@@ -168,7 +168,7 @@ public class Watch : CommonBase {
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 */
 	public ChannelMonitorUpdateStatus update_channel(org.ldk.structs.OutPoint funding_txo, org.ldk.structs.ChannelMonitorUpdate update) {
-		ChannelMonitorUpdateStatus ret = bindings.Watch_update_channel(this.ptr, funding_txo == null ? 0 : funding_txo.ptr, update == null ? 0 : update.ptr);
+		ChannelMonitorUpdateStatus ret = bindings.Watch_update_channel(this.ptr, funding_txo.ptr, update.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(funding_txo);
 		GC.KeepAlive(update);
@@ -188,20 +188,20 @@ public class Watch : CommonBase {
 	 * For details on asynchronous [`ChannelMonitor`] updating and returning
 	 * [`MonitorEvent::Completed`] here, see [`ChannelMonitorUpdateStatus::InProgress`].
 	 */
-	public ThreeTuple_OutPointCVec_MonitorEventZPublicKeyZ[] release_pending_monitor_events() {
+	public FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ[] release_pending_monitor_events() {
 		long ret = bindings.Watch_release_pending_monitor_events(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		int ret_conv_49_len = InternalUtils.getArrayLength(ret);
-		ThreeTuple_OutPointCVec_MonitorEventZPublicKeyZ[] ret_conv_49_arr = new ThreeTuple_OutPointCVec_MonitorEventZPublicKeyZ[ret_conv_49_len];
-		for (int x = 0; x < ret_conv_49_len; x++) {
-			long ret_conv_49 = InternalUtils.getU64ArrayElem(ret, x);
-			ThreeTuple_OutPointCVec_MonitorEventZPublicKeyZ ret_conv_49_hu_conv = new ThreeTuple_OutPointCVec_MonitorEventZPublicKeyZ(null, ret_conv_49);
-			if (ret_conv_49_hu_conv != null) { ret_conv_49_hu_conv.ptrs_to.AddLast(this); };
-			ret_conv_49_arr[x] = ret_conv_49_hu_conv;
+		int ret_conv_57_len = InternalUtils.getArrayLength(ret);
+		FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ[] ret_conv_57_arr = new FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ[ret_conv_57_len];
+		for (int f = 0; f < ret_conv_57_len; f++) {
+			long ret_conv_57 = InternalUtils.getU64ArrayElem(ret, f);
+			FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ ret_conv_57_hu_conv = new FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ(null, ret_conv_57);
+			if (ret_conv_57_hu_conv != null) { ret_conv_57_hu_conv.ptrs_to.AddLast(this); };
+			ret_conv_57_arr[f] = ret_conv_57_hu_conv;
 		}
 		bindings.free_buffer(ret);
-		return ret_conv_49_arr;
+		return ret_conv_57_arr;
 	}
 
 }

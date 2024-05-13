@@ -42,7 +42,7 @@ public class Result_ShutdownScriptDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_ShutdownScriptDecodeErrorZ in the success state.
 	 */
 	public static Result_ShutdownScriptDecodeErrorZ ok(org.ldk.structs.ShutdownScript o) {
-		long ret = bindings.CResult_ShutdownScriptDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_ShutdownScriptDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ShutdownScriptDecodeErrorZ ret_hu_conv = Result_ShutdownScriptDecodeErrorZ.constr_from_ptr(ret);

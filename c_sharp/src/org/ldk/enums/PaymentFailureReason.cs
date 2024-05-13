@@ -30,6 +30,10 @@ public enum PaymentFailureReason {
 	LDKPaymentFailureReason_PaymentExpired,
 	/**
 	 * We failed to find a route while retrying the payment.
+	 * 
+	 * Note that this generally indicates that we've exhausted the available set of possible
+	 * routes - we tried the payment over a few routes but were not able to find any further
+	 * candidate routes beyond those.
 	 */
 	LDKPaymentFailureReason_RouteNotFound,
 	/**

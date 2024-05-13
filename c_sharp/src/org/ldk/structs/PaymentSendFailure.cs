@@ -151,7 +151,7 @@ public class PaymentSendFailure : CommonBase {
 	 * Utility method to constructs a new PathParameterError-variant PaymentSendFailure
 	 */
 	public static PaymentSendFailure path_parameter_error(Result_NoneAPIErrorZ[] a) {
-		long ret = bindings.PaymentSendFailure_path_parameter_error(InternalUtils.encodeUint64Array(InternalUtils.mapArray(a, a_conv_22 => a_conv_22 != null ? a_conv_22.ptr : 0)));
+		long ret = bindings.PaymentSendFailure_path_parameter_error(InternalUtils.encodeUint64Array(InternalUtils.mapArray(a, a_conv_22 => a_conv_22.ptr)));
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PaymentSendFailure ret_hu_conv = org.ldk.structs.PaymentSendFailure.constr_from_ptr(ret);
@@ -187,7 +187,7 @@ public class PaymentSendFailure : CommonBase {
 	 * Utility method to constructs a new PartialFailure-variant PaymentSendFailure
 	 */
 	public static PaymentSendFailure partial_failure(Result_NoneAPIErrorZ[] results, org.ldk.structs.RouteParameters failed_paths_retry, byte[] payment_id) {
-		long ret = bindings.PaymentSendFailure_partial_failure(InternalUtils.encodeUint64Array(InternalUtils.mapArray(results, results_conv_22 => results_conv_22 != null ? results_conv_22.ptr : 0)), failed_paths_retry == null ? 0 : failed_paths_retry.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
+		long ret = bindings.PaymentSendFailure_partial_failure(InternalUtils.encodeUint64Array(InternalUtils.mapArray(results, results_conv_22 => results_conv_22.ptr)), failed_paths_retry.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
 		GC.KeepAlive(results);
 		GC.KeepAlive(failed_paths_retry);
 		GC.KeepAlive(payment_id);
@@ -203,7 +203,7 @@ public class PaymentSendFailure : CommonBase {
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public bool eq(org.ldk.structs.PaymentSendFailure b) {
-		bool ret = bindings.PaymentSendFailure_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.PaymentSendFailure_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		return ret;

@@ -42,7 +42,7 @@ public class Result_TransactionU16LenLimitedDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_TransactionU16LenLimitedDecodeErrorZ in the success state.
 	 */
 	public static Result_TransactionU16LenLimitedDecodeErrorZ ok(org.ldk.structs.TransactionU16LenLimited o) {
-		long ret = bindings.CResult_TransactionU16LenLimitedDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_TransactionU16LenLimitedDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_TransactionU16LenLimitedDecodeErrorZ ret_hu_conv = Result_TransactionU16LenLimitedDecodeErrorZ.constr_from_ptr(ret);

@@ -53,7 +53,7 @@ public class NodeAnnouncement : CommonBase {
 	 * The actual content of the announcement
 	 */
 	public void set_contents(org.ldk.structs.UnsignedNodeAnnouncement val) {
-		bindings.NodeAnnouncement_set_contents(this.ptr, val == null ? 0 : val.ptr);
+		bindings.NodeAnnouncement_set_contents(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -63,7 +63,7 @@ public class NodeAnnouncement : CommonBase {
 	 * Constructs a new NodeAnnouncement given each field
 	 */
 	public static NodeAnnouncement of(byte[] signature_arg, org.ldk.structs.UnsignedNodeAnnouncement contents_arg) {
-		long ret = bindings.NodeAnnouncement_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(signature_arg, 64)), contents_arg == null ? 0 : contents_arg.ptr);
+		long ret = bindings.NodeAnnouncement_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(signature_arg, 64)), contents_arg.ptr);
 		GC.KeepAlive(signature_arg);
 		GC.KeepAlive(contents_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -109,7 +109,7 @@ public class NodeAnnouncement : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.NodeAnnouncement b) {
-		bool ret = bindings.NodeAnnouncement_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.NodeAnnouncement_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

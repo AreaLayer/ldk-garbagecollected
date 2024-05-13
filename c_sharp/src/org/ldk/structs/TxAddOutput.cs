@@ -18,21 +18,23 @@ public class TxAddOutput : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public byte[] get_channel_id() {
+	public ChannelId get_channel_id() {
 		long ret = bindings.TxAddOutput_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
-		return ret_conv;
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
 	}
 
 	/**
 	 * The channel ID
 	 */
-	public void set_channel_id(byte[] val) {
-		bindings.TxAddOutput_set_channel_id(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(val, 32)));
+	public void set_channel_id(org.ldk.structs.ChannelId val) {
+		bindings.TxAddOutput_set_channel_id(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
+		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -96,8 +98,8 @@ public class TxAddOutput : CommonBase {
 	/**
 	 * Constructs a new TxAddOutput given each field
 	 */
-	public static TxAddOutput of(byte[] channel_id_arg, long serial_id_arg, long sats_arg, byte[] script_arg) {
-		long ret = bindings.TxAddOutput_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(channel_id_arg, 32)), serial_id_arg, sats_arg, InternalUtils.encodeUint8Array(script_arg));
+	public static TxAddOutput of(org.ldk.structs.ChannelId channel_id_arg, long serial_id_arg, long sats_arg, byte[] script_arg) {
+		long ret = bindings.TxAddOutput_new(channel_id_arg.ptr, serial_id_arg, sats_arg, InternalUtils.encodeUint8Array(script_arg));
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(serial_id_arg);
 		GC.KeepAlive(sats_arg);
@@ -105,6 +107,7 @@ public class TxAddOutput : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.TxAddOutput ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.TxAddOutput(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id_arg); };
 		return ret_hu_conv;
 	}
 
@@ -144,7 +147,7 @@ public class TxAddOutput : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.TxAddOutput b) {
-		bool ret = bindings.TxAddOutput_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.TxAddOutput_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

@@ -31,7 +31,7 @@ public class NodeAnnouncementInfo : CommonBase {
 	 * Protocol features the node announced support for
 	 */
 	public void set_features(org.ldk.structs.NodeFeatures val) {
-		bindings.NodeAnnouncementInfo_set_features(this.ptr, val == null ? 0 : val.ptr);
+		bindings.NodeAnnouncementInfo_set_features(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -97,7 +97,7 @@ public class NodeAnnouncementInfo : CommonBase {
 	 * should not be exposed to the user.
 	 */
 	public void set_alias(org.ldk.structs.NodeAlias val) {
-		bindings.NodeAnnouncementInfo_set_alias(this.ptr, val == null ? 0 : val.ptr);
+		bindings.NodeAnnouncementInfo_set_alias(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -141,7 +141,7 @@ public class NodeAnnouncementInfo : CommonBase {
 	 * Note that announcement_message_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public static NodeAnnouncementInfo of(org.ldk.structs.NodeFeatures features_arg, int last_update_arg, byte[] rgb_arg, org.ldk.structs.NodeAlias alias_arg, org.ldk.structs.NodeAnnouncement announcement_message_arg) {
-		long ret = bindings.NodeAnnouncementInfo_new(features_arg == null ? 0 : features_arg.ptr, last_update_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(rgb_arg, 3)), alias_arg == null ? 0 : alias_arg.ptr, announcement_message_arg == null ? 0 : announcement_message_arg.ptr);
+		long ret = bindings.NodeAnnouncementInfo_new(features_arg.ptr, last_update_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(rgb_arg, 3)), alias_arg.ptr, announcement_message_arg == null ? 0 : announcement_message_arg.ptr);
 		GC.KeepAlive(features_arg);
 		GC.KeepAlive(last_update_arg);
 		GC.KeepAlive(rgb_arg);
@@ -180,7 +180,7 @@ public class NodeAnnouncementInfo : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.NodeAnnouncementInfo b) {
-		bool ret = bindings.NodeAnnouncementInfo_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.NodeAnnouncementInfo_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

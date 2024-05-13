@@ -42,7 +42,7 @@ public class Result_InitFeaturesDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_InitFeaturesDecodeErrorZ in the success state.
 	 */
 	public static Result_InitFeaturesDecodeErrorZ ok(org.ldk.structs.InitFeatures o) {
-		long ret = bindings.CResult_InitFeaturesDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_InitFeaturesDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_InitFeaturesDecodeErrorZ ret_hu_conv = Result_InitFeaturesDecodeErrorZ.constr_from_ptr(ret);

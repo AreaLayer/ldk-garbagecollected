@@ -56,6 +56,19 @@ public class PhantomKeysManager : CommonBase {
 	}
 
 	/**
+	 * Constructs a new OutputSpender which calls the relevant methods on this_arg.
+	 * This copies the `inner` pointer in this_arg and thus the returned OutputSpender must be freed before this_arg is
+	 */
+	public OutputSpender as_OutputSpender() {
+		long ret = bindings.PhantomKeysManager_as_OutputSpender(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		OutputSpender ret_hu_conv = new OutputSpender(null, ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Constructs a new SignerProvider which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned SignerProvider must be freed before this_arg is
 	 */
@@ -90,24 +103,6 @@ public class PhantomKeysManager : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PhantomKeysManager ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.PhantomKeysManager(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		return ret_hu_conv;
-	}
-
-	/**
-	 * See [`KeysManager::spend_spendable_outputs`] for documentation on this method.
-	 */
-	public Result_TransactionNoneZ spend_spendable_outputs(SpendableOutputDescriptor[] descriptors, TxOut[] outputs, byte[] change_destination_script, int feerate_sat_per_1000_weight, org.ldk.structs.Option_u32Z locktime) {
-		long ret = bindings.PhantomKeysManager_spend_spendable_outputs(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(descriptors, descriptors_conv_27 => descriptors_conv_27.ptr)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(outputs, outputs_conv_7 => outputs_conv_7.ptr)), InternalUtils.encodeUint8Array(change_destination_script), feerate_sat_per_1000_weight, locktime.ptr);
-		GC.KeepAlive(this);
-		GC.KeepAlive(descriptors);
-		GC.KeepAlive(outputs);
-		GC.KeepAlive(change_destination_script);
-		GC.KeepAlive(feerate_sat_per_1000_weight);
-		GC.KeepAlive(locktime);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_TransactionNoneZ ret_hu_conv = Result_TransactionNoneZ.constr_from_ptr(ret);
-		foreach (SpendableOutputDescriptor descriptors_conv_27 in descriptors) { if (this != null) { this.ptrs_to.AddLast(descriptors_conv_27); }; };
-		if (this != null) { this.ptrs_to.AddLast(locktime); };
 		return ret_hu_conv;
 	}
 

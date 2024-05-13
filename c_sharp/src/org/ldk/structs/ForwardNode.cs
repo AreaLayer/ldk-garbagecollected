@@ -33,7 +33,7 @@ public class ForwardNode : CommonBase {
 	 * used for [`BlindedPayInfo`] construction.
 	 */
 	public void set_tlvs(org.ldk.structs.ForwardTlvs val) {
-		bindings.ForwardNode_set_tlvs(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ForwardNode_set_tlvs(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -81,7 +81,7 @@ public class ForwardNode : CommonBase {
 	 * Constructs a new ForwardNode given each field
 	 */
 	public static ForwardNode of(org.ldk.structs.ForwardTlvs tlvs_arg, byte[] node_id_arg, long htlc_maximum_msat_arg) {
-		long ret = bindings.ForwardNode_new(tlvs_arg == null ? 0 : tlvs_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id_arg, 33)), htlc_maximum_msat_arg);
+		long ret = bindings.ForwardNode_new(tlvs_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id_arg, 33)), htlc_maximum_msat_arg);
 		GC.KeepAlive(tlvs_arg);
 		GC.KeepAlive(node_id_arg);
 		GC.KeepAlive(htlc_maximum_msat_arg);

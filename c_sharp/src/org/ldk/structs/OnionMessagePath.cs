@@ -132,6 +132,8 @@ public class OnionMessagePath : CommonBase {
 
 	/**
 	 * Returns the first node in the path.
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public byte[] first_node() {
 		long ret = bindings.OnionMessagePath_first_node(this.ptr);

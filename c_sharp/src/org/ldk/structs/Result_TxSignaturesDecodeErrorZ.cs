@@ -42,7 +42,7 @@ public class Result_TxSignaturesDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_TxSignaturesDecodeErrorZ in the success state.
 	 */
 	public static Result_TxSignaturesDecodeErrorZ ok(org.ldk.structs.TxSignatures o) {
-		long ret = bindings.CResult_TxSignaturesDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_TxSignaturesDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_TxSignaturesDecodeErrorZ ret_hu_conv = Result_TxSignaturesDecodeErrorZ.constr_from_ptr(ret);

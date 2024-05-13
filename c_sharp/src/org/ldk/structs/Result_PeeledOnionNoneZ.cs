@@ -64,5 +64,23 @@ public class Result_PeeledOnionNoneZ : CommonBase {
 		return ret;
 	}
 
+	internal long clone_ptr() {
+		long ret = bindings.CResult_PeeledOnionNoneZ_clone_ptr(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Creates a new CResult_PeeledOnionNoneZ which has the same data as `orig`
+	 * but with all dynamically-allocated buffers duplicated in new buffers.
+	 */
+	public Result_PeeledOnionNoneZ clone() {
+		long ret = bindings.CResult_PeeledOnionNoneZ_clone(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_PeeledOnionNoneZ ret_hu_conv = Result_PeeledOnionNoneZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
 }
 } } }

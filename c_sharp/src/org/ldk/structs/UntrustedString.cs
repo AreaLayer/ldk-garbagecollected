@@ -65,7 +65,7 @@ public class UntrustedString : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.UntrustedString b) {
-		bool ret = bindings.UntrustedString_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.UntrustedString_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

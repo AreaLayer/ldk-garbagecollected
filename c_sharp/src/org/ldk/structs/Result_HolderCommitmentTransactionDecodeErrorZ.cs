@@ -42,7 +42,7 @@ public class Result_HolderCommitmentTransactionDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_HolderCommitmentTransactionDecodeErrorZ in the success state.
 	 */
 	public static Result_HolderCommitmentTransactionDecodeErrorZ ok(org.ldk.structs.HolderCommitmentTransaction o) {
-		long ret = bindings.CResult_HolderCommitmentTransactionDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_HolderCommitmentTransactionDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_HolderCommitmentTransactionDecodeErrorZ ret_hu_conv = Result_HolderCommitmentTransactionDecodeErrorZ.constr_from_ptr(ret);

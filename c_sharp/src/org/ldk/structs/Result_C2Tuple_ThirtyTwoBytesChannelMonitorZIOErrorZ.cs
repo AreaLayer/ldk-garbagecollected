@@ -39,7 +39,7 @@ public class Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ : CommonBase {
 	 * Creates a new CResult_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ in the success state.
 	 */
 	public static Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ ok(org.ldk.structs.TwoTuple_ThirtyTwoBytesChannelMonitorZ o) {
-		long ret = bindings.CResult_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ_ok(o != null ? o.ptr : 0);
+		long ret = bindings.CResult_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ ret_hu_conv = Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ.constr_from_ptr(ret);
