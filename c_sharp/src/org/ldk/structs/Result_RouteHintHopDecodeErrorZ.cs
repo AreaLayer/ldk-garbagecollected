@@ -42,7 +42,7 @@ public class Result_RouteHintHopDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_RouteHintHopDecodeErrorZ in the success state.
 	 */
 	public static Result_RouteHintHopDecodeErrorZ ok(org.ldk.structs.RouteHintHop o) {
-		long ret = bindings.CResult_RouteHintHopDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_RouteHintHopDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RouteHintHopDecodeErrorZ ret_hu_conv = Result_RouteHintHopDecodeErrorZ.constr_from_ptr(ret);

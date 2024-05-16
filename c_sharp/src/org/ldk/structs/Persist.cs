@@ -26,7 +26,7 @@ public interface PersistInterface {
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 * [`Writeable::write`]: crate::util::ser::Writeable::write
 	 */
-	ChannelMonitorUpdateStatus persist_new_channel(OutPoint channel_id, ChannelMonitor data, MonitorUpdateId update_id);
+	ChannelMonitorUpdateStatus persist_new_channel(OutPoint channel_funding_outpoint, ChannelMonitor data, MonitorUpdateId update_id);
 	/**Update one channel's data. The provided [`ChannelMonitor`] has already applied the given
 	 * update.
 	 * 
@@ -63,7 +63,13 @@ public interface PersistInterface {
 	 * 
 	 * Note that update (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	ChannelMonitorUpdateStatus update_persisted_channel(OutPoint channel_id, ChannelMonitorUpdate update, ChannelMonitor data, MonitorUpdateId update_id);
+	ChannelMonitorUpdateStatus update_persisted_channel(OutPoint channel_funding_outpoint, ChannelMonitorUpdate update, ChannelMonitor data, MonitorUpdateId update_id);
+	/**Prevents the channel monitor from being loaded on startup.
+	 * 
+	 * Archiving the data in a backup location (rather than deleting it fully) is useful for
+	 * hedging against data loss in case of unexpected failure.
+	 */
+	void archive_persisted_channel(OutPoint channel_funding_outpoint);
 }
 
 /**
@@ -137,27 +143,33 @@ public class Persist : CommonBase {
 		internal LDKPersistImpl(PersistInterface arg, LDKPersistHolder impl_holder) { this.arg = arg; this.impl_holder = impl_holder; }
 		private PersistInterface arg;
 		private LDKPersistHolder impl_holder;
-		public ChannelMonitorUpdateStatus persist_new_channel(long _channel_id, long _data, long _update_id) {
-			org.ldk.structs.OutPoint _channel_id_hu_conv = null; if (_channel_id < 0 || _channel_id > 4096) { _channel_id_hu_conv = new org.ldk.structs.OutPoint(null, _channel_id); }
-			if (_channel_id_hu_conv != null) { _channel_id_hu_conv.ptrs_to.AddLast(this); };
+		public ChannelMonitorUpdateStatus persist_new_channel(long _channel_funding_outpoint, long _data, long _update_id) {
+			org.ldk.structs.OutPoint _channel_funding_outpoint_hu_conv = null; if (_channel_funding_outpoint < 0 || _channel_funding_outpoint > 4096) { _channel_funding_outpoint_hu_conv = new org.ldk.structs.OutPoint(null, _channel_funding_outpoint); }
+			if (_channel_funding_outpoint_hu_conv != null) { _channel_funding_outpoint_hu_conv.ptrs_to.AddLast(this); };
 			org.ldk.structs.ChannelMonitor _data_hu_conv = null; if (_data < 0 || _data > 4096) { _data_hu_conv = new org.ldk.structs.ChannelMonitor(null, _data); }
 			org.ldk.structs.MonitorUpdateId _update_id_hu_conv = null; if (_update_id < 0 || _update_id > 4096) { _update_id_hu_conv = new org.ldk.structs.MonitorUpdateId(null, _update_id); }
 			if (_update_id_hu_conv != null) { _update_id_hu_conv.ptrs_to.AddLast(this); };
-			ChannelMonitorUpdateStatus ret = arg.persist_new_channel(_channel_id_hu_conv, _data_hu_conv, _update_id_hu_conv);
+			ChannelMonitorUpdateStatus ret = arg.persist_new_channel(_channel_funding_outpoint_hu_conv, _data_hu_conv, _update_id_hu_conv);
 				GC.KeepAlive(arg);
 			return ret;
 		}
-		public ChannelMonitorUpdateStatus update_persisted_channel(long _channel_id, long _update, long _data, long _update_id) {
-			org.ldk.structs.OutPoint _channel_id_hu_conv = null; if (_channel_id < 0 || _channel_id > 4096) { _channel_id_hu_conv = new org.ldk.structs.OutPoint(null, _channel_id); }
-			if (_channel_id_hu_conv != null) { _channel_id_hu_conv.ptrs_to.AddLast(this); };
+		public ChannelMonitorUpdateStatus update_persisted_channel(long _channel_funding_outpoint, long _update, long _data, long _update_id) {
+			org.ldk.structs.OutPoint _channel_funding_outpoint_hu_conv = null; if (_channel_funding_outpoint < 0 || _channel_funding_outpoint > 4096) { _channel_funding_outpoint_hu_conv = new org.ldk.structs.OutPoint(null, _channel_funding_outpoint); }
+			if (_channel_funding_outpoint_hu_conv != null) { _channel_funding_outpoint_hu_conv.ptrs_to.AddLast(this); };
 			org.ldk.structs.ChannelMonitorUpdate _update_hu_conv = null; if (_update < 0 || _update > 4096) { _update_hu_conv = new org.ldk.structs.ChannelMonitorUpdate(null, _update); }
 			if (_update_hu_conv != null) { _update_hu_conv.ptrs_to.AddLast(this); };
 			org.ldk.structs.ChannelMonitor _data_hu_conv = null; if (_data < 0 || _data > 4096) { _data_hu_conv = new org.ldk.structs.ChannelMonitor(null, _data); }
 			org.ldk.structs.MonitorUpdateId _update_id_hu_conv = null; if (_update_id < 0 || _update_id > 4096) { _update_id_hu_conv = new org.ldk.structs.MonitorUpdateId(null, _update_id); }
 			if (_update_id_hu_conv != null) { _update_id_hu_conv.ptrs_to.AddLast(this); };
-			ChannelMonitorUpdateStatus ret = arg.update_persisted_channel(_channel_id_hu_conv, _update_hu_conv, _data_hu_conv, _update_id_hu_conv);
+			ChannelMonitorUpdateStatus ret = arg.update_persisted_channel(_channel_funding_outpoint_hu_conv, _update_hu_conv, _data_hu_conv, _update_id_hu_conv);
 				GC.KeepAlive(arg);
 			return ret;
+		}
+		public void archive_persisted_channel(long _channel_funding_outpoint) {
+			org.ldk.structs.OutPoint _channel_funding_outpoint_hu_conv = null; if (_channel_funding_outpoint < 0 || _channel_funding_outpoint > 4096) { _channel_funding_outpoint_hu_conv = new org.ldk.structs.OutPoint(null, _channel_funding_outpoint); }
+			if (_channel_funding_outpoint_hu_conv != null) { _channel_funding_outpoint_hu_conv.ptrs_to.AddLast(this); };
+			arg.archive_persisted_channel(_channel_funding_outpoint_hu_conv);
+				GC.KeepAlive(arg);
 		}
 	}
 
@@ -190,13 +202,13 @@ public class Persist : CommonBase {
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 * [`Writeable::write`]: crate::util::ser::Writeable::write
 	 */
-	public ChannelMonitorUpdateStatus persist_new_channel(org.ldk.structs.OutPoint channel_id, org.ldk.structs.ChannelMonitor data, org.ldk.structs.MonitorUpdateId update_id) {
-		ChannelMonitorUpdateStatus ret = bindings.Persist_persist_new_channel(this.ptr, channel_id == null ? 0 : channel_id.ptr, data == null ? 0 : data.ptr, update_id == null ? 0 : update_id.ptr);
+	public ChannelMonitorUpdateStatus persist_new_channel(org.ldk.structs.OutPoint channel_funding_outpoint, org.ldk.structs.ChannelMonitor data, org.ldk.structs.MonitorUpdateId update_id) {
+		ChannelMonitorUpdateStatus ret = bindings.Persist_persist_new_channel(this.ptr, channel_funding_outpoint.ptr, data.ptr, update_id.ptr);
 		GC.KeepAlive(this);
-		GC.KeepAlive(channel_id);
+		GC.KeepAlive(channel_funding_outpoint);
 		GC.KeepAlive(data);
 		GC.KeepAlive(update_id);
-		if (this != null) { this.ptrs_to.AddLast(channel_id); };
+		if (this != null) { this.ptrs_to.AddLast(channel_funding_outpoint); };
 		if (this != null) { this.ptrs_to.AddLast(data); };
 		if (this != null) { this.ptrs_to.AddLast(update_id); };
 		return ret;
@@ -239,18 +251,31 @@ public class Persist : CommonBase {
 	 * 
 	 * Note that update (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ChannelMonitorUpdateStatus update_persisted_channel(org.ldk.structs.OutPoint channel_id, org.ldk.structs.ChannelMonitorUpdate update, org.ldk.structs.ChannelMonitor data, org.ldk.structs.MonitorUpdateId update_id) {
-		ChannelMonitorUpdateStatus ret = bindings.Persist_update_persisted_channel(this.ptr, channel_id == null ? 0 : channel_id.ptr, update == null ? 0 : update.ptr, data == null ? 0 : data.ptr, update_id == null ? 0 : update_id.ptr);
+	public ChannelMonitorUpdateStatus update_persisted_channel(org.ldk.structs.OutPoint channel_funding_outpoint, org.ldk.structs.ChannelMonitorUpdate update, org.ldk.structs.ChannelMonitor data, org.ldk.structs.MonitorUpdateId update_id) {
+		ChannelMonitorUpdateStatus ret = bindings.Persist_update_persisted_channel(this.ptr, channel_funding_outpoint.ptr, update == null ? 0 : update.ptr, data.ptr, update_id.ptr);
 		GC.KeepAlive(this);
-		GC.KeepAlive(channel_id);
+		GC.KeepAlive(channel_funding_outpoint);
 		GC.KeepAlive(update);
 		GC.KeepAlive(data);
 		GC.KeepAlive(update_id);
-		if (this != null) { this.ptrs_to.AddLast(channel_id); };
+		if (this != null) { this.ptrs_to.AddLast(channel_funding_outpoint); };
 		if (this != null) { this.ptrs_to.AddLast(update); };
 		if (this != null) { this.ptrs_to.AddLast(data); };
 		if (this != null) { this.ptrs_to.AddLast(update_id); };
 		return ret;
+	}
+
+	/**
+	 * Prevents the channel monitor from being loaded on startup.
+	 * 
+	 * Archiving the data in a backup location (rather than deleting it fully) is useful for
+	 * hedging against data loss in case of unexpected failure.
+	 */
+	public void archive_persisted_channel(org.ldk.structs.OutPoint channel_funding_outpoint) {
+		bindings.Persist_archive_persisted_channel(this.ptr, channel_funding_outpoint.ptr);
+		GC.KeepAlive(this);
+		GC.KeepAlive(channel_funding_outpoint);
+		if (this != null) { this.ptrs_to.AddLast(channel_funding_outpoint); };
 	}
 
 }

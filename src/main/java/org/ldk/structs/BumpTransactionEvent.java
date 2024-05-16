@@ -73,6 +73,14 @@ public class BumpTransactionEvent extends CommonBase {
 	 */
 	public final static class ChannelClose extends BumpTransactionEvent {
 		/**
+		 * The `channel_id` of the channel which has been closed.
+		*/
+		public final org.ldk.structs.ChannelId channel_id;
+		/**
+		 * Counterparty in the closed channel.
+		*/
+		public final byte[] counterparty_node_id;
+		/**
 		 * The unique identifier for the claim of the anchor output in the commitment transaction.
 		 * 
 		 * The identifier must map to the set of external UTXOs assigned to the claim, such that
@@ -108,6 +116,11 @@ public class BumpTransactionEvent extends CommonBase {
 		public final HTLCOutputInCommitment[] pending_htlcs;
 		private ChannelClose(long ptr, bindings.LDKBumpTransactionEvent.ChannelClose obj) {
 			super(null, ptr);
+			long channel_id = obj.channel_id;
+			org.ldk.structs.ChannelId channel_id_hu_conv = null; if (channel_id < 0 || channel_id > 4096) { channel_id_hu_conv = new org.ldk.structs.ChannelId(null, channel_id); }
+			if (channel_id_hu_conv != null) { channel_id_hu_conv.ptrs_to.add(this); };
+			this.channel_id = channel_id_hu_conv;
+			this.counterparty_node_id = obj.counterparty_node_id;
 			this.claim_id = obj.claim_id;
 			this.package_target_feerate_sat_per_1000_weight = obj.package_target_feerate_sat_per_1000_weight;
 			this.commitment_tx = obj.commitment_tx;
@@ -161,6 +174,14 @@ public class BumpTransactionEvent extends CommonBase {
 	 */
 	public final static class HTLCResolution extends BumpTransactionEvent {
 		/**
+		 * The `channel_id` of the channel which has been closed.
+		*/
+		public final org.ldk.structs.ChannelId channel_id;
+		/**
+		 * Counterparty in the closed channel.
+		*/
+		public final byte[] counterparty_node_id;
+		/**
 		 * The unique identifier for the claim of the HTLCs in the confirmed commitment
 		 * transaction.
 		 * 
@@ -184,6 +205,11 @@ public class BumpTransactionEvent extends CommonBase {
 		public final int tx_lock_time;
 		private HTLCResolution(long ptr, bindings.LDKBumpTransactionEvent.HTLCResolution obj) {
 			super(null, ptr);
+			long channel_id = obj.channel_id;
+			org.ldk.structs.ChannelId channel_id_hu_conv = null; if (channel_id < 0 || channel_id > 4096) { channel_id_hu_conv = new org.ldk.structs.ChannelId(null, channel_id); }
+			if (channel_id_hu_conv != null) { channel_id_hu_conv.ptrs_to.add(this); };
+			this.channel_id = channel_id_hu_conv;
+			this.counterparty_node_id = obj.counterparty_node_id;
 			this.claim_id = obj.claim_id;
 			this.target_feerate_sat_per_1000_weight = obj.target_feerate_sat_per_1000_weight;
 			long[] htlc_descriptors = obj.htlc_descriptors;
@@ -220,8 +246,10 @@ public class BumpTransactionEvent extends CommonBase {
 	/**
 	 * Utility method to constructs a new ChannelClose-variant BumpTransactionEvent
 	 */
-	public static BumpTransactionEvent channel_close(byte[] claim_id, int package_target_feerate_sat_per_1000_weight, byte[] commitment_tx, long commitment_tx_fee_satoshis, org.ldk.structs.AnchorDescriptor anchor_descriptor, HTLCOutputInCommitment[] pending_htlcs) {
-		long ret = bindings.BumpTransactionEvent_channel_close(InternalUtils.check_arr_len(claim_id, 32), package_target_feerate_sat_per_1000_weight, commitment_tx, commitment_tx_fee_satoshis, anchor_descriptor == null ? 0 : anchor_descriptor.ptr, pending_htlcs != null ? Arrays.stream(pending_htlcs).mapToLong(pending_htlcs_conv_24 -> pending_htlcs_conv_24 == null ? 0 : pending_htlcs_conv_24.ptr).toArray() : null);
+	public static BumpTransactionEvent channel_close(org.ldk.structs.ChannelId channel_id, byte[] counterparty_node_id, byte[] claim_id, int package_target_feerate_sat_per_1000_weight, byte[] commitment_tx, long commitment_tx_fee_satoshis, org.ldk.structs.AnchorDescriptor anchor_descriptor, HTLCOutputInCommitment[] pending_htlcs) {
+		long ret = bindings.BumpTransactionEvent_channel_close(channel_id.ptr, InternalUtils.check_arr_len(counterparty_node_id, 33), InternalUtils.check_arr_len(claim_id, 32), package_target_feerate_sat_per_1000_weight, commitment_tx, commitment_tx_fee_satoshis, anchor_descriptor.ptr, pending_htlcs != null ? Arrays.stream(pending_htlcs).mapToLong(pending_htlcs_conv_24 -> pending_htlcs_conv_24.ptr).toArray() : null);
+		Reference.reachabilityFence(channel_id);
+		Reference.reachabilityFence(counterparty_node_id);
 		Reference.reachabilityFence(claim_id);
 		Reference.reachabilityFence(package_target_feerate_sat_per_1000_weight);
 		Reference.reachabilityFence(commitment_tx);
@@ -231,6 +259,7 @@ public class BumpTransactionEvent extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.BumpTransactionEvent ret_hu_conv = org.ldk.structs.BumpTransactionEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(anchor_descriptor); };
 		for (HTLCOutputInCommitment pending_htlcs_conv_24: pending_htlcs) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(pending_htlcs_conv_24); }; };
 		return ret_hu_conv;
@@ -239,8 +268,10 @@ public class BumpTransactionEvent extends CommonBase {
 	/**
 	 * Utility method to constructs a new HTLCResolution-variant BumpTransactionEvent
 	 */
-	public static BumpTransactionEvent htlcresolution(byte[] claim_id, int target_feerate_sat_per_1000_weight, HTLCDescriptor[] htlc_descriptors, int tx_lock_time) {
-		long ret = bindings.BumpTransactionEvent_htlcresolution(InternalUtils.check_arr_len(claim_id, 32), target_feerate_sat_per_1000_weight, htlc_descriptors != null ? Arrays.stream(htlc_descriptors).mapToLong(htlc_descriptors_conv_16 -> htlc_descriptors_conv_16 == null ? 0 : htlc_descriptors_conv_16.ptr).toArray() : null, tx_lock_time);
+	public static BumpTransactionEvent htlcresolution(org.ldk.structs.ChannelId channel_id, byte[] counterparty_node_id, byte[] claim_id, int target_feerate_sat_per_1000_weight, HTLCDescriptor[] htlc_descriptors, int tx_lock_time) {
+		long ret = bindings.BumpTransactionEvent_htlcresolution(channel_id.ptr, InternalUtils.check_arr_len(counterparty_node_id, 33), InternalUtils.check_arr_len(claim_id, 32), target_feerate_sat_per_1000_weight, htlc_descriptors != null ? Arrays.stream(htlc_descriptors).mapToLong(htlc_descriptors_conv_16 -> htlc_descriptors_conv_16.ptr).toArray() : null, tx_lock_time);
+		Reference.reachabilityFence(channel_id);
+		Reference.reachabilityFence(counterparty_node_id);
 		Reference.reachabilityFence(claim_id);
 		Reference.reachabilityFence(target_feerate_sat_per_1000_weight);
 		Reference.reachabilityFence(htlc_descriptors);
@@ -248,6 +279,7 @@ public class BumpTransactionEvent extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.BumpTransactionEvent ret_hu_conv = org.ldk.structs.BumpTransactionEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id); };
 		for (HTLCDescriptor htlc_descriptors_conv_16: htlc_descriptors) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(htlc_descriptors_conv_16); }; };
 		return ret_hu_conv;
 	}
@@ -257,7 +289,7 @@ public class BumpTransactionEvent extends CommonBase {
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public boolean eq(org.ldk.structs.BumpTransactionEvent b) {
-		boolean ret = bindings.BumpTransactionEvent_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.BumpTransactionEvent_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		return ret;

@@ -22,21 +22,23 @@ public class FundingCreated : CommonBase {
 	/**
 	 * A temporary channel ID, until the funding is established
 	 */
-	public byte[] get_temporary_channel_id() {
+	public ChannelId get_temporary_channel_id() {
 		long ret = bindings.FundingCreated_get_temporary_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
-		return ret_conv;
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
 	}
 
 	/**
 	 * A temporary channel ID, until the funding is established
 	 */
-	public void set_temporary_channel_id(byte[] val) {
-		bindings.FundingCreated_set_temporary_channel_id(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(val, 32)));
+	public void set_temporary_channel_id(org.ldk.structs.ChannelId val) {
+		bindings.FundingCreated_set_temporary_channel_id(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
+		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -100,8 +102,8 @@ public class FundingCreated : CommonBase {
 	/**
 	 * Constructs a new FundingCreated given each field
 	 */
-	public static FundingCreated of(byte[] temporary_channel_id_arg, byte[] funding_txid_arg, short funding_output_index_arg, byte[] signature_arg) {
-		long ret = bindings.FundingCreated_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(temporary_channel_id_arg, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(funding_txid_arg, 32)), funding_output_index_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(signature_arg, 64)));
+	public static FundingCreated of(org.ldk.structs.ChannelId temporary_channel_id_arg, byte[] funding_txid_arg, short funding_output_index_arg, byte[] signature_arg) {
+		long ret = bindings.FundingCreated_new(temporary_channel_id_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(funding_txid_arg, 32)), funding_output_index_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(signature_arg, 64)));
 		GC.KeepAlive(temporary_channel_id_arg);
 		GC.KeepAlive(funding_txid_arg);
 		GC.KeepAlive(funding_output_index_arg);
@@ -109,6 +111,7 @@ public class FundingCreated : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.FundingCreated ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.FundingCreated(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(temporary_channel_id_arg); };
 		return ret_hu_conv;
 	}
 
@@ -148,7 +151,7 @@ public class FundingCreated : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.FundingCreated b) {
-		bool ret = bindings.FundingCreated_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.FundingCreated_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

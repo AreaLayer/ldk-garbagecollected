@@ -1179,7 +1179,7 @@ public class {struct_name.replace("LDK","")} : CommonBase {{
         out_opaque_struct_human = ""
         out_opaque_struct_human += self.hu_struct_file_prefix
         out_opaque_struct_human += "\n/**\n * " + struct_doc_comment.replace("\n", "\n * ") + "\n */\n"
-        hu_name = struct_name.replace("LDKC2Tuple", "TwoTuple").replace("LDKC3Tuple", "ThreeTuple").replace("LDK", "")
+        hu_name = struct_name.replace("LDKC2Tuple", "TwoTuple").replace("LDKC3Tuple", "ThreeTuple").replace("LDKC4Tuple", "FourTuple").replace("LDK", "")
         out_opaque_struct_human += ("public class " + hu_name + " : CommonBase")
         if struct_name.startswith("LDKLocked") or struct_name.startswith("LDKReadOnly"):
             out_opaque_struct_human += (", IDisposable")

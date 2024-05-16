@@ -33,7 +33,7 @@ public class Input : CommonBase {
 	 * The unique identifier of the input.
 	 */
 	public void set_outpoint(org.ldk.structs.OutPoint val) {
-		bindings.Input_set_outpoint(this.ptr, val == null ? 0 : val.ptr);
+		bindings.Input_set_outpoint(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -85,7 +85,7 @@ public class Input : CommonBase {
 	 * Constructs a new Input given each field
 	 */
 	public static Input of(org.ldk.structs.OutPoint outpoint_arg, org.ldk.structs.TxOut previous_utxo_arg, long satisfaction_weight_arg) {
-		long ret = bindings.Input_new(outpoint_arg == null ? 0 : outpoint_arg.ptr, previous_utxo_arg.ptr, satisfaction_weight_arg);
+		long ret = bindings.Input_new(outpoint_arg.ptr, previous_utxo_arg.ptr, satisfaction_weight_arg);
 		GC.KeepAlive(outpoint_arg);
 		GC.KeepAlive(previous_utxo_arg);
 		GC.KeepAlive(satisfaction_weight_arg);
@@ -132,7 +132,7 @@ public class Input : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.Input b) {
-		bool ret = bindings.Input_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.Input_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

@@ -74,20 +74,20 @@ public class CustomOnionMessageHandler extends CommonBase {
 				if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
 				Option_OnionMessageContentsZ ret = arg.handle_custom_message(ret_hu_conv);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				if (impl_holder.held != null) { impl_holder.held.ptrs_to.add(ret); };
 				return result;
 			}
 			@Override public long read_custom_message(long message_type, byte[] buffer) {
 				Result_COption_OnionMessageContentsZDecodeErrorZ ret = arg.read_custom_message(message_type, buffer);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long[] release_pending_custom_messages() {
 				ThreeTuple_OnionMessageContentsDestinationBlindedPathZ[] ret = arg.release_pending_custom_messages();
 				Reference.reachabilityFence(arg);
-				long[] result = ret != null ? Arrays.stream(ret).mapToLong(ret_conv_56 -> ret_conv_56 == null ? 0 : ret_conv_56.clone_ptr()).toArray() : null;
+				long[] result = ret != null ? Arrays.stream(ret).mapToLong(ret_conv_56 -> ret_conv_56.clone_ptr()).toArray() : null;
 				return result;
 			}
 		});

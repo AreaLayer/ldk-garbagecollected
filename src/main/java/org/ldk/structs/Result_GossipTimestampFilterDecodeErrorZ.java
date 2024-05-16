@@ -13,6 +13,10 @@ public class Result_GossipTimestampFilterDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_GossipTimestampFilterDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_GossipTimestampFilterDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_GossipTimestampFilterDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_GossipTimestampFilterDecodeErrorZ_is_ok(ptr)) {
 			return new Result_GossipTimestampFilterDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_GossipTimestampFilterDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_GossipTimestampFilterDecodeErrorZ in the success state.
 	 */
 	public static Result_GossipTimestampFilterDecodeErrorZ ok(org.ldk.structs.GossipTimestampFilter o) {
-		long ret = bindings.CResult_GossipTimestampFilterDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_GossipTimestampFilterDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_GossipTimestampFilterDecodeErrorZ ret_hu_conv = Result_GossipTimestampFilterDecodeErrorZ.constr_from_ptr(ret);

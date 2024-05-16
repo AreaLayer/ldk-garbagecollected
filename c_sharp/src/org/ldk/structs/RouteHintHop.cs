@@ -73,7 +73,7 @@ public class RouteHintHop : CommonBase {
 	 * The fees which must be paid to use this channel
 	 */
 	public void set_fees(org.ldk.structs.RoutingFees val) {
-		bindings.RouteHintHop_set_fees(this.ptr, val == null ? 0 : val.ptr);
+		bindings.RouteHintHop_set_fees(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -145,7 +145,7 @@ public class RouteHintHop : CommonBase {
 	 * Constructs a new RouteHintHop given each field
 	 */
 	public static RouteHintHop of(byte[] src_node_id_arg, long short_channel_id_arg, org.ldk.structs.RoutingFees fees_arg, short cltv_expiry_delta_arg, org.ldk.structs.Option_u64Z htlc_minimum_msat_arg, org.ldk.structs.Option_u64Z htlc_maximum_msat_arg) {
-		long ret = bindings.RouteHintHop_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(src_node_id_arg, 33)), short_channel_id_arg, fees_arg == null ? 0 : fees_arg.ptr, cltv_expiry_delta_arg, htlc_minimum_msat_arg.ptr, htlc_maximum_msat_arg.ptr);
+		long ret = bindings.RouteHintHop_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(src_node_id_arg, 33)), short_channel_id_arg, fees_arg.ptr, cltv_expiry_delta_arg, htlc_minimum_msat_arg.ptr, htlc_maximum_msat_arg.ptr);
 		GC.KeepAlive(src_node_id_arg);
 		GC.KeepAlive(short_channel_id_arg);
 		GC.KeepAlive(fees_arg);
@@ -197,7 +197,7 @@ public class RouteHintHop : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.RouteHintHop b) {
-		bool ret = bindings.RouteHintHop_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.RouteHintHop_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

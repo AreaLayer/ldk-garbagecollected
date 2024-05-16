@@ -42,7 +42,7 @@ public class Result_TxCreationKeysDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_TxCreationKeysDecodeErrorZ in the success state.
 	 */
 	public static Result_TxCreationKeysDecodeErrorZ ok(org.ldk.structs.TxCreationKeys o) {
-		long ret = bindings.CResult_TxCreationKeysDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_TxCreationKeysDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_TxCreationKeysDecodeErrorZ ret_hu_conv = Result_TxCreationKeysDecodeErrorZ.constr_from_ptr(ret);

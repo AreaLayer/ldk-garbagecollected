@@ -75,6 +75,13 @@ public class PendingHTLCRouting : CommonBase {
 		 */
 		public Option_CVec_u8ZZ payment_metadata;
 		/**
+		 * The context of the payment included by the recipient in a blinded path, or `None` if a
+		 * blinded path was not used.
+		 * 
+		 * Used in part to determine the [`events::PaymentPurpose`].
+		 */
+		public Option_PaymentContextZ payment_context;
+		/**
 		 * CLTV expiry of the received HTLC.
 		 * 
 		 * Used to track when we should expire pending HTLCs that go unclaimed.
@@ -109,6 +116,10 @@ public class PendingHTLCRouting : CommonBase {
 			org.ldk.structs.Option_CVec_u8ZZ payment_metadata_hu_conv = org.ldk.structs.Option_CVec_u8ZZ.constr_from_ptr(payment_metadata);
 			if (payment_metadata_hu_conv != null) { payment_metadata_hu_conv.ptrs_to.AddLast(this); };
 			this.payment_metadata = payment_metadata_hu_conv;
+			long payment_context = bindings.LDKPendingHTLCRouting_Receive_get_payment_context(ptr);
+			org.ldk.structs.Option_PaymentContextZ payment_context_hu_conv = org.ldk.structs.Option_PaymentContextZ.constr_from_ptr(payment_context);
+			if (payment_context_hu_conv != null) { payment_context_hu_conv.ptrs_to.AddLast(this); };
+			this.payment_context = payment_context_hu_conv;
 			this.incoming_cltv_expiry = bindings.LDKPendingHTLCRouting_Receive_get_incoming_cltv_expiry(ptr);
 			long phantom_shared_secret = bindings.LDKPendingHTLCRouting_Receive_get_phantom_shared_secret(ptr);
 			byte[] phantom_shared_secret_conv = InternalUtils.decodeUint8Array(phantom_shared_secret);
@@ -164,6 +175,10 @@ public class PendingHTLCRouting : CommonBase {
 		 * [`RecipientOnionFields::custom_tlvs`].
 		 */
 		public TwoTuple_u64CVec_u8ZZ[] custom_tlvs;
+		/**
+		 * Set if this HTLC is the final hop in a multi-hop blinded path.
+		 */
+		public bool requires_blinded_error;
 		internal PendingHTLCRouting_ReceiveKeysend(long ptr) : base(null, ptr) {
 			long payment_data = bindings.LDKPendingHTLCRouting_ReceiveKeysend_get_payment_data(ptr);
 			org.ldk.structs.FinalOnionHopData payment_data_hu_conv = null; if (payment_data < 0 || payment_data > 4096) { payment_data_hu_conv = new org.ldk.structs.FinalOnionHopData(null, payment_data); }
@@ -188,6 +203,7 @@ public class PendingHTLCRouting : CommonBase {
 			}
 			bindings.free_buffer(custom_tlvs);
 			this.custom_tlvs = custom_tlvs_conv_23_arr;
+			this.requires_blinded_error = bindings.LDKPendingHTLCRouting_ReceiveKeysend_get_requires_blinded_error(ptr);
 		}
 	}
 	internal long clone_ptr() {
@@ -212,7 +228,7 @@ public class PendingHTLCRouting : CommonBase {
 	 * Utility method to constructs a new Forward-variant PendingHTLCRouting
 	 */
 	public static PendingHTLCRouting forward(org.ldk.structs.OnionPacket onion_packet, long short_channel_id, org.ldk.structs.BlindedForward blinded) {
-		long ret = bindings.PendingHTLCRouting_forward(onion_packet == null ? 0 : onion_packet.ptr, short_channel_id, blinded == null ? 0 : blinded.ptr);
+		long ret = bindings.PendingHTLCRouting_forward(onion_packet.ptr, short_channel_id, blinded.ptr);
 		GC.KeepAlive(onion_packet);
 		GC.KeepAlive(short_channel_id);
 		GC.KeepAlive(blinded);
@@ -227,10 +243,11 @@ public class PendingHTLCRouting : CommonBase {
 	/**
 	 * Utility method to constructs a new Receive-variant PendingHTLCRouting
 	 */
-	public static PendingHTLCRouting receive(org.ldk.structs.FinalOnionHopData payment_data, org.ldk.structs.Option_CVec_u8ZZ payment_metadata, int incoming_cltv_expiry, byte[] phantom_shared_secret, TwoTuple_u64CVec_u8ZZ[] custom_tlvs, bool requires_blinded_error) {
-		long ret = bindings.PendingHTLCRouting_receive(payment_data == null ? 0 : payment_data.ptr, payment_metadata.ptr, incoming_cltv_expiry, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(phantom_shared_secret, 32)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(custom_tlvs, custom_tlvs_conv_23 => custom_tlvs_conv_23 != null ? custom_tlvs_conv_23.ptr : 0)), requires_blinded_error);
+	public static PendingHTLCRouting receive(org.ldk.structs.FinalOnionHopData payment_data, org.ldk.structs.Option_CVec_u8ZZ payment_metadata, org.ldk.structs.Option_PaymentContextZ payment_context, int incoming_cltv_expiry, byte[] phantom_shared_secret, TwoTuple_u64CVec_u8ZZ[] custom_tlvs, bool requires_blinded_error) {
+		long ret = bindings.PendingHTLCRouting_receive(payment_data.ptr, payment_metadata.ptr, payment_context.ptr, incoming_cltv_expiry, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(phantom_shared_secret, 32)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(custom_tlvs, custom_tlvs_conv_23 => custom_tlvs_conv_23.ptr)), requires_blinded_error);
 		GC.KeepAlive(payment_data);
 		GC.KeepAlive(payment_metadata);
+		GC.KeepAlive(payment_context);
 		GC.KeepAlive(incoming_cltv_expiry);
 		GC.KeepAlive(phantom_shared_secret);
 		GC.KeepAlive(custom_tlvs);
@@ -240,19 +257,21 @@ public class PendingHTLCRouting : CommonBase {
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(payment_data); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(payment_metadata); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(payment_context); };
 		return ret_hu_conv;
 	}
 
 	/**
 	 * Utility method to constructs a new ReceiveKeysend-variant PendingHTLCRouting
 	 */
-	public static PendingHTLCRouting receive_keysend(org.ldk.structs.FinalOnionHopData payment_data, byte[] payment_preimage, org.ldk.structs.Option_CVec_u8ZZ payment_metadata, int incoming_cltv_expiry, TwoTuple_u64CVec_u8ZZ[] custom_tlvs) {
-		long ret = bindings.PendingHTLCRouting_receive_keysend(payment_data == null ? 0 : payment_data.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_preimage, 32)), payment_metadata.ptr, incoming_cltv_expiry, InternalUtils.encodeUint64Array(InternalUtils.mapArray(custom_tlvs, custom_tlvs_conv_23 => custom_tlvs_conv_23 != null ? custom_tlvs_conv_23.ptr : 0)));
+	public static PendingHTLCRouting receive_keysend(org.ldk.structs.FinalOnionHopData payment_data, byte[] payment_preimage, org.ldk.structs.Option_CVec_u8ZZ payment_metadata, int incoming_cltv_expiry, TwoTuple_u64CVec_u8ZZ[] custom_tlvs, bool requires_blinded_error) {
+		long ret = bindings.PendingHTLCRouting_receive_keysend(payment_data.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_preimage, 32)), payment_metadata.ptr, incoming_cltv_expiry, InternalUtils.encodeUint64Array(InternalUtils.mapArray(custom_tlvs, custom_tlvs_conv_23 => custom_tlvs_conv_23.ptr)), requires_blinded_error);
 		GC.KeepAlive(payment_data);
 		GC.KeepAlive(payment_preimage);
 		GC.KeepAlive(payment_metadata);
 		GC.KeepAlive(incoming_cltv_expiry);
 		GC.KeepAlive(custom_tlvs);
+		GC.KeepAlive(requires_blinded_error);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PendingHTLCRouting ret_hu_conv = org.ldk.structs.PendingHTLCRouting.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };

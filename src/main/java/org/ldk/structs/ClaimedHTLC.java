@@ -23,19 +23,23 @@ public class ClaimedHTLC extends CommonBase {
 	/**
 	 * The `channel_id` of the channel over which the HTLC was received.
 	 */
-	public byte[] get_channel_id() {
-		byte[] ret = bindings.ClaimedHTLC_get_channel_id(this.ptr);
+	public ChannelId get_channel_id() {
+		long ret = bindings.ClaimedHTLC_get_channel_id(this.ptr);
 		Reference.reachabilityFence(this);
-		return ret;
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
 	}
 
 	/**
 	 * The `channel_id` of the channel over which the HTLC was received.
 	 */
-	public void set_channel_id(byte[] val) {
-		bindings.ClaimedHTLC_set_channel_id(this.ptr, InternalUtils.check_arr_len(val, 32));
+	public void set_channel_id(org.ldk.structs.ChannelId val) {
+		bindings.ClaimedHTLC_set_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
+		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -144,8 +148,8 @@ public class ClaimedHTLC extends CommonBase {
 	/**
 	 * Constructs a new ClaimedHTLC given each field
 	 */
-	public static ClaimedHTLC of(byte[] channel_id_arg, org.ldk.util.UInt128 user_channel_id_arg, int cltv_expiry_arg, long value_msat_arg, long counterparty_skimmed_fee_msat_arg) {
-		long ret = bindings.ClaimedHTLC_new(InternalUtils.check_arr_len(channel_id_arg, 32), user_channel_id_arg.getLEBytes(), cltv_expiry_arg, value_msat_arg, counterparty_skimmed_fee_msat_arg);
+	public static ClaimedHTLC of(org.ldk.structs.ChannelId channel_id_arg, org.ldk.util.UInt128 user_channel_id_arg, int cltv_expiry_arg, long value_msat_arg, long counterparty_skimmed_fee_msat_arg) {
+		long ret = bindings.ClaimedHTLC_new(channel_id_arg.ptr, user_channel_id_arg.getLEBytes(), cltv_expiry_arg, value_msat_arg, counterparty_skimmed_fee_msat_arg);
 		Reference.reachabilityFence(channel_id_arg);
 		Reference.reachabilityFence(user_channel_id_arg);
 		Reference.reachabilityFence(cltv_expiry_arg);
@@ -154,6 +158,7 @@ public class ClaimedHTLC extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ClaimedHTLC ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ClaimedHTLC(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id_arg); };
 		return ret_hu_conv;
 	}
 
@@ -181,7 +186,7 @@ public class ClaimedHTLC extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.ClaimedHTLC b) {
-		boolean ret = bindings.ClaimedHTLC_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.ClaimedHTLC_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

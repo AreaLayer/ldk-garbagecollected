@@ -25,19 +25,23 @@ public class UpdateAddHTLC extends CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public byte[] get_channel_id() {
-		byte[] ret = bindings.UpdateAddHTLC_get_channel_id(this.ptr);
+	public ChannelId get_channel_id() {
+		long ret = bindings.UpdateAddHTLC_get_channel_id(this.ptr);
 		Reference.reachabilityFence(this);
-		return ret;
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
 	}
 
 	/**
 	 * The channel ID
 	 */
-	public void set_channel_id(byte[] val) {
-		bindings.UpdateAddHTLC_set_channel_id(this.ptr, InternalUtils.check_arr_len(val, 32));
+	public void set_channel_id(org.ldk.structs.ChannelId val) {
+		bindings.UpdateAddHTLC_set_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
+		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -156,7 +160,7 @@ public class UpdateAddHTLC extends CommonBase {
 	 * The onion routing packet with encrypted data for the next hop.
 	 */
 	public void set_onion_routing_packet(org.ldk.structs.OnionPacket val) {
-		bindings.UpdateAddHTLC_set_onion_routing_packet(this.ptr, val == null ? 0 : val.ptr);
+		bindings.UpdateAddHTLC_set_onion_routing_packet(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -192,8 +196,8 @@ public class UpdateAddHTLC extends CommonBase {
 	 * 
 	 * Note that blinding_point_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static UpdateAddHTLC of(byte[] channel_id_arg, long htlc_id_arg, long amount_msat_arg, byte[] payment_hash_arg, int cltv_expiry_arg, org.ldk.structs.Option_u64Z skimmed_fee_msat_arg, org.ldk.structs.OnionPacket onion_routing_packet_arg, @Nullable byte[] blinding_point_arg) {
-		long ret = bindings.UpdateAddHTLC_new(InternalUtils.check_arr_len(channel_id_arg, 32), htlc_id_arg, amount_msat_arg, InternalUtils.check_arr_len(payment_hash_arg, 32), cltv_expiry_arg, skimmed_fee_msat_arg.ptr, onion_routing_packet_arg == null ? 0 : onion_routing_packet_arg.ptr, InternalUtils.check_arr_len(blinding_point_arg, 33));
+	public static UpdateAddHTLC of(org.ldk.structs.ChannelId channel_id_arg, long htlc_id_arg, long amount_msat_arg, byte[] payment_hash_arg, int cltv_expiry_arg, org.ldk.structs.Option_u64Z skimmed_fee_msat_arg, org.ldk.structs.OnionPacket onion_routing_packet_arg, @Nullable byte[] blinding_point_arg) {
+		long ret = bindings.UpdateAddHTLC_new(channel_id_arg.ptr, htlc_id_arg, amount_msat_arg, InternalUtils.check_arr_len(payment_hash_arg, 32), cltv_expiry_arg, skimmed_fee_msat_arg.ptr, onion_routing_packet_arg.ptr, InternalUtils.check_arr_len(blinding_point_arg, 33));
 		Reference.reachabilityFence(channel_id_arg);
 		Reference.reachabilityFence(htlc_id_arg);
 		Reference.reachabilityFence(amount_msat_arg);
@@ -205,6 +209,7 @@ public class UpdateAddHTLC extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.UpdateAddHTLC ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.UpdateAddHTLC(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id_arg); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(skimmed_fee_msat_arg); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(onion_routing_packet_arg); };
 		return ret_hu_conv;
@@ -246,7 +251,7 @@ public class UpdateAddHTLC extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.UpdateAddHTLC b) {
-		boolean ret = bindings.UpdateAddHTLC_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.UpdateAddHTLC_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

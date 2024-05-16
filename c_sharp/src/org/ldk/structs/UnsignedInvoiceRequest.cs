@@ -20,6 +20,24 @@ public class UnsignedInvoiceRequest : CommonBase {
 		if (ptr != 0) { bindings.UnsignedInvoiceRequest_free(ptr); }
 	}
 
+	internal long clone_ptr() {
+		long ret = bindings.UnsignedInvoiceRequest_clone_ptr(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Creates a copy of the UnsignedInvoiceRequest
+	 */
+	public UnsignedInvoiceRequest clone() {
+		long ret = bindings.UnsignedInvoiceRequest_clone(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.UnsignedInvoiceRequest ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.UnsignedInvoiceRequest(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
+	}
+
 	/**
 	 * Returns the [`TaggedHash`] of the invoice to sign.
 	 */
@@ -67,14 +85,12 @@ public class UnsignedInvoiceRequest : CommonBase {
 
 	/**
 	 * The minimum amount required for a successful payment of a single item.
-	 * 
-	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public Amount amount() {
+	public Option_AmountZ amount() {
 		long ret = bindings.UnsignedInvoiceRequest_amount(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.Amount ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Amount(null, ret); }
+		org.ldk.structs.Option_AmountZ ret_hu_conv = org.ldk.structs.Option_AmountZ.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
 		return ret_hu_conv;
 	}
@@ -82,6 +98,8 @@ public class UnsignedInvoiceRequest : CommonBase {
 	/**
 	 * A complete description of the purpose of the payment. Intended to be displayed to the user
 	 * but with the caveat that it has not been verified in any way.
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public PrintableString description() {
 		long ret = bindings.UnsignedInvoiceRequest_description(this.ptr);
@@ -160,13 +178,15 @@ public class UnsignedInvoiceRequest : CommonBase {
 		long ret = bindings.UnsignedInvoiceRequest_supported_quantity(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.Quantity ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Quantity(null, ret); }
+		org.ldk.structs.Quantity ret_hu_conv = org.ldk.structs.Quantity.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
 		return ret_hu_conv;
 	}
 
 	/**
 	 * The public key used by the recipient to sign invoices.
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public byte[] signing_pubkey() {
 		long ret = bindings.UnsignedInvoiceRequest_signing_pubkey(this.ptr);

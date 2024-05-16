@@ -13,6 +13,10 @@ public class Result_WriteableEcdsaChannelSignerDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_WriteableEcdsaChannelSignerDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_WriteableEcdsaChannelSignerDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_WriteableEcdsaChannelSignerDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_WriteableEcdsaChannelSignerDecodeErrorZ_is_ok(ptr)) {
 			return new Result_WriteableEcdsaChannelSignerDecodeErrorZ_OK(null, ptr);

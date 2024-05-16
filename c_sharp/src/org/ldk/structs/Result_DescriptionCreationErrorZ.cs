@@ -39,7 +39,7 @@ public class Result_DescriptionCreationErrorZ : CommonBase {
 	 * Creates a new CResult_DescriptionCreationErrorZ in the success state.
 	 */
 	public static Result_DescriptionCreationErrorZ ok(org.ldk.structs.Description o) {
-		long ret = bindings.CResult_DescriptionCreationErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_DescriptionCreationErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_DescriptionCreationErrorZ ret_hu_conv = Result_DescriptionCreationErrorZ.constr_from_ptr(ret);

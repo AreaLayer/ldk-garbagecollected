@@ -56,13 +56,13 @@ public class MessageRouter extends CommonBase {
 				if (destination_hu_conv != null) { destination_hu_conv.ptrs_to.add(this); };
 				Result_OnionMessagePathNoneZ ret = arg.find_path(sender, peers, destination_hu_conv);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long create_blinded_paths(byte[] recipient, byte[][] peers) {
 				Result_CVec_BlindedPathZNoneZ ret = arg.create_blinded_paths(recipient, peers);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 		});

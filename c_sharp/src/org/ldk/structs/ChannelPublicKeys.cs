@@ -59,7 +59,7 @@ public class ChannelPublicKeys : CommonBase {
 	 * states.
 	 */
 	public void set_revocation_basepoint(org.ldk.structs.RevocationBasepoint val) {
-		bindings.ChannelPublicKeys_set_revocation_basepoint(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChannelPublicKeys_set_revocation_basepoint(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -109,7 +109,7 @@ public class ChannelPublicKeys : CommonBase {
 	 * after some delay (or can be claimed via the revocation path).
 	 */
 	public void set_delayed_payment_basepoint(org.ldk.structs.DelayedPaymentBasepoint val) {
-		bindings.ChannelPublicKeys_set_delayed_payment_basepoint(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChannelPublicKeys_set_delayed_payment_basepoint(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -133,7 +133,7 @@ public class ChannelPublicKeys : CommonBase {
 	 * which is used to encumber HTLC-in-flight outputs.
 	 */
 	public void set_htlc_basepoint(org.ldk.structs.HtlcBasepoint val) {
-		bindings.ChannelPublicKeys_set_htlc_basepoint(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChannelPublicKeys_set_htlc_basepoint(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -143,7 +143,7 @@ public class ChannelPublicKeys : CommonBase {
 	 * Constructs a new ChannelPublicKeys given each field
 	 */
 	public static ChannelPublicKeys of(byte[] funding_pubkey_arg, org.ldk.structs.RevocationBasepoint revocation_basepoint_arg, byte[] payment_point_arg, org.ldk.structs.DelayedPaymentBasepoint delayed_payment_basepoint_arg, org.ldk.structs.HtlcBasepoint htlc_basepoint_arg) {
-		long ret = bindings.ChannelPublicKeys_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(funding_pubkey_arg, 33)), revocation_basepoint_arg == null ? 0 : revocation_basepoint_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_point_arg, 33)), delayed_payment_basepoint_arg == null ? 0 : delayed_payment_basepoint_arg.ptr, htlc_basepoint_arg == null ? 0 : htlc_basepoint_arg.ptr);
+		long ret = bindings.ChannelPublicKeys_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(funding_pubkey_arg, 33)), revocation_basepoint_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_point_arg, 33)), delayed_payment_basepoint_arg.ptr, htlc_basepoint_arg.ptr);
 		GC.KeepAlive(funding_pubkey_arg);
 		GC.KeepAlive(revocation_basepoint_arg);
 		GC.KeepAlive(payment_point_arg);
@@ -194,7 +194,7 @@ public class ChannelPublicKeys : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.ChannelPublicKeys b) {
-		bool ret = bindings.ChannelPublicKeys_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.ChannelPublicKeys_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

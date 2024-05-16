@@ -55,7 +55,29 @@ public class ReceiveTlvs extends CommonBase {
 	 * Constraints for the receiver of this payment.
 	 */
 	public void set_payment_constraints(org.ldk.structs.PaymentConstraints val) {
-		bindings.ReceiveTlvs_set_payment_constraints(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ReceiveTlvs_set_payment_constraints(this.ptr, val.ptr);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
+		if (this != null) { this.ptrs_to.add(val); };
+	}
+
+	/**
+	 * Context for the receiver of this payment.
+	 */
+	public PaymentContext get_payment_context() {
+		long ret = bindings.ReceiveTlvs_get_payment_context(this.ptr);
+		Reference.reachabilityFence(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.PaymentContext ret_hu_conv = org.ldk.structs.PaymentContext.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Context for the receiver of this payment.
+	 */
+	public void set_payment_context(org.ldk.structs.PaymentContext val) {
+		bindings.ReceiveTlvs_set_payment_context(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -64,14 +86,16 @@ public class ReceiveTlvs extends CommonBase {
 	/**
 	 * Constructs a new ReceiveTlvs given each field
 	 */
-	public static ReceiveTlvs of(byte[] payment_secret_arg, org.ldk.structs.PaymentConstraints payment_constraints_arg) {
-		long ret = bindings.ReceiveTlvs_new(InternalUtils.check_arr_len(payment_secret_arg, 32), payment_constraints_arg == null ? 0 : payment_constraints_arg.ptr);
+	public static ReceiveTlvs of(byte[] payment_secret_arg, org.ldk.structs.PaymentConstraints payment_constraints_arg, org.ldk.structs.PaymentContext payment_context_arg) {
+		long ret = bindings.ReceiveTlvs_new(InternalUtils.check_arr_len(payment_secret_arg, 32), payment_constraints_arg.ptr, payment_context_arg.ptr);
 		Reference.reachabilityFence(payment_secret_arg);
 		Reference.reachabilityFence(payment_constraints_arg);
+		Reference.reachabilityFence(payment_context_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ReceiveTlvs ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ReceiveTlvs(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payment_constraints_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payment_context_arg); };
 		return ret_hu_conv;
 	}
 

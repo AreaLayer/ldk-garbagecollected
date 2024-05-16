@@ -92,7 +92,7 @@ public class Pong extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.Pong b) {
-		boolean ret = bindings.Pong_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.Pong_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

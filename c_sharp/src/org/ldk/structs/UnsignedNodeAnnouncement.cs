@@ -33,7 +33,7 @@ public class UnsignedNodeAnnouncement : CommonBase {
 	 * The advertised features
 	 */
 	public void set_features(org.ldk.structs.NodeFeatures val) {
-		bindings.UnsignedNodeAnnouncement_set_features(this.ptr, val == null ? 0 : val.ptr);
+		bindings.UnsignedNodeAnnouncement_set_features(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -75,7 +75,7 @@ public class UnsignedNodeAnnouncement : CommonBase {
 	 * to this node).
 	 */
 	public void set_node_id(org.ldk.structs.NodeId val) {
-		bindings.UnsignedNodeAnnouncement_set_node_id(this.ptr, val == null ? 0 : val.ptr);
+		bindings.UnsignedNodeAnnouncement_set_node_id(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -121,7 +121,7 @@ public class UnsignedNodeAnnouncement : CommonBase {
 	 * This should be sanitized before use. There is no guarantee of uniqueness.
 	 */
 	public void set_alias(org.ldk.structs.NodeAlias val) {
-		bindings.UnsignedNodeAnnouncement_set_alias(this.ptr, val == null ? 0 : val.ptr);
+		bindings.UnsignedNodeAnnouncement_set_alias(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -156,6 +156,85 @@ public class UnsignedNodeAnnouncement : CommonBase {
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		foreach (SocketAddress val_conv_15 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_15); }; };
+	}
+
+	/**
+	 * Excess address data which was signed as a part of the message which we do not (yet) understand how
+	 * to decode.
+	 * 
+	 * This is stored to ensure forward-compatibility as new address types are added to the lightning gossip protocol.
+	 * 
+	 * Returns a copy of the field.
+	 */
+	public byte[] get_excess_address_data() {
+		long ret = bindings.UnsignedNodeAnnouncement_get_excess_address_data(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
+		return ret_conv;
+	}
+
+	/**
+	 * Excess address data which was signed as a part of the message which we do not (yet) understand how
+	 * to decode.
+	 * 
+	 * This is stored to ensure forward-compatibility as new address types are added to the lightning gossip protocol.
+	 */
+	public void set_excess_address_data(byte[] val) {
+		bindings.UnsignedNodeAnnouncement_set_excess_address_data(this.ptr, InternalUtils.encodeUint8Array(val));
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
+	}
+
+	/**
+	 * Excess data which was signed as a part of the message which we do not (yet) understand how
+	 * to decode.
+	 * 
+	 * This is stored to ensure forward-compatibility as new fields are added to the lightning gossip protocol.
+	 * 
+	 * Returns a copy of the field.
+	 */
+	public byte[] get_excess_data() {
+		long ret = bindings.UnsignedNodeAnnouncement_get_excess_data(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
+		return ret_conv;
+	}
+
+	/**
+	 * Excess data which was signed as a part of the message which we do not (yet) understand how
+	 * to decode.
+	 * 
+	 * This is stored to ensure forward-compatibility as new fields are added to the lightning gossip protocol.
+	 */
+	public void set_excess_data(byte[] val) {
+		bindings.UnsignedNodeAnnouncement_set_excess_data(this.ptr, InternalUtils.encodeUint8Array(val));
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
+	}
+
+	/**
+	 * Constructs a new UnsignedNodeAnnouncement given each field
+	 */
+	public static UnsignedNodeAnnouncement of(org.ldk.structs.NodeFeatures features_arg, int timestamp_arg, org.ldk.structs.NodeId node_id_arg, byte[] rgb_arg, org.ldk.structs.NodeAlias alias_arg, SocketAddress[] addresses_arg, byte[] excess_address_data_arg, byte[] excess_data_arg) {
+		long ret = bindings.UnsignedNodeAnnouncement_new(features_arg.ptr, timestamp_arg, node_id_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(rgb_arg, 3)), alias_arg.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(addresses_arg, addresses_arg_conv_15 => addresses_arg_conv_15.ptr)), InternalUtils.encodeUint8Array(excess_address_data_arg), InternalUtils.encodeUint8Array(excess_data_arg));
+		GC.KeepAlive(features_arg);
+		GC.KeepAlive(timestamp_arg);
+		GC.KeepAlive(node_id_arg);
+		GC.KeepAlive(rgb_arg);
+		GC.KeepAlive(alias_arg);
+		GC.KeepAlive(addresses_arg);
+		GC.KeepAlive(excess_address_data_arg);
+		GC.KeepAlive(excess_data_arg);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.UnsignedNodeAnnouncement ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.UnsignedNodeAnnouncement(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(features_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(node_id_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(alias_arg); };
+		foreach (SocketAddress addresses_arg_conv_15 in addresses_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(addresses_arg_conv_15); }; };
+		return ret_hu_conv;
 	}
 
 	internal long clone_ptr() {
@@ -194,7 +273,7 @@ public class UnsignedNodeAnnouncement : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.UnsignedNodeAnnouncement b) {
-		bool ret = bindings.UnsignedNodeAnnouncement_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.UnsignedNodeAnnouncement_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

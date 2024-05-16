@@ -42,7 +42,7 @@ public class Result_SpliceAckDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_SpliceAckDecodeErrorZ in the success state.
 	 */
 	public static Result_SpliceAckDecodeErrorZ ok(org.ldk.structs.SpliceAck o) {
-		long ret = bindings.CResult_SpliceAckDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_SpliceAckDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_SpliceAckDecodeErrorZ ret_hu_conv = Result_SpliceAckDecodeErrorZ.constr_from_ptr(ret);

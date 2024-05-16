@@ -42,7 +42,7 @@ public class Result_RouteLightningErrorZ : CommonBase {
 	 * Creates a new CResult_RouteLightningErrorZ in the success state.
 	 */
 	public static Result_RouteLightningErrorZ ok(org.ldk.structs.Route o) {
-		long ret = bindings.CResult_RouteLightningErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_RouteLightningErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RouteLightningErrorZ ret_hu_conv = Result_RouteLightningErrorZ.constr_from_ptr(ret);
@@ -54,7 +54,7 @@ public class Result_RouteLightningErrorZ : CommonBase {
 	 * Creates a new CResult_RouteLightningErrorZ in the error state.
 	 */
 	public static Result_RouteLightningErrorZ err(org.ldk.structs.LightningError e) {
-		long ret = bindings.CResult_RouteLightningErrorZ_err(e == null ? 0 : e.ptr);
+		long ret = bindings.CResult_RouteLightningErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RouteLightningErrorZ ret_hu_conv = Result_RouteLightningErrorZ.constr_from_ptr(ret);

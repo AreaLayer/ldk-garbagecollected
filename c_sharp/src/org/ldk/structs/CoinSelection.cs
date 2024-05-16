@@ -41,7 +41,7 @@ public class CoinSelection : CommonBase {
 	 * requiring additional fees.
 	 */
 	public void set_confirmed_utxos(Utxo[] val) {
-		bindings.CoinSelection_set_confirmed_utxos(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_6 => val_conv_6 == null ? 0 : val_conv_6.ptr)));
+		bindings.CoinSelection_set_confirmed_utxos(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_6 => val_conv_6.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		foreach (Utxo val_conv_6 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_6); }; };
@@ -79,7 +79,7 @@ public class CoinSelection : CommonBase {
 	 * Constructs a new CoinSelection given each field
 	 */
 	public static CoinSelection of(Utxo[] confirmed_utxos_arg, org.ldk.structs.Option_TxOutZ change_output_arg) {
-		long ret = bindings.CoinSelection_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(confirmed_utxos_arg, confirmed_utxos_arg_conv_6 => confirmed_utxos_arg_conv_6 == null ? 0 : confirmed_utxos_arg_conv_6.ptr)), change_output_arg.ptr);
+		long ret = bindings.CoinSelection_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(confirmed_utxos_arg, confirmed_utxos_arg_conv_6 => confirmed_utxos_arg_conv_6.ptr)), change_output_arg.ptr);
 		GC.KeepAlive(confirmed_utxos_arg);
 		GC.KeepAlive(change_output_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }

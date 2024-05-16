@@ -42,7 +42,7 @@ public class Path extends CommonBase {
 	 * The list of unblinded hops in this [`Path`]. Must be at least length one.
 	 */
 	public void set_hops(RouteHop[] val) {
-		bindings.Path_set_hops(this.ptr, val != null ? Arrays.stream(val).mapToLong(val_conv_10 -> val_conv_10 == null ? 0 : val_conv_10.ptr).toArray() : null);
+		bindings.Path_set_hops(this.ptr, val != null ? Arrays.stream(val).mapToLong(val_conv_10 -> val_conv_10.ptr).toArray() : null);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		for (RouteHop val_conv_10: val) { if (this != null) { this.ptrs_to.add(val_conv_10); }; };
@@ -81,7 +81,7 @@ public class Path extends CommonBase {
 	 * Note that blinded_tail_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public static Path of(RouteHop[] hops_arg, @Nullable org.ldk.structs.BlindedTail blinded_tail_arg) {
-		long ret = bindings.Path_new(hops_arg != null ? Arrays.stream(hops_arg).mapToLong(hops_arg_conv_10 -> hops_arg_conv_10 == null ? 0 : hops_arg_conv_10.ptr).toArray() : null, blinded_tail_arg == null ? 0 : blinded_tail_arg.ptr);
+		long ret = bindings.Path_new(hops_arg != null ? Arrays.stream(hops_arg).mapToLong(hops_arg_conv_10 -> hops_arg_conv_10.ptr).toArray() : null, blinded_tail_arg == null ? 0 : blinded_tail_arg.ptr);
 		Reference.reachabilityFence(hops_arg);
 		Reference.reachabilityFence(blinded_tail_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -128,7 +128,7 @@ public class Path extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.Path b) {
-		boolean ret = bindings.Path_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.Path_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

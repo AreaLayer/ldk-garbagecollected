@@ -314,7 +314,7 @@ public class ChannelManagerConstructor {
             routing_msg_handler = graph_msg_handler.as_RoutingMessageHandler();
         else
             routing_msg_handler = ignoring_handler.as_RoutingMessageHandler();
-        OnionMessenger messenger = OnionMessenger.of(this.entropy_source, this.node_signer, this.logger, this.router.get_message_router(), channel_manager.as_OffersMessageHandler(), IgnoringMessageHandler.of().as_CustomOnionMessageHandler());
+        OnionMessenger messenger = OnionMessenger.of(this.entropy_source, this.node_signer, this.logger, this.channel_manager.as_NodeIdLookUp(), this.router.get_message_router(), channel_manager.as_OffersMessageHandler(), IgnoringMessageHandler.of().as_CustomOnionMessageHandler());
         this.peer_manager = PeerManager.of(channel_manager.as_ChannelMessageHandler(),
                 routing_msg_handler, messenger.as_OnionMessageHandler(),
                 ignoring_handler.as_CustomMessageHandler(), (int)(System.currentTimeMillis() / 1000),

@@ -31,7 +31,7 @@ public class RawDataPart : CommonBase {
 	 * generation time of the invoice
 	 */
 	public void set_timestamp(org.ldk.structs.PositiveTimestamp val) {
-		bindings.RawDataPart_set_timestamp(this.ptr, val == null ? 0 : val.ptr);
+		bindings.RawDataPart_set_timestamp(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -43,7 +43,7 @@ public class RawDataPart : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.RawDataPart b) {
-		bool ret = bindings.RawDataPart_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.RawDataPart_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

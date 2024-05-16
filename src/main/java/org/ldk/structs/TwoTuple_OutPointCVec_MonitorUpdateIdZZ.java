@@ -72,7 +72,7 @@ public class TwoTuple_OutPointCVec_MonitorUpdateIdZZ extends CommonBase {
 	 * Creates a new C2Tuple_OutPointCVec_MonitorUpdateIdZZ from the contained elements.
 	 */
 	public static TwoTuple_OutPointCVec_MonitorUpdateIdZZ of(org.ldk.structs.OutPoint a, MonitorUpdateId[] b) {
-		long ret = bindings.C2Tuple_OutPointCVec_MonitorUpdateIdZZ_new(a == null ? 0 : a.ptr, b != null ? Arrays.stream(b).mapToLong(b_conv_17 -> b_conv_17 == null ? 0 : b_conv_17.ptr).toArray() : null);
+		long ret = bindings.C2Tuple_OutPointCVec_MonitorUpdateIdZZ_new(a.ptr, b != null ? Arrays.stream(b).mapToLong(b_conv_17 -> b_conv_17.ptr).toArray() : null);
 		Reference.reachabilityFence(a);
 		Reference.reachabilityFence(b);
 		if (ret >= 0 && ret <= 4096) { return null; }

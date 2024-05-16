@@ -25,19 +25,23 @@ public class CommitmentSigned extends CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public byte[] get_channel_id() {
-		byte[] ret = bindings.CommitmentSigned_get_channel_id(this.ptr);
+	public ChannelId get_channel_id() {
+		long ret = bindings.CommitmentSigned_get_channel_id(this.ptr);
 		Reference.reachabilityFence(this);
-		return ret;
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
 	}
 
 	/**
 	 * The channel ID
 	 */
-	public void set_channel_id(byte[] val) {
-		bindings.CommitmentSigned_set_channel_id(this.ptr, InternalUtils.check_arr_len(val, 32));
+	public void set_channel_id(org.ldk.structs.ChannelId val) {
+		bindings.CommitmentSigned_set_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
+		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -81,14 +85,15 @@ public class CommitmentSigned extends CommonBase {
 	/**
 	 * Constructs a new CommitmentSigned given each field
 	 */
-	public static CommitmentSigned of(byte[] channel_id_arg, byte[] signature_arg, byte[][] htlc_signatures_arg) {
-		long ret = bindings.CommitmentSigned_new(InternalUtils.check_arr_len(channel_id_arg, 32), InternalUtils.check_arr_len(signature_arg, 64), htlc_signatures_arg != null ? Arrays.stream(htlc_signatures_arg).map(htlc_signatures_arg_conv_8 -> InternalUtils.check_arr_len(htlc_signatures_arg_conv_8, 64)).toArray(byte[][]::new) : null);
+	public static CommitmentSigned of(org.ldk.structs.ChannelId channel_id_arg, byte[] signature_arg, byte[][] htlc_signatures_arg) {
+		long ret = bindings.CommitmentSigned_new(channel_id_arg.ptr, InternalUtils.check_arr_len(signature_arg, 64), htlc_signatures_arg != null ? Arrays.stream(htlc_signatures_arg).map(htlc_signatures_arg_conv_8 -> InternalUtils.check_arr_len(htlc_signatures_arg_conv_8, 64)).toArray(byte[][]::new) : null);
 		Reference.reachabilityFence(channel_id_arg);
 		Reference.reachabilityFence(signature_arg);
 		Reference.reachabilityFence(htlc_signatures_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CommitmentSigned ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.CommitmentSigned(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id_arg); };
 		return ret_hu_conv;
 	}
 
@@ -128,7 +133,7 @@ public class CommitmentSigned extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.CommitmentSigned b) {
-		boolean ret = bindings.CommitmentSigned_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.CommitmentSigned_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

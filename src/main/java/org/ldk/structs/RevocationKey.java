@@ -57,7 +57,7 @@ public class RevocationKey extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.RevocationKey b) {
-		boolean ret = bindings.RevocationKey_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.RevocationKey_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };
@@ -110,7 +110,7 @@ public class RevocationKey extends CommonBase {
 	 * [`chan_utils::derive_private_revocation_key`]: crate::ln::chan_utils::derive_private_revocation_key
 	 */
 	public static RevocationKey from_basepoint(org.ldk.structs.RevocationBasepoint countersignatory_basepoint, byte[] per_commitment_point) {
-		long ret = bindings.RevocationKey_from_basepoint(countersignatory_basepoint == null ? 0 : countersignatory_basepoint.ptr, InternalUtils.check_arr_len(per_commitment_point, 33));
+		long ret = bindings.RevocationKey_from_basepoint(countersignatory_basepoint.ptr, InternalUtils.check_arr_len(per_commitment_point, 33));
 		Reference.reachabilityFence(countersignatory_basepoint);
 		Reference.reachabilityFence(per_commitment_point);
 		if (ret >= 0 && ret <= 4096) { return null; }

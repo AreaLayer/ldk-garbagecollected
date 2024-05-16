@@ -39,9 +39,9 @@ tests.push(async () => {
 	if (!(read_outpoint instanceof ldk.Result_OutPointDecodeErrorZ_OK)) return false;
 	if (!read_outpoint.res.eq(outpoint)) return false;
 	if (read_outpoint.res.hash() != outpoint.hash()) return false;
-	const chan_id = read_outpoint.res.to_channel_id();
-	if (chan_id.length != 32) return false;
-	if (chan_id[31] != 4) return false;
+	const chan_id = ldk.ChannelId.constructor_v1_from_funding_outpoint(read_outpoint.res);
+	if (chan_id.get_a().length != 32) return false;
+	if (chan_id.get_a()[31] != 4) return false;
 	return true;
 });
 
@@ -51,9 +51,9 @@ tests.push(async () => {
 	if (!(read_outpoint instanceof ldk.Result_OutPointDecodeErrorZ_OK)) return false;
 	if (!read_outpoint.res.eq(outpoint)) return false;
 	if (read_outpoint.res.hash() != outpoint.hash()) return false;
-	const chan_id = read_outpoint.res.to_channel_id();
-	if (chan_id.length != 32) return false;
-	if (chan_id[31] != 4) return false;
+	const chan_id = ldk.ChannelId.constructor_v1_from_funding_outpoint(read_outpoint.res);
+	if (chan_id.get_a().length != 32) return false;
+	if (chan_id.get_a()[31] != 4) return false;
 	return true;
 });
 
@@ -184,13 +184,13 @@ tests.push(async () => {
 	a.chan_man.as_ChannelMessageHandler().peer_connected(b.chan_man.get_our_node_id(), ldk.Init.constructor_new(features, ldk.Option_CVec_ThirtyTwoBytesZZ.constructor_none(), ldk.Option_SocketAddressZ.constructor_none()), false);
 	b.chan_man.as_ChannelMessageHandler().peer_connected(a.chan_man.get_our_node_id(), ldk.Init.constructor_new(features, ldk.Option_CVec_ThirtyTwoBytesZZ.constructor_none(), ldk.Option_SocketAddressZ.constructor_none()), true);
 
-	const chan_create_err = a.chan_man.create_channel(b.chan_man.get_our_node_id(), BigInt(0), BigInt(400), BigInt(0), ldk.Option_ThirtyTwoBytesZ.constructor_none(), null);
+	const chan_create_err = a.chan_man.create_channel(b.chan_man.get_our_node_id(), BigInt(0), BigInt(400), BigInt(0), null, null);
 	if (chan_create_err.is_ok()) return false;
-	if (!(chan_create_err instanceof ldk.Result_ThirtyTwoBytesAPIErrorZ_Err)) return false;
+	if (!(chan_create_err instanceof ldk.Result_ChannelIdAPIErrorZ_Err)) return false;
 	if (!(chan_create_err.err instanceof ldk.APIError_APIMisuseError)) return false;
 	if (chan_create_err.err.err != "Channel value must be at least 1000 satoshis. It was 0") return false;
 
-	const chan_create_res = a.chan_man.create_channel(b.chan_man.get_our_node_id(), BigInt(1000000), BigInt(400), BigInt(0), ldk.Option_ThirtyTwoBytesZ.constructor_none(), null);
+	const chan_create_res = a.chan_man.create_channel(b.chan_man.get_our_node_id(), BigInt(1000000), BigInt(400), BigInt(0), null, null);
 	if (!chan_create_res.is_ok()) return false;
 
 	if (!exchange_messages(a.chan_man, b.chan_man)) return false;
@@ -283,17 +283,17 @@ tests.push(async () => {
 	if (!(init_bytes instanceof ldk.Result_CVec_u8ZPeerHandleErrorZ_OK)) return false;
 	assert(pm_b.read_event(sock_b, init_bytes.res) instanceof ldk.Result_boolPeerHandleErrorZ_OK);
 
-	assert(pm_a.get_peer_node_ids().length == 0);
-	assert(pm_b.get_peer_node_ids().length == 0);
+	assert(pm_a.list_peers().length == 0);
+	assert(pm_b.list_peers().length == 0);
 
 	pm_b.process_events();
 	pm_a.process_events();
 	pm_b.process_events();
 
-	assert(pm_a.get_peer_node_ids().length == 1);
-	assert(pm_b.get_peer_node_ids().length == 1);
+	assert(pm_a.list_peers().length == 1);
+	assert(pm_b.list_peers().length == 1);
 
-	const chan_create_res = a.chan_man.create_channel(b.node_id, BigInt(1000000), BigInt(400), BigInt(0), ldk.Option_ThirtyTwoBytesZ.constructor_none(), ldk.UserConfig.constructor_default());
+	const chan_create_res = a.chan_man.create_channel(b.node_id, BigInt(1000000), BigInt(400), BigInt(0), null, ldk.UserConfig.constructor_default());
 	if (!chan_create_res.is_ok()) return false;
 	if (!update_done) return false;
 
@@ -325,9 +325,10 @@ tests.push(async () => {
 				debug_str(): string { return "Message Contents"; }
 			} as ldk.OnionMessageContentsInterface)));
 		},
-		handle_custom_message(msg: ldk.OnionMessageContents) {
+		handle_custom_message(msg: ldk.OnionMessageContents): ldk.Option_OnionMessageContentsZ {
 			assert(msg.tlv_type() == 9998n);
 			a_handled_msg = true;
+			return ldk.Option_OnionMessageContentsZ.constructor_none();
 		},
 		release_pending_custom_messages(): ldk.ThreeTuple_OnionMessageContentsDestinationBlindedPathZ[] {
 			return [];
@@ -338,7 +339,7 @@ tests.push(async () => {
 		.constructor_new(a.net_graph, a.keys_manager.as_EntropySource()).as_MessageRouter();
 	const underlying_om_a = ldk.OnionMessenger.constructor_new(
 		a.keys_manager.as_EntropySource(), a.keys_manager.as_NodeSigner(), a.logger,
-		a_msg_router, ignorer.as_OffersMessageHandler(), om_handler_a);
+		a.chan_man.as_NodeIdLookUp(), a_msg_router, ignorer.as_OffersMessageHandler(), om_handler_a);
 	const om_a = ldk.OnionMessageHandler.new_impl({
 		handle_onion_message(peer_node_id: Uint8Array, msg: ldk.OnionMessage) {
 			underlying_om_a.as_OnionMessageHandler().handle_onion_message(peer_node_id, msg);
@@ -372,9 +373,10 @@ tests.push(async () => {
 				debug_str(): string { return "Message Contents"; }
 			} as ldk.OnionMessageContentsInterface)));
 		},
-		handle_custom_message(msg: ldk.OnionMessageContents) {
+		handle_custom_message(msg: ldk.OnionMessageContents): ldk.Option_OnionMessageContentsZ {
 			assert(msg.tlv_type() == 9999n);
 			b_handled_msg = true;
+			return ldk.Option_OnionMessageContentsZ.constructor_none();
 		},
 		release_pending_custom_messages(): ldk.ThreeTuple_OnionMessageContentsDestinationBlindedPathZ[] {
 			return [];
@@ -383,7 +385,7 @@ tests.push(async () => {
 	const msg_router_b = ldk.DefaultMessageRouter
 		.constructor_new(b.net_graph, b.keys_manager.as_EntropySource()).as_MessageRouter();
 	const om_b = ldk.OnionMessenger.constructor_new(b.keys_manager.as_EntropySource(), b.keys_manager.as_NodeSigner(),
-		b.logger, msg_router_b, ignorer.as_OffersMessageHandler(), om_handler_b);
+		b.logger, b.chan_man.as_NodeIdLookUp(), msg_router_b, ignorer.as_OffersMessageHandler(), om_handler_b);
 
 	const pm_a = ldk.PeerManager.constructor_new(a.chan_man.as_ChannelMessageHandler(), ignorer.as_RoutingMessageHandler(),
 		om_a, ignorer.as_CustomMessageHandler(), 0xdeadbeef,
@@ -432,15 +434,15 @@ tests.push(async () => {
 	if (!(init_bytes instanceof ldk.Result_CVec_u8ZPeerHandleErrorZ_OK)) return false;
 	assert(pm_b.read_event(sock_b, init_bytes.res) instanceof ldk.Result_boolPeerHandleErrorZ_OK);
 
-	assert(pm_a.get_peer_node_ids().length == 0);
-	assert(pm_b.get_peer_node_ids().length == 0);
+	assert(pm_a.list_peers().length == 0);
+	assert(pm_b.list_peers().length == 0);
 
 	pm_b.process_events();
 	pm_a.process_events();
 	pm_b.process_events();
 
-	assert(pm_a.get_peer_node_ids().length == 1);
-	assert(pm_b.get_peer_node_ids().length == 1);
+	assert(pm_a.list_peers().length == 1);
+	assert(pm_b.list_peers().length == 1);
 
 	underlying_om_a.send_onion_message(
 		ldk.OnionMessageContents.new_impl({

@@ -27,8 +27,14 @@ public class ClosureReason extends CommonBase {
 		if (raw_val.getClass() == bindings.LDKClosureReason.HolderForceClosed.class) {
 			return new HolderForceClosed(ptr, (bindings.LDKClosureReason.HolderForceClosed)raw_val);
 		}
-		if (raw_val.getClass() == bindings.LDKClosureReason.CooperativeClosure.class) {
-			return new CooperativeClosure(ptr, (bindings.LDKClosureReason.CooperativeClosure)raw_val);
+		if (raw_val.getClass() == bindings.LDKClosureReason.LegacyCooperativeClosure.class) {
+			return new LegacyCooperativeClosure(ptr, (bindings.LDKClosureReason.LegacyCooperativeClosure)raw_val);
+		}
+		if (raw_val.getClass() == bindings.LDKClosureReason.CounterpartyInitiatedCooperativeClosure.class) {
+			return new CounterpartyInitiatedCooperativeClosure(ptr, (bindings.LDKClosureReason.CounterpartyInitiatedCooperativeClosure)raw_val);
+		}
+		if (raw_val.getClass() == bindings.LDKClosureReason.LocallyInitiatedCooperativeClosure.class) {
+			return new LocallyInitiatedCooperativeClosure(ptr, (bindings.LDKClosureReason.LocallyInitiatedCooperativeClosure)raw_val);
 		}
 		if (raw_val.getClass() == bindings.LDKClosureReason.CommitmentTxConfirmed.class) {
 			return new CommitmentTxConfirmed(ptr, (bindings.LDKClosureReason.CommitmentTxConfirmed)raw_val);
@@ -50,6 +56,9 @@ public class ClosureReason extends CommonBase {
 		}
 		if (raw_val.getClass() == bindings.LDKClosureReason.FundingBatchClosure.class) {
 			return new FundingBatchClosure(ptr, (bindings.LDKClosureReason.FundingBatchClosure)raw_val);
+		}
+		if (raw_val.getClass() == bindings.LDKClosureReason.HTLCsTimedOut.class) {
+			return new HTLCsTimedOut(ptr, (bindings.LDKClosureReason.HTLCsTimedOut)raw_val);
 		}
 		assert false; return null; // Unreachable without extending the (internal) bindings interface
 	}
@@ -92,9 +101,33 @@ public class ClosureReason extends CommonBase {
 	/**
 	 * The channel was closed after negotiating a cooperative close and we've now broadcasted
 	 * the cooperative close transaction. Note the shutdown may have been initiated by us.
+	 * 
+	 * This was only set in versions of LDK prior to 0.0.122.
 	 */
-	public final static class CooperativeClosure extends ClosureReason {
-		private CooperativeClosure(long ptr, bindings.LDKClosureReason.CooperativeClosure obj) {
+	public final static class LegacyCooperativeClosure extends ClosureReason {
+		private LegacyCooperativeClosure(long ptr, bindings.LDKClosureReason.LegacyCooperativeClosure obj) {
+			super(null, ptr);
+		}
+	}
+	/**
+	 * The channel was closed after negotiating a cooperative close and we've now broadcasted
+	 * the cooperative close transaction. This indicates that the shutdown was initiated by our
+	 * counterparty.
+	 * 
+	 * In rare cases where we initiated closure immediately prior to shutting down without
+	 * persisting, this value may be provided for channels we initiated closure for.
+	 */
+	public final static class CounterpartyInitiatedCooperativeClosure extends ClosureReason {
+		private CounterpartyInitiatedCooperativeClosure(long ptr, bindings.LDKClosureReason.CounterpartyInitiatedCooperativeClosure obj) {
+			super(null, ptr);
+		}
+	}
+	/**
+	 * The channel was closed after negotiating a cooperative close and we've now broadcasted
+	 * the cooperative close transaction. This indicates that the shutdown was initiated by us.
+	 */
+	public final static class LocallyInitiatedCooperativeClosure extends ClosureReason {
+		private LocallyInitiatedCooperativeClosure(long ptr, bindings.LDKClosureReason.LocallyInitiatedCooperativeClosure obj) {
 			super(null, ptr);
 		}
 	}
@@ -176,6 +209,14 @@ public class ClosureReason extends CommonBase {
 			super(null, ptr);
 		}
 	}
+	/**
+	 * One of our HTLCs timed out in a channel, causing us to force close the channel.
+	 */
+	public final static class HTLCsTimedOut extends ClosureReason {
+		private HTLCsTimedOut(long ptr, bindings.LDKClosureReason.HTLCsTimedOut obj) {
+			super(null, ptr);
+		}
+	}
 	long clone_ptr() {
 		long ret = bindings.ClosureReason_clone_ptr(this.ptr);
 		Reference.reachabilityFence(this);
@@ -198,7 +239,7 @@ public class ClosureReason extends CommonBase {
 	 * Utility method to constructs a new CounterpartyForceClosed-variant ClosureReason
 	 */
 	public static ClosureReason counterparty_force_closed(org.ldk.structs.UntrustedString peer_msg) {
-		long ret = bindings.ClosureReason_counterparty_force_closed(peer_msg == null ? 0 : peer_msg.ptr);
+		long ret = bindings.ClosureReason_counterparty_force_closed(peer_msg.ptr);
 		Reference.reachabilityFence(peer_msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ClosureReason ret_hu_conv = org.ldk.structs.ClosureReason.constr_from_ptr(ret);
@@ -219,10 +260,32 @@ public class ClosureReason extends CommonBase {
 	}
 
 	/**
-	 * Utility method to constructs a new CooperativeClosure-variant ClosureReason
+	 * Utility method to constructs a new LegacyCooperativeClosure-variant ClosureReason
 	 */
-	public static ClosureReason cooperative_closure() {
-		long ret = bindings.ClosureReason_cooperative_closure();
+	public static ClosureReason legacy_cooperative_closure() {
+		long ret = bindings.ClosureReason_legacy_cooperative_closure();
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ClosureReason ret_hu_conv = org.ldk.structs.ClosureReason.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new CounterpartyInitiatedCooperativeClosure-variant ClosureReason
+	 */
+	public static ClosureReason counterparty_initiated_cooperative_closure() {
+		long ret = bindings.ClosureReason_counterparty_initiated_cooperative_closure();
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ClosureReason ret_hu_conv = org.ldk.structs.ClosureReason.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new LocallyInitiatedCooperativeClosure-variant ClosureReason
+	 */
+	public static ClosureReason locally_initiated_cooperative_closure() {
+		long ret = bindings.ClosureReason_locally_initiated_cooperative_closure();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ClosureReason ret_hu_conv = org.ldk.structs.ClosureReason.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
@@ -308,11 +371,22 @@ public class ClosureReason extends CommonBase {
 	}
 
 	/**
+	 * Utility method to constructs a new HTLCsTimedOut-variant ClosureReason
+	 */
+	public static ClosureReason htlcs_timed_out() {
+		long ret = bindings.ClosureReason_htlcs_timed_out();
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ClosureReason ret_hu_conv = org.ldk.structs.ClosureReason.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Checks if two ClosureReasons contain equal inner contents.
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public boolean eq(org.ldk.structs.ClosureReason b) {
-		boolean ret = bindings.ClosureReason_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.ClosureReason_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		return ret;

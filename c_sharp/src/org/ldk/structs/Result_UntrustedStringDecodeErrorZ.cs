@@ -42,7 +42,7 @@ public class Result_UntrustedStringDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_UntrustedStringDecodeErrorZ in the success state.
 	 */
 	public static Result_UntrustedStringDecodeErrorZ ok(org.ldk.structs.UntrustedString o) {
-		long ret = bindings.CResult_UntrustedStringDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_UntrustedStringDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_UntrustedStringDecodeErrorZ ret_hu_conv = Result_UntrustedStringDecodeErrorZ.constr_from_ptr(ret);

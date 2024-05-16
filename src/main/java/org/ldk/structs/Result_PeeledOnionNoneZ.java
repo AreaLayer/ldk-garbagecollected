@@ -13,6 +13,10 @@ public class Result_PeeledOnionNoneZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_PeeledOnionNoneZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_PeeledOnionNoneZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_PeeledOnionNoneZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_PeeledOnionNoneZ_is_ok(ptr)) {
 			return new Result_PeeledOnionNoneZ_OK(null, ptr);
@@ -66,6 +70,24 @@ public class Result_PeeledOnionNoneZ extends CommonBase {
 		boolean ret = bindings.CResult_PeeledOnionNoneZ_is_ok(this.ptr);
 		Reference.reachabilityFence(this);
 		return ret;
+	}
+
+	long clone_ptr() {
+		long ret = bindings.CResult_PeeledOnionNoneZ_clone_ptr(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Creates a new CResult_PeeledOnionNoneZ which has the same data as `orig`
+	 * but with all dynamically-allocated buffers duplicated in new buffers.
+	 */
+	public Result_PeeledOnionNoneZ clone() {
+		long ret = bindings.CResult_PeeledOnionNoneZ_clone(this.ptr);
+		Reference.reachabilityFence(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_PeeledOnionNoneZ ret_hu_conv = Result_PeeledOnionNoneZ.constr_from_ptr(ret);
+		return ret_hu_conv;
 	}
 
 }

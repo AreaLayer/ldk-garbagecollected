@@ -120,7 +120,7 @@ public class PathFailure extends CommonBase {
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public boolean eq(org.ldk.structs.PathFailure b) {
-		boolean ret = bindings.PathFailure_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.PathFailure_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		return ret;

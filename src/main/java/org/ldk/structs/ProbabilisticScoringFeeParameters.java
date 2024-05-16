@@ -462,7 +462,7 @@ public class ProbabilisticScoringFeeParameters extends CommonBase {
 	 * i.e it will be avoided during path finding.
 	 */
 	public void add_banned(org.ldk.structs.NodeId node_id) {
-		bindings.ProbabilisticScoringFeeParameters_add_banned(this.ptr, node_id == null ? 0 : node_id.ptr);
+		bindings.ProbabilisticScoringFeeParameters_add_banned(this.ptr, node_id.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(node_id);
 		if (this != null) { this.ptrs_to.add(node_id); };
@@ -473,7 +473,7 @@ public class ProbabilisticScoringFeeParameters extends CommonBase {
 	 * they will be avoided during path finding.
 	 */
 	public void add_banned_from_list(NodeId[] node_ids) {
-		bindings.ProbabilisticScoringFeeParameters_add_banned_from_list(this.ptr, node_ids != null ? Arrays.stream(node_ids).mapToLong(node_ids_conv_8 -> node_ids_conv_8 == null ? 0 : node_ids_conv_8.ptr).toArray() : null);
+		bindings.ProbabilisticScoringFeeParameters_add_banned_from_list(this.ptr, node_ids != null ? Arrays.stream(node_ids).mapToLong(node_ids_conv_8 -> node_ids_conv_8.ptr).toArray() : null);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(node_ids);
 		for (NodeId node_ids_conv_8: node_ids) { if (this != null) { this.ptrs_to.add(node_ids_conv_8); }; };
@@ -483,7 +483,7 @@ public class ProbabilisticScoringFeeParameters extends CommonBase {
 	 * Removes the node with the given `node_id` from the list of nodes to avoid.
 	 */
 	public void remove_banned(org.ldk.structs.NodeId node_id) {
-		bindings.ProbabilisticScoringFeeParameters_remove_banned(this.ptr, node_id == null ? 0 : node_id.ptr);
+		bindings.ProbabilisticScoringFeeParameters_remove_banned(this.ptr, node_id.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(node_id);
 		if (this != null) { this.ptrs_to.add(node_id); };
@@ -493,7 +493,7 @@ public class ProbabilisticScoringFeeParameters extends CommonBase {
 	 * Sets a manual penalty for the given node.
 	 */
 	public void set_manual_penalty(org.ldk.structs.NodeId node_id, long penalty) {
-		bindings.ProbabilisticScoringFeeParameters_set_manual_penalty(this.ptr, node_id == null ? 0 : node_id.ptr, penalty);
+		bindings.ProbabilisticScoringFeeParameters_set_manual_penalty(this.ptr, node_id.ptr, penalty);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(node_id);
 		Reference.reachabilityFence(penalty);
@@ -504,7 +504,7 @@ public class ProbabilisticScoringFeeParameters extends CommonBase {
 	 * Removes the node with the given `node_id` from the list of manual penalties.
 	 */
 	public void remove_manual_penalty(org.ldk.structs.NodeId node_id) {
-		bindings.ProbabilisticScoringFeeParameters_remove_manual_penalty(this.ptr, node_id == null ? 0 : node_id.ptr);
+		bindings.ProbabilisticScoringFeeParameters_remove_manual_penalty(this.ptr, node_id.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(node_id);
 		if (this != null) { this.ptrs_to.add(node_id); };

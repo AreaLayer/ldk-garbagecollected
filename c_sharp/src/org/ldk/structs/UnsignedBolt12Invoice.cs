@@ -20,6 +20,24 @@ public class UnsignedBolt12Invoice : CommonBase {
 		if (ptr != 0) { bindings.UnsignedBolt12Invoice_free(ptr); }
 	}
 
+	internal long clone_ptr() {
+		long ret = bindings.UnsignedBolt12Invoice_clone_ptr(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Creates a copy of the UnsignedBolt12Invoice
+	 */
+	public UnsignedBolt12Invoice clone() {
+		long ret = bindings.UnsignedBolt12Invoice_clone(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.UnsignedBolt12Invoice ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.UnsignedBolt12Invoice(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
+	}
+
 	/**
 	 * Returns the [`TaggedHash`] of the invoice to sign.
 	 */
@@ -91,14 +109,12 @@ public class UnsignedBolt12Invoice : CommonBase {
 	 * 
 	 * [`Offer`]: crate::offers::offer::Offer
 	 * [`Offer::amount`]: crate::offers::offer::Offer::amount
-	 * 
-	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public Amount amount() {
+	public Option_AmountZ amount() {
 		long ret = bindings.UnsignedBolt12Invoice_amount(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.Amount ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Amount(null, ret); }
+		org.ldk.structs.Option_AmountZ ret_hu_conv = org.ldk.structs.Option_AmountZ.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
 		return ret_hu_conv;
 	}
@@ -129,6 +145,8 @@ public class UnsignedBolt12Invoice : CommonBase {
 	 * From [`Offer::description`] or [`Refund::description`].
 	 * 
 	 * [`Offer::description`]: crate::offers::offer::Offer::description
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public PrintableString description() {
 		long ret = bindings.UnsignedBolt12Invoice_description(this.ptr);
@@ -203,14 +221,12 @@ public class UnsignedBolt12Invoice : CommonBase {
 	 * [`Refund`].
 	 * 
 	 * [`Offer::supported_quantity`]: crate::offers::offer::Offer::supported_quantity
-	 * 
-	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public Quantity supported_quantity() {
+	public Option_QuantityZ supported_quantity() {
 		long ret = bindings.UnsignedBolt12Invoice_supported_quantity(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.Quantity ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Quantity(null, ret); }
+		org.ldk.structs.Option_QuantityZ ret_hu_conv = org.ldk.structs.Option_QuantityZ.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
 		return ret_hu_conv;
 	}

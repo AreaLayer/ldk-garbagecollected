@@ -23,7 +23,7 @@ public class RapidGossipSync : CommonBase {
 	 * Instantiate a new [`RapidGossipSync`] instance.
 	 */
 	public static RapidGossipSync of(org.ldk.structs.NetworkGraph network_graph, org.ldk.structs.Logger logger) {
-		long ret = bindings.RapidGossipSync_new(network_graph == null ? 0 : network_graph.ptr, logger.ptr);
+		long ret = bindings.RapidGossipSync_new(network_graph.ptr, logger.ptr);
 		GC.KeepAlive(network_graph);
 		GC.KeepAlive(logger);
 		if (ret >= 0 && ret <= 4096) { return null; }

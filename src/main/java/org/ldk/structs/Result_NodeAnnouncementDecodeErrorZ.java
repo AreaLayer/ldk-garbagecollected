@@ -13,6 +13,10 @@ public class Result_NodeAnnouncementDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_NodeAnnouncementDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_NodeAnnouncementDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_NodeAnnouncementDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_NodeAnnouncementDecodeErrorZ_is_ok(ptr)) {
 			return new Result_NodeAnnouncementDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_NodeAnnouncementDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_NodeAnnouncementDecodeErrorZ in the success state.
 	 */
 	public static Result_NodeAnnouncementDecodeErrorZ ok(org.ldk.structs.NodeAnnouncement o) {
-		long ret = bindings.CResult_NodeAnnouncementDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_NodeAnnouncementDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NodeAnnouncementDecodeErrorZ ret_hu_conv = Result_NodeAnnouncementDecodeErrorZ.constr_from_ptr(ret);

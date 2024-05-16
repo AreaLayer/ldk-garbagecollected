@@ -249,7 +249,7 @@ public class PaymentParameters : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.PaymentParameters b) {
-		bool ret = bindings.PaymentParameters_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.PaymentParameters_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };
@@ -329,7 +329,7 @@ public class PaymentParameters : CommonBase {
 	 * [`PaymentParameters::expiry_time`].
 	 */
 	public static PaymentParameters from_bolt12_invoice(org.ldk.structs.Bolt12Invoice invoice) {
-		long ret = bindings.PaymentParameters_from_bolt12_invoice(invoice == null ? 0 : invoice.ptr);
+		long ret = bindings.PaymentParameters_from_bolt12_invoice(invoice.ptr);
 		GC.KeepAlive(invoice);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PaymentParameters ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.PaymentParameters(null, ret); }
@@ -342,7 +342,7 @@ public class PaymentParameters : CommonBase {
 	 * Creates parameters for paying to a blinded payee from the provided blinded route hints.
 	 */
 	public static PaymentParameters blinded(TwoTuple_BlindedPayInfoBlindedPathZ[] blinded_route_hints) {
-		long ret = bindings.PaymentParameters_blinded(InternalUtils.encodeUint64Array(InternalUtils.mapArray(blinded_route_hints, blinded_route_hints_conv_37 => blinded_route_hints_conv_37 != null ? blinded_route_hints_conv_37.ptr : 0)));
+		long ret = bindings.PaymentParameters_blinded(InternalUtils.encodeUint64Array(InternalUtils.mapArray(blinded_route_hints, blinded_route_hints_conv_37 => blinded_route_hints_conv_37.ptr)));
 		GC.KeepAlive(blinded_route_hints);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PaymentParameters ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.PaymentParameters(null, ret); }

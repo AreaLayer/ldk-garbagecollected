@@ -39,7 +39,7 @@ public class Path : CommonBase {
 	 * The list of unblinded hops in this [`Path`]. Must be at least length one.
 	 */
 	public void set_hops(RouteHop[] val) {
-		bindings.Path_set_hops(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_10 => val_conv_10 == null ? 0 : val_conv_10.ptr)));
+		bindings.Path_set_hops(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_10 => val_conv_10.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		foreach (RouteHop val_conv_10 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_10); }; };
@@ -77,7 +77,7 @@ public class Path : CommonBase {
 	 * Note that blinded_tail_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public static Path of(RouteHop[] hops_arg, org.ldk.structs.BlindedTail blinded_tail_arg) {
-		long ret = bindings.Path_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(hops_arg, hops_arg_conv_10 => hops_arg_conv_10 == null ? 0 : hops_arg_conv_10.ptr)), blinded_tail_arg == null ? 0 : blinded_tail_arg.ptr);
+		long ret = bindings.Path_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(hops_arg, hops_arg_conv_10 => hops_arg_conv_10.ptr)), blinded_tail_arg == null ? 0 : blinded_tail_arg.ptr);
 		GC.KeepAlive(hops_arg);
 		GC.KeepAlive(blinded_tail_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -124,7 +124,7 @@ public class Path : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.Path b) {
-		bool ret = bindings.Path_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.Path_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

@@ -209,6 +209,18 @@ public class Refund extends CommonBase {
 	}
 
 	/**
+	 * Generates a non-cryptographic 64-bit hash of the Refund.
+	 */
+	public long hash() {
+		long ret = bindings.Refund_hash(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	@Override public int hashCode() {
+		return (int)this.hash();
+	}
+	/**
 	 * Serialize the Refund object into a byte array which can be read by Refund_read
 	 */
 	public byte[] write() {

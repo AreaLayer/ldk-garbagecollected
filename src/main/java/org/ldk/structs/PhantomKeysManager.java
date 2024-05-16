@@ -61,6 +61,19 @@ public class PhantomKeysManager extends CommonBase {
 	}
 
 	/**
+	 * Constructs a new OutputSpender which calls the relevant methods on this_arg.
+	 * This copies the `inner` pointer in this_arg and thus the returned OutputSpender must be freed before this_arg is
+	 */
+	public OutputSpender as_OutputSpender() {
+		long ret = bindings.PhantomKeysManager_as_OutputSpender(this.ptr);
+		Reference.reachabilityFence(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		OutputSpender ret_hu_conv = new OutputSpender(null, ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Constructs a new SignerProvider which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned SignerProvider must be freed before this_arg is
 	 */
@@ -95,24 +108,6 @@ public class PhantomKeysManager extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PhantomKeysManager ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.PhantomKeysManager(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		return ret_hu_conv;
-	}
-
-	/**
-	 * See [`KeysManager::spend_spendable_outputs`] for documentation on this method.
-	 */
-	public Result_TransactionNoneZ spend_spendable_outputs(SpendableOutputDescriptor[] descriptors, TxOut[] outputs, byte[] change_destination_script, int feerate_sat_per_1000_weight, org.ldk.structs.Option_u32Z locktime) {
-		long ret = bindings.PhantomKeysManager_spend_spendable_outputs(this.ptr, descriptors != null ? Arrays.stream(descriptors).mapToLong(descriptors_conv_27 -> descriptors_conv_27.ptr).toArray() : null, outputs != null ? Arrays.stream(outputs).mapToLong(outputs_conv_7 -> outputs_conv_7.ptr).toArray() : null, change_destination_script, feerate_sat_per_1000_weight, locktime.ptr);
-		Reference.reachabilityFence(this);
-		Reference.reachabilityFence(descriptors);
-		Reference.reachabilityFence(outputs);
-		Reference.reachabilityFence(change_destination_script);
-		Reference.reachabilityFence(feerate_sat_per_1000_weight);
-		Reference.reachabilityFence(locktime);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_TransactionNoneZ ret_hu_conv = Result_TransactionNoneZ.constr_from_ptr(ret);
-		for (SpendableOutputDescriptor descriptors_conv_27: descriptors) { if (this != null) { this.ptrs_to.add(descriptors_conv_27); }; };
-		if (this != null) { this.ptrs_to.add(locktime); };
 		return ret_hu_conv;
 	}
 

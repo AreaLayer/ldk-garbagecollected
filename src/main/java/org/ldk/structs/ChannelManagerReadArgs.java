@@ -273,7 +273,7 @@ public class ChannelManagerReadArgs extends CommonBase {
 	 * runtime settings which were stored when the ChannelManager was serialized.
 	 */
 	public void set_default_config(org.ldk.structs.UserConfig val) {
-		bindings.ChannelManagerReadArgs_set_default_config(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChannelManagerReadArgs_set_default_config(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -285,7 +285,7 @@ public class ChannelManagerReadArgs extends CommonBase {
 	 * populate a HashMap directly from C.
 	 */
 	public static ChannelManagerReadArgs of(org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.SignerProvider signer_provider, org.ldk.structs.FeeEstimator fee_estimator, org.ldk.structs.Watch chain_monitor, org.ldk.structs.BroadcasterInterface tx_broadcaster, org.ldk.structs.Router router, org.ldk.structs.Logger logger, org.ldk.structs.UserConfig default_config, ChannelMonitor[] channel_monitors) {
-		long ret = bindings.ChannelManagerReadArgs_new(entropy_source.ptr, node_signer.ptr, signer_provider.ptr, fee_estimator.ptr, chain_monitor.ptr, tx_broadcaster.ptr, router.ptr, logger.ptr, default_config == null ? 0 : default_config.ptr, channel_monitors != null ? Arrays.stream(channel_monitors).mapToLong(channel_monitors_conv_16 -> channel_monitors_conv_16 == null ? 0 : channel_monitors_conv_16.ptr).toArray() : null);
+		long ret = bindings.ChannelManagerReadArgs_new(entropy_source.ptr, node_signer.ptr, signer_provider.ptr, fee_estimator.ptr, chain_monitor.ptr, tx_broadcaster.ptr, router.ptr, logger.ptr, default_config.ptr, channel_monitors != null ? Arrays.stream(channel_monitors).mapToLong(channel_monitors_conv_16 -> channel_monitors_conv_16.ptr).toArray() : null);
 		Reference.reachabilityFence(entropy_source);
 		Reference.reachabilityFence(node_signer);
 		Reference.reachabilityFence(signer_provider);

@@ -62,5 +62,33 @@ public class DirectedChannelInfo : CommonBase {
 		return ret_hu_conv;
 	}
 
+	/**
+	 * Returns the `node_id` of the source hop.
+	 * 
+	 * Refers to the `node_id` forwarding the payment to the next hop.
+	 */
+	public NodeId source() {
+		long ret = bindings.DirectedChannelInfo_source(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.NodeId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.NodeId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Returns the `node_id` of the target hop.
+	 * 
+	 * Refers to the `node_id` receiving the payment from the previous hop.
+	 */
+	public NodeId target() {
+		long ret = bindings.DirectedChannelInfo_target(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.NodeId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.NodeId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
+	}
+
 }
 } } }

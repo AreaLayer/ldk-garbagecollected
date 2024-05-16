@@ -33,7 +33,7 @@ public class Init : CommonBase {
 	 * The relevant features which the sender supports.
 	 */
 	public void set_features(org.ldk.structs.InitFeatures val) {
-		bindings.Init_set_features(this.ptr, val == null ? 0 : val.ptr);
+		bindings.Init_set_features(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -103,7 +103,7 @@ public class Init : CommonBase {
 	 * Constructs a new Init given each field
 	 */
 	public static Init of(org.ldk.structs.InitFeatures features_arg, org.ldk.structs.Option_CVec_ThirtyTwoBytesZZ networks_arg, org.ldk.structs.Option_SocketAddressZ remote_network_address_arg) {
-		long ret = bindings.Init_new(features_arg == null ? 0 : features_arg.ptr, networks_arg.ptr, remote_network_address_arg.ptr);
+		long ret = bindings.Init_new(features_arg.ptr, networks_arg.ptr, remote_network_address_arg.ptr);
 		GC.KeepAlive(features_arg);
 		GC.KeepAlive(networks_arg);
 		GC.KeepAlive(remote_network_address_arg);
@@ -152,7 +152,7 @@ public class Init : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.Init b) {
-		bool ret = bindings.Init_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.Init_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

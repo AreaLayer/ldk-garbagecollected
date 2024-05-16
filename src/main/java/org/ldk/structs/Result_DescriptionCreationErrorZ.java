@@ -13,6 +13,10 @@ public class Result_DescriptionCreationErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_DescriptionCreationErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_DescriptionCreationErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_DescriptionCreationErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_DescriptionCreationErrorZ_is_ok(ptr)) {
 			return new Result_DescriptionCreationErrorZ_OK(null, ptr);
@@ -43,7 +47,7 @@ public class Result_DescriptionCreationErrorZ extends CommonBase {
 	 * Creates a new CResult_DescriptionCreationErrorZ in the success state.
 	 */
 	public static Result_DescriptionCreationErrorZ ok(org.ldk.structs.Description o) {
-		long ret = bindings.CResult_DescriptionCreationErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_DescriptionCreationErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_DescriptionCreationErrorZ ret_hu_conv = Result_DescriptionCreationErrorZ.constr_from_ptr(ret);

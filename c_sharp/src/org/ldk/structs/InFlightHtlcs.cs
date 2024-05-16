@@ -49,7 +49,7 @@ public class InFlightHtlcs : CommonBase {
 	 * Takes in a path with payer's node id and adds the path's details to `InFlightHtlcs`.
 	 */
 	public void process_path(org.ldk.structs.Path path, byte[] payer_node_id) {
-		bindings.InFlightHtlcs_process_path(this.ptr, path == null ? 0 : path.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payer_node_id, 33)));
+		bindings.InFlightHtlcs_process_path(this.ptr, path.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payer_node_id, 33)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(path);
 		GC.KeepAlive(payer_node_id);
@@ -61,7 +61,7 @@ public class InFlightHtlcs : CommonBase {
 	 * id.
 	 */
 	public void add_inflight_htlc(org.ldk.structs.NodeId source, org.ldk.structs.NodeId target, long channel_scid, long used_msat) {
-		bindings.InFlightHtlcs_add_inflight_htlc(this.ptr, source == null ? 0 : source.ptr, target == null ? 0 : target.ptr, channel_scid, used_msat);
+		bindings.InFlightHtlcs_add_inflight_htlc(this.ptr, source.ptr, target.ptr, channel_scid, used_msat);
 		GC.KeepAlive(this);
 		GC.KeepAlive(source);
 		GC.KeepAlive(target);
@@ -76,7 +76,7 @@ public class InFlightHtlcs : CommonBase {
 	 * id.
 	 */
 	public Option_u64Z used_liquidity_msat(org.ldk.structs.NodeId source, org.ldk.structs.NodeId target, long channel_scid) {
-		long ret = bindings.InFlightHtlcs_used_liquidity_msat(this.ptr, source == null ? 0 : source.ptr, target == null ? 0 : target.ptr, channel_scid);
+		long ret = bindings.InFlightHtlcs_used_liquidity_msat(this.ptr, source.ptr, target.ptr, channel_scid);
 		GC.KeepAlive(this);
 		GC.KeepAlive(source);
 		GC.KeepAlive(target);

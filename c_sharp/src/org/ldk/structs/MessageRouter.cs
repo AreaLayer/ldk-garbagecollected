@@ -50,7 +50,7 @@ public class MessageRouter : CommonBase {
 			if (_destination_hu_conv != null) { _destination_hu_conv.ptrs_to.AddLast(this); };
 			Result_OnionMessagePathNoneZ ret = arg.find_path(_sender_conv, _peers_conv_8_arr, _destination_hu_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long create_blinded_paths(long _recipient, long _peers) {
@@ -65,7 +65,7 @@ public class MessageRouter : CommonBase {
 			bindings.free_buffer(_peers);
 			Result_CVec_BlindedPathZNoneZ ret = arg.create_blinded_paths(_recipient_conv, _peers_conv_8_arr);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 	}

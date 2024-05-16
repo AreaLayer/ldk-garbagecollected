@@ -146,7 +146,7 @@ public class Packet : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.Packet b) {
-		bool ret = bindings.Packet_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.Packet_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

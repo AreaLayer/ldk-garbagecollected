@@ -95,6 +95,10 @@ public enum Bolt12SemanticError {
 	 */
 	LDKBolt12SemanticError_MissingPaths,
 	/**
+	 * Blinded paths were provided but were not expected.
+	 */
+	LDKBolt12SemanticError_UnexpectedPaths,
+	/**
 	 * The blinded payinfo given does not match the number of blinded path hops.
 	 */
 	LDKBolt12SemanticError_InvalidPayInfo,

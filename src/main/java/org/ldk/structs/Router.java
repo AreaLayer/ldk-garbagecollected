@@ -86,7 +86,7 @@ public class Router extends CommonBase {
 				if (inflight_htlcs_hu_conv != null) { inflight_htlcs_hu_conv.ptrs_to.add(this); };
 				Result_RouteLightningErrorZ ret = arg.find_route(payer, route_params_hu_conv, first_hops_conv_16_arr, inflight_htlcs_hu_conv);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long find_route_with_id(byte[] payer, long route_params, long[] first_hops, long inflight_htlcs, byte[] _payment_hash, byte[] _payment_id) {
@@ -105,7 +105,7 @@ public class Router extends CommonBase {
 				if (inflight_htlcs_hu_conv != null) { inflight_htlcs_hu_conv.ptrs_to.add(this); };
 				Result_RouteLightningErrorZ ret = arg.find_route_with_id(payer, route_params_hu_conv, first_hops_conv_16_arr, inflight_htlcs_hu_conv, _payment_hash, _payment_id);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long create_blinded_payment_paths(byte[] recipient, long[] first_hops, long tlvs, long amount_msats) {
@@ -121,7 +121,7 @@ public class Router extends CommonBase {
 				if (tlvs_hu_conv != null) { tlvs_hu_conv.ptrs_to.add(this); };
 				Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ ret = arg.create_blinded_payment_paths(recipient, first_hops_conv_16_arr, tlvs_hu_conv, amount_msats);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 		}, MessageRouter.new_impl(MessageRouter_impl).bindings_instance);
@@ -146,7 +146,7 @@ public class Router extends CommonBase {
 	 * Note that first_hops (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public Result_RouteLightningErrorZ find_route(byte[] payer, org.ldk.structs.RouteParameters route_params, @Nullable ChannelDetails[] first_hops, org.ldk.structs.InFlightHtlcs inflight_htlcs) {
-		long ret = bindings.Router_find_route(this.ptr, InternalUtils.check_arr_len(payer, 33), route_params == null ? 0 : route_params.ptr, first_hops != null ? Arrays.stream(first_hops).mapToLong(first_hops_conv_16 -> first_hops_conv_16 == null ? 0 : first_hops_conv_16.ptr).toArray() : null, inflight_htlcs == null ? 0 : inflight_htlcs.ptr);
+		long ret = bindings.Router_find_route(this.ptr, InternalUtils.check_arr_len(payer, 33), route_params.ptr, first_hops != null ? Arrays.stream(first_hops).mapToLong(first_hops_conv_16 -> first_hops_conv_16.ptr).toArray() : null, inflight_htlcs.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(payer);
 		Reference.reachabilityFence(route_params);
@@ -172,7 +172,7 @@ public class Router extends CommonBase {
 	 * Note that first_hops (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public Result_RouteLightningErrorZ find_route_with_id(byte[] payer, org.ldk.structs.RouteParameters route_params, @Nullable ChannelDetails[] first_hops, org.ldk.structs.InFlightHtlcs inflight_htlcs, byte[] _payment_hash, byte[] _payment_id) {
-		long ret = bindings.Router_find_route_with_id(this.ptr, InternalUtils.check_arr_len(payer, 33), route_params == null ? 0 : route_params.ptr, first_hops != null ? Arrays.stream(first_hops).mapToLong(first_hops_conv_16 -> first_hops_conv_16 == null ? 0 : first_hops_conv_16.ptr).toArray() : null, inflight_htlcs == null ? 0 : inflight_htlcs.ptr, InternalUtils.check_arr_len(_payment_hash, 32), InternalUtils.check_arr_len(_payment_id, 32));
+		long ret = bindings.Router_find_route_with_id(this.ptr, InternalUtils.check_arr_len(payer, 33), route_params.ptr, first_hops != null ? Arrays.stream(first_hops).mapToLong(first_hops_conv_16 -> first_hops_conv_16.ptr).toArray() : null, inflight_htlcs.ptr, InternalUtils.check_arr_len(_payment_hash, 32), InternalUtils.check_arr_len(_payment_id, 32));
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(payer);
 		Reference.reachabilityFence(route_params);
@@ -194,7 +194,7 @@ public class Router extends CommonBase {
 	 * given in `tlvs`.
 	 */
 	public Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, org.ldk.structs.ReceiveTlvs tlvs, long amount_msats) {
-		long ret = bindings.Router_create_blinded_payment_paths(this.ptr, InternalUtils.check_arr_len(recipient, 33), first_hops != null ? Arrays.stream(first_hops).mapToLong(first_hops_conv_16 -> first_hops_conv_16 == null ? 0 : first_hops_conv_16.ptr).toArray() : null, tlvs == null ? 0 : tlvs.ptr, amount_msats);
+		long ret = bindings.Router_create_blinded_payment_paths(this.ptr, InternalUtils.check_arr_len(recipient, 33), first_hops != null ? Arrays.stream(first_hops).mapToLong(first_hops_conv_16 -> first_hops_conv_16.ptr).toArray() : null, tlvs.ptr, amount_msats);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(recipient);
 		Reference.reachabilityFence(first_hops);

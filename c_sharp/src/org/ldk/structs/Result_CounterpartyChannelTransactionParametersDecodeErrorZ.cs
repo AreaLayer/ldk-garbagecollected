@@ -42,7 +42,7 @@ public class Result_CounterpartyChannelTransactionParametersDecodeErrorZ : Commo
 	 * Creates a new CResult_CounterpartyChannelTransactionParametersDecodeErrorZ in the success state.
 	 */
 	public static Result_CounterpartyChannelTransactionParametersDecodeErrorZ ok(org.ldk.structs.CounterpartyChannelTransactionParameters o) {
-		long ret = bindings.CResult_CounterpartyChannelTransactionParametersDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_CounterpartyChannelTransactionParametersDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CounterpartyChannelTransactionParametersDecodeErrorZ ret_hu_conv = Result_CounterpartyChannelTransactionParametersDecodeErrorZ.constr_from_ptr(ret);

@@ -42,7 +42,7 @@ public class Result_DelayedPaymentOutputDescriptorDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_DelayedPaymentOutputDescriptorDecodeErrorZ in the success state.
 	 */
 	public static Result_DelayedPaymentOutputDescriptorDecodeErrorZ ok(org.ldk.structs.DelayedPaymentOutputDescriptor o) {
-		long ret = bindings.CResult_DelayedPaymentOutputDescriptorDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_DelayedPaymentOutputDescriptorDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_DelayedPaymentOutputDescriptorDecodeErrorZ ret_hu_conv = Result_DelayedPaymentOutputDescriptorDecodeErrorZ.constr_from_ptr(ret);

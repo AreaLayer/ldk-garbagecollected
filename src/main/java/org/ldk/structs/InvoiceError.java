@@ -72,7 +72,7 @@ public class InvoiceError extends CommonBase {
 	 * An explanation of the error.
 	 */
 	public void set_message(org.ldk.structs.UntrustedString val) {
-		bindings.InvoiceError_set_message(this.ptr, val == null ? 0 : val.ptr);
+		bindings.InvoiceError_set_message(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -84,7 +84,7 @@ public class InvoiceError extends CommonBase {
 	 * Note that erroneous_field_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public static InvoiceError of(@Nullable org.ldk.structs.ErroneousField erroneous_field_arg, org.ldk.structs.UntrustedString message_arg) {
-		long ret = bindings.InvoiceError_new(erroneous_field_arg == null ? 0 : erroneous_field_arg.ptr, message_arg == null ? 0 : message_arg.ptr);
+		long ret = bindings.InvoiceError_new(erroneous_field_arg == null ? 0 : erroneous_field_arg.ptr, message_arg.ptr);
 		Reference.reachabilityFence(erroneous_field_arg);
 		Reference.reachabilityFence(message_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }

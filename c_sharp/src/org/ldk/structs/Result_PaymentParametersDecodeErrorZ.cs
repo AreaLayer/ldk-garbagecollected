@@ -42,7 +42,7 @@ public class Result_PaymentParametersDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_PaymentParametersDecodeErrorZ in the success state.
 	 */
 	public static Result_PaymentParametersDecodeErrorZ ok(org.ldk.structs.PaymentParameters o) {
-		long ret = bindings.CResult_PaymentParametersDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_PaymentParametersDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_PaymentParametersDecodeErrorZ ret_hu_conv = Result_PaymentParametersDecodeErrorZ.constr_from_ptr(ret);

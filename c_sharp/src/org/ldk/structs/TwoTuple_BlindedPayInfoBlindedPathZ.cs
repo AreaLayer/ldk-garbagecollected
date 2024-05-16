@@ -62,7 +62,7 @@ public class TwoTuple_BlindedPayInfoBlindedPathZ : CommonBase {
 	 * Creates a new C2Tuple_BlindedPayInfoBlindedPathZ from the contained elements.
 	 */
 	public static TwoTuple_BlindedPayInfoBlindedPathZ of(org.ldk.structs.BlindedPayInfo a, org.ldk.structs.BlindedPath b) {
-		long ret = bindings.C2Tuple_BlindedPayInfoBlindedPathZ_new(a == null ? 0 : a.ptr, b == null ? 0 : b.ptr);
+		long ret = bindings.C2Tuple_BlindedPayInfoBlindedPathZ_new(a.ptr, b.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);
 		if (ret >= 0 && ret <= 4096) { return null; }

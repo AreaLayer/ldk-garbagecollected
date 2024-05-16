@@ -79,7 +79,7 @@ public class GraphSyncError : CommonBase {
 	 * Utility method to constructs a new LightningError-variant GraphSyncError
 	 */
 	public static GraphSyncError lightning_error(org.ldk.structs.LightningError a) {
-		long ret = bindings.GraphSyncError_lightning_error(a == null ? 0 : a.ptr);
+		long ret = bindings.GraphSyncError_lightning_error(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.GraphSyncError ret_hu_conv = org.ldk.structs.GraphSyncError.constr_from_ptr(ret);

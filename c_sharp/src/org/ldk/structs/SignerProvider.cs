@@ -98,20 +98,20 @@ public class SignerProvider : CommonBase {
 			byte[] _reader_conv = InternalUtils.decodeUint8Array(_reader);
 			Result_WriteableEcdsaChannelSignerDecodeErrorZ ret = arg.read_chan_signer(_reader_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long get_destination_script(long _channel_keys_id) {
 			byte[] _channel_keys_id_conv = InternalUtils.decodeUint8Array(_channel_keys_id);
 			Result_CVec_u8ZNoneZ ret = arg.get_destination_script(_channel_keys_id_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long get_shutdown_scriptpubkey() {
 			Result_ShutdownScriptNoneZ ret = arg.get_shutdown_scriptpubkey();
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 	}

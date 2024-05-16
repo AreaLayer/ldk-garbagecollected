@@ -37,7 +37,7 @@ public class Result_C2Tuple_BlindedPayInfoBlindedPathZNoneZ : CommonBase {
 	 * Creates a new CResult_C2Tuple_BlindedPayInfoBlindedPathZNoneZ in the success state.
 	 */
 	public static Result_C2Tuple_BlindedPayInfoBlindedPathZNoneZ ok(org.ldk.structs.TwoTuple_BlindedPayInfoBlindedPathZ o) {
-		long ret = bindings.CResult_C2Tuple_BlindedPayInfoBlindedPathZNoneZ_ok(o != null ? o.ptr : 0);
+		long ret = bindings.CResult_C2Tuple_BlindedPayInfoBlindedPathZNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_C2Tuple_BlindedPayInfoBlindedPathZNoneZ ret_hu_conv = Result_C2Tuple_BlindedPayInfoBlindedPathZNoneZ.constr_from_ptr(ret);

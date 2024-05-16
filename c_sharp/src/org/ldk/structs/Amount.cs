@@ -5,17 +5,53 @@ using System;
 
 namespace org { namespace ldk { namespace structs {
 
-
 /**
  * The minimum amount required for an item in an [`Offer`], denominated in either bitcoin or
  * another currency.
  */
 public class Amount : CommonBase {
-	internal Amount(object _dummy, long ptr) : base(ptr) { }
+	protected Amount(object _dummy, long ptr) : base(ptr) { }
 	~Amount() {
 		if (ptr != 0) { bindings.Amount_free(ptr); }
 	}
 
+	internal static Amount constr_from_ptr(long ptr) {
+		long raw_ty = bindings.LDKAmount_ty_from_ptr(ptr);
+		switch (raw_ty) {
+			case 0: return new Amount_Bitcoin(ptr);
+			case 1: return new Amount_Currency(ptr);
+			default:
+				throw new ArgumentException("Impossible enum variant");
+		}
+	}
+
+	/** A Amount of type Bitcoin */
+	public class Amount_Bitcoin : Amount {
+		/**
+		 * The amount in millisatoshi.
+		 */
+		public long amount_msats;
+		internal Amount_Bitcoin(long ptr) : base(null, ptr) {
+			this.amount_msats = bindings.LDKAmount_Bitcoin_get_amount_msats(ptr);
+		}
+	}
+	/** A Amount of type Currency */
+	public class Amount_Currency : Amount {
+		/**
+		 * The currency that the amount is denominated in.
+		 */
+		public byte[] iso4217_code;
+		/**
+		 * The amount in the currency unit adjusted by the ISO 4712 exponent (e.g., USD cents).
+		 */
+		public long amount;
+		internal Amount_Currency(long ptr) : base(null, ptr) {
+			long iso4217_code = bindings.LDKAmount_Currency_get_iso4217_code(ptr);
+			byte[] iso4217_code_conv = InternalUtils.decodeUint8Array(iso4217_code);
+			this.iso4217_code = iso4217_code_conv;
+			this.amount = bindings.LDKAmount_Currency_get_amount(ptr);
+		}
+	}
 	internal long clone_ptr() {
 		long ret = bindings.Amount_clone_ptr(this.ptr);
 		GC.KeepAlive(this);
@@ -29,8 +65,33 @@ public class Amount : CommonBase {
 		long ret = bindings.Amount_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.Amount ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Amount(null, ret); }
+		org.ldk.structs.Amount ret_hu_conv = org.ldk.structs.Amount.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new Bitcoin-variant Amount
+	 */
+	public static Amount bitcoin(long amount_msats) {
+		long ret = bindings.Amount_bitcoin(amount_msats);
+		GC.KeepAlive(amount_msats);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Amount ret_hu_conv = org.ldk.structs.Amount.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new Currency-variant Amount
+	 */
+	public static Amount currency(byte[] iso4217_code, long amount) {
+		long ret = bindings.Amount_currency(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(iso4217_code, 3)), amount);
+		GC.KeepAlive(iso4217_code);
+		GC.KeepAlive(amount);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Amount ret_hu_conv = org.ldk.structs.Amount.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
 		return ret_hu_conv;
 	}
 

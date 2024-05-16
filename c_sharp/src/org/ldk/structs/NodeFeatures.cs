@@ -21,7 +21,7 @@ public class NodeFeatures : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.NodeFeatures b) {
-		bool ret = bindings.NodeFeatures_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.NodeFeatures_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };
@@ -77,7 +77,7 @@ public class NodeFeatures : CommonBase {
 	 * Returns true if this `Features` object contains required features unknown by `other`.
 	 */
 	public bool requires_unknown_bits_from(org.ldk.structs.NodeFeatures other) {
-		bool ret = bindings.NodeFeatures_requires_unknown_bits_from(this.ptr, other == null ? 0 : other.ptr);
+		bool ret = bindings.NodeFeatures_requires_unknown_bits_from(this.ptr, other.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(other);
 		if (this != null) { this.ptrs_to.AddLast(other); };
@@ -796,6 +796,40 @@ public class NodeFeatures : CommonBase {
 	 */
 	public bool requires_keysend() {
 		bool ret = bindings.NodeFeatures_requires_keysend(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Set this feature as optional.
+	 */
+	public void set_trampoline_routing_optional() {
+		bindings.NodeFeatures_set_trampoline_routing_optional(this.ptr);
+		GC.KeepAlive(this);
+	}
+
+	/**
+	 * Set this feature as required.
+	 */
+	public void set_trampoline_routing_required() {
+		bindings.NodeFeatures_set_trampoline_routing_required(this.ptr);
+		GC.KeepAlive(this);
+	}
+
+	/**
+	 * Checks if this feature is supported.
+	 */
+	public bool supports_trampoline_routing() {
+		bool ret = bindings.NodeFeatures_supports_trampoline_routing(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Checks if this feature is required.
+	 */
+	public bool requires_trampoline_routing() {
+		bool ret = bindings.NodeFeatures_requires_trampoline_routing(this.ptr);
 		GC.KeepAlive(this);
 		return ret;
 	}

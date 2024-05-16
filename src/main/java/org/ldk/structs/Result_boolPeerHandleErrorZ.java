@@ -13,6 +13,10 @@ public class Result_boolPeerHandleErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_boolPeerHandleErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_boolPeerHandleErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_boolPeerHandleErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_boolPeerHandleErrorZ_is_ok(ptr)) {
 			return new Result_boolPeerHandleErrorZ_OK(null, ptr);
@@ -54,7 +58,7 @@ public class Result_boolPeerHandleErrorZ extends CommonBase {
 	 * Creates a new CResult_boolPeerHandleErrorZ in the error state.
 	 */
 	public static Result_boolPeerHandleErrorZ err(org.ldk.structs.PeerHandleError e) {
-		long ret = bindings.CResult_boolPeerHandleErrorZ_err(e == null ? 0 : e.ptr);
+		long ret = bindings.CResult_boolPeerHandleErrorZ_err(e.ptr);
 		Reference.reachabilityFence(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_boolPeerHandleErrorZ ret_hu_conv = Result_boolPeerHandleErrorZ.constr_from_ptr(ret);

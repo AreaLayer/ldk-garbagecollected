@@ -65,14 +65,14 @@ public class OffersMessageHandler extends CommonBase {
 				if (message_hu_conv != null) { message_hu_conv.ptrs_to.add(this); };
 				Option_OffersMessageZ ret = arg.handle_message(message_hu_conv);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				if (impl_holder.held != null) { impl_holder.held.ptrs_to.add(ret); };
 				return result;
 			}
 			@Override public long[] release_pending_messages() {
 				ThreeTuple_OffersMessageDestinationBlindedPathZ[] ret = arg.release_pending_messages();
 				Reference.reachabilityFence(arg);
-				long[] result = ret != null ? Arrays.stream(ret).mapToLong(ret_conv_49 -> ret_conv_49 == null ? 0 : ret_conv_49.clone_ptr()).toArray() : null;
+				long[] result = ret != null ? Arrays.stream(ret).mapToLong(ret_conv_49 -> ret_conv_49.clone_ptr()).toArray() : null;
 				return result;
 			}
 		});

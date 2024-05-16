@@ -128,7 +128,7 @@ public class Payee : CommonBase {
 	 * Utility method to constructs a new Blinded-variant Payee
 	 */
 	public static Payee blinded(TwoTuple_BlindedPayInfoBlindedPathZ[] route_hints, org.ldk.structs.Bolt12InvoiceFeatures features) {
-		long ret = bindings.Payee_blinded(InternalUtils.encodeUint64Array(InternalUtils.mapArray(route_hints, route_hints_conv_37 => route_hints_conv_37 != null ? route_hints_conv_37.ptr : 0)), features == null ? 0 : features.ptr);
+		long ret = bindings.Payee_blinded(InternalUtils.encodeUint64Array(InternalUtils.mapArray(route_hints, route_hints_conv_37 => route_hints_conv_37.ptr)), features.ptr);
 		GC.KeepAlive(route_hints);
 		GC.KeepAlive(features);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -142,7 +142,7 @@ public class Payee : CommonBase {
 	 * Utility method to constructs a new Clear-variant Payee
 	 */
 	public static Payee clear(byte[] node_id, RouteHint[] route_hints, org.ldk.structs.Bolt11InvoiceFeatures features, int final_cltv_expiry_delta) {
-		long ret = bindings.Payee_clear(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(route_hints, route_hints_conv_11 => route_hints_conv_11 == null ? 0 : route_hints_conv_11.ptr)), features == null ? 0 : features.ptr, final_cltv_expiry_delta);
+		long ret = bindings.Payee_clear(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(route_hints, route_hints_conv_11 => route_hints_conv_11.ptr)), features.ptr, final_cltv_expiry_delta);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(route_hints);
 		GC.KeepAlive(features);
@@ -172,7 +172,7 @@ public class Payee : CommonBase {
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public bool eq(org.ldk.structs.Payee b) {
-		bool ret = bindings.Payee_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.Payee_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		return ret;

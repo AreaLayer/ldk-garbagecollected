@@ -79,7 +79,7 @@ public class ThreeTuple_ChannelAnnouncementChannelUpdateChannelUpdateZ extends C
 	 * Creates a new C3Tuple_ChannelAnnouncementChannelUpdateChannelUpdateZ from the contained elements.
 	 */
 	public static ThreeTuple_ChannelAnnouncementChannelUpdateChannelUpdateZ of(org.ldk.structs.ChannelAnnouncement a, org.ldk.structs.ChannelUpdate b, org.ldk.structs.ChannelUpdate c) {
-		long ret = bindings.C3Tuple_ChannelAnnouncementChannelUpdateChannelUpdateZ_new(a == null ? 0 : a.ptr, b == null ? 0 : b.ptr, c == null ? 0 : c.ptr);
+		long ret = bindings.C3Tuple_ChannelAnnouncementChannelUpdateChannelUpdateZ_new(a.ptr, b.ptr, c.ptr);
 		Reference.reachabilityFence(a);
 		Reference.reachabilityFence(b);
 		Reference.reachabilityFence(c);

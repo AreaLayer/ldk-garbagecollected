@@ -13,6 +13,10 @@ public class Result_COption_EventZDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_COption_EventZDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_COption_EventZDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_COption_EventZDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_COption_EventZDecodeErrorZ_is_ok(ptr)) {
 			return new Result_COption_EventZDecodeErrorZ_OK(null, ptr);

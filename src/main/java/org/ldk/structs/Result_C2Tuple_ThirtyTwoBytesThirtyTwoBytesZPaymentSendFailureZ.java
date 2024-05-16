@@ -13,6 +13,10 @@ public class Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ ext
 		if (ptr != 0) { bindings.CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ_is_ok(ptr)) {
 			return new Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ ext
 	 * Creates a new CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ in the success state.
 	 */
 	public static Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ ok(org.ldk.structs.TwoTuple_ThirtyTwoBytesThirtyTwoBytesZ o) {
-		long ret = bindings.CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ_ok(o != null ? o.ptr : 0);
+		long ret = bindings.CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ ret_hu_conv = Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ.constr_from_ptr(ret);

@@ -33,7 +33,7 @@ public class UnsignedChannelAnnouncement : CommonBase {
 	 * The advertised channel features
 	 */
 	public void set_features(org.ldk.structs.ChannelFeatures val) {
-		bindings.UnsignedChannelAnnouncement_set_features(this.ptr, val == null ? 0 : val.ptr);
+		bindings.UnsignedChannelAnnouncement_set_features(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -93,7 +93,7 @@ public class UnsignedChannelAnnouncement : CommonBase {
 	 * One of the two `node_id`s which are endpoints of this channel
 	 */
 	public void set_node_id_1(org.ldk.structs.NodeId val) {
-		bindings.UnsignedChannelAnnouncement_set_node_id_1(this.ptr, val == null ? 0 : val.ptr);
+		bindings.UnsignedChannelAnnouncement_set_node_id_1(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -115,7 +115,7 @@ public class UnsignedChannelAnnouncement : CommonBase {
 	 * The other of the two `node_id`s which are endpoints of this channel
 	 */
 	public void set_node_id_2(org.ldk.structs.NodeId val) {
-		bindings.UnsignedChannelAnnouncement_set_node_id_2(this.ptr, val == null ? 0 : val.ptr);
+		bindings.UnsignedChannelAnnouncement_set_node_id_2(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -137,7 +137,7 @@ public class UnsignedChannelAnnouncement : CommonBase {
 	 * The funding key for the first node
 	 */
 	public void set_bitcoin_key_1(org.ldk.structs.NodeId val) {
-		bindings.UnsignedChannelAnnouncement_set_bitcoin_key_1(this.ptr, val == null ? 0 : val.ptr);
+		bindings.UnsignedChannelAnnouncement_set_bitcoin_key_1(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -159,7 +159,7 @@ public class UnsignedChannelAnnouncement : CommonBase {
 	 * The funding key for the second node
 	 */
 	public void set_bitcoin_key_2(org.ldk.structs.NodeId val) {
-		bindings.UnsignedChannelAnnouncement_set_bitcoin_key_2(this.ptr, val == null ? 0 : val.ptr);
+		bindings.UnsignedChannelAnnouncement_set_bitcoin_key_2(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -197,7 +197,7 @@ public class UnsignedChannelAnnouncement : CommonBase {
 	 * Constructs a new UnsignedChannelAnnouncement given each field
 	 */
 	public static UnsignedChannelAnnouncement of(org.ldk.structs.ChannelFeatures features_arg, byte[] chain_hash_arg, long short_channel_id_arg, org.ldk.structs.NodeId node_id_1_arg, org.ldk.structs.NodeId node_id_2_arg, org.ldk.structs.NodeId bitcoin_key_1_arg, org.ldk.structs.NodeId bitcoin_key_2_arg, byte[] excess_data_arg) {
-		long ret = bindings.UnsignedChannelAnnouncement_new(features_arg == null ? 0 : features_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(chain_hash_arg, 32)), short_channel_id_arg, node_id_1_arg == null ? 0 : node_id_1_arg.ptr, node_id_2_arg == null ? 0 : node_id_2_arg.ptr, bitcoin_key_1_arg == null ? 0 : bitcoin_key_1_arg.ptr, bitcoin_key_2_arg == null ? 0 : bitcoin_key_2_arg.ptr, InternalUtils.encodeUint8Array(excess_data_arg));
+		long ret = bindings.UnsignedChannelAnnouncement_new(features_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(chain_hash_arg, 32)), short_channel_id_arg, node_id_1_arg.ptr, node_id_2_arg.ptr, bitcoin_key_1_arg.ptr, bitcoin_key_2_arg.ptr, InternalUtils.encodeUint8Array(excess_data_arg));
 		GC.KeepAlive(features_arg);
 		GC.KeepAlive(chain_hash_arg);
 		GC.KeepAlive(short_channel_id_arg);
@@ -253,7 +253,7 @@ public class UnsignedChannelAnnouncement : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.UnsignedChannelAnnouncement b) {
-		bool ret = bindings.UnsignedChannelAnnouncement_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.UnsignedChannelAnnouncement_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

@@ -13,6 +13,10 @@ public class Result_SignedRawBolt11InvoiceBolt11ParseErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_SignedRawBolt11InvoiceBolt11ParseErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_SignedRawBolt11InvoiceBolt11ParseErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_SignedRawBolt11InvoiceBolt11ParseErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_SignedRawBolt11InvoiceBolt11ParseErrorZ_is_ok(ptr)) {
 			return new Result_SignedRawBolt11InvoiceBolt11ParseErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_SignedRawBolt11InvoiceBolt11ParseErrorZ extends CommonBase {
 	 * Creates a new CResult_SignedRawBolt11InvoiceBolt11ParseErrorZ in the success state.
 	 */
 	public static Result_SignedRawBolt11InvoiceBolt11ParseErrorZ ok(org.ldk.structs.SignedRawBolt11Invoice o) {
-		long ret = bindings.CResult_SignedRawBolt11InvoiceBolt11ParseErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_SignedRawBolt11InvoiceBolt11ParseErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_SignedRawBolt11InvoiceBolt11ParseErrorZ ret_hu_conv = Result_SignedRawBolt11InvoiceBolt11ParseErrorZ.constr_from_ptr(ret);

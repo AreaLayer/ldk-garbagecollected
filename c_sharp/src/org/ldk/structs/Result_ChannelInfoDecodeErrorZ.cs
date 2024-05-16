@@ -42,7 +42,7 @@ public class Result_ChannelInfoDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_ChannelInfoDecodeErrorZ in the success state.
 	 */
 	public static Result_ChannelInfoDecodeErrorZ ok(org.ldk.structs.ChannelInfo o) {
-		long ret = bindings.CResult_ChannelInfoDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_ChannelInfoDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ChannelInfoDecodeErrorZ ret_hu_conv = Result_ChannelInfoDecodeErrorZ.constr_from_ptr(ret);

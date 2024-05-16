@@ -80,7 +80,7 @@ public class ScoreLookUp extends CommonBase {
 	 * Thus, implementations should be overflow-safe.
 	 */
 	public long channel_penalty_msat(org.ldk.structs.CandidateRouteHop candidate, org.ldk.structs.ChannelUsage usage, org.ldk.structs.ProbabilisticScoringFeeParameters score_params) {
-		long ret = bindings.ScoreLookUp_channel_penalty_msat(this.ptr, candidate == null ? 0 : candidate.ptr, usage == null ? 0 : usage.ptr, score_params == null ? 0 : score_params.ptr);
+		long ret = bindings.ScoreLookUp_channel_penalty_msat(this.ptr, candidate.ptr, usage.ptr, score_params.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(candidate);
 		Reference.reachabilityFence(usage);

@@ -305,7 +305,7 @@ public class InMemorySigner extends CommonBase {
 	 * [`descriptor.outpoint`]: StaticPaymentOutputDescriptor::outpoint
 	 */
 	public Result_WitnessNoneZ sign_counterparty_payment_input(byte[] spend_tx, long input_idx, org.ldk.structs.StaticPaymentOutputDescriptor descriptor) {
-		long ret = bindings.InMemorySigner_sign_counterparty_payment_input(this.ptr, spend_tx, input_idx, descriptor == null ? 0 : descriptor.ptr);
+		long ret = bindings.InMemorySigner_sign_counterparty_payment_input(this.ptr, spend_tx, input_idx, descriptor.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(spend_tx);
 		Reference.reachabilityFence(input_idx);
@@ -329,7 +329,7 @@ public class InMemorySigner extends CommonBase {
 	 * [`descriptor.to_self_delay`]: DelayedPaymentOutputDescriptor::to_self_delay
 	 */
 	public Result_WitnessNoneZ sign_dynamic_p2wsh_input(byte[] spend_tx, long input_idx, org.ldk.structs.DelayedPaymentOutputDescriptor descriptor) {
-		long ret = bindings.InMemorySigner_sign_dynamic_p2wsh_input(this.ptr, spend_tx, input_idx, descriptor == null ? 0 : descriptor.ptr);
+		long ret = bindings.InMemorySigner_sign_dynamic_p2wsh_input(this.ptr, spend_tx, input_idx, descriptor.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(spend_tx);
 		Reference.reachabilityFence(input_idx);

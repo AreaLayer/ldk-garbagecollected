@@ -42,7 +42,7 @@ public class Result_BlindedTailDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_BlindedTailDecodeErrorZ in the success state.
 	 */
 	public static Result_BlindedTailDecodeErrorZ ok(org.ldk.structs.BlindedTail o) {
-		long ret = bindings.CResult_BlindedTailDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_BlindedTailDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_BlindedTailDecodeErrorZ ret_hu_conv = Result_BlindedTailDecodeErrorZ.constr_from_ptr(ret);

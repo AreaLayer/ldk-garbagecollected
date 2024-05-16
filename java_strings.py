@@ -1390,7 +1390,7 @@ import javax.annotation.Nullable;
         out_opaque_struct_human += self.hu_struct_file_prefix
         out_opaque_struct_human += "\n/**\n * " + struct_doc_comment.replace("\n", "\n * ") + "\n */\n"
         out_opaque_struct_human += "@SuppressWarnings(\"unchecked\") // We correctly assign various generic arrays\n"
-        hu_name = struct_name.replace("LDKC2Tuple", "TwoTuple").replace("LDKC3Tuple", "ThreeTuple").replace("LDK", "")
+        hu_name = struct_name.replace("LDKC2Tuple", "TwoTuple").replace("LDKC4Tuple", "FourTuple").replace("LDKC3Tuple", "ThreeTuple").replace("LDK", "")
         out_opaque_struct_human += ("public class " + hu_name + " extends CommonBase")
         if struct_name.startswith("LDKLocked") or struct_name.startswith("LDKReadOnly"):
             out_opaque_struct_human += (" implements AutoCloseable")
@@ -1417,6 +1417,9 @@ import javax.annotation.Nullable;
         java_hu_struct += "\tprivate " + human_ty + "(Object _dummy, long ptr) { super(ptr); }\n"
         java_hu_struct += "\tprotected void finalize() throws Throwable {\n"
         java_hu_struct += "\t\tif (ptr != 0) { bindings." + struct_name.replace("LDK","") + "_free(ptr); } super.finalize();\n"
+        java_hu_struct += "\t}\n\n"
+        java_hu_struct += "\tprotected void force_free() {\n" # Used by NioPeerHandler
+        java_hu_struct += "\t\tif (ptr != 0) { bindings." + struct_name.replace("LDK","") + "_free(ptr); ptr = 0; }\n"
         java_hu_struct += "\t}\n\n"
         java_hu_struct += "\tstatic " + human_ty + " constr_from_ptr(long ptr) {\n"
         java_hu_struct += "\t\tif (bindings." + struct_name.replace("LDK", "") + "_is_ok(ptr)) {\n"

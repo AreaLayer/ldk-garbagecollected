@@ -42,7 +42,7 @@ public class Result_PongDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_PongDecodeErrorZ in the success state.
 	 */
 	public static Result_PongDecodeErrorZ ok(org.ldk.structs.Pong o) {
-		long ret = bindings.CResult_PongDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_PongDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_PongDecodeErrorZ ret_hu_conv = Result_PongDecodeErrorZ.constr_from_ptr(ret);

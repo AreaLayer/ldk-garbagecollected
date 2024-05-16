@@ -27,12 +27,13 @@ public class PeeledOnion : CommonBase {
 
 	/** A PeeledOnion of type Forward */
 	public class PeeledOnion_Forward : PeeledOnion {
-		public byte[] _0;
+		public NextMessageHop _0;
 		public OnionMessage _1;
 		internal PeeledOnion_Forward(long ptr) : base(null, ptr) {
 			long _0 = bindings.LDKPeeledOnion_Forward_get__0(ptr);
-			byte[] _0_conv = InternalUtils.decodeUint8Array(_0);
-			this._0 = _0_conv;
+			org.ldk.structs.NextMessageHop _0_hu_conv = org.ldk.structs.NextMessageHop.constr_from_ptr(_0);
+			if (_0_hu_conv != null) { _0_hu_conv.ptrs_to.AddLast(this); };
+			this._0 = _0_hu_conv;
 			long _1 = bindings.LDKPeeledOnion_Forward_get__1(ptr);
 			org.ldk.structs.OnionMessage _1_hu_conv = null; if (_1 < 0 || _1 > 4096) { _1_hu_conv = new org.ldk.structs.OnionMessage(null, _1); }
 			if (_1_hu_conv != null) { _1_hu_conv.ptrs_to.AddLast(this); };
@@ -85,13 +86,14 @@ public class PeeledOnion : CommonBase {
 	/**
 	 * Utility method to constructs a new Forward-variant PeeledOnion
 	 */
-	public static PeeledOnion forward(byte[] a, org.ldk.structs.OnionMessage b) {
-		long ret = bindings.PeeledOnion_forward(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 33)), b == null ? 0 : b.ptr);
+	public static PeeledOnion forward(org.ldk.structs.NextMessageHop a, org.ldk.structs.OnionMessage b) {
+		long ret = bindings.PeeledOnion_forward(a.ptr, b.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PeeledOnion ret_hu_conv = org.ldk.structs.PeeledOnion.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(a); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(b); };
 		return ret_hu_conv;
 	}
@@ -100,7 +102,7 @@ public class PeeledOnion : CommonBase {
 	 * Utility method to constructs a new Receive-variant PeeledOnion
 	 */
 	public static PeeledOnion receive(org.ldk.structs.ParsedOnionMessageContents a, byte[] b, org.ldk.structs.BlindedPath c) {
-		long ret = bindings.PeeledOnion_receive(a.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(b, 32)), c == null ? 0 : c.ptr);
+		long ret = bindings.PeeledOnion_receive(a.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(b, 32)), c.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);
 		GC.KeepAlive(c);

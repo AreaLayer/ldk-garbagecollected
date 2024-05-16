@@ -82,11 +82,23 @@ public class SendSuccess : CommonBase {
 	}
 
 	/**
+	 * Generates a non-cryptographic 64-bit hash of the SendSuccess.
+	 */
+	public long hash() {
+		long ret = bindings.SendSuccess_hash(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	public override int GetHashCode() {
+		return (int)this.hash();
+	}
+	/**
 	 * Checks if two SendSuccesss contain equal inner contents.
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public bool eq(org.ldk.structs.SendSuccess b) {
-		bool ret = bindings.SendSuccess_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.SendSuccess_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		return ret;

@@ -69,7 +69,7 @@ public class TwoTuple_ThirtyTwoBytesCVec_C2Tuple_u32TxOutZZZ extends CommonBase 
 	 * Creates a new C2Tuple_ThirtyTwoBytesCVec_C2Tuple_u32TxOutZZZ from the contained elements.
 	 */
 	public static TwoTuple_ThirtyTwoBytesCVec_C2Tuple_u32TxOutZZZ of(byte[] a, TwoTuple_u32TxOutZ[] b) {
-		long ret = bindings.C2Tuple_ThirtyTwoBytesCVec_C2Tuple_u32TxOutZZZ_new(InternalUtils.check_arr_len(a, 32), b != null ? Arrays.stream(b).mapToLong(b_conv_20 -> b_conv_20 != null ? b_conv_20.ptr : 0).toArray() : null);
+		long ret = bindings.C2Tuple_ThirtyTwoBytesCVec_C2Tuple_u32TxOutZZZ_new(InternalUtils.check_arr_len(a, 32), b != null ? Arrays.stream(b).mapToLong(b_conv_20 -> b_conv_20.ptr).toArray() : null);
 		Reference.reachabilityFence(a);
 		Reference.reachabilityFence(b);
 		if (ret >= 0 && ret <= 4096) { return null; }

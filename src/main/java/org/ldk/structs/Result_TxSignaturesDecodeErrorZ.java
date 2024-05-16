@@ -13,6 +13,10 @@ public class Result_TxSignaturesDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_TxSignaturesDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_TxSignaturesDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_TxSignaturesDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_TxSignaturesDecodeErrorZ_is_ok(ptr)) {
 			return new Result_TxSignaturesDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_TxSignaturesDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_TxSignaturesDecodeErrorZ in the success state.
 	 */
 	public static Result_TxSignaturesDecodeErrorZ ok(org.ldk.structs.TxSignatures o) {
-		long ret = bindings.CResult_TxSignaturesDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_TxSignaturesDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_TxSignaturesDecodeErrorZ ret_hu_conv = Result_TxSignaturesDecodeErrorZ.constr_from_ptr(ret);

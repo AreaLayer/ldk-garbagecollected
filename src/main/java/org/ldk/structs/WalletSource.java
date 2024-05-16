@@ -64,19 +64,19 @@ public class WalletSource extends CommonBase {
 			@Override public long list_confirmed_utxos() {
 				Result_CVec_UtxoZNoneZ ret = arg.list_confirmed_utxos();
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long get_change_script() {
 				Result_CVec_u8ZNoneZ ret = arg.get_change_script();
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long sign_psbt(byte[] psbt) {
 				Result_TransactionNoneZ ret = arg.sign_psbt(psbt);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 		});

@@ -129,7 +129,7 @@ public class ErrorAction : CommonBase {
 	 * Utility method to constructs a new DisconnectPeer-variant ErrorAction
 	 */
 	public static ErrorAction disconnect_peer(org.ldk.structs.ErrorMessage msg) {
-		long ret = bindings.ErrorAction_disconnect_peer(msg == null ? 0 : msg.ptr);
+		long ret = bindings.ErrorAction_disconnect_peer(msg.ptr);
 		GC.KeepAlive(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ErrorAction ret_hu_conv = org.ldk.structs.ErrorAction.constr_from_ptr(ret);
@@ -142,7 +142,7 @@ public class ErrorAction : CommonBase {
 	 * Utility method to constructs a new DisconnectPeerWithWarning-variant ErrorAction
 	 */
 	public static ErrorAction disconnect_peer_with_warning(org.ldk.structs.WarningMessage msg) {
-		long ret = bindings.ErrorAction_disconnect_peer_with_warning(msg == null ? 0 : msg.ptr);
+		long ret = bindings.ErrorAction_disconnect_peer_with_warning(msg.ptr);
 		GC.KeepAlive(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ErrorAction ret_hu_conv = org.ldk.structs.ErrorAction.constr_from_ptr(ret);
@@ -189,7 +189,7 @@ public class ErrorAction : CommonBase {
 	 * Utility method to constructs a new SendErrorMessage-variant ErrorAction
 	 */
 	public static ErrorAction send_error_message(org.ldk.structs.ErrorMessage msg) {
-		long ret = bindings.ErrorAction_send_error_message(msg == null ? 0 : msg.ptr);
+		long ret = bindings.ErrorAction_send_error_message(msg.ptr);
 		GC.KeepAlive(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ErrorAction ret_hu_conv = org.ldk.structs.ErrorAction.constr_from_ptr(ret);
@@ -202,7 +202,7 @@ public class ErrorAction : CommonBase {
 	 * Utility method to constructs a new SendWarningMessage-variant ErrorAction
 	 */
 	public static ErrorAction send_warning_message(org.ldk.structs.WarningMessage msg, Level log_level) {
-		long ret = bindings.ErrorAction_send_warning_message(msg == null ? 0 : msg.ptr, log_level);
+		long ret = bindings.ErrorAction_send_warning_message(msg.ptr, log_level);
 		GC.KeepAlive(msg);
 		GC.KeepAlive(log_level);
 		if (ret >= 0 && ret <= 4096) { return null; }

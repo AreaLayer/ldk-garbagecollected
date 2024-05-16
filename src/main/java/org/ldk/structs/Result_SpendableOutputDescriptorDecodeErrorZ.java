@@ -13,6 +13,10 @@ public class Result_SpendableOutputDescriptorDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_SpendableOutputDescriptorDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_SpendableOutputDescriptorDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_SpendableOutputDescriptorDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_SpendableOutputDescriptorDecodeErrorZ_is_ok(ptr)) {
 			return new Result_SpendableOutputDescriptorDecodeErrorZ_OK(null, ptr);

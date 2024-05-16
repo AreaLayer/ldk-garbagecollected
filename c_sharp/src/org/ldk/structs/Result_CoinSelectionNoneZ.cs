@@ -37,7 +37,7 @@ public class Result_CoinSelectionNoneZ : CommonBase {
 	 * Creates a new CResult_CoinSelectionNoneZ in the success state.
 	 */
 	public static Result_CoinSelectionNoneZ ok(org.ldk.structs.CoinSelection o) {
-		long ret = bindings.CResult_CoinSelectionNoneZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_CoinSelectionNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CoinSelectionNoneZ ret_hu_conv = Result_CoinSelectionNoneZ.constr_from_ptr(ret);

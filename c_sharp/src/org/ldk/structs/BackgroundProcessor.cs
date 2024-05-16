@@ -29,6 +29,8 @@ namespace org { namespace ldk { namespace structs {
  * However, as long as [`ChannelMonitor`] backups are sound, no funds besides those used for
  * unilateral chain closure fees are at risk.
  * 
+ * [`ChannelManager`]: lightning::ln::channelmanager::ChannelManager
+ * [`ChannelManager::timer_tick_occurred`]: lightning::ln::channelmanager::ChannelManager::timer_tick_occurred
  * [`ChannelMonitor`]: lightning::chain::channelmonitor::ChannelMonitor
  * [`Event`]: lightning::events::Event
  * [`PeerManager::timer_tick_occurred`]: lightning::ln::peer_handler::PeerManager::timer_tick_occurred
@@ -88,7 +90,7 @@ public class BackgroundProcessor : CommonBase {
 	 * [`NetworkGraph::write`]: lightning::routing::gossip::NetworkGraph#impl-Writeable
 	 */
 	public static BackgroundProcessor start(org.ldk.structs.Persister persister, org.ldk.structs.EventHandler event_handler, org.ldk.structs.ChainMonitor chain_monitor, org.ldk.structs.ChannelManager channel_manager, org.ldk.structs.GossipSync gossip_sync, org.ldk.structs.PeerManager peer_manager, org.ldk.structs.Logger logger, org.ldk.structs.Option_WriteableScoreZ scorer) {
-		long ret = bindings.BackgroundProcessor_start(persister.ptr, event_handler.ptr, chain_monitor == null ? 0 : chain_monitor.ptr, channel_manager == null ? 0 : channel_manager.ptr, gossip_sync.ptr, peer_manager == null ? 0 : peer_manager.ptr, logger.ptr, scorer.ptr);
+		long ret = bindings.BackgroundProcessor_start(persister.ptr, event_handler.ptr, chain_monitor.ptr, channel_manager.ptr, gossip_sync.ptr, peer_manager.ptr, logger.ptr, scorer.ptr);
 		GC.KeepAlive(persister);
 		GC.KeepAlive(event_handler);
 		GC.KeepAlive(chain_monitor);

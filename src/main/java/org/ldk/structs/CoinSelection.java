@@ -44,7 +44,7 @@ public class CoinSelection extends CommonBase {
 	 * requiring additional fees.
 	 */
 	public void set_confirmed_utxos(Utxo[] val) {
-		bindings.CoinSelection_set_confirmed_utxos(this.ptr, val != null ? Arrays.stream(val).mapToLong(val_conv_6 -> val_conv_6 == null ? 0 : val_conv_6.ptr).toArray() : null);
+		bindings.CoinSelection_set_confirmed_utxos(this.ptr, val != null ? Arrays.stream(val).mapToLong(val_conv_6 -> val_conv_6.ptr).toArray() : null);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		for (Utxo val_conv_6: val) { if (this != null) { this.ptrs_to.add(val_conv_6); }; };
@@ -82,7 +82,7 @@ public class CoinSelection extends CommonBase {
 	 * Constructs a new CoinSelection given each field
 	 */
 	public static CoinSelection of(Utxo[] confirmed_utxos_arg, org.ldk.structs.Option_TxOutZ change_output_arg) {
-		long ret = bindings.CoinSelection_new(confirmed_utxos_arg != null ? Arrays.stream(confirmed_utxos_arg).mapToLong(confirmed_utxos_arg_conv_6 -> confirmed_utxos_arg_conv_6 == null ? 0 : confirmed_utxos_arg_conv_6.ptr).toArray() : null, change_output_arg.ptr);
+		long ret = bindings.CoinSelection_new(confirmed_utxos_arg != null ? Arrays.stream(confirmed_utxos_arg).mapToLong(confirmed_utxos_arg_conv_6 -> confirmed_utxos_arg_conv_6.ptr).toArray() : null, change_output_arg.ptr);
 		Reference.reachabilityFence(confirmed_utxos_arg);
 		Reference.reachabilityFence(change_output_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }

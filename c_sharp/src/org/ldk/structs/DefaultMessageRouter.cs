@@ -19,7 +19,7 @@ public class DefaultMessageRouter : CommonBase {
 	 * Creates a [`DefaultMessageRouter`] using the given [`NetworkGraph`].
 	 */
 	public static DefaultMessageRouter of(org.ldk.structs.NetworkGraph network_graph, org.ldk.structs.EntropySource entropy_source) {
-		long ret = bindings.DefaultMessageRouter_new(network_graph == null ? 0 : network_graph.ptr, entropy_source.ptr);
+		long ret = bindings.DefaultMessageRouter_new(network_graph.ptr, entropy_source.ptr);
 		GC.KeepAlive(network_graph);
 		GC.KeepAlive(entropy_source);
 		if (ret >= 0 && ret <= 4096) { return null; }

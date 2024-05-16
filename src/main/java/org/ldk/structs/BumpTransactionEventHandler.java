@@ -49,7 +49,7 @@ public class BumpTransactionEventHandler extends CommonBase {
 	 * Handles all variants of [`BumpTransactionEvent`].
 	 */
 	public void handle_event(org.ldk.structs.BumpTransactionEvent event) {
-		bindings.BumpTransactionEventHandler_handle_event(this.ptr, event == null ? 0 : event.ptr);
+		bindings.BumpTransactionEventHandler_handle_event(this.ptr, event.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(event);
 	}

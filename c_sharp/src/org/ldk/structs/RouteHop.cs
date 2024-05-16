@@ -54,7 +54,7 @@ public class RouteHop : CommonBase {
 	 * amended to match the features present in the invoice this node generated.
 	 */
 	public void set_node_features(org.ldk.structs.NodeFeatures val) {
-		bindings.RouteHop_set_node_features(this.ptr, val == null ? 0 : val.ptr);
+		bindings.RouteHop_set_node_features(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -96,7 +96,7 @@ public class RouteHop : CommonBase {
 	 * to reach this node.
 	 */
 	public void set_channel_features(org.ldk.structs.ChannelFeatures val) {
-		bindings.RouteHop_set_channel_features(this.ptr, val == null ? 0 : val.ptr);
+		bindings.RouteHop_set_channel_features(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -194,7 +194,7 @@ public class RouteHop : CommonBase {
 	 * Constructs a new RouteHop given each field
 	 */
 	public static RouteHop of(byte[] pubkey_arg, org.ldk.structs.NodeFeatures node_features_arg, long short_channel_id_arg, org.ldk.structs.ChannelFeatures channel_features_arg, long fee_msat_arg, int cltv_expiry_delta_arg, bool maybe_announced_channel_arg) {
-		long ret = bindings.RouteHop_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(pubkey_arg, 33)), node_features_arg == null ? 0 : node_features_arg.ptr, short_channel_id_arg, channel_features_arg == null ? 0 : channel_features_arg.ptr, fee_msat_arg, cltv_expiry_delta_arg, maybe_announced_channel_arg);
+		long ret = bindings.RouteHop_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(pubkey_arg, 33)), node_features_arg.ptr, short_channel_id_arg, channel_features_arg.ptr, fee_msat_arg, cltv_expiry_delta_arg, maybe_announced_channel_arg);
 		GC.KeepAlive(pubkey_arg);
 		GC.KeepAlive(node_features_arg);
 		GC.KeepAlive(short_channel_id_arg);
@@ -246,7 +246,7 @@ public class RouteHop : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.RouteHop b) {
-		bool ret = bindings.RouteHop_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.RouteHop_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

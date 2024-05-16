@@ -42,7 +42,7 @@ public class Result_CounterpartyForwardingInfoDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_CounterpartyForwardingInfoDecodeErrorZ in the success state.
 	 */
 	public static Result_CounterpartyForwardingInfoDecodeErrorZ ok(org.ldk.structs.CounterpartyForwardingInfo o) {
-		long ret = bindings.CResult_CounterpartyForwardingInfoDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_CounterpartyForwardingInfoDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CounterpartyForwardingInfoDecodeErrorZ ret_hu_conv = Result_CounterpartyForwardingInfoDecodeErrorZ.constr_from_ptr(ret);

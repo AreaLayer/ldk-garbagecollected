@@ -38,7 +38,7 @@ public class DelayedPaymentOutputDescriptor extends CommonBase {
 	 * The outpoint which is spendable.
 	 */
 	public void set_outpoint(org.ldk.structs.OutPoint val) {
-		bindings.DelayedPaymentOutputDescriptor_set_outpoint(this.ptr, val == null ? 0 : val.ptr);
+		bindings.DelayedPaymentOutputDescriptor_set_outpoint(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -120,7 +120,7 @@ public class DelayedPaymentOutputDescriptor extends CommonBase {
 	 * derive the witnessScript for this output.
 	 */
 	public void set_revocation_pubkey(org.ldk.structs.RevocationKey val) {
-		bindings.DelayedPaymentOutputDescriptor_set_revocation_pubkey(this.ptr, val == null ? 0 : val.ptr);
+		bindings.DelayedPaymentOutputDescriptor_set_revocation_pubkey(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -165,10 +165,45 @@ public class DelayedPaymentOutputDescriptor extends CommonBase {
 	}
 
 	/**
-	 * Constructs a new DelayedPaymentOutputDescriptor given each field
+	 * The channel public keys and other parameters needed to generate a spending transaction or
+	 * to provide to a re-derived signer through [`ChannelSigner::provide_channel_parameters`].
+	 * 
+	 * Added as optional, but always `Some` if the descriptor was produced in v0.0.123 or later.
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static DelayedPaymentOutputDescriptor of(org.ldk.structs.OutPoint outpoint_arg, byte[] per_commitment_point_arg, short to_self_delay_arg, org.ldk.structs.TxOut output_arg, org.ldk.structs.RevocationKey revocation_pubkey_arg, byte[] channel_keys_id_arg, long channel_value_satoshis_arg) {
-		long ret = bindings.DelayedPaymentOutputDescriptor_new(outpoint_arg == null ? 0 : outpoint_arg.ptr, InternalUtils.check_arr_len(per_commitment_point_arg, 33), to_self_delay_arg, output_arg.ptr, revocation_pubkey_arg == null ? 0 : revocation_pubkey_arg.ptr, InternalUtils.check_arr_len(channel_keys_id_arg, 32), channel_value_satoshis_arg);
+	@Nullable
+	public ChannelTransactionParameters get_channel_transaction_parameters() {
+		long ret = bindings.DelayedPaymentOutputDescriptor_get_channel_transaction_parameters(this.ptr);
+		Reference.reachabilityFence(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ChannelTransactionParameters ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelTransactionParameters(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * The channel public keys and other parameters needed to generate a spending transaction or
+	 * to provide to a re-derived signer through [`ChannelSigner::provide_channel_parameters`].
+	 * 
+	 * Added as optional, but always `Some` if the descriptor was produced in v0.0.123 or later.
+	 * 
+	 * Note that val (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	public void set_channel_transaction_parameters(@Nullable org.ldk.structs.ChannelTransactionParameters val) {
+		bindings.DelayedPaymentOutputDescriptor_set_channel_transaction_parameters(this.ptr, val == null ? 0 : val.ptr);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
+		if (this != null) { this.ptrs_to.add(val); };
+	}
+
+	/**
+	 * Constructs a new DelayedPaymentOutputDescriptor given each field
+	 * 
+	 * Note that channel_transaction_parameters_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	public static DelayedPaymentOutputDescriptor of(org.ldk.structs.OutPoint outpoint_arg, byte[] per_commitment_point_arg, short to_self_delay_arg, org.ldk.structs.TxOut output_arg, org.ldk.structs.RevocationKey revocation_pubkey_arg, byte[] channel_keys_id_arg, long channel_value_satoshis_arg, @Nullable org.ldk.structs.ChannelTransactionParameters channel_transaction_parameters_arg) {
+		long ret = bindings.DelayedPaymentOutputDescriptor_new(outpoint_arg.ptr, InternalUtils.check_arr_len(per_commitment_point_arg, 33), to_self_delay_arg, output_arg.ptr, revocation_pubkey_arg.ptr, InternalUtils.check_arr_len(channel_keys_id_arg, 32), channel_value_satoshis_arg, channel_transaction_parameters_arg == null ? 0 : channel_transaction_parameters_arg.ptr);
 		Reference.reachabilityFence(outpoint_arg);
 		Reference.reachabilityFence(per_commitment_point_arg);
 		Reference.reachabilityFence(to_self_delay_arg);
@@ -176,11 +211,13 @@ public class DelayedPaymentOutputDescriptor extends CommonBase {
 		Reference.reachabilityFence(revocation_pubkey_arg);
 		Reference.reachabilityFence(channel_keys_id_arg);
 		Reference.reachabilityFence(channel_value_satoshis_arg);
+		Reference.reachabilityFence(channel_transaction_parameters_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.DelayedPaymentOutputDescriptor ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.DelayedPaymentOutputDescriptor(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(outpoint_arg); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(revocation_pubkey_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_transaction_parameters_arg); };
 		return ret_hu_conv;
 	}
 
@@ -220,7 +257,7 @@ public class DelayedPaymentOutputDescriptor extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.DelayedPaymentOutputDescriptor b) {
-		boolean ret = bindings.DelayedPaymentOutputDescriptor_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.DelayedPaymentOutputDescriptor_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

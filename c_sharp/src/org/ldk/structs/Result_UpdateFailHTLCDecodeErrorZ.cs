@@ -42,7 +42,7 @@ public class Result_UpdateFailHTLCDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_UpdateFailHTLCDecodeErrorZ in the success state.
 	 */
 	public static Result_UpdateFailHTLCDecodeErrorZ ok(org.ldk.structs.UpdateFailHTLC o) {
-		long ret = bindings.CResult_UpdateFailHTLCDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_UpdateFailHTLCDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_UpdateFailHTLCDecodeErrorZ ret_hu_conv = Result_UpdateFailHTLCDecodeErrorZ.constr_from_ptr(ret);

@@ -13,6 +13,10 @@ public class Result_COption_HTLCDestinationZDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_COption_HTLCDestinationZDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_COption_HTLCDestinationZDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_COption_HTLCDestinationZDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_COption_HTLCDestinationZDecodeErrorZ_is_ok(ptr)) {
 			return new Result_COption_HTLCDestinationZDecodeErrorZ_OK(null, ptr);

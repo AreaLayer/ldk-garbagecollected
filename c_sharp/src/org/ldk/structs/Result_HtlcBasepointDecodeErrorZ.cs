@@ -42,7 +42,7 @@ public class Result_HtlcBasepointDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_HtlcBasepointDecodeErrorZ in the success state.
 	 */
 	public static Result_HtlcBasepointDecodeErrorZ ok(org.ldk.structs.HtlcBasepoint o) {
-		long ret = bindings.CResult_HtlcBasepointDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_HtlcBasepointDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_HtlcBasepointDecodeErrorZ ret_hu_conv = Result_HtlcBasepointDecodeErrorZ.constr_from_ptr(ret);

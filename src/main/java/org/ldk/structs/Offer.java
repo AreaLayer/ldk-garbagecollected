@@ -76,15 +76,12 @@ public class Offer extends CommonBase {
 
 	/**
 	 * The minimum amount required for a successful payment of a single item.
-	 * 
-	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	@Nullable
-	public Amount amount() {
+	public Option_AmountZ amount() {
 		long ret = bindings.Offer_amount(this.ptr);
 		Reference.reachabilityFence(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.Amount ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Amount(null, ret); }
+		org.ldk.structs.Option_AmountZ ret_hu_conv = org.ldk.structs.Option_AmountZ.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
 		return ret_hu_conv;
 	}
@@ -92,7 +89,10 @@ public class Offer extends CommonBase {
 	/**
 	 * A complete description of the purpose of the payment. Intended to be displayed to the user
 	 * but with the caveat that it has not been verified in any way.
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
+	@Nullable
 	public PrintableString description() {
 		long ret = bindings.Offer_description(this.ptr);
 		Reference.reachabilityFence(this);
@@ -169,18 +169,33 @@ public class Offer extends CommonBase {
 		long ret = bindings.Offer_supported_quantity(this.ptr);
 		Reference.reachabilityFence(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.Quantity ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Quantity(null, ret); }
+		org.ldk.structs.Quantity ret_hu_conv = org.ldk.structs.Quantity.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
 		return ret_hu_conv;
 	}
 
 	/**
 	 * The public key used by the recipient to sign invoices.
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
+	@Nullable
 	public byte[] signing_pubkey() {
 		byte[] ret = bindings.Offer_signing_pubkey(this.ptr);
 		Reference.reachabilityFence(this);
 		return ret;
+	}
+
+	/**
+	 * Returns the id of the offer.
+	 */
+	public OfferId id() {
+		long ret = bindings.Offer_id(this.ptr);
+		Reference.reachabilityFence(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.OfferId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.OfferId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
 	}
 
 	/**
@@ -233,6 +248,95 @@ public class Offer extends CommonBase {
 		return ret;
 	}
 
+	/**
+	 * Similar to [`Offer::request_invoice`] except it:
+	 * - derives the [`InvoiceRequest::payer_id`] such that a different key can be used for each
+	 * request,
+	 * - sets [`InvoiceRequest::payer_metadata`] when [`InvoiceRequestBuilder::build`] is called
+	 * such that it can be used by [`Bolt12Invoice::verify`] to determine if the invoice was
+	 * requested using a base [`ExpandedKey`] from which the payer id was derived, and
+	 * - includes the [`PaymentId`] encrypted in [`InvoiceRequest::payer_metadata`] so that it can
+	 * be used when sending the payment for the requested invoice.
+	 * 
+	 * Useful to protect the sender's privacy.
+	 * 
+	 * [`InvoiceRequest::payer_id`]: crate::offers::invoice_request::InvoiceRequest::payer_id
+	 * [`InvoiceRequest::payer_metadata`]: crate::offers::invoice_request::InvoiceRequest::payer_metadata
+	 * [`Bolt12Invoice::verify`]: crate::offers::invoice::Bolt12Invoice::verify
+	 * [`ExpandedKey`]: crate::ln::inbound_payment::ExpandedKey
+	 */
+	public Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ request_invoice_deriving_payer_id(org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.EntropySource entropy_source, byte[] payment_id) {
+		long ret = bindings.Offer_request_invoice_deriving_payer_id(this.ptr, expanded_key.ptr, entropy_source.ptr, InternalUtils.check_arr_len(payment_id, 32));
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(expanded_key);
+		Reference.reachabilityFence(entropy_source);
+		Reference.reachabilityFence(payment_id);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ ret_hu_conv = Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
+		if (this != null) { this.ptrs_to.add(expanded_key); };
+		if (this != null) { this.ptrs_to.add(entropy_source); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Similar to [`Offer::request_invoice_deriving_payer_id`] except uses `payer_id` for the
+	 * [`InvoiceRequest::payer_id`] instead of deriving a different key for each request.
+	 * 
+	 * Useful for recurring payments using the same `payer_id` with different invoices.
+	 * 
+	 * [`InvoiceRequest::payer_id`]: crate::offers::invoice_request::InvoiceRequest::payer_id
+	 */
+	public Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ request_invoice_deriving_metadata(byte[] payer_id, org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.EntropySource entropy_source, byte[] payment_id) {
+		long ret = bindings.Offer_request_invoice_deriving_metadata(this.ptr, InternalUtils.check_arr_len(payer_id, 33), expanded_key.ptr, entropy_source.ptr, InternalUtils.check_arr_len(payment_id, 32));
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(payer_id);
+		Reference.reachabilityFence(expanded_key);
+		Reference.reachabilityFence(entropy_source);
+		Reference.reachabilityFence(payment_id);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ ret_hu_conv = Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
+		if (this != null) { this.ptrs_to.add(expanded_key); };
+		if (this != null) { this.ptrs_to.add(entropy_source); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Creates an [`InvoiceRequestBuilder`] for the offer with the given `metadata` and `payer_id`,
+	 * which will be reflected in the `Bolt12Invoice` response.
+	 * 
+	 * The `metadata` is useful for including information about the derivation of `payer_id` such
+	 * that invoice response handling can be stateless. Also serves as payer-provided entropy while
+	 * hashing in the signature calculation.
+	 * 
+	 * This should not leak any information such as by using a simple BIP-32 derivation path.
+	 * Otherwise, payments may be correlated.
+	 * 
+	 * Errors if the offer contains unknown required features.
+	 * 
+	 * [`InvoiceRequest`]: crate::offers::invoice_request::InvoiceRequest
+	 */
+	public Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ request_invoice(byte[] metadata, byte[] payer_id) {
+		long ret = bindings.Offer_request_invoice(this.ptr, metadata, InternalUtils.check_arr_len(payer_id, 33));
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(metadata);
+		Reference.reachabilityFence(payer_id);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ ret_hu_conv = Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Generates a non-cryptographic 64-bit hash of the Offer.
+	 */
+	public long hash() {
+		long ret = bindings.Offer_hash(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	@Override public int hashCode() {
+		return (int)this.hash();
+	}
 	/**
 	 * Serialize the Offer object into a byte array which can be read by Offer_read
 	 */

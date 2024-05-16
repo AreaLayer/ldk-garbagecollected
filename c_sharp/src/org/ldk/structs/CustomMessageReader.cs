@@ -40,7 +40,7 @@ public class CustomMessageReader : CommonBase {
 			byte[] _buffer_conv = InternalUtils.decodeUint8Array(_buffer);
 			Result_COption_TypeZDecodeErrorZ ret = arg.read(_message_type, _buffer_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 	}

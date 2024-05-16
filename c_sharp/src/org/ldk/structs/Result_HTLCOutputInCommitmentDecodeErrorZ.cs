@@ -42,7 +42,7 @@ public class Result_HTLCOutputInCommitmentDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_HTLCOutputInCommitmentDecodeErrorZ in the success state.
 	 */
 	public static Result_HTLCOutputInCommitmentDecodeErrorZ ok(org.ldk.structs.HTLCOutputInCommitment o) {
-		long ret = bindings.CResult_HTLCOutputInCommitmentDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_HTLCOutputInCommitmentDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_HTLCOutputInCommitmentDecodeErrorZ ret_hu_conv = Result_HTLCOutputInCommitmentDecodeErrorZ.constr_from_ptr(ret);

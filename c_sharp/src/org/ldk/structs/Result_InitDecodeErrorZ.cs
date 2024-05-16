@@ -42,7 +42,7 @@ public class Result_InitDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_InitDecodeErrorZ in the success state.
 	 */
 	public static Result_InitDecodeErrorZ ok(org.ldk.structs.Init o) {
-		long ret = bindings.CResult_InitDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_InitDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_InitDecodeErrorZ ret_hu_conv = Result_InitDecodeErrorZ.constr_from_ptr(ret);

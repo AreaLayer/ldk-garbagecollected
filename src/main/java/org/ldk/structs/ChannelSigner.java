@@ -16,7 +16,7 @@ public class ChannelSigner extends CommonBase {
 	final bindings.LDKChannelSigner bindings_instance;
 	ChannelSigner(Object _dummy, long ptr) { super(ptr); bindings_instance = null; }
 	private ChannelSigner(bindings.LDKChannelSigner arg, ChannelPublicKeys pubkeys) {
-		super(bindings.LDKChannelSigner_new(arg, pubkeys == null ? 0 : pubkeys.clone_ptr()));
+		super(bindings.LDKChannelSigner_new(arg, pubkeys.clone_ptr()));
 		this.ptrs_to.add(arg);
 		this.bindings_instance = arg;
 	}
@@ -117,13 +117,13 @@ public class ChannelSigner extends CommonBase {
 				org.ldk.structs.HolderCommitmentTransaction holder_tx_hu_conv = null; if (holder_tx < 0 || holder_tx > 4096) { holder_tx_hu_conv = new org.ldk.structs.HolderCommitmentTransaction(null, holder_tx); }
 				Result_NoneNoneZ ret = arg.validate_holder_commitment(holder_tx_hu_conv, outbound_htlc_preimages);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long validate_counterparty_revocation(long idx, byte[] secret) {
 				Result_NoneNoneZ ret = arg.validate_counterparty_revocation(idx, secret);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public byte[] channel_keys_id() {
@@ -185,7 +185,7 @@ public class ChannelSigner extends CommonBase {
 	 * irrelevant or duplicate preimages.
 	 */
 	public Result_NoneNoneZ validate_holder_commitment(org.ldk.structs.HolderCommitmentTransaction holder_tx, byte[][] outbound_htlc_preimages) {
-		long ret = bindings.ChannelSigner_validate_holder_commitment(this.ptr, holder_tx == null ? 0 : holder_tx.ptr, outbound_htlc_preimages != null ? Arrays.stream(outbound_htlc_preimages).map(outbound_htlc_preimages_conv_8 -> InternalUtils.check_arr_len(outbound_htlc_preimages_conv_8, 32)).toArray(byte[][]::new) : null);
+		long ret = bindings.ChannelSigner_validate_holder_commitment(this.ptr, holder_tx.ptr, outbound_htlc_preimages != null ? Arrays.stream(outbound_htlc_preimages).map(outbound_htlc_preimages_conv_8 -> InternalUtils.check_arr_len(outbound_htlc_preimages_conv_8, 32)).toArray(byte[][]::new) : null);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(holder_tx);
 		Reference.reachabilityFence(outbound_htlc_preimages);
@@ -234,7 +234,7 @@ public class ChannelSigner extends CommonBase {
 	 * channel_parameters.is_populated() MUST be true.
 	 */
 	public void provide_channel_parameters(org.ldk.structs.ChannelTransactionParameters channel_parameters) {
-		bindings.ChannelSigner_provide_channel_parameters(this.ptr, channel_parameters == null ? 0 : channel_parameters.ptr);
+		bindings.ChannelSigner_provide_channel_parameters(this.ptr, channel_parameters.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(channel_parameters);
 		if (this != null) { this.ptrs_to.add(channel_parameters); };

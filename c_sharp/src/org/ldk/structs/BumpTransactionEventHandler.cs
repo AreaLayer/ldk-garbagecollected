@@ -44,7 +44,7 @@ public class BumpTransactionEventHandler : CommonBase {
 	 * Handles all variants of [`BumpTransactionEvent`].
 	 */
 	public void handle_event(org.ldk.structs.BumpTransactionEvent _event) {
-		bindings.BumpTransactionEventHandler_handle_event(this.ptr, _event == null ? 0 : _event.ptr);
+		bindings.BumpTransactionEventHandler_handle_event(this.ptr, _event.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(_event);
 	}

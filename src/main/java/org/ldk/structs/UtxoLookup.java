@@ -53,7 +53,7 @@ public class UtxoLookup extends CommonBase {
 			@Override public long get_utxo(byte[] chain_hash, long short_channel_id) {
 				UtxoResult ret = arg.get_utxo(chain_hash, short_channel_id);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				if (impl_holder.held != null) { impl_holder.held.ptrs_to.add(ret); };
 				return result;
 			}

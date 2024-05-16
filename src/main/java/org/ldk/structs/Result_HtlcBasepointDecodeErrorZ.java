@@ -13,6 +13,10 @@ public class Result_HtlcBasepointDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_HtlcBasepointDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_HtlcBasepointDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_HtlcBasepointDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_HtlcBasepointDecodeErrorZ_is_ok(ptr)) {
 			return new Result_HtlcBasepointDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_HtlcBasepointDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_HtlcBasepointDecodeErrorZ in the success state.
 	 */
 	public static Result_HtlcBasepointDecodeErrorZ ok(org.ldk.structs.HtlcBasepoint o) {
-		long ret = bindings.CResult_HtlcBasepointDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_HtlcBasepointDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_HtlcBasepointDecodeErrorZ ret_hu_conv = Result_HtlcBasepointDecodeErrorZ.constr_from_ptr(ret);

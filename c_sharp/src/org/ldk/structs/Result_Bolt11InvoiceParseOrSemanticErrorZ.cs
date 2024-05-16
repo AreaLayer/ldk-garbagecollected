@@ -42,7 +42,7 @@ public class Result_Bolt11InvoiceParseOrSemanticErrorZ : CommonBase {
 	 * Creates a new CResult_Bolt11InvoiceParseOrSemanticErrorZ in the success state.
 	 */
 	public static Result_Bolt11InvoiceParseOrSemanticErrorZ ok(org.ldk.structs.Bolt11Invoice o) {
-		long ret = bindings.CResult_Bolt11InvoiceParseOrSemanticErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_Bolt11InvoiceParseOrSemanticErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_Bolt11InvoiceParseOrSemanticErrorZ ret_hu_conv = Result_Bolt11InvoiceParseOrSemanticErrorZ.constr_from_ptr(ret);

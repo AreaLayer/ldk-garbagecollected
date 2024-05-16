@@ -42,7 +42,7 @@ public class Result_ReplyChannelRangeDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_ReplyChannelRangeDecodeErrorZ in the success state.
 	 */
 	public static Result_ReplyChannelRangeDecodeErrorZ ok(org.ldk.structs.ReplyChannelRange o) {
-		long ret = bindings.CResult_ReplyChannelRangeDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_ReplyChannelRangeDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ReplyChannelRangeDecodeErrorZ ret_hu_conv = Result_ReplyChannelRangeDecodeErrorZ.constr_from_ptr(ret);

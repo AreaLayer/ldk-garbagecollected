@@ -27,19 +27,23 @@ public class FundingCreated extends CommonBase {
 	/**
 	 * A temporary channel ID, until the funding is established
 	 */
-	public byte[] get_temporary_channel_id() {
-		byte[] ret = bindings.FundingCreated_get_temporary_channel_id(this.ptr);
+	public ChannelId get_temporary_channel_id() {
+		long ret = bindings.FundingCreated_get_temporary_channel_id(this.ptr);
 		Reference.reachabilityFence(this);
-		return ret;
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
 	}
 
 	/**
 	 * A temporary channel ID, until the funding is established
 	 */
-	public void set_temporary_channel_id(byte[] val) {
-		bindings.FundingCreated_set_temporary_channel_id(this.ptr, InternalUtils.check_arr_len(val, 32));
+	public void set_temporary_channel_id(org.ldk.structs.ChannelId val) {
+		bindings.FundingCreated_set_temporary_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
+		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -99,8 +103,8 @@ public class FundingCreated extends CommonBase {
 	/**
 	 * Constructs a new FundingCreated given each field
 	 */
-	public static FundingCreated of(byte[] temporary_channel_id_arg, byte[] funding_txid_arg, short funding_output_index_arg, byte[] signature_arg) {
-		long ret = bindings.FundingCreated_new(InternalUtils.check_arr_len(temporary_channel_id_arg, 32), InternalUtils.check_arr_len(funding_txid_arg, 32), funding_output_index_arg, InternalUtils.check_arr_len(signature_arg, 64));
+	public static FundingCreated of(org.ldk.structs.ChannelId temporary_channel_id_arg, byte[] funding_txid_arg, short funding_output_index_arg, byte[] signature_arg) {
+		long ret = bindings.FundingCreated_new(temporary_channel_id_arg.ptr, InternalUtils.check_arr_len(funding_txid_arg, 32), funding_output_index_arg, InternalUtils.check_arr_len(signature_arg, 64));
 		Reference.reachabilityFence(temporary_channel_id_arg);
 		Reference.reachabilityFence(funding_txid_arg);
 		Reference.reachabilityFence(funding_output_index_arg);
@@ -108,6 +112,7 @@ public class FundingCreated extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.FundingCreated ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.FundingCreated(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(temporary_channel_id_arg); };
 		return ret_hu_conv;
 	}
 
@@ -147,7 +152,7 @@ public class FundingCreated extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.FundingCreated b) {
-		boolean ret = bindings.FundingCreated_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.FundingCreated_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

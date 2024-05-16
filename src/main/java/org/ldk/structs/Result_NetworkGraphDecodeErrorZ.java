@@ -13,6 +13,10 @@ public class Result_NetworkGraphDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_NetworkGraphDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_NetworkGraphDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_NetworkGraphDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_NetworkGraphDecodeErrorZ_is_ok(ptr)) {
 			return new Result_NetworkGraphDecodeErrorZ_OK(null, ptr);

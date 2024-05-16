@@ -74,7 +74,7 @@ public class ThreeTuple_OnionMessageContentsDestinationBlindedPathZ : CommonBase
 	 * Creates a new C3Tuple_OnionMessageContentsDestinationBlindedPathZ from the contained elements.
 	 */
 	public static ThreeTuple_OnionMessageContentsDestinationBlindedPathZ of(org.ldk.structs.OnionMessageContents a, org.ldk.structs.Destination b, org.ldk.structs.BlindedPath c) {
-		long ret = bindings.C3Tuple_OnionMessageContentsDestinationBlindedPathZ_new(a.ptr, b.ptr, c == null ? 0 : c.ptr);
+		long ret = bindings.C3Tuple_OnionMessageContentsDestinationBlindedPathZ_new(a.ptr, b.ptr, c.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);
 		GC.KeepAlive(c);

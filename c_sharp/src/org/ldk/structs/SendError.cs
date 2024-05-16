@@ -27,7 +27,8 @@ public class SendError : CommonBase {
 			case 5: return new SendError_InvalidMessage(ptr);
 			case 6: return new SendError_BufferFull(ptr);
 			case 7: return new SendError_GetNodeIdFailed(ptr);
-			case 8: return new SendError_BlindedPathAdvanceFailed(ptr);
+			case 8: return new SendError_UnresolvedIntroductionNode(ptr);
+			case 9: return new SendError_BlindedPathAdvanceFailed(ptr);
 			default:
 				throw new ArgumentException("Impossible enum variant");
 		}
@@ -77,6 +78,11 @@ public class SendError : CommonBase {
 	/** A SendError of type GetNodeIdFailed */
 	public class SendError_GetNodeIdFailed : SendError {
 		internal SendError_GetNodeIdFailed(long ptr) : base(null, ptr) {
+		}
+	}
+	/** A SendError of type UnresolvedIntroductionNode */
+	public class SendError_UnresolvedIntroductionNode : SendError {
+		internal SendError_UnresolvedIntroductionNode(long ptr) : base(null, ptr) {
 		}
 	}
 	/** A SendError of type BlindedPathAdvanceFailed */
@@ -193,6 +199,17 @@ public class SendError : CommonBase {
 	}
 
 	/**
+	 * Utility method to constructs a new UnresolvedIntroductionNode-variant SendError
+	 */
+	public static SendError unresolved_introduction_node() {
+		long ret = bindings.SendError_unresolved_introduction_node();
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.SendError ret_hu_conv = org.ldk.structs.SendError.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Utility method to constructs a new BlindedPathAdvanceFailed-variant SendError
 	 */
 	public static SendError blinded_path_advance_failed() {
@@ -204,11 +221,23 @@ public class SendError : CommonBase {
 	}
 
 	/**
+	 * Generates a non-cryptographic 64-bit hash of the SendError.
+	 */
+	public long hash() {
+		long ret = bindings.SendError_hash(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	public override int GetHashCode() {
+		return (int)this.hash();
+	}
+	/**
 	 * Checks if two SendErrors contain equal inner contents.
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public bool eq(org.ldk.structs.SendError b) {
-		bool ret = bindings.SendError_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.SendError_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		return ret;

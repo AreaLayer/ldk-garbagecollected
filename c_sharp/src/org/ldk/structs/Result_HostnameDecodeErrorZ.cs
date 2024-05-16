@@ -42,7 +42,7 @@ public class Result_HostnameDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_HostnameDecodeErrorZ in the success state.
 	 */
 	public static Result_HostnameDecodeErrorZ ok(org.ldk.structs.Hostname o) {
-		long ret = bindings.CResult_HostnameDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_HostnameDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_HostnameDecodeErrorZ ret_hu_conv = Result_HostnameDecodeErrorZ.constr_from_ptr(ret);

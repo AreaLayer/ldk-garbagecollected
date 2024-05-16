@@ -42,7 +42,7 @@ public class Result_CommitmentSignedDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_CommitmentSignedDecodeErrorZ in the success state.
 	 */
 	public static Result_CommitmentSignedDecodeErrorZ ok(org.ldk.structs.CommitmentSigned o) {
-		long ret = bindings.CResult_CommitmentSignedDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_CommitmentSignedDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CommitmentSignedDecodeErrorZ ret_hu_conv = Result_CommitmentSignedDecodeErrorZ.constr_from_ptr(ret);

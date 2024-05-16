@@ -13,6 +13,10 @@ public class Result_SendSuccessSendErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_SendSuccessSendErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_SendSuccessSendErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_SendSuccessSendErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_SendSuccessSendErrorZ_is_ok(ptr)) {
 			return new Result_SendSuccessSendErrorZ_OK(null, ptr);
@@ -73,6 +77,24 @@ public class Result_SendSuccessSendErrorZ extends CommonBase {
 		boolean ret = bindings.CResult_SendSuccessSendErrorZ_is_ok(this.ptr);
 		Reference.reachabilityFence(this);
 		return ret;
+	}
+
+	long clone_ptr() {
+		long ret = bindings.CResult_SendSuccessSendErrorZ_clone_ptr(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Creates a new CResult_SendSuccessSendErrorZ which has the same data as `orig`
+	 * but with all dynamically-allocated buffers duplicated in new buffers.
+	 */
+	public Result_SendSuccessSendErrorZ clone() {
+		long ret = bindings.CResult_SendSuccessSendErrorZ_clone(this.ptr);
+		Reference.reachabilityFence(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_SendSuccessSendErrorZ ret_hu_conv = Result_SendSuccessSendErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
 	}
 
 }

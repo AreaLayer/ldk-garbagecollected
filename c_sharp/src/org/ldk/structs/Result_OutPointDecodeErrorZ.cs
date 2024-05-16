@@ -42,7 +42,7 @@ public class Result_OutPointDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_OutPointDecodeErrorZ in the success state.
 	 */
 	public static Result_OutPointDecodeErrorZ ok(org.ldk.structs.OutPoint o) {
-		long ret = bindings.CResult_OutPointDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_OutPointDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_OutPointDecodeErrorZ ret_hu_conv = Result_OutPointDecodeErrorZ.constr_from_ptr(ret);

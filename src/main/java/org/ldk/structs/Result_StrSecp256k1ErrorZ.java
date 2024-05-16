@@ -13,6 +13,10 @@ public class Result_StrSecp256k1ErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_StrSecp256k1ErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_StrSecp256k1ErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_StrSecp256k1ErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_StrSecp256k1ErrorZ_is_ok(ptr)) {
 			return new Result_StrSecp256k1ErrorZ_OK(null, ptr);

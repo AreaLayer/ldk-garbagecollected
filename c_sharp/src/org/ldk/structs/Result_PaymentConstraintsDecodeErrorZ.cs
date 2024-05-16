@@ -42,7 +42,7 @@ public class Result_PaymentConstraintsDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_PaymentConstraintsDecodeErrorZ in the success state.
 	 */
 	public static Result_PaymentConstraintsDecodeErrorZ ok(org.ldk.structs.PaymentConstraints o) {
-		long ret = bindings.CResult_PaymentConstraintsDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_PaymentConstraintsDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_PaymentConstraintsDecodeErrorZ ret_hu_conv = Result_PaymentConstraintsDecodeErrorZ.constr_from_ptr(ret);

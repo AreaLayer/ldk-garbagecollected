@@ -30,7 +30,7 @@ public class ChannelTypeFeatures : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.ChannelTypeFeatures b) {
-		bool ret = bindings.ChannelTypeFeatures_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.ChannelTypeFeatures_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };
@@ -86,7 +86,7 @@ public class ChannelTypeFeatures : CommonBase {
 	 * Returns true if this `Features` object contains required features unknown by `other`.
 	 */
 	public bool requires_unknown_bits_from(org.ldk.structs.ChannelTypeFeatures other) {
-		bool ret = bindings.ChannelTypeFeatures_requires_unknown_bits_from(this.ptr, other == null ? 0 : other.ptr);
+		bool ret = bindings.ChannelTypeFeatures_requires_unknown_bits_from(this.ptr, other.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(other);
 		if (this != null) { this.ptrs_to.AddLast(other); };

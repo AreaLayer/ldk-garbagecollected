@@ -7,11 +7,629 @@ namespace org { namespace ldk { namespace structs {
 
 
 /**
- * Manager which keeps track of a number of channels and sends messages to the appropriate
- * channel, also tracking HTLC preimages and forwarding onion packets appropriately.
+ * A lightning node's channel state machine and payment management logic, which facilitates
+ * sending, forwarding, and receiving payments through lightning channels.
  * 
- * Implements [`ChannelMessageHandler`], handling the multi-channel parts and passing things through
- * to individual Channels.
+ * [`ChannelManager`] is parameterized by a number of components to achieve this.
+ * - [`chain::Watch`] (typically [`ChainMonitor`]) for on-chain monitoring and enforcement of each
+ * channel
+ * - [`BroadcasterInterface`] for broadcasting transactions related to opening, funding, and
+ * closing channels
+ * - [`EntropySource`] for providing random data needed for cryptographic operations
+ * - [`NodeSigner`] for cryptographic operations scoped to the node
+ * - [`SignerProvider`] for providing signers whose operations are scoped to individual channels
+ * - [`FeeEstimator`] to determine transaction fee rates needed to have a transaction mined in a
+ * timely manner
+ * - [`Router`] for finding payment paths when initiating and retrying payments
+ * - [`Logger`] for logging operational information of varying degrees
+ * 
+ * Additionally, it implements the following traits:
+ * - [`ChannelMessageHandler`] to handle off-chain channel activity from peers
+ * - [`MessageSendEventsProvider`] to similarly send such messages to peers
+ * - [`OffersMessageHandler`] for BOLT 12 message handling and sending
+ * - [`EventsProvider`] to generate user-actionable [`Event`]s
+ * - [`chain::Listen`] and [`chain::Confirm`] for notification of on-chain activity
+ * 
+ * Thus, [`ChannelManager`] is typically used to parameterize a [`MessageHandler`] and an
+ * [`OnionMessenger`]. The latter is required to support BOLT 12 functionality.
+ * 
+ * # `ChannelManager` vs `ChannelMonitor`
+ * 
+ * It's important to distinguish between the *off-chain* management and *on-chain* enforcement of
+ * lightning channels. [`ChannelManager`] exchanges messages with peers to manage the off-chain
+ * state of each channel. During this process, it generates a [`ChannelMonitor`] for each channel
+ * and a [`ChannelMonitorUpdate`] for each relevant change, notifying its parameterized
+ * [`chain::Watch`] of them.
+ * 
+ * An implementation of [`chain::Watch`], such as [`ChainMonitor`], is responsible for aggregating
+ * these [`ChannelMonitor`]s and applying any [`ChannelMonitorUpdate`]s to them. It then monitors
+ * for any pertinent on-chain activity, enforcing claims as needed.
+ * 
+ * This division of off-chain management and on-chain enforcement allows for interesting node
+ * setups. For instance, on-chain enforcement could be moved to a separate host or have added
+ * redundancy, possibly as a watchtower. See [`chain::Watch`] for the relevant interface.
+ * 
+ * # Initialization
+ * 
+ * Use [`ChannelManager::new`] with the most recent [`BlockHash`] when creating a fresh instance.
+ * Otherwise, if restarting, construct [`ChannelManagerReadArgs`] with the necessary parameters and
+ * references to any deserialized [`ChannelMonitor`]s that were previously persisted. Use this to
+ * deserialize the [`ChannelManager`] and feed it any new chain data since it was last online, as
+ * detailed in the [`ChannelManagerReadArgs`] documentation.
+ * 
+ * ```
+ * use bitcoin::BlockHash;
+ * use bitcoin::network::constants::Network;
+ * use lightning::chain::BestBlock;
+ * # use lightning::chain::channelmonitor::ChannelMonitor;
+ * use lightning::ln::channelmanager::{ChainParameters, ChannelManager, ChannelManagerReadArgs};
+ * # use lightning::routing::gossip::NetworkGraph;
+ * use lightning::util::config::UserConfig;
+ * use lightning::util::ser::ReadableArgs;
+ * 
+ * # fn read_channel_monitors() -> Vec<ChannelMonitor<lightning::sign::InMemorySigner>> { vec![] }
+ * # fn example<
+ * #     'a,
+ * #     L: lightning::util::logger::Logger,
+ * #     ES: lightning::sign::EntropySource,
+ * #     S: for <'b> lightning::routing::scoring::LockableScore<'b, ScoreLookUp = SL>,
+ * #     SL: lightning::routing::scoring::ScoreLookUp<ScoreParams = SP>,
+ * #     SP: Sized,
+ * #     R: lightning::io::Read,
+ * # >(
+ * #     fee_estimator: &dyn lightning::chain::chaininterface::FeeEstimator,
+ * #     chain_monitor: &dyn lightning::chain::Watch<lightning::sign::InMemorySigner>,
+ * #     tx_broadcaster: &dyn lightning::chain::chaininterface::BroadcasterInterface,
+ * #     router: &lightning::routing::router::DefaultRouter<&NetworkGraph<&'a L>, &'a L, &ES, &S, SP, SL>,
+ * #     logger: &L,
+ * #     entropy_source: &ES,
+ * #     node_signer: &dyn lightning::sign::NodeSigner,
+ * #     signer_provider: &lightning::sign::DynSignerProvider,
+ * #     best_block: lightning::chain::BestBlock,
+ * #     current_timestamp: u32,
+ * #     mut reader: R,
+ * # ) -> Result<(), lightning::ln::msgs::DecodeError> {
+ * Fresh start with no channels
+ * let params = ChainParameters {
+ * network: Network::Bitcoin,
+ * best_block,
+ * };
+ * let default_config = UserConfig::default();
+ * let channel_manager = ChannelManager::new(
+ * fee_estimator, chain_monitor, tx_broadcaster, router, logger, entropy_source, node_signer,
+ * signer_provider, default_config, params, current_timestamp
+ * );
+ * 
+ * Restart from deserialized data
+ * let mut channel_monitors = read_channel_monitors();
+ * let args = ChannelManagerReadArgs::new(
+ * entropy_source, node_signer, signer_provider, fee_estimator, chain_monitor, tx_broadcaster,
+ * router, logger, default_config, channel_monitors.iter_mut().collect()
+ * );
+ * let (block_hash, channel_manager) =
+ * <(BlockHash, ChannelManager<_, _, _, _, _, _, _, _>)>::read(&mut reader, args)?;
+ * 
+ * Update the ChannelManager and ChannelMonitors with the latest chain data
+ * ...
+ * 
+ * Move the monitors to the ChannelManager's chain::Watch parameter
+ * for monitor in channel_monitors {
+ * chain_monitor.watch_channel(monitor.get_funding_txo().0, monitor);
+ * }
+ * # Ok(())
+ * # }
+ * ```
+ * 
+ * # Operation
+ * 
+ * The following is required for [`ChannelManager`] to function properly:
+ * - Handle messages from peers using its [`ChannelMessageHandler`] implementation (typically
+ * called by [`PeerManager::read_event`] when processing network I/O)
+ * - Send messages to peers obtained via its [`MessageSendEventsProvider`] implementation
+ * (typically initiated when [`PeerManager::process_events`] is called)
+ * - Feed on-chain activity using either its [`chain::Listen`] or [`chain::Confirm`] implementation
+ * as documented by those traits
+ * - Perform any periodic channel and payment checks by calling [`timer_tick_occurred`] roughly
+ * every minute
+ * - Persist to disk whenever [`get_and_clear_needs_persistence`] returns `true` using a
+ * [`Persister`] such as a [`KVStore`] implementation
+ * - Handle [`Event`]s obtained via its [`EventsProvider`] implementation
+ * 
+ * The [`Future`] returned by [`get_event_or_persistence_needed_future`] is useful in determining
+ * when the last two requirements need to be checked.
+ * 
+ * The [`lightning-block-sync`] and [`lightning-transaction-sync`] crates provide utilities that
+ * simplify feeding in on-chain activity using the [`chain::Listen`] and [`chain::Confirm`] traits,
+ * respectively. The remaining requirements can be met using the [`lightning-background-processor`]
+ * crate. For languages other than Rust, the availability of similar utilities may vary.
+ * 
+ * # Channels
+ * 
+ * [`ChannelManager`]'s primary function involves managing a channel state. Without channels,
+ * payments can't be sent. Use [`list_channels`] or [`list_usable_channels`] for a snapshot of the
+ * currently open channels.
+ * 
+ * ```
+ * # use lightning::ln::channelmanager::AChannelManager;
+ * #
+ * # fn example<T: AChannelManager>(channel_manager: T) {
+ * # let channel_manager = channel_manager.get_cm();
+ * let channels = channel_manager.list_usable_channels();
+ * for details in channels {
+ * println!(\"{:?}\", details);
+ * }
+ * # }
+ * ```
+ * 
+ * Each channel is identified using a [`ChannelId`], which will change throughout the channel's
+ * life cycle. Additionally, channels are assigned a `user_channel_id`, which is given in
+ * [`Event`]s associated with the channel and serves as a fixed identifier but is otherwise unused
+ * by [`ChannelManager`].
+ * 
+ * ## Opening Channels
+ * 
+ * To an open a channel with a peer, call [`create_channel`]. This will initiate the process of
+ * opening an outbound channel, which requires self-funding when handling
+ * [`Event::FundingGenerationReady`].
+ * 
+ * ```
+ * # use bitcoin::{ScriptBuf, Transaction};
+ * # use bitcoin::secp256k1::PublicKey;
+ * # use lightning::ln::channelmanager::AChannelManager;
+ * # use lightning::events::{Event, EventsProvider};
+ * #
+ * # trait Wallet {
+ * #     fn create_funding_transaction(
+ * #         &self, _amount_sats: u64, _output_script: ScriptBuf
+ * #     ) -> Transaction;
+ * # }
+ * #
+ * # fn example<T: AChannelManager, W: Wallet>(channel_manager: T, wallet: W, peer_id: PublicKey) {
+ * # let channel_manager = channel_manager.get_cm();
+ * let value_sats = 1_000_000;
+ * let push_msats = 10_000_000;
+ * match channel_manager.create_channel(peer_id, value_sats, push_msats, 42, None, None) {
+ * Ok(channel_id) => println!(\"Opening channel {}\", channel_id),
+ * Err(e) => println!(\"Error opening channel: {:?}\", e),
+ * }
+ * 
+ * On the event processing thread once the peer has responded
+ * channel_manager.process_pending_events(&|event| match event {
+ * Event::FundingGenerationReady {
+ * temporary_channel_id, counterparty_node_id, channel_value_satoshis, output_script,
+ * user_channel_id, ..
+ * } => {
+ * assert_eq!(user_channel_id, 42);
+ * let funding_transaction = wallet.create_funding_transaction(
+ * channel_value_satoshis, output_script
+ * );
+ * match channel_manager.funding_transaction_generated(
+ * &temporary_channel_id, &counterparty_node_id, funding_transaction
+ * ) {
+ * Ok(()) => println!(\"Funding channel {}\", temporary_channel_id),
+ * Err(e) => println!(\"Error funding channel {}: {:?}\", temporary_channel_id, e),
+ * }
+ * },
+ * Event::ChannelPending { channel_id, user_channel_id, former_temporary_channel_id, .. } => {
+ * assert_eq!(user_channel_id, 42);
+ * println!(
+ * \"Channel {} now {} pending (funding transaction has been broadcasted)\", channel_id,
+ * former_temporary_channel_id.unwrap()
+ * );
+ * },
+ * Event::ChannelReady { channel_id, user_channel_id, .. } => {
+ * assert_eq!(user_channel_id, 42);
+ * println!(\"Channel {} ready\", channel_id);
+ * },
+ * ...
+ * #     _ => {},
+ * });
+ * # }
+ * ```
+ * 
+ * ## Accepting Channels
+ * 
+ * Inbound channels are initiated by peers and are automatically accepted unless [`ChannelManager`]
+ * has [`UserConfig::manually_accept_inbound_channels`] set. In that case, the channel may be
+ * either accepted or rejected when handling [`Event::OpenChannelRequest`].
+ * 
+ * ```
+ * # use bitcoin::secp256k1::PublicKey;
+ * # use lightning::ln::channelmanager::AChannelManager;
+ * # use lightning::events::{Event, EventsProvider};
+ * #
+ * # fn is_trusted(counterparty_node_id: PublicKey) -> bool {
+ * #     // ...
+ * #     unimplemented!()
+ * # }
+ * #
+ * # fn example<T: AChannelManager>(channel_manager: T) {
+ * # let channel_manager = channel_manager.get_cm();
+ * channel_manager.process_pending_events(&|event| match event {
+ * Event::OpenChannelRequest { temporary_channel_id, counterparty_node_id, ..  } => {
+ * if !is_trusted(counterparty_node_id) {
+ * match channel_manager.force_close_without_broadcasting_txn(
+ * &temporary_channel_id, &counterparty_node_id
+ * ) {
+ * Ok(()) => println!(\"Rejecting channel {}\", temporary_channel_id),
+ * Err(e) => println!(\"Error rejecting channel {}: {:?}\", temporary_channel_id, e),
+ * }
+ * return;
+ * }
+ * 
+ * let user_channel_id = 43;
+ * match channel_manager.accept_inbound_channel(
+ * &temporary_channel_id, &counterparty_node_id, user_channel_id
+ * ) {
+ * Ok(()) => println!(\"Accepting channel {}\", temporary_channel_id),
+ * Err(e) => println!(\"Error accepting channel {}: {:?}\", temporary_channel_id, e),
+ * }
+ * },
+ * ...
+ * #     _ => {},
+ * });
+ * # }
+ * ```
+ * 
+ * ## Closing Channels
+ * 
+ * There are two ways to close a channel: either cooperatively using [`close_channel`] or
+ * unilaterally using [`force_close_broadcasting_latest_txn`]. The former is ideal as it makes for
+ * lower fees and immediate access to funds. However, the latter may be necessary if the
+ * counterparty isn't behaving properly or has gone offline. [`Event::ChannelClosed`] is generated
+ * once the channel has been closed successfully.
+ * 
+ * ```
+ * # use bitcoin::secp256k1::PublicKey;
+ * # use lightning::ln::types::ChannelId;
+ * # use lightning::ln::channelmanager::AChannelManager;
+ * # use lightning::events::{Event, EventsProvider};
+ * #
+ * # fn example<T: AChannelManager>(
+ * #     channel_manager: T, channel_id: ChannelId, counterparty_node_id: PublicKey
+ * # ) {
+ * # let channel_manager = channel_manager.get_cm();
+ * match channel_manager.close_channel(&channel_id, &counterparty_node_id) {
+ * Ok(()) => println!(\"Closing channel {}\", channel_id),
+ * Err(e) => println!(\"Error closing channel {}: {:?}\", channel_id, e),
+ * }
+ * 
+ * On the event processing thread
+ * channel_manager.process_pending_events(&|event| match event {
+ * Event::ChannelClosed { channel_id, user_channel_id, ..  } => {
+ * assert_eq!(user_channel_id, 42);
+ * println!(\"Channel {} closed\", channel_id);
+ * },
+ * ...
+ * #     _ => {},
+ * });
+ * # }
+ * ```
+ * 
+ * # Payments
+ * 
+ * [`ChannelManager`] is responsible for sending, forwarding, and receiving payments through its
+ * channels. A payment is typically initiated from a [BOLT 11] invoice or a [BOLT 12] offer, though
+ * spontaneous (i.e., keysend) payments are also possible. Incoming payments don't require
+ * maintaining any additional state as [`ChannelManager`] can reconstruct the [`PaymentPreimage`]
+ * from the [`PaymentSecret`]. Sending payments, however, require tracking in order to retry failed
+ * HTLCs.
+ * 
+ * After a payment is initiated, it will appear in [`list_recent_payments`] until a short time
+ * after either an [`Event::PaymentSent`] or [`Event::PaymentFailed`] is handled. Failed HTLCs
+ * for a payment will be retried according to the payment's [`Retry`] strategy or until
+ * [`abandon_payment`] is called.
+ * 
+ * ## BOLT 11 Invoices
+ * 
+ * The [`lightning-invoice`] crate is useful for creating BOLT 11 invoices. Specifically, use the
+ * functions in its `utils` module for constructing invoices that are compatible with
+ * [`ChannelManager`]. These functions serve as a convenience for building invoices with the
+ * [`PaymentHash`] and [`PaymentSecret`] returned from [`create_inbound_payment`]. To provide your
+ * own [`PaymentHash`], use [`create_inbound_payment_for_hash`] or the corresponding functions in
+ * the [`lightning-invoice`] `utils` module.
+ * 
+ * [`ChannelManager`] generates an [`Event::PaymentClaimable`] once the full payment has been
+ * received. Call [`claim_funds`] to release the [`PaymentPreimage`], which in turn will result in
+ * an [`Event::PaymentClaimed`].
+ * 
+ * ```
+ * # use lightning::events::{Event, EventsProvider, PaymentPurpose};
+ * # use lightning::ln::channelmanager::AChannelManager;
+ * #
+ * # fn example<T: AChannelManager>(channel_manager: T) {
+ * # let channel_manager = channel_manager.get_cm();
+ * Or use utils::create_invoice_from_channelmanager
+ * let known_payment_hash = match channel_manager.create_inbound_payment(
+ * Some(10_000_000), 3600, None
+ * ) {
+ * Ok((payment_hash, _payment_secret)) => {
+ * println!(\"Creating inbound payment {}\", payment_hash);
+ * payment_hash
+ * },
+ * Err(()) => panic!(\"Error creating inbound payment\"),
+ * };
+ * 
+ * On the event processing thread
+ * channel_manager.process_pending_events(&|event| match event {
+ * Event::PaymentClaimable { payment_hash, purpose, .. } => match purpose {
+ * PaymentPurpose::Bolt11InvoicePayment { payment_preimage: Some(payment_preimage), .. } => {
+ * assert_eq!(payment_hash, known_payment_hash);
+ * println!(\"Claiming payment {}\", payment_hash);
+ * channel_manager.claim_funds(payment_preimage);
+ * },
+ * PaymentPurpose::Bolt11InvoicePayment { payment_preimage: None, .. } => {
+ * println!(\"Unknown payment hash: {}\", payment_hash);
+ * },
+ * PaymentPurpose::SpontaneousPayment(payment_preimage) => {
+ * assert_ne!(payment_hash, known_payment_hash);
+ * println!(\"Claiming spontaneous payment {}\", payment_hash);
+ * channel_manager.claim_funds(payment_preimage);
+ * },
+ * ...
+ * #         _ => {},
+ * },
+ * Event::PaymentClaimed { payment_hash, amount_msat, .. } => {
+ * assert_eq!(payment_hash, known_payment_hash);
+ * println!(\"Claimed {} msats\", amount_msat);
+ * },
+ * ...
+ * #     _ => {},
+ * });
+ * # }
+ * ```
+ * 
+ * For paying an invoice, [`lightning-invoice`] provides a `payment` module with convenience
+ * functions for use with [`send_payment`].
+ * 
+ * ```
+ * # use lightning::events::{Event, EventsProvider};
+ * # use lightning::ln::types::PaymentHash;
+ * # use lightning::ln::channelmanager::{AChannelManager, PaymentId, RecentPaymentDetails, RecipientOnionFields, Retry};
+ * # use lightning::routing::router::RouteParameters;
+ * #
+ * # fn example<T: AChannelManager>(
+ * #     channel_manager: T, payment_hash: PaymentHash, recipient_onion: RecipientOnionFields,
+ * #     route_params: RouteParameters, retry: Retry
+ * # ) {
+ * # let channel_manager = channel_manager.get_cm();
+ * let (payment_hash, recipient_onion, route_params) =
+ * payment::payment_parameters_from_invoice(&invoice);
+ * let payment_id = PaymentId([42; 32]);
+ * match channel_manager.send_payment(
+ * payment_hash, recipient_onion, payment_id, route_params, retry
+ * ) {
+ * Ok(()) => println!(\"Sending payment with hash {}\", payment_hash),
+ * Err(e) => println!(\"Failed sending payment with hash {}: {:?}\", payment_hash, e),
+ * }
+ * 
+ * let expected_payment_id = payment_id;
+ * let expected_payment_hash = payment_hash;
+ * assert!(
+ * channel_manager.list_recent_payments().iter().find(|details| matches!(
+ * details,
+ * RecentPaymentDetails::Pending {
+ * payment_id: expected_payment_id,
+ * payment_hash: expected_payment_hash,
+ * ..
+ * }
+ * )).is_some()
+ * );
+ * 
+ * On the event processing thread
+ * channel_manager.process_pending_events(&|event| match event {
+ * Event::PaymentSent { payment_hash, .. } => println!(\"Paid {}\", payment_hash),
+ * Event::PaymentFailed { payment_hash, .. } => println!(\"Failed paying {}\", payment_hash),
+ * ...
+ * #     _ => {},
+ * });
+ * # }
+ * ```
+ * 
+ * ## BOLT 12 Offers
+ * 
+ * The [`offers`] module is useful for creating BOLT 12 offers. An [`Offer`] is a precursor to a
+ * [`Bolt12Invoice`], which must first be requested by the payer. The interchange of these messages
+ * as defined in the specification is handled by [`ChannelManager`] and its implementation of
+ * [`OffersMessageHandler`]. However, this only works with an [`Offer`] created using a builder
+ * returned by [`create_offer_builder`]. With this approach, BOLT 12 offers and invoices are
+ * stateless just as BOLT 11 invoices are.
+ * 
+ * ```
+ * # use lightning::events::{Event, EventsProvider, PaymentPurpose};
+ * # use lightning::ln::channelmanager::AChannelManager;
+ * # use lightning::offers::parse::Bolt12SemanticError;
+ * #
+ * # fn example<T: AChannelManager>(channel_manager: T) -> Result<(), Bolt12SemanticError> {
+ * # let channel_manager = channel_manager.get_cm();
+ * let offer = channel_manager
+ * .create_offer_builder()?
+ * # ;
+ * # // Needed for compiling for c_bindings
+ * # let builder: lightning::offers::offer::OfferBuilder<_, _> = offer.into();
+ * # let offer = builder
+ * .description(\"coffee\".to_string())
+ * .amount_msats(10_000_000)
+ * .build()?;
+ * let bech32_offer = offer.to_string();
+ * 
+ * On the event processing thread
+ * channel_manager.process_pending_events(&|event| match event {
+ * Event::PaymentClaimable { payment_hash, purpose, .. } => match purpose {
+ * PaymentPurpose::Bolt12OfferPayment { payment_preimage: Some(payment_preimage), .. } => {
+ * println!(\"Claiming payment {}\", payment_hash);
+ * channel_manager.claim_funds(payment_preimage);
+ * },
+ * PaymentPurpose::Bolt12OfferPayment { payment_preimage: None, .. } => {
+ * println!(\"Unknown payment hash: {}\", payment_hash);
+ * },
+ * ...
+ * #         _ => {},
+ * },
+ * Event::PaymentClaimed { payment_hash, amount_msat, .. } => {
+ * println!(\"Claimed {} msats\", amount_msat);
+ * },
+ * ...
+ * #     _ => {},
+ * });
+ * # Ok(())
+ * # }
+ * ```
+ * 
+ * Use [`pay_for_offer`] to initiated payment, which sends an [`InvoiceRequest`] for an [`Offer`]
+ * and pays the [`Bolt12Invoice`] response. In addition to success and failure events,
+ * [`ChannelManager`] may also generate an [`Event::InvoiceRequestFailed`].
+ * 
+ * ```
+ * # use lightning::events::{Event, EventsProvider};
+ * # use lightning::ln::channelmanager::{AChannelManager, PaymentId, RecentPaymentDetails, Retry};
+ * # use lightning::offers::offer::Offer;
+ * #
+ * # fn example<T: AChannelManager>(
+ * #     channel_manager: T, offer: &Offer, quantity: Option<u64>, amount_msats: Option<u64>,
+ * #     payer_note: Option<String>, retry: Retry, max_total_routing_fee_msat: Option<u64>
+ * # ) {
+ * # let channel_manager = channel_manager.get_cm();
+ * let payment_id = PaymentId([42; 32]);
+ * match channel_manager.pay_for_offer(
+ * offer, quantity, amount_msats, payer_note, payment_id, retry, max_total_routing_fee_msat
+ * ) {
+ * Ok(()) => println!(\"Requesting invoice for offer\"),
+ * Err(e) => println!(\"Unable to request invoice for offer: {:?}\", e),
+ * }
+ * 
+ * First the payment will be waiting on an invoice
+ * let expected_payment_id = payment_id;
+ * assert!(
+ * channel_manager.list_recent_payments().iter().find(|details| matches!(
+ * details,
+ * RecentPaymentDetails::AwaitingInvoice { payment_id: expected_payment_id }
+ * )).is_some()
+ * );
+ * 
+ * Once the invoice is received, a payment will be sent
+ * assert!(
+ * channel_manager.list_recent_payments().iter().find(|details| matches!(
+ * details,
+ * RecentPaymentDetails::Pending { payment_id: expected_payment_id, ..  }
+ * )).is_some()
+ * );
+ * 
+ * On the event processing thread
+ * channel_manager.process_pending_events(&|event| match event {
+ * Event::PaymentSent { payment_id: Some(payment_id), .. } => println!(\"Paid {}\", payment_id),
+ * Event::PaymentFailed { payment_id, .. } => println!(\"Failed paying {}\", payment_id),
+ * Event::InvoiceRequestFailed { payment_id, .. } => println!(\"Failed paying {}\", payment_id),
+ * ...
+ * #     _ => {},
+ * });
+ * # }
+ * ```
+ * 
+ * ## BOLT 12 Refunds
+ * 
+ * A [`Refund`] is a request for an invoice to be paid. Like *paying* for an [`Offer`], *creating*
+ * a [`Refund`] involves maintaining state since it represents a future outbound payment.
+ * Therefore, use [`create_refund_builder`] when creating one, otherwise [`ChannelManager`] will
+ * refuse to pay any corresponding [`Bolt12Invoice`] that it receives.
+ * 
+ * ```
+ * # use core::time::Duration;
+ * # use lightning::events::{Event, EventsProvider};
+ * # use lightning::ln::channelmanager::{AChannelManager, PaymentId, RecentPaymentDetails, Retry};
+ * # use lightning::offers::parse::Bolt12SemanticError;
+ * #
+ * # fn example<T: AChannelManager>(
+ * #     channel_manager: T, amount_msats: u64, absolute_expiry: Duration, retry: Retry,
+ * #     max_total_routing_fee_msat: Option<u64>
+ * # ) -> Result<(), Bolt12SemanticError> {
+ * # let channel_manager = channel_manager.get_cm();
+ * let payment_id = PaymentId([42; 32]);
+ * let refund = channel_manager
+ * .create_refund_builder(
+ * amount_msats, absolute_expiry, payment_id, retry, max_total_routing_fee_msat
+ * )?
+ * # ;
+ * # // Needed for compiling for c_bindings
+ * # let builder: lightning::offers::refund::RefundBuilder<_> = refund.into();
+ * # let refund = builder
+ * .description(\"coffee\".to_string())
+ * .payer_note(\"refund for order 1234\".to_string())
+ * .build()?;
+ * let bech32_refund = refund.to_string();
+ * 
+ * First the payment will be waiting on an invoice
+ * let expected_payment_id = payment_id;
+ * assert!(
+ * channel_manager.list_recent_payments().iter().find(|details| matches!(
+ * details,
+ * RecentPaymentDetails::AwaitingInvoice { payment_id: expected_payment_id }
+ * )).is_some()
+ * );
+ * 
+ * Once the invoice is received, a payment will be sent
+ * assert!(
+ * channel_manager.list_recent_payments().iter().find(|details| matches!(
+ * details,
+ * RecentPaymentDetails::Pending { payment_id: expected_payment_id, ..  }
+ * )).is_some()
+ * );
+ * 
+ * On the event processing thread
+ * channel_manager.process_pending_events(&|event| match event {
+ * Event::PaymentSent { payment_id: Some(payment_id), .. } => println!(\"Paid {}\", payment_id),
+ * Event::PaymentFailed { payment_id, .. } => println!(\"Failed paying {}\", payment_id),
+ * ...
+ * #     _ => {},
+ * });
+ * # Ok(())
+ * # }
+ * ```
+ * 
+ * Use [`request_refund_payment`] to send a [`Bolt12Invoice`] for receiving the refund. Similar to
+ * creating* an [`Offer`], this is stateless as it represents an inbound payment.
+ * 
+ * ```
+ * # use lightning::events::{Event, EventsProvider, PaymentPurpose};
+ * # use lightning::ln::channelmanager::AChannelManager;
+ * # use lightning::offers::refund::Refund;
+ * #
+ * # fn example<T: AChannelManager>(channel_manager: T, refund: &Refund) {
+ * # let channel_manager = channel_manager.get_cm();
+ * let known_payment_hash = match channel_manager.request_refund_payment(refund) {
+ * Ok(invoice) => {
+ * let payment_hash = invoice.payment_hash();
+ * println!(\"Requesting refund payment {}\", payment_hash);
+ * payment_hash
+ * },
+ * Err(e) => panic!(\"Unable to request payment for refund: {:?}\", e),
+ * };
+ * 
+ * On the event processing thread
+ * channel_manager.process_pending_events(&|event| match event {
+ * Event::PaymentClaimable { payment_hash, purpose, .. } => match purpose {
+ * \tPaymentPurpose::Bolt12RefundPayment { payment_preimage: Some(payment_preimage), .. } => {
+ * assert_eq!(payment_hash, known_payment_hash);
+ * println!(\"Claiming payment {}\", payment_hash);
+ * channel_manager.claim_funds(payment_preimage);
+ * },
+ * \tPaymentPurpose::Bolt12RefundPayment { payment_preimage: None, .. } => {
+ * println!(\"Unknown payment hash: {}\", payment_hash);
+ * \t},
+ * ...
+ * #         _ => {},
+ * },
+ * Event::PaymentClaimed { payment_hash, amount_msat, .. } => {
+ * assert_eq!(payment_hash, known_payment_hash);
+ * println!(\"Claimed {} msats\", amount_msat);
+ * },
+ * ...
+ * #     _ => {},
+ * });
+ * # }
+ * ```
+ * 
+ * # Persistence
  * 
  * Implements [`Writeable`] to write out all channel state to disk. Implies [`peer_disconnected`] for
  * all peers during write/read (though does not modify this instance, only the instance being
@@ -32,11 +650,15 @@ namespace org { namespace ldk { namespace structs {
  * tells you the last block hash which was connected. You should get the best block tip before using the manager.
  * See [`chain::Listen`] and [`chain::Confirm`] for more details.
  * 
+ * # `ChannelUpdate` Messages
+ * 
  * Note that `ChannelManager` is responsible for tracking liveness of its channels and generating
  * [`ChannelUpdate`] messages informing peers that the channel is temporarily disabled. To avoid
  * spam due to quick disconnection/reconnection, updates are not sent until the channel has been
  * offline for a full minute. In order to track this, you must call
  * [`timer_tick_occurred`] roughly once per minute, though it doesn't have to be perfect.
+ * 
+ * # DoS Mitigation
  * 
  * To avoid trivial DoS issues, `ChannelManager` limits the number of inbound connections and
  * inbound channels without confirmed funding transactions. This may result in nodes which we do
@@ -47,19 +669,53 @@ namespace org { namespace ldk { namespace structs {
  * exempted from the count of unfunded channels. Similarly, outbound channels and connections are
  * never limited. Please ensure you limit the count of such channels yourself.
  * 
+ * # Type Aliases
+ * 
  * Rather than using a plain `ChannelManager`, it is preferable to use either a [`SimpleArcChannelManager`]
  * a [`SimpleRefChannelManager`], for conciseness. See their documentation for more details, but
  * essentially you should default to using a [`SimpleRefChannelManager`], and use a
  * [`SimpleArcChannelManager`] when you require a `ChannelManager` with a static lifetime, such as when
  * you're using lightning-net-tokio.
  * 
+ * [`ChainMonitor`]: crate::chain::chainmonitor::ChainMonitor
+ * [`MessageHandler`]: crate::ln::peer_handler::MessageHandler
+ * [`OnionMessenger`]: crate::onion_message::messenger::OnionMessenger
+ * [`PeerManager::read_event`]: crate::ln::peer_handler::PeerManager::read_event
+ * [`PeerManager::process_events`]: crate::ln::peer_handler::PeerManager::process_events
+ * [`timer_tick_occurred`]: Self::timer_tick_occurred
+ * [`get_and_clear_needs_persistence`]: Self::get_and_clear_needs_persistence
+ * [`Persister`]: crate::util::persist::Persister
+ * [`KVStore`]: crate::util::persist::KVStore
+ * [`get_event_or_persistence_needed_future`]: Self::get_event_or_persistence_needed_future
+ * [`lightning-block-sync`]: https://docs.rs/lightning_block_sync/latest/lightning_block_sync
+ * [`lightning-transaction-sync`]: https://docs.rs/lightning_transaction_sync/latest/lightning_transaction_sync
+ * [`lightning-background-processor`]: https://docs.rs/lightning_background_processor/lightning_background_processor
+ * [`list_channels`]: Self::list_channels
+ * [`list_usable_channels`]: Self::list_usable_channels
+ * [`create_channel`]: Self::create_channel
+ * [`close_channel`]: Self::force_close_broadcasting_latest_txn
+ * [`force_close_broadcasting_latest_txn`]: Self::force_close_broadcasting_latest_txn
+ * [BOLT 11]: https://github.com/lightning/bolts/blob/master/11-payment-encoding.md
+ * [BOLT 12]: https://github.com/rustyrussell/lightning-rfc/blob/guilt/offers/12-offer-encoding.md
+ * [`list_recent_payments`]: Self::list_recent_payments
+ * [`abandon_payment`]: Self::abandon_payment
+ * [`lightning-invoice`]: https://docs.rs/lightning_invoice/latest/lightning_invoice
+ * [`create_inbound_payment`]: Self::create_inbound_payment
+ * [`create_inbound_payment_for_hash`]: Self::create_inbound_payment_for_hash
+ * [`claim_funds`]: Self::claim_funds
+ * [`send_payment`]: Self::send_payment
+ * [`offers`]: crate::offers
+ * [`create_offer_builder`]: Self::create_offer_builder
+ * [`pay_for_offer`]: Self::pay_for_offer
+ * [`InvoiceRequest`]: crate::offers::invoice_request::InvoiceRequest
+ * [`create_refund_builder`]: Self::create_refund_builder
+ * [`request_refund_payment`]: Self::request_refund_payment
  * [`peer_disconnected`]: msgs::ChannelMessageHandler::peer_disconnected
  * [`funding_created`]: msgs::FundingCreated
  * [`funding_transaction_generated`]: Self::funding_transaction_generated
  * [`BlockHash`]: bitcoin::hash_types::BlockHash
  * [`update_channel`]: chain::Watch::update_channel
  * [`ChannelUpdate`]: msgs::ChannelUpdate
- * [`timer_tick_occurred`]: Self::timer_tick_occurred
  * [`read`]: ReadableArgs::read
  */
 public class ChannelManager : CommonBase {
@@ -88,7 +744,7 @@ public class ChannelManager : CommonBase {
 	 * [`params.best_block.block_hash`]: chain::BestBlock::block_hash
 	 */
 	public static ChannelManager of(org.ldk.structs.FeeEstimator fee_est, org.ldk.structs.Watch chain_monitor, org.ldk.structs.BroadcasterInterface tx_broadcaster, org.ldk.structs.Router router, org.ldk.structs.Logger logger, org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.SignerProvider signer_provider, org.ldk.structs.UserConfig config, org.ldk.structs.ChainParameters _params, int current_timestamp) {
-		long ret = bindings.ChannelManager_new(fee_est.ptr, chain_monitor.ptr, tx_broadcaster.ptr, router.ptr, logger.ptr, entropy_source.ptr, node_signer.ptr, signer_provider.ptr, config == null ? 0 : config.ptr, _params == null ? 0 : _params.ptr, current_timestamp);
+		long ret = bindings.ChannelManager_new(fee_est.ptr, chain_monitor.ptr, tx_broadcaster.ptr, router.ptr, logger.ptr, entropy_source.ptr, node_signer.ptr, signer_provider.ptr, config.ptr, _params.ptr, current_timestamp);
 		GC.KeepAlive(fee_est);
 		GC.KeepAlive(chain_monitor);
 		GC.KeepAlive(tx_broadcaster);
@@ -162,10 +818,11 @@ public class ChannelManager : CommonBase {
 	 * [`Event::FundingGenerationReady::temporary_channel_id`]: events::Event::FundingGenerationReady::temporary_channel_id
 	 * [`Event::ChannelClosed::channel_id`]: events::Event::ChannelClosed::channel_id
 	 * 
+	 * Note that temporary_channel_id (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 * Note that override_config (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public Result_ThirtyTwoBytesAPIErrorZ create_channel(byte[] their_network_key, long channel_value_satoshis, long push_msat, org.ldk.util.UInt128 user_channel_id, org.ldk.structs.Option_ThirtyTwoBytesZ temporary_channel_id, org.ldk.structs.UserConfig override_config) {
-		long ret = bindings.ChannelManager_create_channel(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_network_key, 33)), channel_value_satoshis, push_msat, InternalUtils.encodeUint8Array(user_channel_id.getLEBytes()), temporary_channel_id.ptr, override_config == null ? 0 : override_config.ptr);
+	public Result_ChannelIdAPIErrorZ create_channel(byte[] their_network_key, long channel_value_satoshis, long push_msat, org.ldk.util.UInt128 user_channel_id, org.ldk.structs.ChannelId temporary_channel_id, org.ldk.structs.UserConfig override_config) {
+		long ret = bindings.ChannelManager_create_channel(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_network_key, 33)), channel_value_satoshis, push_msat, InternalUtils.encodeUint8Array(user_channel_id.getLEBytes()), temporary_channel_id == null ? 0 : temporary_channel_id.ptr, override_config == null ? 0 : override_config.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(their_network_key);
 		GC.KeepAlive(channel_value_satoshis);
@@ -174,7 +831,7 @@ public class ChannelManager : CommonBase {
 		GC.KeepAlive(temporary_channel_id);
 		GC.KeepAlive(override_config);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_ThirtyTwoBytesAPIErrorZ ret_hu_conv = Result_ThirtyTwoBytesAPIErrorZ.constr_from_ptr(ret);
+		Result_ChannelIdAPIErrorZ ret_hu_conv = Result_ChannelIdAPIErrorZ.constr_from_ptr(ret);
 		if (this != null) { this.ptrs_to.AddLast(temporary_channel_id); };
 		if (this != null) { this.ptrs_to.AddLast(override_config); };
 		return ret_hu_conv;
@@ -295,13 +952,14 @@ public class ChannelManager : CommonBase {
 	 * [`NonAnchorChannelFee`]: crate::chain::chaininterface::ConfirmationTarget::NonAnchorChannelFee
 	 * [`SendShutdown`]: crate::events::MessageSendEvent::SendShutdown
 	 */
-	public Result_NoneAPIErrorZ close_channel(byte[] channel_id, byte[] counterparty_node_id) {
-		long ret = bindings.ChannelManager_close_channel(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(channel_id, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)));
+	public Result_NoneAPIErrorZ close_channel(org.ldk.structs.ChannelId channel_id, byte[] counterparty_node_id) {
+		long ret = bindings.ChannelManager_close_channel(this.ptr, channel_id.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(channel_id);
 		GC.KeepAlive(counterparty_node_id);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneAPIErrorZ ret_hu_conv = Result_NoneAPIErrorZ.constr_from_ptr(ret);
+		if (this != null) { this.ptrs_to.AddLast(channel_id); };
 		return ret_hu_conv;
 	}
 
@@ -338,8 +996,8 @@ public class ChannelManager : CommonBase {
 	 * 
 	 * Note that shutdown_script (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public Result_NoneAPIErrorZ close_channel_with_feerate_and_script(byte[] channel_id, byte[] counterparty_node_id, org.ldk.structs.Option_u32Z target_feerate_sats_per_1000_weight, org.ldk.structs.ShutdownScript shutdown_script) {
-		long ret = bindings.ChannelManager_close_channel_with_feerate_and_script(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(channel_id, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)), target_feerate_sats_per_1000_weight.ptr, shutdown_script == null ? 0 : shutdown_script.ptr);
+	public Result_NoneAPIErrorZ close_channel_with_feerate_and_script(org.ldk.structs.ChannelId channel_id, byte[] counterparty_node_id, org.ldk.structs.Option_u32Z target_feerate_sats_per_1000_weight, org.ldk.structs.ShutdownScript shutdown_script) {
+		long ret = bindings.ChannelManager_close_channel_with_feerate_and_script(this.ptr, channel_id.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)), target_feerate_sats_per_1000_weight.ptr, shutdown_script == null ? 0 : shutdown_script.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(channel_id);
 		GC.KeepAlive(counterparty_node_id);
@@ -347,6 +1005,7 @@ public class ChannelManager : CommonBase {
 		GC.KeepAlive(shutdown_script);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneAPIErrorZ ret_hu_conv = Result_NoneAPIErrorZ.constr_from_ptr(ret);
+		if (this != null) { this.ptrs_to.AddLast(channel_id); };
 		if (this != null) { this.ptrs_to.AddLast(target_feerate_sats_per_1000_weight); };
 		if (this != null) { this.ptrs_to.AddLast(shutdown_script); };
 		return ret_hu_conv;
@@ -358,13 +1017,14 @@ public class ChannelManager : CommonBase {
 	 * the manager, or if the `counterparty_node_id` isn't the counterparty of the corresponding
 	 * channel.
 	 */
-	public Result_NoneAPIErrorZ force_close_broadcasting_latest_txn(byte[] channel_id, byte[] counterparty_node_id) {
-		long ret = bindings.ChannelManager_force_close_broadcasting_latest_txn(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(channel_id, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)));
+	public Result_NoneAPIErrorZ force_close_broadcasting_latest_txn(org.ldk.structs.ChannelId channel_id, byte[] counterparty_node_id) {
+		long ret = bindings.ChannelManager_force_close_broadcasting_latest_txn(this.ptr, channel_id.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(channel_id);
 		GC.KeepAlive(counterparty_node_id);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneAPIErrorZ ret_hu_conv = Result_NoneAPIErrorZ.constr_from_ptr(ret);
+		if (this != null) { this.ptrs_to.AddLast(channel_id); };
 		return ret_hu_conv;
 	}
 
@@ -373,16 +1033,17 @@ public class ChannelManager : CommonBase {
 	 * the latest local transaction(s). Fails if `channel_id` is unknown to the manager, or if the
 	 * `counterparty_node_id` isn't the counterparty of the corresponding channel.
 	 * 
-	 * You can always get the latest local transaction(s) to broadcast from
-	 * [`ChannelMonitor::get_latest_holder_commitment_txn`].
+	 * You can always broadcast the latest local transaction(s) via
+	 * [`ChannelMonitor::broadcast_latest_holder_commitment_txn`].
 	 */
-	public Result_NoneAPIErrorZ force_close_without_broadcasting_txn(byte[] channel_id, byte[] counterparty_node_id) {
-		long ret = bindings.ChannelManager_force_close_without_broadcasting_txn(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(channel_id, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)));
+	public Result_NoneAPIErrorZ force_close_without_broadcasting_txn(org.ldk.structs.ChannelId channel_id, byte[] counterparty_node_id) {
+		long ret = bindings.ChannelManager_force_close_without_broadcasting_txn(this.ptr, channel_id.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(channel_id);
 		GC.KeepAlive(counterparty_node_id);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneAPIErrorZ ret_hu_conv = Result_NoneAPIErrorZ.constr_from_ptr(ret);
+		if (this != null) { this.ptrs_to.AddLast(channel_id); };
 		return ret_hu_conv;
 	}
 
@@ -458,7 +1119,7 @@ public class ChannelManager : CommonBase {
 	 * [`ChannelMonitorUpdateStatus::InProgress`]: crate::chain::ChannelMonitorUpdateStatus::InProgress
 	 */
 	public Result_NonePaymentSendFailureZ send_payment_with_route(org.ldk.structs.Route route, byte[] payment_hash, org.ldk.structs.RecipientOnionFields recipient_onion, byte[] payment_id) {
-		long ret = bindings.ChannelManager_send_payment_with_route(this.ptr, route == null ? 0 : route.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), recipient_onion == null ? 0 : recipient_onion.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
+		long ret = bindings.ChannelManager_send_payment_with_route(this.ptr, route.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), recipient_onion.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(route);
 		GC.KeepAlive(payment_hash);
@@ -476,7 +1137,7 @@ public class ChannelManager : CommonBase {
 	 * `route_params` and retry failed payment paths based on `retry_strategy`.
 	 */
 	public Result_NoneRetryableSendFailureZ send_payment(byte[] payment_hash, org.ldk.structs.RecipientOnionFields recipient_onion, byte[] payment_id, org.ldk.structs.RouteParameters route_params, org.ldk.structs.Retry retry_strategy) {
-		long ret = bindings.ChannelManager_send_payment(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), recipient_onion == null ? 0 : recipient_onion.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), route_params == null ? 0 : route_params.ptr, retry_strategy.ptr);
+		long ret = bindings.ChannelManager_send_payment(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), recipient_onion.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), route_params.ptr, retry_strategy.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(payment_hash);
 		GC.KeepAlive(recipient_onion);
@@ -542,7 +1203,7 @@ public class ChannelManager : CommonBase {
 	 * [`send_payment`]: Self::send_payment
 	 */
 	public Result_ThirtyTwoBytesPaymentSendFailureZ send_spontaneous_payment(org.ldk.structs.Route route, org.ldk.structs.Option_ThirtyTwoBytesZ payment_preimage, org.ldk.structs.RecipientOnionFields recipient_onion, byte[] payment_id) {
-		long ret = bindings.ChannelManager_send_spontaneous_payment(this.ptr, route == null ? 0 : route.ptr, payment_preimage.ptr, recipient_onion == null ? 0 : recipient_onion.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
+		long ret = bindings.ChannelManager_send_spontaneous_payment(this.ptr, route.ptr, payment_preimage.ptr, recipient_onion.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(route);
 		GC.KeepAlive(payment_preimage);
@@ -566,7 +1227,7 @@ public class ChannelManager : CommonBase {
 	 * [`PaymentParameters::for_keysend`]: crate::routing::router::PaymentParameters::for_keysend
 	 */
 	public Result_ThirtyTwoBytesRetryableSendFailureZ send_spontaneous_payment_with_retry(org.ldk.structs.Option_ThirtyTwoBytesZ payment_preimage, org.ldk.structs.RecipientOnionFields recipient_onion, byte[] payment_id, org.ldk.structs.RouteParameters route_params, org.ldk.structs.Retry retry_strategy) {
-		long ret = bindings.ChannelManager_send_spontaneous_payment_with_retry(this.ptr, payment_preimage.ptr, recipient_onion == null ? 0 : recipient_onion.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), route_params == null ? 0 : route_params.ptr, retry_strategy.ptr);
+		long ret = bindings.ChannelManager_send_spontaneous_payment_with_retry(this.ptr, payment_preimage.ptr, recipient_onion.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), route_params.ptr, retry_strategy.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(payment_preimage);
 		GC.KeepAlive(recipient_onion);
@@ -588,7 +1249,7 @@ public class ChannelManager : CommonBase {
 	 * us to easily discern them from real payments.
 	 */
 	public Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ send_probe(org.ldk.structs.Path path) {
-		long ret = bindings.ChannelManager_send_probe(this.ptr, path == null ? 0 : path.ptr);
+		long ret = bindings.ChannelManager_send_probe(this.ptr, path.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(path);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -633,7 +1294,7 @@ public class ChannelManager : CommonBase {
 	 * probes. If `None` is given as `liquidity_limit_multiplier`, it defaults to `3`.
 	 */
 	public Result_CVec_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZZProbeSendFailureZ send_preflight_probes(org.ldk.structs.RouteParameters route_params, org.ldk.structs.Option_u64Z liquidity_limit_multiplier) {
-		long ret = bindings.ChannelManager_send_preflight_probes(this.ptr, route_params == null ? 0 : route_params.ptr, liquidity_limit_multiplier.ptr);
+		long ret = bindings.ChannelManager_send_preflight_probes(this.ptr, route_params.ptr, liquidity_limit_multiplier.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(route_params);
 		GC.KeepAlive(liquidity_limit_multiplier);
@@ -676,14 +1337,15 @@ public class ChannelManager : CommonBase {
 	 * [`Event::FundingGenerationReady`]: crate::events::Event::FundingGenerationReady
 	 * [`Event::ChannelClosed`]: crate::events::Event::ChannelClosed
 	 */
-	public Result_NoneAPIErrorZ funding_transaction_generated(byte[] temporary_channel_id, byte[] counterparty_node_id, byte[] funding_transaction) {
-		long ret = bindings.ChannelManager_funding_transaction_generated(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(temporary_channel_id, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)), InternalUtils.encodeUint8Array(funding_transaction));
+	public Result_NoneAPIErrorZ funding_transaction_generated(org.ldk.structs.ChannelId temporary_channel_id, byte[] counterparty_node_id, byte[] funding_transaction) {
+		long ret = bindings.ChannelManager_funding_transaction_generated(this.ptr, temporary_channel_id.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)), InternalUtils.encodeUint8Array(funding_transaction));
 		GC.KeepAlive(this);
 		GC.KeepAlive(temporary_channel_id);
 		GC.KeepAlive(counterparty_node_id);
 		GC.KeepAlive(funding_transaction);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneAPIErrorZ ret_hu_conv = Result_NoneAPIErrorZ.constr_from_ptr(ret);
+		if (this != null) { this.ptrs_to.AddLast(temporary_channel_id); };
 		return ret_hu_conv;
 	}
 
@@ -699,8 +1361,8 @@ public class ChannelManager : CommonBase {
 	 * 
 	 * If there is an error, all channels in the batch are to be considered closed.
 	 */
-	public Result_NoneAPIErrorZ batch_funding_transaction_generated(TwoTuple_ThirtyTwoBytesPublicKeyZ[] temporary_channels, byte[] funding_transaction) {
-		long ret = bindings.ChannelManager_batch_funding_transaction_generated(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(temporary_channels, temporary_channels_conv_35 => temporary_channels_conv_35 != null ? temporary_channels_conv_35.ptr : 0)), InternalUtils.encodeUint8Array(funding_transaction));
+	public Result_NoneAPIErrorZ batch_funding_transaction_generated(TwoTuple_ChannelIdPublicKeyZ[] temporary_channels, byte[] funding_transaction) {
+		long ret = bindings.ChannelManager_batch_funding_transaction_generated(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(temporary_channels, temporary_channels_conv_30 => temporary_channels_conv_30.ptr)), InternalUtils.encodeUint8Array(funding_transaction));
 		GC.KeepAlive(this);
 		GC.KeepAlive(temporary_channels);
 		GC.KeepAlive(funding_transaction);
@@ -733,14 +1395,15 @@ public class ChannelManager : CommonBase {
 	 * [`ChannelUnavailable`]: APIError::ChannelUnavailable
 	 * [`APIMisuseError`]: APIError::APIMisuseError
 	 */
-	public Result_NoneAPIErrorZ update_partial_channel_config(byte[] counterparty_node_id, byte[][] channel_ids, org.ldk.structs.ChannelConfigUpdate config_update) {
-		long ret = bindings.ChannelManager_update_partial_channel_config(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(channel_ids, channel_ids_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(channel_ids_conv_8, 32)))), config_update == null ? 0 : config_update.ptr);
+	public Result_NoneAPIErrorZ update_partial_channel_config(byte[] counterparty_node_id, ChannelId[] channel_ids, org.ldk.structs.ChannelConfigUpdate config_update) {
+		long ret = bindings.ChannelManager_update_partial_channel_config(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(channel_ids, channel_ids_conv_11 => channel_ids_conv_11.ptr)), config_update.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(counterparty_node_id);
 		GC.KeepAlive(channel_ids);
 		GC.KeepAlive(config_update);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneAPIErrorZ ret_hu_conv = Result_NoneAPIErrorZ.constr_from_ptr(ret);
+		foreach (ChannelId channel_ids_conv_11 in channel_ids) { if (this != null) { this.ptrs_to.AddLast(channel_ids_conv_11); }; };
 		if (this != null) { this.ptrs_to.AddLast(config_update); };
 		return ret_hu_conv;
 	}
@@ -769,14 +1432,15 @@ public class ChannelManager : CommonBase {
 	 * [`ChannelUnavailable`]: APIError::ChannelUnavailable
 	 * [`APIMisuseError`]: APIError::APIMisuseError
 	 */
-	public Result_NoneAPIErrorZ update_channel_config(byte[] counterparty_node_id, byte[][] channel_ids, org.ldk.structs.ChannelConfig config) {
-		long ret = bindings.ChannelManager_update_channel_config(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(channel_ids, channel_ids_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(channel_ids_conv_8, 32)))), config == null ? 0 : config.ptr);
+	public Result_NoneAPIErrorZ update_channel_config(byte[] counterparty_node_id, ChannelId[] channel_ids, org.ldk.structs.ChannelConfig config) {
+		long ret = bindings.ChannelManager_update_channel_config(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(channel_ids, channel_ids_conv_11 => channel_ids_conv_11.ptr)), config.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(counterparty_node_id);
 		GC.KeepAlive(channel_ids);
 		GC.KeepAlive(config);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneAPIErrorZ ret_hu_conv = Result_NoneAPIErrorZ.constr_from_ptr(ret);
+		foreach (ChannelId channel_ids_conv_11 in channel_ids) { if (this != null) { this.ptrs_to.AddLast(channel_ids_conv_11); }; };
 		if (this != null) { this.ptrs_to.AddLast(config); };
 		return ret_hu_conv;
 	}
@@ -806,8 +1470,8 @@ public class ChannelManager : CommonBase {
 	 * [`HTLCIntercepted`]: events::Event::HTLCIntercepted
 	 * [`HTLCIntercepted::expected_outbound_amount_msat`]: events::Event::HTLCIntercepted::expected_outbound_amount_msat
 	 */
-	public Result_NoneAPIErrorZ forward_intercepted_htlc(byte[] intercept_id, byte[] next_hop_channel_id, byte[] next_node_id, long amt_to_forward_msat) {
-		long ret = bindings.ChannelManager_forward_intercepted_htlc(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(intercept_id, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(next_hop_channel_id, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(next_node_id, 33)), amt_to_forward_msat);
+	public Result_NoneAPIErrorZ forward_intercepted_htlc(byte[] intercept_id, org.ldk.structs.ChannelId next_hop_channel_id, byte[] next_node_id, long amt_to_forward_msat) {
+		long ret = bindings.ChannelManager_forward_intercepted_htlc(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(intercept_id, 32)), next_hop_channel_id.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(next_node_id, 33)), amt_to_forward_msat);
 		GC.KeepAlive(this);
 		GC.KeepAlive(intercept_id);
 		GC.KeepAlive(next_hop_channel_id);
@@ -815,6 +1479,7 @@ public class ChannelManager : CommonBase {
 		GC.KeepAlive(amt_to_forward_msat);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneAPIErrorZ ret_hu_conv = Result_NoneAPIErrorZ.constr_from_ptr(ret);
+		if (this != null) { this.ptrs_to.AddLast(next_hop_channel_id); };
 		return ret_hu_conv;
 	}
 
@@ -988,14 +1653,15 @@ public class ChannelManager : CommonBase {
 	 * [`Event::OpenChannelRequest`]: events::Event::OpenChannelRequest
 	 * [`Event::ChannelClosed::user_channel_id`]: events::Event::ChannelClosed::user_channel_id
 	 */
-	public Result_NoneAPIErrorZ accept_inbound_channel(byte[] temporary_channel_id, byte[] counterparty_node_id, org.ldk.util.UInt128 user_channel_id) {
-		long ret = bindings.ChannelManager_accept_inbound_channel(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(temporary_channel_id, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)), InternalUtils.encodeUint8Array(user_channel_id.getLEBytes()));
+	public Result_NoneAPIErrorZ accept_inbound_channel(org.ldk.structs.ChannelId temporary_channel_id, byte[] counterparty_node_id, org.ldk.util.UInt128 user_channel_id) {
+		long ret = bindings.ChannelManager_accept_inbound_channel(this.ptr, temporary_channel_id.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)), InternalUtils.encodeUint8Array(user_channel_id.getLEBytes()));
 		GC.KeepAlive(this);
 		GC.KeepAlive(temporary_channel_id);
 		GC.KeepAlive(counterparty_node_id);
 		GC.KeepAlive(user_channel_id);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneAPIErrorZ ret_hu_conv = Result_NoneAPIErrorZ.constr_from_ptr(ret);
+		if (this != null) { this.ptrs_to.AddLast(temporary_channel_id); };
 		return ret_hu_conv;
 	}
 
@@ -1019,14 +1685,113 @@ public class ChannelManager : CommonBase {
 	 * [`Event::OpenChannelRequest`]: events::Event::OpenChannelRequest
 	 * [`Event::ChannelClosed::user_channel_id`]: events::Event::ChannelClosed::user_channel_id
 	 */
-	public Result_NoneAPIErrorZ accept_inbound_channel_from_trusted_peer_0conf(byte[] temporary_channel_id, byte[] counterparty_node_id, org.ldk.util.UInt128 user_channel_id) {
-		long ret = bindings.ChannelManager_accept_inbound_channel_from_trusted_peer_0conf(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(temporary_channel_id, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)), InternalUtils.encodeUint8Array(user_channel_id.getLEBytes()));
+	public Result_NoneAPIErrorZ accept_inbound_channel_from_trusted_peer_0conf(org.ldk.structs.ChannelId temporary_channel_id, byte[] counterparty_node_id, org.ldk.util.UInt128 user_channel_id) {
+		long ret = bindings.ChannelManager_accept_inbound_channel_from_trusted_peer_0conf(this.ptr, temporary_channel_id.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)), InternalUtils.encodeUint8Array(user_channel_id.getLEBytes()));
 		GC.KeepAlive(this);
 		GC.KeepAlive(temporary_channel_id);
 		GC.KeepAlive(counterparty_node_id);
 		GC.KeepAlive(user_channel_id);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneAPIErrorZ ret_hu_conv = Result_NoneAPIErrorZ.constr_from_ptr(ret);
+		if (this != null) { this.ptrs_to.AddLast(temporary_channel_id); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Creates an [`OfferBuilder`] such that the [`Offer`] it builds is recognized by the
+	 * [`ChannelManager`] when handling [`InvoiceRequest`] messages for the offer. The offer will
+	 * not have an expiration unless otherwise set on the builder.
+	 * 
+	 * # Privacy
+	 * 
+	 * Uses [`MessageRouter::create_blinded_paths`] to construct a [`BlindedPath`] for the offer.
+	 * However, if one is not found, uses a one-hop [`BlindedPath`] with
+	 * [`ChannelManager::get_our_node_id`] as the introduction node instead. In the latter case,
+	 * the node must be announced, otherwise, there is no way to find a path to the introduction in
+	 * order to send the [`InvoiceRequest`].
+	 * 
+	 * Also, uses a derived signing pubkey in the offer for recipient privacy.
+	 * 
+	 * # Limitations
+	 * 
+	 * Requires a direct connection to the introduction node in the responding [`InvoiceRequest`]'s
+	 * reply path.
+	 * 
+	 * # Errors
+	 * 
+	 * Errors if the parameterized [`Router`] is unable to create a blinded path for the offer.
+	 * 
+	 * [`Offer`]: crate::offers::offer::Offer
+	 * [`InvoiceRequest`]: crate::offers::invoice_request::InvoiceRequest
+	 */
+	public Result_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ create_offer_builder() {
+		long ret = bindings.ChannelManager_create_offer_builder(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ ret_hu_conv = Result_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Creates a [`RefundBuilder`] such that the [`Refund`] it builds is recognized by the
+	 * [`ChannelManager`] when handling [`Bolt12Invoice`] messages for the refund.
+	 * 
+	 * # Payment
+	 * 
+	 * The provided `payment_id` is used to ensure that only one invoice is paid for the refund.
+	 * See [Avoiding Duplicate Payments] for other requirements once the payment has been sent.
+	 * 
+	 * The builder will have the provided expiration set. Any changes to the expiration on the
+	 * returned builder will not be honored by [`ChannelManager`]. For `no-std`, the highest seen
+	 * block time minus two hours is used for the current time when determining if the refund has
+	 * expired.
+	 * 
+	 * To revoke the refund, use [`ChannelManager::abandon_payment`] prior to receiving the
+	 * invoice. If abandoned, or an invoice isn't received before expiration, the payment will fail
+	 * with an [`Event::InvoiceRequestFailed`].
+	 * 
+	 * If `max_total_routing_fee_msat` is not specified, The default from
+	 * [`RouteParameters::from_payment_params_and_value`] is applied.
+	 * 
+	 * # Privacy
+	 * 
+	 * Uses [`MessageRouter::create_blinded_paths`] to construct a [`BlindedPath`] for the refund.
+	 * However, if one is not found, uses a one-hop [`BlindedPath`] with
+	 * [`ChannelManager::get_our_node_id`] as the introduction node instead. In the latter case,
+	 * the node must be announced, otherwise, there is no way to find a path to the introduction in
+	 * order to send the [`Bolt12Invoice`].
+	 * 
+	 * Also, uses a derived payer id in the refund for payer privacy.
+	 * 
+	 * # Limitations
+	 * 
+	 * Requires a direct connection to an introduction node in the responding
+	 * [`Bolt12Invoice::payment_paths`].
+	 * 
+	 * # Errors
+	 * 
+	 * Errors if:
+	 * - a duplicate `payment_id` is provided given the caveats in the aforementioned link,
+	 * - `amount_msats` is invalid, or
+	 * - the parameterized [`Router`] is unable to create a blinded path for the refund.
+	 * 
+	 * [`Refund`]: crate::offers::refund::Refund
+	 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
+	 * [`Bolt12Invoice::payment_paths`]: crate::offers::invoice::Bolt12Invoice::payment_paths
+	 * [Avoiding Duplicate Payments]: #avoiding-duplicate-payments
+	 */
+	public Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ create_refund_builder(long amount_msats, long absolute_expiry, byte[] payment_id, org.ldk.structs.Retry retry_strategy, org.ldk.structs.Option_u64Z max_total_routing_fee_msat) {
+		long ret = bindings.ChannelManager_create_refund_builder(this.ptr, amount_msats, absolute_expiry, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), retry_strategy.ptr, max_total_routing_fee_msat.ptr);
+		GC.KeepAlive(this);
+		GC.KeepAlive(amount_msats);
+		GC.KeepAlive(absolute_expiry);
+		GC.KeepAlive(payment_id);
+		GC.KeepAlive(retry_strategy);
+		GC.KeepAlive(max_total_routing_fee_msat);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ ret_hu_conv = Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
+		if (this != null) { this.ptrs_to.AddLast(retry_strategy); };
+		if (this != null) { this.ptrs_to.AddLast(max_total_routing_fee_msat); };
 		return ret_hu_conv;
 	}
 
@@ -1074,6 +1839,7 @@ public class ChannelManager : CommonBase {
 	 * Errors if:
 	 * - a duplicate `payment_id` is provided given the caveats in the aforementioned link,
 	 * - the provided parameters are invalid for the offer,
+	 * - the offer is for an unsupported chain, or
 	 * - the parameterized [`Router`] is unable to create a blinded reply path for the invoice
 	 * request.
 	 * 
@@ -1086,7 +1852,7 @@ public class ChannelManager : CommonBase {
 	 * [Avoiding Duplicate Payments]: #avoiding-duplicate-payments
 	 */
 	public Result_NoneBolt12SemanticErrorZ pay_for_offer(org.ldk.structs.Offer offer, org.ldk.structs.Option_u64Z quantity, org.ldk.structs.Option_u64Z amount_msats, org.ldk.structs.Option_StrZ payer_note, byte[] payment_id, org.ldk.structs.Retry retry_strategy, org.ldk.structs.Option_u64Z max_total_routing_fee_msat) {
-		long ret = bindings.ChannelManager_pay_for_offer(this.ptr, offer == null ? 0 : offer.ptr, quantity.ptr, amount_msats.ptr, payer_note.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), retry_strategy.ptr, max_total_routing_fee_msat.ptr);
+		long ret = bindings.ChannelManager_pay_for_offer(this.ptr, offer.ptr, quantity.ptr, amount_msats.ptr, payer_note.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), retry_strategy.ptr, max_total_routing_fee_msat.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(offer);
 		GC.KeepAlive(quantity);
@@ -1112,7 +1878,7 @@ public class ChannelManager : CommonBase {
 	 * 
 	 * The resulting invoice uses a [`PaymentHash`] recognized by the [`ChannelManager`] and a
 	 * [`BlindedPath`] containing the [`PaymentSecret`] needed to reconstruct the corresponding
-	 * [`PaymentPreimage`].
+	 * [`PaymentPreimage`]. It is returned purely for informational purposes.
 	 * 
 	 * # Limitations
 	 * 
@@ -1123,17 +1889,19 @@ public class ChannelManager : CommonBase {
 	 * 
 	 * # Errors
 	 * 
-	 * Errors if the parameterized [`Router`] is unable to create a blinded payment path or reply
-	 * path for the invoice.
+	 * Errors if:
+	 * - the refund is for an unsupported chain, or
+	 * - the parameterized [`Router`] is unable to create a blinded payment path or reply path for
+	 * the invoice.
 	 * 
 	 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
 	 */
-	public Result_NoneBolt12SemanticErrorZ request_refund_payment(org.ldk.structs.Refund refund) {
-		long ret = bindings.ChannelManager_request_refund_payment(this.ptr, refund == null ? 0 : refund.ptr);
+	public Result_Bolt12InvoiceBolt12SemanticErrorZ request_refund_payment(org.ldk.structs.Refund refund) {
+		long ret = bindings.ChannelManager_request_refund_payment(this.ptr, refund.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(refund);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_NoneBolt12SemanticErrorZ ret_hu_conv = Result_NoneBolt12SemanticErrorZ.constr_from_ptr(ret);
+		Result_Bolt12InvoiceBolt12SemanticErrorZ ret_hu_conv = Result_Bolt12InvoiceBolt12SemanticErrorZ.constr_from_ptr(ret);
 		if (this != null) { this.ptrs_to.AddLast(refund); };
 		return ret_hu_conv;
 	}
@@ -1145,10 +1913,9 @@ public class ChannelManager : CommonBase {
 	 * This differs from [`create_inbound_payment_for_hash`] only in that it generates the
 	 * [`PaymentHash`] and [`PaymentPreimage`] for you.
 	 * 
-	 * The [`PaymentPreimage`] will ultimately be returned to you in the [`PaymentClaimable`], which
-	 * will have the [`PaymentClaimable::purpose`] be [`PaymentPurpose::InvoicePayment`] with
-	 * its [`PaymentPurpose::InvoicePayment::payment_preimage`] field filled in. That should then be
-	 * passed directly to [`claim_funds`].
+	 * The [`PaymentPreimage`] will ultimately be returned to you in the [`PaymentClaimable`] event, which
+	 * will have the [`PaymentClaimable::purpose`] return `Some` for [`PaymentPurpose::preimage`]. That
+	 * should then be passed directly to [`claim_funds`].
 	 * 
 	 * See [`create_inbound_payment_for_hash`] for detailed documentation on behavior and requirements.
 	 * 
@@ -1168,8 +1935,7 @@ public class ChannelManager : CommonBase {
 	 * [`claim_funds`]: Self::claim_funds
 	 * [`PaymentClaimable`]: events::Event::PaymentClaimable
 	 * [`PaymentClaimable::purpose`]: events::Event::PaymentClaimable::purpose
-	 * [`PaymentPurpose::InvoicePayment`]: events::PaymentPurpose::InvoicePayment
-	 * [`PaymentPurpose::InvoicePayment::payment_preimage`]: events::PaymentPurpose::InvoicePayment::payment_preimage
+	 * [`PaymentPurpose::preimage`]: events::PaymentPurpose::preimage
 	 * [`create_inbound_payment_for_hash`]: Self::create_inbound_payment_for_hash
 	 */
 	public Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ create_inbound_payment(org.ldk.structs.Option_u64Z min_value_msat, int invoice_expiry_delta_secs, org.ldk.structs.Option_u16Z min_final_cltv_expiry_delta) {
@@ -1389,6 +2155,9 @@ public class ChannelManager : CommonBase {
 
 	/**
 	 * Returns true if this [`ChannelManager`] needs to be persisted.
+	 * 
+	 * See [`Self::get_event_or_persistence_needed_future`] for retrieving a [`Future`] that
+	 * indicates this should be checked.
 	 */
 	public bool get_and_clear_needs_persistence() {
 		bool ret = bindings.ChannelManager_get_and_clear_needs_persistence(this.ptr);
@@ -1483,6 +2252,19 @@ public class ChannelManager : CommonBase {
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		OffersMessageHandler ret_hu_conv = new OffersMessageHandler(null, ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Constructs a new NodeIdLookUp which calls the relevant methods on this_arg.
+	 * This copies the `inner` pointer in this_arg and thus the returned NodeIdLookUp must be freed before this_arg is
+	 */
+	public NodeIdLookUp as_NodeIdLookUp() {
+		long ret = bindings.ChannelManager_as_NodeIdLookUp(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		NodeIdLookUp ret_hu_conv = new NodeIdLookUp(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
 		return ret_hu_conv;
 	}

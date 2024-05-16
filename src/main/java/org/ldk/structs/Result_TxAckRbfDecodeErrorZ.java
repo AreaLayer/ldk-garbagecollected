@@ -13,6 +13,10 @@ public class Result_TxAckRbfDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_TxAckRbfDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_TxAckRbfDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_TxAckRbfDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_TxAckRbfDecodeErrorZ_is_ok(ptr)) {
 			return new Result_TxAckRbfDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_TxAckRbfDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_TxAckRbfDecodeErrorZ in the success state.
 	 */
 	public static Result_TxAckRbfDecodeErrorZ ok(org.ldk.structs.TxAckRbf o) {
-		long ret = bindings.CResult_TxAckRbfDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_TxAckRbfDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_TxAckRbfDecodeErrorZ ret_hu_conv = Result_TxAckRbfDecodeErrorZ.constr_from_ptr(ret);

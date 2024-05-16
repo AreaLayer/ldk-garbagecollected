@@ -36,7 +36,7 @@ public class AnchorDescriptor extends CommonBase {
 	 * The parameters required to derive the signer for the anchor input.
 	 */
 	public void set_channel_derivation_parameters(org.ldk.structs.ChannelDerivationParameters val) {
-		bindings.AnchorDescriptor_set_channel_derivation_parameters(this.ptr, val == null ? 0 : val.ptr);
+		bindings.AnchorDescriptor_set_channel_derivation_parameters(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -60,7 +60,7 @@ public class AnchorDescriptor extends CommonBase {
 	 * output.
 	 */
 	public void set_outpoint(org.ldk.structs.OutPoint val) {
-		bindings.AnchorDescriptor_set_outpoint(this.ptr, val == null ? 0 : val.ptr);
+		bindings.AnchorDescriptor_set_outpoint(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -70,7 +70,7 @@ public class AnchorDescriptor extends CommonBase {
 	 * Constructs a new AnchorDescriptor given each field
 	 */
 	public static AnchorDescriptor of(org.ldk.structs.ChannelDerivationParameters channel_derivation_parameters_arg, org.ldk.structs.OutPoint outpoint_arg) {
-		long ret = bindings.AnchorDescriptor_new(channel_derivation_parameters_arg == null ? 0 : channel_derivation_parameters_arg.ptr, outpoint_arg == null ? 0 : outpoint_arg.ptr);
+		long ret = bindings.AnchorDescriptor_new(channel_derivation_parameters_arg.ptr, outpoint_arg.ptr);
 		Reference.reachabilityFence(channel_derivation_parameters_arg);
 		Reference.reachabilityFence(outpoint_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -105,7 +105,7 @@ public class AnchorDescriptor extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.AnchorDescriptor b) {
-		boolean ret = bindings.AnchorDescriptor_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.AnchorDescriptor_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

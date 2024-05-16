@@ -32,7 +32,7 @@ public class Utxo : CommonBase {
 	 * The unique identifier of the output.
 	 */
 	public void set_outpoint(org.ldk.structs.OutPoint val) {
-		bindings.Utxo_set_outpoint(this.ptr, val == null ? 0 : val.ptr);
+		bindings.Utxo_set_outpoint(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -84,7 +84,7 @@ public class Utxo : CommonBase {
 	 * Constructs a new Utxo given each field
 	 */
 	public static Utxo of(org.ldk.structs.OutPoint outpoint_arg, org.ldk.structs.TxOut output_arg, long satisfaction_weight_arg) {
-		long ret = bindings.Utxo_new(outpoint_arg == null ? 0 : outpoint_arg.ptr, output_arg.ptr, satisfaction_weight_arg);
+		long ret = bindings.Utxo_new(outpoint_arg.ptr, output_arg.ptr, satisfaction_weight_arg);
 		GC.KeepAlive(outpoint_arg);
 		GC.KeepAlive(output_arg);
 		GC.KeepAlive(satisfaction_weight_arg);
@@ -131,7 +131,7 @@ public class Utxo : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.Utxo b) {
-		bool ret = bindings.Utxo_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.Utxo_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };
@@ -146,7 +146,7 @@ public class Utxo : CommonBase {
 	 * Returns a `Utxo` with the `satisfaction_weight` estimate for a legacy P2PKH output.
 	 */
 	public static Utxo new_p2pkh(org.ldk.structs.OutPoint outpoint, long value, byte[] pubkey_hash) {
-		long ret = bindings.Utxo_new_p2pkh(outpoint == null ? 0 : outpoint.ptr, value, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(pubkey_hash, 20)));
+		long ret = bindings.Utxo_new_p2pkh(outpoint.ptr, value, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(pubkey_hash, 20)));
 		GC.KeepAlive(outpoint);
 		GC.KeepAlive(value);
 		GC.KeepAlive(pubkey_hash);

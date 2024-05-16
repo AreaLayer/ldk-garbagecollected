@@ -19,21 +19,23 @@ public class TxSignatures : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public byte[] get_channel_id() {
+	public ChannelId get_channel_id() {
 		long ret = bindings.TxSignatures_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
-		return ret_conv;
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
 	}
 
 	/**
 	 * The channel ID
 	 */
-	public void set_channel_id(byte[] val) {
-		bindings.TxSignatures_set_channel_id(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(val, 32)));
+	public void set_channel_id(org.ldk.structs.ChannelId val) {
+		bindings.TxSignatures_set_channel_id(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
+		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -86,16 +88,41 @@ public class TxSignatures : CommonBase {
 	}
 
 	/**
+	 * Optional signature for the shared input -- the previous funding outpoint -- signed by both peers
+	 */
+	public Option_ECDSASignatureZ get_funding_outpoint_sig() {
+		long ret = bindings.TxSignatures_get_funding_outpoint_sig(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Option_ECDSASignatureZ ret_hu_conv = org.ldk.structs.Option_ECDSASignatureZ.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Optional signature for the shared input -- the previous funding outpoint -- signed by both peers
+	 */
+	public void set_funding_outpoint_sig(org.ldk.structs.Option_ECDSASignatureZ val) {
+		bindings.TxSignatures_set_funding_outpoint_sig(this.ptr, val.ptr);
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
+		if (this != null) { this.ptrs_to.AddLast(val); };
+	}
+
+	/**
 	 * Constructs a new TxSignatures given each field
 	 */
-	public static TxSignatures of(byte[] channel_id_arg, byte[] tx_hash_arg, byte[][] witnesses_arg) {
-		long ret = bindings.TxSignatures_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(channel_id_arg, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(tx_hash_arg, 32)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(witnesses_arg, witnesses_arg_conv_8 => InternalUtils.encodeUint8Array(witnesses_arg_conv_8))));
+	public static TxSignatures of(org.ldk.structs.ChannelId channel_id_arg, byte[] tx_hash_arg, byte[][] witnesses_arg, org.ldk.structs.Option_ECDSASignatureZ funding_outpoint_sig_arg) {
+		long ret = bindings.TxSignatures_new(channel_id_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(tx_hash_arg, 32)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(witnesses_arg, witnesses_arg_conv_8 => InternalUtils.encodeUint8Array(witnesses_arg_conv_8))), funding_outpoint_sig_arg.ptr);
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(tx_hash_arg);
 		GC.KeepAlive(witnesses_arg);
+		GC.KeepAlive(funding_outpoint_sig_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.TxSignatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.TxSignatures(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(funding_outpoint_sig_arg); };
 		return ret_hu_conv;
 	}
 
@@ -135,7 +162,7 @@ public class TxSignatures : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.TxSignatures b) {
-		bool ret = bindings.TxSignatures_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.TxSignatures_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

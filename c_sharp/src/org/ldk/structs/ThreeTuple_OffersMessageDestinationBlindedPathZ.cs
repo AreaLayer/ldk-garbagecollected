@@ -74,7 +74,7 @@ public class ThreeTuple_OffersMessageDestinationBlindedPathZ : CommonBase {
 	 * Creates a new C3Tuple_OffersMessageDestinationBlindedPathZ from the contained elements.
 	 */
 	public static ThreeTuple_OffersMessageDestinationBlindedPathZ of(org.ldk.structs.OffersMessage a, org.ldk.structs.Destination b, org.ldk.structs.BlindedPath c) {
-		long ret = bindings.C3Tuple_OffersMessageDestinationBlindedPathZ_new(a.ptr, b.ptr, c == null ? 0 : c.ptr);
+		long ret = bindings.C3Tuple_OffersMessageDestinationBlindedPathZ_new(a.ptr, b.ptr, c.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);
 		GC.KeepAlive(c);

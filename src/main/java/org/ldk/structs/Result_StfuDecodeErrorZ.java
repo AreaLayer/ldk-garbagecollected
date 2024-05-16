@@ -13,6 +13,10 @@ public class Result_StfuDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_StfuDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_StfuDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_StfuDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_StfuDecodeErrorZ_is_ok(ptr)) {
 			return new Result_StfuDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_StfuDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_StfuDecodeErrorZ in the success state.
 	 */
 	public static Result_StfuDecodeErrorZ ok(org.ldk.structs.Stfu o) {
-		long ret = bindings.CResult_StfuDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_StfuDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_StfuDecodeErrorZ ret_hu_conv = Result_StfuDecodeErrorZ.constr_from_ptr(ret);

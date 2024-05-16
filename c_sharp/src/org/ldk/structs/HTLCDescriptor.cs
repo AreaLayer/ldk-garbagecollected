@@ -31,10 +31,30 @@ public class HTLCDescriptor : CommonBase {
 	 * The parameters required to derive the signer for the HTLC input.
 	 */
 	public void set_channel_derivation_parameters(org.ldk.structs.ChannelDerivationParameters val) {
-		bindings.HTLCDescriptor_set_channel_derivation_parameters(this.ptr, val == null ? 0 : val.ptr);
+		bindings.HTLCDescriptor_set_channel_derivation_parameters(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
+	}
+
+	/**
+	 * The txid of the commitment transaction in which the HTLC output lives.
+	 */
+	public byte[] get_commitment_txid() {
+		long ret = bindings.HTLCDescriptor_get_commitment_txid(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
+		return ret_conv;
+	}
+
+	/**
+	 * The txid of the commitment transaction in which the HTLC output lives.
+	 */
+	public void set_commitment_txid(byte[] val) {
+		bindings.HTLCDescriptor_set_commitment_txid(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(val, 32)));
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
 	}
 
 	/**
@@ -121,7 +141,7 @@ public class HTLCDescriptor : CommonBase {
 	 * The details of the HTLC as it appears in the commitment transaction.
 	 */
 	public void set_htlc(org.ldk.structs.HTLCOutputInCommitment val) {
-		bindings.HTLCDescriptor_set_htlc(this.ptr, val == null ? 0 : val.ptr);
+		bindings.HTLCDescriptor_set_htlc(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -171,6 +191,28 @@ public class HTLCDescriptor : CommonBase {
 		GC.KeepAlive(val);
 	}
 
+	/**
+	 * Constructs a new HTLCDescriptor given each field
+	 */
+	public static HTLCDescriptor of(org.ldk.structs.ChannelDerivationParameters channel_derivation_parameters_arg, byte[] commitment_txid_arg, long per_commitment_number_arg, byte[] per_commitment_point_arg, int feerate_per_kw_arg, org.ldk.structs.HTLCOutputInCommitment htlc_arg, org.ldk.structs.Option_ThirtyTwoBytesZ preimage_arg, byte[] counterparty_sig_arg) {
+		long ret = bindings.HTLCDescriptor_new(channel_derivation_parameters_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(commitment_txid_arg, 32)), per_commitment_number_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(per_commitment_point_arg, 33)), feerate_per_kw_arg, htlc_arg.ptr, preimage_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_sig_arg, 64)));
+		GC.KeepAlive(channel_derivation_parameters_arg);
+		GC.KeepAlive(commitment_txid_arg);
+		GC.KeepAlive(per_commitment_number_arg);
+		GC.KeepAlive(per_commitment_point_arg);
+		GC.KeepAlive(feerate_per_kw_arg);
+		GC.KeepAlive(htlc_arg);
+		GC.KeepAlive(preimage_arg);
+		GC.KeepAlive(counterparty_sig_arg);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.HTLCDescriptor ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.HTLCDescriptor(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_derivation_parameters_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(htlc_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(preimage_arg); };
+		return ret_hu_conv;
+	}
+
 	internal long clone_ptr() {
 		long ret = bindings.HTLCDescriptor_clone_ptr(this.ptr);
 		GC.KeepAlive(this);
@@ -195,7 +237,7 @@ public class HTLCDescriptor : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.HTLCDescriptor b) {
-		bool ret = bindings.HTLCDescriptor_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.HTLCDescriptor_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

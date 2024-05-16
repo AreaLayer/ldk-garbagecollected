@@ -51,7 +51,7 @@ public class HtlcBasepoint : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.HtlcBasepoint b) {
-		bool ret = bindings.HtlcBasepoint_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.HtlcBasepoint_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };
@@ -98,6 +98,18 @@ public class HtlcBasepoint : CommonBase {
 	public byte[] to_public_key() {
 		long ret = bindings.HtlcBasepoint_to_public_key(this.ptr);
 		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
+		return ret_conv;
+	}
+
+	/**
+	 * Derives the \"tweak\" used in calculate [`HtlcKey::from_basepoint`].\n\n[`HtlcKey::from_basepoint`] calculates a private key as:\n`privkey = basepoint_secret + SHA256(per_commitment_point || basepoint)`\n\nThis calculates the hash part in the tweak derivation process, which is used to\nensure that each key is unique and cannot be guessed by an external party.
+	 */
+	public byte[] derive_add_tweak(byte[] per_commitment_point) {
+		long ret = bindings.HtlcBasepoint_derive_add_tweak(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(per_commitment_point, 33)));
+		GC.KeepAlive(this);
+		GC.KeepAlive(per_commitment_point);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
 		return ret_conv;

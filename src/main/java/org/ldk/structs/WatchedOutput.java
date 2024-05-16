@@ -68,7 +68,7 @@ public class WatchedOutput extends CommonBase {
 	 * Outpoint identifying the transaction output.
 	 */
 	public void set_outpoint(org.ldk.structs.OutPoint val) {
-		bindings.WatchedOutput_set_outpoint(this.ptr, val == null ? 0 : val.ptr);
+		bindings.WatchedOutput_set_outpoint(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -96,7 +96,7 @@ public class WatchedOutput extends CommonBase {
 	 * Constructs a new WatchedOutput given each field
 	 */
 	public static WatchedOutput of(org.ldk.structs.Option_ThirtyTwoBytesZ block_hash_arg, org.ldk.structs.OutPoint outpoint_arg, byte[] script_pubkey_arg) {
-		long ret = bindings.WatchedOutput_new(block_hash_arg.ptr, outpoint_arg == null ? 0 : outpoint_arg.ptr, script_pubkey_arg);
+		long ret = bindings.WatchedOutput_new(block_hash_arg.ptr, outpoint_arg.ptr, script_pubkey_arg);
 		Reference.reachabilityFence(block_hash_arg);
 		Reference.reachabilityFence(outpoint_arg);
 		Reference.reachabilityFence(script_pubkey_arg);
@@ -132,7 +132,7 @@ public class WatchedOutput extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.WatchedOutput b) {
-		boolean ret = bindings.WatchedOutput_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.WatchedOutput_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

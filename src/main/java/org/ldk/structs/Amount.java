@@ -14,13 +14,54 @@ import javax.annotation.Nullable;
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class Amount extends CommonBase {
-	Amount(Object _dummy, long ptr) { super(ptr); }
+	private Amount(Object _dummy, long ptr) { super(ptr); }
 	@Override @SuppressWarnings("deprecation")
 	protected void finalize() throws Throwable {
 		super.finalize();
 		if (ptr != 0) { bindings.Amount_free(ptr); }
 	}
+	static Amount constr_from_ptr(long ptr) {
+		bindings.LDKAmount raw_val = bindings.LDKAmount_ref_from_ptr(ptr);
+		if (raw_val.getClass() == bindings.LDKAmount.Bitcoin.class) {
+			return new Bitcoin(ptr, (bindings.LDKAmount.Bitcoin)raw_val);
+		}
+		if (raw_val.getClass() == bindings.LDKAmount.Currency.class) {
+			return new Currency(ptr, (bindings.LDKAmount.Currency)raw_val);
+		}
+		assert false; return null; // Unreachable without extending the (internal) bindings interface
+	}
 
+	/**
+	 * An amount of bitcoin.
+	 */
+	public final static class Bitcoin extends Amount {
+		/**
+		 * The amount in millisatoshi.
+		*/
+		public final long amount_msats;
+		private Bitcoin(long ptr, bindings.LDKAmount.Bitcoin obj) {
+			super(null, ptr);
+			this.amount_msats = obj.amount_msats;
+		}
+	}
+	/**
+	 * An amount of currency specified using ISO 4712.
+	 */
+	public final static class Currency extends Amount {
+		/**
+		 * The currency that the amount is denominated in.
+		*/
+		public final byte[] iso4217_code;
+		/**
+		 * The amount in the currency unit adjusted by the ISO 4712 exponent (e.g., USD cents).
+		*/
+		public final long amount;
+		private Currency(long ptr, bindings.LDKAmount.Currency obj) {
+			super(null, ptr);
+			this.iso4217_code = obj.iso4217_code;
+			this.amount = obj.amount;
+		}
+	}
 	long clone_ptr() {
 		long ret = bindings.Amount_clone_ptr(this.ptr);
 		Reference.reachabilityFence(this);
@@ -34,8 +75,33 @@ public class Amount extends CommonBase {
 		long ret = bindings.Amount_clone(this.ptr);
 		Reference.reachabilityFence(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.Amount ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Amount(null, ret); }
+		org.ldk.structs.Amount ret_hu_conv = org.ldk.structs.Amount.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new Bitcoin-variant Amount
+	 */
+	public static Amount bitcoin(long amount_msats) {
+		long ret = bindings.Amount_bitcoin(amount_msats);
+		Reference.reachabilityFence(amount_msats);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Amount ret_hu_conv = org.ldk.structs.Amount.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new Currency-variant Amount
+	 */
+	public static Amount currency(byte[] iso4217_code, long amount) {
+		long ret = bindings.Amount_currency(InternalUtils.check_arr_len(iso4217_code, 3), amount);
+		Reference.reachabilityFence(iso4217_code);
+		Reference.reachabilityFence(amount);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Amount ret_hu_conv = org.ldk.structs.Amount.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
 		return ret_hu_conv;
 	}
 

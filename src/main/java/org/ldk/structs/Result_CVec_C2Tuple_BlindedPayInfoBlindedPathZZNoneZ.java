@@ -13,6 +13,10 @@ public class Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ extends Common
 		if (ptr != 0) { bindings.CResult_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ_is_ok(ptr)) {
 			return new Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ_OK(null, ptr);
@@ -47,7 +51,7 @@ public class Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ extends Common
 	 * Creates a new CResult_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ in the success state.
 	 */
 	public static Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ ok(TwoTuple_BlindedPayInfoBlindedPathZ[] o) {
-		long ret = bindings.CResult_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ_ok(o != null ? Arrays.stream(o).mapToLong(o_conv_37 -> o_conv_37 != null ? o_conv_37.ptr : 0).toArray() : null);
+		long ret = bindings.CResult_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ_ok(o != null ? Arrays.stream(o).mapToLong(o_conv_37 -> o_conv_37.ptr).toArray() : null);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ ret_hu_conv = Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ.constr_from_ptr(ret);

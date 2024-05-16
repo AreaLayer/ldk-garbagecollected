@@ -73,12 +73,15 @@ public class Record extends CommonBase {
 	/**
 	 * The channel id of the channel pertaining to the logged record. May be a temporary id before
 	 * the channel has been funded.
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public Option_ThirtyTwoBytesZ get_channel_id() {
+	@Nullable
+	public ChannelId get_channel_id() {
 		long ret = bindings.Record_get_channel_id(this.ptr);
 		Reference.reachabilityFence(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.Option_ThirtyTwoBytesZ ret_hu_conv = org.ldk.structs.Option_ThirtyTwoBytesZ.constr_from_ptr(ret);
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
 		return ret_hu_conv;
 	}
@@ -86,9 +89,11 @@ public class Record extends CommonBase {
 	/**
 	 * The channel id of the channel pertaining to the logged record. May be a temporary id before
 	 * the channel has been funded.
+	 * 
+	 * Note that val (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public void set_channel_id(org.ldk.structs.Option_ThirtyTwoBytesZ val) {
-		bindings.Record_set_channel_id(this.ptr, val.ptr);
+	public void set_channel_id(@Nullable org.ldk.structs.ChannelId val) {
+		bindings.Record_set_channel_id(this.ptr, val == null ? 0 : val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -170,9 +175,10 @@ public class Record extends CommonBase {
 	 * Constructs a new Record given each field
 	 * 
 	 * Note that peer_id_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 * Note that channel_id_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static Record of(org.ldk.enums.Level level_arg, @Nullable byte[] peer_id_arg, org.ldk.structs.Option_ThirtyTwoBytesZ channel_id_arg, java.lang.String args_arg, java.lang.String module_path_arg, java.lang.String file_arg, int line_arg) {
-		long ret = bindings.Record_new(level_arg, InternalUtils.check_arr_len(peer_id_arg, 33), channel_id_arg.ptr, args_arg, module_path_arg, file_arg, line_arg);
+	public static Record of(org.ldk.enums.Level level_arg, @Nullable byte[] peer_id_arg, @Nullable org.ldk.structs.ChannelId channel_id_arg, java.lang.String args_arg, java.lang.String module_path_arg, java.lang.String file_arg, int line_arg) {
+		long ret = bindings.Record_new(level_arg, InternalUtils.check_arr_len(peer_id_arg, 33), channel_id_arg == null ? 0 : channel_id_arg.ptr, args_arg, module_path_arg, file_arg, line_arg);
 		Reference.reachabilityFence(level_arg);
 		Reference.reachabilityFence(peer_id_arg);
 		Reference.reachabilityFence(channel_id_arg);

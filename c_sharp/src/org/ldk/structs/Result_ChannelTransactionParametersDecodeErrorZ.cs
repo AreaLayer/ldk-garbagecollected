@@ -42,7 +42,7 @@ public class Result_ChannelTransactionParametersDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_ChannelTransactionParametersDecodeErrorZ in the success state.
 	 */
 	public static Result_ChannelTransactionParametersDecodeErrorZ ok(org.ldk.structs.ChannelTransactionParameters o) {
-		long ret = bindings.CResult_ChannelTransactionParametersDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_ChannelTransactionParametersDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ChannelTransactionParametersDecodeErrorZ ret_hu_conv = Result_ChannelTransactionParametersDecodeErrorZ.constr_from_ptr(ret);

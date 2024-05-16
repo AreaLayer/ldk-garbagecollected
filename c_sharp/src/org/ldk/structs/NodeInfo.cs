@@ -107,7 +107,7 @@ public class NodeInfo : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.NodeInfo b) {
-		bool ret = bindings.NodeInfo_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.NodeInfo_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };
@@ -118,6 +118,15 @@ public class NodeInfo : CommonBase {
 		if (!(o is NodeInfo)) return false;
 		return this.eq((NodeInfo)o);
 	}
+	/**
+	 * Returns whether the node has only announced Tor addresses.
+	 */
+	public bool is_tor_only() {
+		bool ret = bindings.NodeInfo_is_tor_only(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
 	/**
 	 * Serialize the NodeInfo object into a byte array which can be read by NodeInfo_read
 	 */

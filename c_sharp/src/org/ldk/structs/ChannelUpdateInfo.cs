@@ -123,7 +123,7 @@ public class ChannelUpdateInfo : CommonBase {
 	 * Fees charged when the channel is used for routing
 	 */
 	public void set_fees(org.ldk.structs.RoutingFees val) {
-		bindings.ChannelUpdateInfo_set_fees(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChannelUpdateInfo_set_fees(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -167,7 +167,7 @@ public class ChannelUpdateInfo : CommonBase {
 	 * Note that last_update_message_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public static ChannelUpdateInfo of(int last_update_arg, bool enabled_arg, short cltv_expiry_delta_arg, long htlc_minimum_msat_arg, long htlc_maximum_msat_arg, org.ldk.structs.RoutingFees fees_arg, org.ldk.structs.ChannelUpdate last_update_message_arg) {
-		long ret = bindings.ChannelUpdateInfo_new(last_update_arg, enabled_arg, cltv_expiry_delta_arg, htlc_minimum_msat_arg, htlc_maximum_msat_arg, fees_arg == null ? 0 : fees_arg.ptr, last_update_message_arg == null ? 0 : last_update_message_arg.ptr);
+		long ret = bindings.ChannelUpdateInfo_new(last_update_arg, enabled_arg, cltv_expiry_delta_arg, htlc_minimum_msat_arg, htlc_maximum_msat_arg, fees_arg.ptr, last_update_message_arg == null ? 0 : last_update_message_arg.ptr);
 		GC.KeepAlive(last_update_arg);
 		GC.KeepAlive(enabled_arg);
 		GC.KeepAlive(cltv_expiry_delta_arg);
@@ -207,7 +207,7 @@ public class ChannelUpdateInfo : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.ChannelUpdateInfo b) {
-		bool ret = bindings.ChannelUpdateInfo_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.ChannelUpdateInfo_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

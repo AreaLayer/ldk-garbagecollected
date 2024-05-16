@@ -9,6 +9,8 @@ import javax.annotation.Nullable;
 
 /**
  * Trait that handles persisting a [`ChannelManager`], [`NetworkGraph`], and [`WriteableScore`] to disk.
+ * 
+ * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class Persister extends CommonBase {
@@ -39,6 +41,8 @@ public class Persister extends CommonBase {
 	public static interface PersisterInterface {
 		/**
 		 * Persist the given ['ChannelManager'] to disk, returning an error if persistence failed.
+		 * 
+		 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 		 */
 		Result_NoneIOErrorZ persist_manager(ChannelManager channel_manager);
 		/**
@@ -58,14 +62,14 @@ public class Persister extends CommonBase {
 				org.ldk.structs.ChannelManager channel_manager_hu_conv = null; if (channel_manager < 0 || channel_manager > 4096) { channel_manager_hu_conv = new org.ldk.structs.ChannelManager(null, channel_manager); }
 				Result_NoneIOErrorZ ret = arg.persist_manager(channel_manager_hu_conv);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long persist_graph(long network_graph) {
 				org.ldk.structs.NetworkGraph network_graph_hu_conv = null; if (network_graph < 0 || network_graph > 4096) { network_graph_hu_conv = new org.ldk.structs.NetworkGraph(null, network_graph); }
 				Result_NoneIOErrorZ ret = arg.persist_graph(network_graph_hu_conv);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long persist_scorer(long scorer) {
@@ -73,7 +77,7 @@ public class Persister extends CommonBase {
 				if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
 				Result_NoneIOErrorZ ret = arg.persist_scorer(ret_hu_conv);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 		});
@@ -81,9 +85,11 @@ public class Persister extends CommonBase {
 	}
 	/**
 	 * Persist the given ['ChannelManager'] to disk, returning an error if persistence failed.
+	 * 
+	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 */
 	public Result_NoneIOErrorZ persist_manager(org.ldk.structs.ChannelManager channel_manager) {
-		long ret = bindings.Persister_persist_manager(this.ptr, channel_manager == null ? 0 : channel_manager.ptr);
+		long ret = bindings.Persister_persist_manager(this.ptr, channel_manager.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(channel_manager);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -96,7 +102,7 @@ public class Persister extends CommonBase {
 	 * Persist the given [`NetworkGraph`] to disk, returning an error if persistence failed.
 	 */
 	public Result_NoneIOErrorZ persist_graph(org.ldk.structs.NetworkGraph network_graph) {
-		long ret = bindings.Persister_persist_graph(this.ptr, network_graph == null ? 0 : network_graph.ptr);
+		long ret = bindings.Persister_persist_graph(this.ptr, network_graph.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(network_graph);
 		if (ret >= 0 && ret <= 4096) { return null; }

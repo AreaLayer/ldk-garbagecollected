@@ -42,7 +42,7 @@ public class Result_ReplyShortChannelIdsEndDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_ReplyShortChannelIdsEndDecodeErrorZ in the success state.
 	 */
 	public static Result_ReplyShortChannelIdsEndDecodeErrorZ ok(org.ldk.structs.ReplyShortChannelIdsEnd o) {
-		long ret = bindings.CResult_ReplyShortChannelIdsEndDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_ReplyShortChannelIdsEndDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ReplyShortChannelIdsEndDecodeErrorZ ret_hu_conv = Result_ReplyShortChannelIdsEndDecodeErrorZ.constr_from_ptr(ret);

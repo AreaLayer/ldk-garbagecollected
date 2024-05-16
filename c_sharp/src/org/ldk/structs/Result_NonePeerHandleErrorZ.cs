@@ -47,7 +47,7 @@ public class Result_NonePeerHandleErrorZ : CommonBase {
 	 * Creates a new CResult_NonePeerHandleErrorZ in the error state.
 	 */
 	public static Result_NonePeerHandleErrorZ err(org.ldk.structs.PeerHandleError e) {
-		long ret = bindings.CResult_NonePeerHandleErrorZ_err(e == null ? 0 : e.ptr);
+		long ret = bindings.CResult_NonePeerHandleErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NonePeerHandleErrorZ ret_hu_conv = Result_NonePeerHandleErrorZ.constr_from_ptr(ret);

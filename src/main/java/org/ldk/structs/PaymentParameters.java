@@ -250,7 +250,7 @@ public class PaymentParameters extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.PaymentParameters b) {
-		boolean ret = bindings.PaymentParameters_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.PaymentParameters_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };
@@ -328,7 +328,7 @@ public class PaymentParameters extends CommonBase {
 	 * [`PaymentParameters::expiry_time`].
 	 */
 	public static PaymentParameters from_bolt12_invoice(org.ldk.structs.Bolt12Invoice invoice) {
-		long ret = bindings.PaymentParameters_from_bolt12_invoice(invoice == null ? 0 : invoice.ptr);
+		long ret = bindings.PaymentParameters_from_bolt12_invoice(invoice.ptr);
 		Reference.reachabilityFence(invoice);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PaymentParameters ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.PaymentParameters(null, ret); }
@@ -341,7 +341,7 @@ public class PaymentParameters extends CommonBase {
 	 * Creates parameters for paying to a blinded payee from the provided blinded route hints.
 	 */
 	public static PaymentParameters blinded(TwoTuple_BlindedPayInfoBlindedPathZ[] blinded_route_hints) {
-		long ret = bindings.PaymentParameters_blinded(blinded_route_hints != null ? Arrays.stream(blinded_route_hints).mapToLong(blinded_route_hints_conv_37 -> blinded_route_hints_conv_37 != null ? blinded_route_hints_conv_37.ptr : 0).toArray() : null);
+		long ret = bindings.PaymentParameters_blinded(blinded_route_hints != null ? Arrays.stream(blinded_route_hints).mapToLong(blinded_route_hints_conv_37 -> blinded_route_hints_conv_37.ptr).toArray() : null);
 		Reference.reachabilityFence(blinded_route_hints);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PaymentParameters ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.PaymentParameters(null, ret); }

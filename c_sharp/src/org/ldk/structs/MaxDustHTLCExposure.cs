@@ -6,7 +6,7 @@ using System;
 namespace org { namespace ldk { namespace structs {
 
 /**
- * Options for how to set the max dust HTLC exposure allowed on a channel. See
+ * Options for how to set the max dust exposure allowed on a channel. See
  * [`ChannelConfig::max_dust_htlc_exposure`] for details.
  */
 public class MaxDustHTLCExposure : CommonBase {
@@ -86,7 +86,7 @@ public class MaxDustHTLCExposure : CommonBase {
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public bool eq(org.ldk.structs.MaxDustHTLCExposure b) {
-		bool ret = bindings.MaxDustHTLCExposure_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.MaxDustHTLCExposure_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		return ret;

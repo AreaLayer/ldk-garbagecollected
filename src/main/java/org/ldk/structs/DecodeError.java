@@ -42,6 +42,9 @@ public class DecodeError extends CommonBase {
 		if (raw_val.getClass() == bindings.LDKDecodeError.UnsupportedCompression.class) {
 			return new UnsupportedCompression(ptr, (bindings.LDKDecodeError.UnsupportedCompression)raw_val);
 		}
+		if (raw_val.getClass() == bindings.LDKDecodeError.DangerousValue.class) {
+			return new DangerousValue(ptr, (bindings.LDKDecodeError.DangerousValue)raw_val);
+		}
 		assert false; return null; // Unreachable without extending the (internal) bindings interface
 	}
 
@@ -106,6 +109,22 @@ public class DecodeError extends CommonBase {
 	 */
 	public final static class UnsupportedCompression extends DecodeError {
 		private UnsupportedCompression(long ptr, bindings.LDKDecodeError.UnsupportedCompression obj) {
+			super(null, ptr);
+		}
+	}
+	/**
+	 * Value is validly encoded but is dangerous to use.
+	 * 
+	 * This is used for things like [`ChannelManager`] deserialization where we want to ensure
+	 * that we don't use a [`ChannelManager`] which is in out of sync with the [`ChannelMonitor`].
+	 * This indicates that there is a critical implementation flaw in the storage implementation
+	 * and it's unsafe to continue.
+	 * 
+	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
+	 * [`ChannelMonitor`]: crate::chain::channelmonitor::ChannelMonitor
+	 */
+	public final static class DangerousValue extends DecodeError {
+		private DangerousValue(long ptr, bindings.LDKDecodeError.DangerousValue obj) {
 			super(null, ptr);
 		}
 	}
@@ -206,6 +225,17 @@ public class DecodeError extends CommonBase {
 	}
 
 	/**
+	 * Utility method to constructs a new DangerousValue-variant DecodeError
+	 */
+	public static DecodeError dangerous_value() {
+		long ret = bindings.DecodeError_dangerous_value();
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.DecodeError ret_hu_conv = org.ldk.structs.DecodeError.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Generates a non-cryptographic 64-bit hash of the DecodeError.
 	 */
 	public long hash() {
@@ -222,7 +252,7 @@ public class DecodeError extends CommonBase {
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public boolean eq(org.ldk.structs.DecodeError b) {
-		boolean ret = bindings.DecodeError_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.DecodeError_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		return ret;

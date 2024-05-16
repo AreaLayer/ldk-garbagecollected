@@ -18,21 +18,23 @@ public class SpliceAck : CommonBase {
 	/**
 	 * The channel ID where splicing is intended
 	 */
-	public byte[] get_channel_id() {
+	public ChannelId get_channel_id() {
 		long ret = bindings.SpliceAck_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
-		return ret_conv;
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
 	}
 
 	/**
 	 * The channel ID where splicing is intended
 	 */
-	public void set_channel_id(byte[] val) {
-		bindings.SpliceAck_set_channel_id(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(val, 32)));
+	public void set_channel_id(org.ldk.structs.ChannelId val) {
+		bindings.SpliceAck_set_channel_id(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
+		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -98,8 +100,8 @@ public class SpliceAck : CommonBase {
 	/**
 	 * Constructs a new SpliceAck given each field
 	 */
-	public static SpliceAck of(byte[] channel_id_arg, byte[] chain_hash_arg, long relative_satoshis_arg, byte[] funding_pubkey_arg) {
-		long ret = bindings.SpliceAck_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(channel_id_arg, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(chain_hash_arg, 32)), relative_satoshis_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(funding_pubkey_arg, 33)));
+	public static SpliceAck of(org.ldk.structs.ChannelId channel_id_arg, byte[] chain_hash_arg, long relative_satoshis_arg, byte[] funding_pubkey_arg) {
+		long ret = bindings.SpliceAck_new(channel_id_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(chain_hash_arg, 32)), relative_satoshis_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(funding_pubkey_arg, 33)));
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(chain_hash_arg);
 		GC.KeepAlive(relative_satoshis_arg);
@@ -107,6 +109,7 @@ public class SpliceAck : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.SpliceAck ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.SpliceAck(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id_arg); };
 		return ret_hu_conv;
 	}
 
@@ -134,7 +137,7 @@ public class SpliceAck : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.SpliceAck b) {
-		bool ret = bindings.SpliceAck_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.SpliceAck_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

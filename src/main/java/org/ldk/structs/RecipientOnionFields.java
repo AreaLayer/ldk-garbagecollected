@@ -135,7 +135,7 @@ public class RecipientOnionFields extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.RecipientOnionFields b) {
-		boolean ret = bindings.RecipientOnionFields_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.RecipientOnionFields_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };
@@ -210,7 +210,7 @@ public class RecipientOnionFields extends CommonBase {
 	 * See [`Self::custom_tlvs`] for more info.
 	 */
 	public Result_RecipientOnionFieldsNoneZ with_custom_tlvs(TwoTuple_u64CVec_u8ZZ[] custom_tlvs) {
-		long ret = bindings.RecipientOnionFields_with_custom_tlvs(this.ptr, custom_tlvs != null ? Arrays.stream(custom_tlvs).mapToLong(custom_tlvs_conv_23 -> custom_tlvs_conv_23 != null ? custom_tlvs_conv_23.ptr : 0).toArray() : null);
+		long ret = bindings.RecipientOnionFields_with_custom_tlvs(this.ptr, custom_tlvs != null ? Arrays.stream(custom_tlvs).mapToLong(custom_tlvs_conv_23 -> custom_tlvs_conv_23.ptr).toArray() : null);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(custom_tlvs);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -178,16 +178,16 @@ class HumanObjectPeerTestInstance {
                 }
 
                 @Override
-                public ThreeTuple_OutPointCVec_MonitorEventZPublicKeyZ[] release_pending_monitor_events() {
+                public FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ[] release_pending_monitor_events() {
                     synchronized (monitors) {
                         assert monitors.size() <= 1;
                         for (ChannelMonitor mon : monitors.values()) {
-                            ThreeTuple_OutPointCVec_MonitorEventZPublicKeyZ[] res = new ThreeTuple_OutPointCVec_MonitorEventZPublicKeyZ[1];
-                            res[0] = ThreeTuple_OutPointCVec_MonitorEventZPublicKeyZ.of(mon.get_funding_txo().get_a(), mon.get_and_clear_pending_monitor_events(), mon.get_counterparty_node_id());
+                            FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ[] res = new FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ[1];
+                            res[0] = FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ.of(mon.get_funding_txo().get_a(), ChannelId.of(new byte[32]), mon.get_and_clear_pending_monitor_events(), mon.get_counterparty_node_id());
                             return res;
                         }
                     }
-                    return new ThreeTuple_OutPointCVec_MonitorEventZPublicKeyZ[0];
+                    return new FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ[0];
                 }
             };
             Watch watch = Watch.new_impl(watch_impl);
@@ -277,7 +277,7 @@ class HumanObjectPeerTestInstance {
                 @Override
                 public ChannelMonitorUpdateStatus persist_new_channel(OutPoint id, ChannelMonitor data, MonitorUpdateId update_id) {
                     synchronized (monitors) {
-                        String key = Arrays.toString(id.to_channel_id());
+                        String key = Arrays.toString(ChannelId.v1_from_funding_outpoint(id).get_a());
                         ChannelMonitor res = test_mon_roundtrip(id, data.write());
                         assert monitors.put(key, res) == null;
                     }
@@ -287,13 +287,18 @@ class HumanObjectPeerTestInstance {
                 @Override
                 public ChannelMonitorUpdateStatus update_persisted_channel(OutPoint id, ChannelMonitorUpdate update, ChannelMonitor data, MonitorUpdateId update_id) {
                     synchronized (monitors) {
-                        String key = Arrays.toString(id.to_channel_id());
+                        String key = Arrays.toString(ChannelId.v1_from_funding_outpoint(id).get_a());
                         ChannelMonitor res = test_mon_roundtrip(id, data.write());
                         // Note that we use a serialization-roundtrip copy of data here, not the original, as this can
                         // expose the JVM JIT bug where it finalize()s things still being called.
                         assert monitors.put(key, res) != null;
                     }
                     return ChannelMonitorUpdateStatus.LDKChannelMonitorUpdateStatus_Completed;
+                }
+
+                @Override
+                public void archive_persisted_channel(OutPoint channel_funding_outpoint) {
+                    assert false;
                 }
             });
 
@@ -822,7 +827,7 @@ class HumanObjectPeerTestInstance {
             try {
                 peer1.nio_peer_handler.connect(peer2.chan_manager.get_our_node_id(), new InetSocketAddress("127.0.0.1", peer2.nio_port), 100);
             } catch (IOException e) { assert false; }
-            while (peer1.peer_manager.get_peer_node_ids().length == 0 || peer2.peer_manager.get_peer_node_ids().length == 0) {
+            while (peer1.peer_manager.list_peers().length == 0 || peer2.peer_manager.list_peers().length == 0) {
                 Thread.yield();
             }
         } else {
@@ -871,8 +876,8 @@ class HumanObjectPeerTestInstance {
 
         UInt128 user_id = new UInt128(new byte[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16});
 
-        Result_ThirtyTwoBytesAPIErrorZ cc_res = peer1.chan_manager.create_channel(peer2.node_id, 100000, 1000, user_id, Option_ThirtyTwoBytesZ.none(), null);
-        assert cc_res instanceof Result_ThirtyTwoBytesAPIErrorZ.Result_ThirtyTwoBytesAPIErrorZ_OK;
+        Result_ChannelIdAPIErrorZ cc_res = peer1.chan_manager.create_channel(peer2.node_id, 100000, 1000, user_id, null, null);
+        assert cc_res instanceof Result_ChannelIdAPIErrorZ.Result_ChannelIdAPIErrorZ_OK;
 
         // Previously, this was a SEGFAULT instead of get_funding_txo() returning null.
         ChannelDetails pre_funding_chan = peer1.chan_manager.list_channels()[0];
@@ -884,7 +889,7 @@ class HumanObjectPeerTestInstance {
         assert ((Event.FundingGenerationReady) events[0]).user_channel_id.equals(user_id);
         byte[] funding_spk = ((Event.FundingGenerationReady) events[0]).output_script;
         assert funding_spk.length == 34 && funding_spk[0] == 0 && funding_spk[1] == 32; // P2WSH
-        byte[] chan_id = ((Event.FundingGenerationReady) events[0]).temporary_channel_id;
+        ChannelId chan_id = ((Event.FundingGenerationReady) events[0]).temporary_channel_id;
 
         BitcoinNetworkParams bitcoinj_net = BitcoinNetworkParams.of(BitcoinNetwork.MAINNET);
 
@@ -945,8 +950,8 @@ class HumanObjectPeerTestInstance {
         Option_u64Z short_chan_id = peer1_chans[0].get_short_channel_id();
         assert short_chan_id instanceof Option_u64Z.Some;
         assert ((Option_u64Z.Some)short_chan_id).some == (1L << 40); // 0th output in the 0th transaction in the 1st block
-        assert Arrays.equals(peer1_chans[0].get_channel_id(), funding.getTxId().getReversedBytes());
-        assert Arrays.equals(peer2_chans[0].get_channel_id(), funding.getTxId().getReversedBytes());
+        assert Arrays.equals(peer1_chans[0].get_channel_id().get_a(), funding.getTxId().getReversedBytes());
+        assert Arrays.equals(peer2_chans[0].get_channel_id().get_a(), funding.getTxId().getReversedBytes());
 
         // Generate a random invoice description to exercise the string conversion logic a good bit
         String invoice_description;
@@ -1101,17 +1106,17 @@ if (parsed_invoice instanceof Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_B
 
         events = state.peer2.get_manager_events(1, state.peer1, state.peer2);
         assert events[0] instanceof Event.PaymentClaimable;
-        assert ((Event.PaymentClaimable)events[0]).purpose instanceof PaymentPurpose.InvoicePayment;
-        assert ((PaymentPurpose.InvoicePayment) ((Event.PaymentClaimable)events[0]).purpose).payment_preimage instanceof Option_ThirtyTwoBytesZ.Some;
-        byte[] payment_preimage = ((Option_ThirtyTwoBytesZ.Some) ((PaymentPurpose.InvoicePayment)((Event.PaymentClaimable)events[0]).purpose).payment_preimage).some;
+        assert ((Event.PaymentClaimable)events[0]).purpose instanceof PaymentPurpose.Bolt11InvoicePayment;
+        assert ((PaymentPurpose.Bolt11InvoicePayment) ((Event.PaymentClaimable)events[0]).purpose).payment_preimage instanceof Option_ThirtyTwoBytesZ.Some;
+        byte[] payment_preimage = ((Option_ThirtyTwoBytesZ.Some) ((PaymentPurpose.Bolt11InvoicePayment)((Event.PaymentClaimable)events[0]).purpose).payment_preimage).some;
         assert !Arrays.equals(payment_preimage, new byte[32]);
         state.peer2.chan_manager.claim_funds(payment_preimage);
 
         events = state.peer2.get_manager_events(1, state.peer1, state.peer2);
         assert events[0] instanceof Event.PaymentClaimed;
-        assert ((Event.PaymentClaimed)events[0]).purpose instanceof PaymentPurpose.InvoicePayment;
-        assert ((PaymentPurpose.InvoicePayment) ((Event.PaymentClaimed)events[0]).purpose).payment_preimage instanceof  Option_ThirtyTwoBytesZ.Some;
-        payment_preimage = ((Option_ThirtyTwoBytesZ.Some)((PaymentPurpose.InvoicePayment)((Event.PaymentClaimed)events[0]).purpose).payment_preimage).some;
+        assert ((Event.PaymentClaimed)events[0]).purpose instanceof PaymentPurpose.Bolt11InvoicePayment;
+        assert ((PaymentPurpose.Bolt11InvoicePayment) ((Event.PaymentClaimed)events[0]).purpose).payment_preimage instanceof  Option_ThirtyTwoBytesZ.Some;
+        payment_preimage = ((Option_ThirtyTwoBytesZ.Some)((PaymentPurpose.Bolt11InvoicePayment)((Event.PaymentClaimed)events[0]).purpose).payment_preimage).some;
         assert !Arrays.equals(payment_preimage, new byte[32]);
 
         events = state.peer1.get_manager_events(2, state.peer1, state.peer2);
@@ -1202,15 +1207,11 @@ if (parsed_invoice instanceof Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_B
             }
 
             Event[] broadcastable_event = state.peer2.get_monitor_events(1);
-            for (ChannelMonitor mon : state.peer2.monitors.values()) {
-                // This used to be buggy and double-free, so go ahead and fetch them!
-                byte[][] txn = mon.get_latest_holder_commitment_txn(state.peer2.logger);
-            }
             assert broadcastable_event.length == 1;
             assert broadcastable_event[0] instanceof Event.SpendableOutputs;
             if (state.peer2.explicit_keys_manager != null) {
                 TxOut[] additional_outputs = new TxOut[]{new TxOut(420, new byte[]{0x42})};
-                Result_TransactionNoneZ tx_res = state.peer2.explicit_keys_manager.spend_spendable_outputs(((Event.SpendableOutputs) broadcastable_event[0]).outputs, additional_outputs, new byte[]{0x00}, 253, Option_u32Z.none());
+                Result_TransactionNoneZ tx_res = state.peer2.explicit_keys_manager.as_OutputSpender().spend_spendable_outputs(((Event.SpendableOutputs) broadcastable_event[0]).outputs, additional_outputs, new byte[]{0x00}, 253, Option_u32Z.none());
                 assert tx_res instanceof Result_TransactionNoneZ.Result_TransactionNoneZ_OK;
                 Transaction built_tx = new Transaction(bitcoinj_net, ((Result_TransactionNoneZ.Result_TransactionNoneZ_OK) tx_res).res);
                 assert built_tx.getOutputs().size() == 2;
@@ -1219,7 +1220,7 @@ if (parsed_invoice instanceof Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_B
                 assert built_tx.getOutput(0).getValue().value == 420;
             }
 
-            while (state.peer1.peer_manager.get_peer_node_ids().length != 0 || state.peer2.peer_manager.get_peer_node_ids().length != 0) {
+            while (state.peer1.peer_manager.list_peers().length != 0 || state.peer2.peer_manager.list_peers().length != 0) {
                 // LDK disconnects peers before sending an error message, so wait for disconnection.
                 Thread.sleep(10);
             }
@@ -1250,8 +1251,8 @@ if (parsed_invoice instanceof Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_B
 
         if (use_nio_peer_handler) {
             state.peer1.peer_manager.disconnect_by_node_id(state.peer2.chan_manager.get_our_node_id());
-            while (state.peer1.peer_manager.get_peer_node_ids().length != 0) Thread.yield();
-            while (state.peer2.peer_manager.get_peer_node_ids().length != 0) Thread.yield();
+            while (state.peer1.peer_manager.list_peers().length != 0) Thread.yield();
+            while (state.peer2.peer_manager.list_peers().length != 0) Thread.yield();
             state.peer1.nio_peer_handler.interrupt();
             state.peer2.nio_peer_handler.interrupt();
         }

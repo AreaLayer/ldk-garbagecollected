@@ -111,7 +111,7 @@ public class BlindedForward extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.BlindedForward b) {
-		boolean ret = bindings.BlindedForward_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.BlindedForward_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

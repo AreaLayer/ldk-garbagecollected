@@ -42,7 +42,7 @@ public class Result_ClaimedHTLCDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_ClaimedHTLCDecodeErrorZ in the success state.
 	 */
 	public static Result_ClaimedHTLCDecodeErrorZ ok(org.ldk.structs.ClaimedHTLC o) {
-		long ret = bindings.CResult_ClaimedHTLCDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_ClaimedHTLCDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ClaimedHTLCDecodeErrorZ ret_hu_conv = Result_ClaimedHTLCDecodeErrorZ.constr_from_ptr(ret);

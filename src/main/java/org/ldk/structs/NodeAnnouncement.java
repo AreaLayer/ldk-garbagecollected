@@ -56,7 +56,7 @@ public class NodeAnnouncement extends CommonBase {
 	 * The actual content of the announcement
 	 */
 	public void set_contents(org.ldk.structs.UnsignedNodeAnnouncement val) {
-		bindings.NodeAnnouncement_set_contents(this.ptr, val == null ? 0 : val.ptr);
+		bindings.NodeAnnouncement_set_contents(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -66,7 +66,7 @@ public class NodeAnnouncement extends CommonBase {
 	 * Constructs a new NodeAnnouncement given each field
 	 */
 	public static NodeAnnouncement of(byte[] signature_arg, org.ldk.structs.UnsignedNodeAnnouncement contents_arg) {
-		long ret = bindings.NodeAnnouncement_new(InternalUtils.check_arr_len(signature_arg, 64), contents_arg == null ? 0 : contents_arg.ptr);
+		long ret = bindings.NodeAnnouncement_new(InternalUtils.check_arr_len(signature_arg, 64), contents_arg.ptr);
 		Reference.reachabilityFence(signature_arg);
 		Reference.reachabilityFence(contents_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -112,7 +112,7 @@ public class NodeAnnouncement extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.NodeAnnouncement b) {
-		boolean ret = bindings.NodeAnnouncement_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.NodeAnnouncement_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

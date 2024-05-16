@@ -37,7 +37,7 @@ public class Result_VerifiedInvoiceRequestNoneZ : CommonBase {
 	 * Creates a new CResult_VerifiedInvoiceRequestNoneZ in the success state.
 	 */
 	public static Result_VerifiedInvoiceRequestNoneZ ok(org.ldk.structs.VerifiedInvoiceRequest o) {
-		long ret = bindings.CResult_VerifiedInvoiceRequestNoneZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_VerifiedInvoiceRequestNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_VerifiedInvoiceRequestNoneZ ret_hu_conv = Result_VerifiedInvoiceRequestNoneZ.constr_from_ptr(ret);

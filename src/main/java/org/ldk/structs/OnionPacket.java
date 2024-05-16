@@ -63,7 +63,7 @@ public class OnionPacket extends CommonBase {
 	 * like.
 	 */
 	public void set_public_key(org.ldk.structs.Result_PublicKeySecp256k1ErrorZ val) {
-		bindings.OnionPacket_set_public_key(this.ptr, val != null ? val.ptr : 0);
+		bindings.OnionPacket_set_public_key(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 	}
@@ -122,7 +122,7 @@ public class OnionPacket extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.OnionPacket b) {
-		boolean ret = bindings.OnionPacket_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.OnionPacket_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

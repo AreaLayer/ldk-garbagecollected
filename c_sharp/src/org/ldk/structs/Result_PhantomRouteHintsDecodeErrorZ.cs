@@ -42,7 +42,7 @@ public class Result_PhantomRouteHintsDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_PhantomRouteHintsDecodeErrorZ in the success state.
 	 */
 	public static Result_PhantomRouteHintsDecodeErrorZ ok(org.ldk.structs.PhantomRouteHints o) {
-		long ret = bindings.CResult_PhantomRouteHintsDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_PhantomRouteHintsDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_PhantomRouteHintsDecodeErrorZ ret_hu_conv = Result_PhantomRouteHintsDecodeErrorZ.constr_from_ptr(ret);

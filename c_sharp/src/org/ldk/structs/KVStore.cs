@@ -94,7 +94,7 @@ public class KVStore : CommonBase {
 			string _key_conv = InternalUtils.decodeString(_key);
 			Result_CVec_u8ZIOErrorZ ret = arg.read(_primary_namespace_conv, _secondary_namespace_conv, _key_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long write(long _primary_namespace, long _secondary_namespace, long _key, long _buf) {
@@ -104,7 +104,7 @@ public class KVStore : CommonBase {
 			byte[] _buf_conv = InternalUtils.decodeUint8Array(_buf);
 			Result_NoneIOErrorZ ret = arg.write(_primary_namespace_conv, _secondary_namespace_conv, _key_conv, _buf_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long remove(long _primary_namespace, long _secondary_namespace, long _key, bool _lazy) {
@@ -113,7 +113,7 @@ public class KVStore : CommonBase {
 			string _key_conv = InternalUtils.decodeString(_key);
 			Result_NoneIOErrorZ ret = arg.remove(_primary_namespace_conv, _secondary_namespace_conv, _key_conv, _lazy);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long list(long _primary_namespace, long _secondary_namespace) {
@@ -121,7 +121,7 @@ public class KVStore : CommonBase {
 			string _secondary_namespace_conv = InternalUtils.decodeString(_secondary_namespace);
 			Result_CVec_StrZIOErrorZ ret = arg.list(_primary_namespace_conv, _secondary_namespace_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 	}

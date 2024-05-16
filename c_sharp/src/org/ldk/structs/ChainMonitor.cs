@@ -69,7 +69,7 @@ public class ChainMonitor : CommonBase {
 	 * inclusion in the return value.
 	 */
 	public Balance[] get_claimable_balances(ChannelDetails[] ignored_channels) {
-		long ret = bindings.ChainMonitor_get_claimable_balances(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(ignored_channels, ignored_channels_conv_16 => ignored_channels_conv_16 == null ? 0 : ignored_channels_conv_16.ptr)));
+		long ret = bindings.ChainMonitor_get_claimable_balances(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(ignored_channels, ignored_channels_conv_16 => ignored_channels_conv_16.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(ignored_channels);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -94,7 +94,7 @@ public class ChainMonitor : CommonBase {
 	 * indefinitely.
 	 */
 	public Result_LockedChannelMonitorNoneZ get_monitor(org.ldk.structs.OutPoint funding_txo) {
-		long ret = bindings.ChainMonitor_get_monitor(this.ptr, funding_txo == null ? 0 : funding_txo.ptr);
+		long ret = bindings.ChainMonitor_get_monitor(this.ptr, funding_txo.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(funding_txo);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -104,25 +104,25 @@ public class ChainMonitor : CommonBase {
 	}
 
 	/**
-	 * Lists the funding outpoint of each [`ChannelMonitor`] being monitored.
+	 * Lists the funding outpoint and channel ID of each [`ChannelMonitor`] being monitored.
 	 * 
 	 * Note that [`ChannelMonitor`]s are not removed when a channel is closed as they are always
 	 * monitoring for on-chain state resolutions.
 	 */
-	public OutPoint[] list_monitors() {
+	public TwoTuple_OutPointChannelIdZ[] list_monitors() {
 		long ret = bindings.ChainMonitor_list_monitors(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		int ret_conv_10_len = InternalUtils.getArrayLength(ret);
-		OutPoint[] ret_conv_10_arr = new OutPoint[ret_conv_10_len];
-		for (int k = 0; k < ret_conv_10_len; k++) {
-			long ret_conv_10 = InternalUtils.getU64ArrayElem(ret, k);
-			org.ldk.structs.OutPoint ret_conv_10_hu_conv = null; if (ret_conv_10 < 0 || ret_conv_10 > 4096) { ret_conv_10_hu_conv = new org.ldk.structs.OutPoint(null, ret_conv_10); }
-			if (ret_conv_10_hu_conv != null) { ret_conv_10_hu_conv.ptrs_to.AddLast(this); };
-			ret_conv_10_arr[k] = ret_conv_10_hu_conv;
+		int ret_conv_29_len = InternalUtils.getArrayLength(ret);
+		TwoTuple_OutPointChannelIdZ[] ret_conv_29_arr = new TwoTuple_OutPointChannelIdZ[ret_conv_29_len];
+		for (int d = 0; d < ret_conv_29_len; d++) {
+			long ret_conv_29 = InternalUtils.getU64ArrayElem(ret, d);
+			TwoTuple_OutPointChannelIdZ ret_conv_29_hu_conv = new TwoTuple_OutPointChannelIdZ(null, ret_conv_29);
+			if (ret_conv_29_hu_conv != null) { ret_conv_29_hu_conv.ptrs_to.AddLast(this); };
+			ret_conv_29_arr[d] = ret_conv_29_hu_conv;
 		}
 		bindings.free_buffer(ret);
-		return ret_conv_10_arr;
+		return ret_conv_29_arr;
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class ChainMonitor : CommonBase {
 	 * registered [`ChannelMonitor`]s.
 	 */
 	public Result_NoneAPIErrorZ channel_monitor_updated(org.ldk.structs.OutPoint funding_txo, org.ldk.structs.MonitorUpdateId completed_update_id) {
-		long ret = bindings.ChainMonitor_channel_monitor_updated(this.ptr, funding_txo == null ? 0 : funding_txo.ptr, completed_update_id == null ? 0 : completed_update_id.ptr);
+		long ret = bindings.ChainMonitor_channel_monitor_updated(this.ptr, funding_txo.ptr, completed_update_id.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(funding_txo);
 		GC.KeepAlive(completed_update_id);
@@ -199,6 +199,37 @@ public class ChainMonitor : CommonBase {
 	 */
 	public void rebroadcast_pending_claims() {
 		bindings.ChainMonitor_rebroadcast_pending_claims(this.ptr);
+		GC.KeepAlive(this);
+	}
+
+	/**
+	 * Triggers rebroadcasts of pending claims from force-closed channels after a transaction
+	 * signature generation failure.
+	 * 
+	 * `monitor_opt` can be used as a filter to only trigger them for a specific channel monitor.
+	 * 
+	 * Note that monitor_opt (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	public void signer_unblocked(org.ldk.structs.OutPoint monitor_opt) {
+		bindings.ChainMonitor_signer_unblocked(this.ptr, monitor_opt == null ? 0 : monitor_opt.ptr);
+		GC.KeepAlive(this);
+		GC.KeepAlive(monitor_opt);
+		if (this != null) { this.ptrs_to.AddLast(monitor_opt); };
+	}
+
+	/**
+	 * Archives fully resolved channel monitors by calling [`Persist::archive_persisted_channel`].
+	 * 
+	 * This is useful for pruning fully resolved monitors from the monitor set and primary
+	 * storage so they are not kept in memory and reloaded on restart.
+	 * 
+	 * Should be called occasionally (once every handful of blocks or on startup).
+	 * 
+	 * Depending on the implementation of [`Persist::archive_persisted_channel`] the monitor
+	 * data could be moved to an archive location or removed entirely.
+	 */
+	public void archive_fully_resolved_channel_monitors() {
+		bindings.ChainMonitor_archive_fully_resolved_channel_monitors(this.ptr);
 		GC.KeepAlive(this);
 	}
 

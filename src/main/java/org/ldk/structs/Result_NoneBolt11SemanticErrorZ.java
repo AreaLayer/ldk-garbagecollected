@@ -13,6 +13,10 @@ public class Result_NoneBolt11SemanticErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_NoneBolt11SemanticErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_NoneBolt11SemanticErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_NoneBolt11SemanticErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_NoneBolt11SemanticErrorZ_is_ok(ptr)) {
 			return new Result_NoneBolt11SemanticErrorZ_OK(null, ptr);

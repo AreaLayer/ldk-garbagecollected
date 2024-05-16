@@ -42,7 +42,7 @@ public class Result_ShutdownScriptInvalidShutdownScriptZ : CommonBase {
 	 * Creates a new CResult_ShutdownScriptInvalidShutdownScriptZ in the success state.
 	 */
 	public static Result_ShutdownScriptInvalidShutdownScriptZ ok(org.ldk.structs.ShutdownScript o) {
-		long ret = bindings.CResult_ShutdownScriptInvalidShutdownScriptZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_ShutdownScriptInvalidShutdownScriptZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ShutdownScriptInvalidShutdownScriptZ ret_hu_conv = Result_ShutdownScriptInvalidShutdownScriptZ.constr_from_ptr(ret);
@@ -54,7 +54,7 @@ public class Result_ShutdownScriptInvalidShutdownScriptZ : CommonBase {
 	 * Creates a new CResult_ShutdownScriptInvalidShutdownScriptZ in the error state.
 	 */
 	public static Result_ShutdownScriptInvalidShutdownScriptZ err(org.ldk.structs.InvalidShutdownScript e) {
-		long ret = bindings.CResult_ShutdownScriptInvalidShutdownScriptZ_err(e == null ? 0 : e.ptr);
+		long ret = bindings.CResult_ShutdownScriptInvalidShutdownScriptZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ShutdownScriptInvalidShutdownScriptZ ret_hu_conv = Result_ShutdownScriptInvalidShutdownScriptZ.constr_from_ptr(ret);

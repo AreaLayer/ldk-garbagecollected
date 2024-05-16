@@ -23,19 +23,23 @@ public class TxAbort extends CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public byte[] get_channel_id() {
-		byte[] ret = bindings.TxAbort_get_channel_id(this.ptr);
+	public ChannelId get_channel_id() {
+		long ret = bindings.TxAbort_get_channel_id(this.ptr);
 		Reference.reachabilityFence(this);
-		return ret;
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ChannelId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
 	}
 
 	/**
 	 * The channel ID
 	 */
-	public void set_channel_id(byte[] val) {
-		bindings.TxAbort_set_channel_id(this.ptr, InternalUtils.check_arr_len(val, 32));
+	public void set_channel_id(org.ldk.structs.ChannelId val) {
+		bindings.TxAbort_set_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
+		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -61,13 +65,14 @@ public class TxAbort extends CommonBase {
 	/**
 	 * Constructs a new TxAbort given each field
 	 */
-	public static TxAbort of(byte[] channel_id_arg, byte[] data_arg) {
-		long ret = bindings.TxAbort_new(InternalUtils.check_arr_len(channel_id_arg, 32), data_arg);
+	public static TxAbort of(org.ldk.structs.ChannelId channel_id_arg, byte[] data_arg) {
+		long ret = bindings.TxAbort_new(channel_id_arg.ptr, data_arg);
 		Reference.reachabilityFence(channel_id_arg);
 		Reference.reachabilityFence(data_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.TxAbort ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.TxAbort(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id_arg); };
 		return ret_hu_conv;
 	}
 
@@ -107,7 +112,7 @@ public class TxAbort extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.TxAbort b) {
-		boolean ret = bindings.TxAbort_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.TxAbort_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

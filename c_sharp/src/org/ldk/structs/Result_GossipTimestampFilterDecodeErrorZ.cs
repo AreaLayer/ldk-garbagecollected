@@ -42,7 +42,7 @@ public class Result_GossipTimestampFilterDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_GossipTimestampFilterDecodeErrorZ in the success state.
 	 */
 	public static Result_GossipTimestampFilterDecodeErrorZ ok(org.ldk.structs.GossipTimestampFilter o) {
-		long ret = bindings.CResult_GossipTimestampFilterDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_GossipTimestampFilterDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_GossipTimestampFilterDecodeErrorZ ret_hu_conv = Result_GossipTimestampFilterDecodeErrorZ.constr_from_ptr(ret);

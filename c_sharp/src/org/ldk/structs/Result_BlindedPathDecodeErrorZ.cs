@@ -42,7 +42,7 @@ public class Result_BlindedPathDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_BlindedPathDecodeErrorZ in the success state.
 	 */
 	public static Result_BlindedPathDecodeErrorZ ok(org.ldk.structs.BlindedPath o) {
-		long ret = bindings.CResult_BlindedPathDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_BlindedPathDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_BlindedPathDecodeErrorZ ret_hu_conv = Result_BlindedPathDecodeErrorZ.constr_from_ptr(ret);

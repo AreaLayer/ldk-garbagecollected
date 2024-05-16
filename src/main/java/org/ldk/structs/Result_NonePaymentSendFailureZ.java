@@ -13,6 +13,10 @@ public class Result_NonePaymentSendFailureZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_NonePaymentSendFailureZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_NonePaymentSendFailureZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_NonePaymentSendFailureZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_NonePaymentSendFailureZ_is_ok(ptr)) {
 			return new Result_NonePaymentSendFailureZ_OK(null, ptr);

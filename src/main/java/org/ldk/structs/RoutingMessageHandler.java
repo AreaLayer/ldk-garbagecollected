@@ -138,27 +138,27 @@ public class RoutingMessageHandler extends CommonBase {
 				org.ldk.structs.NodeAnnouncement msg_hu_conv = null; if (msg < 0 || msg > 4096) { msg_hu_conv = new org.ldk.structs.NodeAnnouncement(null, msg); }
 				Result_boolLightningErrorZ ret = arg.handle_node_announcement(msg_hu_conv);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long handle_channel_announcement(long msg) {
 				org.ldk.structs.ChannelAnnouncement msg_hu_conv = null; if (msg < 0 || msg > 4096) { msg_hu_conv = new org.ldk.structs.ChannelAnnouncement(null, msg); }
 				Result_boolLightningErrorZ ret = arg.handle_channel_announcement(msg_hu_conv);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long handle_channel_update(long msg) {
 				org.ldk.structs.ChannelUpdate msg_hu_conv = null; if (msg < 0 || msg > 4096) { msg_hu_conv = new org.ldk.structs.ChannelUpdate(null, msg); }
 				Result_boolLightningErrorZ ret = arg.handle_channel_update(msg_hu_conv);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long get_next_channel_announcement(long starting_point) {
 				Option_C3Tuple_ChannelAnnouncementChannelUpdateChannelUpdateZZ ret = arg.get_next_channel_announcement(starting_point);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				if (impl_holder.held != null) { impl_holder.held.ptrs_to.add(ret); };
 				return result;
 			}
@@ -174,7 +174,7 @@ public class RoutingMessageHandler extends CommonBase {
 				org.ldk.structs.Init init_hu_conv = null; if (init < 0 || init > 4096) { init_hu_conv = new org.ldk.structs.Init(null, init); }
 				Result_NoneNoneZ ret = arg.peer_connected(their_node_id, init_hu_conv, inbound);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long handle_reply_channel_range(byte[] their_node_id, long msg) {
@@ -182,7 +182,7 @@ public class RoutingMessageHandler extends CommonBase {
 				if (msg_hu_conv != null) { msg_hu_conv.ptrs_to.add(this); };
 				Result_NoneLightningErrorZ ret = arg.handle_reply_channel_range(their_node_id, msg_hu_conv);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long handle_reply_short_channel_ids_end(byte[] their_node_id, long msg) {
@@ -190,7 +190,7 @@ public class RoutingMessageHandler extends CommonBase {
 				if (msg_hu_conv != null) { msg_hu_conv.ptrs_to.add(this); };
 				Result_NoneLightningErrorZ ret = arg.handle_reply_short_channel_ids_end(their_node_id, msg_hu_conv);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long handle_query_channel_range(byte[] their_node_id, long msg) {
@@ -198,7 +198,7 @@ public class RoutingMessageHandler extends CommonBase {
 				if (msg_hu_conv != null) { msg_hu_conv.ptrs_to.add(this); };
 				Result_NoneLightningErrorZ ret = arg.handle_query_channel_range(their_node_id, msg_hu_conv);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long handle_query_short_channel_ids(byte[] their_node_id, long msg) {
@@ -206,7 +206,7 @@ public class RoutingMessageHandler extends CommonBase {
 				if (msg_hu_conv != null) { msg_hu_conv.ptrs_to.add(this); };
 				Result_NoneLightningErrorZ ret = arg.handle_query_short_channel_ids(their_node_id, msg_hu_conv);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public boolean processing_queue_high() {
@@ -217,13 +217,13 @@ public class RoutingMessageHandler extends CommonBase {
 			@Override public long provided_node_features() {
 				NodeFeatures ret = arg.provided_node_features();
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long provided_init_features(byte[] their_node_id) {
 				InitFeatures ret = arg.provided_init_features(their_node_id);
 				Reference.reachabilityFence(arg);
-				long result = ret == null ? 0 : ret.clone_ptr();
+				long result = ret.clone_ptr();
 				return result;
 			}
 		}, MessageSendEventsProvider.new_impl(MessageSendEventsProvider_impl).bindings_instance);
@@ -244,7 +244,7 @@ public class RoutingMessageHandler extends CommonBase {
 	 * `false` or returning an `Err` otherwise.
 	 */
 	public Result_boolLightningErrorZ handle_node_announcement(org.ldk.structs.NodeAnnouncement msg) {
-		long ret = bindings.RoutingMessageHandler_handle_node_announcement(this.ptr, msg == null ? 0 : msg.ptr);
+		long ret = bindings.RoutingMessageHandler_handle_node_announcement(this.ptr, msg.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -258,7 +258,7 @@ public class RoutingMessageHandler extends CommonBase {
 	 * or returning an `Err` otherwise.
 	 */
 	public Result_boolLightningErrorZ handle_channel_announcement(org.ldk.structs.ChannelAnnouncement msg) {
-		long ret = bindings.RoutingMessageHandler_handle_channel_announcement(this.ptr, msg == null ? 0 : msg.ptr);
+		long ret = bindings.RoutingMessageHandler_handle_channel_announcement(this.ptr, msg.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -272,7 +272,7 @@ public class RoutingMessageHandler extends CommonBase {
 	 * `false` or returning an `Err` otherwise.
 	 */
 	public Result_boolLightningErrorZ handle_channel_update(org.ldk.structs.ChannelUpdate msg) {
-		long ret = bindings.RoutingMessageHandler_handle_channel_update(this.ptr, msg == null ? 0 : msg.ptr);
+		long ret = bindings.RoutingMessageHandler_handle_channel_update(this.ptr, msg.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -327,7 +327,7 @@ public class RoutingMessageHandler extends CommonBase {
 	 * message handlers may still wish to communicate with this peer.
 	 */
 	public Result_NoneNoneZ peer_connected(byte[] their_node_id, org.ldk.structs.Init init, boolean inbound) {
-		long ret = bindings.RoutingMessageHandler_peer_connected(this.ptr, InternalUtils.check_arr_len(their_node_id, 33), init == null ? 0 : init.ptr, inbound);
+		long ret = bindings.RoutingMessageHandler_peer_connected(this.ptr, InternalUtils.check_arr_len(their_node_id, 33), init.ptr, inbound);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(their_node_id);
 		Reference.reachabilityFence(init);
@@ -344,7 +344,7 @@ public class RoutingMessageHandler extends CommonBase {
 	 * replies to a single query.
 	 */
 	public Result_NoneLightningErrorZ handle_reply_channel_range(byte[] their_node_id, org.ldk.structs.ReplyChannelRange msg) {
-		long ret = bindings.RoutingMessageHandler_handle_reply_channel_range(this.ptr, InternalUtils.check_arr_len(their_node_id, 33), msg == null ? 0 : msg.ptr);
+		long ret = bindings.RoutingMessageHandler_handle_reply_channel_range(this.ptr, InternalUtils.check_arr_len(their_node_id, 33), msg.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(their_node_id);
 		Reference.reachabilityFence(msg);
@@ -361,7 +361,7 @@ public class RoutingMessageHandler extends CommonBase {
 	 * gossip messages.
 	 */
 	public Result_NoneLightningErrorZ handle_reply_short_channel_ids_end(byte[] their_node_id, org.ldk.structs.ReplyShortChannelIdsEnd msg) {
-		long ret = bindings.RoutingMessageHandler_handle_reply_short_channel_ids_end(this.ptr, InternalUtils.check_arr_len(their_node_id, 33), msg == null ? 0 : msg.ptr);
+		long ret = bindings.RoutingMessageHandler_handle_reply_short_channel_ids_end(this.ptr, InternalUtils.check_arr_len(their_node_id, 33), msg.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(their_node_id);
 		Reference.reachabilityFence(msg);
@@ -376,7 +376,7 @@ public class RoutingMessageHandler extends CommonBase {
 	 * for the requested range of blocks.
 	 */
 	public Result_NoneLightningErrorZ handle_query_channel_range(byte[] their_node_id, org.ldk.structs.QueryChannelRange msg) {
-		long ret = bindings.RoutingMessageHandler_handle_query_channel_range(this.ptr, InternalUtils.check_arr_len(their_node_id, 33), msg == null ? 0 : msg.ptr);
+		long ret = bindings.RoutingMessageHandler_handle_query_channel_range(this.ptr, InternalUtils.check_arr_len(their_node_id, 33), msg.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(their_node_id);
 		Reference.reachabilityFence(msg);
@@ -391,7 +391,7 @@ public class RoutingMessageHandler extends CommonBase {
 	 * list of `short_channel_id`s.
 	 */
 	public Result_NoneLightningErrorZ handle_query_short_channel_ids(byte[] their_node_id, org.ldk.structs.QueryShortChannelIds msg) {
-		long ret = bindings.RoutingMessageHandler_handle_query_short_channel_ids(this.ptr, InternalUtils.check_arr_len(their_node_id, 33), msg == null ? 0 : msg.ptr);
+		long ret = bindings.RoutingMessageHandler_handle_query_short_channel_ids(this.ptr, InternalUtils.check_arr_len(their_node_id, 33), msg.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(their_node_id);
 		Reference.reachabilityFence(msg);

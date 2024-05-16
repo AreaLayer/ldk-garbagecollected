@@ -42,7 +42,7 @@ public class Result_NodeAliasDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_NodeAliasDecodeErrorZ in the success state.
 	 */
 	public static Result_NodeAliasDecodeErrorZ ok(org.ldk.structs.NodeAlias o) {
-		long ret = bindings.CResult_NodeAliasDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_NodeAliasDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NodeAliasDecodeErrorZ ret_hu_conv = Result_NodeAliasDecodeErrorZ.constr_from_ptr(ret);

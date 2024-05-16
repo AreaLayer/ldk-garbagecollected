@@ -24,7 +24,7 @@ public class DefaultRouter extends CommonBase {
 	 * Creates a new router.
 	 */
 	public static DefaultRouter of(org.ldk.structs.NetworkGraph network_graph, org.ldk.structs.Logger logger, org.ldk.structs.EntropySource entropy_source, org.ldk.structs.LockableScore scorer, org.ldk.structs.ProbabilisticScoringFeeParameters score_params) {
-		long ret = bindings.DefaultRouter_new(network_graph == null ? 0 : network_graph.ptr, logger.ptr, entropy_source.ptr, scorer.ptr, score_params == null ? 0 : score_params.ptr);
+		long ret = bindings.DefaultRouter_new(network_graph.ptr, logger.ptr, entropy_source.ptr, scorer.ptr, score_params.ptr);
 		Reference.reachabilityFence(network_graph);
 		Reference.reachabilityFence(logger);
 		Reference.reachabilityFence(entropy_source);

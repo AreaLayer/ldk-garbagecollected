@@ -13,6 +13,10 @@ public class Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ extends Com
 		if (ptr != 0) { bindings.CResult_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ_is_ok(ptr)) {
 			return new Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ_OK(null, ptr);
@@ -41,7 +45,7 @@ public class Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ extends Com
 	 * Creates a new CResult_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ in the success state.
 	 */
 	public static Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ ok(org.ldk.structs.TwoTuple_ECDSASignatureCVec_ECDSASignatureZZ o) {
-		long ret = bindings.CResult_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ_ok(o != null ? o.ptr : 0);
+		long ret = bindings.CResult_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ ret_hu_conv = Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ.constr_from_ptr(ret);

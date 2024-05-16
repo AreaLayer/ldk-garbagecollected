@@ -13,6 +13,10 @@ public class Result_PingDecodeErrorZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_PingDecodeErrorZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_PingDecodeErrorZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_PingDecodeErrorZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_PingDecodeErrorZ_is_ok(ptr)) {
 			return new Result_PingDecodeErrorZ_OK(null, ptr);
@@ -46,7 +50,7 @@ public class Result_PingDecodeErrorZ extends CommonBase {
 	 * Creates a new CResult_PingDecodeErrorZ in the success state.
 	 */
 	public static Result_PingDecodeErrorZ ok(org.ldk.structs.Ping o) {
-		long ret = bindings.CResult_PingDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_PingDecodeErrorZ_ok(o.ptr);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_PingDecodeErrorZ ret_hu_conv = Result_PingDecodeErrorZ.constr_from_ptr(ret);

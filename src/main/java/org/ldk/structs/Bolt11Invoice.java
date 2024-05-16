@@ -33,7 +33,7 @@ public class Bolt11Invoice extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.Bolt11Invoice b) {
-		boolean ret = bindings.Bolt11Invoice_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.Bolt11Invoice_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };
@@ -130,7 +130,7 @@ public class Bolt11Invoice extends CommonBase {
 	 * ```
 	 */
 	public static Result_Bolt11InvoiceBolt11SemanticErrorZ from_signed(org.ldk.structs.SignedRawBolt11Invoice signed_invoice) {
-		long ret = bindings.Bolt11Invoice_from_signed(signed_invoice == null ? 0 : signed_invoice.ptr);
+		long ret = bindings.Bolt11Invoice_from_signed(signed_invoice.ptr);
 		Reference.reachabilityFence(signed_invoice);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_Bolt11InvoiceBolt11SemanticErrorZ ret_hu_conv = Result_Bolt11InvoiceBolt11SemanticErrorZ.constr_from_ptr(ret);
@@ -218,6 +218,16 @@ public class Bolt11Invoice extends CommonBase {
 	 */
 	public byte[] recover_payee_pub_key() {
 		byte[] ret = bindings.Bolt11Invoice_recover_payee_pub_key(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Recover the payee's public key if one was included in the invoice, otherwise return the
+	 * recovered public key from the signature
+	 */
+	public byte[] get_payee_pub_key() {
+		byte[] ret = bindings.Bolt11Invoice_get_payee_pub_key(this.ptr);
 		Reference.reachabilityFence(this);
 		return ret;
 	}

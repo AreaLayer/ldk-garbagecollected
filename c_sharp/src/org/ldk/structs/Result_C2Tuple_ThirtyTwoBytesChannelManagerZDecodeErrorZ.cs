@@ -42,7 +42,7 @@ public class Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ : CommonBa
 	 * Creates a new CResult_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ in the success state.
 	 */
 	public static Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ ok(org.ldk.structs.TwoTuple_ThirtyTwoBytesChannelManagerZ o) {
-		long ret = bindings.CResult_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ_ok(o != null ? o.ptr : 0);
+		long ret = bindings.CResult_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ ret_hu_conv = Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ.constr_from_ptr(ret);

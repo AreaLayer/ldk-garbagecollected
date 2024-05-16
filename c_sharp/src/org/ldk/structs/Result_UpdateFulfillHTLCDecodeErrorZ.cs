@@ -42,7 +42,7 @@ public class Result_UpdateFulfillHTLCDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_UpdateFulfillHTLCDecodeErrorZ in the success state.
 	 */
 	public static Result_UpdateFulfillHTLCDecodeErrorZ ok(org.ldk.structs.UpdateFulfillHTLC o) {
-		long ret = bindings.CResult_UpdateFulfillHTLCDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_UpdateFulfillHTLCDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_UpdateFulfillHTLCDecodeErrorZ ret_hu_conv = Result_UpdateFulfillHTLCDecodeErrorZ.constr_from_ptr(ret);

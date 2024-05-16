@@ -92,7 +92,7 @@ public class Listen : CommonBase {
 	 * possibly filtered.
 	 */
 	public void filtered_block_connected(byte[] header, TwoTuple_usizeTransactionZ[] txdata, int height) {
-		bindings.Listen_filtered_block_connected(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(header, 80)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(txdata, txdata_conv_28 => txdata_conv_28 != null ? txdata_conv_28.ptr : 0)), height);
+		bindings.Listen_filtered_block_connected(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(header, 80)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(txdata, txdata_conv_28 => txdata_conv_28.ptr)), height);
 		GC.KeepAlive(this);
 		GC.KeepAlive(header);
 		GC.KeepAlive(txdata);

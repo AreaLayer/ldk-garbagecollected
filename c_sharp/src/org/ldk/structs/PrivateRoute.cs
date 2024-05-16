@@ -54,7 +54,7 @@ public class PrivateRoute : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.PrivateRoute b) {
-		bool ret = bindings.PrivateRoute_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.PrivateRoute_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };
@@ -69,7 +69,7 @@ public class PrivateRoute : CommonBase {
 	 * Creates a new (partial) route from a list of hops
 	 */
 	public static Result_PrivateRouteCreationErrorZ of(org.ldk.structs.RouteHint hops) {
-		long ret = bindings.PrivateRoute_new(hops == null ? 0 : hops.ptr);
+		long ret = bindings.PrivateRoute_new(hops.ptr);
 		GC.KeepAlive(hops);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_PrivateRouteCreationErrorZ ret_hu_conv = Result_PrivateRouteCreationErrorZ.constr_from_ptr(ret);

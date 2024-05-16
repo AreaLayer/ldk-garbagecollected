@@ -71,7 +71,7 @@ public class ChannelDerivationParameters : CommonBase {
 	 * [`ChannelSigner::provide_channel_parameters`].
 	 */
 	public void set_transaction_parameters(org.ldk.structs.ChannelTransactionParameters val) {
-		bindings.ChannelDerivationParameters_set_transaction_parameters(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChannelDerivationParameters_set_transaction_parameters(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -81,7 +81,7 @@ public class ChannelDerivationParameters : CommonBase {
 	 * Constructs a new ChannelDerivationParameters given each field
 	 */
 	public static ChannelDerivationParameters of(long value_satoshis_arg, byte[] keys_id_arg, org.ldk.structs.ChannelTransactionParameters transaction_parameters_arg) {
-		long ret = bindings.ChannelDerivationParameters_new(value_satoshis_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(keys_id_arg, 32)), transaction_parameters_arg == null ? 0 : transaction_parameters_arg.ptr);
+		long ret = bindings.ChannelDerivationParameters_new(value_satoshis_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(keys_id_arg, 32)), transaction_parameters_arg.ptr);
 		GC.KeepAlive(value_satoshis_arg);
 		GC.KeepAlive(keys_id_arg);
 		GC.KeepAlive(transaction_parameters_arg);
@@ -116,7 +116,7 @@ public class ChannelDerivationParameters : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.ChannelDerivationParameters b) {
-		bool ret = bindings.ChannelDerivationParameters_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.ChannelDerivationParameters_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

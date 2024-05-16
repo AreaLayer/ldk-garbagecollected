@@ -111,27 +111,27 @@ public class RoutingMessageHandler : CommonBase {
 			org.ldk.structs.NodeAnnouncement _msg_hu_conv = null; if (_msg < 0 || _msg > 4096) { _msg_hu_conv = new org.ldk.structs.NodeAnnouncement(null, _msg); }
 			Result_boolLightningErrorZ ret = arg.handle_node_announcement(_msg_hu_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long handle_channel_announcement(long _msg) {
 			org.ldk.structs.ChannelAnnouncement _msg_hu_conv = null; if (_msg < 0 || _msg > 4096) { _msg_hu_conv = new org.ldk.structs.ChannelAnnouncement(null, _msg); }
 			Result_boolLightningErrorZ ret = arg.handle_channel_announcement(_msg_hu_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long handle_channel_update(long _msg) {
 			org.ldk.structs.ChannelUpdate _msg_hu_conv = null; if (_msg < 0 || _msg > 4096) { _msg_hu_conv = new org.ldk.structs.ChannelUpdate(null, _msg); }
 			Result_boolLightningErrorZ ret = arg.handle_channel_update(_msg_hu_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long get_next_channel_announcement(long _starting_point) {
 			Option_C3Tuple_ChannelAnnouncementChannelUpdateChannelUpdateZZ ret = arg.get_next_channel_announcement(_starting_point);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			if (impl_holder.held != null) { impl_holder.held.ptrs_to.AddLast(ret); };
 			return result;
 		}
@@ -148,7 +148,7 @@ public class RoutingMessageHandler : CommonBase {
 			org.ldk.structs.Init _init_hu_conv = null; if (_init < 0 || _init > 4096) { _init_hu_conv = new org.ldk.structs.Init(null, _init); }
 			Result_NoneNoneZ ret = arg.peer_connected(_their_node_id_conv, _init_hu_conv, _inbound);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long handle_reply_channel_range(long _their_node_id, long _msg) {
@@ -157,7 +157,7 @@ public class RoutingMessageHandler : CommonBase {
 			if (_msg_hu_conv != null) { _msg_hu_conv.ptrs_to.AddLast(this); };
 			Result_NoneLightningErrorZ ret = arg.handle_reply_channel_range(_their_node_id_conv, _msg_hu_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long handle_reply_short_channel_ids_end(long _their_node_id, long _msg) {
@@ -166,7 +166,7 @@ public class RoutingMessageHandler : CommonBase {
 			if (_msg_hu_conv != null) { _msg_hu_conv.ptrs_to.AddLast(this); };
 			Result_NoneLightningErrorZ ret = arg.handle_reply_short_channel_ids_end(_their_node_id_conv, _msg_hu_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long handle_query_channel_range(long _their_node_id, long _msg) {
@@ -175,7 +175,7 @@ public class RoutingMessageHandler : CommonBase {
 			if (_msg_hu_conv != null) { _msg_hu_conv.ptrs_to.AddLast(this); };
 			Result_NoneLightningErrorZ ret = arg.handle_query_channel_range(_their_node_id_conv, _msg_hu_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long handle_query_short_channel_ids(long _their_node_id, long _msg) {
@@ -184,7 +184,7 @@ public class RoutingMessageHandler : CommonBase {
 			if (_msg_hu_conv != null) { _msg_hu_conv.ptrs_to.AddLast(this); };
 			Result_NoneLightningErrorZ ret = arg.handle_query_short_channel_ids(_their_node_id_conv, _msg_hu_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public bool processing_queue_high() {
@@ -195,14 +195,14 @@ public class RoutingMessageHandler : CommonBase {
 		public long provided_node_features() {
 			NodeFeatures ret = arg.provided_node_features();
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long provided_init_features(long _their_node_id) {
 			byte[] _their_node_id_conv = InternalUtils.decodeUint8Array(_their_node_id);
 			InitFeatures ret = arg.provided_init_features(_their_node_id_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 	}
@@ -226,7 +226,7 @@ public class RoutingMessageHandler : CommonBase {
 	 * `false` or returning an `Err` otherwise.
 	 */
 	public Result_boolLightningErrorZ handle_node_announcement(org.ldk.structs.NodeAnnouncement msg) {
-		long ret = bindings.RoutingMessageHandler_handle_node_announcement(this.ptr, msg == null ? 0 : msg.ptr);
+		long ret = bindings.RoutingMessageHandler_handle_node_announcement(this.ptr, msg.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -240,7 +240,7 @@ public class RoutingMessageHandler : CommonBase {
 	 * or returning an `Err` otherwise.
 	 */
 	public Result_boolLightningErrorZ handle_channel_announcement(org.ldk.structs.ChannelAnnouncement msg) {
-		long ret = bindings.RoutingMessageHandler_handle_channel_announcement(this.ptr, msg == null ? 0 : msg.ptr);
+		long ret = bindings.RoutingMessageHandler_handle_channel_announcement(this.ptr, msg.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -254,7 +254,7 @@ public class RoutingMessageHandler : CommonBase {
 	 * `false` or returning an `Err` otherwise.
 	 */
 	public Result_boolLightningErrorZ handle_channel_update(org.ldk.structs.ChannelUpdate msg) {
-		long ret = bindings.RoutingMessageHandler_handle_channel_update(this.ptr, msg == null ? 0 : msg.ptr);
+		long ret = bindings.RoutingMessageHandler_handle_channel_update(this.ptr, msg.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -308,7 +308,7 @@ public class RoutingMessageHandler : CommonBase {
 	 * message handlers may still wish to communicate with this peer.
 	 */
 	public Result_NoneNoneZ peer_connected(byte[] their_node_id, org.ldk.structs.Init init, bool inbound) {
-		long ret = bindings.RoutingMessageHandler_peer_connected(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)), init == null ? 0 : init.ptr, inbound);
+		long ret = bindings.RoutingMessageHandler_peer_connected(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)), init.ptr, inbound);
 		GC.KeepAlive(this);
 		GC.KeepAlive(their_node_id);
 		GC.KeepAlive(init);
@@ -325,7 +325,7 @@ public class RoutingMessageHandler : CommonBase {
 	 * replies to a single query.
 	 */
 	public Result_NoneLightningErrorZ handle_reply_channel_range(byte[] their_node_id, org.ldk.structs.ReplyChannelRange msg) {
-		long ret = bindings.RoutingMessageHandler_handle_reply_channel_range(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)), msg == null ? 0 : msg.ptr);
+		long ret = bindings.RoutingMessageHandler_handle_reply_channel_range(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)), msg.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(their_node_id);
 		GC.KeepAlive(msg);
@@ -342,7 +342,7 @@ public class RoutingMessageHandler : CommonBase {
 	 * gossip messages.
 	 */
 	public Result_NoneLightningErrorZ handle_reply_short_channel_ids_end(byte[] their_node_id, org.ldk.structs.ReplyShortChannelIdsEnd msg) {
-		long ret = bindings.RoutingMessageHandler_handle_reply_short_channel_ids_end(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)), msg == null ? 0 : msg.ptr);
+		long ret = bindings.RoutingMessageHandler_handle_reply_short_channel_ids_end(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)), msg.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(their_node_id);
 		GC.KeepAlive(msg);
@@ -357,7 +357,7 @@ public class RoutingMessageHandler : CommonBase {
 	 * for the requested range of blocks.
 	 */
 	public Result_NoneLightningErrorZ handle_query_channel_range(byte[] their_node_id, org.ldk.structs.QueryChannelRange msg) {
-		long ret = bindings.RoutingMessageHandler_handle_query_channel_range(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)), msg == null ? 0 : msg.ptr);
+		long ret = bindings.RoutingMessageHandler_handle_query_channel_range(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)), msg.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(their_node_id);
 		GC.KeepAlive(msg);
@@ -372,7 +372,7 @@ public class RoutingMessageHandler : CommonBase {
 	 * list of `short_channel_id`s.
 	 */
 	public Result_NoneLightningErrorZ handle_query_short_channel_ids(byte[] their_node_id, org.ldk.structs.QueryShortChannelIds msg) {
-		long ret = bindings.RoutingMessageHandler_handle_query_short_channel_ids(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)), msg == null ? 0 : msg.ptr);
+		long ret = bindings.RoutingMessageHandler_handle_query_short_channel_ids(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)), msg.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(their_node_id);
 		GC.KeepAlive(msg);

@@ -57,7 +57,7 @@ public class ChainParameters : CommonBase {
 	 * Used to track on-chain channel funding outputs and send payments with reliable timelocks.
 	 */
 	public void set_best_block(org.ldk.structs.BestBlock val) {
-		bindings.ChainParameters_set_best_block(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChainParameters_set_best_block(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -67,7 +67,7 @@ public class ChainParameters : CommonBase {
 	 * Constructs a new ChainParameters given each field
 	 */
 	public static ChainParameters of(Network network_arg, org.ldk.structs.BestBlock best_block_arg) {
-		long ret = bindings.ChainParameters_new(network_arg, best_block_arg == null ? 0 : best_block_arg.ptr);
+		long ret = bindings.ChainParameters_new(network_arg, best_block_arg.ptr);
 		GC.KeepAlive(network_arg);
 		GC.KeepAlive(best_block_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }

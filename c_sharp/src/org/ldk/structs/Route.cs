@@ -43,7 +43,7 @@ public class Route : CommonBase {
 	 * the same.
 	 */
 	public void set_paths(Path[] val) {
-		bindings.Route_set_paths(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_6 => val_conv_6 == null ? 0 : val_conv_6.ptr)));
+		bindings.Route_set_paths(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_6 => val_conv_6.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		foreach (Path val_conv_6 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_6); }; };
@@ -89,7 +89,7 @@ public class Route : CommonBase {
 	 * Note that route_params_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public static Route of(Path[] paths_arg, org.ldk.structs.RouteParameters route_params_arg) {
-		long ret = bindings.Route_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(paths_arg, paths_arg_conv_6 => paths_arg_conv_6 == null ? 0 : paths_arg_conv_6.ptr)), route_params_arg == null ? 0 : route_params_arg.ptr);
+		long ret = bindings.Route_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(paths_arg, paths_arg_conv_6 => paths_arg_conv_6.ptr)), route_params_arg == null ? 0 : route_params_arg.ptr);
 		GC.KeepAlive(paths_arg);
 		GC.KeepAlive(route_params_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -136,7 +136,7 @@ public class Route : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.Route b) {
-		bool ret = bindings.Route_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.Route_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

@@ -76,7 +76,7 @@ public class ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ extends Com
 	 * Creates a new C3Tuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ from the contained elements.
 	 */
 	public static ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ of(org.ldk.structs.RawBolt11Invoice a, byte[] b, org.ldk.structs.Bolt11InvoiceSignature c) {
-		long ret = bindings.C3Tuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ_new(a == null ? 0 : a.ptr, InternalUtils.check_arr_len(b, 32), c == null ? 0 : c.ptr);
+		long ret = bindings.C3Tuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ_new(a.ptr, InternalUtils.check_arr_len(b, 32), c.ptr);
 		Reference.reachabilityFence(a);
 		Reference.reachabilityFence(b);
 		Reference.reachabilityFence(c);

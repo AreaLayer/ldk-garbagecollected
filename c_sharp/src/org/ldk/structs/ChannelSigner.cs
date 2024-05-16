@@ -106,14 +106,14 @@ public class ChannelSigner : CommonBase {
 			bindings.free_buffer(_outbound_htlc_preimages);
 			Result_NoneNoneZ ret = arg.validate_holder_commitment(_holder_tx_hu_conv, _outbound_htlc_preimages_conv_8_arr);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long validate_counterparty_revocation(long _idx, long _secret) {
 			byte[] _secret_conv = InternalUtils.decodeUint8Array(_secret);
 			Result_NoneNoneZ ret = arg.validate_counterparty_revocation(_idx, _secret_conv);
 				GC.KeepAlive(arg);
-			long result = ret == null ? 0 : ret.clone_ptr();
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long channel_keys_id() {
@@ -133,7 +133,7 @@ public class ChannelSigner : CommonBase {
 	public static ChannelSigner new_impl(ChannelSignerInterface arg, ChannelPublicKeys pubkeys) {
 		LDKChannelSignerHolder impl_holder = new LDKChannelSignerHolder();
 		LDKChannelSignerImpl impl = new LDKChannelSignerImpl(arg, impl_holder);
-		long[] ptr_idx = bindings.LDKChannelSigner_new(impl, pubkeys == null ? 0 : pubkeys.clone_ptr());
+		long[] ptr_idx = bindings.LDKChannelSigner_new(impl, pubkeys.clone_ptr());
 
 		impl_holder.held = new ChannelSigner(null, ptr_idx[0]);
 		impl_holder.held.instance_idx = ptr_idx[1];
@@ -190,7 +190,7 @@ public class ChannelSigner : CommonBase {
 	 * irrelevant or duplicate preimages.
 	 */
 	public Result_NoneNoneZ validate_holder_commitment(org.ldk.structs.HolderCommitmentTransaction holder_tx, byte[][] outbound_htlc_preimages) {
-		long ret = bindings.ChannelSigner_validate_holder_commitment(this.ptr, holder_tx == null ? 0 : holder_tx.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(outbound_htlc_preimages, outbound_htlc_preimages_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(outbound_htlc_preimages_conv_8, 32)))));
+		long ret = bindings.ChannelSigner_validate_holder_commitment(this.ptr, holder_tx.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(outbound_htlc_preimages, outbound_htlc_preimages_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(outbound_htlc_preimages_conv_8, 32)))));
 		GC.KeepAlive(this);
 		GC.KeepAlive(holder_tx);
 		GC.KeepAlive(outbound_htlc_preimages);
@@ -241,7 +241,7 @@ public class ChannelSigner : CommonBase {
 	 * channel_parameters.is_populated() MUST be true.
 	 */
 	public void provide_channel_parameters(org.ldk.structs.ChannelTransactionParameters channel_parameters) {
-		bindings.ChannelSigner_provide_channel_parameters(this.ptr, channel_parameters == null ? 0 : channel_parameters.ptr);
+		bindings.ChannelSigner_provide_channel_parameters(this.ptr, channel_parameters.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(channel_parameters);
 		if (this != null) { this.ptrs_to.AddLast(channel_parameters); };

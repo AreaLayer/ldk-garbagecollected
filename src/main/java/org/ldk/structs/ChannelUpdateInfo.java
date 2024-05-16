@@ -128,7 +128,7 @@ public class ChannelUpdateInfo extends CommonBase {
 	 * Fees charged when the channel is used for routing
 	 */
 	public void set_fees(org.ldk.structs.RoutingFees val) {
-		bindings.ChannelUpdateInfo_set_fees(this.ptr, val == null ? 0 : val.ptr);
+		bindings.ChannelUpdateInfo_set_fees(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 		if (this != null) { this.ptrs_to.add(val); };
@@ -173,7 +173,7 @@ public class ChannelUpdateInfo extends CommonBase {
 	 * Note that last_update_message_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public static ChannelUpdateInfo of(int last_update_arg, boolean enabled_arg, short cltv_expiry_delta_arg, long htlc_minimum_msat_arg, long htlc_maximum_msat_arg, org.ldk.structs.RoutingFees fees_arg, @Nullable org.ldk.structs.ChannelUpdate last_update_message_arg) {
-		long ret = bindings.ChannelUpdateInfo_new(last_update_arg, enabled_arg, cltv_expiry_delta_arg, htlc_minimum_msat_arg, htlc_maximum_msat_arg, fees_arg == null ? 0 : fees_arg.ptr, last_update_message_arg == null ? 0 : last_update_message_arg.ptr);
+		long ret = bindings.ChannelUpdateInfo_new(last_update_arg, enabled_arg, cltv_expiry_delta_arg, htlc_minimum_msat_arg, htlc_maximum_msat_arg, fees_arg.ptr, last_update_message_arg == null ? 0 : last_update_message_arg.ptr);
 		Reference.reachabilityFence(last_update_arg);
 		Reference.reachabilityFence(enabled_arg);
 		Reference.reachabilityFence(cltv_expiry_delta_arg);
@@ -213,7 +213,7 @@ public class ChannelUpdateInfo extends CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public boolean eq(org.ldk.structs.ChannelUpdateInfo b) {
-		boolean ret = bindings.ChannelUpdateInfo_eq(this.ptr, b == null ? 0 : b.ptr);
+		boolean ret = bindings.ChannelUpdateInfo_eq(this.ptr, b.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(b);
 		if (this != null) { this.ptrs_to.add(b); };

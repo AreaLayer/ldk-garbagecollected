@@ -13,6 +13,10 @@ public class Result_CVec_UtxoZNoneZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_CVec_UtxoZNoneZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_CVec_UtxoZNoneZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_CVec_UtxoZNoneZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_CVec_UtxoZNoneZ_is_ok(ptr)) {
 			return new Result_CVec_UtxoZNoneZ_OK(null, ptr);
@@ -47,7 +51,7 @@ public class Result_CVec_UtxoZNoneZ extends CommonBase {
 	 * Creates a new CResult_CVec_UtxoZNoneZ in the success state.
 	 */
 	public static Result_CVec_UtxoZNoneZ ok(Utxo[] o) {
-		long ret = bindings.CResult_CVec_UtxoZNoneZ_ok(o != null ? Arrays.stream(o).mapToLong(o_conv_6 -> o_conv_6 == null ? 0 : o_conv_6.ptr).toArray() : null);
+		long ret = bindings.CResult_CVec_UtxoZNoneZ_ok(o != null ? Arrays.stream(o).mapToLong(o_conv_6 -> o_conv_6.ptr).toArray() : null);
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CVec_UtxoZNoneZ ret_hu_conv = Result_CVec_UtxoZNoneZ.constr_from_ptr(ret);

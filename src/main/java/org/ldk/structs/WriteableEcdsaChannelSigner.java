@@ -21,7 +21,7 @@ public class WriteableEcdsaChannelSigner extends CommonBase {
 	final bindings.LDKWriteableEcdsaChannelSigner bindings_instance;
 	WriteableEcdsaChannelSigner(Object _dummy, long ptr) { super(ptr); bindings_instance = null; }
 	private WriteableEcdsaChannelSigner(bindings.LDKWriteableEcdsaChannelSigner arg, bindings.LDKEcdsaChannelSigner EcdsaChannelSigner, bindings.LDKChannelSigner ChannelSigner, ChannelPublicKeys pubkeys) {
-		super(bindings.LDKWriteableEcdsaChannelSigner_new(arg, EcdsaChannelSigner, ChannelSigner, pubkeys == null ? 0 : pubkeys.clone_ptr()));
+		super(bindings.LDKWriteableEcdsaChannelSigner_new(arg, EcdsaChannelSigner, ChannelSigner, pubkeys.clone_ptr()));
 		this.ptrs_to.add(arg);
 		this.ptrs_to.add(EcdsaChannelSigner);
 		this.ptrs_to.add(ChannelSigner);

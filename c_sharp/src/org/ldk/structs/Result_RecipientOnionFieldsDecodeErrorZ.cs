@@ -42,7 +42,7 @@ public class Result_RecipientOnionFieldsDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_RecipientOnionFieldsDecodeErrorZ in the success state.
 	 */
 	public static Result_RecipientOnionFieldsDecodeErrorZ ok(org.ldk.structs.RecipientOnionFields o) {
-		long ret = bindings.CResult_RecipientOnionFieldsDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_RecipientOnionFieldsDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RecipientOnionFieldsDecodeErrorZ ret_hu_conv = Result_RecipientOnionFieldsDecodeErrorZ.constr_from_ptr(ret);

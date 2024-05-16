@@ -40,7 +40,7 @@ public class PhantomRouteHints : CommonBase {
 	 * The list of channels to be included in the invoice route hints.
 	 */
 	public void set_channels(ChannelDetails[] val) {
-		bindings.PhantomRouteHints_set_channels(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_16 => val_conv_16 == null ? 0 : val_conv_16.ptr)));
+		bindings.PhantomRouteHints_set_channels(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_16 => val_conv_16.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		foreach (ChannelDetails val_conv_16 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_16); }; };
@@ -90,7 +90,7 @@ public class PhantomRouteHints : CommonBase {
 	 * Constructs a new PhantomRouteHints given each field
 	 */
 	public static PhantomRouteHints of(ChannelDetails[] channels_arg, long phantom_scid_arg, byte[] real_node_pubkey_arg) {
-		long ret = bindings.PhantomRouteHints_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(channels_arg, channels_arg_conv_16 => channels_arg_conv_16 == null ? 0 : channels_arg_conv_16.ptr)), phantom_scid_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(real_node_pubkey_arg, 33)));
+		long ret = bindings.PhantomRouteHints_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(channels_arg, channels_arg_conv_16 => channels_arg_conv_16.ptr)), phantom_scid_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(real_node_pubkey_arg, 33)));
 		GC.KeepAlive(channels_arg);
 		GC.KeepAlive(phantom_scid_arg);
 		GC.KeepAlive(real_node_pubkey_arg);

@@ -42,7 +42,7 @@ public class Result_SignedRawBolt11InvoiceBolt11ParseErrorZ : CommonBase {
 	 * Creates a new CResult_SignedRawBolt11InvoiceBolt11ParseErrorZ in the success state.
 	 */
 	public static Result_SignedRawBolt11InvoiceBolt11ParseErrorZ ok(org.ldk.structs.SignedRawBolt11Invoice o) {
-		long ret = bindings.CResult_SignedRawBolt11InvoiceBolt11ParseErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_SignedRawBolt11InvoiceBolt11ParseErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_SignedRawBolt11InvoiceBolt11ParseErrorZ ret_hu_conv = Result_SignedRawBolt11InvoiceBolt11ParseErrorZ.constr_from_ptr(ret);

@@ -20,7 +20,8 @@ public class HTLCDestination : CommonBase {
 			case 0: return new HTLCDestination_NextHopChannel(ptr);
 			case 1: return new HTLCDestination_UnknownNextHop(ptr);
 			case 2: return new HTLCDestination_InvalidForward(ptr);
-			case 3: return new HTLCDestination_FailedPayment(ptr);
+			case 3: return new HTLCDestination_InvalidOnion(ptr);
+			case 4: return new HTLCDestination_FailedPayment(ptr);
 			default:
 				throw new ArgumentException("Impossible enum variant");
 		}
@@ -39,14 +40,15 @@ public class HTLCDestination : CommonBase {
 		/**
 		 * The outgoing `channel_id` between us and the next node.
 		 */
-		public byte[] channel_id;
+		public ChannelId channel_id;
 		internal HTLCDestination_NextHopChannel(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKHTLCDestination_NextHopChannel_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
 			this.node_id = node_id_conv;
 			long channel_id = bindings.LDKHTLCDestination_NextHopChannel_get_channel_id(ptr);
-			byte[] channel_id_conv = InternalUtils.decodeUint8Array(channel_id);
-			this.channel_id = channel_id_conv;
+			org.ldk.structs.ChannelId channel_id_hu_conv = null; if (channel_id < 0 || channel_id > 4096) { channel_id_hu_conv = new org.ldk.structs.ChannelId(null, channel_id); }
+			if (channel_id_hu_conv != null) { channel_id_hu_conv.ptrs_to.AddLast(this); };
+			this.channel_id = channel_id_hu_conv;
 		}
 	}
 	/** A HTLCDestination of type UnknownNextHop */
@@ -67,6 +69,11 @@ public class HTLCDestination : CommonBase {
 		public long requested_forward_scid;
 		internal HTLCDestination_InvalidForward(long ptr) : base(null, ptr) {
 			this.requested_forward_scid = bindings.LDKHTLCDestination_InvalidForward_get_requested_forward_scid(ptr);
+		}
+	}
+	/** A HTLCDestination of type InvalidOnion */
+	public class HTLCDestination_InvalidOnion : HTLCDestination {
+		internal HTLCDestination_InvalidOnion(long ptr) : base(null, ptr) {
 		}
 	}
 	/** A HTLCDestination of type FailedPayment */
@@ -102,13 +109,14 @@ public class HTLCDestination : CommonBase {
 	/**
 	 * Utility method to constructs a new NextHopChannel-variant HTLCDestination
 	 */
-	public static HTLCDestination next_hop_channel(byte[] node_id, byte[] channel_id) {
-		long ret = bindings.HTLCDestination_next_hop_channel(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(channel_id, 32)));
+	public static HTLCDestination next_hop_channel(byte[] node_id, org.ldk.structs.ChannelId channel_id) {
+		long ret = bindings.HTLCDestination_next_hop_channel(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), channel_id.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(channel_id);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.HTLCDestination ret_hu_conv = org.ldk.structs.HTLCDestination.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id); };
 		return ret_hu_conv;
 	}
 
@@ -137,6 +145,17 @@ public class HTLCDestination : CommonBase {
 	}
 
 	/**
+	 * Utility method to constructs a new InvalidOnion-variant HTLCDestination
+	 */
+	public static HTLCDestination invalid_onion() {
+		long ret = bindings.HTLCDestination_invalid_onion();
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.HTLCDestination ret_hu_conv = org.ldk.structs.HTLCDestination.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Utility method to constructs a new FailedPayment-variant HTLCDestination
 	 */
 	public static HTLCDestination failed_payment(byte[] payment_hash) {
@@ -153,7 +172,7 @@ public class HTLCDestination : CommonBase {
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public bool eq(org.ldk.structs.HTLCDestination b) {
-		bool ret = bindings.HTLCDestination_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.HTLCDestination_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		return ret;

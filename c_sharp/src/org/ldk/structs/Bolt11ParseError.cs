@@ -377,7 +377,7 @@ public class Bolt11ParseError : CommonBase {
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 */
 	public bool eq(org.ldk.structs.Bolt11ParseError b) {
-		bool ret = bindings.Bolt11ParseError_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.Bolt11ParseError_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		return ret;

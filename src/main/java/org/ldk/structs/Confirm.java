@@ -159,7 +159,7 @@ public class Confirm extends CommonBase {
 			@Override public long[] get_relevant_txids() {
 				ThreeTuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ[] ret = arg.get_relevant_txids();
 				Reference.reachabilityFence(arg);
-				long[] result = ret != null ? Arrays.stream(ret).mapToLong(ret_conv_54 -> ret_conv_54 == null ? 0 : ret_conv_54.clone_ptr()).toArray() : null;
+				long[] result = ret != null ? Arrays.stream(ret).mapToLong(ret_conv_54 -> ret_conv_54.clone_ptr()).toArray() : null;
 				return result;
 			}
 		});
@@ -181,7 +181,7 @@ public class Confirm extends CommonBase {
 	 * [`best_block_updated`]: Self::best_block_updated
 	 */
 	public void transactions_confirmed(byte[] header, TwoTuple_usizeTransactionZ[] txdata, int height) {
-		bindings.Confirm_transactions_confirmed(this.ptr, InternalUtils.check_arr_len(header, 80), txdata != null ? Arrays.stream(txdata).mapToLong(txdata_conv_28 -> txdata_conv_28 != null ? txdata_conv_28.ptr : 0).toArray() : null, height);
+		bindings.Confirm_transactions_confirmed(this.ptr, InternalUtils.check_arr_len(header, 80), txdata != null ? Arrays.stream(txdata).mapToLong(txdata_conv_28 -> txdata_conv_28.ptr).toArray() : null, height);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(header);
 		Reference.reachabilityFence(txdata);

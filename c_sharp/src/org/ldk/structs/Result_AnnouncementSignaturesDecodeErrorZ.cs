@@ -42,7 +42,7 @@ public class Result_AnnouncementSignaturesDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_AnnouncementSignaturesDecodeErrorZ in the success state.
 	 */
 	public static Result_AnnouncementSignaturesDecodeErrorZ ok(org.ldk.structs.AnnouncementSignatures o) {
-		long ret = bindings.CResult_AnnouncementSignaturesDecodeErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_AnnouncementSignaturesDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_AnnouncementSignaturesDecodeErrorZ ret_hu_conv = Result_AnnouncementSignaturesDecodeErrorZ.constr_from_ptr(ret);

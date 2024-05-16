@@ -139,13 +139,16 @@ public class ChannelConfig : CommonBase {
 	}
 
 	/**
-	 * Limit our total exposure to in-flight HTLCs which are burned to fees as they are too
-	 * small to claim on-chain.
+	 * Limit our total exposure to potential loss to on-chain fees on close, including in-flight
+	 * HTLCs which are burned to fees as they are too small to claim on-chain and fees on
+	 * commitment transaction(s) broadcasted by our counterparty in excess of our own fee estimate.
+	 * 
+	 * # HTLC-based Dust Exposure
 	 * 
 	 * When an HTLC present in one of our channels is below a \"dust\" threshold, the HTLC will
 	 * not be claimable on-chain, instead being turned into additional miner fees if either
 	 * party force-closes the channel. Because the threshold is per-HTLC, our total exposure
-	 * to such payments may be sustantial if there are many dust HTLCs present when the
+	 * to such payments may be substantial if there are many dust HTLCs present when the
 	 * channel is force-closed.
 	 * 
 	 * The dust threshold for each HTLC is based on the `dust_limit_satoshis` for each party in a
@@ -159,7 +162,37 @@ public class ChannelConfig : CommonBase {
 	 * The selected limit is applied for sent, forwarded, and received HTLCs and limits the total
 	 * exposure across all three types per-channel.
 	 * 
-	 * Default value: [`MaxDustHTLCExposure::FeeRateMultiplier`] with a multiplier of 5000.
+	 * # Transaction Fee Dust Exposure
+	 * 
+	 * Further, counterparties broadcasting a commitment transaction in a force-close may result
+	 * in other balance being burned to fees, and thus all fees on commitment and HTLC
+	 * transactions in excess of our local fee estimates are included in the dust calculation.
+	 * 
+	 * Because of this, another way to look at this limit is to divide it by 43,000 (or 218,750
+	 * for non-anchor channels) and see it as the maximum feerate disagreement (in sats/vB) per
+	 * non-dust HTLC we're allowed to have with our peers before risking a force-closure for
+	 * inbound channels.
+	 * 
+	 * Thus, for the default value of 10_000 * a current feerate estimate of 10 sat/vB (or 2,500
+	 * sat/KW), we risk force-closure if we disagree with our peer by:
+	 * `10_000 * 2_500 / 43_000 / (483*2)` = 0.6 sat/vB for anchor channels with 483 HTLCs in
+	 * both directions (the maximum),
+	 * `10_000 * 2_500 / 43_000 / (50*2)` = 5.8 sat/vB for anchor channels with 50 HTLCs in both
+	 * directions (the LDK default max from [`ChannelHandshakeConfig::our_max_accepted_htlcs`])
+	 * `10_000 * 2_500 / 218_750 / (483*2)` = 0.1 sat/vB for non-anchor channels with 483 HTLCs
+	 * in both directions (the maximum),
+	 * `10_000 * 2_500 / 218_750 / (50*2)` = 1.1 sat/vB for non-anchor channels with 50 HTLCs
+	 * in both (the LDK default maximum from [`ChannelHandshakeConfig::our_max_accepted_htlcs`])
+	 * 
+	 * Note that when using [`MaxDustHTLCExposure::FeeRateMultiplier`] this maximum disagreement
+	 * will scale linearly with increases (or decreases) in the our feerate estimates. Further,
+	 * for anchor channels we expect our counterparty to use a relatively low feerate estimate
+	 * while we use [`ConfirmationTarget::OnChainSweep`] (which should be relatively high) and
+	 * feerate disagreement force-closures should only occur when theirs is higher than ours.
+	 * 
+	 * Default value: [`MaxDustHTLCExposure::FeeRateMultiplier`] with a multiplier of 10_000.
+	 * 
+	 * [`ConfirmationTarget::OnChainSweep`]: crate::chain::chaininterface::ConfirmationTarget::OnChainSweep
 	 */
 	public MaxDustHTLCExposure get_max_dust_htlc_exposure() {
 		long ret = bindings.ChannelConfig_get_max_dust_htlc_exposure(this.ptr);
@@ -171,13 +204,16 @@ public class ChannelConfig : CommonBase {
 	}
 
 	/**
-	 * Limit our total exposure to in-flight HTLCs which are burned to fees as they are too
-	 * small to claim on-chain.
+	 * Limit our total exposure to potential loss to on-chain fees on close, including in-flight
+	 * HTLCs which are burned to fees as they are too small to claim on-chain and fees on
+	 * commitment transaction(s) broadcasted by our counterparty in excess of our own fee estimate.
+	 * 
+	 * # HTLC-based Dust Exposure
 	 * 
 	 * When an HTLC present in one of our channels is below a \"dust\" threshold, the HTLC will
 	 * not be claimable on-chain, instead being turned into additional miner fees if either
 	 * party force-closes the channel. Because the threshold is per-HTLC, our total exposure
-	 * to such payments may be sustantial if there are many dust HTLCs present when the
+	 * to such payments may be substantial if there are many dust HTLCs present when the
 	 * channel is force-closed.
 	 * 
 	 * The dust threshold for each HTLC is based on the `dust_limit_satoshis` for each party in a
@@ -191,7 +227,37 @@ public class ChannelConfig : CommonBase {
 	 * The selected limit is applied for sent, forwarded, and received HTLCs and limits the total
 	 * exposure across all three types per-channel.
 	 * 
-	 * Default value: [`MaxDustHTLCExposure::FeeRateMultiplier`] with a multiplier of 5000.
+	 * # Transaction Fee Dust Exposure
+	 * 
+	 * Further, counterparties broadcasting a commitment transaction in a force-close may result
+	 * in other balance being burned to fees, and thus all fees on commitment and HTLC
+	 * transactions in excess of our local fee estimates are included in the dust calculation.
+	 * 
+	 * Because of this, another way to look at this limit is to divide it by 43,000 (or 218,750
+	 * for non-anchor channels) and see it as the maximum feerate disagreement (in sats/vB) per
+	 * non-dust HTLC we're allowed to have with our peers before risking a force-closure for
+	 * inbound channels.
+	 * 
+	 * Thus, for the default value of 10_000 * a current feerate estimate of 10 sat/vB (or 2,500
+	 * sat/KW), we risk force-closure if we disagree with our peer by:
+	 * `10_000 * 2_500 / 43_000 / (483*2)` = 0.6 sat/vB for anchor channels with 483 HTLCs in
+	 * both directions (the maximum),
+	 * `10_000 * 2_500 / 43_000 / (50*2)` = 5.8 sat/vB for anchor channels with 50 HTLCs in both
+	 * directions (the LDK default max from [`ChannelHandshakeConfig::our_max_accepted_htlcs`])
+	 * `10_000 * 2_500 / 218_750 / (483*2)` = 0.1 sat/vB for non-anchor channels with 483 HTLCs
+	 * in both directions (the maximum),
+	 * `10_000 * 2_500 / 218_750 / (50*2)` = 1.1 sat/vB for non-anchor channels with 50 HTLCs
+	 * in both (the LDK default maximum from [`ChannelHandshakeConfig::our_max_accepted_htlcs`])
+	 * 
+	 * Note that when using [`MaxDustHTLCExposure::FeeRateMultiplier`] this maximum disagreement
+	 * will scale linearly with increases (or decreases) in the our feerate estimates. Further,
+	 * for anchor channels we expect our counterparty to use a relatively low feerate estimate
+	 * while we use [`ConfirmationTarget::OnChainSweep`] (which should be relatively high) and
+	 * feerate disagreement force-closures should only occur when theirs is higher than ours.
+	 * 
+	 * Default value: [`MaxDustHTLCExposure::FeeRateMultiplier`] with a multiplier of 10_000.
+	 * 
+	 * [`ConfirmationTarget::OnChainSweep`]: crate::chain::chaininterface::ConfirmationTarget::OnChainSweep
 	 */
 	public void set_max_dust_htlc_exposure(org.ldk.structs.MaxDustHTLCExposure val) {
 		bindings.ChannelConfig_set_max_dust_htlc_exposure(this.ptr, val.ptr);
@@ -380,7 +446,7 @@ public class ChannelConfig : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.ChannelConfig b) {
-		bool ret = bindings.ChannelConfig_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.ChannelConfig_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };
@@ -395,7 +461,7 @@ public class ChannelConfig : CommonBase {
 	 * Applies the given [`ChannelConfigUpdate`] as a partial update to the [`ChannelConfig`].
 	 */
 	public void apply(org.ldk.structs.ChannelConfigUpdate update) {
-		bindings.ChannelConfig_apply(this.ptr, update == null ? 0 : update.ptr);
+		bindings.ChannelConfig_apply(this.ptr, update.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(update);
 		if (this != null) { this.ptrs_to.AddLast(update); };

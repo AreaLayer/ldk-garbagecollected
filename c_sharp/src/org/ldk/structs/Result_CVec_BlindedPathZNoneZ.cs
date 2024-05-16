@@ -44,7 +44,7 @@ public class Result_CVec_BlindedPathZNoneZ : CommonBase {
 	 * Creates a new CResult_CVec_BlindedPathZNoneZ in the success state.
 	 */
 	public static Result_CVec_BlindedPathZNoneZ ok(BlindedPath[] o) {
-		long ret = bindings.CResult_CVec_BlindedPathZNoneZ_ok(InternalUtils.encodeUint64Array(InternalUtils.mapArray(o, o_conv_13 => o_conv_13 == null ? 0 : o_conv_13.ptr)));
+		long ret = bindings.CResult_CVec_BlindedPathZNoneZ_ok(InternalUtils.encodeUint64Array(InternalUtils.mapArray(o, o_conv_13 => o_conv_13.ptr)));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CVec_BlindedPathZNoneZ ret_hu_conv = Result_CVec_BlindedPathZNoneZ.constr_from_ptr(ret);

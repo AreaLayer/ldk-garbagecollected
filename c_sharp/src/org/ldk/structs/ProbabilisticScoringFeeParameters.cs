@@ -457,7 +457,7 @@ public class ProbabilisticScoringFeeParameters : CommonBase {
 	 * i.e it will be avoided during path finding.
 	 */
 	public void add_banned(org.ldk.structs.NodeId node_id) {
-		bindings.ProbabilisticScoringFeeParameters_add_banned(this.ptr, node_id == null ? 0 : node_id.ptr);
+		bindings.ProbabilisticScoringFeeParameters_add_banned(this.ptr, node_id.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(node_id);
 		if (this != null) { this.ptrs_to.AddLast(node_id); };
@@ -468,7 +468,7 @@ public class ProbabilisticScoringFeeParameters : CommonBase {
 	 * they will be avoided during path finding.
 	 */
 	public void add_banned_from_list(NodeId[] node_ids) {
-		bindings.ProbabilisticScoringFeeParameters_add_banned_from_list(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(node_ids, node_ids_conv_8 => node_ids_conv_8 == null ? 0 : node_ids_conv_8.ptr)));
+		bindings.ProbabilisticScoringFeeParameters_add_banned_from_list(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(node_ids, node_ids_conv_8 => node_ids_conv_8.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(node_ids);
 		foreach (NodeId node_ids_conv_8 in node_ids) { if (this != null) { this.ptrs_to.AddLast(node_ids_conv_8); }; };
@@ -478,7 +478,7 @@ public class ProbabilisticScoringFeeParameters : CommonBase {
 	 * Removes the node with the given `node_id` from the list of nodes to avoid.
 	 */
 	public void remove_banned(org.ldk.structs.NodeId node_id) {
-		bindings.ProbabilisticScoringFeeParameters_remove_banned(this.ptr, node_id == null ? 0 : node_id.ptr);
+		bindings.ProbabilisticScoringFeeParameters_remove_banned(this.ptr, node_id.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(node_id);
 		if (this != null) { this.ptrs_to.AddLast(node_id); };
@@ -488,7 +488,7 @@ public class ProbabilisticScoringFeeParameters : CommonBase {
 	 * Sets a manual penalty for the given node.
 	 */
 	public void set_manual_penalty(org.ldk.structs.NodeId node_id, long penalty) {
-		bindings.ProbabilisticScoringFeeParameters_set_manual_penalty(this.ptr, node_id == null ? 0 : node_id.ptr, penalty);
+		bindings.ProbabilisticScoringFeeParameters_set_manual_penalty(this.ptr, node_id.ptr, penalty);
 		GC.KeepAlive(this);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(penalty);
@@ -499,7 +499,7 @@ public class ProbabilisticScoringFeeParameters : CommonBase {
 	 * Removes the node with the given `node_id` from the list of manual penalties.
 	 */
 	public void remove_manual_penalty(org.ldk.structs.NodeId node_id) {
-		bindings.ProbabilisticScoringFeeParameters_remove_manual_penalty(this.ptr, node_id == null ? 0 : node_id.ptr);
+		bindings.ProbabilisticScoringFeeParameters_remove_manual_penalty(this.ptr, node_id.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(node_id);
 		if (this != null) { this.ptrs_to.AddLast(node_id); };

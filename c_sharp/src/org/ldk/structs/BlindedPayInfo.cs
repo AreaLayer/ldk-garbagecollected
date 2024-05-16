@@ -135,7 +135,7 @@ public class BlindedPayInfo : CommonBase {
 	 * onion payload.
 	 */
 	public void set_features(org.ldk.structs.BlindedHopFeatures val) {
-		bindings.BlindedPayInfo_set_features(this.ptr, val == null ? 0 : val.ptr);
+		bindings.BlindedPayInfo_set_features(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 		if (this != null) { this.ptrs_to.AddLast(val); };
@@ -145,7 +145,7 @@ public class BlindedPayInfo : CommonBase {
 	 * Constructs a new BlindedPayInfo given each field
 	 */
 	public static BlindedPayInfo of(int fee_base_msat_arg, int fee_proportional_millionths_arg, short cltv_expiry_delta_arg, long htlc_minimum_msat_arg, long htlc_maximum_msat_arg, org.ldk.structs.BlindedHopFeatures features_arg) {
-		long ret = bindings.BlindedPayInfo_new(fee_base_msat_arg, fee_proportional_millionths_arg, cltv_expiry_delta_arg, htlc_minimum_msat_arg, htlc_maximum_msat_arg, features_arg == null ? 0 : features_arg.ptr);
+		long ret = bindings.BlindedPayInfo_new(fee_base_msat_arg, fee_proportional_millionths_arg, cltv_expiry_delta_arg, htlc_minimum_msat_arg, htlc_maximum_msat_arg, features_arg.ptr);
 		GC.KeepAlive(fee_base_msat_arg);
 		GC.KeepAlive(fee_proportional_millionths_arg);
 		GC.KeepAlive(cltv_expiry_delta_arg);
@@ -195,7 +195,7 @@ public class BlindedPayInfo : CommonBase {
 	 * Two objects with NULL inner values will be considered "equal" here.
 	 */
 	public bool eq(org.ldk.structs.BlindedPayInfo b) {
-		bool ret = bindings.BlindedPayInfo_eq(this.ptr, b == null ? 0 : b.ptr);
+		bool ret = bindings.BlindedPayInfo_eq(this.ptr, b.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(b);
 		if (this != null) { this.ptrs_to.AddLast(b); };

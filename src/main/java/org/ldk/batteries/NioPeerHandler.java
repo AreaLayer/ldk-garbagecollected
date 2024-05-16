@@ -6,6 +6,8 @@ import org.ldk.structs.*;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.ref.Reference;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.*;
 import java.util.LinkedList;
 import java.nio.Buffer;
@@ -19,7 +21,6 @@ import java.nio.channels.*;
 public class NioPeerHandler {
     private static class Peer {
         SocketDescriptor descriptor;
-        long descriptor_raw_pointer;
         SelectionKey key;
     }
 
@@ -48,14 +49,13 @@ public class NioPeerHandler {
         }
     }
 
-    static private Field CommonBasePointer;
+    static private Method ResultBoolPeerHandleError_Free;
     static {
         try {
-            Class c = PeerManager.class.getSuperclass();
-            CommonBasePointer = c.getDeclaredField("ptr");
-            CommonBasePointer.setAccessible(true);
-            long _dummy_check = CommonBasePointer.getLong(Ping.of((short)0, (short)0));
-        } catch (NoSuchFieldException | IllegalAccessException e) {
+            Class c = Result_boolPeerHandleErrorZ.class;
+            ResultBoolPeerHandleError_Free = c.getDeclaredMethod("force_free");
+            ResultBoolPeerHandleError_Free.setAccessible(true);
+        } catch (NoSuchMethodException e) {
             throw new IllegalArgumentException(
                     "We currently use reflection to access protected fields as Java has no reasonable access controls", e);
         }
@@ -105,12 +105,6 @@ public class NioPeerHandler {
             @Override public long hash() { return our_id; }
         });
         peer.descriptor = descriptor;
-        try {
-            peer.descriptor_raw_pointer = CommonBasePointer.getLong(descriptor);
-        } catch (IllegalAccessException e) {
-            throw new IllegalArgumentException(
-                    "We currently use reflection to access protected fields as Java has no reasonable access controls", e);
-        }
         return peer;
     }
 
@@ -147,12 +141,6 @@ public class NioPeerHandler {
             byte[] max_buf_byte_object = new byte[BUF_SZ];
             ByteBuffer buf = ByteBuffer.allocate(BUF_SZ);
 
-            long peer_manager_raw_pointer;
-            try {
-                peer_manager_raw_pointer = CommonBasePointer.getLong(this.peer_manager);
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
-            }
             while (true) {
                 try {
                     if (IS_ANDROID) {
@@ -215,14 +203,6 @@ public class NioPeerHandler {
                                     key.channel().close(); // This may throw, we read -1 so the channel should already be closed, but do this to be safe
                                 } else if (read > 0) {
                                     ((Buffer)buf).flip();
-                                    // This code is quite hot during initial network graph sync, so we go a ways out of
-                                    // our way to avoid object allocations that'll make the GC sweat later -
-                                    // * when we're hot, we'll likely often be reading the full buffer, so we keep
-                                    //   around a full-buffer-sized byte array to reuse across reads,
-                                    // * We use the manual memory management call logic directly in bindings instead of
-                                    //   the nice "human-readable" wrappers. This puts us at risk of memory issues,
-                                    //   so we indirectly ensure compile fails if the types change by writing the
-                                    //   "human-readable" form of the same code in the dummy function below.
                                     byte[] read_bytes;
                                     if (read == BUF_SZ) {
                                         read_bytes = max_buf_byte_object;
@@ -230,17 +210,21 @@ public class NioPeerHandler {
                                         read_bytes = new byte[read];
                                     }
                                     buf.get(read_bytes, 0, read);
-                                    long read_result_pointer = bindings.PeerManager_read_event(
-                                            peer_manager_raw_pointer, peer.descriptor_raw_pointer, read_bytes);
-                                    if (bindings.CResult_boolPeerHandleErrorZ_is_ok(read_result_pointer)) {
-                                        if (bindings.CResult_boolPeerHandleErrorZ_get_ok(read_result_pointer)) {
+                                    Result_boolPeerHandleErrorZ read_res = this.peer_manager.read_event(peer.descriptor, read_bytes);
+                                    if (read_res instanceof Result_boolPeerHandleErrorZ.Result_boolPeerHandleErrorZ_OK) {
+                                        if (((Result_boolPeerHandleErrorZ.Result_boolPeerHandleErrorZ_OK) read_res).res) {
                                             key.interestOps(key.interestOps() & (~SelectionKey.OP_READ));
                                         }
+                                        // Force the read_res to drop its native memory early (before finalize()) as this is
+                                        // pretty hot and we don't want to bloat native memory too long.
+                                        // Note that we only do this in the Ok case as its more trivially safe, the Err
+                                        // case has nested structs which will also free and may be confused if their pointer
+                                        // is dropped out from under them.
+                                        try { ResultBoolPeerHandleError_Free.invoke(read_res); } catch (Exception ignored) {}
                                     } else {
                                         key.cancel();
                                         key.channel().close();
                                     }
-                                    bindings.CResult_boolPeerHandleErrorZ_free(read_result_pointer);
                                 }
                             }
                         } catch (IOException ignored) {
@@ -258,13 +242,6 @@ public class NioPeerHandler {
             }
         }, "NioPeerHandler NIO Thread");
         io_thread.start();
-    }
-
-    // Ensure the types used in the above manual code match what they were when the code was written.
-    // Ensure the above manual bindings.* code changes if this fails to compile.
-    private void dummy_check_return_type_matches_manual_memory_code_above(Peer peer) {
-        byte[] read_bytes = new byte[32];
-        Result_boolPeerHandleErrorZ res = this.peer_manager.read_event(peer.descriptor, read_bytes);
     }
 
     /**

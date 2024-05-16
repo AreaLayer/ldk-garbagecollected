@@ -42,7 +42,7 @@ public class Result_RefundBolt12ParseErrorZ : CommonBase {
 	 * Creates a new CResult_RefundBolt12ParseErrorZ in the success state.
 	 */
 	public static Result_RefundBolt12ParseErrorZ ok(org.ldk.structs.Refund o) {
-		long ret = bindings.CResult_RefundBolt12ParseErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_RefundBolt12ParseErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RefundBolt12ParseErrorZ ret_hu_conv = Result_RefundBolt12ParseErrorZ.constr_from_ptr(ret);
@@ -54,7 +54,7 @@ public class Result_RefundBolt12ParseErrorZ : CommonBase {
 	 * Creates a new CResult_RefundBolt12ParseErrorZ in the error state.
 	 */
 	public static Result_RefundBolt12ParseErrorZ err(org.ldk.structs.Bolt12ParseError e) {
-		long ret = bindings.CResult_RefundBolt12ParseErrorZ_err(e == null ? 0 : e.ptr);
+		long ret = bindings.CResult_RefundBolt12ParseErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RefundBolt12ParseErrorZ ret_hu_conv = Result_RefundBolt12ParseErrorZ.constr_from_ptr(ret);

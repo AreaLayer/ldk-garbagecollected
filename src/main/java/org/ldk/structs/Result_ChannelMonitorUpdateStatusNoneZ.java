@@ -13,6 +13,10 @@ public class Result_ChannelMonitorUpdateStatusNoneZ extends CommonBase {
 		if (ptr != 0) { bindings.CResult_ChannelMonitorUpdateStatusNoneZ_free(ptr); } super.finalize();
 	}
 
+	protected void force_free() {
+		if (ptr != 0) { bindings.CResult_ChannelMonitorUpdateStatusNoneZ_free(ptr); ptr = 0; }
+	}
+
 	static Result_ChannelMonitorUpdateStatusNoneZ constr_from_ptr(long ptr) {
 		if (bindings.CResult_ChannelMonitorUpdateStatusNoneZ_is_ok(ptr)) {
 			return new Result_ChannelMonitorUpdateStatusNoneZ_OK(null, ptr);

@@ -42,7 +42,7 @@ public class Result_Bolt11InvoiceSignOrCreationErrorZ : CommonBase {
 	 * Creates a new CResult_Bolt11InvoiceSignOrCreationErrorZ in the success state.
 	 */
 	public static Result_Bolt11InvoiceSignOrCreationErrorZ ok(org.ldk.structs.Bolt11Invoice o) {
-		long ret = bindings.CResult_Bolt11InvoiceSignOrCreationErrorZ_ok(o == null ? 0 : o.ptr);
+		long ret = bindings.CResult_Bolt11InvoiceSignOrCreationErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_Bolt11InvoiceSignOrCreationErrorZ ret_hu_conv = Result_Bolt11InvoiceSignOrCreationErrorZ.constr_from_ptr(ret);
