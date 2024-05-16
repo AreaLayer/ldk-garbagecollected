@@ -1389,6 +1389,7 @@ public class HumanObjectPeerTest {
         } catch (Exception e) {
             System.err.println("Caught exception:");
             System.err.println(e);
+            e.printStackTrace();
             System.exit(1);
         }
     }
