@@ -254,7 +254,7 @@ jobs:
         run: |
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
           if ! diff ldk-java-bins/"${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/"org.ldk.nupkg c_sharp/org.ldk.nupkg; then
-            dnf -y install diffoscope
+            dnf -y install diffoscope mono-devel
             diffoscope ldk-java-bins/"${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/"org.ldk.nupkg c_sharp/org.ldk.nupkg || echo
             exit 1
           fi
