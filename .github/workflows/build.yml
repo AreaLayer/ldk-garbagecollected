@@ -258,6 +258,13 @@ jobs:
             diffoscope ldk-java-bins/"${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/"org.ldk.nupkg c_sharp/org.ldk.nupkg || echo
             exit 1
           fi
+      - name: Run test against C# release library
+        shell: bash
+        run: |
+          cd c_sharp
+          ln -s ./packaging_artifacts/runtimes/linux-x64/native/libldkcsharp.so ./
+          LD_LIBRARY_PATH=. dotnet run --project tests.csproj
+          LD_LIBRARY_PATH=. dotnet run --project tests.csproj --configuration Release
 
   java_bindings:
     runs-on: ubuntu-latest

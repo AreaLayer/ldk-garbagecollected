@@ -148,7 +148,7 @@ if [ "$2" = "c_sharp" ]; then
 		mono-csc -g -out:csharpldk.dll -langversion:3 -t:library -unsafe c_sharp/src/org/ldk/enums/*.cs c_sharp/src/org/ldk/impl/*.cs c_sharp/src/org/ldk/util/*.cs c_sharp/src/org/ldk/structs/*.cs
 	else
 		cd c_sharp
-		dotnet build --configuration Release
+		dotnet build csharpldk.csproj --configuration Release
 		cd ..
 	fi
 
