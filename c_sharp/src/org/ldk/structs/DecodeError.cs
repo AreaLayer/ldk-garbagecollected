@@ -206,5 +206,16 @@ public class DecodeError : CommonBase {
 		if (!(o is DecodeError)) return false;
 		return this.eq((DecodeError)o);
 	}
+	/**
+	 * Get the string representation of a DecodeError object
+	 */
+	public string to_str() {
+		long ret = bindings.DecodeError_to_str(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		string ret_conv = InternalUtils.decodeString(ret);
+		return ret_conv;
+	}
+
 }
 } } }

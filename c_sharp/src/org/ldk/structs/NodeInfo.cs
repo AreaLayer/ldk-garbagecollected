@@ -128,6 +128,17 @@ public class NodeInfo : CommonBase {
 	}
 
 	/**
+	 * Get the string representation of a NodeInfo object
+	 */
+	public string to_str() {
+		long ret = bindings.NodeInfo_to_str(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		string ret_conv = InternalUtils.decodeString(ret);
+		return ret_conv;
+	}
+
+	/**
 	 * Serialize the NodeInfo object into a byte array which can be read by NodeInfo_read
 	 */
 	public byte[] write() {

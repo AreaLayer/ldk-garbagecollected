@@ -110,5 +110,16 @@ public class UntrustedString : CommonBase {
 		return ret_hu_conv;
 	}
 
+	/**
+	 * Get the string representation of a UntrustedString object
+	 */
+	public string to_str() {
+		long ret = bindings.UntrustedString_to_str(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		string ret_conv = InternalUtils.decodeString(ret);
+		return ret_conv;
+	}
+
 }
 } } }

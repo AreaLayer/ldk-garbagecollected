@@ -6,7 +6,7 @@ using System;
 namespace org { namespace ldk { namespace structs {
 
 /**
- * An enum which can either contain a crate::lightning::ln::channelmanager::ChannelShutdownState or not
+ * An enum which can either contain a crate::lightning::ln::channel_state::ChannelShutdownState or not
  */
 public class Option_ChannelShutdownStateZ : CommonBase {
 	protected Option_ChannelShutdownStateZ(object _dummy, long ptr) : base(ptr) { }
@@ -37,7 +37,7 @@ public class Option_ChannelShutdownStateZ : CommonBase {
 		}
 	}
 	/**
-	 * Constructs a new COption_ChannelShutdownStateZ containing a crate::lightning::ln::channelmanager::ChannelShutdownState
+	 * Constructs a new COption_ChannelShutdownStateZ containing a crate::lightning::ln::channel_state::ChannelShutdownState
 	 */
 	public static Option_ChannelShutdownStateZ some(ChannelShutdownState o) {
 		long ret = bindings.COption_ChannelShutdownStateZ_some(o);

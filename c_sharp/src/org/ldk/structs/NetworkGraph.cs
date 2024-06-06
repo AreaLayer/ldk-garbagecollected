@@ -64,6 +64,17 @@ public class NetworkGraph : CommonBase {
 	}
 
 	/**
+	 * Get the string representation of a NetworkGraph object
+	 */
+	public string to_str() {
+		long ret = bindings.NetworkGraph_to_str(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		string ret_conv = InternalUtils.decodeString(ret);
+		return ret_conv;
+	}
+
+	/**
 	 * Creates a new, empty, network graph.
 	 */
 	public static NetworkGraph of(Network network, org.ldk.structs.Logger logger) {
