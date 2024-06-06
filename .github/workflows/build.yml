@@ -266,6 +266,48 @@ jobs:
           LD_LIBRARY_PATH=. dotnet run --project tests.csproj
           LD_LIBRARY_PATH=. dotnet run --project tests.csproj --configuration Release
 
+  osx_c_sharp:
+    strategy:
+      matrix:
+        include:
+          - platform: macos-13
+          - platform: macos-14
+      fail-fast: false
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '6.0.x'
+      - name: Checkout latest binaries
+        run: |
+          export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
+          echo "Fetching deterministic binaries for LDK-GC ${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}"
+          # Gitweb only allows snapshots of folders by providing the object hash, which we have to extract:
+          SNAPSHOT_LINK="$(wget -O /dev/stdout "https://git.bitcoin.ninja/index.cgi?p=ldk-java-bins;a=tree;f=${LDK_GARBAGECOLLECTED_GIT_OVERRIDE};hb=refs/heads/main" | grep snapshot | grep -o 'href="[a-zA-Z0-9/?\.=;\-]*"' | sed 's/href="//' | tr -d '"' | grep snapshot)"
+          wget -O bins-snapshot.tgz "https://git.bitcoin.ninja${SNAPSHOT_LINK}"
+          mkdir -p ldk-java-bins/"${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}"
+          cd ldk-java-bins/"${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}"
+          tar xvvf ../../bins-snapshot.tgz
+          mv ldk-java-bins-*/* ./
+          unzip org.ldk.nupkg
+      - name: Run test against C# release library
+        shell: bash
+        run: |
+          export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
+          cd c_sharp
+          if [ "$(uname -m)" = "arm64" ]; then
+            cp "../ldk-java-bins/${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/runtimes/osx-arm64/native/libldkcsharp.dylib" ./libldkcsharp.dylib
+          else
+            cp "../ldk-java-bins/${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/runtimes/osx-x64/native/libldkcsharp.dylib" ./libldkcsharp.dylib
+          fi
+          LD_LIBRARY_PATH=. dotnet run --project tests.csproj
+          LD_LIBRARY_PATH=. dotnet run --project tests.csproj --configuration Release
+
   java_bindings:
     runs-on: ubuntu-latest
     # Ubuntu's version of rustc uses its own LLVM instead of being a real native package.
