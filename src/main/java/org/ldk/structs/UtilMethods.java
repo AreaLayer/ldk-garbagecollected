@@ -294,6 +294,28 @@ public class UtilMethods {
 	}
 
 	/**
+	 * Read a InboundHTLCStateDetails from a byte array, created by InboundHTLCStateDetails_write
+	 */
+	public static Result_COption_InboundHTLCStateDetailsZDecodeErrorZ InboundHTLCStateDetails_read(byte[] ser) {
+		long ret = bindings.InboundHTLCStateDetails_read(ser);
+		Reference.reachabilityFence(ser);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_COption_InboundHTLCStateDetailsZDecodeErrorZ ret_hu_conv = Result_COption_InboundHTLCStateDetailsZDecodeErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Read a OutboundHTLCStateDetails from a byte array, created by OutboundHTLCStateDetails_write
+	 */
+	public static Result_COption_OutboundHTLCStateDetailsZDecodeErrorZ OutboundHTLCStateDetails_read(byte[] ser) {
+		long ret = bindings.OutboundHTLCStateDetails_read(ser);
+		Reference.reachabilityFence(ser);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_COption_OutboundHTLCStateDetailsZDecodeErrorZ ret_hu_conv = Result_COption_OutboundHTLCStateDetailsZDecodeErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Equivalent to [`crate::ln::channelmanager::ChannelManager::create_inbound_payment`], but no
 	 * `ChannelManager` is required. Useful for generating invoices for [phantom node payments] without
 	 * a `ChannelManager`.

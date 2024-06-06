@@ -154,4 +154,13 @@ public class ShutdownScript extends CommonBase {
 		return ret;
 	}
 
+	/**
+	 * Get the string representation of a ShutdownScript object
+	 */
+	public String to_str() {
+		String ret = bindings.ShutdownScript_to_str(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
 }

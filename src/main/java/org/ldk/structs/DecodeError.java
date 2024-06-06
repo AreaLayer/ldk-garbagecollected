@@ -262,4 +262,13 @@ public class DecodeError extends CommonBase {
 		if (!(o instanceof DecodeError)) return false;
 		return this.eq((DecodeError)o);
 	}
+	/**
+	 * Get the string representation of a DecodeError object
+	 */
+	public String to_str() {
+		String ret = bindings.DecodeError_to_str(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
 }

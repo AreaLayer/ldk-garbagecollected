@@ -132,6 +132,15 @@ public class NodeInfo extends CommonBase {
 	}
 
 	/**
+	 * Get the string representation of a NodeInfo object
+	 */
+	public String to_str() {
+		String ret = bindings.NodeInfo_to_str(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
 	 * Serialize the NodeInfo object into a byte array which can be read by NodeInfo_read
 	 */
 	public byte[] write() {

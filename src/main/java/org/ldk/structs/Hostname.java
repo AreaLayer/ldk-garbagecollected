@@ -83,6 +83,15 @@ public class Hostname extends CommonBase {
 	}
 
 	/**
+	 * Get the string representation of a Hostname object
+	 */
+	public String to_str() {
+		String ret = bindings.Hostname_to_str(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
 	 * Serialize the Hostname object into a byte array which can be read by Hostname_read
 	 */
 	public byte[] write() {

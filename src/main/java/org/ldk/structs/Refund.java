@@ -240,4 +240,13 @@ public class Refund extends CommonBase {
 		return ret_hu_conv;
 	}
 
+	/**
+	 * Get the string representation of a Refund object
+	 */
+	public String to_str() {
+		String ret = bindings.Refund_to_str(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
 }

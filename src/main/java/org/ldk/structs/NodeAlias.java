@@ -95,6 +95,15 @@ public class NodeAlias extends CommonBase {
 		return this.eq((NodeAlias)o);
 	}
 	/**
+	 * Get the string representation of a NodeAlias object
+	 */
+	public String to_str() {
+		String ret = bindings.NodeAlias_to_str(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
 	 * Serialize the NodeAlias object into a byte array which can be read by NodeAlias_read
 	 */
 	public byte[] write() {

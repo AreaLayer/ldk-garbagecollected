@@ -91,6 +91,15 @@ public class NodeId extends CommonBase {
 	}
 
 	/**
+	 * Get the string representation of a NodeId object
+	 */
+	public String to_str() {
+		String ret = bindings.NodeId_to_str(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
 	 * Generates a non-cryptographic 64-bit hash of the NodeId.
 	 */
 	public long hash() {
