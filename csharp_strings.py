@@ -442,7 +442,8 @@ static inline LDKStr str_ref_to_owned_c(const jstring str) {
 	return res;
 }
 
-typedef bool jboolean;
+// The C# Bool marshalling is defined as 4 bytes, but the size of bool is platform-dependent
+typedef int32_t jboolean;
 
 int64_t CS_LDK_allocate_buffer(int64_t len) {
 	return (int64_t)MALLOC(len, "C#-requested buffer");
