@@ -111,4 +111,13 @@ public class UntrustedString extends CommonBase {
 		return ret_hu_conv;
 	}
 
+	/**
+	 * Get the string representation of a UntrustedString object
+	 */
+	public String to_str() {
+		String ret = bindings.UntrustedString_to_str(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
 }

@@ -326,10 +326,31 @@ namespace tests {
 			Assert(as_commit[0] is MessageSendEvent.MessageSendEvent_UpdateHTLCs, 33);
 		}
 
+		static void Bolt12ParseTest() {
+			// Parse a random BOLT12 offer from the BOLT12 test cases
+			const string offerStr = "lno1pgx9getnwss8vetrw3hhyuckyypwa3eyt44h6txtxquqh7lz5djge4afgfjn7k4rgrkuag0jsd5xvxg";
+			const string expectedPubkey = "02eec7245d6b7d2ccb30380bfbe2a3648cd7a942653f5aa340edcea1f283686619";
+			const string expectedDescription = "Test vectors";
+
+			Result_OfferBolt12ParseErrorZ offer_res = Offer.from_str(offerStr);
+			Assert(offer_res.is_ok(), 100);
+			Offer offer = ((Result_OfferBolt12ParseErrorZ.Result_OfferBolt12ParseErrorZ_OK)offer_res).res;
+			Assert(BitConverter.ToString(offer.signing_pubkey()).Replace("-", "").ToLower() == expectedPubkey, 101);
+			Assert(offer.description().get_a() == expectedDescription, 102);
+			Assert(offer.issuer() == null, 103);
+			Assert(!offer.is_expired(), 104);
+			Assert(!offer.expects_quantity(), 105);
+			Assert(offer.supported_quantity() is Quantity.Quantity_One, 106);
+			Assert(offer.amount() is Option_AmountZ.Option_AmountZ_None, 107);
+			Assert(offer.supported_quantity() is Quantity.Quantity_One, 108);
+			Assert(offer.to_str() == offerStr, 109);
+		}
+
 		static void Main(string[] args) {
 			SimpleConstructionTest();
 			SimpleTraitTest();
 			NodeTest();
+			Bolt12ParseTest();
 
 			Console.WriteLine("\n\nTESTS PASSED\n\n");
 			System.GC.Collect();

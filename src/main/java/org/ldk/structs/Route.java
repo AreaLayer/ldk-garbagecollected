@@ -181,6 +181,15 @@ public class Route extends CommonBase {
 	}
 
 	/**
+	 * Get the string representation of a Route object
+	 */
+	public String to_str() {
+		String ret = bindings.Route_to_str(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
 	 * Serialize the Route object into a byte array which can be read by Route_read
 	 */
 	public byte[] write() {

@@ -8,6 +8,9 @@ namespace org { namespace ldk { namespace structs {
 
 /**
  * Details of a channel, as returned by [`ChannelManager::list_channels`] and [`ChannelManager::list_usable_channels`]
+ * 
+ * [`ChannelManager::list_channels`]: crate::ln::channelmanager::ChannelManager::list_channels
+ * [`ChannelManager::list_usable_channels`]: crate::ln::channelmanager::ChannelManager::list_usable_channels
  */
 public class ChannelDetails : CommonBase {
 	internal ChannelDetails(object _dummy, long ptr) : base(ptr) { }
@@ -821,6 +824,134 @@ public class ChannelDetails : CommonBase {
 		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
+	/**
+	 * Pending inbound HTLCs.
+	 * 
+	 * This field is empty for objects serialized with LDK versions prior to 0.0.122.
+	 */
+	public InboundHTLCDetails[] get_pending_inbound_htlcs() {
+		long ret = bindings.ChannelDetails_get_pending_inbound_htlcs(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		int ret_conv_20_len = InternalUtils.getArrayLength(ret);
+		InboundHTLCDetails[] ret_conv_20_arr = new InboundHTLCDetails[ret_conv_20_len];
+		for (int u = 0; u < ret_conv_20_len; u++) {
+			long ret_conv_20 = InternalUtils.getU64ArrayElem(ret, u);
+			org.ldk.structs.InboundHTLCDetails ret_conv_20_hu_conv = null; if (ret_conv_20 < 0 || ret_conv_20 > 4096) { ret_conv_20_hu_conv = new org.ldk.structs.InboundHTLCDetails(null, ret_conv_20); }
+			if (ret_conv_20_hu_conv != null) { ret_conv_20_hu_conv.ptrs_to.AddLast(this); };
+			ret_conv_20_arr[u] = ret_conv_20_hu_conv;
+		}
+		bindings.free_buffer(ret);
+		return ret_conv_20_arr;
+	}
+
+	/**
+	 * Pending inbound HTLCs.
+	 * 
+	 * This field is empty for objects serialized with LDK versions prior to 0.0.122.
+	 */
+	public void set_pending_inbound_htlcs(InboundHTLCDetails[] val) {
+		bindings.ChannelDetails_set_pending_inbound_htlcs(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_20 => val_conv_20.ptr)));
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
+		foreach (InboundHTLCDetails val_conv_20 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_20); }; };
+	}
+
+	/**
+	 * Pending outbound HTLCs.
+	 * 
+	 * This field is empty for objects serialized with LDK versions prior to 0.0.122.
+	 */
+	public OutboundHTLCDetails[] get_pending_outbound_htlcs() {
+		long ret = bindings.ChannelDetails_get_pending_outbound_htlcs(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		int ret_conv_21_len = InternalUtils.getArrayLength(ret);
+		OutboundHTLCDetails[] ret_conv_21_arr = new OutboundHTLCDetails[ret_conv_21_len];
+		for (int v = 0; v < ret_conv_21_len; v++) {
+			long ret_conv_21 = InternalUtils.getU64ArrayElem(ret, v);
+			org.ldk.structs.OutboundHTLCDetails ret_conv_21_hu_conv = null; if (ret_conv_21 < 0 || ret_conv_21 > 4096) { ret_conv_21_hu_conv = new org.ldk.structs.OutboundHTLCDetails(null, ret_conv_21); }
+			if (ret_conv_21_hu_conv != null) { ret_conv_21_hu_conv.ptrs_to.AddLast(this); };
+			ret_conv_21_arr[v] = ret_conv_21_hu_conv;
+		}
+		bindings.free_buffer(ret);
+		return ret_conv_21_arr;
+	}
+
+	/**
+	 * Pending outbound HTLCs.
+	 * 
+	 * This field is empty for objects serialized with LDK versions prior to 0.0.122.
+	 */
+	public void set_pending_outbound_htlcs(OutboundHTLCDetails[] val) {
+		bindings.ChannelDetails_set_pending_outbound_htlcs(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_21 => val_conv_21.ptr)));
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
+		foreach (OutboundHTLCDetails val_conv_21 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_21); }; };
+	}
+
+	/**
+	 * Constructs a new ChannelDetails given each field
+	 * 
+	 * Note that funding_txo_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 * Note that channel_type_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 * Note that config_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	public static ChannelDetails of(org.ldk.structs.ChannelId channel_id_arg, org.ldk.structs.ChannelCounterparty counterparty_arg, org.ldk.structs.OutPoint funding_txo_arg, org.ldk.structs.ChannelTypeFeatures channel_type_arg, org.ldk.structs.Option_u64Z short_channel_id_arg, org.ldk.structs.Option_u64Z outbound_scid_alias_arg, org.ldk.structs.Option_u64Z inbound_scid_alias_arg, long channel_value_satoshis_arg, org.ldk.structs.Option_u64Z unspendable_punishment_reserve_arg, org.ldk.util.UInt128 user_channel_id_arg, org.ldk.structs.Option_u32Z feerate_sat_per_1000_weight_arg, long balance_msat_arg, long outbound_capacity_msat_arg, long next_outbound_htlc_limit_msat_arg, long next_outbound_htlc_minimum_msat_arg, long inbound_capacity_msat_arg, org.ldk.structs.Option_u32Z confirmations_required_arg, org.ldk.structs.Option_u32Z confirmations_arg, org.ldk.structs.Option_u16Z force_close_spend_delay_arg, bool is_outbound_arg, bool is_channel_ready_arg, org.ldk.structs.Option_ChannelShutdownStateZ channel_shutdown_state_arg, bool is_usable_arg, bool is_public_arg, org.ldk.structs.Option_u64Z inbound_htlc_minimum_msat_arg, org.ldk.structs.Option_u64Z inbound_htlc_maximum_msat_arg, org.ldk.structs.ChannelConfig config_arg, InboundHTLCDetails[] pending_inbound_htlcs_arg, OutboundHTLCDetails[] pending_outbound_htlcs_arg) {
+		long ret = bindings.ChannelDetails_new(channel_id_arg.ptr, counterparty_arg.ptr, funding_txo_arg == null ? 0 : funding_txo_arg.ptr, channel_type_arg == null ? 0 : channel_type_arg.ptr, short_channel_id_arg.ptr, outbound_scid_alias_arg.ptr, inbound_scid_alias_arg.ptr, channel_value_satoshis_arg, unspendable_punishment_reserve_arg.ptr, InternalUtils.encodeUint8Array(user_channel_id_arg.getLEBytes()), feerate_sat_per_1000_weight_arg.ptr, balance_msat_arg, outbound_capacity_msat_arg, next_outbound_htlc_limit_msat_arg, next_outbound_htlc_minimum_msat_arg, inbound_capacity_msat_arg, confirmations_required_arg.ptr, confirmations_arg.ptr, force_close_spend_delay_arg.ptr, is_outbound_arg, is_channel_ready_arg, channel_shutdown_state_arg.ptr, is_usable_arg, is_public_arg, inbound_htlc_minimum_msat_arg.ptr, inbound_htlc_maximum_msat_arg.ptr, config_arg == null ? 0 : config_arg.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(pending_inbound_htlcs_arg, pending_inbound_htlcs_arg_conv_20 => pending_inbound_htlcs_arg_conv_20.ptr)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(pending_outbound_htlcs_arg, pending_outbound_htlcs_arg_conv_21 => pending_outbound_htlcs_arg_conv_21.ptr)));
+		GC.KeepAlive(channel_id_arg);
+		GC.KeepAlive(counterparty_arg);
+		GC.KeepAlive(funding_txo_arg);
+		GC.KeepAlive(channel_type_arg);
+		GC.KeepAlive(short_channel_id_arg);
+		GC.KeepAlive(outbound_scid_alias_arg);
+		GC.KeepAlive(inbound_scid_alias_arg);
+		GC.KeepAlive(channel_value_satoshis_arg);
+		GC.KeepAlive(unspendable_punishment_reserve_arg);
+		GC.KeepAlive(user_channel_id_arg);
+		GC.KeepAlive(feerate_sat_per_1000_weight_arg);
+		GC.KeepAlive(balance_msat_arg);
+		GC.KeepAlive(outbound_capacity_msat_arg);
+		GC.KeepAlive(next_outbound_htlc_limit_msat_arg);
+		GC.KeepAlive(next_outbound_htlc_minimum_msat_arg);
+		GC.KeepAlive(inbound_capacity_msat_arg);
+		GC.KeepAlive(confirmations_required_arg);
+		GC.KeepAlive(confirmations_arg);
+		GC.KeepAlive(force_close_spend_delay_arg);
+		GC.KeepAlive(is_outbound_arg);
+		GC.KeepAlive(is_channel_ready_arg);
+		GC.KeepAlive(channel_shutdown_state_arg);
+		GC.KeepAlive(is_usable_arg);
+		GC.KeepAlive(is_public_arg);
+		GC.KeepAlive(inbound_htlc_minimum_msat_arg);
+		GC.KeepAlive(inbound_htlc_maximum_msat_arg);
+		GC.KeepAlive(config_arg);
+		GC.KeepAlive(pending_inbound_htlcs_arg);
+		GC.KeepAlive(pending_outbound_htlcs_arg);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ChannelDetails ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelDetails(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(counterparty_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(funding_txo_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_type_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(short_channel_id_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(outbound_scid_alias_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(inbound_scid_alias_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(unspendable_punishment_reserve_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(feerate_sat_per_1000_weight_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(confirmations_required_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(confirmations_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(force_close_spend_delay_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_shutdown_state_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(inbound_htlc_minimum_msat_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(inbound_htlc_maximum_msat_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(config_arg); };
+		foreach (InboundHTLCDetails pending_inbound_htlcs_arg_conv_20 in pending_inbound_htlcs_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(pending_inbound_htlcs_arg_conv_20); }; };
+		foreach (OutboundHTLCDetails pending_outbound_htlcs_arg_conv_21 in pending_outbound_htlcs_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(pending_outbound_htlcs_arg_conv_21); }; };
+		return ret_hu_conv;
+	}
+
 	internal long clone_ptr() {
 		long ret = bindings.ChannelDetails_clone_ptr(this.ptr);
 		GC.KeepAlive(this);
@@ -863,6 +994,8 @@ public class ChannelDetails : CommonBase {
 	 * 
 	 * This is either the [`ChannelDetails::short_channel_id`], if set, or the
 	 * [`ChannelDetails::outbound_scid_alias`]. See those for more information.
+	 * 
+	 * [`Route`]: crate::routing::router::Route
 	 */
 	public Option_u64Z get_outbound_payment_scid() {
 		long ret = bindings.ChannelDetails_get_outbound_payment_scid(this.ptr);

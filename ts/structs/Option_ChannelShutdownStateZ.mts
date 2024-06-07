@@ -14,8 +14,10 @@ import { Currency } from '../enums/Currency.mjs';
 import { Direction } from '../enums/Direction.mjs';
 import { HTLCClaim } from '../enums/HTLCClaim.mjs';
 import { IOError } from '../enums/IOError.mjs';
+import { InboundHTLCStateDetails } from '../enums/InboundHTLCStateDetails.mjs';
 import { Level } from '../enums/Level.mjs';
 import { Network } from '../enums/Network.mjs';
+import { OutboundHTLCStateDetails } from '../enums/OutboundHTLCStateDetails.mjs';
 import { PaymentFailureReason } from '../enums/PaymentFailureReason.mjs';
 import { Recipient } from '../enums/Recipient.mjs';
 import { RetryableSendFailure } from '../enums/RetryableSendFailure.mjs';
@@ -280,11 +282,6 @@ import { OffersMessage } from '../structs/OffersMessage.mjs';
 import { Option_OffersMessageZ } from '../structs/Option_OffersMessageZ.mjs';
 import { Destination } from '../structs/Destination.mjs';
 import { ThreeTuple_OffersMessageDestinationBlindedPathZ } from '../structs/ThreeTuple_OffersMessageDestinationBlindedPathZ.mjs';
-import { CounterpartyForwardingInfo } from '../structs/CounterpartyForwardingInfo.mjs';
-import { Result_CounterpartyForwardingInfoDecodeErrorZ } from '../structs/Result_CounterpartyForwardingInfoDecodeErrorZ.mjs';
-import { ChannelCounterparty } from '../structs/ChannelCounterparty.mjs';
-import { Result_ChannelCounterpartyDecodeErrorZ } from '../structs/Result_ChannelCounterpartyDecodeErrorZ.mjs';
-import { Result_ChannelDetailsDecodeErrorZ } from '../structs/Result_ChannelDetailsDecodeErrorZ.mjs';
 import { PhantomRouteHints } from '../structs/PhantomRouteHints.mjs';
 import { Result_PhantomRouteHintsDecodeErrorZ } from '../structs/Result_PhantomRouteHintsDecodeErrorZ.mjs';
 import { BlindedForward } from '../structs/BlindedForward.mjs';
@@ -295,7 +292,6 @@ import { PendingHTLCRouting } from '../structs/PendingHTLCRouting.mjs';
 import { Result_PendingHTLCRoutingDecodeErrorZ } from '../structs/Result_PendingHTLCRoutingDecodeErrorZ.mjs';
 import { Result_PendingHTLCInfoDecodeErrorZ } from '../structs/Result_PendingHTLCInfoDecodeErrorZ.mjs';
 import { Result_BlindedFailureDecodeErrorZ } from '../structs/Result_BlindedFailureDecodeErrorZ.mjs';
-import { Result_ChannelShutdownStateDecodeErrorZ } from '../structs/Result_ChannelShutdownStateDecodeErrorZ.mjs';
 import { ChannelMonitor } from '../structs/ChannelMonitor.mjs';
 import { ChannelMonitorUpdate } from '../structs/ChannelMonitorUpdate.mjs';
 import { Watch, WatchInterface } from '../structs/Watch.mjs';
@@ -436,6 +432,20 @@ import { Result_GossipTimestampFilterDecodeErrorZ } from '../structs/Result_Goss
 import { Bolt11Invoice } from '../structs/Bolt11Invoice.mjs';
 import { SignOrCreationError } from '../structs/SignOrCreationError.mjs';
 import { Result_Bolt11InvoiceSignOrCreationErrorZ } from '../structs/Result_Bolt11InvoiceSignOrCreationErrorZ.mjs';
+import { Option_InboundHTLCStateDetailsZ } from '../structs/Option_InboundHTLCStateDetailsZ.mjs';
+import { Result_COption_InboundHTLCStateDetailsZDecodeErrorZ } from '../structs/Result_COption_InboundHTLCStateDetailsZDecodeErrorZ.mjs';
+import { InboundHTLCDetails } from '../structs/InboundHTLCDetails.mjs';
+import { Result_InboundHTLCDetailsDecodeErrorZ } from '../structs/Result_InboundHTLCDetailsDecodeErrorZ.mjs';
+import { Option_OutboundHTLCStateDetailsZ } from '../structs/Option_OutboundHTLCStateDetailsZ.mjs';
+import { Result_COption_OutboundHTLCStateDetailsZDecodeErrorZ } from '../structs/Result_COption_OutboundHTLCStateDetailsZDecodeErrorZ.mjs';
+import { OutboundHTLCDetails } from '../structs/OutboundHTLCDetails.mjs';
+import { Result_OutboundHTLCDetailsDecodeErrorZ } from '../structs/Result_OutboundHTLCDetailsDecodeErrorZ.mjs';
+import { CounterpartyForwardingInfo } from '../structs/CounterpartyForwardingInfo.mjs';
+import { Result_CounterpartyForwardingInfoDecodeErrorZ } from '../structs/Result_CounterpartyForwardingInfoDecodeErrorZ.mjs';
+import { ChannelCounterparty } from '../structs/ChannelCounterparty.mjs';
+import { Result_ChannelCounterpartyDecodeErrorZ } from '../structs/Result_ChannelCounterpartyDecodeErrorZ.mjs';
+import { Result_ChannelDetailsDecodeErrorZ } from '../structs/Result_ChannelDetailsDecodeErrorZ.mjs';
+import { Result_ChannelShutdownStateDecodeErrorZ } from '../structs/Result_ChannelShutdownStateDecodeErrorZ.mjs';
 import { Result_OffersMessageDecodeErrorZ } from '../structs/Result_OffersMessageDecodeErrorZ.mjs';
 import { Option_HTLCClaimZ } from '../structs/Option_HTLCClaimZ.mjs';
 import { CounterpartyCommitmentSecrets } from '../structs/CounterpartyCommitmentSecrets.mjs';
@@ -661,7 +671,7 @@ import { CommonBase, UInt5, WitnessVersion, UnqualifiedError } from './CommonBas
 import * as bindings from '../bindings.mjs'
 
 /**
- * An enum which can either contain a crate::lightning::ln::channelmanager::ChannelShutdownState or not
+ * An enum which can either contain a crate::lightning::ln::channel_state::ChannelShutdownState or not
  */
 export class Option_ChannelShutdownStateZ extends CommonBase {
 	protected constructor(_dummy: null, ptr: bigint) { super(ptr, bindings.COption_ChannelShutdownStateZ_free); }
@@ -677,7 +687,7 @@ export class Option_ChannelShutdownStateZ extends CommonBase {
 	}
 
 	/**
-	 * Constructs a new COption_ChannelShutdownStateZ containing a crate::lightning::ln::channelmanager::ChannelShutdownState
+	 * Constructs a new COption_ChannelShutdownStateZ containing a crate::lightning::ln::channel_state::ChannelShutdownState
 	 */
 	public static constructor_some(o: ChannelShutdownState): Option_ChannelShutdownStateZ {
 		const ret: bigint = bindings.COption_ChannelShutdownStateZ_some(o);

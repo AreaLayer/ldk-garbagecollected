@@ -126,6 +126,15 @@ public class InvoiceError extends CommonBase {
 	}
 
 	/**
+	 * Get the string representation of a InvoiceError object
+	 */
+	public String to_str() {
+		String ret = bindings.InvoiceError_to_str(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
 	 * Serialize the InvoiceError object into a byte array which can be read by InvoiceError_read
 	 */
 	public byte[] write() {

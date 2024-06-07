@@ -14,8 +14,10 @@ import { Currency } from '../enums/Currency.mjs';
 import { Direction } from '../enums/Direction.mjs';
 import { HTLCClaim } from '../enums/HTLCClaim.mjs';
 import { IOError } from '../enums/IOError.mjs';
+import { InboundHTLCStateDetails } from '../enums/InboundHTLCStateDetails.mjs';
 import { Level } from '../enums/Level.mjs';
 import { Network } from '../enums/Network.mjs';
+import { OutboundHTLCStateDetails } from '../enums/OutboundHTLCStateDetails.mjs';
 import { PaymentFailureReason } from '../enums/PaymentFailureReason.mjs';
 import { Recipient } from '../enums/Recipient.mjs';
 import { RetryableSendFailure } from '../enums/RetryableSendFailure.mjs';
@@ -256,7 +258,6 @@ import { PaymentContext } from '../structs/PaymentContext.mjs';
 import { Option_PaymentContextZ } from '../structs/Option_PaymentContextZ.mjs';
 import { TwoTuple_u64u16Z } from '../structs/TwoTuple_u64u16Z.mjs';
 import { Option_C2Tuple_u64u16ZZ } from '../structs/Option_C2Tuple_u64u16ZZ.mjs';
-import { Option_ChannelShutdownStateZ } from '../structs/Option_ChannelShutdownStateZ.mjs';
 import { Result_ChannelIdAPIErrorZ } from '../structs/Result_ChannelIdAPIErrorZ.mjs';
 import { RecentPaymentDetails } from '../structs/RecentPaymentDetails.mjs';
 import { PaymentSendFailure } from '../structs/PaymentSendFailure.mjs';
@@ -280,11 +281,6 @@ import { OffersMessage } from '../structs/OffersMessage.mjs';
 import { Option_OffersMessageZ } from '../structs/Option_OffersMessageZ.mjs';
 import { Destination } from '../structs/Destination.mjs';
 import { ThreeTuple_OffersMessageDestinationBlindedPathZ } from '../structs/ThreeTuple_OffersMessageDestinationBlindedPathZ.mjs';
-import { CounterpartyForwardingInfo } from '../structs/CounterpartyForwardingInfo.mjs';
-import { Result_CounterpartyForwardingInfoDecodeErrorZ } from '../structs/Result_CounterpartyForwardingInfoDecodeErrorZ.mjs';
-import { ChannelCounterparty } from '../structs/ChannelCounterparty.mjs';
-import { Result_ChannelCounterpartyDecodeErrorZ } from '../structs/Result_ChannelCounterpartyDecodeErrorZ.mjs';
-import { Result_ChannelDetailsDecodeErrorZ } from '../structs/Result_ChannelDetailsDecodeErrorZ.mjs';
 import { PhantomRouteHints } from '../structs/PhantomRouteHints.mjs';
 import { Result_PhantomRouteHintsDecodeErrorZ } from '../structs/Result_PhantomRouteHintsDecodeErrorZ.mjs';
 import { BlindedForward } from '../structs/BlindedForward.mjs';
@@ -295,7 +291,6 @@ import { PendingHTLCRouting } from '../structs/PendingHTLCRouting.mjs';
 import { Result_PendingHTLCRoutingDecodeErrorZ } from '../structs/Result_PendingHTLCRoutingDecodeErrorZ.mjs';
 import { Result_PendingHTLCInfoDecodeErrorZ } from '../structs/Result_PendingHTLCInfoDecodeErrorZ.mjs';
 import { Result_BlindedFailureDecodeErrorZ } from '../structs/Result_BlindedFailureDecodeErrorZ.mjs';
-import { Result_ChannelShutdownStateDecodeErrorZ } from '../structs/Result_ChannelShutdownStateDecodeErrorZ.mjs';
 import { ChannelMonitor } from '../structs/ChannelMonitor.mjs';
 import { ChannelMonitorUpdate } from '../structs/ChannelMonitorUpdate.mjs';
 import { Watch, WatchInterface } from '../structs/Watch.mjs';
@@ -436,6 +431,21 @@ import { Result_GossipTimestampFilterDecodeErrorZ } from '../structs/Result_Goss
 import { Bolt11Invoice } from '../structs/Bolt11Invoice.mjs';
 import { SignOrCreationError } from '../structs/SignOrCreationError.mjs';
 import { Result_Bolt11InvoiceSignOrCreationErrorZ } from '../structs/Result_Bolt11InvoiceSignOrCreationErrorZ.mjs';
+import { Option_InboundHTLCStateDetailsZ } from '../structs/Option_InboundHTLCStateDetailsZ.mjs';
+import { Result_COption_InboundHTLCStateDetailsZDecodeErrorZ } from '../structs/Result_COption_InboundHTLCStateDetailsZDecodeErrorZ.mjs';
+import { InboundHTLCDetails } from '../structs/InboundHTLCDetails.mjs';
+import { Result_InboundHTLCDetailsDecodeErrorZ } from '../structs/Result_InboundHTLCDetailsDecodeErrorZ.mjs';
+import { Option_OutboundHTLCStateDetailsZ } from '../structs/Option_OutboundHTLCStateDetailsZ.mjs';
+import { Result_COption_OutboundHTLCStateDetailsZDecodeErrorZ } from '../structs/Result_COption_OutboundHTLCStateDetailsZDecodeErrorZ.mjs';
+import { OutboundHTLCDetails } from '../structs/OutboundHTLCDetails.mjs';
+import { Result_OutboundHTLCDetailsDecodeErrorZ } from '../structs/Result_OutboundHTLCDetailsDecodeErrorZ.mjs';
+import { CounterpartyForwardingInfo } from '../structs/CounterpartyForwardingInfo.mjs';
+import { Result_CounterpartyForwardingInfoDecodeErrorZ } from '../structs/Result_CounterpartyForwardingInfoDecodeErrorZ.mjs';
+import { ChannelCounterparty } from '../structs/ChannelCounterparty.mjs';
+import { Result_ChannelCounterpartyDecodeErrorZ } from '../structs/Result_ChannelCounterpartyDecodeErrorZ.mjs';
+import { Option_ChannelShutdownStateZ } from '../structs/Option_ChannelShutdownStateZ.mjs';
+import { Result_ChannelDetailsDecodeErrorZ } from '../structs/Result_ChannelDetailsDecodeErrorZ.mjs';
+import { Result_ChannelShutdownStateDecodeErrorZ } from '../structs/Result_ChannelShutdownStateDecodeErrorZ.mjs';
 import { Result_OffersMessageDecodeErrorZ } from '../structs/Result_OffersMessageDecodeErrorZ.mjs';
 import { Option_HTLCClaimZ } from '../structs/Option_HTLCClaimZ.mjs';
 import { CounterpartyCommitmentSecrets } from '../structs/CounterpartyCommitmentSecrets.mjs';
@@ -663,6 +673,9 @@ import * as bindings from '../bindings.mjs'
 
 /**
  * Details of a channel, as returned by [`ChannelManager::list_channels`] and [`ChannelManager::list_usable_channels`]
+ * 
+ * [`ChannelManager::list_channels`]: crate::ln::channelmanager::ChannelManager::list_channels
+ * [`ChannelManager::list_usable_channels`]: crate::ln::channelmanager::ChannelManager::list_usable_channels
  */
 export class ChannelDetails extends CommonBase {
 	/* @internal */
@@ -1378,6 +1391,96 @@ export class ChannelDetails extends CommonBase {
 		CommonBase.add_ref_from(this, val);
 	}
 
+	/**
+	 * Pending inbound HTLCs.
+	 * 
+	 * This field is empty for objects serialized with LDK versions prior to 0.0.122.
+	 */
+	public get_pending_inbound_htlcs(): InboundHTLCDetails[] {
+		const ret: number = bindings.ChannelDetails_get_pending_inbound_htlcs(this.ptr);
+		const ret_conv_20_len: number = bindings.getArrayLength(ret);
+		const ret_conv_20_arr: InboundHTLCDetails[] = new Array(ret_conv_20_len).fill(null);
+		for (var u = 0; u < ret_conv_20_len; u++) {
+			const ret_conv_20: bigint = bindings.getU64ArrayElem(ret, u);
+			const ret_conv_20_hu_conv: InboundHTLCDetails = new InboundHTLCDetails(null, ret_conv_20);
+			CommonBase.add_ref_from(ret_conv_20_hu_conv, this);
+			ret_conv_20_arr[u] = ret_conv_20_hu_conv;
+		}
+		bindings.freeWasmMemory(ret)
+		return ret_conv_20_arr;
+	}
+
+	/**
+	 * Pending inbound HTLCs.
+	 * 
+	 * This field is empty for objects serialized with LDK versions prior to 0.0.122.
+	 */
+	public set_pending_inbound_htlcs(val: InboundHTLCDetails[]): void {
+		bindings.ChannelDetails_set_pending_inbound_htlcs(this.ptr, bindings.encodeUint64Array(val.map(val_conv_20 => CommonBase.get_ptr_of(val_conv_20))));
+		val.forEach((val_conv_20: InboundHTLCDetails) => { CommonBase.add_ref_from(this, val_conv_20); });
+	}
+
+	/**
+	 * Pending outbound HTLCs.
+	 * 
+	 * This field is empty for objects serialized with LDK versions prior to 0.0.122.
+	 */
+	public get_pending_outbound_htlcs(): OutboundHTLCDetails[] {
+		const ret: number = bindings.ChannelDetails_get_pending_outbound_htlcs(this.ptr);
+		const ret_conv_21_len: number = bindings.getArrayLength(ret);
+		const ret_conv_21_arr: OutboundHTLCDetails[] = new Array(ret_conv_21_len).fill(null);
+		for (var v = 0; v < ret_conv_21_len; v++) {
+			const ret_conv_21: bigint = bindings.getU64ArrayElem(ret, v);
+			const ret_conv_21_hu_conv: OutboundHTLCDetails = new OutboundHTLCDetails(null, ret_conv_21);
+			CommonBase.add_ref_from(ret_conv_21_hu_conv, this);
+			ret_conv_21_arr[v] = ret_conv_21_hu_conv;
+		}
+		bindings.freeWasmMemory(ret)
+		return ret_conv_21_arr;
+	}
+
+	/**
+	 * Pending outbound HTLCs.
+	 * 
+	 * This field is empty for objects serialized with LDK versions prior to 0.0.122.
+	 */
+	public set_pending_outbound_htlcs(val: OutboundHTLCDetails[]): void {
+		bindings.ChannelDetails_set_pending_outbound_htlcs(this.ptr, bindings.encodeUint64Array(val.map(val_conv_21 => CommonBase.get_ptr_of(val_conv_21))));
+		val.forEach((val_conv_21: OutboundHTLCDetails) => { CommonBase.add_ref_from(this, val_conv_21); });
+	}
+
+	/**
+	 * Constructs a new ChannelDetails given each field
+	 * 
+	 * Note that funding_txo_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 * Note that channel_type_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 * Note that config_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	public static constructor_new(channel_id_arg: ChannelId, counterparty_arg: ChannelCounterparty, funding_txo_arg: OutPoint|null, channel_type_arg: ChannelTypeFeatures|null, short_channel_id_arg: Option_u64Z, outbound_scid_alias_arg: Option_u64Z, inbound_scid_alias_arg: Option_u64Z, channel_value_satoshis_arg: bigint, unspendable_punishment_reserve_arg: Option_u64Z, user_channel_id_arg: bigint, feerate_sat_per_1000_weight_arg: Option_u32Z, balance_msat_arg: bigint, outbound_capacity_msat_arg: bigint, next_outbound_htlc_limit_msat_arg: bigint, next_outbound_htlc_minimum_msat_arg: bigint, inbound_capacity_msat_arg: bigint, confirmations_required_arg: Option_u32Z, confirmations_arg: Option_u32Z, force_close_spend_delay_arg: Option_u16Z, is_outbound_arg: boolean, is_channel_ready_arg: boolean, channel_shutdown_state_arg: Option_ChannelShutdownStateZ, is_usable_arg: boolean, is_public_arg: boolean, inbound_htlc_minimum_msat_arg: Option_u64Z, inbound_htlc_maximum_msat_arg: Option_u64Z, config_arg: ChannelConfig|null, pending_inbound_htlcs_arg: InboundHTLCDetails[], pending_outbound_htlcs_arg: OutboundHTLCDetails[]): ChannelDetails {
+		const ret: bigint = bindings.ChannelDetails_new(CommonBase.get_ptr_of(channel_id_arg), CommonBase.get_ptr_of(counterparty_arg), funding_txo_arg == null ? 0n : CommonBase.get_ptr_of(funding_txo_arg), channel_type_arg == null ? 0n : CommonBase.get_ptr_of(channel_type_arg), CommonBase.get_ptr_of(short_channel_id_arg), CommonBase.get_ptr_of(outbound_scid_alias_arg), CommonBase.get_ptr_of(inbound_scid_alias_arg), channel_value_satoshis_arg, CommonBase.get_ptr_of(unspendable_punishment_reserve_arg), bindings.encodeUint128(user_channel_id_arg), CommonBase.get_ptr_of(feerate_sat_per_1000_weight_arg), balance_msat_arg, outbound_capacity_msat_arg, next_outbound_htlc_limit_msat_arg, next_outbound_htlc_minimum_msat_arg, inbound_capacity_msat_arg, CommonBase.get_ptr_of(confirmations_required_arg), CommonBase.get_ptr_of(confirmations_arg), CommonBase.get_ptr_of(force_close_spend_delay_arg), is_outbound_arg, is_channel_ready_arg, CommonBase.get_ptr_of(channel_shutdown_state_arg), is_usable_arg, is_public_arg, CommonBase.get_ptr_of(inbound_htlc_minimum_msat_arg), CommonBase.get_ptr_of(inbound_htlc_maximum_msat_arg), config_arg == null ? 0n : CommonBase.get_ptr_of(config_arg), bindings.encodeUint64Array(pending_inbound_htlcs_arg.map(pending_inbound_htlcs_arg_conv_20 => CommonBase.get_ptr_of(pending_inbound_htlcs_arg_conv_20))), bindings.encodeUint64Array(pending_outbound_htlcs_arg.map(pending_outbound_htlcs_arg_conv_21 => CommonBase.get_ptr_of(pending_outbound_htlcs_arg_conv_21))));
+		const ret_hu_conv: ChannelDetails = new ChannelDetails(null, ret);
+		CommonBase.add_ref_from(ret_hu_conv, ret_hu_conv);
+		CommonBase.add_ref_from(ret_hu_conv, channel_id_arg);
+		CommonBase.add_ref_from(ret_hu_conv, counterparty_arg);
+		CommonBase.add_ref_from(ret_hu_conv, funding_txo_arg);
+		CommonBase.add_ref_from(ret_hu_conv, channel_type_arg);
+		CommonBase.add_ref_from(ret_hu_conv, short_channel_id_arg);
+		CommonBase.add_ref_from(ret_hu_conv, outbound_scid_alias_arg);
+		CommonBase.add_ref_from(ret_hu_conv, inbound_scid_alias_arg);
+		CommonBase.add_ref_from(ret_hu_conv, unspendable_punishment_reserve_arg);
+		CommonBase.add_ref_from(ret_hu_conv, feerate_sat_per_1000_weight_arg);
+		CommonBase.add_ref_from(ret_hu_conv, confirmations_required_arg);
+		CommonBase.add_ref_from(ret_hu_conv, confirmations_arg);
+		CommonBase.add_ref_from(ret_hu_conv, force_close_spend_delay_arg);
+		CommonBase.add_ref_from(ret_hu_conv, channel_shutdown_state_arg);
+		CommonBase.add_ref_from(ret_hu_conv, inbound_htlc_minimum_msat_arg);
+		CommonBase.add_ref_from(ret_hu_conv, inbound_htlc_maximum_msat_arg);
+		CommonBase.add_ref_from(ret_hu_conv, config_arg);
+		pending_inbound_htlcs_arg.forEach((pending_inbound_htlcs_arg_conv_20: InboundHTLCDetails) => { CommonBase.add_ref_from(ret_hu_conv, pending_inbound_htlcs_arg_conv_20); });
+		pending_outbound_htlcs_arg.forEach((pending_outbound_htlcs_arg_conv_21: OutboundHTLCDetails) => { CommonBase.add_ref_from(ret_hu_conv, pending_outbound_htlcs_arg_conv_21); });
+		return ret_hu_conv;
+	}
+
 	public clone_ptr(): bigint {
 		const ret: bigint = bindings.ChannelDetails_clone_ptr(this.ptr);
 		return ret;
@@ -1415,6 +1518,8 @@ export class ChannelDetails extends CommonBase {
 	 * 
 	 * This is either the [`ChannelDetails::short_channel_id`], if set, or the
 	 * [`ChannelDetails::outbound_scid_alias`]. See those for more information.
+	 * 
+	 * [`Route`]: crate::routing::router::Route
 	 */
 	public get_outbound_payment_scid(): Option_u64Z {
 		const ret: bigint = bindings.ChannelDetails_get_outbound_payment_scid(this.ptr);

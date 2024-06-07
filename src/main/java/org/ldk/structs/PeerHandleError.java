@@ -51,4 +51,13 @@ public class PeerHandleError extends CommonBase {
 		return ret_hu_conv;
 	}
 
+	/**
+	 * Get the string representation of a PeerHandleError object
+	 */
+	public String to_str() {
+		String ret = bindings.PeerHandleError_to_str(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
 }

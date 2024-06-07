@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 
 
 /**
- * An enum which can either contain a crate::lightning::ln::channelmanager::ChannelShutdownState or not
+ * An enum which can either contain a crate::lightning::ln::channel_state::ChannelShutdownState or not
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class Option_ChannelShutdownStateZ extends CommonBase {
@@ -31,7 +31,7 @@ public class Option_ChannelShutdownStateZ extends CommonBase {
 	}
 
 	/**
-	 * When we're in this state, this COption_ChannelShutdownStateZ contains a crate::lightning::ln::channelmanager::ChannelShutdownState
+	 * When we're in this state, this COption_ChannelShutdownStateZ contains a crate::lightning::ln::channel_state::ChannelShutdownState
 	 */
 	public final static class Some extends Option_ChannelShutdownStateZ {
 		public final org.ldk.enums.ChannelShutdownState some;
@@ -49,7 +49,7 @@ public class Option_ChannelShutdownStateZ extends CommonBase {
 		}
 	}
 	/**
-	 * Constructs a new COption_ChannelShutdownStateZ containing a crate::lightning::ln::channelmanager::ChannelShutdownState
+	 * Constructs a new COption_ChannelShutdownStateZ containing a crate::lightning::ln::channel_state::ChannelShutdownState
 	 */
 	public static Option_ChannelShutdownStateZ some(org.ldk.enums.ChannelShutdownState o) {
 		long ret = bindings.COption_ChannelShutdownStateZ_some(o);

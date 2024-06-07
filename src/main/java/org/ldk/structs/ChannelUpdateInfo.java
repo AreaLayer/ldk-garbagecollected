@@ -225,6 +225,15 @@ public class ChannelUpdateInfo extends CommonBase {
 		return this.eq((ChannelUpdateInfo)o);
 	}
 	/**
+	 * Get the string representation of a ChannelUpdateInfo object
+	 */
+	public String to_str() {
+		String ret = bindings.ChannelUpdateInfo_to_str(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
 	 * Serialize the ChannelUpdateInfo object into a byte array which can be read by ChannelUpdateInfo_read
 	 */
 	public byte[] write() {

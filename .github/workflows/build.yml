@@ -258,6 +258,55 @@ jobs:
             diffoscope ldk-java-bins/"${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/"org.ldk.nupkg c_sharp/org.ldk.nupkg || echo
             exit 1
           fi
+      - name: Run test against C# release library
+        shell: bash
+        run: |
+          cd c_sharp
+          ln -s ./packaging_artifacts/runtimes/linux-x64/native/libldkcsharp.so ./
+          LD_LIBRARY_PATH=. dotnet run --project tests.csproj
+          LD_LIBRARY_PATH=. dotnet run --project tests.csproj --configuration Release
+
+  osx_c_sharp:
+    strategy:
+      matrix:
+        include:
+          - platform: macos-13
+          - platform: macos-14
+      fail-fast: false
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '6.0.x'
+      - name: Checkout latest binaries
+        run: |
+          export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
+          echo "Fetching deterministic binaries for LDK-GC ${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}"
+          # Gitweb only allows snapshots of folders by providing the object hash, which we have to extract:
+          SNAPSHOT_LINK="$(wget -O /dev/stdout "https://git.bitcoin.ninja/index.cgi?p=ldk-java-bins;a=tree;f=${LDK_GARBAGECOLLECTED_GIT_OVERRIDE};hb=refs/heads/main" | grep snapshot | grep -o 'href="[a-zA-Z0-9/?\.=;\-]*"' | sed 's/href="//' | tr -d '"' | grep snapshot)"
+          wget -O bins-snapshot.tgz "https://git.bitcoin.ninja${SNAPSHOT_LINK}"
+          mkdir -p ldk-java-bins/"${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}"
+          cd ldk-java-bins/"${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}"
+          tar xvvf ../../bins-snapshot.tgz
+          mv ldk-java-bins-*/* ./
+          unzip org.ldk.nupkg
+      - name: Run test against C# release library
+        shell: bash
+        run: |
+          export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
+          cd c_sharp
+          if [ "$(uname -m)" = "arm64" ]; then
+            cp "../ldk-java-bins/${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/runtimes/osx-arm64/native/libldkcsharp.dylib" ./libldkcsharp.dylib
+          else
+            cp "../ldk-java-bins/${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/runtimes/osx-x64/native/libldkcsharp.dylib" ./libldkcsharp.dylib
+          fi
+          LD_LIBRARY_PATH=. dotnet run --project tests.csproj
+          LD_LIBRARY_PATH=. dotnet run --project tests.csproj --configuration Release
 
   java_bindings:
     runs-on: ubuntu-latest
@@ -673,44 +722,19 @@ jobs:
             exit 1
           fi
 
-  osx:
+  osx_java:
     strategy:
       matrix:
         include:
-          - platform: macos-11
-          - platform: macos-12
           - platform: macos-13
+          - platform: macos-14
       fail-fast: false
     runs-on: ${{ matrix.platform }}
     steps:
-      - name: Install Rust components
-        run: |
-          rustup target install aarch64-apple-darwin
-          rustup component add rust-src
       - name: Checkout source code
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Install cbindgen
-        run: cargo install cbindgen
-      - name: Checkout Rust-Lightning and LDK-C-Bindings git
-        run: |
-          git config --global user.email "ldk-ci@example.com"
-          git config --global user.name "LDK CI"
-          # Note this is a different endpoint, as we need one non-upstream commit!
-          git clone https://github.com/lightningdevkit/rust-lightning
-          cd rust-lightning
-          git checkout origin/0.0.123-bindings
-          cd ..
-          git clone https://github.com/lightningdevkit/ldk-c-bindings
-          cd ldk-c-bindings
-          git checkout 0.0.123
-          cd lightning-c-bindings
-          cargo update -p memchr --precise "2.5.0" --verbose
-      - name: Rebuild C bindings and check the sample app builds + links
-        run: |
-          cd ldk-c-bindings
-          CC=clang ./genbindings.sh ../rust-lightning true
       - name: Fetch OpenJDK 18
         run: |
           if [ "$(uname -m)" = "arm64" ]; then
@@ -728,7 +752,7 @@ jobs:
             fi
             tar xvvf openjdk-18.0.1.1_macos-x64_bin.tar.gz
           fi
-      - name: Checkout latest Linux binaries
+      - name: Checkout latest binaries
         run: |
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
           echo "Fetching deterministic binaries for LDK-GC ${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}"
@@ -739,24 +763,6 @@ jobs:
           cd ldk-java-bins/"${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}"
           tar xvvf ../../bins-snapshot.tgz
           mv ldk-java-bins-*/* ./
-          cd ../..
-          mkdir -p src/main/resources/
-          cp "ldk-java-bins/${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/liblightningjni_Linux-"* src/main/resources/
-      - name: Build Java Release Bindings
-        run: |
-          export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
-          export JAVA_HOME=`pwd`/jdk-18.0.1.1.jdk/Contents/Home
-          export PATH=$JAVA_HOME/bin:$PATH
-          ./genbindings.sh ./ldk-c-bindings/ "-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin -isysroot$(xcrun --show-sdk-path)" false false
-
-          if [ "${{ matrix.platform }}" = "macos-11" ]; then
-            export CC="clang --target=aarch64-apple-darwin"
-            export LDK_TARGET=aarch64-apple-darwin
-            export LDK_TARGET_CPU=apple-a14
-            ./genbindings.sh ./ldk-c-bindings/ "-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin -isysroot$(xcrun --show-sdk-path)" false false
-            cat src/main/resources/liblightningjni_MacOSX-aarch64.nativelib > /dev/null
-
-          fi
       - name: Fetch Maven 3.8.4
         run: |
           # We don't bother using the upstream mirrors as they remove prior
@@ -769,17 +775,6 @@ jobs:
           fi
           tar xvvf apache-maven-3.8.4-bin.tar.gz
           export PATH=apache-maven-3.8.4/bin:$PATH
-      - name: Run Java Tests against built jar
-        run: |
-          export JAVA_HOME=`pwd`/jdk-18.0.1.1.jdk/Contents/Home
-          export PATH=$JAVA_HOME/bin:$PATH
-          mvn -DskipTests=true package
-          export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
-          JAR_VERSION=${LDK_GARBAGECOLLECTED_GIT_OVERRIDE:1:100}
-          mvn install:install-file -Dfile=target/ldk-java-${JAR_VERSION}.jar -DgroupId=org.lightningdevkit -DartifactId=ldk-java -Dversion=1.0-SNAPSHOT -Dpackaging=jar
-          cd javatester
-          mvn -q -B package
-          java -ea -jar target/ldk-java-tests-1.0-SNAPSHOT-jar-with-dependencies.jar
       - name: Run Java Tests against release bins
         run: |
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"

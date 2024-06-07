@@ -65,6 +65,15 @@ public class NetworkGraph extends CommonBase {
 	}
 
 	/**
+	 * Get the string representation of a NetworkGraph object
+	 */
+	public String to_str() {
+		String ret = bindings.NetworkGraph_to_str(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
 	 * Creates a new, empty, network graph.
 	 */
 	public static NetworkGraph of(org.ldk.enums.Network network, org.ldk.structs.Logger logger) {

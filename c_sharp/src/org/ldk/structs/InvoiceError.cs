@@ -120,6 +120,17 @@ public class InvoiceError : CommonBase {
 	}
 
 	/**
+	 * Get the string representation of a InvoiceError object
+	 */
+	public string to_str() {
+		long ret = bindings.InvoiceError_to_str(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		string ret_conv = InternalUtils.decodeString(ret);
+		return ret_conv;
+	}
+
+	/**
 	 * Serialize the InvoiceError object into a byte array which can be read by InvoiceError_read
 	 */
 	public byte[] write() {

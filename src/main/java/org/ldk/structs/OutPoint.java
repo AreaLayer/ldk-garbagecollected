@@ -120,6 +120,15 @@ public class OutPoint extends CommonBase {
 		return (int)this.hash();
 	}
 	/**
+	 * Get the string representation of a OutPoint object
+	 */
+	public String to_str() {
+		String ret = bindings.OutPoint_to_str(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
 	 * Serialize the OutPoint object into a byte array which can be read by OutPoint_read
 	 */
 	public byte[] write() {

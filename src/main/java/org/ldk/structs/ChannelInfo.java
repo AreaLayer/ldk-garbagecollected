@@ -248,6 +248,15 @@ public class ChannelInfo extends CommonBase {
 	}
 
 	/**
+	 * Get the string representation of a ChannelInfo object
+	 */
+	public String to_str() {
+		String ret = bindings.ChannelInfo_to_str(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
 	 * Serialize the ChannelInfo object into a byte array which can be read by ChannelInfo_read
 	 */
 	public byte[] write() {

@@ -10,6 +10,9 @@ import javax.annotation.Nullable;
 
 /**
  * Details of a channel, as returned by [`ChannelManager::list_channels`] and [`ChannelManager::list_usable_channels`]
+ * 
+ * [`ChannelManager::list_channels`]: crate::ln::channelmanager::ChannelManager::list_channels
+ * [`ChannelManager::list_usable_channels`]: crate::ln::channelmanager::ChannelManager::list_usable_channels
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class ChannelDetails extends CommonBase {
@@ -828,6 +831,130 @@ public class ChannelDetails extends CommonBase {
 		if (this != null) { this.ptrs_to.add(val); };
 	}
 
+	/**
+	 * Pending inbound HTLCs.
+	 * 
+	 * This field is empty for objects serialized with LDK versions prior to 0.0.122.
+	 */
+	public InboundHTLCDetails[] get_pending_inbound_htlcs() {
+		long[] ret = bindings.ChannelDetails_get_pending_inbound_htlcs(this.ptr);
+		Reference.reachabilityFence(this);
+		int ret_conv_20_len = ret.length;
+		InboundHTLCDetails[] ret_conv_20_arr = new InboundHTLCDetails[ret_conv_20_len];
+		for (int u = 0; u < ret_conv_20_len; u++) {
+			long ret_conv_20 = ret[u];
+			org.ldk.structs.InboundHTLCDetails ret_conv_20_hu_conv = null; if (ret_conv_20 < 0 || ret_conv_20 > 4096) { ret_conv_20_hu_conv = new org.ldk.structs.InboundHTLCDetails(null, ret_conv_20); }
+			if (ret_conv_20_hu_conv != null) { ret_conv_20_hu_conv.ptrs_to.add(this); };
+			ret_conv_20_arr[u] = ret_conv_20_hu_conv;
+		}
+		return ret_conv_20_arr;
+	}
+
+	/**
+	 * Pending inbound HTLCs.
+	 * 
+	 * This field is empty for objects serialized with LDK versions prior to 0.0.122.
+	 */
+	public void set_pending_inbound_htlcs(InboundHTLCDetails[] val) {
+		bindings.ChannelDetails_set_pending_inbound_htlcs(this.ptr, val != null ? Arrays.stream(val).mapToLong(val_conv_20 -> val_conv_20.ptr).toArray() : null);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
+		for (InboundHTLCDetails val_conv_20: val) { if (this != null) { this.ptrs_to.add(val_conv_20); }; };
+	}
+
+	/**
+	 * Pending outbound HTLCs.
+	 * 
+	 * This field is empty for objects serialized with LDK versions prior to 0.0.122.
+	 */
+	public OutboundHTLCDetails[] get_pending_outbound_htlcs() {
+		long[] ret = bindings.ChannelDetails_get_pending_outbound_htlcs(this.ptr);
+		Reference.reachabilityFence(this);
+		int ret_conv_21_len = ret.length;
+		OutboundHTLCDetails[] ret_conv_21_arr = new OutboundHTLCDetails[ret_conv_21_len];
+		for (int v = 0; v < ret_conv_21_len; v++) {
+			long ret_conv_21 = ret[v];
+			org.ldk.structs.OutboundHTLCDetails ret_conv_21_hu_conv = null; if (ret_conv_21 < 0 || ret_conv_21 > 4096) { ret_conv_21_hu_conv = new org.ldk.structs.OutboundHTLCDetails(null, ret_conv_21); }
+			if (ret_conv_21_hu_conv != null) { ret_conv_21_hu_conv.ptrs_to.add(this); };
+			ret_conv_21_arr[v] = ret_conv_21_hu_conv;
+		}
+		return ret_conv_21_arr;
+	}
+
+	/**
+	 * Pending outbound HTLCs.
+	 * 
+	 * This field is empty for objects serialized with LDK versions prior to 0.0.122.
+	 */
+	public void set_pending_outbound_htlcs(OutboundHTLCDetails[] val) {
+		bindings.ChannelDetails_set_pending_outbound_htlcs(this.ptr, val != null ? Arrays.stream(val).mapToLong(val_conv_21 -> val_conv_21.ptr).toArray() : null);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
+		for (OutboundHTLCDetails val_conv_21: val) { if (this != null) { this.ptrs_to.add(val_conv_21); }; };
+	}
+
+	/**
+	 * Constructs a new ChannelDetails given each field
+	 * 
+	 * Note that funding_txo_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 * Note that channel_type_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 * Note that config_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	public static ChannelDetails of(org.ldk.structs.ChannelId channel_id_arg, org.ldk.structs.ChannelCounterparty counterparty_arg, @Nullable org.ldk.structs.OutPoint funding_txo_arg, @Nullable org.ldk.structs.ChannelTypeFeatures channel_type_arg, org.ldk.structs.Option_u64Z short_channel_id_arg, org.ldk.structs.Option_u64Z outbound_scid_alias_arg, org.ldk.structs.Option_u64Z inbound_scid_alias_arg, long channel_value_satoshis_arg, org.ldk.structs.Option_u64Z unspendable_punishment_reserve_arg, org.ldk.util.UInt128 user_channel_id_arg, org.ldk.structs.Option_u32Z feerate_sat_per_1000_weight_arg, long balance_msat_arg, long outbound_capacity_msat_arg, long next_outbound_htlc_limit_msat_arg, long next_outbound_htlc_minimum_msat_arg, long inbound_capacity_msat_arg, org.ldk.structs.Option_u32Z confirmations_required_arg, org.ldk.structs.Option_u32Z confirmations_arg, org.ldk.structs.Option_u16Z force_close_spend_delay_arg, boolean is_outbound_arg, boolean is_channel_ready_arg, org.ldk.structs.Option_ChannelShutdownStateZ channel_shutdown_state_arg, boolean is_usable_arg, boolean is_public_arg, org.ldk.structs.Option_u64Z inbound_htlc_minimum_msat_arg, org.ldk.structs.Option_u64Z inbound_htlc_maximum_msat_arg, @Nullable org.ldk.structs.ChannelConfig config_arg, InboundHTLCDetails[] pending_inbound_htlcs_arg, OutboundHTLCDetails[] pending_outbound_htlcs_arg) {
+		long ret = bindings.ChannelDetails_new(channel_id_arg.ptr, counterparty_arg.ptr, funding_txo_arg == null ? 0 : funding_txo_arg.ptr, channel_type_arg == null ? 0 : channel_type_arg.ptr, short_channel_id_arg.ptr, outbound_scid_alias_arg.ptr, inbound_scid_alias_arg.ptr, channel_value_satoshis_arg, unspendable_punishment_reserve_arg.ptr, user_channel_id_arg.getLEBytes(), feerate_sat_per_1000_weight_arg.ptr, balance_msat_arg, outbound_capacity_msat_arg, next_outbound_htlc_limit_msat_arg, next_outbound_htlc_minimum_msat_arg, inbound_capacity_msat_arg, confirmations_required_arg.ptr, confirmations_arg.ptr, force_close_spend_delay_arg.ptr, is_outbound_arg, is_channel_ready_arg, channel_shutdown_state_arg.ptr, is_usable_arg, is_public_arg, inbound_htlc_minimum_msat_arg.ptr, inbound_htlc_maximum_msat_arg.ptr, config_arg == null ? 0 : config_arg.ptr, pending_inbound_htlcs_arg != null ? Arrays.stream(pending_inbound_htlcs_arg).mapToLong(pending_inbound_htlcs_arg_conv_20 -> pending_inbound_htlcs_arg_conv_20.ptr).toArray() : null, pending_outbound_htlcs_arg != null ? Arrays.stream(pending_outbound_htlcs_arg).mapToLong(pending_outbound_htlcs_arg_conv_21 -> pending_outbound_htlcs_arg_conv_21.ptr).toArray() : null);
+		Reference.reachabilityFence(channel_id_arg);
+		Reference.reachabilityFence(counterparty_arg);
+		Reference.reachabilityFence(funding_txo_arg);
+		Reference.reachabilityFence(channel_type_arg);
+		Reference.reachabilityFence(short_channel_id_arg);
+		Reference.reachabilityFence(outbound_scid_alias_arg);
+		Reference.reachabilityFence(inbound_scid_alias_arg);
+		Reference.reachabilityFence(channel_value_satoshis_arg);
+		Reference.reachabilityFence(unspendable_punishment_reserve_arg);
+		Reference.reachabilityFence(user_channel_id_arg);
+		Reference.reachabilityFence(feerate_sat_per_1000_weight_arg);
+		Reference.reachabilityFence(balance_msat_arg);
+		Reference.reachabilityFence(outbound_capacity_msat_arg);
+		Reference.reachabilityFence(next_outbound_htlc_limit_msat_arg);
+		Reference.reachabilityFence(next_outbound_htlc_minimum_msat_arg);
+		Reference.reachabilityFence(inbound_capacity_msat_arg);
+		Reference.reachabilityFence(confirmations_required_arg);
+		Reference.reachabilityFence(confirmations_arg);
+		Reference.reachabilityFence(force_close_spend_delay_arg);
+		Reference.reachabilityFence(is_outbound_arg);
+		Reference.reachabilityFence(is_channel_ready_arg);
+		Reference.reachabilityFence(channel_shutdown_state_arg);
+		Reference.reachabilityFence(is_usable_arg);
+		Reference.reachabilityFence(is_public_arg);
+		Reference.reachabilityFence(inbound_htlc_minimum_msat_arg);
+		Reference.reachabilityFence(inbound_htlc_maximum_msat_arg);
+		Reference.reachabilityFence(config_arg);
+		Reference.reachabilityFence(pending_inbound_htlcs_arg);
+		Reference.reachabilityFence(pending_outbound_htlcs_arg);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ChannelDetails ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelDetails(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(counterparty_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(funding_txo_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_type_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(short_channel_id_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(outbound_scid_alias_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(inbound_scid_alias_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(unspendable_punishment_reserve_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(feerate_sat_per_1000_weight_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(confirmations_required_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(confirmations_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(force_close_spend_delay_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_shutdown_state_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(inbound_htlc_minimum_msat_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(inbound_htlc_maximum_msat_arg); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(config_arg); };
+		for (InboundHTLCDetails pending_inbound_htlcs_arg_conv_20: pending_inbound_htlcs_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(pending_inbound_htlcs_arg_conv_20); }; };
+		for (OutboundHTLCDetails pending_outbound_htlcs_arg_conv_21: pending_outbound_htlcs_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(pending_outbound_htlcs_arg_conv_21); }; };
+		return ret_hu_conv;
+	}
+
 	long clone_ptr() {
 		long ret = bindings.ChannelDetails_clone_ptr(this.ptr);
 		Reference.reachabilityFence(this);
@@ -870,6 +997,8 @@ public class ChannelDetails extends CommonBase {
 	 * 
 	 * This is either the [`ChannelDetails::short_channel_id`], if set, or the
 	 * [`ChannelDetails::outbound_scid_alias`]. See those for more information.
+	 * 
+	 * [`Route`]: crate::routing::router::Route
 	 */
 	public Option_u64Z get_outbound_payment_scid() {
 		long ret = bindings.ChannelDetails_get_outbound_payment_scid(this.ptr);
