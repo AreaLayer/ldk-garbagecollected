@@ -41,7 +41,6 @@ public class RouteParameters extends CommonBase {
 		bindings.RouteParameters_set_payment_params(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -91,7 +90,6 @@ public class RouteParameters extends CommonBase {
 		bindings.RouteParameters_set_max_total_routing_fee_msat(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -105,8 +103,6 @@ public class RouteParameters extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.RouteParameters ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.RouteParameters(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payment_params_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(max_total_routing_fee_msat_arg); };
 		return ret_hu_conv;
 	}
 
@@ -169,7 +165,22 @@ public class RouteParameters extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.RouteParameters ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.RouteParameters(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payment_params); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Sets the maximum number of hops that can be included in a payment path, based on the provided
+	 * [`RecipientOnionFields`] and blinded paths.
+	 */
+	public Result_NoneNoneZ set_max_path_length(org.ldk.structs.RecipientOnionFields recipient_onion, boolean is_keysend, int best_block_height) {
+		long ret = bindings.RouteParameters_set_max_path_length(this.ptr, recipient_onion.ptr, is_keysend, best_block_height);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(recipient_onion);
+		Reference.reachabilityFence(is_keysend);
+		Reference.reachabilityFence(best_block_height);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_NoneNoneZ ret_hu_conv = Result_NoneNoneZ.constr_from_ptr(ret);
+		if (this != null) { this.ptrs_to.add(recipient_onion); };
 		return ret_hu_conv;
 	}
 

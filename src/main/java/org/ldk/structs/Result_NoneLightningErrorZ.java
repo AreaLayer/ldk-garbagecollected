@@ -59,7 +59,6 @@ public class Result_NoneLightningErrorZ extends CommonBase {
 		Reference.reachabilityFence(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneLightningErrorZ ret_hu_conv = Result_NoneLightningErrorZ.constr_from_ptr(ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(e); };
 		return ret_hu_conv;
 	}
 

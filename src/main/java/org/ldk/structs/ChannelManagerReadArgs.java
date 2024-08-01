@@ -276,7 +276,6 @@ public class ChannelManagerReadArgs extends CommonBase {
 		bindings.ChannelManagerReadArgs_set_default_config(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -307,7 +306,6 @@ public class ChannelManagerReadArgs extends CommonBase {
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(tx_broadcaster); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(router); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(logger); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(default_config); };
 		for (ChannelMonitor channel_monitors_conv_16: channel_monitors) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_monitors_conv_16); }; };
 		return ret_hu_conv;
 	}

@@ -43,7 +43,6 @@ public class RawBolt11Invoice extends CommonBase {
 		bindings.RawBolt11Invoice_set_data(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**

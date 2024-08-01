@@ -50,9 +50,9 @@ public class MaxDustHTLCExposure extends CommonBase {
 		}
 	}
 	/**
-	 * This sets a multiplier on the [`ConfirmationTarget::OnChainSweep`] feerate (in sats/KW) to
-	 * determine the maximum allowed dust exposure. If this variant is used then the maximum dust
-	 * exposure in millisatoshis is calculated as:
+	 * This sets a multiplier on the [`ConfirmationTarget::MaximumFeeEstimate`] feerate (in
+	 * sats/KW) to determine the maximum allowed dust exposure. If this variant is used then the
+	 * maximum dust exposure in millisatoshis is calculated as:
 	 * `feerate_per_kw * value`. For example, with our default value
 	 * `FeeRateMultiplier(10_000)`:
 	 * 
@@ -75,7 +75,7 @@ public class MaxDustHTLCExposure extends CommonBase {
 	 * by default this will be set to a [`Self::FixedLimitMsat`] of 5,000,000 msat.
 	 * 
 	 * [`FeeEstimator`]: crate::chain::chaininterface::FeeEstimator
-	 * [`ConfirmationTarget::OnChainSweep`]: crate::chain::chaininterface::ConfirmationTarget::OnChainSweep
+	 * [`ConfirmationTarget::MaximumFeeEstimate`]: crate::chain::chaininterface::ConfirmationTarget::MaximumFeeEstimate
 	 */
 	public final static class FeeRateMultiplier extends MaxDustHTLCExposure {
 		public final long fee_rate_multiplier;

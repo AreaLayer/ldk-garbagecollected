@@ -54,6 +54,7 @@ public class Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ extends Co
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ ret_hu_conv = Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(o); };
 		return ret_hu_conv;
 	}
 
@@ -65,7 +66,6 @@ public class Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ extends Co
 		Reference.reachabilityFence(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ ret_hu_conv = Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ.constr_from_ptr(ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(e); };
 		return ret_hu_conv;
 	}
 

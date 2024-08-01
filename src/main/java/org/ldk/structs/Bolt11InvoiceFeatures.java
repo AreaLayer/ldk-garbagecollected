@@ -21,6 +21,26 @@ public class Bolt11InvoiceFeatures extends CommonBase {
 	}
 
 	/**
+	 * Serialize the Bolt11InvoiceFeatures object into a byte array which can be read by Bolt11InvoiceFeatures_read
+	 */
+	public byte[] write() {
+		byte[] ret = bindings.Bolt11InvoiceFeatures_write(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Read a Bolt11InvoiceFeatures from a byte array, created by Bolt11InvoiceFeatures_write
+	 */
+	public static Result_Bolt11InvoiceFeaturesDecodeErrorZ read(byte[] ser) {
+		long ret = bindings.Bolt11InvoiceFeatures_read(ser);
+		Reference.reachabilityFence(ser);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_Bolt11InvoiceFeaturesDecodeErrorZ ret_hu_conv = Result_Bolt11InvoiceFeaturesDecodeErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Checks if two Bolt11InvoiceFeaturess contain equal inner contents.
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 * Two objects with NULL inner values will be considered "equal" here.
@@ -68,6 +88,24 @@ public class Bolt11InvoiceFeatures extends CommonBase {
 		return (int)this.hash();
 	}
 	/**
+	 * Getting a route for a keysend payment to a private node requires providing the payee's
+	 * features (since they were not announced in a node announcement). However, keysend payments
+	 * don't have an invoice to pull the payee's features from, so this method is provided for use
+	 * when a [`Bolt11InvoiceFeatures`] is required in a route.
+	 * 
+	 * MPP keysend is not widely supported yet, so we parameterize support to allow the user to
+	 * choose whether their router should find multi-part routes.
+	 */
+	public static Bolt11InvoiceFeatures for_keysend(boolean allow_mpp) {
+		long ret = bindings.Bolt11InvoiceFeatures_for_keysend(allow_mpp);
+		Reference.reachabilityFence(allow_mpp);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Bolt11InvoiceFeatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Bolt11InvoiceFeatures(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Create a blank Features with no features set
 	 */
 	public static Bolt11InvoiceFeatures empty() {
@@ -76,6 +114,25 @@ public class Bolt11InvoiceFeatures extends CommonBase {
 		org.ldk.structs.Bolt11InvoiceFeatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Bolt11InvoiceFeatures(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
 		return ret_hu_conv;
+	}
+
+	/**
+	 * Returns the feature set as a list of bytes, in little-endian. This is in reverse byte order
+	 * from most on-the-wire encodings.
+	 */
+	public byte[] le_flags() {
+		byte[] ret = bindings.Bolt11InvoiceFeatures_le_flags(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Returns true if this `Features` has any optional flags set
+	 */
+	public boolean supports_any_optional_bits() {
+		boolean ret = bindings.Bolt11InvoiceFeatures_supports_any_optional_bits(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
 	}
 
 	/**
@@ -90,11 +147,31 @@ public class Bolt11InvoiceFeatures extends CommonBase {
 	}
 
 	/**
+	 * Returns the set of required features unknown by `other`, as their bit position.
+	 */
+	public long[] required_unknown_bits_from(org.ldk.structs.Bolt11InvoiceFeatures other) {
+		long[] ret = bindings.Bolt11InvoiceFeatures_required_unknown_bits_from(this.ptr, other.ptr);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(other);
+		if (this != null) { this.ptrs_to.add(other); };
+		return ret;
+	}
+
+	/**
 	 * Returns true if this `Features` object contains unknown feature flags which are set as
 	 * \"required\".
 	 */
 	public boolean requires_unknown_bits() {
 		boolean ret = bindings.Bolt11InvoiceFeatures_requires_unknown_bits(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Returns true if this `Features` supports any bits which we do not know of
+	 */
+	public boolean supports_unknown_bits() {
+		boolean ret = bindings.Bolt11InvoiceFeatures_supports_unknown_bits(this.ptr);
 		Reference.reachabilityFence(this);
 		return ret;
 	}
@@ -168,26 +245,6 @@ public class Bolt11InvoiceFeatures extends CommonBase {
 		Reference.reachabilityFence(bit);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneNoneZ ret_hu_conv = Result_NoneNoneZ.constr_from_ptr(ret);
-		return ret_hu_conv;
-	}
-
-	/**
-	 * Serialize the Bolt11InvoiceFeatures object into a byte array which can be read by Bolt11InvoiceFeatures_read
-	 */
-	public byte[] write() {
-		byte[] ret = bindings.Bolt11InvoiceFeatures_write(this.ptr);
-		Reference.reachabilityFence(this);
-		return ret;
-	}
-
-	/**
-	 * Read a Bolt11InvoiceFeatures from a byte array, created by Bolt11InvoiceFeatures_write
-	 */
-	public static Result_Bolt11InvoiceFeaturesDecodeErrorZ read(byte[] ser) {
-		long ret = bindings.Bolt11InvoiceFeatures_read(ser);
-		Reference.reachabilityFence(ser);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_Bolt11InvoiceFeaturesDecodeErrorZ ret_hu_conv = Result_Bolt11InvoiceFeaturesDecodeErrorZ.constr_from_ptr(ret);
 		return ret_hu_conv;
 	}
 

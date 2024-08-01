@@ -20,6 +20,26 @@ public class UntrustedString extends CommonBase {
 		if (ptr != 0) { bindings.UntrustedString_free(ptr); }
 	}
 
+	/**
+	 * Serialize the UntrustedString object into a byte array which can be read by UntrustedString_read
+	 */
+	public byte[] write() {
+		byte[] ret = bindings.UntrustedString_write(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Read a UntrustedString from a byte array, created by UntrustedString_write
+	 */
+	public static Result_UntrustedStringDecodeErrorZ read(byte[] ser) {
+		long ret = bindings.UntrustedString_read(ser);
+		Reference.reachabilityFence(ser);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_UntrustedStringDecodeErrorZ ret_hu_conv = Result_UntrustedStringDecodeErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
 	public String get_a() {
 		String ret = bindings.UntrustedString_get_a(this.ptr);
 		Reference.reachabilityFence(this);
@@ -91,26 +111,6 @@ public class UntrustedString extends CommonBase {
 	@Override public int hashCode() {
 		return (int)this.hash();
 	}
-	/**
-	 * Serialize the UntrustedString object into a byte array which can be read by UntrustedString_read
-	 */
-	public byte[] write() {
-		byte[] ret = bindings.UntrustedString_write(this.ptr);
-		Reference.reachabilityFence(this);
-		return ret;
-	}
-
-	/**
-	 * Read a UntrustedString from a byte array, created by UntrustedString_write
-	 */
-	public static Result_UntrustedStringDecodeErrorZ read(byte[] ser) {
-		long ret = bindings.UntrustedString_read(ser);
-		Reference.reachabilityFence(ser);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_UntrustedStringDecodeErrorZ ret_hu_conv = Result_UntrustedStringDecodeErrorZ.constr_from_ptr(ret);
-		return ret_hu_conv;
-	}
-
 	/**
 	 * Get the string representation of a UntrustedString object
 	 */

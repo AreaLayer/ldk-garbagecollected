@@ -79,10 +79,40 @@ public class InvoiceRequestFeatures extends CommonBase {
 	}
 
 	/**
+	 * Returns the feature set as a list of bytes, in little-endian. This is in reverse byte order
+	 * from most on-the-wire encodings.
+	 */
+	public byte[] le_flags() {
+		byte[] ret = bindings.InvoiceRequestFeatures_le_flags(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Returns true if this `Features` has any optional flags set
+	 */
+	public boolean supports_any_optional_bits() {
+		boolean ret = bindings.InvoiceRequestFeatures_supports_any_optional_bits(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
 	 * Returns true if this `Features` object contains required features unknown by `other`.
 	 */
 	public boolean requires_unknown_bits_from(org.ldk.structs.InvoiceRequestFeatures other) {
 		boolean ret = bindings.InvoiceRequestFeatures_requires_unknown_bits_from(this.ptr, other.ptr);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(other);
+		if (this != null) { this.ptrs_to.add(other); };
+		return ret;
+	}
+
+	/**
+	 * Returns the set of required features unknown by `other`, as their bit position.
+	 */
+	public long[] required_unknown_bits_from(org.ldk.structs.InvoiceRequestFeatures other) {
+		long[] ret = bindings.InvoiceRequestFeatures_required_unknown_bits_from(this.ptr, other.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(other);
 		if (this != null) { this.ptrs_to.add(other); };
@@ -95,6 +125,15 @@ public class InvoiceRequestFeatures extends CommonBase {
 	 */
 	public boolean requires_unknown_bits() {
 		boolean ret = bindings.InvoiceRequestFeatures_requires_unknown_bits(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Returns true if this `Features` supports any bits which we do not know of
+	 */
+	public boolean supports_unknown_bits() {
+		boolean ret = bindings.InvoiceRequestFeatures_supports_unknown_bits(this.ptr);
 		Reference.reachabilityFence(this);
 		return ret;
 	}

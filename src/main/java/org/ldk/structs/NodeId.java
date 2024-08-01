@@ -39,6 +39,23 @@ public class NodeId extends CommonBase {
 	}
 
 	/**
+	 * Checks if two NodeIds contain equal inner contents.
+	 * This ignores pointers and is_owned flags and looks at the values in fields.
+	 * Two objects with NULL inner values will be considered "equal" here.
+	 */
+	public boolean eq(org.ldk.structs.NodeId b) {
+		boolean ret = bindings.NodeId_eq(this.ptr, b.ptr);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(b);
+		if (this != null) { this.ptrs_to.add(b); };
+		return ret;
+	}
+
+	@Override public boolean equals(Object o) {
+		if (!(o instanceof NodeId)) return false;
+		return this.eq((NodeId)o);
+	}
+	/**
 	 * Create a new NodeId from a public key
 	 */
 	public static NodeId from_pubkey(byte[] pubkey) {

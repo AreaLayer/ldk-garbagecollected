@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 /**
  * Configuration we set when applicable.
  * 
- * Default::default() provides sane defaults.
+ * `Default::default()` provides sane defaults.
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class ChannelHandshakeConfig extends CommonBase {
@@ -24,15 +24,15 @@ public class ChannelHandshakeConfig extends CommonBase {
 
 	/**
 	 * Confirmations we will wait for before considering the channel locked in.
-	 * Applied only for inbound channels (see ChannelHandshakeLimits::max_minimum_depth for the
+	 * Applied only for inbound channels (see [`ChannelHandshakeLimits::max_minimum_depth`] for the
 	 * equivalent limit applied to outbound channels).
 	 * 
-	 * A lower-bound of 1 is applied, requiring all channels to have a confirmed commitment
+	 * A lower-bound of `1` is applied, requiring all channels to have a confirmed commitment
 	 * transaction before operation. If you wish to accept channels with zero confirmations, see
 	 * [`UserConfig::manually_accept_inbound_channels`] and
 	 * [`ChannelManager::accept_inbound_channel_from_trusted_peer_0conf`].
 	 * 
-	 * Default value: 6.
+	 * Default value: `6`
 	 * 
 	 * [`ChannelManager::accept_inbound_channel`]: crate::ln::channelmanager::ChannelManager::accept_inbound_channel
 	 * [`ChannelManager::accept_inbound_channel_from_trusted_peer_0conf`]: crate::ln::channelmanager::ChannelManager::accept_inbound_channel_from_trusted_peer_0conf
@@ -45,15 +45,15 @@ public class ChannelHandshakeConfig extends CommonBase {
 
 	/**
 	 * Confirmations we will wait for before considering the channel locked in.
-	 * Applied only for inbound channels (see ChannelHandshakeLimits::max_minimum_depth for the
+	 * Applied only for inbound channels (see [`ChannelHandshakeLimits::max_minimum_depth`] for the
 	 * equivalent limit applied to outbound channels).
 	 * 
-	 * A lower-bound of 1 is applied, requiring all channels to have a confirmed commitment
+	 * A lower-bound of `1` is applied, requiring all channels to have a confirmed commitment
 	 * transaction before operation. If you wish to accept channels with zero confirmations, see
 	 * [`UserConfig::manually_accept_inbound_channels`] and
 	 * [`ChannelManager::accept_inbound_channel_from_trusted_peer_0conf`].
 	 * 
-	 * Default value: 6.
+	 * Default value: `6`
 	 * 
 	 * [`ChannelManager::accept_inbound_channel`]: crate::ln::channelmanager::ChannelManager::accept_inbound_channel
 	 * [`ChannelManager::accept_inbound_channel_from_trusted_peer_0conf`]: crate::ln::channelmanager::ChannelManager::accept_inbound_channel_from_trusted_peer_0conf
@@ -78,8 +78,8 @@ public class ChannelHandshakeConfig extends CommonBase {
 	 * case of an honest unilateral channel close, which implicitly decrease the economic value of
 	 * our channel.
 	 * 
-	 * Default value: [`BREAKDOWN_TIMEOUT`], we enforce it as a minimum at channel opening so you
-	 * can tweak config to ask for more security, not less.
+	 * Default value: [`BREAKDOWN_TIMEOUT`] (We enforce it as a minimum at channel opening so you
+	 * can tweak config to ask for more security, not less.)
 	 */
 	public short get_our_to_self_delay() {
 		short ret = bindings.ChannelHandshakeConfig_get_our_to_self_delay(this.ptr);
@@ -101,8 +101,8 @@ public class ChannelHandshakeConfig extends CommonBase {
 	 * case of an honest unilateral channel close, which implicitly decrease the economic value of
 	 * our channel.
 	 * 
-	 * Default value: [`BREAKDOWN_TIMEOUT`], we enforce it as a minimum at channel opening so you
-	 * can tweak config to ask for more security, not less.
+	 * Default value: [`BREAKDOWN_TIMEOUT`] (We enforce it as a minimum at channel opening so you
+	 * can tweak config to ask for more security, not less.)
 	 */
 	public void set_our_to_self_delay(short val) {
 		bindings.ChannelHandshakeConfig_set_our_to_self_delay(this.ptr, val);
@@ -116,8 +116,8 @@ public class ChannelHandshakeConfig extends CommonBase {
 	 * This value is sent to our counterparty on channel-open and we close the channel any time
 	 * our counterparty misbehaves by sending us an HTLC with a value smaller than this.
 	 * 
-	 * Default value: 1. If the value is less than 1, it is ignored and set to 1, as is required
-	 * by the protocol.
+	 * Default value: `1` (If the value is less than `1`, it is ignored and set to `1`, as is
+	 * required by the protocol.
 	 */
 	public long get_our_htlc_minimum_msat() {
 		long ret = bindings.ChannelHandshakeConfig_get_our_htlc_minimum_msat(this.ptr);
@@ -131,8 +131,8 @@ public class ChannelHandshakeConfig extends CommonBase {
 	 * This value is sent to our counterparty on channel-open and we close the channel any time
 	 * our counterparty misbehaves by sending us an HTLC with a value smaller than this.
 	 * 
-	 * Default value: 1. If the value is less than 1, it is ignored and set to 1, as is required
-	 * by the protocol.
+	 * Default value: `1` (If the value is less than `1`, it is ignored and set to `1`, as is
+	 * required by the protocol.
 	 */
 	public void set_our_htlc_minimum_msat(long val) {
 		bindings.ChannelHandshakeConfig_set_our_htlc_minimum_msat(this.ptr, val);
@@ -148,7 +148,7 @@ public class ChannelHandshakeConfig extends CommonBase {
 	 * channel value in whole percentages.
 	 * 
 	 * Note that:
-	 * If configured to another value than the default value 10, any new channels created with
+	 * If configured to another value than the default value `10`, any new channels created with
 	 * the non default value will cause versions of LDK prior to 0.0.104 to refuse to read the
 	 * `ChannelManager`.
 	 * 
@@ -161,9 +161,11 @@ public class ChannelHandshakeConfig extends CommonBase {
 	 * See [`ChannelHandshakeConfig::our_to_self_delay`] and [`ChannelConfig::cltv_expiry_delta`]
 	 * for more information.
 	 * 
-	 * Default value: 10.
-	 * Minimum value: 1, any values less than 1 will be treated as 1 instead.
-	 * Maximum value: 100, any values larger than 100 will be treated as 100 instead.
+	 * Default value: `10`
+	 * 
+	 * Minimum value: `1` (Any values less will be treated as `1` instead.)
+	 * 
+	 * Maximum value: `100` (Any values larger will be treated as `100` instead.)
 	 */
 	public byte get_max_inbound_htlc_value_in_flight_percent_of_channel() {
 		byte ret = bindings.ChannelHandshakeConfig_get_max_inbound_htlc_value_in_flight_percent_of_channel(this.ptr);
@@ -179,7 +181,7 @@ public class ChannelHandshakeConfig extends CommonBase {
 	 * channel value in whole percentages.
 	 * 
 	 * Note that:
-	 * If configured to another value than the default value 10, any new channels created with
+	 * If configured to another value than the default value `10`, any new channels created with
 	 * the non default value will cause versions of LDK prior to 0.0.104 to refuse to read the
 	 * `ChannelManager`.
 	 * 
@@ -192,9 +194,11 @@ public class ChannelHandshakeConfig extends CommonBase {
 	 * See [`ChannelHandshakeConfig::our_to_self_delay`] and [`ChannelConfig::cltv_expiry_delta`]
 	 * for more information.
 	 * 
-	 * Default value: 10.
-	 * Minimum value: 1, any values less than 1 will be treated as 1 instead.
-	 * Maximum value: 100, any values larger than 100 will be treated as 100 instead.
+	 * Default value: `10`
+	 * 
+	 * Minimum value: `1` (Any values less will be treated as `1` instead.)
+	 * 
+	 * Maximum value: `100` (Any values larger will be treated as `100` instead.)
 	 */
 	public void set_max_inbound_htlc_value_in_flight_percent_of_channel(byte val) {
 		bindings.ChannelHandshakeConfig_set_max_inbound_htlc_value_in_flight_percent_of_channel(this.ptr, val);
@@ -217,10 +221,10 @@ public class ChannelHandshakeConfig extends CommonBase {
 	 * private channel without that option.
 	 * 
 	 * Ignored if the channel is negotiated to be announced, see
-	 * [`ChannelHandshakeConfig::announced_channel`] and
+	 * [`ChannelHandshakeConfig::announce_for_forwarding`] and
 	 * [`ChannelHandshakeLimits::force_announced_channel_preference`] for more.
 	 * 
-	 * Default value: false. This value is likely to change to true in the future.
+	 * Default value: `false` (This value is likely to change to `true` in the future.)
 	 * 
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 * [`DecodeError::InvalidValue`]: crate::ln::msgs::DecodeError::InvalidValue
@@ -246,10 +250,10 @@ public class ChannelHandshakeConfig extends CommonBase {
 	 * private channel without that option.
 	 * 
 	 * Ignored if the channel is negotiated to be announced, see
-	 * [`ChannelHandshakeConfig::announced_channel`] and
+	 * [`ChannelHandshakeConfig::announce_for_forwarding`] and
 	 * [`ChannelHandshakeLimits::force_announced_channel_preference`] for more.
 	 * 
-	 * Default value: false. This value is likely to change to true in the future.
+	 * Default value: `false` (This value is likely to change to `true` in the future.)
 	 * 
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 * [`DecodeError::InvalidValue`]: crate::ln::msgs::DecodeError::InvalidValue
@@ -269,10 +273,10 @@ public class ChannelHandshakeConfig extends CommonBase {
 	 * As the node which funds a channel picks this value this will only apply for new outbound
 	 * channels unless [`ChannelHandshakeLimits::force_announced_channel_preference`] is set.
 	 * 
-	 * Default value: false.
+	 * Default value: `false`
 	 */
-	public boolean get_announced_channel() {
-		boolean ret = bindings.ChannelHandshakeConfig_get_announced_channel(this.ptr);
+	public boolean get_announce_for_forwarding() {
+		boolean ret = bindings.ChannelHandshakeConfig_get_announce_for_forwarding(this.ptr);
 		Reference.reachabilityFence(this);
 		return ret;
 	}
@@ -286,10 +290,10 @@ public class ChannelHandshakeConfig extends CommonBase {
 	 * As the node which funds a channel picks this value this will only apply for new outbound
 	 * channels unless [`ChannelHandshakeLimits::force_announced_channel_preference`] is set.
 	 * 
-	 * Default value: false.
+	 * Default value: `false`
 	 */
-	public void set_announced_channel(boolean val) {
-		bindings.ChannelHandshakeConfig_set_announced_channel(this.ptr, val);
+	public void set_announce_for_forwarding(boolean val) {
+		bindings.ChannelHandshakeConfig_set_announce_for_forwarding(this.ptr, val);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 	}
@@ -305,7 +309,7 @@ public class ChannelHandshakeConfig extends CommonBase {
 	 * 
 	 * The upfront key committed is provided from [`SignerProvider::get_shutdown_scriptpubkey`].
 	 * 
-	 * Default value: true.
+	 * Default value: `true`
 	 * 
 	 * [`SignerProvider::get_shutdown_scriptpubkey`]: crate::sign::SignerProvider::get_shutdown_scriptpubkey
 	 */
@@ -326,7 +330,7 @@ public class ChannelHandshakeConfig extends CommonBase {
 	 * 
 	 * The upfront key committed is provided from [`SignerProvider::get_shutdown_scriptpubkey`].
 	 * 
-	 * Default value: true.
+	 * Default value: `true`
 	 * 
 	 * [`SignerProvider::get_shutdown_scriptpubkey`]: crate::sign::SignerProvider::get_shutdown_scriptpubkey
 	 */
@@ -354,11 +358,15 @@ public class ChannelHandshakeConfig extends CommonBase {
 	 * Note: Versions of LDK earlier than v0.0.104 will fail to read channels with any channel reserve
 	 * other than the default value.
 	 * 
-	 * Default value: 1% of channel value, i.e., configured as 10,000 millionths.
-	 * Minimum value: If the calculated proportional value is less than 1000 sats, it will be treated
-	 * as 1000 sats instead, which is a safe implementation-specific lower bound.
-	 * Maximum value: 1,000,000, any values larger than 1 Million will be treated as 1 Million (or 100%)
-	 * instead, although channel negotiations will fail in that case.
+	 * Default value: `10_000` millionths (i.e., 1% of channel value)
+	 * 
+	 * Minimum value: If the calculated proportional value is less than `1000` sats, it will be
+	 * treated as `1000` sats instead, which is a safe implementation-specific lower
+	 * bound.
+	 * 
+	 * Maximum value: `1_000_000` (i.e., 100% of channel value. Any values larger than one million
+	 * will be treated as one million instead, although channel negotiations will
+	 * fail in that case.)
 	 */
 	public int get_their_channel_reserve_proportional_millionths() {
 		int ret = bindings.ChannelHandshakeConfig_get_their_channel_reserve_proportional_millionths(this.ptr);
@@ -384,11 +392,15 @@ public class ChannelHandshakeConfig extends CommonBase {
 	 * Note: Versions of LDK earlier than v0.0.104 will fail to read channels with any channel reserve
 	 * other than the default value.
 	 * 
-	 * Default value: 1% of channel value, i.e., configured as 10,000 millionths.
-	 * Minimum value: If the calculated proportional value is less than 1000 sats, it will be treated
-	 * as 1000 sats instead, which is a safe implementation-specific lower bound.
-	 * Maximum value: 1,000,000, any values larger than 1 Million will be treated as 1 Million (or 100%)
-	 * instead, although channel negotiations will fail in that case.
+	 * Default value: `10_000` millionths (i.e., 1% of channel value)
+	 * 
+	 * Minimum value: If the calculated proportional value is less than `1000` sats, it will be
+	 * treated as `1000` sats instead, which is a safe implementation-specific lower
+	 * bound.
+	 * 
+	 * Maximum value: `1_000_000` (i.e., 100% of channel value. Any values larger than one million
+	 * will be treated as one million instead, although channel negotiations will
+	 * fail in that case.)
 	 */
 	public void set_their_channel_reserve_proportional_millionths(int val) {
 		bindings.ChannelHandshakeConfig_set_their_channel_reserve_proportional_millionths(this.ptr, val);
@@ -419,7 +431,7 @@ public class ChannelHandshakeConfig extends CommonBase {
 	 * vulnerability after its deployment. For more context, see the [`SIGHASH_SINGLE + update_fee
 	 * Considered Harmful`] mailing list post.
 	 * 
-	 * Default value: false. This value is likely to change to true in the future.
+	 * Default value: `false` (This value is likely to change to `true` in the future.)
 	 * 
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 * [`ChannelManager::accept_inbound_channel`]: crate::ln::channelmanager::ChannelManager::accept_inbound_channel
@@ -455,7 +467,7 @@ public class ChannelHandshakeConfig extends CommonBase {
 	 * vulnerability after its deployment. For more context, see the [`SIGHASH_SINGLE + update_fee
 	 * Considered Harmful`] mailing list post.
 	 * 
-	 * Default value: false. This value is likely to change to true in the future.
+	 * Default value: `false` (This value is likely to change to `true` in the future.)
 	 * 
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 * [`ChannelManager::accept_inbound_channel`]: crate::ln::channelmanager::ChannelManager::accept_inbound_channel
@@ -477,9 +489,10 @@ public class ChannelHandshakeConfig extends CommonBase {
 	 * Note: Versions of LDK earlier than v0.0.115 will fail to read channels with a configuration
 	 * other than the default value.
 	 * 
-	 * Default value: 50
-	 * Maximum value: 483, any values larger will be treated as 483.
-	 * This is the BOLT #2 spec limit on `max_accepted_htlcs`.
+	 * Default value: `50`
+	 * 
+	 * Maximum value: `483` (Any values larger will be treated as `483`. This is the BOLT #2 spec
+	 * limit on `max_accepted_htlcs`.)
 	 */
 	public short get_our_max_accepted_htlcs() {
 		short ret = bindings.ChannelHandshakeConfig_get_our_max_accepted_htlcs(this.ptr);
@@ -496,9 +509,10 @@ public class ChannelHandshakeConfig extends CommonBase {
 	 * Note: Versions of LDK earlier than v0.0.115 will fail to read channels with a configuration
 	 * other than the default value.
 	 * 
-	 * Default value: 50
-	 * Maximum value: 483, any values larger will be treated as 483.
-	 * This is the BOLT #2 spec limit on `max_accepted_htlcs`.
+	 * Default value: `50`
+	 * 
+	 * Maximum value: `483` (Any values larger will be treated as `483`. This is the BOLT #2 spec
+	 * limit on `max_accepted_htlcs`.)
 	 */
 	public void set_our_max_accepted_htlcs(short val) {
 		bindings.ChannelHandshakeConfig_set_our_max_accepted_htlcs(this.ptr, val);
@@ -509,14 +523,14 @@ public class ChannelHandshakeConfig extends CommonBase {
 	/**
 	 * Constructs a new ChannelHandshakeConfig given each field
 	 */
-	public static ChannelHandshakeConfig of(int minimum_depth_arg, short our_to_self_delay_arg, long our_htlc_minimum_msat_arg, byte max_inbound_htlc_value_in_flight_percent_of_channel_arg, boolean negotiate_scid_privacy_arg, boolean announced_channel_arg, boolean commit_upfront_shutdown_pubkey_arg, int their_channel_reserve_proportional_millionths_arg, boolean negotiate_anchors_zero_fee_htlc_tx_arg, short our_max_accepted_htlcs_arg) {
-		long ret = bindings.ChannelHandshakeConfig_new(minimum_depth_arg, our_to_self_delay_arg, our_htlc_minimum_msat_arg, max_inbound_htlc_value_in_flight_percent_of_channel_arg, negotiate_scid_privacy_arg, announced_channel_arg, commit_upfront_shutdown_pubkey_arg, their_channel_reserve_proportional_millionths_arg, negotiate_anchors_zero_fee_htlc_tx_arg, our_max_accepted_htlcs_arg);
+	public static ChannelHandshakeConfig of(int minimum_depth_arg, short our_to_self_delay_arg, long our_htlc_minimum_msat_arg, byte max_inbound_htlc_value_in_flight_percent_of_channel_arg, boolean negotiate_scid_privacy_arg, boolean announce_for_forwarding_arg, boolean commit_upfront_shutdown_pubkey_arg, int their_channel_reserve_proportional_millionths_arg, boolean negotiate_anchors_zero_fee_htlc_tx_arg, short our_max_accepted_htlcs_arg) {
+		long ret = bindings.ChannelHandshakeConfig_new(minimum_depth_arg, our_to_self_delay_arg, our_htlc_minimum_msat_arg, max_inbound_htlc_value_in_flight_percent_of_channel_arg, negotiate_scid_privacy_arg, announce_for_forwarding_arg, commit_upfront_shutdown_pubkey_arg, their_channel_reserve_proportional_millionths_arg, negotiate_anchors_zero_fee_htlc_tx_arg, our_max_accepted_htlcs_arg);
 		Reference.reachabilityFence(minimum_depth_arg);
 		Reference.reachabilityFence(our_to_self_delay_arg);
 		Reference.reachabilityFence(our_htlc_minimum_msat_arg);
 		Reference.reachabilityFence(max_inbound_htlc_value_in_flight_percent_of_channel_arg);
 		Reference.reachabilityFence(negotiate_scid_privacy_arg);
-		Reference.reachabilityFence(announced_channel_arg);
+		Reference.reachabilityFence(announce_for_forwarding_arg);
 		Reference.reachabilityFence(commit_upfront_shutdown_pubkey_arg);
 		Reference.reachabilityFence(their_channel_reserve_proportional_millionths_arg);
 		Reference.reachabilityFence(negotiate_anchors_zero_fee_htlc_tx_arg);

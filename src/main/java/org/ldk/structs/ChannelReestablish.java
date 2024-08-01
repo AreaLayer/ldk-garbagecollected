@@ -41,7 +41,6 @@ public class ChannelReestablish extends CommonBase {
 		bindings.ChannelReestablish_set_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -137,7 +136,6 @@ public class ChannelReestablish extends CommonBase {
 		bindings.ChannelReestablish_set_next_funding_txid(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -154,8 +152,6 @@ public class ChannelReestablish extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ChannelReestablish ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelReestablish(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(next_funding_txid_arg); };
 		return ret_hu_conv;
 	}
 

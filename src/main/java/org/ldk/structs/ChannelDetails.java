@@ -11,8 +11,14 @@ import javax.annotation.Nullable;
 /**
  * Details of a channel, as returned by [`ChannelManager::list_channels`] and [`ChannelManager::list_usable_channels`]
  * 
+ * Balances of a channel are available through [`ChainMonitor::get_claimable_balances`] and
+ * [`ChannelMonitor::get_claimable_balances`], calculated with respect to the corresponding on-chain
+ * transactions.
+ * 
  * [`ChannelManager::list_channels`]: crate::ln::channelmanager::ChannelManager::list_channels
  * [`ChannelManager::list_usable_channels`]: crate::ln::channelmanager::ChannelManager::list_usable_channels
+ * [`ChainMonitor::get_claimable_balances`]: crate::chain::chainmonitor::ChainMonitor::get_claimable_balances
+ * [`ChannelMonitor::get_claimable_balances`]: crate::chain::channelmonitor::ChannelMonitor::get_claimable_balances
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class ChannelDetails extends CommonBase {
@@ -48,7 +54,6 @@ public class ChannelDetails extends CommonBase {
 		bindings.ChannelDetails_set_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -70,7 +75,6 @@ public class ChannelDetails extends CommonBase {
 		bindings.ChannelDetails_set_counterparty(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -99,7 +103,6 @@ public class ChannelDetails extends CommonBase {
 		bindings.ChannelDetails_set_funding_txo(this.ptr, val == null ? 0 : val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -130,7 +133,6 @@ public class ChannelDetails extends CommonBase {
 		bindings.ChannelDetails_set_channel_type(this.ptr, val == null ? 0 : val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -178,7 +180,6 @@ public class ChannelDetails extends CommonBase {
 		bindings.ChannelDetails_set_short_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -216,7 +217,6 @@ public class ChannelDetails extends CommonBase {
 		bindings.ChannelDetails_set_outbound_scid_alias(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -254,7 +254,6 @@ public class ChannelDetails extends CommonBase {
 		bindings.ChannelDetails_set_inbound_scid_alias(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -310,7 +309,6 @@ public class ChannelDetails extends CommonBase {
 		bindings.ChannelDetails_set_unspendable_punishment_reserve(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -373,7 +371,6 @@ public class ChannelDetails extends CommonBase {
 		bindings.ChannelDetails_set_feerate_sat_per_1000_weight(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -575,7 +572,6 @@ public class ChannelDetails extends CommonBase {
 		bindings.ChannelDetails_set_confirmations_required(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -601,7 +597,6 @@ public class ChannelDetails extends CommonBase {
 		bindings.ChannelDetails_set_confirmations(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -635,7 +630,6 @@ public class ChannelDetails extends CommonBase {
 		bindings.ChannelDetails_set_force_close_spend_delay(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -709,7 +703,6 @@ public class ChannelDetails extends CommonBase {
 		bindings.ChannelDetails_set_channel_shutdown_state(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -739,8 +732,8 @@ public class ChannelDetails extends CommonBase {
 	/**
 	 * True if this channel is (or will be) publicly-announced.
 	 */
-	public boolean get_is_public() {
-		boolean ret = bindings.ChannelDetails_get_is_public(this.ptr);
+	public boolean get_is_announced() {
+		boolean ret = bindings.ChannelDetails_get_is_announced(this.ptr);
 		Reference.reachabilityFence(this);
 		return ret;
 	}
@@ -748,8 +741,8 @@ public class ChannelDetails extends CommonBase {
 	/**
 	 * True if this channel is (or will be) publicly-announced.
 	 */
-	public void set_is_public(boolean val) {
-		bindings.ChannelDetails_set_is_public(this.ptr, val);
+	public void set_is_announced(boolean val) {
+		bindings.ChannelDetails_set_is_announced(this.ptr, val);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 	}
@@ -775,7 +768,6 @@ public class ChannelDetails extends CommonBase {
 		bindings.ChannelDetails_set_inbound_htlc_minimum_msat(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -797,7 +789,6 @@ public class ChannelDetails extends CommonBase {
 		bindings.ChannelDetails_set_inbound_htlc_maximum_msat(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -828,7 +819,6 @@ public class ChannelDetails extends CommonBase {
 		bindings.ChannelDetails_set_config(this.ptr, val == null ? 0 : val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -859,7 +849,6 @@ public class ChannelDetails extends CommonBase {
 		bindings.ChannelDetails_set_pending_inbound_htlcs(this.ptr, val != null ? Arrays.stream(val).mapToLong(val_conv_20 -> val_conv_20.ptr).toArray() : null);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		for (InboundHTLCDetails val_conv_20: val) { if (this != null) { this.ptrs_to.add(val_conv_20); }; };
 	}
 
 	/**
@@ -890,7 +879,6 @@ public class ChannelDetails extends CommonBase {
 		bindings.ChannelDetails_set_pending_outbound_htlcs(this.ptr, val != null ? Arrays.stream(val).mapToLong(val_conv_21 -> val_conv_21.ptr).toArray() : null);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		for (OutboundHTLCDetails val_conv_21: val) { if (this != null) { this.ptrs_to.add(val_conv_21); }; };
 	}
 
 	/**
@@ -900,8 +888,8 @@ public class ChannelDetails extends CommonBase {
 	 * Note that channel_type_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 * Note that config_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static ChannelDetails of(org.ldk.structs.ChannelId channel_id_arg, org.ldk.structs.ChannelCounterparty counterparty_arg, @Nullable org.ldk.structs.OutPoint funding_txo_arg, @Nullable org.ldk.structs.ChannelTypeFeatures channel_type_arg, org.ldk.structs.Option_u64Z short_channel_id_arg, org.ldk.structs.Option_u64Z outbound_scid_alias_arg, org.ldk.structs.Option_u64Z inbound_scid_alias_arg, long channel_value_satoshis_arg, org.ldk.structs.Option_u64Z unspendable_punishment_reserve_arg, org.ldk.util.UInt128 user_channel_id_arg, org.ldk.structs.Option_u32Z feerate_sat_per_1000_weight_arg, long balance_msat_arg, long outbound_capacity_msat_arg, long next_outbound_htlc_limit_msat_arg, long next_outbound_htlc_minimum_msat_arg, long inbound_capacity_msat_arg, org.ldk.structs.Option_u32Z confirmations_required_arg, org.ldk.structs.Option_u32Z confirmations_arg, org.ldk.structs.Option_u16Z force_close_spend_delay_arg, boolean is_outbound_arg, boolean is_channel_ready_arg, org.ldk.structs.Option_ChannelShutdownStateZ channel_shutdown_state_arg, boolean is_usable_arg, boolean is_public_arg, org.ldk.structs.Option_u64Z inbound_htlc_minimum_msat_arg, org.ldk.structs.Option_u64Z inbound_htlc_maximum_msat_arg, @Nullable org.ldk.structs.ChannelConfig config_arg, InboundHTLCDetails[] pending_inbound_htlcs_arg, OutboundHTLCDetails[] pending_outbound_htlcs_arg) {
-		long ret = bindings.ChannelDetails_new(channel_id_arg.ptr, counterparty_arg.ptr, funding_txo_arg == null ? 0 : funding_txo_arg.ptr, channel_type_arg == null ? 0 : channel_type_arg.ptr, short_channel_id_arg.ptr, outbound_scid_alias_arg.ptr, inbound_scid_alias_arg.ptr, channel_value_satoshis_arg, unspendable_punishment_reserve_arg.ptr, user_channel_id_arg.getLEBytes(), feerate_sat_per_1000_weight_arg.ptr, balance_msat_arg, outbound_capacity_msat_arg, next_outbound_htlc_limit_msat_arg, next_outbound_htlc_minimum_msat_arg, inbound_capacity_msat_arg, confirmations_required_arg.ptr, confirmations_arg.ptr, force_close_spend_delay_arg.ptr, is_outbound_arg, is_channel_ready_arg, channel_shutdown_state_arg.ptr, is_usable_arg, is_public_arg, inbound_htlc_minimum_msat_arg.ptr, inbound_htlc_maximum_msat_arg.ptr, config_arg == null ? 0 : config_arg.ptr, pending_inbound_htlcs_arg != null ? Arrays.stream(pending_inbound_htlcs_arg).mapToLong(pending_inbound_htlcs_arg_conv_20 -> pending_inbound_htlcs_arg_conv_20.ptr).toArray() : null, pending_outbound_htlcs_arg != null ? Arrays.stream(pending_outbound_htlcs_arg).mapToLong(pending_outbound_htlcs_arg_conv_21 -> pending_outbound_htlcs_arg_conv_21.ptr).toArray() : null);
+	public static ChannelDetails of(org.ldk.structs.ChannelId channel_id_arg, org.ldk.structs.ChannelCounterparty counterparty_arg, @Nullable org.ldk.structs.OutPoint funding_txo_arg, @Nullable org.ldk.structs.ChannelTypeFeatures channel_type_arg, org.ldk.structs.Option_u64Z short_channel_id_arg, org.ldk.structs.Option_u64Z outbound_scid_alias_arg, org.ldk.structs.Option_u64Z inbound_scid_alias_arg, long channel_value_satoshis_arg, org.ldk.structs.Option_u64Z unspendable_punishment_reserve_arg, org.ldk.util.UInt128 user_channel_id_arg, org.ldk.structs.Option_u32Z feerate_sat_per_1000_weight_arg, long balance_msat_arg, long outbound_capacity_msat_arg, long next_outbound_htlc_limit_msat_arg, long next_outbound_htlc_minimum_msat_arg, long inbound_capacity_msat_arg, org.ldk.structs.Option_u32Z confirmations_required_arg, org.ldk.structs.Option_u32Z confirmations_arg, org.ldk.structs.Option_u16Z force_close_spend_delay_arg, boolean is_outbound_arg, boolean is_channel_ready_arg, org.ldk.structs.Option_ChannelShutdownStateZ channel_shutdown_state_arg, boolean is_usable_arg, boolean is_announced_arg, org.ldk.structs.Option_u64Z inbound_htlc_minimum_msat_arg, org.ldk.structs.Option_u64Z inbound_htlc_maximum_msat_arg, @Nullable org.ldk.structs.ChannelConfig config_arg, InboundHTLCDetails[] pending_inbound_htlcs_arg, OutboundHTLCDetails[] pending_outbound_htlcs_arg) {
+		long ret = bindings.ChannelDetails_new(channel_id_arg.ptr, counterparty_arg.ptr, funding_txo_arg == null ? 0 : funding_txo_arg.ptr, channel_type_arg == null ? 0 : channel_type_arg.ptr, short_channel_id_arg.ptr, outbound_scid_alias_arg.ptr, inbound_scid_alias_arg.ptr, channel_value_satoshis_arg, unspendable_punishment_reserve_arg.ptr, user_channel_id_arg.getLEBytes(), feerate_sat_per_1000_weight_arg.ptr, balance_msat_arg, outbound_capacity_msat_arg, next_outbound_htlc_limit_msat_arg, next_outbound_htlc_minimum_msat_arg, inbound_capacity_msat_arg, confirmations_required_arg.ptr, confirmations_arg.ptr, force_close_spend_delay_arg.ptr, is_outbound_arg, is_channel_ready_arg, channel_shutdown_state_arg.ptr, is_usable_arg, is_announced_arg, inbound_htlc_minimum_msat_arg.ptr, inbound_htlc_maximum_msat_arg.ptr, config_arg == null ? 0 : config_arg.ptr, pending_inbound_htlcs_arg != null ? Arrays.stream(pending_inbound_htlcs_arg).mapToLong(pending_inbound_htlcs_arg_conv_20 -> pending_inbound_htlcs_arg_conv_20.ptr).toArray() : null, pending_outbound_htlcs_arg != null ? Arrays.stream(pending_outbound_htlcs_arg).mapToLong(pending_outbound_htlcs_arg_conv_21 -> pending_outbound_htlcs_arg_conv_21.ptr).toArray() : null);
 		Reference.reachabilityFence(channel_id_arg);
 		Reference.reachabilityFence(counterparty_arg);
 		Reference.reachabilityFence(funding_txo_arg);
@@ -925,7 +913,7 @@ public class ChannelDetails extends CommonBase {
 		Reference.reachabilityFence(is_channel_ready_arg);
 		Reference.reachabilityFence(channel_shutdown_state_arg);
 		Reference.reachabilityFence(is_usable_arg);
-		Reference.reachabilityFence(is_public_arg);
+		Reference.reachabilityFence(is_announced_arg);
 		Reference.reachabilityFence(inbound_htlc_minimum_msat_arg);
 		Reference.reachabilityFence(inbound_htlc_maximum_msat_arg);
 		Reference.reachabilityFence(config_arg);
@@ -934,24 +922,6 @@ public class ChannelDetails extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ChannelDetails ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelDetails(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(counterparty_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(funding_txo_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_type_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(short_channel_id_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(outbound_scid_alias_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(inbound_scid_alias_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(unspendable_punishment_reserve_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(feerate_sat_per_1000_weight_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(confirmations_required_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(confirmations_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(force_close_spend_delay_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_shutdown_state_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(inbound_htlc_minimum_msat_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(inbound_htlc_maximum_msat_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(config_arg); };
-		for (InboundHTLCDetails pending_inbound_htlcs_arg_conv_20: pending_inbound_htlcs_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(pending_inbound_htlcs_arg_conv_20); }; };
-		for (OutboundHTLCDetails pending_outbound_htlcs_arg_conv_21: pending_outbound_htlcs_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(pending_outbound_htlcs_arg_conv_21); }; };
 		return ret_hu_conv;
 	}
 

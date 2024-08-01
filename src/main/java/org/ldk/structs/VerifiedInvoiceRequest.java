@@ -9,8 +9,9 @@ import javax.annotation.Nullable;
 
 
 /**
- * An [`InvoiceRequest`] that has been verified by [`InvoiceRequest::verify`] and exposes different
- * ways to respond depending on whether the signing keys were derived.
+ * An [`InvoiceRequest`] that has been verified by [`InvoiceRequest::verify_using_metadata`] or
+ * [`InvoiceRequest::verify_using_recipient_data`] and exposes different ways to respond depending
+ * on whether the signing keys were derived.
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class VerifiedInvoiceRequest extends CommonBase {
@@ -40,43 +41,6 @@ public class VerifiedInvoiceRequest extends CommonBase {
 		bindings.VerifiedInvoiceRequest_set_offer_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
-	}
-
-	/**
-	 * Keys used for signing a [`Bolt12Invoice`] if they can be derived.
-	 * 
-	 * If `Some`, must call [`respond_using_derived_keys`] when responding. Otherwise, call
-	 * [`respond_with`].
-	 * 
-	 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
-	 * [`respond_using_derived_keys`]: Self::respond_using_derived_keys
-	 * [`respond_with`]: Self::respond_with
-	 */
-	public Option_SecretKeyZ get_keys() {
-		long ret = bindings.VerifiedInvoiceRequest_get_keys(this.ptr);
-		Reference.reachabilityFence(this);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.Option_SecretKeyZ ret_hu_conv = org.ldk.structs.Option_SecretKeyZ.constr_from_ptr(ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
-		return ret_hu_conv;
-	}
-
-	/**
-	 * Keys used for signing a [`Bolt12Invoice`] if they can be derived.
-	 * 
-	 * If `Some`, must call [`respond_using_derived_keys`] when responding. Otherwise, call
-	 * [`respond_with`].
-	 * 
-	 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
-	 * [`respond_using_derived_keys`]: Self::respond_using_derived_keys
-	 * [`respond_with`]: Self::respond_with
-	 */
-	public void set_keys(org.ldk.structs.Option_SecretKeyZ val) {
-		bindings.VerifiedInvoiceRequest_set_keys(this.ptr, val.ptr);
-		Reference.reachabilityFence(this);
-		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	long clone_ptr() {
@@ -195,18 +159,18 @@ public class VerifiedInvoiceRequest extends CommonBase {
 	 * Paths to the recipient originating from publicly reachable nodes. Blinded paths provide
 	 * recipient privacy by obfuscating its node id.
 	 */
-	public BlindedPath[] paths() {
+	public BlindedMessagePath[] paths() {
 		long[] ret = bindings.VerifiedInvoiceRequest_paths(this.ptr);
 		Reference.reachabilityFence(this);
-		int ret_conv_13_len = ret.length;
-		BlindedPath[] ret_conv_13_arr = new BlindedPath[ret_conv_13_len];
-		for (int n = 0; n < ret_conv_13_len; n++) {
-			long ret_conv_13 = ret[n];
-			org.ldk.structs.BlindedPath ret_conv_13_hu_conv = null; if (ret_conv_13 < 0 || ret_conv_13 > 4096) { ret_conv_13_hu_conv = new org.ldk.structs.BlindedPath(null, ret_conv_13); }
-			if (ret_conv_13_hu_conv != null) { ret_conv_13_hu_conv.ptrs_to.add(this); };
-			ret_conv_13_arr[n] = ret_conv_13_hu_conv;
+		int ret_conv_20_len = ret.length;
+		BlindedMessagePath[] ret_conv_20_arr = new BlindedMessagePath[ret_conv_20_len];
+		for (int u = 0; u < ret_conv_20_len; u++) {
+			long ret_conv_20 = ret[u];
+			org.ldk.structs.BlindedMessagePath ret_conv_20_hu_conv = null; if (ret_conv_20 < 0 || ret_conv_20 > 4096) { ret_conv_20_hu_conv = new org.ldk.structs.BlindedMessagePath(null, ret_conv_20); }
+			if (ret_conv_20_hu_conv != null) { ret_conv_20_hu_conv.ptrs_to.add(this); };
+			ret_conv_20_arr[u] = ret_conv_20_hu_conv;
 		}
-		return ret_conv_13_arr;
+		return ret_conv_20_arr;
 	}
 
 	/**
@@ -327,8 +291,8 @@ public class VerifiedInvoiceRequest extends CommonBase {
 	 * 
 	 * [`Duration`]: core::time::Duration
 	 */
-	public Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ respond_with(TwoTuple_BlindedPayInfoBlindedPathZ[] payment_paths, byte[] payment_hash) {
-		long ret = bindings.VerifiedInvoiceRequest_respond_with(this.ptr, payment_paths != null ? Arrays.stream(payment_paths).mapToLong(payment_paths_conv_37 -> payment_paths_conv_37.ptr).toArray() : null, InternalUtils.check_arr_len(payment_hash, 32));
+	public Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ respond_with(BlindedPaymentPath[] payment_paths, byte[] payment_hash) {
+		long ret = bindings.VerifiedInvoiceRequest_respond_with(this.ptr, payment_paths != null ? Arrays.stream(payment_paths).mapToLong(payment_paths_conv_20 -> payment_paths_conv_20.ptr).toArray() : null, InternalUtils.check_arr_len(payment_hash, 32));
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(payment_paths);
 		Reference.reachabilityFence(payment_hash);
@@ -357,13 +321,15 @@ public class VerifiedInvoiceRequest extends CommonBase {
 	 * # Note
 	 * 
 	 * If the originating [`Offer`] was created using [`OfferBuilder::deriving_signing_pubkey`],
-	 * then use [`InvoiceRequest::verify`] and [`VerifiedInvoiceRequest`] methods instead.
+	 * then first use [`InvoiceRequest::verify_using_metadata`] or
+	 * [`InvoiceRequest::verify_using_recipient_data`] and then [`VerifiedInvoiceRequest`] methods
+	 * instead.
 	 * 
 	 * [`Bolt12Invoice::created_at`]: crate::offers::invoice::Bolt12Invoice::created_at
 	 * [`OfferBuilder::deriving_signing_pubkey`]: crate::offers::offer::OfferBuilder::deriving_signing_pubkey
 	 */
-	public Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ respond_with_no_std(TwoTuple_BlindedPayInfoBlindedPathZ[] payment_paths, byte[] payment_hash, long created_at) {
-		long ret = bindings.VerifiedInvoiceRequest_respond_with_no_std(this.ptr, payment_paths != null ? Arrays.stream(payment_paths).mapToLong(payment_paths_conv_37 -> payment_paths_conv_37.ptr).toArray() : null, InternalUtils.check_arr_len(payment_hash, 32), created_at);
+	public Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ respond_with_no_std(BlindedPaymentPath[] payment_paths, byte[] payment_hash, long created_at) {
+		long ret = bindings.VerifiedInvoiceRequest_respond_with_no_std(this.ptr, payment_paths != null ? Arrays.stream(payment_paths).mapToLong(payment_paths_conv_20 -> payment_paths_conv_20.ptr).toArray() : null, InternalUtils.check_arr_len(payment_hash, 32), created_at);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(payment_paths);
 		Reference.reachabilityFence(payment_hash);
@@ -382,8 +348,8 @@ public class VerifiedInvoiceRequest extends CommonBase {
 	 * 
 	 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
 	 */
-	public Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ respond_using_derived_keys(TwoTuple_BlindedPayInfoBlindedPathZ[] payment_paths, byte[] payment_hash) {
-		long ret = bindings.VerifiedInvoiceRequest_respond_using_derived_keys(this.ptr, payment_paths != null ? Arrays.stream(payment_paths).mapToLong(payment_paths_conv_37 -> payment_paths_conv_37.ptr).toArray() : null, InternalUtils.check_arr_len(payment_hash, 32));
+	public Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ respond_using_derived_keys(BlindedPaymentPath[] payment_paths, byte[] payment_hash) {
+		long ret = bindings.VerifiedInvoiceRequest_respond_using_derived_keys(this.ptr, payment_paths != null ? Arrays.stream(payment_paths).mapToLong(payment_paths_conv_20 -> payment_paths_conv_20.ptr).toArray() : null, InternalUtils.check_arr_len(payment_hash, 32));
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(payment_paths);
 		Reference.reachabilityFence(payment_hash);
@@ -401,8 +367,8 @@ public class VerifiedInvoiceRequest extends CommonBase {
 	 * 
 	 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
 	 */
-	public Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ respond_using_derived_keys_no_std(TwoTuple_BlindedPayInfoBlindedPathZ[] payment_paths, byte[] payment_hash, long created_at) {
-		long ret = bindings.VerifiedInvoiceRequest_respond_using_derived_keys_no_std(this.ptr, payment_paths != null ? Arrays.stream(payment_paths).mapToLong(payment_paths_conv_37 -> payment_paths_conv_37.ptr).toArray() : null, InternalUtils.check_arr_len(payment_hash, 32), created_at);
+	public Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ respond_using_derived_keys_no_std(BlindedPaymentPath[] payment_paths, byte[] payment_hash, long created_at) {
+		long ret = bindings.VerifiedInvoiceRequest_respond_using_derived_keys_no_std(this.ptr, payment_paths != null ? Arrays.stream(payment_paths).mapToLong(payment_paths_conv_20 -> payment_paths_conv_20.ptr).toArray() : null, InternalUtils.check_arr_len(payment_hash, 32), created_at);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(payment_paths);
 		Reference.reachabilityFence(payment_hash);

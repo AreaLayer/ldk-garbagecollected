@@ -61,7 +61,7 @@ public class Result_OutputSweeperDecodeErrorZ extends CommonBase {
 		Reference.reachabilityFence(o_logger);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_OutputSweeperDecodeErrorZ ret_hu_conv = Result_OutputSweeperDecodeErrorZ.constr_from_ptr(ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(o_best_block); };
+		;
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(o_broadcaster); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(o_fee_estimator); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(o_chain_data_source); };
@@ -80,7 +80,6 @@ public class Result_OutputSweeperDecodeErrorZ extends CommonBase {
 		Reference.reachabilityFence(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_OutputSweeperDecodeErrorZ ret_hu_conv = Result_OutputSweeperDecodeErrorZ.constr_from_ptr(ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(e); };
 		return ret_hu_conv;
 	}
 

@@ -41,7 +41,6 @@ public class UnsignedNodeAnnouncement extends CommonBase {
 		bindings.UnsignedNodeAnnouncement_set_features(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -83,7 +82,6 @@ public class UnsignedNodeAnnouncement extends CommonBase {
 		bindings.UnsignedNodeAnnouncement_set_node_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -127,7 +125,6 @@ public class UnsignedNodeAnnouncement extends CommonBase {
 		bindings.UnsignedNodeAnnouncement_set_alias(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -156,7 +153,6 @@ public class UnsignedNodeAnnouncement extends CommonBase {
 		bindings.UnsignedNodeAnnouncement_set_addresses(this.ptr, val != null ? Arrays.stream(val).mapToLong(val_conv_15 -> val_conv_15.ptr).toArray() : null);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		for (SocketAddress val_conv_15: val) { if (this != null) { this.ptrs_to.add(val_conv_15); }; };
 	}
 
 	/**
@@ -227,10 +223,6 @@ public class UnsignedNodeAnnouncement extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.UnsignedNodeAnnouncement ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.UnsignedNodeAnnouncement(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(features_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(node_id_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(alias_arg); };
-		for (SocketAddress addresses_arg_conv_15: addresses_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(addresses_arg_conv_15); }; };
 		return ret_hu_conv;
 	}
 

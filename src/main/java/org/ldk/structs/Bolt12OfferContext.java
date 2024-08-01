@@ -45,7 +45,6 @@ public class Bolt12OfferContext extends CommonBase {
 		bindings.Bolt12OfferContext_set_offer_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -73,7 +72,6 @@ public class Bolt12OfferContext extends CommonBase {
 		bindings.Bolt12OfferContext_set_invoice_request(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -86,8 +84,6 @@ public class Bolt12OfferContext extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Bolt12OfferContext ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Bolt12OfferContext(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(offer_id_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(invoice_request_arg); };
 		return ret_hu_conv;
 	}
 

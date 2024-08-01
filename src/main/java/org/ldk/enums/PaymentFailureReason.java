@@ -6,6 +6,12 @@ package org.ldk.enums;
 public enum PaymentFailureReason {
 	/**
 	 * The intended recipient rejected our payment.
+	 * 
+	 * Also used for [`UnknownRequiredFeatures`] and [`InvoiceRequestRejected`] when downgrading to
+	 * version prior to 0.0.124.
+	 * 
+	 * [`UnknownRequiredFeatures`]: Self::UnknownRequiredFeatures
+	 * [`InvoiceRequestRejected`]: Self::InvoiceRequestRejected
 	 */
 	LDKPaymentFailureReason_RecipientRejected,
 	/**
@@ -27,7 +33,10 @@ public enum PaymentFailureReason {
 	 * The payment expired while retrying, based on the provided
 	 * [`PaymentParameters::expiry_time`].
 	 * 
+	 * Also used for [`InvoiceRequestExpired`] when downgrading to version prior to 0.0.124.
+	 * 
 	 * [`PaymentParameters::expiry_time`]: crate::routing::router::PaymentParameters::expiry_time
+	 * [`InvoiceRequestExpired`]: Self::InvoiceRequestExpired
 	 */
 	LDKPaymentFailureReason_PaymentExpired,
 	/**
@@ -43,6 +52,20 @@ public enum PaymentFailureReason {
 	 * your router.
 	 */
 	LDKPaymentFailureReason_UnexpectedError,
+	/**
+	 * An invoice was received that required unknown features.
+	 */
+	LDKPaymentFailureReason_UnknownRequiredFeatures,
+	/**
+	 * A [`Bolt12Invoice`] was not received in a reasonable amount of time.
+	 */
+	LDKPaymentFailureReason_InvoiceRequestExpired,
+	/**
+	 * An [`InvoiceRequest`] for the payment was rejected by the recipient.
+	 * 
+	 * [`InvoiceRequest`]: crate::offers::invoice_request::InvoiceRequest
+	 */
+	LDKPaymentFailureReason_InvoiceRequestRejected,
 	; static native void init();
 	static { org.ldk.impl.bindings.run_statics(); init(); }
 }

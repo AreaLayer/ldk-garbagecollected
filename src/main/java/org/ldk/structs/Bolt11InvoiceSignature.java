@@ -20,6 +20,30 @@ public class Bolt11InvoiceSignature extends CommonBase {
 		if (ptr != 0) { bindings.Bolt11InvoiceSignature_free(ptr); }
 	}
 
+	public byte[] get_a() {
+		byte[] ret = bindings.Bolt11InvoiceSignature_get_a(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	public void set_a(byte[] val) {
+		bindings.Bolt11InvoiceSignature_set_a(this.ptr, InternalUtils.check_arr_len(val, 68));
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
+	}
+
+	/**
+	 * Constructs a new Bolt11InvoiceSignature given each field
+	 */
+	public static Bolt11InvoiceSignature of(byte[] a_arg) {
+		long ret = bindings.Bolt11InvoiceSignature_new(InternalUtils.check_arr_len(a_arg, 68));
+		Reference.reachabilityFence(a_arg);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Bolt11InvoiceSignature ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Bolt11InvoiceSignature(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
 	long clone_ptr() {
 		long ret = bindings.Bolt11InvoiceSignature_clone_ptr(this.ptr);
 		Reference.reachabilityFence(this);

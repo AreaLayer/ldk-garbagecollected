@@ -25,6 +25,26 @@ public class RouteHintHop extends CommonBase {
 	}
 
 	/**
+	 * Serialize the RouteHintHop object into a byte array which can be read by RouteHintHop_read
+	 */
+	public byte[] write() {
+		byte[] ret = bindings.RouteHintHop_write(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Read a RouteHintHop from a byte array, created by RouteHintHop_write
+	 */
+	public static Result_RouteHintHopDecodeErrorZ read(byte[] ser) {
+		long ret = bindings.RouteHintHop_read(ser);
+		Reference.reachabilityFence(ser);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_RouteHintHopDecodeErrorZ ret_hu_conv = Result_RouteHintHopDecodeErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
+	/**
 	 * The node_id of the non-target end of the route
 	 */
 	public byte[] get_src_node_id() {
@@ -79,7 +99,6 @@ public class RouteHintHop extends CommonBase {
 		bindings.RouteHintHop_set_fees(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -119,7 +138,6 @@ public class RouteHintHop extends CommonBase {
 		bindings.RouteHintHop_set_htlc_minimum_msat(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -141,7 +159,6 @@ public class RouteHintHop extends CommonBase {
 		bindings.RouteHintHop_set_htlc_maximum_msat(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -158,9 +175,6 @@ public class RouteHintHop extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.RouteHintHop ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.RouteHintHop(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(fees_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(htlc_minimum_msat_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(htlc_maximum_msat_arg); };
 		return ret_hu_conv;
 	}
 
@@ -211,24 +225,4 @@ public class RouteHintHop extends CommonBase {
 		if (!(o instanceof RouteHintHop)) return false;
 		return this.eq((RouteHintHop)o);
 	}
-	/**
-	 * Serialize the RouteHintHop object into a byte array which can be read by RouteHintHop_read
-	 */
-	public byte[] write() {
-		byte[] ret = bindings.RouteHintHop_write(this.ptr);
-		Reference.reachabilityFence(this);
-		return ret;
-	}
-
-	/**
-	 * Read a RouteHintHop from a byte array, created by RouteHintHop_write
-	 */
-	public static Result_RouteHintHopDecodeErrorZ read(byte[] ser) {
-		long ret = bindings.RouteHintHop_read(ser);
-		Reference.reachabilityFence(ser);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_RouteHintHopDecodeErrorZ ret_hu_conv = Result_RouteHintHopDecodeErrorZ.constr_from_ptr(ret);
-		return ret_hu_conv;
-	}
-
 }

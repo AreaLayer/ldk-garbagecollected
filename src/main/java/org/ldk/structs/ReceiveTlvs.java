@@ -58,7 +58,6 @@ public class ReceiveTlvs extends CommonBase {
 		bindings.ReceiveTlvs_set_payment_constraints(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -80,7 +79,6 @@ public class ReceiveTlvs extends CommonBase {
 		bindings.ReceiveTlvs_set_payment_context(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -94,8 +92,6 @@ public class ReceiveTlvs extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ReceiveTlvs ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ReceiveTlvs(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payment_constraints_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payment_context_arg); };
 		return ret_hu_conv;
 	}
 

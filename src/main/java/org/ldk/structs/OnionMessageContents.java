@@ -42,6 +42,10 @@ public class OnionMessageContents extends CommonBase {
 		 */
 		long tlv_type();
 		/**
+		 * Returns the message type
+		 */
+		String msg_type();
+		/**
 		 * Serialize the object into a byte array
 		 */
 		byte[] write();
@@ -56,6 +60,11 @@ public class OnionMessageContents extends CommonBase {
 		impl_holder.held = new OnionMessageContents(new bindings.LDKOnionMessageContents() {
 			@Override public long tlv_type() {
 				long ret = arg.tlv_type();
+				Reference.reachabilityFence(arg);
+				return ret;
+			}
+			@Override public String msg_type() {
+				String ret = arg.msg_type();
 				Reference.reachabilityFence(arg);
 				return ret;
 			}
@@ -77,6 +86,15 @@ public class OnionMessageContents extends CommonBase {
 	 */
 	public long tlv_type() {
 		long ret = bindings.OnionMessageContents_tlv_type(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Returns the message type
+	 */
+	public String msg_type() {
+		String ret = bindings.OnionMessageContents_msg_type(this.ptr);
 		Reference.reachabilityFence(this);
 		return ret;
 	}

@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 
 
 /**
- * A splice_locked message to be sent to or received from a peer.
+ * A `splice_locked` message to be sent to or received from a peer.
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class SpliceLocked extends CommonBase {
@@ -39,19 +39,36 @@ public class SpliceLocked extends CommonBase {
 		bindings.SpliceLocked_set_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
+	}
+
+	/**
+	 * The ID of the new funding transaction that has been locked
+	 */
+	public byte[] get_splice_txid() {
+		byte[] ret = bindings.SpliceLocked_get_splice_txid(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * The ID of the new funding transaction that has been locked
+	 */
+	public void set_splice_txid(byte[] val) {
+		bindings.SpliceLocked_set_splice_txid(this.ptr, InternalUtils.check_arr_len(val, 32));
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
 	}
 
 	/**
 	 * Constructs a new SpliceLocked given each field
 	 */
-	public static SpliceLocked of(org.ldk.structs.ChannelId channel_id_arg) {
-		long ret = bindings.SpliceLocked_new(channel_id_arg.ptr);
+	public static SpliceLocked of(org.ldk.structs.ChannelId channel_id_arg, byte[] splice_txid_arg) {
+		long ret = bindings.SpliceLocked_new(channel_id_arg.ptr, InternalUtils.check_arr_len(splice_txid_arg, 32));
 		Reference.reachabilityFence(channel_id_arg);
+		Reference.reachabilityFence(splice_txid_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.SpliceLocked ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.SpliceLocked(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id_arg); };
 		return ret_hu_conv;
 	}
 

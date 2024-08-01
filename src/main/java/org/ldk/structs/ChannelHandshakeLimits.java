@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
  * 
  * These limits are only applied to our counterparty's limits, not our own.
  * 
- * Use 0/`<type>::max_value()` as appropriate to skip checking.
+ * Use `0` or `<type>::max_value()` as appropriate to skip checking.
  * 
  * Provides sane defaults for most configurations.
  * 
@@ -34,7 +34,8 @@ public class ChannelHandshakeLimits extends CommonBase {
 	 * Minimum allowed satoshis when a channel is funded. This is supplied by the sender and so
 	 * only applies to inbound channels.
 	 * 
-	 * Default value: 0.
+	 * Default value: `1000`
+	 * (Minimum of [`ChannelHandshakeConfig::their_channel_reserve_proportional_millionths`])
 	 */
 	public long get_min_funding_satoshis() {
 		long ret = bindings.ChannelHandshakeLimits_get_min_funding_satoshis(this.ptr);
@@ -46,7 +47,8 @@ public class ChannelHandshakeLimits extends CommonBase {
 	 * Minimum allowed satoshis when a channel is funded. This is supplied by the sender and so
 	 * only applies to inbound channels.
 	 * 
-	 * Default value: 0.
+	 * Default value: `1000`
+	 * (Minimum of [`ChannelHandshakeConfig::their_channel_reserve_proportional_millionths`])
 	 */
 	public void set_min_funding_satoshis(long val) {
 		bindings.ChannelHandshakeLimits_set_min_funding_satoshis(this.ptr, val);
@@ -58,7 +60,7 @@ public class ChannelHandshakeLimits extends CommonBase {
 	 * Maximum allowed satoshis when a channel is funded. This is supplied by the sender and so
 	 * only applies to inbound channels.
 	 * 
-	 * Default value: 2^24 - 1.
+	 * Default value: `2^24 - 1`
 	 */
 	public long get_max_funding_satoshis() {
 		long ret = bindings.ChannelHandshakeLimits_get_max_funding_satoshis(this.ptr);
@@ -70,7 +72,7 @@ public class ChannelHandshakeLimits extends CommonBase {
 	 * Maximum allowed satoshis when a channel is funded. This is supplied by the sender and so
 	 * only applies to inbound channels.
 	 * 
-	 * Default value: 2^24 - 1.
+	 * Default value: `2^24 - 1`
 	 */
 	public void set_max_funding_satoshis(long val) {
 		bindings.ChannelHandshakeLimits_set_max_funding_satoshis(this.ptr, val);
@@ -82,7 +84,7 @@ public class ChannelHandshakeLimits extends CommonBase {
 	 * The remote node sets a limit on the minimum size of HTLCs we can send to them. This allows
 	 * you to limit the maximum minimum-size they can require.
 	 * 
-	 * Default value: u64::max_value.
+	 * Default value: `u64::max_value`
 	 */
 	public long get_max_htlc_minimum_msat() {
 		long ret = bindings.ChannelHandshakeLimits_get_max_htlc_minimum_msat(this.ptr);
@@ -94,7 +96,7 @@ public class ChannelHandshakeLimits extends CommonBase {
 	 * The remote node sets a limit on the minimum size of HTLCs we can send to them. This allows
 	 * you to limit the maximum minimum-size they can require.
 	 * 
-	 * Default value: u64::max_value.
+	 * Default value: `u64::max_value`
 	 */
 	public void set_max_htlc_minimum_msat(long val) {
 		bindings.ChannelHandshakeLimits_set_max_htlc_minimum_msat(this.ptr, val);
@@ -106,7 +108,7 @@ public class ChannelHandshakeLimits extends CommonBase {
 	 * The remote node sets a limit on the maximum value of pending HTLCs to them at any given
 	 * time to limit their funds exposure to HTLCs. This allows you to set a minimum such value.
 	 * 
-	 * Default value: 0.
+	 * Default value: `0`
 	 */
 	public long get_min_max_htlc_value_in_flight_msat() {
 		long ret = bindings.ChannelHandshakeLimits_get_min_max_htlc_value_in_flight_msat(this.ptr);
@@ -118,7 +120,7 @@ public class ChannelHandshakeLimits extends CommonBase {
 	 * The remote node sets a limit on the maximum value of pending HTLCs to them at any given
 	 * time to limit their funds exposure to HTLCs. This allows you to set a minimum such value.
 	 * 
-	 * Default value: 0.
+	 * Default value: `0`
 	 */
 	public void set_min_max_htlc_value_in_flight_msat(long val) {
 		bindings.ChannelHandshakeLimits_set_min_max_htlc_value_in_flight_msat(this.ptr, val);
@@ -131,7 +133,7 @@ public class ChannelHandshakeLimits extends CommonBase {
 	 * time, ensuring that we are able to be punished if we broadcast an old state. This allows to
 	 * you limit the amount which we will have to keep to ourselves (and cannot use for HTLCs).
 	 * 
-	 * Default value: u64::max_value.
+	 * Default value: `u64::max_value`.
 	 */
 	public long get_max_channel_reserve_satoshis() {
 		long ret = bindings.ChannelHandshakeLimits_get_max_channel_reserve_satoshis(this.ptr);
@@ -144,7 +146,7 @@ public class ChannelHandshakeLimits extends CommonBase {
 	 * time, ensuring that we are able to be punished if we broadcast an old state. This allows to
 	 * you limit the amount which we will have to keep to ourselves (and cannot use for HTLCs).
 	 * 
-	 * Default value: u64::max_value.
+	 * Default value: `u64::max_value`.
 	 */
 	public void set_max_channel_reserve_satoshis(long val) {
 		bindings.ChannelHandshakeLimits_set_max_channel_reserve_satoshis(this.ptr, val);
@@ -156,7 +158,7 @@ public class ChannelHandshakeLimits extends CommonBase {
 	 * The remote node sets a limit on the maximum number of pending HTLCs to them at any given
 	 * time. This allows you to set a minimum such value.
 	 * 
-	 * Default value: 0.
+	 * Default value: `0`
 	 */
 	public short get_min_max_accepted_htlcs() {
 		short ret = bindings.ChannelHandshakeLimits_get_min_max_accepted_htlcs(this.ptr);
@@ -168,7 +170,7 @@ public class ChannelHandshakeLimits extends CommonBase {
 	 * The remote node sets a limit on the maximum number of pending HTLCs to them at any given
 	 * time. This allows you to set a minimum such value.
 	 * 
-	 * Default value: 0.
+	 * Default value: `0`
 	 */
 	public void set_min_max_accepted_htlcs(short val) {
 		bindings.ChannelHandshakeLimits_set_min_max_accepted_htlcs(this.ptr, val);
@@ -182,7 +184,7 @@ public class ChannelHandshakeLimits extends CommonBase {
 	 * assume they aren't going to double-spend themselves).
 	 * This config allows you to set a limit on the maximum amount of time to wait.
 	 * 
-	 * Default value: 144, or roughly one day and only applies to outbound channels.
+	 * Default value: `144`, or roughly one day and only applies to outbound channels
 	 */
 	public int get_max_minimum_depth() {
 		int ret = bindings.ChannelHandshakeLimits_get_max_minimum_depth(this.ptr);
@@ -196,7 +198,7 @@ public class ChannelHandshakeLimits extends CommonBase {
 	 * assume they aren't going to double-spend themselves).
 	 * This config allows you to set a limit on the maximum amount of time to wait.
 	 * 
-	 * Default value: 144, or roughly one day and only applies to outbound channels.
+	 * Default value: `144`, or roughly one day and only applies to outbound channels
 	 */
 	public void set_max_minimum_depth(int val) {
 		bindings.ChannelHandshakeLimits_set_max_minimum_depth(this.ptr, val);
@@ -216,12 +218,12 @@ public class ChannelHandshakeLimits extends CommonBase {
 	 * You may wish to un-set this if you allow the user to (or do in an automated fashion)
 	 * double-spend the funding transaction to RBF with an alternative channel open.
 	 * 
-	 * This only applies if our counterparty set their confirmations-required value to 0, and we
-	 * always trust our own funding transaction at 1 confirmation irrespective of this value.
+	 * This only applies if our counterparty set their confirmations-required value to `0`, and we
+	 * always trust our own funding transaction at `1` confirmation irrespective of this value.
 	 * Thus, this effectively acts as a `min_minimum_depth`, with the only possible values being
-	 * `true` (0) and `false` (1).
+	 * `true` (`0`) and `false` (`1`).
 	 * 
-	 * Default value: true
+	 * Default value: `true`
 	 */
 	public boolean get_trust_own_funding_0conf() {
 		boolean ret = bindings.ChannelHandshakeLimits_get_trust_own_funding_0conf(this.ptr);
@@ -241,12 +243,12 @@ public class ChannelHandshakeLimits extends CommonBase {
 	 * You may wish to un-set this if you allow the user to (or do in an automated fashion)
 	 * double-spend the funding transaction to RBF with an alternative channel open.
 	 * 
-	 * This only applies if our counterparty set their confirmations-required value to 0, and we
-	 * always trust our own funding transaction at 1 confirmation irrespective of this value.
+	 * This only applies if our counterparty set their confirmations-required value to `0`, and we
+	 * always trust our own funding transaction at `1` confirmation irrespective of this value.
 	 * Thus, this effectively acts as a `min_minimum_depth`, with the only possible values being
-	 * `true` (0) and `false` (1).
+	 * `true` (`0`) and `false` (`1`).
 	 * 
-	 * Default value: true
+	 * Default value: `true`
 	 */
 	public void set_trust_own_funding_0conf(boolean val) {
 		bindings.ChannelHandshakeLimits_set_trust_own_funding_0conf(this.ptr, val);
@@ -256,13 +258,13 @@ public class ChannelHandshakeLimits extends CommonBase {
 
 	/**
 	 * Set to force an incoming channel to match our announced channel preference in
-	 * [`ChannelHandshakeConfig::announced_channel`].
+	 * [`ChannelHandshakeConfig::announce_for_forwarding`].
 	 * 
 	 * For a node which is not online reliably, this should be set to true and
-	 * [`ChannelHandshakeConfig::announced_channel`] set to false, ensuring that no announced (aka public)
+	 * [`ChannelHandshakeConfig::announce_for_forwarding`] set to false, ensuring that no announced (aka public)
 	 * channels will ever be opened.
 	 * 
-	 * Default value: true.
+	 * Default value: `true`
 	 */
 	public boolean get_force_announced_channel_preference() {
 		boolean ret = bindings.ChannelHandshakeLimits_get_force_announced_channel_preference(this.ptr);
@@ -272,13 +274,13 @@ public class ChannelHandshakeLimits extends CommonBase {
 
 	/**
 	 * Set to force an incoming channel to match our announced channel preference in
-	 * [`ChannelHandshakeConfig::announced_channel`].
+	 * [`ChannelHandshakeConfig::announce_for_forwarding`].
 	 * 
 	 * For a node which is not online reliably, this should be set to true and
-	 * [`ChannelHandshakeConfig::announced_channel`] set to false, ensuring that no announced (aka public)
+	 * [`ChannelHandshakeConfig::announce_for_forwarding`] set to false, ensuring that no announced (aka public)
 	 * channels will ever be opened.
 	 * 
-	 * Default value: true.
+	 * Default value: `true`
 	 */
 	public void set_force_announced_channel_preference(boolean val) {
 		bindings.ChannelHandshakeLimits_set_force_announced_channel_preference(this.ptr, val);
@@ -292,7 +294,7 @@ public class ChannelHandshakeLimits extends CommonBase {
 	 * Not checking this value would be a security issue, as our peer would be able to set it to
 	 * max relative lock-time (a year) and we would \"lose\" money as it would be locked for a long time.
 	 * 
-	 * Default value: 2016, which we also enforce as a maximum value so you can tweak config to
+	 * Default value: `2016`, which we also enforce as a maximum value so you can tweak config to
 	 * reduce the loss of having useless locked funds (if your peer accepts)
 	 */
 	public short get_their_to_self_delay() {
@@ -307,7 +309,7 @@ public class ChannelHandshakeLimits extends CommonBase {
 	 * Not checking this value would be a security issue, as our peer would be able to set it to
 	 * max relative lock-time (a year) and we would \"lose\" money as it would be locked for a long time.
 	 * 
-	 * Default value: 2016, which we also enforce as a maximum value so you can tweak config to
+	 * Default value: `2016`, which we also enforce as a maximum value so you can tweak config to
 	 * reduce the loss of having useless locked funds (if your peer accepts)
 	 */
 	public void set_their_to_self_delay(short val) {

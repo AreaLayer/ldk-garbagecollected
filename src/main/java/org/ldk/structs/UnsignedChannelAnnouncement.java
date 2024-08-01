@@ -41,7 +41,6 @@ public class UnsignedChannelAnnouncement extends CommonBase {
 		bindings.UnsignedChannelAnnouncement_set_features(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -99,7 +98,6 @@ public class UnsignedChannelAnnouncement extends CommonBase {
 		bindings.UnsignedChannelAnnouncement_set_node_id_1(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -121,7 +119,6 @@ public class UnsignedChannelAnnouncement extends CommonBase {
 		bindings.UnsignedChannelAnnouncement_set_node_id_2(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -143,7 +140,6 @@ public class UnsignedChannelAnnouncement extends CommonBase {
 		bindings.UnsignedChannelAnnouncement_set_bitcoin_key_1(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -165,7 +161,6 @@ public class UnsignedChannelAnnouncement extends CommonBase {
 		bindings.UnsignedChannelAnnouncement_set_bitcoin_key_2(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -210,11 +205,6 @@ public class UnsignedChannelAnnouncement extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.UnsignedChannelAnnouncement ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.UnsignedChannelAnnouncement(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(features_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(node_id_1_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(node_id_2_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(bitcoin_key_1_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(bitcoin_key_2_arg); };
 		return ret_hu_conv;
 	}
 

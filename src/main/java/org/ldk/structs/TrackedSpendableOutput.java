@@ -39,7 +39,6 @@ public class TrackedSpendableOutput extends CommonBase {
 		bindings.TrackedSpendableOutput_set_descriptor(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -70,7 +69,6 @@ public class TrackedSpendableOutput extends CommonBase {
 		bindings.TrackedSpendableOutput_set_channel_id(this.ptr, val == null ? 0 : val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -92,7 +90,6 @@ public class TrackedSpendableOutput extends CommonBase {
 		bindings.TrackedSpendableOutput_set_status(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -108,9 +105,6 @@ public class TrackedSpendableOutput extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.TrackedSpendableOutput ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.TrackedSpendableOutput(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(descriptor_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(status_arg); };
 		return ret_hu_conv;
 	}
 

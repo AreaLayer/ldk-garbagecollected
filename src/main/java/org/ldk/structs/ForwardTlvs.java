@@ -57,7 +57,6 @@ public class ForwardTlvs extends CommonBase {
 		bindings.ForwardTlvs_set_payment_relay(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -79,7 +78,6 @@ public class ForwardTlvs extends CommonBase {
 		bindings.ForwardTlvs_set_payment_constraints(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -107,24 +105,48 @@ public class ForwardTlvs extends CommonBase {
 		bindings.ForwardTlvs_set_features(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
+	}
+
+	/**
+	 * Set if this [`BlindedPaymentPath`] is concatenated to another, to indicate the
+	 * [`BlindedPaymentPath::blinding_point`] of the appended blinded path.
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	@Nullable
+	public byte[] get_next_blinding_override() {
+		byte[] ret = bindings.ForwardTlvs_get_next_blinding_override(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Set if this [`BlindedPaymentPath`] is concatenated to another, to indicate the
+	 * [`BlindedPaymentPath::blinding_point`] of the appended blinded path.
+	 * 
+	 * Note that val (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	public void set_next_blinding_override(@Nullable byte[] val) {
+		bindings.ForwardTlvs_set_next_blinding_override(this.ptr, InternalUtils.check_arr_len(val, 33));
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
 	}
 
 	/**
 	 * Constructs a new ForwardTlvs given each field
+	 * 
+	 * Note that next_blinding_override_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static ForwardTlvs of(long short_channel_id_arg, org.ldk.structs.PaymentRelay payment_relay_arg, org.ldk.structs.PaymentConstraints payment_constraints_arg, org.ldk.structs.BlindedHopFeatures features_arg) {
-		long ret = bindings.ForwardTlvs_new(short_channel_id_arg, payment_relay_arg.ptr, payment_constraints_arg.ptr, features_arg.ptr);
+	public static ForwardTlvs of(long short_channel_id_arg, org.ldk.structs.PaymentRelay payment_relay_arg, org.ldk.structs.PaymentConstraints payment_constraints_arg, org.ldk.structs.BlindedHopFeatures features_arg, @Nullable byte[] next_blinding_override_arg) {
+		long ret = bindings.ForwardTlvs_new(short_channel_id_arg, payment_relay_arg.ptr, payment_constraints_arg.ptr, features_arg.ptr, InternalUtils.check_arr_len(next_blinding_override_arg, 33));
 		Reference.reachabilityFence(short_channel_id_arg);
 		Reference.reachabilityFence(payment_relay_arg);
 		Reference.reachabilityFence(payment_constraints_arg);
 		Reference.reachabilityFence(features_arg);
+		Reference.reachabilityFence(next_blinding_override_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ForwardTlvs ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ForwardTlvs(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payment_relay_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payment_constraints_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(features_arg); };
 		return ret_hu_conv;
 	}
 

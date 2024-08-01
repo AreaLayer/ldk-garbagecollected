@@ -54,7 +54,6 @@ public class Result_TxCompleteDecodeErrorZ extends CommonBase {
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_TxCompleteDecodeErrorZ ret_hu_conv = Result_TxCompleteDecodeErrorZ.constr_from_ptr(ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(o); };
 		return ret_hu_conv;
 	}
 
@@ -66,7 +65,6 @@ public class Result_TxCompleteDecodeErrorZ extends CommonBase {
 		Reference.reachabilityFence(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_TxCompleteDecodeErrorZ ret_hu_conv = Result_TxCompleteDecodeErrorZ.constr_from_ptr(ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(e); };
 		return ret_hu_conv;
 	}
 

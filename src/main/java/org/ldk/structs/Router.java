@@ -60,11 +60,11 @@ public class Router extends CommonBase {
 		 */
 		Result_RouteLightningErrorZ find_route_with_id(byte[] payer, RouteParameters route_params, ChannelDetails[] first_hops, InFlightHtlcs inflight_htlcs, byte[] _payment_hash, byte[] _payment_id);
 		/**
-		 * Creates [`BlindedPath`]s for payment to the `recipient` node. The channels in `first_hops`
+		 * Creates [`BlindedPaymentPath`]s for payment to the `recipient` node. The channels in `first_hops`
 		 * are assumed to be with the `recipient`'s peers. The payment secret and any constraints are
 		 * given in `tlvs`.
 		 */
-		Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, ReceiveTlvs tlvs, long amount_msats);
+		Result_CVec_BlindedPaymentPathZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, ReceiveTlvs tlvs, long amount_msats);
 	}
 	private static class LDKRouterHolder { Router held; }
 	public static Router new_impl(RouterInterface arg, MessageRouter.MessageRouterInterface MessageRouter_impl) {
@@ -119,7 +119,7 @@ public class Router extends CommonBase {
 				}
 				org.ldk.structs.ReceiveTlvs tlvs_hu_conv = null; if (tlvs < 0 || tlvs > 4096) { tlvs_hu_conv = new org.ldk.structs.ReceiveTlvs(null, tlvs); }
 				if (tlvs_hu_conv != null) { tlvs_hu_conv.ptrs_to.add(this); };
-				Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ ret = arg.create_blinded_payment_paths(recipient, first_hops_conv_16_arr, tlvs_hu_conv, amount_msats);
+				Result_CVec_BlindedPaymentPathZNoneZ ret = arg.create_blinded_payment_paths(recipient, first_hops_conv_16_arr, tlvs_hu_conv, amount_msats);
 				Reference.reachabilityFence(arg);
 				long result = ret.clone_ptr();
 				return result;
@@ -156,7 +156,6 @@ public class Router extends CommonBase {
 		Result_RouteLightningErrorZ ret_hu_conv = Result_RouteLightningErrorZ.constr_from_ptr(ret);
 		if (this != null) { this.ptrs_to.add(route_params); };
 		if (first_hops != null) { for (ChannelDetails first_hops_conv_16: first_hops) { if (this != null) { this.ptrs_to.add(first_hops_conv_16); }; } };
-		if (this != null) { this.ptrs_to.add(inflight_htlcs); };
 		return ret_hu_conv;
 	}
 
@@ -184,16 +183,15 @@ public class Router extends CommonBase {
 		Result_RouteLightningErrorZ ret_hu_conv = Result_RouteLightningErrorZ.constr_from_ptr(ret);
 		if (this != null) { this.ptrs_to.add(route_params); };
 		if (first_hops != null) { for (ChannelDetails first_hops_conv_16: first_hops) { if (this != null) { this.ptrs_to.add(first_hops_conv_16); }; } };
-		if (this != null) { this.ptrs_to.add(inflight_htlcs); };
 		return ret_hu_conv;
 	}
 
 	/**
-	 * Creates [`BlindedPath`]s for payment to the `recipient` node. The channels in `first_hops`
+	 * Creates [`BlindedPaymentPath`]s for payment to the `recipient` node. The channels in `first_hops`
 	 * are assumed to be with the `recipient`'s peers. The payment secret and any constraints are
 	 * given in `tlvs`.
 	 */
-	public Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, org.ldk.structs.ReceiveTlvs tlvs, long amount_msats) {
+	public Result_CVec_BlindedPaymentPathZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, org.ldk.structs.ReceiveTlvs tlvs, long amount_msats) {
 		long ret = bindings.Router_create_blinded_payment_paths(this.ptr, InternalUtils.check_arr_len(recipient, 33), first_hops != null ? Arrays.stream(first_hops).mapToLong(first_hops_conv_16 -> first_hops_conv_16.ptr).toArray() : null, tlvs.ptr, amount_msats);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(recipient);
@@ -201,9 +199,7 @@ public class Router extends CommonBase {
 		Reference.reachabilityFence(tlvs);
 		Reference.reachabilityFence(amount_msats);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ ret_hu_conv = Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ.constr_from_ptr(ret);
-		for (ChannelDetails first_hops_conv_16: first_hops) { if (this != null) { this.ptrs_to.add(first_hops_conv_16); }; };
-		if (this != null) { this.ptrs_to.add(tlvs); };
+		Result_CVec_BlindedPaymentPathZNoneZ ret_hu_conv = Result_CVec_BlindedPaymentPathZNoneZ.constr_from_ptr(ret);
 		return ret_hu_conv;
 	}
 

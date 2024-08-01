@@ -18,6 +18,9 @@ import javax.annotation.Nullable;
  * If `block_hash` is `Some`, this indicates the output was created in the corresponding block and
  * may have been spent there. See [`Filter::register_output`] for details.
  * 
+ * Depending on your block source, you may need one or both of either [`Self::outpoint`] or
+ * [`Self::script_pubkey`].
+ * 
  * [`ChannelMonitor`]: channelmonitor::ChannelMonitor
  * [`ChannelMonitor::block_connected`]: channelmonitor::ChannelMonitor::block_connected
  */
@@ -49,7 +52,6 @@ public class WatchedOutput extends CommonBase {
 		bindings.WatchedOutput_set_block_hash(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -71,7 +73,6 @@ public class WatchedOutput extends CommonBase {
 		bindings.WatchedOutput_set_outpoint(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -103,8 +104,6 @@ public class WatchedOutput extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.WatchedOutput ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.WatchedOutput(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(block_hash_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(outpoint_arg); };
 		return ret_hu_conv;
 	}
 

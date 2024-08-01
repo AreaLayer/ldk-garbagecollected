@@ -175,14 +175,19 @@ public class ChannelMonitor extends CommonBase {
 	 * An [`EventHandler`] may safely call back to the provider, though this shouldn't be needed in
 	 * order to handle these events.
 	 * 
+	 * Will return a [`ReplayEvent`] error if event handling failed and should eventually be retried.
+	 * 
 	 * [`SpendableOutputs`]: crate::events::Event::SpendableOutputs
 	 * [`BumpTransaction`]: crate::events::Event::BumpTransaction
 	 */
-	public void process_pending_events(org.ldk.structs.EventHandler handler) {
-		bindings.ChannelMonitor_process_pending_events(this.ptr, handler.ptr);
+	public Result_NoneReplayEventZ process_pending_events(org.ldk.structs.EventHandler handler) {
+		long ret = bindings.ChannelMonitor_process_pending_events(this.ptr, handler.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(handler);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_NoneReplayEventZ ret_hu_conv = Result_NoneReplayEventZ.constr_from_ptr(ret);
 		if (this != null) { this.ptrs_to.add(handler); };
+		return ret_hu_conv;
 	}
 
 	/**
@@ -499,6 +504,15 @@ public class ChannelMonitor extends CommonBase {
 		if (this != null) { this.ptrs_to.add(broadcaster); };
 		if (this != null) { this.ptrs_to.add(fee_estimator); };
 		if (this != null) { this.ptrs_to.add(logger); };
+	}
+
+	/**
+	 * Returns true if the monitor has pending claim requests that are not fully confirmed yet.
+	 */
+	public boolean has_pending_claims() {
+		boolean ret = bindings.ChannelMonitor_has_pending_claims(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
 	}
 
 	/**

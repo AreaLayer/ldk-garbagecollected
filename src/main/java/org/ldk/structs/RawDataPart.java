@@ -39,7 +39,6 @@ public class RawDataPart extends CommonBase {
 		bindings.RawDataPart_set_timestamp(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**

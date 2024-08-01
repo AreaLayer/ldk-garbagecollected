@@ -76,7 +76,7 @@ public class OfferWithExplicitMetadataBuilder extends CommonBase {
 		Reference.reachabilityFence(metadata);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneBolt12SemanticErrorZ ret_hu_conv = Result_NoneBolt12SemanticErrorZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 		return ret_hu_conv;
 	}
 
@@ -92,7 +92,7 @@ public class OfferWithExplicitMetadataBuilder extends CommonBase {
 		bindings.OfferWithExplicitMetadataBuilder_chain(this.ptr, network);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(network);
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class OfferWithExplicitMetadataBuilder extends CommonBase {
 		bindings.OfferWithExplicitMetadataBuilder_amount_msats(this.ptr, amount_msats);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(amount_msats);
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 	}
 
 	/**
@@ -117,7 +117,7 @@ public class OfferWithExplicitMetadataBuilder extends CommonBase {
 		bindings.OfferWithExplicitMetadataBuilder_absolute_expiry(this.ptr, absolute_expiry);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(absolute_expiry);
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class OfferWithExplicitMetadataBuilder extends CommonBase {
 		bindings.OfferWithExplicitMetadataBuilder_description(this.ptr, description);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(description);
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 	}
 
 	/**
@@ -141,7 +141,7 @@ public class OfferWithExplicitMetadataBuilder extends CommonBase {
 		bindings.OfferWithExplicitMetadataBuilder_issuer(this.ptr, issuer);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(issuer);
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 	}
 
 	/**
@@ -151,12 +151,11 @@ public class OfferWithExplicitMetadataBuilder extends CommonBase {
 	 * Successive calls to this method will add another blinded path. Caller is responsible for not
 	 * adding duplicate paths.
 	 */
-	public void path(org.ldk.structs.BlindedPath path) {
+	public void path(org.ldk.structs.BlindedMessagePath path) {
 		bindings.OfferWithExplicitMetadataBuilder_path(this.ptr, path.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(path);
-		if (this != null) { this.ptrs_to.add(path); };
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 	}
 
 	/**
@@ -169,8 +168,7 @@ public class OfferWithExplicitMetadataBuilder extends CommonBase {
 		bindings.OfferWithExplicitMetadataBuilder_supported_quantity(this.ptr, quantity.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(quantity);
-		if (this != null) { this.ptrs_to.add(quantity); };
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 	}
 
 	/**
@@ -181,7 +179,7 @@ public class OfferWithExplicitMetadataBuilder extends CommonBase {
 		Reference.reachabilityFence(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_OfferBolt12SemanticErrorZ ret_hu_conv = Result_OfferBolt12SemanticErrorZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 		return ret_hu_conv;
 	}
 

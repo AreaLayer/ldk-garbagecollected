@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 
 
 /**
- * The unblinded node in a [`BlindedPath`].
+ * The unblinded node in a blinded path.
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class IntroductionNode extends CommonBase {

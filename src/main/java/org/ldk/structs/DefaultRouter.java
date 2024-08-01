@@ -10,6 +10,11 @@ import javax.annotation.Nullable;
 
 /**
  * A [`Router`] implemented using [`find_route`].
+ * 
+ * # Privacy
+ * 
+ * Implements [`MessageRouter`] by delegating to [`DefaultMessageRouter`]. See those docs for
+ * privacy implications.
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class DefaultRouter extends CommonBase {
@@ -37,7 +42,6 @@ public class DefaultRouter extends CommonBase {
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(logger); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(entropy_source); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(scorer); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(score_params); };
 		return ret_hu_conv;
 	}
 

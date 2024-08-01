@@ -82,7 +82,7 @@ public class NodeSigner extends CommonBase {
 		 * 
 		 * Errors if the [`Recipient`] variant is not supported by the implementation.
 		 */
-		Result_RecoverableSignatureNoneZ sign_invoice(byte[] hrp_bytes, UInt5[] invoice_data, Recipient recipient);
+		Result_RecoverableSignatureNoneZ sign_invoice(RawBolt11Invoice invoice, Recipient recipient);
 		/**
 		 * Signs the [`TaggedHash`] of a BOLT 12 invoice request.
 		 * 
@@ -145,15 +145,9 @@ public class NodeSigner extends CommonBase {
 				long result = ret.clone_ptr();
 				return result;
 			}
-			@Override public long sign_invoice(byte[] hrp_bytes, byte[] invoice_data, Recipient recipient) {
-				int invoice_data_conv_7_len = invoice_data.length;
-				UInt5[] invoice_data_conv_7_arr = new UInt5[invoice_data_conv_7_len];
-				for (int h = 0; h < invoice_data_conv_7_len; h++) {
-					byte invoice_data_conv_7 = invoice_data[h];
-					UInt5 invoice_data_conv_7_conv = new UInt5(invoice_data_conv_7);
-					invoice_data_conv_7_arr[h] = invoice_data_conv_7_conv;
-				}
-				Result_RecoverableSignatureNoneZ ret = arg.sign_invoice(hrp_bytes, invoice_data_conv_7_arr, recipient);
+			@Override public long sign_invoice(long invoice, Recipient recipient) {
+				org.ldk.structs.RawBolt11Invoice invoice_hu_conv = null; if (invoice < 0 || invoice > 4096) { invoice_hu_conv = new org.ldk.structs.RawBolt11Invoice(null, invoice); }
+				Result_RecoverableSignatureNoneZ ret = arg.sign_invoice(invoice_hu_conv, recipient);
 				Reference.reachabilityFence(arg);
 				long result = ret.clone_ptr();
 				return result;
@@ -235,7 +229,6 @@ public class NodeSigner extends CommonBase {
 		Reference.reachabilityFence(tweak);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ThirtyTwoBytesNoneZ ret_hu_conv = Result_ThirtyTwoBytesNoneZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.add(tweak); };
 		return ret_hu_conv;
 	}
 
@@ -252,14 +245,14 @@ public class NodeSigner extends CommonBase {
 	 * 
 	 * Errors if the [`Recipient`] variant is not supported by the implementation.
 	 */
-	public Result_RecoverableSignatureNoneZ sign_invoice(byte[] hrp_bytes, UInt5[] invoice_data, org.ldk.enums.Recipient recipient) {
-		long ret = bindings.NodeSigner_sign_invoice(this.ptr, hrp_bytes, invoice_data != null ? InternalUtils.convUInt5Array(invoice_data) : null, recipient);
+	public Result_RecoverableSignatureNoneZ sign_invoice(org.ldk.structs.RawBolt11Invoice invoice, org.ldk.enums.Recipient recipient) {
+		long ret = bindings.NodeSigner_sign_invoice(this.ptr, invoice.ptr, recipient);
 		Reference.reachabilityFence(this);
-		Reference.reachabilityFence(hrp_bytes);
-		Reference.reachabilityFence(invoice_data);
+		Reference.reachabilityFence(invoice);
 		Reference.reachabilityFence(recipient);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RecoverableSignatureNoneZ ret_hu_conv = Result_RecoverableSignatureNoneZ.constr_from_ptr(ret);
+		if (this != null) { this.ptrs_to.add(invoice); };
 		return ret_hu_conv;
 	}
 
@@ -323,7 +316,6 @@ public class NodeSigner extends CommonBase {
 		Reference.reachabilityFence(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ECDSASignatureNoneZ ret_hu_conv = Result_ECDSASignatureNoneZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.add(msg); };
 		return ret_hu_conv;
 	}
 

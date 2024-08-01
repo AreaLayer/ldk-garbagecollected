@@ -62,7 +62,6 @@ public class RecipientOnionFields extends CommonBase {
 		bindings.RecipientOnionFields_set_payment_secret(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -108,7 +107,6 @@ public class RecipientOnionFields extends CommonBase {
 		bindings.RecipientOnionFields_set_payment_metadata(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	long clone_ptr() {
@@ -215,7 +213,7 @@ public class RecipientOnionFields extends CommonBase {
 		Reference.reachabilityFence(custom_tlvs);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RecipientOnionFieldsNoneZ ret_hu_conv = Result_RecipientOnionFieldsNoneZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 		return ret_hu_conv;
 	}
 

@@ -88,7 +88,7 @@ public class TransactionU16LenLimited extends CommonBase {
 	public byte[] into_transaction() {
 		byte[] ret = bindings.TransactionU16LenLimited_into_transaction(this.ptr);
 		Reference.reachabilityFence(this);
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 		return ret;
 	}
 

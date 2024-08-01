@@ -21,6 +21,26 @@ public class NodeFeatures extends CommonBase {
 	}
 
 	/**
+	 * Serialize the NodeFeatures object into a byte array which can be read by NodeFeatures_read
+	 */
+	public byte[] write() {
+		byte[] ret = bindings.NodeFeatures_write(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Read a NodeFeatures from a byte array, created by NodeFeatures_write
+	 */
+	public static Result_NodeFeaturesDecodeErrorZ read(byte[] ser) {
+		long ret = bindings.NodeFeatures_read(ser);
+		Reference.reachabilityFence(ser);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_NodeFeaturesDecodeErrorZ ret_hu_conv = Result_NodeFeaturesDecodeErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Checks if two NodeFeaturess contain equal inner contents.
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 * Two objects with NULL inner values will be considered "equal" here.
@@ -79,10 +99,40 @@ public class NodeFeatures extends CommonBase {
 	}
 
 	/**
+	 * Returns the feature set as a list of bytes, in little-endian. This is in reverse byte order
+	 * from most on-the-wire encodings.
+	 */
+	public byte[] le_flags() {
+		byte[] ret = bindings.NodeFeatures_le_flags(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Returns true if this `Features` has any optional flags set
+	 */
+	public boolean supports_any_optional_bits() {
+		boolean ret = bindings.NodeFeatures_supports_any_optional_bits(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
 	 * Returns true if this `Features` object contains required features unknown by `other`.
 	 */
 	public boolean requires_unknown_bits_from(org.ldk.structs.NodeFeatures other) {
 		boolean ret = bindings.NodeFeatures_requires_unknown_bits_from(this.ptr, other.ptr);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(other);
+		if (this != null) { this.ptrs_to.add(other); };
+		return ret;
+	}
+
+	/**
+	 * Returns the set of required features unknown by `other`, as their bit position.
+	 */
+	public long[] required_unknown_bits_from(org.ldk.structs.NodeFeatures other) {
+		long[] ret = bindings.NodeFeatures_required_unknown_bits_from(this.ptr, other.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(other);
 		if (this != null) { this.ptrs_to.add(other); };
@@ -95,6 +145,15 @@ public class NodeFeatures extends CommonBase {
 	 */
 	public boolean requires_unknown_bits() {
 		boolean ret = bindings.NodeFeatures_requires_unknown_bits(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Returns true if this `Features` supports any bits which we do not know of
+	 */
+	public boolean supports_unknown_bits() {
+		boolean ret = bindings.NodeFeatures_supports_unknown_bits(this.ptr);
 		Reference.reachabilityFence(this);
 		return ret;
 	}
@@ -172,23 +231,66 @@ public class NodeFeatures extends CommonBase {
 	}
 
 	/**
-	 * Serialize the NodeFeatures object into a byte array which can be read by NodeFeatures_read
+	 * Unsets the `upfront_shutdown_script` feature
 	 */
-	public byte[] write() {
-		byte[] ret = bindings.NodeFeatures_write(this.ptr);
+	public NodeFeatures clear_upfront_shutdown_script() {
+		long ret = bindings.NodeFeatures_clear_upfront_shutdown_script(this.ptr);
 		Reference.reachabilityFence(this);
-		return ret;
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.NodeFeatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.NodeFeatures(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		;
+		return ret_hu_conv;
 	}
 
 	/**
-	 * Read a NodeFeatures from a byte array, created by NodeFeatures_write
+	 * Unsets the `shutdown_anysegwit` feature
 	 */
-	public static Result_NodeFeaturesDecodeErrorZ read(byte[] ser) {
-		long ret = bindings.NodeFeatures_read(ser);
-		Reference.reachabilityFence(ser);
+	public NodeFeatures clear_shutdown_anysegwit() {
+		long ret = bindings.NodeFeatures_clear_shutdown_anysegwit(this.ptr);
+		Reference.reachabilityFence(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_NodeFeaturesDecodeErrorZ ret_hu_conv = Result_NodeFeaturesDecodeErrorZ.constr_from_ptr(ret);
+		org.ldk.structs.NodeFeatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.NodeFeatures(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		;
 		return ret_hu_conv;
+	}
+
+	/**
+	 * Unsets the `wumbo` feature
+	 */
+	public NodeFeatures clear_wumbo() {
+		long ret = bindings.NodeFeatures_clear_wumbo(this.ptr);
+		Reference.reachabilityFence(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.NodeFeatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.NodeFeatures(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		;
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Unsets the `scid_privacy` feature
+	 */
+	public void clear_scid_privacy() {
+		bindings.NodeFeatures_clear_scid_privacy(this.ptr);
+		Reference.reachabilityFence(this);
+	}
+
+	/**
+	 * Unsets the `anchors_zero_fee_htlc_tx` feature
+	 */
+	public void clear_anchors_zero_fee_htlc_tx() {
+		bindings.NodeFeatures_clear_anchors_zero_fee_htlc_tx(this.ptr);
+		Reference.reachabilityFence(this);
+	}
+
+	/**
+	 * Unsets the `route_blinding` feature
+	 */
+	public void clear_route_blinding() {
+		bindings.NodeFeatures_clear_route_blinding(this.ptr);
+		Reference.reachabilityFence(this);
 	}
 
 	/**

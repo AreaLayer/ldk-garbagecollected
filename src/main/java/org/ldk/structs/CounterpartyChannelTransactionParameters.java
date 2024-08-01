@@ -39,7 +39,6 @@ public class CounterpartyChannelTransactionParameters extends CommonBase {
 		bindings.CounterpartyChannelTransactionParameters_set_pubkeys(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -70,7 +69,6 @@ public class CounterpartyChannelTransactionParameters extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CounterpartyChannelTransactionParameters ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.CounterpartyChannelTransactionParameters(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(pubkeys_arg); };
 		return ret_hu_conv;
 	}
 

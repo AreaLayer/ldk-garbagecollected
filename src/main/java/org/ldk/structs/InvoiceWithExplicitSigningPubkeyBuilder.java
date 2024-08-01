@@ -50,7 +50,8 @@ public class InvoiceWithExplicitSigningPubkeyBuilder extends CommonBase {
 	}
 
 	/**
-	 * Sets the [`Bolt12Invoice::relative_expiry`] as seconds since [`Bolt12Invoice::created_at`].
+	 * Sets the [`Bolt12Invoice::relative_expiry`]
+	 * as seconds since [`Bolt12Invoice::created_at`].
 	 * Any expiry that has already passed is valid and can be checked for using
 	 * [`Bolt12Invoice::is_expired`].
 	 * 
@@ -135,8 +136,8 @@ public class InvoiceWithExplicitSigningPubkeyBuilder extends CommonBase {
 	}
 
 	/**
-	 * Sets [`Bolt12Invoice::invoice_features`] to indicate MPP may be used. Otherwise, MPP is
-	 * disallowed.
+	 * Sets [`Bolt12Invoice::invoice_features`]
+	 * to indicate MPP may be used. Otherwise, MPP is disallowed.
 	 */
 	public void allow_mpp() {
 		bindings.InvoiceWithExplicitSigningPubkeyBuilder_allow_mpp(this.ptr);

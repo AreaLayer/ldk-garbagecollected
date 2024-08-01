@@ -33,7 +33,6 @@ public class ChannelConfigUpdate extends CommonBase {
 		bindings.ChannelConfigUpdate_set_forwarding_fee_proportional_millionths(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	public Option_u32Z get_forwarding_fee_base_msat() {
@@ -49,7 +48,6 @@ public class ChannelConfigUpdate extends CommonBase {
 		bindings.ChannelConfigUpdate_set_forwarding_fee_base_msat(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	public Option_u16Z get_cltv_expiry_delta() {
@@ -65,7 +63,6 @@ public class ChannelConfigUpdate extends CommonBase {
 		bindings.ChannelConfigUpdate_set_cltv_expiry_delta(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -84,7 +81,6 @@ public class ChannelConfigUpdate extends CommonBase {
 		bindings.ChannelConfigUpdate_set_max_dust_htlc_exposure_msat(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	public Option_u64Z get_force_close_avoidance_max_fee_satoshis() {
@@ -100,7 +96,6 @@ public class ChannelConfigUpdate extends CommonBase {
 		bindings.ChannelConfigUpdate_set_force_close_avoidance_max_fee_satoshis(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -113,22 +108,6 @@ public class ChannelConfigUpdate extends CommonBase {
 		Reference.reachabilityFence(cltv_expiry_delta_arg);
 		Reference.reachabilityFence(max_dust_htlc_exposure_msat_arg);
 		Reference.reachabilityFence(force_close_avoidance_max_fee_satoshis_arg);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.ChannelConfigUpdate ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelConfigUpdate(null, ret); }
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(forwarding_fee_proportional_millionths_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(forwarding_fee_base_msat_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(cltv_expiry_delta_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(max_dust_htlc_exposure_msat_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(force_close_avoidance_max_fee_satoshis_arg); };
-		return ret_hu_conv;
-	}
-
-	/**
-	 * Creates a "default" ChannelConfigUpdate. See struct and individual field documentaiton for details on which values are used.
-	 */
-	public static ChannelConfigUpdate with_default() {
-		long ret = bindings.ChannelConfigUpdate_default();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ChannelConfigUpdate ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelConfigUpdate(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };

@@ -69,8 +69,8 @@ public class TwoTuple_ThirtyTwoBytesChannelManagerZ extends CommonBase {
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(b_entropy_source); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(b_node_signer); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(b_signer_provider); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(b_config); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(b_params); };
+		;
+		;
 		return ret_hu_conv;
 	}
 

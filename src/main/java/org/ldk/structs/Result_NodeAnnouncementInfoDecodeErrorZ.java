@@ -29,7 +29,7 @@ public class Result_NodeAnnouncementInfoDecodeErrorZ extends CommonBase {
 		private Result_NodeAnnouncementInfoDecodeErrorZ_OK(Object _dummy, long ptr) {
 			super(_dummy, ptr);
 			long res = bindings.CResult_NodeAnnouncementInfoDecodeErrorZ_get_ok(ptr);
-			org.ldk.structs.NodeAnnouncementInfo res_hu_conv = null; if (res < 0 || res > 4096) { res_hu_conv = new org.ldk.structs.NodeAnnouncementInfo(null, res); }
+			org.ldk.structs.NodeAnnouncementInfo res_hu_conv = org.ldk.structs.NodeAnnouncementInfo.constr_from_ptr(res);
 			if (res_hu_conv != null) { res_hu_conv.ptrs_to.add(this); };
 			this.res = res_hu_conv;
 		}
@@ -54,7 +54,6 @@ public class Result_NodeAnnouncementInfoDecodeErrorZ extends CommonBase {
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NodeAnnouncementInfoDecodeErrorZ ret_hu_conv = Result_NodeAnnouncementInfoDecodeErrorZ.constr_from_ptr(ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(o); };
 		return ret_hu_conv;
 	}
 
@@ -66,7 +65,6 @@ public class Result_NodeAnnouncementInfoDecodeErrorZ extends CommonBase {
 		Reference.reachabilityFence(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NodeAnnouncementInfoDecodeErrorZ ret_hu_conv = Result_NodeAnnouncementInfoDecodeErrorZ.constr_from_ptr(ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(e); };
 		return ret_hu_conv;
 	}
 

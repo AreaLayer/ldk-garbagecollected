@@ -41,7 +41,6 @@ public class UpdateFailHTLC extends CommonBase {
 		bindings.UpdateFailHTLC_set_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**

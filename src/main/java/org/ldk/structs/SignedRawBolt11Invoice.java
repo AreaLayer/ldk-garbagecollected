@@ -83,7 +83,7 @@ public class SignedRawBolt11Invoice extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ ret_hu_conv = new ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 		return ret_hu_conv;
 	}
 

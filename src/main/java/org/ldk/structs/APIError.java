@@ -231,7 +231,6 @@ public class APIError extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.APIError ret_hu_conv = org.ldk.structs.APIError.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(script); };
 		return ret_hu_conv;
 	}
 

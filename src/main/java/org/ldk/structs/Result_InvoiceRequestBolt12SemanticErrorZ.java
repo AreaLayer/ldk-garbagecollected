@@ -51,7 +51,6 @@ public class Result_InvoiceRequestBolt12SemanticErrorZ extends CommonBase {
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_InvoiceRequestBolt12SemanticErrorZ ret_hu_conv = Result_InvoiceRequestBolt12SemanticErrorZ.constr_from_ptr(ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(o); };
 		return ret_hu_conv;
 	}
 

@@ -63,7 +63,6 @@ public class CommonOpenChannelFields extends CommonBase {
 		bindings.CommonOpenChannelFields_set_temporary_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -349,7 +348,6 @@ public class CommonOpenChannelFields extends CommonBase {
 		bindings.CommonOpenChannelFields_set_shutdown_scriptpubkey(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -382,7 +380,6 @@ public class CommonOpenChannelFields extends CommonBase {
 		bindings.CommonOpenChannelFields_set_channel_type(this.ptr, val == null ? 0 : val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -413,9 +410,6 @@ public class CommonOpenChannelFields extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CommonOpenChannelFields ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.CommonOpenChannelFields(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(temporary_channel_id_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(shutdown_scriptpubkey_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_type_arg); };
 		return ret_hu_conv;
 	}
 
@@ -466,4 +460,16 @@ public class CommonOpenChannelFields extends CommonBase {
 		if (!(o instanceof CommonOpenChannelFields)) return false;
 		return this.eq((CommonOpenChannelFields)o);
 	}
+	/**
+	 * The [`ChannelParameters`] for this channel.
+	 */
+	public ChannelParameters channel_parameters() {
+		long ret = bindings.CommonOpenChannelFields_channel_parameters(this.ptr);
+		Reference.reachabilityFence(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ChannelParameters ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelParameters(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
+	}
+
 }

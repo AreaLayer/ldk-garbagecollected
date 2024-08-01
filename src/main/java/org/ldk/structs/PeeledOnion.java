@@ -50,27 +50,27 @@ public class PeeledOnion extends CommonBase {
 		}
 	}
 	/**
-	 * Received onion message, with decrypted contents, path_id, and reply path
+	 * Received onion message, with decrypted contents, context, and reply path
 	 */
 	public final static class Receive extends PeeledOnion {
 		public final org.ldk.structs.ParsedOnionMessageContents _0;
+		public final org.ldk.structs.Option_MessageContextZ _1;
 		/**
 		 * Note that this (or a relevant inner pointer) may be NULL or all-0s to represent None
 		*/
-		@Nullable public final byte[] _1;
-		/**
-		 * Note that this (or a relevant inner pointer) may be NULL or all-0s to represent None
-		*/
-		@Nullable public final org.ldk.structs.BlindedPath _2;
+		@Nullable public final org.ldk.structs.BlindedMessagePath _2;
 		private Receive(long ptr, bindings.LDKPeeledOnion.Receive obj) {
 			super(null, ptr);
 			long _0 = obj._0;
 			org.ldk.structs.ParsedOnionMessageContents _0_hu_conv = org.ldk.structs.ParsedOnionMessageContents.constr_from_ptr(_0);
 			if (_0_hu_conv != null) { _0_hu_conv.ptrs_to.add(this); };
 			this._0 = _0_hu_conv;
-			this._1 = obj._1;
+			long _1 = obj._1;
+			org.ldk.structs.Option_MessageContextZ _1_hu_conv = org.ldk.structs.Option_MessageContextZ.constr_from_ptr(_1);
+			if (_1_hu_conv != null) { _1_hu_conv.ptrs_to.add(this); };
+			this._1 = _1_hu_conv;
 			long _2 = obj._2;
-			org.ldk.structs.BlindedPath _2_hu_conv = null; if (_2 < 0 || _2 > 4096) { _2_hu_conv = new org.ldk.structs.BlindedPath(null, _2); }
+			org.ldk.structs.BlindedMessagePath _2_hu_conv = null; if (_2 < 0 || _2 > 4096) { _2_hu_conv = new org.ldk.structs.BlindedMessagePath(null, _2); }
 			if (_2_hu_conv != null) { _2_hu_conv.ptrs_to.add(this); };
 			this._2 = _2_hu_conv;
 		}
@@ -103,16 +103,14 @@ public class PeeledOnion extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PeeledOnion ret_hu_conv = org.ldk.structs.PeeledOnion.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(a); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(b); };
 		return ret_hu_conv;
 	}
 
 	/**
 	 * Utility method to constructs a new Receive-variant PeeledOnion
 	 */
-	public static PeeledOnion receive(org.ldk.structs.ParsedOnionMessageContents a, byte[] b, org.ldk.structs.BlindedPath c) {
-		long ret = bindings.PeeledOnion_receive(a.ptr, InternalUtils.check_arr_len(b, 32), c.ptr);
+	public static PeeledOnion receive(org.ldk.structs.ParsedOnionMessageContents a, org.ldk.structs.Option_MessageContextZ b, org.ldk.structs.BlindedMessagePath c) {
+		long ret = bindings.PeeledOnion_receive(a.ptr, b.ptr, c.ptr);
 		Reference.reachabilityFence(a);
 		Reference.reachabilityFence(b);
 		Reference.reachabilityFence(c);
@@ -120,7 +118,6 @@ public class PeeledOnion extends CommonBase {
 		org.ldk.structs.PeeledOnion ret_hu_conv = org.ldk.structs.PeeledOnion.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(a); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(c); };
 		return ret_hu_conv;
 	}
 

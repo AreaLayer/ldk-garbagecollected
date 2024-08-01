@@ -21,62 +21,6 @@ public class ChannelUpdateInfo extends CommonBase {
 	}
 
 	/**
-	 * When the last update to the channel direction was issued.
-	 * Value is opaque, as set in the announcement.
-	 */
-	public int get_last_update() {
-		int ret = bindings.ChannelUpdateInfo_get_last_update(this.ptr);
-		Reference.reachabilityFence(this);
-		return ret;
-	}
-
-	/**
-	 * When the last update to the channel direction was issued.
-	 * Value is opaque, as set in the announcement.
-	 */
-	public void set_last_update(int val) {
-		bindings.ChannelUpdateInfo_set_last_update(this.ptr, val);
-		Reference.reachabilityFence(this);
-		Reference.reachabilityFence(val);
-	}
-
-	/**
-	 * Whether the channel can be currently used for payments (in this one direction).
-	 */
-	public boolean get_enabled() {
-		boolean ret = bindings.ChannelUpdateInfo_get_enabled(this.ptr);
-		Reference.reachabilityFence(this);
-		return ret;
-	}
-
-	/**
-	 * Whether the channel can be currently used for payments (in this one direction).
-	 */
-	public void set_enabled(boolean val) {
-		bindings.ChannelUpdateInfo_set_enabled(this.ptr, val);
-		Reference.reachabilityFence(this);
-		Reference.reachabilityFence(val);
-	}
-
-	/**
-	 * The difference in CLTV values that you must have when routing through this channel.
-	 */
-	public short get_cltv_expiry_delta() {
-		short ret = bindings.ChannelUpdateInfo_get_cltv_expiry_delta(this.ptr);
-		Reference.reachabilityFence(this);
-		return ret;
-	}
-
-	/**
-	 * The difference in CLTV values that you must have when routing through this channel.
-	 */
-	public void set_cltv_expiry_delta(short val) {
-		bindings.ChannelUpdateInfo_set_cltv_expiry_delta(this.ptr, val);
-		Reference.reachabilityFence(this);
-		Reference.reachabilityFence(val);
-	}
-
-	/**
 	 * The minimum value, which must be relayed to the next hop via the channel
 	 */
 	public long get_htlc_minimum_msat() {
@@ -131,7 +75,62 @@ public class ChannelUpdateInfo extends CommonBase {
 		bindings.ChannelUpdateInfo_set_fees(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
+	}
+
+	/**
+	 * When the last update to the channel direction was issued.
+	 * Value is opaque, as set in the announcement.
+	 */
+	public int get_last_update() {
+		int ret = bindings.ChannelUpdateInfo_get_last_update(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * When the last update to the channel direction was issued.
+	 * Value is opaque, as set in the announcement.
+	 */
+	public void set_last_update(int val) {
+		bindings.ChannelUpdateInfo_set_last_update(this.ptr, val);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
+	}
+
+	/**
+	 * The difference in CLTV values that you must have when routing through this channel.
+	 */
+	public short get_cltv_expiry_delta() {
+		short ret = bindings.ChannelUpdateInfo_get_cltv_expiry_delta(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * The difference in CLTV values that you must have when routing through this channel.
+	 */
+	public void set_cltv_expiry_delta(short val) {
+		bindings.ChannelUpdateInfo_set_cltv_expiry_delta(this.ptr, val);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
+	}
+
+	/**
+	 * Whether the channel can be currently used for payments (in this one direction).
+	 */
+	public boolean get_enabled() {
+		boolean ret = bindings.ChannelUpdateInfo_get_enabled(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Whether the channel can be currently used for payments (in this one direction).
+	 */
+	public void set_enabled(boolean val) {
+		bindings.ChannelUpdateInfo_set_enabled(this.ptr, val);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
 	}
 
 	/**
@@ -164,7 +163,6 @@ public class ChannelUpdateInfo extends CommonBase {
 		bindings.ChannelUpdateInfo_set_last_update_message(this.ptr, val == null ? 0 : val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -172,20 +170,18 @@ public class ChannelUpdateInfo extends CommonBase {
 	 * 
 	 * Note that last_update_message_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static ChannelUpdateInfo of(int last_update_arg, boolean enabled_arg, short cltv_expiry_delta_arg, long htlc_minimum_msat_arg, long htlc_maximum_msat_arg, org.ldk.structs.RoutingFees fees_arg, @Nullable org.ldk.structs.ChannelUpdate last_update_message_arg) {
-		long ret = bindings.ChannelUpdateInfo_new(last_update_arg, enabled_arg, cltv_expiry_delta_arg, htlc_minimum_msat_arg, htlc_maximum_msat_arg, fees_arg.ptr, last_update_message_arg == null ? 0 : last_update_message_arg.ptr);
-		Reference.reachabilityFence(last_update_arg);
-		Reference.reachabilityFence(enabled_arg);
-		Reference.reachabilityFence(cltv_expiry_delta_arg);
+	public static ChannelUpdateInfo of(long htlc_minimum_msat_arg, long htlc_maximum_msat_arg, org.ldk.structs.RoutingFees fees_arg, int last_update_arg, short cltv_expiry_delta_arg, boolean enabled_arg, @Nullable org.ldk.structs.ChannelUpdate last_update_message_arg) {
+		long ret = bindings.ChannelUpdateInfo_new(htlc_minimum_msat_arg, htlc_maximum_msat_arg, fees_arg.ptr, last_update_arg, cltv_expiry_delta_arg, enabled_arg, last_update_message_arg == null ? 0 : last_update_message_arg.ptr);
 		Reference.reachabilityFence(htlc_minimum_msat_arg);
 		Reference.reachabilityFence(htlc_maximum_msat_arg);
 		Reference.reachabilityFence(fees_arg);
+		Reference.reachabilityFence(last_update_arg);
+		Reference.reachabilityFence(cltv_expiry_delta_arg);
+		Reference.reachabilityFence(enabled_arg);
 		Reference.reachabilityFence(last_update_message_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ChannelUpdateInfo ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelUpdateInfo(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(fees_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(last_update_message_arg); };
 		return ret_hu_conv;
 	}
 

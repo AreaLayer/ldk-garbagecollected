@@ -73,8 +73,6 @@ public class TwoTuple_OutPointChannelIdZ extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		TwoTuple_OutPointChannelIdZ ret_hu_conv = new TwoTuple_OutPointChannelIdZ(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(a); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(b); };
 		return ret_hu_conv;
 	}
 

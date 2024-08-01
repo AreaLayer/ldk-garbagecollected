@@ -94,12 +94,13 @@ public class BackgroundProcessor extends CommonBase {
 	 * [`NetworkGraph`]: lightning::routing::gossip::NetworkGraph
 	 * [`NetworkGraph::write`]: lightning::routing::gossip::NetworkGraph#impl-Writeable
 	 */
-	public static BackgroundProcessor start(org.ldk.structs.Persister persister, org.ldk.structs.EventHandler event_handler, org.ldk.structs.ChainMonitor chain_monitor, org.ldk.structs.ChannelManager channel_manager, org.ldk.structs.GossipSync gossip_sync, org.ldk.structs.PeerManager peer_manager, org.ldk.structs.Logger logger, org.ldk.structs.Option_WriteableScoreZ scorer) {
-		long ret = bindings.BackgroundProcessor_start(persister.ptr, event_handler.ptr, chain_monitor.ptr, channel_manager.ptr, gossip_sync.ptr, peer_manager.ptr, logger.ptr, scorer.ptr);
+	public static BackgroundProcessor start(org.ldk.structs.Persister persister, org.ldk.structs.EventHandler event_handler, org.ldk.structs.ChainMonitor chain_monitor, org.ldk.structs.ChannelManager channel_manager, org.ldk.structs.OnionMessenger onion_messenger, org.ldk.structs.GossipSync gossip_sync, org.ldk.structs.PeerManager peer_manager, org.ldk.structs.Logger logger, org.ldk.structs.Option_WriteableScoreZ scorer) {
+		long ret = bindings.BackgroundProcessor_start(persister.ptr, event_handler.ptr, chain_monitor.ptr, channel_manager.ptr, onion_messenger.ptr, gossip_sync.ptr, peer_manager.ptr, logger.ptr, scorer.ptr);
 		Reference.reachabilityFence(persister);
 		Reference.reachabilityFence(event_handler);
 		Reference.reachabilityFence(chain_monitor);
 		Reference.reachabilityFence(channel_manager);
+		Reference.reachabilityFence(onion_messenger);
 		Reference.reachabilityFence(gossip_sync);
 		Reference.reachabilityFence(peer_manager);
 		Reference.reachabilityFence(logger);
@@ -111,6 +112,7 @@ public class BackgroundProcessor extends CommonBase {
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(event_handler); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(chain_monitor); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_manager); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(onion_messenger); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(gossip_sync); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(peer_manager); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(logger); };

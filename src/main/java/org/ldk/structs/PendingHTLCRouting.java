@@ -251,8 +251,6 @@ public class PendingHTLCRouting extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PendingHTLCRouting ret_hu_conv = org.ldk.structs.PendingHTLCRouting.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(onion_packet); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(blinded); };
 		return ret_hu_conv;
 	}
 
@@ -271,9 +269,6 @@ public class PendingHTLCRouting extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PendingHTLCRouting ret_hu_conv = org.ldk.structs.PendingHTLCRouting.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payment_data); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payment_metadata); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payment_context); };
 		return ret_hu_conv;
 	}
 
@@ -291,8 +286,6 @@ public class PendingHTLCRouting extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PendingHTLCRouting ret_hu_conv = org.ldk.structs.PendingHTLCRouting.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payment_data); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payment_metadata); };
 		return ret_hu_conv;
 	}
 

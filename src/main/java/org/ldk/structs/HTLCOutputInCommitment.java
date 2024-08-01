@@ -123,7 +123,6 @@ public class HTLCOutputInCommitment extends CommonBase {
 		bindings.HTLCOutputInCommitment_set_transaction_output_index(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -139,7 +138,6 @@ public class HTLCOutputInCommitment extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.HTLCOutputInCommitment ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.HTLCOutputInCommitment(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(transaction_output_index_arg); };
 		return ret_hu_conv;
 	}
 
@@ -178,6 +176,17 @@ public class HTLCOutputInCommitment extends CommonBase {
 		if (!(o instanceof HTLCOutputInCommitment)) return false;
 		return this.eq((HTLCOutputInCommitment)o);
 	}
+	/**
+	 * Converts HTLC's value with millisatoshi precision into [bitcoin::Amount] with satoshi precision.
+	 * Typically this conversion is needed when transitioning from LN into base-layer Bitcoin,
+	 * e. g. in commitment transactions.
+	 */
+	public long to_bitcoin_amount() {
+		long ret = bindings.HTLCOutputInCommitment_to_bitcoin_amount(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
 	/**
 	 * Serialize the HTLCOutputInCommitment object into a byte array which can be read by HTLCOutputInCommitment_read
 	 */

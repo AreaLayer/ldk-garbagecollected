@@ -39,7 +39,6 @@ public class PaymentParameters extends CommonBase {
 		bindings.PaymentParameters_set_payee(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -61,7 +60,6 @@ public class PaymentParameters extends CommonBase {
 		bindings.PaymentParameters_set_expiry_time(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -100,6 +98,26 @@ public class PaymentParameters extends CommonBase {
 	 */
 	public void set_max_path_count(byte val) {
 		bindings.PaymentParameters_set_max_path_count(this.ptr, val);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
+	}
+
+	/**
+	 * The maximum number of [`Path::hops`] in any returned path.
+	 * Defaults to [`MAX_PATH_LENGTH_ESTIMATE`].
+	 */
+	public byte get_max_path_length() {
+		byte ret = bindings.PaymentParameters_get_max_path_length(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * The maximum number of [`Path::hops`] in any returned path.
+	 * Defaults to [`MAX_PATH_LENGTH_ESTIMATE`].
+	 */
+	public void set_max_path_length(byte val) {
+		bindings.PaymentParameters_set_max_path_length(this.ptr, val);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 	}
@@ -197,20 +215,19 @@ public class PaymentParameters extends CommonBase {
 	/**
 	 * Constructs a new PaymentParameters given each field
 	 */
-	public static PaymentParameters of(org.ldk.structs.Payee payee_arg, org.ldk.structs.Option_u64Z expiry_time_arg, int max_total_cltv_expiry_delta_arg, byte max_path_count_arg, byte max_channel_saturation_power_of_half_arg, long[] previously_failed_channels_arg, long[] previously_failed_blinded_path_idxs_arg) {
-		long ret = bindings.PaymentParameters_new(payee_arg.ptr, expiry_time_arg.ptr, max_total_cltv_expiry_delta_arg, max_path_count_arg, max_channel_saturation_power_of_half_arg, previously_failed_channels_arg, previously_failed_blinded_path_idxs_arg);
+	public static PaymentParameters of(org.ldk.structs.Payee payee_arg, org.ldk.structs.Option_u64Z expiry_time_arg, int max_total_cltv_expiry_delta_arg, byte max_path_count_arg, byte max_path_length_arg, byte max_channel_saturation_power_of_half_arg, long[] previously_failed_channels_arg, long[] previously_failed_blinded_path_idxs_arg) {
+		long ret = bindings.PaymentParameters_new(payee_arg.ptr, expiry_time_arg.ptr, max_total_cltv_expiry_delta_arg, max_path_count_arg, max_path_length_arg, max_channel_saturation_power_of_half_arg, previously_failed_channels_arg, previously_failed_blinded_path_idxs_arg);
 		Reference.reachabilityFence(payee_arg);
 		Reference.reachabilityFence(expiry_time_arg);
 		Reference.reachabilityFence(max_total_cltv_expiry_delta_arg);
 		Reference.reachabilityFence(max_path_count_arg);
+		Reference.reachabilityFence(max_path_length_arg);
 		Reference.reachabilityFence(max_channel_saturation_power_of_half_arg);
 		Reference.reachabilityFence(previously_failed_channels_arg);
 		Reference.reachabilityFence(previously_failed_blinded_path_idxs_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PaymentParameters ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.PaymentParameters(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payee_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(expiry_time_arg); };
 		return ret_hu_conv;
 	}
 
@@ -340,8 +357,8 @@ public class PaymentParameters extends CommonBase {
 	/**
 	 * Creates parameters for paying to a blinded payee from the provided blinded route hints.
 	 */
-	public static PaymentParameters blinded(TwoTuple_BlindedPayInfoBlindedPathZ[] blinded_route_hints) {
-		long ret = bindings.PaymentParameters_blinded(blinded_route_hints != null ? Arrays.stream(blinded_route_hints).mapToLong(blinded_route_hints_conv_37 -> blinded_route_hints_conv_37.ptr).toArray() : null);
+	public static PaymentParameters blinded(BlindedPaymentPath[] blinded_route_hints) {
+		long ret = bindings.PaymentParameters_blinded(blinded_route_hints != null ? Arrays.stream(blinded_route_hints).mapToLong(blinded_route_hints_conv_20 -> blinded_route_hints_conv_20.ptr).toArray() : null);
 		Reference.reachabilityFence(blinded_route_hints);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PaymentParameters ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.PaymentParameters(null, ret); }

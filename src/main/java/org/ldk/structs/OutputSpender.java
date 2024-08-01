@@ -108,8 +108,6 @@ public class OutputSpender extends CommonBase {
 		Reference.reachabilityFence(locktime);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_TransactionNoneZ ret_hu_conv = Result_TransactionNoneZ.constr_from_ptr(ret);
-		for (SpendableOutputDescriptor descriptors_conv_27: descriptors) { if (this != null) { this.ptrs_to.add(descriptors_conv_27); }; };
-		if (this != null) { this.ptrs_to.add(locktime); };
 		return ret_hu_conv;
 	}
 

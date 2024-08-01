@@ -60,6 +60,9 @@ public class ClosureReason extends CommonBase {
 		if (raw_val.getClass() == bindings.LDKClosureReason.HTLCsTimedOut.class) {
 			return new HTLCsTimedOut(ptr, (bindings.LDKClosureReason.HTLCsTimedOut)raw_val);
 		}
+		if (raw_val.getClass() == bindings.LDKClosureReason.PeerFeerateTooLow.class) {
+			return new PeerFeerateTooLow(ptr, (bindings.LDKClosureReason.PeerFeerateTooLow)raw_val);
+		}
 		assert false; return null; // Unreachable without extending the (internal) bindings interface
 	}
 
@@ -94,8 +97,27 @@ public class ClosureReason extends CommonBase {
 	 * [`ChannelManager::force_close_channel`]: crate::ln::channelmanager::ChannelManager::force_close_channel.
 	 */
 	public final static class HolderForceClosed extends ClosureReason {
+		/**
+		 * Whether or not the latest transaction was broadcasted when the channel was force
+		 * closed.
+		 * 
+		 * Channels closed using [`ChannelManager::force_close_broadcasting_latest_txn`] will have
+		 * this field set to true, whereas channels closed using [`ChannelManager::force_close_without_broadcasting_txn`]
+		 * or force-closed prior to being funded will have this field set to false.
+		 * 
+		 * This will be `None` for objects generated or written by LDK 0.0.123 and
+		 * earlier.
+		 * 
+		 * [`ChannelManager::force_close_broadcasting_latest_txn`]: crate::ln::channelmanager::ChannelManager::force_close_broadcasting_latest_txn.
+		 * [`ChannelManager::force_close_without_broadcasting_txn`]: crate::ln::channelmanager::ChannelManager::force_close_without_broadcasting_txn.
+		*/
+		public final org.ldk.structs.Option_boolZ broadcasted_latest_txn;
 		private HolderForceClosed(long ptr, bindings.LDKClosureReason.HolderForceClosed obj) {
 			super(null, ptr);
+			long broadcasted_latest_txn = obj.broadcasted_latest_txn;
+			org.ldk.structs.Option_boolZ broadcasted_latest_txn_hu_conv = org.ldk.structs.Option_boolZ.constr_from_ptr(broadcasted_latest_txn);
+			if (broadcasted_latest_txn_hu_conv != null) { broadcasted_latest_txn_hu_conv.ptrs_to.add(this); };
+			this.broadcasted_latest_txn = broadcasted_latest_txn_hu_conv;
 		}
 	}
 	/**
@@ -217,6 +239,32 @@ public class ClosureReason extends CommonBase {
 			super(null, ptr);
 		}
 	}
+	/**
+	 * Our peer provided a feerate which violated our required minimum (fetched from our
+	 * [`FeeEstimator`] either as [`ConfirmationTarget::MinAllowedAnchorChannelRemoteFee`] or
+	 * [`ConfirmationTarget::MinAllowedNonAnchorChannelRemoteFee`]).
+	 * 
+	 * [`FeeEstimator`]: crate::chain::chaininterface::FeeEstimator
+	 * [`ConfirmationTarget::MinAllowedAnchorChannelRemoteFee`]: crate::chain::chaininterface::ConfirmationTarget::MinAllowedAnchorChannelRemoteFee
+	 * [`ConfirmationTarget::MinAllowedNonAnchorChannelRemoteFee`]: crate::chain::chaininterface::ConfirmationTarget::MinAllowedNonAnchorChannelRemoteFee
+	 */
+	public final static class PeerFeerateTooLow extends ClosureReason {
+		/**
+		 * The feerate on our channel set by our peer.
+		*/
+		public final int peer_feerate_sat_per_kw;
+		/**
+		 * The required feerate we enforce, from our [`FeeEstimator`].
+		 * 
+		 * [`FeeEstimator`]: crate::chain::chaininterface::FeeEstimator
+		*/
+		public final int required_feerate_sat_per_kw;
+		private PeerFeerateTooLow(long ptr, bindings.LDKClosureReason.PeerFeerateTooLow obj) {
+			super(null, ptr);
+			this.peer_feerate_sat_per_kw = obj.peer_feerate_sat_per_kw;
+			this.required_feerate_sat_per_kw = obj.required_feerate_sat_per_kw;
+		}
+	}
 	long clone_ptr() {
 		long ret = bindings.ClosureReason_clone_ptr(this.ptr);
 		Reference.reachabilityFence(this);
@@ -244,15 +292,15 @@ public class ClosureReason extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ClosureReason ret_hu_conv = org.ldk.structs.ClosureReason.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(peer_msg); };
 		return ret_hu_conv;
 	}
 
 	/**
 	 * Utility method to constructs a new HolderForceClosed-variant ClosureReason
 	 */
-	public static ClosureReason holder_force_closed() {
-		long ret = bindings.ClosureReason_holder_force_closed();
+	public static ClosureReason holder_force_closed(org.ldk.structs.Option_boolZ broadcasted_latest_txn) {
+		long ret = bindings.ClosureReason_holder_force_closed(broadcasted_latest_txn.ptr);
+		Reference.reachabilityFence(broadcasted_latest_txn);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ClosureReason ret_hu_conv = org.ldk.structs.ClosureReason.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
@@ -375,6 +423,19 @@ public class ClosureReason extends CommonBase {
 	 */
 	public static ClosureReason htlcs_timed_out() {
 		long ret = bindings.ClosureReason_htlcs_timed_out();
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ClosureReason ret_hu_conv = org.ldk.structs.ClosureReason.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new PeerFeerateTooLow-variant ClosureReason
+	 */
+	public static ClosureReason peer_feerate_too_low(int peer_feerate_sat_per_kw, int required_feerate_sat_per_kw) {
+		long ret = bindings.ClosureReason_peer_feerate_too_low(peer_feerate_sat_per_kw, required_feerate_sat_per_kw);
+		Reference.reachabilityFence(peer_feerate_sat_per_kw);
+		Reference.reachabilityFence(required_feerate_sat_per_kw);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ClosureReason ret_hu_conv = org.ldk.structs.ClosureReason.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
