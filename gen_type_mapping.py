@@ -300,7 +300,7 @@ class TypeMappingGenerator:
                 else:
                     from_hu_conv = (self.consts.get_ptr(ty_info.var_name), self.consts.add_ref("this", ty_info.var_name))
                 opaque_arg_conv = ty_info.rust_obj + " " + ty_info.var_name + "_conv;\n"
-                opaque_arg_conv = opaque_arg_conv + ty_info.var_name + "_conv.inner = untag_ptr(" + ty_info.var_name + ");\n"
+                opaque_arg_conv += ty_info.var_name + "_conv.inner = untag_ptr(" + ty_info.var_name + ");\n"
                 opaque_arg_conv += ty_info.var_name + "_conv.is_owned = ptr_is_owned(" + ty_info.var_name + ");\n"
                 opaque_arg_conv += "CHECK_INNER_FIELD_ACCESS_OR_NULL(" + ty_info.var_name + "_conv);"
 
@@ -313,6 +313,8 @@ class TypeMappingGenerator:
                         # whereas in the first we prefer to clone in C to avoid additional Java code as much as possible.
                         if holds_ref:
                             opaque_arg_conv += "\n" + ty_info.var_name + "_conv = " + ty_info.rust_obj.replace("LDK", "") + "_clone(&" + ty_info.var_name + "_conv);"
+                            if not ty_info.pass_by_ref and not ty_info.contains_trait and not ty_info.is_trait:
+                                from_hu_conv = (from_hu_conv[0], "")
                         elif is_nullable:
                             from_hu_conv = (ty_info.var_name + " == null ? " + self.consts.native_zero_ptr + " : " + ty_info.var_name + ".clone_ptr()", "")
                         else:
@@ -415,9 +417,10 @@ class TypeMappingGenerator:
                         to_hu_conv = self.consts.var_decl_statement(ty_info.java_hu_ty, "ret_hu_conv", "new " + ty_info.java_hu_ty + "(null, " + ty_info.var_name + ")") + ";\n" + self.consts.add_ref("ret_hu_conv", "this") + ";",
                         to_hu_conv_name = "ret_hu_conv", from_hu_conv = from_hu_conv)
                 needs_full_clone = not is_free and (not ty_info.is_ptr or ty_info.requires_clone == True) and ty_info.requires_clone != False
+                from_hu_add_ref = ""
+                if ty_info.contains_trait or ty_info.is_trait or needs_full_clone:
+                    from_hu_add_ref = self.consts.add_ref("this", ty_info.var_name)
                 if needs_full_clone:
-                    if "res" in ty_info.var_name: # XXX: This is a stupid hack
-                        needs_full_clone = False
                     if needs_full_clone and (ty_info.rust_obj.replace("LDK", "") + "_clone") in self.clone_fns:
                         # arg_conv is used when converting a function argument from java normally (with holds_ref set),
                         # and when converting a java value being returned from a trait method (with holds_ref unset).
@@ -425,8 +428,12 @@ class TypeMappingGenerator:
                         # whereas in the first we prefer to clone in C to avoid additional Java code as much as possible.
                         if holds_ref:
                             base_conv += "\n" + ty_info.var_name + "_conv = " + ty_info.rust_obj.replace("LDK", "") + "_clone((" + ty_info.rust_obj + "*)untag_ptr(" + ty_info.var_name + "));"
+                            if not ty_info.pass_by_ref and not ty_info.contains_trait and not ty_info.is_trait:
+                                from_hu_add_ref = ""
                         else:
-                            from_hu_conv = (ty_info.var_name + ".clone_ptr()", "")
+                            if not ty_info.pass_by_ref and not ty_info.contains_trait and not ty_info.is_trait:
+                                from_hu_add_ref = ""
+                            from_hu_conv = (ty_info.var_name + ".clone_ptr()", from_hu_add_ref)
                             base_conv += "\n" + "FREE(untag_ptr(" + ty_info.var_name + "));"
                     elif needs_full_clone:
                         base_conv = base_conv + "\n// WARNING: we may need a move here but no clone is available for " + ty_info.rust_obj
@@ -454,8 +461,7 @@ class TypeMappingGenerator:
                         ret_conv = (ret_conv[0] + "*" + ty_info.var_name + "_copy = ", "")
                         ret_conv = (ret_conv[0], ";\n" + self.consts.ptr_c_ty + " " + ty_info.var_name + "_ref = tag_ptr(" + ty_info.var_name + "_copy, true);")
                     if from_hu_conv is None:
-                        from_hu_conv = (self.consts.get_ptr(ty_info.var_name), "")
-                    from_hu_conv = (from_hu_conv[0], self.consts.add_ref("this", ty_info.var_name))
+                        from_hu_conv = (self.consts.get_ptr(ty_info.var_name), from_hu_add_ref)
                     fully_qualified_ty = self.consts.fully_qualified_hu_ty_path(ty_info)
                     to_hu_call = fully_qualified_ty + ".constr_from_ptr(" + ty_info.var_name + ")"
                     return ConvInfo(ty_info = ty_info, arg_name = ty_info.var_name,
@@ -472,7 +478,7 @@ class TypeMappingGenerator:
                     else:
                         ret_conv = (ty_info.rust_obj + "* " + ty_info.var_name + "_conv = MALLOC(sizeof(" + ty_info.rust_obj + "), \"" + ty_info.rust_obj + "\");\n*" + ty_info.var_name + "_conv = ", ";")
                     if from_hu_conv is None:
-                        from_hu_conv = (self.consts.get_ptr(ty_info.var_name), "")
+                        from_hu_conv = (self.consts.get_ptr(ty_info.var_name), from_hu_add_ref)
                     return ConvInfo(ty_info = ty_info, arg_name = ty_info.var_name,
                         arg_conv = base_conv, arg_conv_name = ty_info.var_name + "_conv", arg_conv_cleanup = None,
                         ret_conv = ret_conv, ret_conv_name = "tag_ptr(" + ty_info.var_name + "_conv, true)",
@@ -498,7 +504,7 @@ class TypeMappingGenerator:
                     else:
                         to_hu_conv_sfx = ""
                     if from_hu_conv is None:
-                        from_hu_conv = (self.consts.get_ptr(ty_info.var_name), "")
+                        from_hu_conv = (self.consts.get_ptr(ty_info.var_name), from_hu_add_ref)
                     return ConvInfo(ty_info = ty_info, arg_name = ty_info.var_name,
                         arg_conv = base_conv, arg_conv_name = ty_info.var_name + "_conv", arg_conv_cleanup = None,
                         ret_conv = ret_conv, ret_conv_name = ret_conv_name,
