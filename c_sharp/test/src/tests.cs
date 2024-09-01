@@ -54,10 +54,10 @@ namespace tests {
 		}
 
 		class TestPersister : PersistInterface {
-			public ChannelMonitorUpdateStatus persist_new_channel(OutPoint channel_id, ChannelMonitor data, MonitorUpdateId update_id) {
+			public ChannelMonitorUpdateStatus persist_new_channel(OutPoint channel_id, ChannelMonitor data) {
 				return ChannelMonitorUpdateStatus.LDKChannelMonitorUpdateStatus_Completed;
 			}
-			public ChannelMonitorUpdateStatus update_persisted_channel(OutPoint channel_id, ChannelMonitorUpdate update, ChannelMonitor data, MonitorUpdateId update_id) {
+			public ChannelMonitorUpdateStatus update_persisted_channel(OutPoint channel_id, ChannelMonitorUpdate update, ChannelMonitor data) {
 				return ChannelMonitorUpdateStatus.LDKChannelMonitorUpdateStatus_Completed;
 			}
 			public void archive_persisted_channel(OutPoint channel_id) { }
@@ -65,8 +65,9 @@ namespace tests {
 
 		class TestEventHandler : EventHandlerInterface {
 			public List<Event> events = new List<Event>();
-			public void handle_event(Event ev) {
+			public Result_NoneReplayEventZ handle_event(Event ev) {
 				events.Add(ev);
+				return Result_NoneReplayEventZ.ok();
 			}
 		}
 		static Event get_event(ChannelManager manager) {
@@ -90,23 +91,26 @@ namespace tests {
 			public Result_RouteLightningErrorZ find_route_with_id(byte[] payer, RouteParameters param, ChannelDetails[] chans, InFlightHtlcs htlcs, byte[] payment_hash, byte[] payment_id) {
 				return inner.as_Router().find_route_with_id(payer, param, chans, htlcs, payment_hash, payment_id);
 			}
-			public Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, ReceiveTlvs tlvs, long amount_msats) {
-				Result_C2Tuple_BlindedPayInfoBlindedPathZNoneZ info_path = UtilMethods.BlindedPath_one_hop_for_payment(recipient, tlvs, 40, entropy);
-				TwoTuple_BlindedPayInfoBlindedPathZ hop = ((Result_C2Tuple_BlindedPayInfoBlindedPathZNoneZ.Result_C2Tuple_BlindedPayInfoBlindedPathZNoneZ_OK)info_path).res;
-				TwoTuple_BlindedPayInfoBlindedPathZ[] hops = new TwoTuple_BlindedPayInfoBlindedPathZ[1];
+			public Result_CVec_BlindedPaymentPathZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, ReceiveTlvs tlvs, long amount_msats) {
+				Result_BlindedPaymentPathNoneZ info_path = BlindedPaymentPath.one_hop(recipient, tlvs, 40, entropy);
+				BlindedPaymentPath hop = ((Result_BlindedPaymentPathNoneZ.Result_BlindedPaymentPathNoneZ_OK)info_path).res;
+				BlindedPaymentPath[] hops = new BlindedPaymentPath[1];
 				hops[0] = hop;
-				return Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ.ok(hops);
+				return Result_CVec_BlindedPaymentPathZNoneZ.ok(hops);
 			}
 
 			public Result_OnionMessagePathNoneZ find_path(byte[] sender, byte[][] peers, Destination dest) {
 				return inner.as_MessageRouter().find_path(sender, peers, dest);
 			}
-			public Result_CVec_BlindedPathZNoneZ create_blinded_paths(byte[] recipient, byte[][] peers) {
-				Result_BlindedPathNoneZ path = BlindedPath.one_hop_for_message(recipient, entropy);
+			public Result_CVec_BlindedMessagePathZNoneZ create_blinded_paths(byte[] recipient, MessageContext ctx, byte[][] peers) {
+				Result_BlindedMessagePathNoneZ path = BlindedMessagePath.one_hop(recipient, ctx, entropy);
 				Assert(path.is_ok(), 2);
-				BlindedPath[] paths = new BlindedPath[1];
-				paths[0] = ((Result_BlindedPathNoneZ.Result_BlindedPathNoneZ_OK)path).res;
-				return Result_CVec_BlindedPathZNoneZ.ok(paths);
+				BlindedMessagePath[] paths = new BlindedMessagePath[1];
+				paths[0] = ((Result_BlindedMessagePathNoneZ.Result_BlindedMessagePathNoneZ_OK)path).res;
+				return Result_CVec_BlindedMessagePathZNoneZ.ok(paths);
+			}
+			public Result_CVec_BlindedMessagePathZNoneZ create_compact_blinded_paths(byte[] recipient, MessageContext ctx, MessageForwardNode[] peers) {
+				return this.create_blinded_paths(recipient, ctx, new byte[0][]);
 			}
 		}
 
@@ -145,7 +149,7 @@ namespace tests {
 
 				manager = ChannelManager.of(estimator, chain_monitor.as_Watch(), ldk_broadcaster, router, logger, keys.as_EntropySource(), keys.as_NodeSigner(), keys.as_SignerProvider(), config, chain_params, 42);
 
-				messenger = OnionMessenger.of(keys.as_EntropySource(), keys.as_NodeSigner(), logger, manager.as_NodeIdLookUp(), MessageRouter.new_impl(router_wrapper), manager.as_OffersMessageHandler(), IgnoringMessageHandler.of().as_CustomOnionMessageHandler());
+				messenger = OnionMessenger.of(keys.as_EntropySource(), keys.as_NodeSigner(), logger, manager.as_NodeIdLookUp(), MessageRouter.new_impl(router_wrapper), manager.as_OffersMessageHandler(), IgnoringMessageHandler.of().as_AsyncPaymentsMessageHandler(), IgnoringMessageHandler.of().as_CustomOnionMessageHandler());
 			}
 		}
 
@@ -305,7 +309,7 @@ namespace tests {
 
 			// Now that we have a channel, pay using a BOLT12 offer!
 
-			Result_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ builder_res = node_b.manager.create_offer_builder();
+			Result_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ builder_res = node_b.manager.create_offer_builder(Option_u64Z.none());
 			Assert(builder_res.is_ok(), 29);
 			Result_OfferBolt12SemanticErrorZ offer_res = ((Result_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ.Result_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ_OK)builder_res).res.build();
 			Assert(offer_res.is_ok(), 30);
