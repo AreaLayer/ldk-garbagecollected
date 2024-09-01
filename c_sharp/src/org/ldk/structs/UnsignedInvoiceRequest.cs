@@ -155,20 +155,20 @@ public class UnsignedInvoiceRequest : CommonBase {
 	 * Paths to the recipient originating from publicly reachable nodes. Blinded paths provide
 	 * recipient privacy by obfuscating its node id.
 	 */
-	public BlindedPath[] paths() {
+	public BlindedMessagePath[] paths() {
 		long ret = bindings.UnsignedInvoiceRequest_paths(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		int ret_conv_13_len = InternalUtils.getArrayLength(ret);
-		BlindedPath[] ret_conv_13_arr = new BlindedPath[ret_conv_13_len];
-		for (int n = 0; n < ret_conv_13_len; n++) {
-			long ret_conv_13 = InternalUtils.getU64ArrayElem(ret, n);
-			org.ldk.structs.BlindedPath ret_conv_13_hu_conv = null; if (ret_conv_13 < 0 || ret_conv_13 > 4096) { ret_conv_13_hu_conv = new org.ldk.structs.BlindedPath(null, ret_conv_13); }
-			if (ret_conv_13_hu_conv != null) { ret_conv_13_hu_conv.ptrs_to.AddLast(this); };
-			ret_conv_13_arr[n] = ret_conv_13_hu_conv;
+		int ret_conv_20_len = InternalUtils.getArrayLength(ret);
+		BlindedMessagePath[] ret_conv_20_arr = new BlindedMessagePath[ret_conv_20_len];
+		for (int u = 0; u < ret_conv_20_len; u++) {
+			long ret_conv_20 = InternalUtils.getU64ArrayElem(ret, u);
+			org.ldk.structs.BlindedMessagePath ret_conv_20_hu_conv = null; if (ret_conv_20 < 0 || ret_conv_20 > 4096) { ret_conv_20_hu_conv = new org.ldk.structs.BlindedMessagePath(null, ret_conv_20); }
+			if (ret_conv_20_hu_conv != null) { ret_conv_20_hu_conv.ptrs_to.AddLast(this); };
+			ret_conv_20_arr[u] = ret_conv_20_hu_conv;
 		}
 		bindings.free_buffer(ret);
-		return ret_conv_13_arr;
+		return ret_conv_20_arr;
 	}
 
 	/**

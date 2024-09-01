@@ -40,7 +40,6 @@ public class WarningMessage : CommonBase {
 		bindings.WarningMessage_set_channel_id(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -81,7 +80,6 @@ public class WarningMessage : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.WarningMessage ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.WarningMessage(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id_arg); };
 		return ret_hu_conv;
 	}
 

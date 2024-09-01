@@ -35,7 +35,6 @@ public class TxSignatures : CommonBase {
 		bindings.TxSignatures_set_channel_id(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -90,8 +89,8 @@ public class TxSignatures : CommonBase {
 	/**
 	 * Optional signature for the shared input -- the previous funding outpoint -- signed by both peers
 	 */
-	public Option_ECDSASignatureZ get_funding_outpoint_sig() {
-		long ret = bindings.TxSignatures_get_funding_outpoint_sig(this.ptr);
+	public Option_ECDSASignatureZ get_shared_input_signature() {
+		long ret = bindings.TxSignatures_get_shared_input_signature(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_ECDSASignatureZ ret_hu_conv = org.ldk.structs.Option_ECDSASignatureZ.constr_from_ptr(ret);
@@ -102,27 +101,24 @@ public class TxSignatures : CommonBase {
 	/**
 	 * Optional signature for the shared input -- the previous funding outpoint -- signed by both peers
 	 */
-	public void set_funding_outpoint_sig(org.ldk.structs.Option_ECDSASignatureZ val) {
-		bindings.TxSignatures_set_funding_outpoint_sig(this.ptr, val.ptr);
+	public void set_shared_input_signature(org.ldk.structs.Option_ECDSASignatureZ val) {
+		bindings.TxSignatures_set_shared_input_signature(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
 	 * Constructs a new TxSignatures given each field
 	 */
-	public static TxSignatures of(org.ldk.structs.ChannelId channel_id_arg, byte[] tx_hash_arg, byte[][] witnesses_arg, org.ldk.structs.Option_ECDSASignatureZ funding_outpoint_sig_arg) {
-		long ret = bindings.TxSignatures_new(channel_id_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(tx_hash_arg, 32)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(witnesses_arg, witnesses_arg_conv_8 => InternalUtils.encodeUint8Array(witnesses_arg_conv_8))), funding_outpoint_sig_arg.ptr);
+	public static TxSignatures of(org.ldk.structs.ChannelId channel_id_arg, byte[] tx_hash_arg, byte[][] witnesses_arg, org.ldk.structs.Option_ECDSASignatureZ shared_input_signature_arg) {
+		long ret = bindings.TxSignatures_new(channel_id_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(tx_hash_arg, 32)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(witnesses_arg, witnesses_arg_conv_8 => InternalUtils.encodeUint8Array(witnesses_arg_conv_8))), shared_input_signature_arg.ptr);
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(tx_hash_arg);
 		GC.KeepAlive(witnesses_arg);
-		GC.KeepAlive(funding_outpoint_sig_arg);
+		GC.KeepAlive(shared_input_signature_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.TxSignatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.TxSignatures(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(funding_outpoint_sig_arg); };
 		return ret_hu_conv;
 	}
 

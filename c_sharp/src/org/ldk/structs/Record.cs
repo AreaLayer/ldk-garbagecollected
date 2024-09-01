@@ -91,7 +91,6 @@ public class Record : CommonBase {
 		bindings.Record_set_channel_id(this.ptr, val == null ? 0 : val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -173,13 +172,40 @@ public class Record : CommonBase {
 	}
 
 	/**
+	 * The payment hash.
+	 * 
+	 * Note that this is only filled in for logs pertaining to a specific payment, and will be
+	 * `None` for logs which are not directly related to a payment.
+	 */
+	public Option_ThirtyTwoBytesZ get_payment_hash() {
+		long ret = bindings.Record_get_payment_hash(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Option_ThirtyTwoBytesZ ret_hu_conv = org.ldk.structs.Option_ThirtyTwoBytesZ.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * The payment hash.
+	 * 
+	 * Note that this is only filled in for logs pertaining to a specific payment, and will be
+	 * `None` for logs which are not directly related to a payment.
+	 */
+	public void set_payment_hash(org.ldk.structs.Option_ThirtyTwoBytesZ val) {
+		bindings.Record_set_payment_hash(this.ptr, val.ptr);
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
+	}
+
+	/**
 	 * Constructs a new Record given each field
 	 * 
 	 * Note that peer_id_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 * Note that channel_id_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static Record of(Level level_arg, byte[] peer_id_arg, org.ldk.structs.ChannelId channel_id_arg, string args_arg, string module_path_arg, string file_arg, int line_arg) {
-		long ret = bindings.Record_new(level_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(peer_id_arg, 33)), channel_id_arg == null ? 0 : channel_id_arg.ptr, InternalUtils.encodeString(args_arg), InternalUtils.encodeString(module_path_arg), InternalUtils.encodeString(file_arg), line_arg);
+	public static Record of(Level level_arg, byte[] peer_id_arg, org.ldk.structs.ChannelId channel_id_arg, string args_arg, string module_path_arg, string file_arg, int line_arg, org.ldk.structs.Option_ThirtyTwoBytesZ payment_hash_arg) {
+		long ret = bindings.Record_new(level_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(peer_id_arg, 33)), channel_id_arg == null ? 0 : channel_id_arg.ptr, InternalUtils.encodeString(args_arg), InternalUtils.encodeString(module_path_arg), InternalUtils.encodeString(file_arg), line_arg, payment_hash_arg.ptr);
 		GC.KeepAlive(level_arg);
 		GC.KeepAlive(peer_id_arg);
 		GC.KeepAlive(channel_id_arg);
@@ -187,10 +213,10 @@ public class Record : CommonBase {
 		GC.KeepAlive(module_path_arg);
 		GC.KeepAlive(file_arg);
 		GC.KeepAlive(line_arg);
+		GC.KeepAlive(payment_hash_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Record ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Record(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id_arg); };
 		return ret_hu_conv;
 	}
 

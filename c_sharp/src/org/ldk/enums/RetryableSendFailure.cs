@@ -27,4 +27,12 @@ public enum RetryableSendFailure {
 	 * [`Event::PaymentFailed`]: crate::events::Event::PaymentFailed
 	 */
 	LDKRetryableSendFailure_DuplicatePayment,
+	/**
+	 * The [`RecipientOnionFields::payment_metadata`], [`RecipientOnionFields::custom_tlvs`], or
+	 * [`BlindedPaymentPath`]s provided are too large and caused us to exceed the maximum onion
+	 * packet size of 1300 bytes.
+	 * 
+	 * [`BlindedPaymentPath`]: crate::blinded_path::payment::BlindedPaymentPath
+	 */
+	LDKRetryableSendFailure_OnionPacketSizeExceeded,
 }} } }

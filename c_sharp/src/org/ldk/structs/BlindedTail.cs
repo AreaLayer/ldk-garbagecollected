@@ -19,9 +19,7 @@ public class BlindedTail : CommonBase {
 	}
 
 	/**
-	 * The hops of the [`BlindedPath`] provided by the recipient.
-	 * 
-	 * [`BlindedPath`]: crate::blinded_path::BlindedPath
+	 * The hops of the [`BlindedPaymentPath`] provided by the recipient.
 	 */
 	public BlindedHop[] get_hops() {
 		long ret = bindings.BlindedTail_get_hops(this.ptr);
@@ -40,21 +38,16 @@ public class BlindedTail : CommonBase {
 	}
 
 	/**
-	 * The hops of the [`BlindedPath`] provided by the recipient.
-	 * 
-	 * [`BlindedPath`]: crate::blinded_path::BlindedPath
+	 * The hops of the [`BlindedPaymentPath`] provided by the recipient.
 	 */
 	public void set_hops(BlindedHop[] val) {
 		bindings.BlindedTail_set_hops(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_12 => val_conv_12.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		foreach (BlindedHop val_conv_12 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_12); }; };
 	}
 
 	/**
-	 * The blinding point of the [`BlindedPath`] provided by the recipient.
-	 * 
-	 * [`BlindedPath`]: crate::blinded_path::BlindedPath
+	 * The blinding point of the [`BlindedPaymentPath`] provided by the recipient.
 	 */
 	public byte[] get_blinding_point() {
 		long ret = bindings.BlindedTail_get_blinding_point(this.ptr);
@@ -65,9 +58,7 @@ public class BlindedTail : CommonBase {
 	}
 
 	/**
-	 * The blinding point of the [`BlindedPath`] provided by the recipient.
-	 * 
-	 * [`BlindedPath`]: crate::blinded_path::BlindedPath
+	 * The blinding point of the [`BlindedPaymentPath`] provided by the recipient.
 	 */
 	public void set_blinding_point(byte[] val) {
 		bindings.BlindedTail_set_blinding_point(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(val, 33)));
@@ -125,7 +116,6 @@ public class BlindedTail : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.BlindedTail ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.BlindedTail(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		foreach (BlindedHop hops_arg_conv_12 in hops_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(hops_arg_conv_12); }; };
 		return ret_hu_conv;
 	}
 

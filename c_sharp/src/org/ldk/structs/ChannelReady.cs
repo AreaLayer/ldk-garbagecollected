@@ -36,7 +36,6 @@ public class ChannelReady : CommonBase {
 		bindings.ChannelReady_set_channel_id(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -84,7 +83,6 @@ public class ChannelReady : CommonBase {
 		bindings.ChannelReady_set_short_channel_id_alias(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -98,8 +96,6 @@ public class ChannelReady : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ChannelReady ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelReady(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(short_channel_id_alias_arg); };
 		return ret_hu_conv;
 	}
 

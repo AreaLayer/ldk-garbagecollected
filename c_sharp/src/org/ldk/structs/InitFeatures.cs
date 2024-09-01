@@ -16,6 +16,28 @@ public class InitFeatures : CommonBase {
 	}
 
 	/**
+	 * Serialize the InitFeatures object into a byte array which can be read by InitFeatures_read
+	 */
+	public byte[] write() {
+		long ret = bindings.InitFeatures_write(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
+		return ret_conv;
+	}
+
+	/**
+	 * Read a InitFeatures from a byte array, created by InitFeatures_write
+	 */
+	public static Result_InitFeaturesDecodeErrorZ read(byte[] ser) {
+		long ret = bindings.InitFeatures_read(InternalUtils.encodeUint8Array(ser));
+		GC.KeepAlive(ser);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_InitFeaturesDecodeErrorZ ret_hu_conv = Result_InitFeaturesDecodeErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Checks if two InitFeaturess contain equal inner contents.
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 * Two objects with NULL inner values will be considered "equal" here.
@@ -74,6 +96,27 @@ public class InitFeatures : CommonBase {
 	}
 
 	/**
+	 * Returns the feature set as a list of bytes, in little-endian. This is in reverse byte order
+	 * from most on-the-wire encodings.
+	 */
+	public byte[] le_flags() {
+		long ret = bindings.InitFeatures_le_flags(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
+		return ret_conv;
+	}
+
+	/**
+	 * Returns true if this `Features` has any optional flags set
+	 */
+	public bool supports_any_optional_bits() {
+		bool ret = bindings.InitFeatures_supports_any_optional_bits(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
 	 * Returns true if this `Features` object contains required features unknown by `other`.
 	 */
 	public bool requires_unknown_bits_from(org.ldk.structs.InitFeatures other) {
@@ -85,11 +128,33 @@ public class InitFeatures : CommonBase {
 	}
 
 	/**
+	 * Returns the set of required features unknown by `other`, as their bit position.
+	 */
+	public long[] required_unknown_bits_from(org.ldk.structs.InitFeatures other) {
+		long ret = bindings.InitFeatures_required_unknown_bits_from(this.ptr, other.ptr);
+		GC.KeepAlive(this);
+		GC.KeepAlive(other);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		long[] ret_conv = InternalUtils.decodeUint64Array(ret);
+		if (this != null) { this.ptrs_to.AddLast(other); };
+		return ret_conv;
+	}
+
+	/**
 	 * Returns true if this `Features` object contains unknown feature flags which are set as
 	 * \"required\".
 	 */
 	public bool requires_unknown_bits() {
 		bool ret = bindings.InitFeatures_requires_unknown_bits(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Returns true if this `Features` supports any bits which we do not know of
+	 */
+	public bool supports_unknown_bits() {
+		bool ret = bindings.InitFeatures_supports_unknown_bits(this.ptr);
 		GC.KeepAlive(this);
 		return ret;
 	}
@@ -167,25 +232,66 @@ public class InitFeatures : CommonBase {
 	}
 
 	/**
-	 * Serialize the InitFeatures object into a byte array which can be read by InitFeatures_read
+	 * Unsets the `upfront_shutdown_script` feature
 	 */
-	public byte[] write() {
-		long ret = bindings.InitFeatures_write(this.ptr);
+	public InitFeatures clear_upfront_shutdown_script() {
+		long ret = bindings.InitFeatures_clear_upfront_shutdown_script(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
-		return ret_conv;
+		org.ldk.structs.InitFeatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.InitFeatures(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		;
+		return ret_hu_conv;
 	}
 
 	/**
-	 * Read a InitFeatures from a byte array, created by InitFeatures_write
+	 * Unsets the `shutdown_anysegwit` feature
 	 */
-	public static Result_InitFeaturesDecodeErrorZ read(byte[] ser) {
-		long ret = bindings.InitFeatures_read(InternalUtils.encodeUint8Array(ser));
-		GC.KeepAlive(ser);
+	public InitFeatures clear_shutdown_anysegwit() {
+		long ret = bindings.InitFeatures_clear_shutdown_anysegwit(this.ptr);
+		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_InitFeaturesDecodeErrorZ ret_hu_conv = Result_InitFeaturesDecodeErrorZ.constr_from_ptr(ret);
+		org.ldk.structs.InitFeatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.InitFeatures(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		;
 		return ret_hu_conv;
+	}
+
+	/**
+	 * Unsets the `wumbo` feature
+	 */
+	public InitFeatures clear_wumbo() {
+		long ret = bindings.InitFeatures_clear_wumbo(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.InitFeatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.InitFeatures(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		;
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Unsets the `scid_privacy` feature
+	 */
+	public void clear_scid_privacy() {
+		bindings.InitFeatures_clear_scid_privacy(this.ptr);
+		GC.KeepAlive(this);
+	}
+
+	/**
+	 * Unsets the `anchors_zero_fee_htlc_tx` feature
+	 */
+	public void clear_anchors_zero_fee_htlc_tx() {
+		bindings.InitFeatures_clear_anchors_zero_fee_htlc_tx(this.ptr);
+		GC.KeepAlive(this);
+	}
+
+	/**
+	 * Unsets the `route_blinding` feature
+	 */
+	public void clear_route_blinding() {
+		bindings.InitFeatures_clear_route_blinding(this.ptr);
+		GC.KeepAlive(this);
 	}
 
 	/**

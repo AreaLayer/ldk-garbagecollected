@@ -63,7 +63,6 @@ public class OnionMessagePath : CommonBase {
 		bindings.OnionMessagePath_set_destination(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -93,7 +92,6 @@ public class OnionMessagePath : CommonBase {
 		bindings.OnionMessagePath_set_first_node_addresses(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -107,8 +105,6 @@ public class OnionMessagePath : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.OnionMessagePath ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.OnionMessagePath(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(destination_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(first_node_addresses_arg); };
 		return ret_hu_conv;
 	}
 

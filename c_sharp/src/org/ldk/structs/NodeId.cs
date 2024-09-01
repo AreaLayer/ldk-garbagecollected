@@ -34,6 +34,23 @@ public class NodeId : CommonBase {
 	}
 
 	/**
+	 * Checks if two NodeIds contain equal inner contents.
+	 * This ignores pointers and is_owned flags and looks at the values in fields.
+	 * Two objects with NULL inner values will be considered "equal" here.
+	 */
+	public bool eq(org.ldk.structs.NodeId b) {
+		bool ret = bindings.NodeId_eq(this.ptr, b.ptr);
+		GC.KeepAlive(this);
+		GC.KeepAlive(b);
+		if (this != null) { this.ptrs_to.AddLast(b); };
+		return ret;
+	}
+
+	public override bool Equals(object o) {
+		if (!(o is NodeId)) return false;
+		return this.eq((NodeId)o);
+	}
+	/**
 	 * Create a new NodeId from a public key
 	 */
 	public static NodeId from_pubkey(byte[] pubkey) {

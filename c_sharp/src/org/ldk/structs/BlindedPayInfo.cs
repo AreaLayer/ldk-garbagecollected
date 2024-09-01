@@ -7,7 +7,7 @@ namespace org { namespace ldk { namespace structs {
 
 
 /**
- * Information needed to route a payment across a [`BlindedPath`].
+ * Information needed to route a payment across a [`BlindedPaymentPath`].
  */
 public class BlindedPayInfo : CommonBase {
 	internal BlindedPayInfo(object _dummy, long ptr) : base(ptr) { }
@@ -138,7 +138,6 @@ public class BlindedPayInfo : CommonBase {
 		bindings.BlindedPayInfo_set_features(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -155,7 +154,6 @@ public class BlindedPayInfo : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.BlindedPayInfo ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.BlindedPayInfo(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(features_arg); };
 		return ret_hu_conv;
 	}
 

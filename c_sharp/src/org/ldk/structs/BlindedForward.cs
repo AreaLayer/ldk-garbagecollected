@@ -60,12 +60,43 @@ public class BlindedForward : CommonBase {
 	}
 
 	/**
-	 * Constructs a new BlindedForward given each field
+	 * Overrides the next hop's [`msgs::UpdateAddHTLC::blinding_point`]. Set if this HTLC is being
+	 * forwarded within a [`BlindedPaymentPath`] that was concatenated to another blinded path that
+	 * starts at the next hop.
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static BlindedForward of(byte[] inbound_blinding_point_arg, BlindedFailure failure_arg) {
-		long ret = bindings.BlindedForward_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(inbound_blinding_point_arg, 33)), failure_arg);
+	public byte[] get_next_blinding_override() {
+		long ret = bindings.BlindedForward_get_next_blinding_override(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
+		return ret_conv;
+	}
+
+	/**
+	 * Overrides the next hop's [`msgs::UpdateAddHTLC::blinding_point`]. Set if this HTLC is being
+	 * forwarded within a [`BlindedPaymentPath`] that was concatenated to another blinded path that
+	 * starts at the next hop.
+	 * 
+	 * Note that val (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	public void set_next_blinding_override(byte[] val) {
+		bindings.BlindedForward_set_next_blinding_override(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(val, 33)));
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
+	}
+
+	/**
+	 * Constructs a new BlindedForward given each field
+	 * 
+	 * Note that next_blinding_override_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	public static BlindedForward of(byte[] inbound_blinding_point_arg, BlindedFailure failure_arg, byte[] next_blinding_override_arg) {
+		long ret = bindings.BlindedForward_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(inbound_blinding_point_arg, 33)), failure_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(next_blinding_override_arg, 33)));
 		GC.KeepAlive(inbound_blinding_point_arg);
 		GC.KeepAlive(failure_arg);
+		GC.KeepAlive(next_blinding_override_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.BlindedForward ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.BlindedForward(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };

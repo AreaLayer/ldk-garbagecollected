@@ -107,7 +107,6 @@ public class CandidateRouteHop : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CandidateRouteHop ret_hu_conv = org.ldk.structs.CandidateRouteHop.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(a); };
 		return ret_hu_conv;
 	}
 
@@ -120,7 +119,6 @@ public class CandidateRouteHop : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CandidateRouteHop ret_hu_conv = org.ldk.structs.CandidateRouteHop.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(a); };
 		return ret_hu_conv;
 	}
 
@@ -133,7 +131,6 @@ public class CandidateRouteHop : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CandidateRouteHop ret_hu_conv = org.ldk.structs.CandidateRouteHop.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(a); };
 		return ret_hu_conv;
 	}
 
@@ -146,7 +143,6 @@ public class CandidateRouteHop : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CandidateRouteHop ret_hu_conv = org.ldk.structs.CandidateRouteHop.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(a); };
 		return ret_hu_conv;
 	}
 
@@ -159,7 +155,6 @@ public class CandidateRouteHop : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CandidateRouteHop ret_hu_conv = org.ldk.structs.CandidateRouteHop.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(a); };
 		return ret_hu_conv;
 	}
 

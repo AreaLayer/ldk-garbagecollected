@@ -108,8 +108,6 @@ public class OutputSpender : CommonBase {
 		GC.KeepAlive(locktime);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_TransactionNoneZ ret_hu_conv = Result_TransactionNoneZ.constr_from_ptr(ret);
-		foreach (SpendableOutputDescriptor descriptors_conv_27 in descriptors) { if (this != null) { this.ptrs_to.AddLast(descriptors_conv_27); }; };
-		if (this != null) { this.ptrs_to.AddLast(locktime); };
 		return ret_hu_conv;
 	}
 

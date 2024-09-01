@@ -96,7 +96,6 @@ public class ChannelMonitorUpdate : CommonBase {
 		bindings.ChannelMonitorUpdate_set_channel_id(this.ptr, val == null ? 0 : val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	internal long clone_ptr() {

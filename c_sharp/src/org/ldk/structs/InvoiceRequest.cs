@@ -144,20 +144,20 @@ public class InvoiceRequest : CommonBase {
 	 * Paths to the recipient originating from publicly reachable nodes. Blinded paths provide
 	 * recipient privacy by obfuscating its node id.
 	 */
-	public BlindedPath[] paths() {
+	public BlindedMessagePath[] paths() {
 		long ret = bindings.InvoiceRequest_paths(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		int ret_conv_13_len = InternalUtils.getArrayLength(ret);
-		BlindedPath[] ret_conv_13_arr = new BlindedPath[ret_conv_13_len];
-		for (int n = 0; n < ret_conv_13_len; n++) {
-			long ret_conv_13 = InternalUtils.getU64ArrayElem(ret, n);
-			org.ldk.structs.BlindedPath ret_conv_13_hu_conv = null; if (ret_conv_13 < 0 || ret_conv_13 > 4096) { ret_conv_13_hu_conv = new org.ldk.structs.BlindedPath(null, ret_conv_13); }
-			if (ret_conv_13_hu_conv != null) { ret_conv_13_hu_conv.ptrs_to.AddLast(this); };
-			ret_conv_13_arr[n] = ret_conv_13_hu_conv;
+		int ret_conv_20_len = InternalUtils.getArrayLength(ret);
+		BlindedMessagePath[] ret_conv_20_arr = new BlindedMessagePath[ret_conv_20_len];
+		for (int u = 0; u < ret_conv_20_len; u++) {
+			long ret_conv_20 = InternalUtils.getU64ArrayElem(ret, u);
+			org.ldk.structs.BlindedMessagePath ret_conv_20_hu_conv = null; if (ret_conv_20 < 0 || ret_conv_20 > 4096) { ret_conv_20_hu_conv = new org.ldk.structs.BlindedMessagePath(null, ret_conv_20); }
+			if (ret_conv_20_hu_conv != null) { ret_conv_20_hu_conv.ptrs_to.AddLast(this); };
+			ret_conv_20_arr[u] = ret_conv_20_hu_conv;
 		}
 		bindings.free_buffer(ret);
-		return ret_conv_13_arr;
+		return ret_conv_20_arr;
 	}
 
 	/**
@@ -284,8 +284,8 @@ public class InvoiceRequest : CommonBase {
 	 * 
 	 * [`Duration`]: core::time::Duration
 	 */
-	public Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ respond_with(TwoTuple_BlindedPayInfoBlindedPathZ[] payment_paths, byte[] payment_hash) {
-		long ret = bindings.InvoiceRequest_respond_with(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(payment_paths, payment_paths_conv_37 => payment_paths_conv_37.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)));
+	public Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ respond_with(BlindedPaymentPath[] payment_paths, byte[] payment_hash) {
+		long ret = bindings.InvoiceRequest_respond_with(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(payment_paths, payment_paths_conv_20 => payment_paths_conv_20.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(payment_paths);
 		GC.KeepAlive(payment_hash);
@@ -314,13 +314,15 @@ public class InvoiceRequest : CommonBase {
 	 * # Note
 	 * 
 	 * If the originating [`Offer`] was created using [`OfferBuilder::deriving_signing_pubkey`],
-	 * then use [`InvoiceRequest::verify`] and [`VerifiedInvoiceRequest`] methods instead.
+	 * then first use [`InvoiceRequest::verify_using_metadata`] or
+	 * [`InvoiceRequest::verify_using_recipient_data`] and then [`VerifiedInvoiceRequest`] methods
+	 * instead.
 	 * 
 	 * [`Bolt12Invoice::created_at`]: crate::offers::invoice::Bolt12Invoice::created_at
 	 * [`OfferBuilder::deriving_signing_pubkey`]: crate::offers::offer::OfferBuilder::deriving_signing_pubkey
 	 */
-	public Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ respond_with_no_std(TwoTuple_BlindedPayInfoBlindedPathZ[] payment_paths, byte[] payment_hash, long created_at) {
-		long ret = bindings.InvoiceRequest_respond_with_no_std(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(payment_paths, payment_paths_conv_37 => payment_paths_conv_37.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), created_at);
+	public Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ respond_with_no_std(BlindedPaymentPath[] payment_paths, byte[] payment_hash, long created_at) {
+		long ret = bindings.InvoiceRequest_respond_with_no_std(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(payment_paths, payment_paths_conv_20 => payment_paths_conv_20.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), created_at);
 		GC.KeepAlive(this);
 		GC.KeepAlive(payment_paths);
 		GC.KeepAlive(payment_hash);
@@ -331,20 +333,43 @@ public class InvoiceRequest : CommonBase {
 	}
 
 	/**
-	 * Verifies that the request was for an offer created using the given key. Returns the verified
-	 * request which contains the derived keys needed to sign a [`Bolt12Invoice`] for the request
-	 * if they could be extracted from the metadata.
+	 * Verifies that the request was for an offer created using the given key by checking the
+	 * metadata from the offer.
+	 * 
+	 * Returns the verified request which contains the derived keys needed to sign a
+	 * [`Bolt12Invoice`] for the request if they could be extracted from the metadata.
 	 * 
 	 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
 	 */
-	public Result_VerifiedInvoiceRequestNoneZ verify(org.ldk.structs.ExpandedKey key) {
-		long ret = bindings.InvoiceRequest_verify(this.ptr, key.ptr);
+	public Result_VerifiedInvoiceRequestNoneZ verify_using_metadata(org.ldk.structs.ExpandedKey key) {
+		long ret = bindings.InvoiceRequest_verify_using_metadata(this.ptr, key.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(key);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_VerifiedInvoiceRequestNoneZ ret_hu_conv = Result_VerifiedInvoiceRequestNoneZ.constr_from_ptr(ret);
 		if (this != null) { this.ptrs_to.AddLast(key); };
-		if (this != null) { this.ptrs_to.AddLast(this); };
+		;
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Verifies that the request was for an offer created using the given key by checking a nonce
+	 * included with the [`BlindedMessagePath`] for which the request was sent through.
+	 * 
+	 * Returns the verified request which contains the derived keys needed to sign a
+	 * [`Bolt12Invoice`] for the request if they could be extracted from the metadata.
+	 * 
+	 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
+	 */
+	public Result_VerifiedInvoiceRequestNoneZ verify_using_recipient_data(org.ldk.structs.Nonce nonce, org.ldk.structs.ExpandedKey key) {
+		long ret = bindings.InvoiceRequest_verify_using_recipient_data(this.ptr, nonce.ptr, key.ptr);
+		GC.KeepAlive(this);
+		GC.KeepAlive(nonce);
+		GC.KeepAlive(key);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_VerifiedInvoiceRequestNoneZ ret_hu_conv = Result_VerifiedInvoiceRequestNoneZ.constr_from_ptr(ret);
+		if (this != null) { this.ptrs_to.AddLast(key); };
+		;
 		return ret_hu_conv;
 	}
 

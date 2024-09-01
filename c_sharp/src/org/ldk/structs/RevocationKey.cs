@@ -14,7 +14,7 @@ namespace org { namespace ldk { namespace structs {
  * per_commitment_point which is used in both commitment and HTLC transactions.
  * 
  * See [the BOLT spec for derivation details]
- * (https://github.com/lightning/bolts/blob/master/03-transactions.md#revocationpubkey-derivation)
+ * <https://github.com/lightning/bolts/blob/master/03-transactions.md#revocationpubkey-derivation>
  */
 public class RevocationKey : CommonBase {
 	internal RevocationKey(object _dummy, long ptr) : base(ptr) { }

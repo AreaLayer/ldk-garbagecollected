@@ -12,6 +12,11 @@ namespace org { namespace ldk { namespace structs {
 public interface FilterInterface {
 	/**Registers interest in a transaction with `txid` and having an output with `script_pubkey` as
 	 * a spending condition.
+	 * 
+	 * This may be used, for example, to monitor for when a funding transaction confirms.
+	 * 
+	 * The `script_pubkey` is provided for informational purposes and may be useful for block
+	 * sources which only support filtering on scripts.
 	 */
 	void register_tx(byte[] txid, byte[] script_pubkey);
 	/**Registers interest in spends of a transaction output.
@@ -20,6 +25,9 @@ public interface FilterInterface {
 	 * to ensure that also dependent output spents within an already connected block are correctly
 	 * handled, e.g., by re-scanning the block in question whenever new outputs have been
 	 * registered mid-processing.
+	 * 
+	 * This may be used, for example, to monitor for when a funding output is spent (by any
+	 * transaction).
 	 */
 	void register_output(WatchedOutput output);
 }
@@ -89,6 +97,11 @@ public class Filter : CommonBase {
 	/**
 	 * Registers interest in a transaction with `txid` and having an output with `script_pubkey` as
 	 * a spending condition.
+	 * 
+	 * This may be used, for example, to monitor for when a funding transaction confirms.
+	 * 
+	 * The `script_pubkey` is provided for informational purposes and may be useful for block
+	 * sources which only support filtering on scripts.
 	 */
 	public void register_tx(byte[] txid, byte[] script_pubkey) {
 		bindings.Filter_register_tx(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(txid, 32)), InternalUtils.encodeUint8Array(script_pubkey));
@@ -104,12 +117,14 @@ public class Filter : CommonBase {
 	 * to ensure that also dependent output spents within an already connected block are correctly
 	 * handled, e.g., by re-scanning the block in question whenever new outputs have been
 	 * registered mid-processing.
+	 * 
+	 * This may be used, for example, to monitor for when a funding output is spent (by any
+	 * transaction).
 	 */
 	public void register_output(org.ldk.structs.WatchedOutput output) {
 		bindings.Filter_register_output(this.ptr, output.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(output);
-		if (this != null) { this.ptrs_to.AddLast(output); };
 	}
 
 }

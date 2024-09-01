@@ -34,7 +34,6 @@ public class RawDataPart : CommonBase {
 		bindings.RawDataPart_set_timestamp(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**

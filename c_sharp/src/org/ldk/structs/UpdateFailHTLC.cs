@@ -36,7 +36,6 @@ public class UpdateFailHTLC : CommonBase {
 		bindings.UpdateFailHTLC_set_channel_id(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**

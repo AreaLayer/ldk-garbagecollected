@@ -74,6 +74,27 @@ public class InvoiceRequestFeatures : CommonBase {
 	}
 
 	/**
+	 * Returns the feature set as a list of bytes, in little-endian. This is in reverse byte order
+	 * from most on-the-wire encodings.
+	 */
+	public byte[] le_flags() {
+		long ret = bindings.InvoiceRequestFeatures_le_flags(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
+		return ret_conv;
+	}
+
+	/**
+	 * Returns true if this `Features` has any optional flags set
+	 */
+	public bool supports_any_optional_bits() {
+		bool ret = bindings.InvoiceRequestFeatures_supports_any_optional_bits(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
 	 * Returns true if this `Features` object contains required features unknown by `other`.
 	 */
 	public bool requires_unknown_bits_from(org.ldk.structs.InvoiceRequestFeatures other) {
@@ -85,11 +106,33 @@ public class InvoiceRequestFeatures : CommonBase {
 	}
 
 	/**
+	 * Returns the set of required features unknown by `other`, as their bit position.
+	 */
+	public long[] required_unknown_bits_from(org.ldk.structs.InvoiceRequestFeatures other) {
+		long ret = bindings.InvoiceRequestFeatures_required_unknown_bits_from(this.ptr, other.ptr);
+		GC.KeepAlive(this);
+		GC.KeepAlive(other);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		long[] ret_conv = InternalUtils.decodeUint64Array(ret);
+		if (this != null) { this.ptrs_to.AddLast(other); };
+		return ret_conv;
+	}
+
+	/**
 	 * Returns true if this `Features` object contains unknown feature flags which are set as
 	 * \"required\".
 	 */
 	public bool requires_unknown_bits() {
 		bool ret = bindings.InvoiceRequestFeatures_requires_unknown_bits(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Returns true if this `Features` supports any bits which we do not know of
+	 */
+	public bool supports_unknown_bits() {
+		bool ret = bindings.InvoiceRequestFeatures_supports_unknown_bits(this.ptr);
 		GC.KeepAlive(this);
 		return ret;
 	}

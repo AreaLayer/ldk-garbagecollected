@@ -67,7 +67,6 @@ public class TwoTuple_ChannelIdPublicKeyZ : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		TwoTuple_ChannelIdPublicKeyZ ret_hu_conv = new TwoTuple_ChannelIdPublicKeyZ(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(a); };
 		return ret_hu_conv;
 	}
 

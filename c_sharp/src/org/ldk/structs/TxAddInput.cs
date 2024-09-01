@@ -34,7 +34,6 @@ public class TxAddInput : CommonBase {
 		bindings.TxAddInput_set_channel_id(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -78,7 +77,6 @@ public class TxAddInput : CommonBase {
 		bindings.TxAddInput_set_prevtx(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -118,20 +116,40 @@ public class TxAddInput : CommonBase {
 	}
 
 	/**
+	 * The ID of the previous funding transaction, when it is being added as an input during splicing
+	 */
+	public Option_ThirtyTwoBytesZ get_shared_input_txid() {
+		long ret = bindings.TxAddInput_get_shared_input_txid(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Option_ThirtyTwoBytesZ ret_hu_conv = org.ldk.structs.Option_ThirtyTwoBytesZ.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * The ID of the previous funding transaction, when it is being added as an input during splicing
+	 */
+	public void set_shared_input_txid(org.ldk.structs.Option_ThirtyTwoBytesZ val) {
+		bindings.TxAddInput_set_shared_input_txid(this.ptr, val.ptr);
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
+	}
+
+	/**
 	 * Constructs a new TxAddInput given each field
 	 */
-	public static TxAddInput of(org.ldk.structs.ChannelId channel_id_arg, long serial_id_arg, org.ldk.structs.TransactionU16LenLimited prevtx_arg, int prevtx_out_arg, int sequence_arg) {
-		long ret = bindings.TxAddInput_new(channel_id_arg.ptr, serial_id_arg, prevtx_arg.ptr, prevtx_out_arg, sequence_arg);
+	public static TxAddInput of(org.ldk.structs.ChannelId channel_id_arg, long serial_id_arg, org.ldk.structs.TransactionU16LenLimited prevtx_arg, int prevtx_out_arg, int sequence_arg, org.ldk.structs.Option_ThirtyTwoBytesZ shared_input_txid_arg) {
+		long ret = bindings.TxAddInput_new(channel_id_arg.ptr, serial_id_arg, prevtx_arg.ptr, prevtx_out_arg, sequence_arg, shared_input_txid_arg.ptr);
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(serial_id_arg);
 		GC.KeepAlive(prevtx_arg);
 		GC.KeepAlive(prevtx_out_arg);
 		GC.KeepAlive(sequence_arg);
+		GC.KeepAlive(shared_input_txid_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.TxAddInput ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.TxAddInput(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(prevtx_arg); };
 		return ret_hu_conv;
 	}
 

@@ -111,6 +111,10 @@ public enum Bolt12SemanticError {
 	 */
 	LDKBolt12SemanticError_MissingPaymentHash,
 	/**
+	 * An invoice payment hash was provided but was not expected.
+	 */
+	LDKBolt12SemanticError_UnexpectedPaymentHash,
+	/**
 	 * A signature was expected but was missing.
 	 */
 	LDKBolt12SemanticError_MissingSignature,

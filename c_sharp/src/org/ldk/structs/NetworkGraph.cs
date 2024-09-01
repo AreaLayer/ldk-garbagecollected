@@ -17,8 +17,6 @@ public class NetworkGraph : CommonBase {
 
 	/**
 	 * Handles any network updates originating from [`Event`]s.
-	 * Note that this will skip applying any [`NetworkUpdate::ChannelUpdateMessage`] to avoid
-	 * leaking possibly identifying information of the sender to the public network.
 	 * 
 	 * [`Event`]: crate::events::Event
 	 */
@@ -236,7 +234,6 @@ public class NetworkGraph : CommonBase {
 		GC.KeepAlive(node_id_2);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneLightningErrorZ ret_hu_conv = Result_NoneLightningErrorZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.AddLast(features); };
 		return ret_hu_conv;
 	}
 

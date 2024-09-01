@@ -7,7 +7,7 @@ namespace org { namespace ldk { namespace structs {
 
 
 /**
- * A splice_locked message to be sent to or received from a peer.
+ * A `splice_locked` message to be sent to or received from a peer.
  */
 public class SpliceLocked : CommonBase {
 	internal SpliceLocked(object _dummy, long ptr) : base(ptr) { }
@@ -34,19 +34,38 @@ public class SpliceLocked : CommonBase {
 		bindings.SpliceLocked_set_channel_id(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
+	}
+
+	/**
+	 * The ID of the new funding transaction that has been locked
+	 */
+	public byte[] get_splice_txid() {
+		long ret = bindings.SpliceLocked_get_splice_txid(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
+		return ret_conv;
+	}
+
+	/**
+	 * The ID of the new funding transaction that has been locked
+	 */
+	public void set_splice_txid(byte[] val) {
+		bindings.SpliceLocked_set_splice_txid(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(val, 32)));
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
 	}
 
 	/**
 	 * Constructs a new SpliceLocked given each field
 	 */
-	public static SpliceLocked of(org.ldk.structs.ChannelId channel_id_arg) {
-		long ret = bindings.SpliceLocked_new(channel_id_arg.ptr);
+	public static SpliceLocked of(org.ldk.structs.ChannelId channel_id_arg, byte[] splice_txid_arg) {
+		long ret = bindings.SpliceLocked_new(channel_id_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(splice_txid_arg, 32)));
 		GC.KeepAlive(channel_id_arg);
+		GC.KeepAlive(splice_txid_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.SpliceLocked ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.SpliceLocked(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id_arg); };
 		return ret_hu_conv;
 	}
 

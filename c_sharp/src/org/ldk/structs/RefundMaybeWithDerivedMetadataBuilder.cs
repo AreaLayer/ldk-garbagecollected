@@ -68,26 +68,29 @@ public class RefundMaybeWithDerivedMetadataBuilder : CommonBase {
 	 * different payer id for each refund, assuming a different nonce is used.  Otherwise, the
 	 * provided `node_id` is used for the payer id.
 	 * 
-	 * Also, sets the metadata when [`RefundBuilder::build`] is called such that it can be used to
-	 * verify that an [`InvoiceRequest`] was produced for the refund given an [`ExpandedKey`].
+	 * Also, sets the metadata when [`RefundBuilder::build`] is called such that it can be used by
+	 * [`Bolt12Invoice::verify_using_metadata`] to determine if the invoice was produced for the
+	 * refund given an [`ExpandedKey`]. However, if [`RefundBuilder::path`] is called, then the
+	 * metadata must be included in each [`BlindedMessagePath`] instead. In this case, use
+	 * [`Bolt12Invoice::verify_using_payer_data`].
 	 * 
 	 * The `payment_id` is encrypted in the metadata and should be unique. This ensures that only
 	 * one invoice will be paid for the refund and that payments can be uniquely identified.
 	 * 
-	 * [`InvoiceRequest`]: crate::offers::invoice_request::InvoiceRequest
+	 * [`Bolt12Invoice::verify_using_metadata`]: crate::offers::invoice::Bolt12Invoice::verify_using_metadata
+	 * [`Bolt12Invoice::verify_using_payer_data`]: crate::offers::invoice::Bolt12Invoice::verify_using_payer_data
 	 * [`ExpandedKey`]: crate::ln::inbound_payment::ExpandedKey
 	 */
-	public static Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ deriving_payer_id(byte[] node_id, org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.EntropySource entropy_source, long amount_msats, byte[] payment_id) {
-		long ret = bindings.RefundMaybeWithDerivedMetadataBuilder_deriving_payer_id(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), expanded_key.ptr, entropy_source.ptr, amount_msats, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
+	public static Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ deriving_payer_id(byte[] node_id, org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.Nonce nonce, long amount_msats, byte[] payment_id) {
+		long ret = bindings.RefundMaybeWithDerivedMetadataBuilder_deriving_payer_id(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), expanded_key.ptr, nonce.ptr, amount_msats, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(expanded_key);
-		GC.KeepAlive(entropy_source);
+		GC.KeepAlive(nonce);
 		GC.KeepAlive(amount_msats);
 		GC.KeepAlive(payment_id);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ ret_hu_conv = Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(expanded_key); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(entropy_source); };
 		return ret_hu_conv;
 	}
 
@@ -100,7 +103,7 @@ public class RefundMaybeWithDerivedMetadataBuilder : CommonBase {
 		bindings.RefundMaybeWithDerivedMetadataBuilder_description(this.ptr, InternalUtils.encodeString(description));
 		GC.KeepAlive(this);
 		GC.KeepAlive(description);
-		if (this != null) { this.ptrs_to.AddLast(this); };
+		;
 	}
 
 	/**
@@ -113,7 +116,7 @@ public class RefundMaybeWithDerivedMetadataBuilder : CommonBase {
 		bindings.RefundMaybeWithDerivedMetadataBuilder_absolute_expiry(this.ptr, absolute_expiry);
 		GC.KeepAlive(this);
 		GC.KeepAlive(absolute_expiry);
-		if (this != null) { this.ptrs_to.AddLast(this); };
+		;
 	}
 
 	/**
@@ -125,7 +128,7 @@ public class RefundMaybeWithDerivedMetadataBuilder : CommonBase {
 		bindings.RefundMaybeWithDerivedMetadataBuilder_issuer(this.ptr, InternalUtils.encodeString(issuer));
 		GC.KeepAlive(this);
 		GC.KeepAlive(issuer);
-		if (this != null) { this.ptrs_to.AddLast(this); };
+		;
 	}
 
 	/**
@@ -135,12 +138,11 @@ public class RefundMaybeWithDerivedMetadataBuilder : CommonBase {
 	 * Successive calls to this method will add another blinded path. Caller is responsible for not
 	 * adding duplicate paths.
 	 */
-	public void path(org.ldk.structs.BlindedPath path) {
+	public void path(org.ldk.structs.BlindedMessagePath path) {
 		bindings.RefundMaybeWithDerivedMetadataBuilder_path(this.ptr, path.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(path);
-		if (this != null) { this.ptrs_to.AddLast(path); };
-		if (this != null) { this.ptrs_to.AddLast(this); };
+		;
 	}
 
 	/**
@@ -153,7 +155,7 @@ public class RefundMaybeWithDerivedMetadataBuilder : CommonBase {
 		bindings.RefundMaybeWithDerivedMetadataBuilder_chain(this.ptr, network);
 		GC.KeepAlive(this);
 		GC.KeepAlive(network);
-		if (this != null) { this.ptrs_to.AddLast(this); };
+		;
 	}
 
 	/**
@@ -171,7 +173,7 @@ public class RefundMaybeWithDerivedMetadataBuilder : CommonBase {
 		bindings.RefundMaybeWithDerivedMetadataBuilder_quantity(this.ptr, quantity);
 		GC.KeepAlive(this);
 		GC.KeepAlive(quantity);
-		if (this != null) { this.ptrs_to.AddLast(this); };
+		;
 	}
 
 	/**
@@ -183,7 +185,7 @@ public class RefundMaybeWithDerivedMetadataBuilder : CommonBase {
 		bindings.RefundMaybeWithDerivedMetadataBuilder_payer_note(this.ptr, InternalUtils.encodeString(payer_note));
 		GC.KeepAlive(this);
 		GC.KeepAlive(payer_note);
-		if (this != null) { this.ptrs_to.AddLast(this); };
+		;
 	}
 
 	/**
@@ -194,7 +196,7 @@ public class RefundMaybeWithDerivedMetadataBuilder : CommonBase {
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RefundBolt12SemanticErrorZ ret_hu_conv = Result_RefundBolt12SemanticErrorZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.AddLast(this); };
+		;
 		return ret_hu_conv;
 	}
 

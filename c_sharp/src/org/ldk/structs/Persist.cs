@@ -17,8 +17,9 @@ public interface PersistInterface {
 	 * channel's outpoint (and it is up to you to maintain a correct mapping between the outpoint
 	 * and the stored channel data). Note that you **must** persist every new monitor to disk.
 	 * 
-	 * The `update_id` is used to identify this call to [`ChainMonitor::channel_monitor_updated`],
-	 * if you return [`ChannelMonitorUpdateStatus::InProgress`].
+	 * The [`ChannelMonitor::get_latest_update_id`] uniquely links this call to [`ChainMonitor::channel_monitor_updated`].
+	 * For [`Persist::persist_new_channel`], it is only necessary to call [`ChainMonitor::channel_monitor_updated`]
+	 * when you return [`ChannelMonitorUpdateStatus::InProgress`].
 	 * 
 	 * See [`Writeable::write`] on [`ChannelMonitor`] for writing out a `ChannelMonitor`
 	 * and [`ChannelMonitorUpdateStatus`] for requirements when returning errors.
@@ -26,7 +27,7 @@ public interface PersistInterface {
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 * [`Writeable::write`]: crate::util::ser::Writeable::write
 	 */
-	ChannelMonitorUpdateStatus persist_new_channel(OutPoint channel_funding_outpoint, ChannelMonitor data, MonitorUpdateId update_id);
+	ChannelMonitorUpdateStatus persist_new_channel(OutPoint channel_funding_outpoint, ChannelMonitor monitor);
 	/**Update one channel's data. The provided [`ChannelMonitor`] has already applied the given
 	 * update.
 	 * 
@@ -43,7 +44,9 @@ public interface PersistInterface {
 	 * If an implementer chooses to persist the updates only, they need to make
 	 * sure that all the updates are applied to the `ChannelMonitors` *before
 	 * the set of channel monitors is given to the `ChannelManager`
-	 * deserialization routine. See [`ChannelMonitor::update_monitor`] for
+	 * deserialization routine. If there are any gaps in the persisted [`ChannelMonitorUpdate`]s,
+	 * implementer can safely ignore [`ChannelMonitorUpdate`]s after the gap and load without them.
+	 * See [`ChannelMonitor::update_monitor`] for
 	 * applying a monitor update to a monitor. If full `ChannelMonitors` are
 	 * persisted, then there is no need to persist individual updates.
 	 * 
@@ -52,8 +55,10 @@ public interface PersistInterface {
 	 * them in batches. The size of each monitor grows `O(number of state updates)`
 	 * whereas updates are small and `O(1)`.
 	 * 
-	 * The `update_id` is used to identify this call to [`ChainMonitor::channel_monitor_updated`],
-	 * if you return [`ChannelMonitorUpdateStatus::InProgress`].
+	 * The [`ChannelMonitorUpdate::update_id`] or [`ChannelMonitor::get_latest_update_id`] uniquely
+	 * links this call to [`ChainMonitor::channel_monitor_updated`].
+	 * For [`Persist::update_persisted_channel`], it is only necessary to call [`ChainMonitor::channel_monitor_updated`]
+	 * when a [`ChannelMonitorUpdate`] is provided and when you return [`ChannelMonitorUpdateStatus::InProgress`].
 	 * 
 	 * See [`Writeable::write`] on [`ChannelMonitor`] for writing out a `ChannelMonitor`,
 	 * [`Writeable::write`] on [`ChannelMonitorUpdate`] for writing out an update, and
@@ -61,9 +66,9 @@ public interface PersistInterface {
 	 * 
 	 * [`Writeable::write`]: crate::util::ser::Writeable::write
 	 * 
-	 * Note that update (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 * Note that monitor_update (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	ChannelMonitorUpdateStatus update_persisted_channel(OutPoint channel_funding_outpoint, ChannelMonitorUpdate update, ChannelMonitor data, MonitorUpdateId update_id);
+	ChannelMonitorUpdateStatus update_persisted_channel(OutPoint channel_funding_outpoint, ChannelMonitorUpdate monitor_update, ChannelMonitor monitor);
 	/**Prevents the channel monitor from being loaded on startup.
 	 * 
 	 * Archiving the data in a backup location (rather than deleting it fully) is useful for
@@ -105,7 +110,7 @@ public interface PersistInterface {
  * All calls should generally spawn a background task and immediately return
  * [`ChannelMonitorUpdateStatus::InProgress`]. Once the update completes,
  * [`ChainMonitor::channel_monitor_updated`] should be called with the corresponding
- * [`MonitorUpdateId`].
+ * [`ChannelMonitor::get_latest_update_id`] or [`ChannelMonitorUpdate::update_id`].
  * 
  * Note that unlike the direct [`chain::Watch`] interface,
  * [`ChainMonitor::channel_monitor_updated`] must be called once for *each* update which occurs.
@@ -143,25 +148,21 @@ public class Persist : CommonBase {
 		internal LDKPersistImpl(PersistInterface arg, LDKPersistHolder impl_holder) { this.arg = arg; this.impl_holder = impl_holder; }
 		private PersistInterface arg;
 		private LDKPersistHolder impl_holder;
-		public ChannelMonitorUpdateStatus persist_new_channel(long _channel_funding_outpoint, long _data, long _update_id) {
+		public ChannelMonitorUpdateStatus persist_new_channel(long _channel_funding_outpoint, long _monitor) {
 			org.ldk.structs.OutPoint _channel_funding_outpoint_hu_conv = null; if (_channel_funding_outpoint < 0 || _channel_funding_outpoint > 4096) { _channel_funding_outpoint_hu_conv = new org.ldk.structs.OutPoint(null, _channel_funding_outpoint); }
 			if (_channel_funding_outpoint_hu_conv != null) { _channel_funding_outpoint_hu_conv.ptrs_to.AddLast(this); };
-			org.ldk.structs.ChannelMonitor _data_hu_conv = null; if (_data < 0 || _data > 4096) { _data_hu_conv = new org.ldk.structs.ChannelMonitor(null, _data); }
-			org.ldk.structs.MonitorUpdateId _update_id_hu_conv = null; if (_update_id < 0 || _update_id > 4096) { _update_id_hu_conv = new org.ldk.structs.MonitorUpdateId(null, _update_id); }
-			if (_update_id_hu_conv != null) { _update_id_hu_conv.ptrs_to.AddLast(this); };
-			ChannelMonitorUpdateStatus ret = arg.persist_new_channel(_channel_funding_outpoint_hu_conv, _data_hu_conv, _update_id_hu_conv);
+			org.ldk.structs.ChannelMonitor _monitor_hu_conv = null; if (_monitor < 0 || _monitor > 4096) { _monitor_hu_conv = new org.ldk.structs.ChannelMonitor(null, _monitor); }
+			ChannelMonitorUpdateStatus ret = arg.persist_new_channel(_channel_funding_outpoint_hu_conv, _monitor_hu_conv);
 				GC.KeepAlive(arg);
 			return ret;
 		}
-		public ChannelMonitorUpdateStatus update_persisted_channel(long _channel_funding_outpoint, long _update, long _data, long _update_id) {
+		public ChannelMonitorUpdateStatus update_persisted_channel(long _channel_funding_outpoint, long _monitor_update, long _monitor) {
 			org.ldk.structs.OutPoint _channel_funding_outpoint_hu_conv = null; if (_channel_funding_outpoint < 0 || _channel_funding_outpoint > 4096) { _channel_funding_outpoint_hu_conv = new org.ldk.structs.OutPoint(null, _channel_funding_outpoint); }
 			if (_channel_funding_outpoint_hu_conv != null) { _channel_funding_outpoint_hu_conv.ptrs_to.AddLast(this); };
-			org.ldk.structs.ChannelMonitorUpdate _update_hu_conv = null; if (_update < 0 || _update > 4096) { _update_hu_conv = new org.ldk.structs.ChannelMonitorUpdate(null, _update); }
-			if (_update_hu_conv != null) { _update_hu_conv.ptrs_to.AddLast(this); };
-			org.ldk.structs.ChannelMonitor _data_hu_conv = null; if (_data < 0 || _data > 4096) { _data_hu_conv = new org.ldk.structs.ChannelMonitor(null, _data); }
-			org.ldk.structs.MonitorUpdateId _update_id_hu_conv = null; if (_update_id < 0 || _update_id > 4096) { _update_id_hu_conv = new org.ldk.structs.MonitorUpdateId(null, _update_id); }
-			if (_update_id_hu_conv != null) { _update_id_hu_conv.ptrs_to.AddLast(this); };
-			ChannelMonitorUpdateStatus ret = arg.update_persisted_channel(_channel_funding_outpoint_hu_conv, _update_hu_conv, _data_hu_conv, _update_id_hu_conv);
+			org.ldk.structs.ChannelMonitorUpdate _monitor_update_hu_conv = null; if (_monitor_update < 0 || _monitor_update > 4096) { _monitor_update_hu_conv = new org.ldk.structs.ChannelMonitorUpdate(null, _monitor_update); }
+			if (_monitor_update_hu_conv != null) { _monitor_update_hu_conv.ptrs_to.AddLast(this); };
+			org.ldk.structs.ChannelMonitor _monitor_hu_conv = null; if (_monitor < 0 || _monitor > 4096) { _monitor_hu_conv = new org.ldk.structs.ChannelMonitor(null, _monitor); }
+			ChannelMonitorUpdateStatus ret = arg.update_persisted_channel(_channel_funding_outpoint_hu_conv, _monitor_update_hu_conv, _monitor_hu_conv);
 				GC.KeepAlive(arg);
 			return ret;
 		}
@@ -193,8 +194,9 @@ public class Persist : CommonBase {
 	 * channel's outpoint (and it is up to you to maintain a correct mapping between the outpoint
 	 * and the stored channel data). Note that you **must** persist every new monitor to disk.
 	 * 
-	 * The `update_id` is used to identify this call to [`ChainMonitor::channel_monitor_updated`],
-	 * if you return [`ChannelMonitorUpdateStatus::InProgress`].
+	 * The [`ChannelMonitor::get_latest_update_id`] uniquely links this call to [`ChainMonitor::channel_monitor_updated`].
+	 * For [`Persist::persist_new_channel`], it is only necessary to call [`ChainMonitor::channel_monitor_updated`]
+	 * when you return [`ChannelMonitorUpdateStatus::InProgress`].
 	 * 
 	 * See [`Writeable::write`] on [`ChannelMonitor`] for writing out a `ChannelMonitor`
 	 * and [`ChannelMonitorUpdateStatus`] for requirements when returning errors.
@@ -202,15 +204,12 @@ public class Persist : CommonBase {
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 * [`Writeable::write`]: crate::util::ser::Writeable::write
 	 */
-	public ChannelMonitorUpdateStatus persist_new_channel(org.ldk.structs.OutPoint channel_funding_outpoint, org.ldk.structs.ChannelMonitor data, org.ldk.structs.MonitorUpdateId update_id) {
-		ChannelMonitorUpdateStatus ret = bindings.Persist_persist_new_channel(this.ptr, channel_funding_outpoint.ptr, data.ptr, update_id.ptr);
+	public ChannelMonitorUpdateStatus persist_new_channel(org.ldk.structs.OutPoint channel_funding_outpoint, org.ldk.structs.ChannelMonitor monitor) {
+		ChannelMonitorUpdateStatus ret = bindings.Persist_persist_new_channel(this.ptr, channel_funding_outpoint.ptr, monitor.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(channel_funding_outpoint);
-		GC.KeepAlive(data);
-		GC.KeepAlive(update_id);
-		if (this != null) { this.ptrs_to.AddLast(channel_funding_outpoint); };
-		if (this != null) { this.ptrs_to.AddLast(data); };
-		if (this != null) { this.ptrs_to.AddLast(update_id); };
+		GC.KeepAlive(monitor);
+		if (this != null) { this.ptrs_to.AddLast(monitor); };
 		return ret;
 	}
 
@@ -231,7 +230,9 @@ public class Persist : CommonBase {
 	 * If an implementer chooses to persist the updates only, they need to make
 	 * sure that all the updates are applied to the `ChannelMonitors` *before
 	 * the set of channel monitors is given to the `ChannelManager`
-	 * deserialization routine. See [`ChannelMonitor::update_monitor`] for
+	 * deserialization routine. If there are any gaps in the persisted [`ChannelMonitorUpdate`]s,
+	 * implementer can safely ignore [`ChannelMonitorUpdate`]s after the gap and load without them.
+	 * See [`ChannelMonitor::update_monitor`] for
 	 * applying a monitor update to a monitor. If full `ChannelMonitors` are
 	 * persisted, then there is no need to persist individual updates.
 	 * 
@@ -240,8 +241,10 @@ public class Persist : CommonBase {
 	 * them in batches. The size of each monitor grows `O(number of state updates)`
 	 * whereas updates are small and `O(1)`.
 	 * 
-	 * The `update_id` is used to identify this call to [`ChainMonitor::channel_monitor_updated`],
-	 * if you return [`ChannelMonitorUpdateStatus::InProgress`].
+	 * The [`ChannelMonitorUpdate::update_id`] or [`ChannelMonitor::get_latest_update_id`] uniquely
+	 * links this call to [`ChainMonitor::channel_monitor_updated`].
+	 * For [`Persist::update_persisted_channel`], it is only necessary to call [`ChainMonitor::channel_monitor_updated`]
+	 * when a [`ChannelMonitorUpdate`] is provided and when you return [`ChannelMonitorUpdateStatus::InProgress`].
 	 * 
 	 * See [`Writeable::write`] on [`ChannelMonitor`] for writing out a `ChannelMonitor`,
 	 * [`Writeable::write`] on [`ChannelMonitorUpdate`] for writing out an update, and
@@ -249,19 +252,15 @@ public class Persist : CommonBase {
 	 * 
 	 * [`Writeable::write`]: crate::util::ser::Writeable::write
 	 * 
-	 * Note that update (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 * Note that monitor_update (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ChannelMonitorUpdateStatus update_persisted_channel(org.ldk.structs.OutPoint channel_funding_outpoint, org.ldk.structs.ChannelMonitorUpdate update, org.ldk.structs.ChannelMonitor data, org.ldk.structs.MonitorUpdateId update_id) {
-		ChannelMonitorUpdateStatus ret = bindings.Persist_update_persisted_channel(this.ptr, channel_funding_outpoint.ptr, update == null ? 0 : update.ptr, data.ptr, update_id.ptr);
+	public ChannelMonitorUpdateStatus update_persisted_channel(org.ldk.structs.OutPoint channel_funding_outpoint, org.ldk.structs.ChannelMonitorUpdate monitor_update, org.ldk.structs.ChannelMonitor monitor) {
+		ChannelMonitorUpdateStatus ret = bindings.Persist_update_persisted_channel(this.ptr, channel_funding_outpoint.ptr, monitor_update == null ? 0 : monitor_update.ptr, monitor.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(channel_funding_outpoint);
-		GC.KeepAlive(update);
-		GC.KeepAlive(data);
-		GC.KeepAlive(update_id);
-		if (this != null) { this.ptrs_to.AddLast(channel_funding_outpoint); };
-		if (this != null) { this.ptrs_to.AddLast(update); };
-		if (this != null) { this.ptrs_to.AddLast(data); };
-		if (this != null) { this.ptrs_to.AddLast(update_id); };
+		GC.KeepAlive(monitor_update);
+		GC.KeepAlive(monitor);
+		if (this != null) { this.ptrs_to.AddLast(monitor); };
 		return ret;
 	}
 
@@ -275,7 +274,6 @@ public class Persist : CommonBase {
 		bindings.Persist_archive_persisted_channel(this.ptr, channel_funding_outpoint.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(channel_funding_outpoint);
-		if (this != null) { this.ptrs_to.AddLast(channel_funding_outpoint); };
 	}
 
 }

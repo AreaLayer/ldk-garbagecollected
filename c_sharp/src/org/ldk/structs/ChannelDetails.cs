@@ -9,8 +9,14 @@ namespace org { namespace ldk { namespace structs {
 /**
  * Details of a channel, as returned by [`ChannelManager::list_channels`] and [`ChannelManager::list_usable_channels`]
  * 
+ * Balances of a channel are available through [`ChainMonitor::get_claimable_balances`] and
+ * [`ChannelMonitor::get_claimable_balances`], calculated with respect to the corresponding on-chain
+ * transactions.
+ * 
  * [`ChannelManager::list_channels`]: crate::ln::channelmanager::ChannelManager::list_channels
  * [`ChannelManager::list_usable_channels`]: crate::ln::channelmanager::ChannelManager::list_usable_channels
+ * [`ChainMonitor::get_claimable_balances`]: crate::chain::chainmonitor::ChainMonitor::get_claimable_balances
+ * [`ChannelMonitor::get_claimable_balances`]: crate::chain::channelmonitor::ChannelMonitor::get_claimable_balances
  */
 public class ChannelDetails : CommonBase {
 	internal ChannelDetails(object _dummy, long ptr) : base(ptr) { }
@@ -43,7 +49,6 @@ public class ChannelDetails : CommonBase {
 		bindings.ChannelDetails_set_channel_id(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -65,7 +70,6 @@ public class ChannelDetails : CommonBase {
 		bindings.ChannelDetails_set_counterparty(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -93,7 +97,6 @@ public class ChannelDetails : CommonBase {
 		bindings.ChannelDetails_set_funding_txo(this.ptr, val == null ? 0 : val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -123,7 +126,6 @@ public class ChannelDetails : CommonBase {
 		bindings.ChannelDetails_set_channel_type(this.ptr, val == null ? 0 : val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -171,7 +173,6 @@ public class ChannelDetails : CommonBase {
 		bindings.ChannelDetails_set_short_channel_id(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -209,7 +210,6 @@ public class ChannelDetails : CommonBase {
 		bindings.ChannelDetails_set_outbound_scid_alias(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -247,7 +247,6 @@ public class ChannelDetails : CommonBase {
 		bindings.ChannelDetails_set_inbound_scid_alias(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -303,7 +302,6 @@ public class ChannelDetails : CommonBase {
 		bindings.ChannelDetails_set_unspendable_punishment_reserve(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -367,7 +365,6 @@ public class ChannelDetails : CommonBase {
 		bindings.ChannelDetails_set_feerate_sat_per_1000_weight(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -569,7 +566,6 @@ public class ChannelDetails : CommonBase {
 		bindings.ChannelDetails_set_confirmations_required(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -595,7 +591,6 @@ public class ChannelDetails : CommonBase {
 		bindings.ChannelDetails_set_confirmations(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -629,7 +624,6 @@ public class ChannelDetails : CommonBase {
 		bindings.ChannelDetails_set_force_close_spend_delay(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -703,7 +697,6 @@ public class ChannelDetails : CommonBase {
 		bindings.ChannelDetails_set_channel_shutdown_state(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -733,8 +726,8 @@ public class ChannelDetails : CommonBase {
 	/**
 	 * True if this channel is (or will be) publicly-announced.
 	 */
-	public bool get_is_public() {
-		bool ret = bindings.ChannelDetails_get_is_public(this.ptr);
+	public bool get_is_announced() {
+		bool ret = bindings.ChannelDetails_get_is_announced(this.ptr);
 		GC.KeepAlive(this);
 		return ret;
 	}
@@ -742,8 +735,8 @@ public class ChannelDetails : CommonBase {
 	/**
 	 * True if this channel is (or will be) publicly-announced.
 	 */
-	public void set_is_public(bool val) {
-		bindings.ChannelDetails_set_is_public(this.ptr, val);
+	public void set_is_announced(bool val) {
+		bindings.ChannelDetails_set_is_announced(this.ptr, val);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 	}
@@ -769,7 +762,6 @@ public class ChannelDetails : CommonBase {
 		bindings.ChannelDetails_set_inbound_htlc_minimum_msat(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -791,7 +783,6 @@ public class ChannelDetails : CommonBase {
 		bindings.ChannelDetails_set_inbound_htlc_maximum_msat(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -821,7 +812,6 @@ public class ChannelDetails : CommonBase {
 		bindings.ChannelDetails_set_config(this.ptr, val == null ? 0 : val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -854,7 +844,6 @@ public class ChannelDetails : CommonBase {
 		bindings.ChannelDetails_set_pending_inbound_htlcs(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_20 => val_conv_20.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		foreach (InboundHTLCDetails val_conv_20 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_20); }; };
 	}
 
 	/**
@@ -887,7 +876,6 @@ public class ChannelDetails : CommonBase {
 		bindings.ChannelDetails_set_pending_outbound_htlcs(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_21 => val_conv_21.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		foreach (OutboundHTLCDetails val_conv_21 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_21); }; };
 	}
 
 	/**
@@ -897,8 +885,8 @@ public class ChannelDetails : CommonBase {
 	 * Note that channel_type_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 * Note that config_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static ChannelDetails of(org.ldk.structs.ChannelId channel_id_arg, org.ldk.structs.ChannelCounterparty counterparty_arg, org.ldk.structs.OutPoint funding_txo_arg, org.ldk.structs.ChannelTypeFeatures channel_type_arg, org.ldk.structs.Option_u64Z short_channel_id_arg, org.ldk.structs.Option_u64Z outbound_scid_alias_arg, org.ldk.structs.Option_u64Z inbound_scid_alias_arg, long channel_value_satoshis_arg, org.ldk.structs.Option_u64Z unspendable_punishment_reserve_arg, org.ldk.util.UInt128 user_channel_id_arg, org.ldk.structs.Option_u32Z feerate_sat_per_1000_weight_arg, long balance_msat_arg, long outbound_capacity_msat_arg, long next_outbound_htlc_limit_msat_arg, long next_outbound_htlc_minimum_msat_arg, long inbound_capacity_msat_arg, org.ldk.structs.Option_u32Z confirmations_required_arg, org.ldk.structs.Option_u32Z confirmations_arg, org.ldk.structs.Option_u16Z force_close_spend_delay_arg, bool is_outbound_arg, bool is_channel_ready_arg, org.ldk.structs.Option_ChannelShutdownStateZ channel_shutdown_state_arg, bool is_usable_arg, bool is_public_arg, org.ldk.structs.Option_u64Z inbound_htlc_minimum_msat_arg, org.ldk.structs.Option_u64Z inbound_htlc_maximum_msat_arg, org.ldk.structs.ChannelConfig config_arg, InboundHTLCDetails[] pending_inbound_htlcs_arg, OutboundHTLCDetails[] pending_outbound_htlcs_arg) {
-		long ret = bindings.ChannelDetails_new(channel_id_arg.ptr, counterparty_arg.ptr, funding_txo_arg == null ? 0 : funding_txo_arg.ptr, channel_type_arg == null ? 0 : channel_type_arg.ptr, short_channel_id_arg.ptr, outbound_scid_alias_arg.ptr, inbound_scid_alias_arg.ptr, channel_value_satoshis_arg, unspendable_punishment_reserve_arg.ptr, InternalUtils.encodeUint8Array(user_channel_id_arg.getLEBytes()), feerate_sat_per_1000_weight_arg.ptr, balance_msat_arg, outbound_capacity_msat_arg, next_outbound_htlc_limit_msat_arg, next_outbound_htlc_minimum_msat_arg, inbound_capacity_msat_arg, confirmations_required_arg.ptr, confirmations_arg.ptr, force_close_spend_delay_arg.ptr, is_outbound_arg, is_channel_ready_arg, channel_shutdown_state_arg.ptr, is_usable_arg, is_public_arg, inbound_htlc_minimum_msat_arg.ptr, inbound_htlc_maximum_msat_arg.ptr, config_arg == null ? 0 : config_arg.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(pending_inbound_htlcs_arg, pending_inbound_htlcs_arg_conv_20 => pending_inbound_htlcs_arg_conv_20.ptr)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(pending_outbound_htlcs_arg, pending_outbound_htlcs_arg_conv_21 => pending_outbound_htlcs_arg_conv_21.ptr)));
+	public static ChannelDetails of(org.ldk.structs.ChannelId channel_id_arg, org.ldk.structs.ChannelCounterparty counterparty_arg, org.ldk.structs.OutPoint funding_txo_arg, org.ldk.structs.ChannelTypeFeatures channel_type_arg, org.ldk.structs.Option_u64Z short_channel_id_arg, org.ldk.structs.Option_u64Z outbound_scid_alias_arg, org.ldk.structs.Option_u64Z inbound_scid_alias_arg, long channel_value_satoshis_arg, org.ldk.structs.Option_u64Z unspendable_punishment_reserve_arg, org.ldk.util.UInt128 user_channel_id_arg, org.ldk.structs.Option_u32Z feerate_sat_per_1000_weight_arg, long balance_msat_arg, long outbound_capacity_msat_arg, long next_outbound_htlc_limit_msat_arg, long next_outbound_htlc_minimum_msat_arg, long inbound_capacity_msat_arg, org.ldk.structs.Option_u32Z confirmations_required_arg, org.ldk.structs.Option_u32Z confirmations_arg, org.ldk.structs.Option_u16Z force_close_spend_delay_arg, bool is_outbound_arg, bool is_channel_ready_arg, org.ldk.structs.Option_ChannelShutdownStateZ channel_shutdown_state_arg, bool is_usable_arg, bool is_announced_arg, org.ldk.structs.Option_u64Z inbound_htlc_minimum_msat_arg, org.ldk.structs.Option_u64Z inbound_htlc_maximum_msat_arg, org.ldk.structs.ChannelConfig config_arg, InboundHTLCDetails[] pending_inbound_htlcs_arg, OutboundHTLCDetails[] pending_outbound_htlcs_arg) {
+		long ret = bindings.ChannelDetails_new(channel_id_arg.ptr, counterparty_arg.ptr, funding_txo_arg == null ? 0 : funding_txo_arg.ptr, channel_type_arg == null ? 0 : channel_type_arg.ptr, short_channel_id_arg.ptr, outbound_scid_alias_arg.ptr, inbound_scid_alias_arg.ptr, channel_value_satoshis_arg, unspendable_punishment_reserve_arg.ptr, InternalUtils.encodeUint8Array(user_channel_id_arg.getLEBytes()), feerate_sat_per_1000_weight_arg.ptr, balance_msat_arg, outbound_capacity_msat_arg, next_outbound_htlc_limit_msat_arg, next_outbound_htlc_minimum_msat_arg, inbound_capacity_msat_arg, confirmations_required_arg.ptr, confirmations_arg.ptr, force_close_spend_delay_arg.ptr, is_outbound_arg, is_channel_ready_arg, channel_shutdown_state_arg.ptr, is_usable_arg, is_announced_arg, inbound_htlc_minimum_msat_arg.ptr, inbound_htlc_maximum_msat_arg.ptr, config_arg == null ? 0 : config_arg.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(pending_inbound_htlcs_arg, pending_inbound_htlcs_arg_conv_20 => pending_inbound_htlcs_arg_conv_20.ptr)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(pending_outbound_htlcs_arg, pending_outbound_htlcs_arg_conv_21 => pending_outbound_htlcs_arg_conv_21.ptr)));
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(counterparty_arg);
 		GC.KeepAlive(funding_txo_arg);
@@ -922,7 +910,7 @@ public class ChannelDetails : CommonBase {
 		GC.KeepAlive(is_channel_ready_arg);
 		GC.KeepAlive(channel_shutdown_state_arg);
 		GC.KeepAlive(is_usable_arg);
-		GC.KeepAlive(is_public_arg);
+		GC.KeepAlive(is_announced_arg);
 		GC.KeepAlive(inbound_htlc_minimum_msat_arg);
 		GC.KeepAlive(inbound_htlc_maximum_msat_arg);
 		GC.KeepAlive(config_arg);
@@ -931,24 +919,6 @@ public class ChannelDetails : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ChannelDetails ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelDetails(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(counterparty_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(funding_txo_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_type_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(short_channel_id_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(outbound_scid_alias_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(inbound_scid_alias_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(unspendable_punishment_reserve_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(feerate_sat_per_1000_weight_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(confirmations_required_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(confirmations_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(force_close_spend_delay_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_shutdown_state_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(inbound_htlc_minimum_msat_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(inbound_htlc_maximum_msat_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(config_arg); };
-		foreach (InboundHTLCDetails pending_inbound_htlcs_arg_conv_20 in pending_inbound_htlcs_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(pending_inbound_htlcs_arg_conv_20); }; };
-		foreach (OutboundHTLCDetails pending_outbound_htlcs_arg_conv_21 in pending_outbound_htlcs_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(pending_outbound_htlcs_arg_conv_21); }; };
 		return ret_hu_conv;
 	}
 

@@ -56,7 +56,6 @@ public class InvoiceRequestFields : CommonBase {
 		bindings.InvoiceRequestFields_set_quantity(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -84,7 +83,6 @@ public class InvoiceRequestFields : CommonBase {
 		bindings.InvoiceRequestFields_set_payer_note_truncated(this.ptr, val == null ? 0 : val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -100,8 +98,6 @@ public class InvoiceRequestFields : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.InvoiceRequestFields ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.InvoiceRequestFields(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(quantity_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(payer_note_truncated_arg); };
 		return ret_hu_conv;
 	}
 

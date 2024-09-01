@@ -16,6 +16,28 @@ public class RoutingFees : CommonBase {
 	}
 
 	/**
+	 * Serialize the RoutingFees object into a byte array which can be read by RoutingFees_read
+	 */
+	public byte[] write() {
+		long ret = bindings.RoutingFees_write(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
+		return ret_conv;
+	}
+
+	/**
+	 * Read a RoutingFees from a byte array, created by RoutingFees_write
+	 */
+	public static Result_RoutingFeesDecodeErrorZ read(byte[] ser) {
+		long ret = bindings.RoutingFees_read(InternalUtils.encodeUint8Array(ser));
+		GC.KeepAlive(ser);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_RoutingFeesDecodeErrorZ ret_hu_conv = Result_RoutingFeesDecodeErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Flat routing fee in millisatoshis.
 	 */
 	public int get_base_msat() {
@@ -113,27 +135,5 @@ public class RoutingFees : CommonBase {
 	public override int GetHashCode() {
 		return (int)this.hash();
 	}
-	/**
-	 * Serialize the RoutingFees object into a byte array which can be read by RoutingFees_read
-	 */
-	public byte[] write() {
-		long ret = bindings.RoutingFees_write(this.ptr);
-		GC.KeepAlive(this);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
-		return ret_conv;
-	}
-
-	/**
-	 * Read a RoutingFees from a byte array, created by RoutingFees_write
-	 */
-	public static Result_RoutingFeesDecodeErrorZ read(byte[] ser) {
-		long ret = bindings.RoutingFees_read(InternalUtils.encodeUint8Array(ser));
-		GC.KeepAlive(ser);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_RoutingFeesDecodeErrorZ ret_hu_conv = Result_RoutingFeesDecodeErrorZ.constr_from_ptr(ret);
-		return ret_hu_conv;
-	}
-
 }
 } } }

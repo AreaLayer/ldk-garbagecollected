@@ -36,7 +36,6 @@ public class CommitmentSigned : CommonBase {
 		bindings.CommitmentSigned_set_channel_id(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -89,17 +88,44 @@ public class CommitmentSigned : CommonBase {
 	}
 
 	/**
-	 * Constructs a new CommitmentSigned given each field
+	 * Optional batch size and other parameters
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static CommitmentSigned of(org.ldk.structs.ChannelId channel_id_arg, byte[] signature_arg, byte[][] htlc_signatures_arg) {
-		long ret = bindings.CommitmentSigned_new(channel_id_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(signature_arg, 64)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(htlc_signatures_arg, htlc_signatures_arg_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(htlc_signatures_arg_conv_8, 64)))));
+	public CommitmentSignedBatch get_batch() {
+		long ret = bindings.CommitmentSigned_get_batch(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.CommitmentSignedBatch ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.CommitmentSignedBatch(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Optional batch size and other parameters
+	 * 
+	 * Note that val (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	public void set_batch(org.ldk.structs.CommitmentSignedBatch val) {
+		bindings.CommitmentSigned_set_batch(this.ptr, val == null ? 0 : val.ptr);
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
+	}
+
+	/**
+	 * Constructs a new CommitmentSigned given each field
+	 * 
+	 * Note that batch_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	public static CommitmentSigned of(org.ldk.structs.ChannelId channel_id_arg, byte[] signature_arg, byte[][] htlc_signatures_arg, org.ldk.structs.CommitmentSignedBatch batch_arg) {
+		long ret = bindings.CommitmentSigned_new(channel_id_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(signature_arg, 64)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(htlc_signatures_arg, htlc_signatures_arg_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(htlc_signatures_arg_conv_8, 64)))), batch_arg == null ? 0 : batch_arg.ptr);
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(signature_arg);
 		GC.KeepAlive(htlc_signatures_arg);
+		GC.KeepAlive(batch_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CommitmentSigned ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.CommitmentSigned(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id_arg); };
 		return ret_hu_conv;
 	}
 

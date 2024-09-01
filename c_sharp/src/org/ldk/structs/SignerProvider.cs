@@ -25,10 +25,10 @@ public interface SignerProviderInterface {
 	 * re-derived from its `channel_keys_id`, which can be obtained through its trait method
 	 * [`ChannelSigner::channel_keys_id`].
 	 */
-	WriteableEcdsaChannelSigner derive_channel_signer(long channel_value_satoshis, byte[] channel_keys_id);
+	EcdsaChannelSigner derive_channel_signer(long channel_value_satoshis, byte[] channel_keys_id);
 	/**Reads a [`Signer`] for this [`SignerProvider`] from the given input stream.
 	 * This is only called during deserialization of other objects which contain
-	 * [`WriteableEcdsaChannelSigner`]-implementing objects (i.e., [`ChannelMonitor`]s and [`ChannelManager`]s).
+	 * [`EcdsaChannelSigner`]-implementing objects (i.e., [`ChannelMonitor`]s and [`ChannelManager`]s).
 	 * The bytes are exactly those which `<Self::Signer as Writeable>::write()` writes, and
 	 * contain no versioning scheme. You may wish to include your own version prefix and ensure
 	 * you've read all of the provided bytes to ensure no corruption occurred.
@@ -40,7 +40,7 @@ public interface SignerProviderInterface {
 	 * [`ChannelMonitor`]: crate::chain::channelmonitor::ChannelMonitor
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 */
-	Result_WriteableEcdsaChannelSignerDecodeErrorZ read_chan_signer(byte[] reader);
+	Result_EcdsaChannelSignerDecodeErrorZ read_chan_signer(byte[] reader);
 	/**Get a script pubkey which we send funds to when claiming on-chain contestable outputs.
 	 * 
 	 * If this function returns an error, this will result in a channel failing to open.
@@ -88,7 +88,7 @@ public class SignerProvider : CommonBase {
 		}
 		public long derive_channel_signer(long _channel_value_satoshis, long _channel_keys_id) {
 			byte[] _channel_keys_id_conv = InternalUtils.decodeUint8Array(_channel_keys_id);
-			WriteableEcdsaChannelSigner ret = arg.derive_channel_signer(_channel_value_satoshis, _channel_keys_id_conv);
+			EcdsaChannelSigner ret = arg.derive_channel_signer(_channel_value_satoshis, _channel_keys_id_conv);
 				GC.KeepAlive(arg);
 			long result = ret.clone_ptr();
 			if (impl_holder.held != null) { impl_holder.held.ptrs_to.AddLast(ret); };
@@ -96,7 +96,7 @@ public class SignerProvider : CommonBase {
 		}
 		public long read_chan_signer(long _reader) {
 			byte[] _reader_conv = InternalUtils.decodeUint8Array(_reader);
-			Result_WriteableEcdsaChannelSignerDecodeErrorZ ret = arg.read_chan_signer(_reader_conv);
+			Result_EcdsaChannelSignerDecodeErrorZ ret = arg.read_chan_signer(_reader_conv);
 				GC.KeepAlive(arg);
 			long result = ret.clone_ptr();
 			return result;
@@ -155,13 +155,13 @@ public class SignerProvider : CommonBase {
 	 * re-derived from its `channel_keys_id`, which can be obtained through its trait method
 	 * [`ChannelSigner::channel_keys_id`].
 	 */
-	public WriteableEcdsaChannelSigner derive_channel_signer(long channel_value_satoshis, byte[] channel_keys_id) {
+	public EcdsaChannelSigner derive_channel_signer(long channel_value_satoshis, byte[] channel_keys_id) {
 		long ret = bindings.SignerProvider_derive_channel_signer(this.ptr, channel_value_satoshis, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(channel_keys_id, 32)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(channel_value_satoshis);
 		GC.KeepAlive(channel_keys_id);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		WriteableEcdsaChannelSigner ret_hu_conv = new WriteableEcdsaChannelSigner(null, ret);
+		EcdsaChannelSigner ret_hu_conv = new EcdsaChannelSigner(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
 		return ret_hu_conv;
 	}
@@ -169,7 +169,7 @@ public class SignerProvider : CommonBase {
 	/**
 	 * Reads a [`Signer`] for this [`SignerProvider`] from the given input stream.
 	 * This is only called during deserialization of other objects which contain
-	 * [`WriteableEcdsaChannelSigner`]-implementing objects (i.e., [`ChannelMonitor`]s and [`ChannelManager`]s).
+	 * [`EcdsaChannelSigner`]-implementing objects (i.e., [`ChannelMonitor`]s and [`ChannelManager`]s).
 	 * The bytes are exactly those which `<Self::Signer as Writeable>::write()` writes, and
 	 * contain no versioning scheme. You may wish to include your own version prefix and ensure
 	 * you've read all of the provided bytes to ensure no corruption occurred.
@@ -181,12 +181,12 @@ public class SignerProvider : CommonBase {
 	 * [`ChannelMonitor`]: crate::chain::channelmonitor::ChannelMonitor
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 */
-	public Result_WriteableEcdsaChannelSignerDecodeErrorZ read_chan_signer(byte[] reader) {
+	public Result_EcdsaChannelSignerDecodeErrorZ read_chan_signer(byte[] reader) {
 		long ret = bindings.SignerProvider_read_chan_signer(this.ptr, InternalUtils.encodeUint8Array(reader));
 		GC.KeepAlive(this);
 		GC.KeepAlive(reader);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_WriteableEcdsaChannelSignerDecodeErrorZ ret_hu_conv = Result_WriteableEcdsaChannelSignerDecodeErrorZ.constr_from_ptr(ret);
+		Result_EcdsaChannelSignerDecodeErrorZ ret_hu_conv = Result_EcdsaChannelSignerDecodeErrorZ.constr_from_ptr(ret);
 		return ret_hu_conv;
 	}
 

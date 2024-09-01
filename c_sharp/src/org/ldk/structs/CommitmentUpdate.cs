@@ -42,7 +42,6 @@ public class CommitmentUpdate : CommonBase {
 		bindings.CommitmentUpdate_set_update_add_htlcs(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_15 => val_conv_15.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		foreach (UpdateAddHTLC val_conv_15 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_15); }; };
 	}
 
 	/**
@@ -71,7 +70,6 @@ public class CommitmentUpdate : CommonBase {
 		bindings.CommitmentUpdate_set_update_fulfill_htlcs(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_19 => val_conv_19.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		foreach (UpdateFulfillHTLC val_conv_19 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_19); }; };
 	}
 
 	/**
@@ -100,7 +98,6 @@ public class CommitmentUpdate : CommonBase {
 		bindings.CommitmentUpdate_set_update_fail_htlcs(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_16 => val_conv_16.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		foreach (UpdateFailHTLC val_conv_16 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_16); }; };
 	}
 
 	/**
@@ -129,7 +126,6 @@ public class CommitmentUpdate : CommonBase {
 		bindings.CommitmentUpdate_set_update_fail_malformed_htlcs(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_25 => val_conv_25.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		foreach (UpdateFailMalformedHTLC val_conv_25 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_25); }; };
 	}
 
 	/**
@@ -155,7 +151,6 @@ public class CommitmentUpdate : CommonBase {
 		bindings.CommitmentUpdate_set_update_fee(this.ptr, val == null ? 0 : val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -177,7 +172,6 @@ public class CommitmentUpdate : CommonBase {
 		bindings.CommitmentUpdate_set_commitment_signed(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -196,12 +190,6 @@ public class CommitmentUpdate : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CommitmentUpdate ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.CommitmentUpdate(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		foreach (UpdateAddHTLC update_add_htlcs_arg_conv_15 in update_add_htlcs_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(update_add_htlcs_arg_conv_15); }; };
-		foreach (UpdateFulfillHTLC update_fulfill_htlcs_arg_conv_19 in update_fulfill_htlcs_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(update_fulfill_htlcs_arg_conv_19); }; };
-		foreach (UpdateFailHTLC update_fail_htlcs_arg_conv_16 in update_fail_htlcs_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(update_fail_htlcs_arg_conv_16); }; };
-		foreach (UpdateFailMalformedHTLC update_fail_malformed_htlcs_arg_conv_25 in update_fail_malformed_htlcs_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(update_fail_malformed_htlcs_arg_conv_25); }; };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(update_fee_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(commitment_signed_arg); };
 		return ret_hu_conv;
 	}
 

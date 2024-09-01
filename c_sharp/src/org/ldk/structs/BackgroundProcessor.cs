@@ -89,12 +89,13 @@ public class BackgroundProcessor : CommonBase {
 	 * [`NetworkGraph`]: lightning::routing::gossip::NetworkGraph
 	 * [`NetworkGraph::write`]: lightning::routing::gossip::NetworkGraph#impl-Writeable
 	 */
-	public static BackgroundProcessor start(org.ldk.structs.Persister persister, org.ldk.structs.EventHandler event_handler, org.ldk.structs.ChainMonitor chain_monitor, org.ldk.structs.ChannelManager channel_manager, org.ldk.structs.GossipSync gossip_sync, org.ldk.structs.PeerManager peer_manager, org.ldk.structs.Logger logger, org.ldk.structs.Option_WriteableScoreZ scorer) {
-		long ret = bindings.BackgroundProcessor_start(persister.ptr, event_handler.ptr, chain_monitor.ptr, channel_manager.ptr, gossip_sync.ptr, peer_manager.ptr, logger.ptr, scorer.ptr);
+	public static BackgroundProcessor start(org.ldk.structs.Persister persister, org.ldk.structs.EventHandler event_handler, org.ldk.structs.ChainMonitor chain_monitor, org.ldk.structs.ChannelManager channel_manager, org.ldk.structs.OnionMessenger onion_messenger, org.ldk.structs.GossipSync gossip_sync, org.ldk.structs.PeerManager peer_manager, org.ldk.structs.Logger logger, org.ldk.structs.Option_WriteableScoreZ scorer) {
+		long ret = bindings.BackgroundProcessor_start(persister.ptr, event_handler.ptr, chain_monitor.ptr, channel_manager.ptr, onion_messenger.ptr, gossip_sync.ptr, peer_manager.ptr, logger.ptr, scorer.ptr);
 		GC.KeepAlive(persister);
 		GC.KeepAlive(event_handler);
 		GC.KeepAlive(chain_monitor);
 		GC.KeepAlive(channel_manager);
+		GC.KeepAlive(onion_messenger);
 		GC.KeepAlive(gossip_sync);
 		GC.KeepAlive(peer_manager);
 		GC.KeepAlive(logger);
@@ -106,6 +107,7 @@ public class BackgroundProcessor : CommonBase {
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(event_handler); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(chain_monitor); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_manager); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(onion_messenger); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(gossip_sync); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(peer_manager); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(logger); };

@@ -41,6 +41,77 @@ public class Bolt12Invoice : CommonBase {
 	}
 
 	/**
+	 * Duration since the Unix epoch when the invoice was created.
+	 */
+	public long created_at() {
+		long ret = bindings.Bolt12Invoice_created_at(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Duration since
+	 * [`Bolt12Invoice::created_at`]
+	 * when the invoice has expired and therefore should no longer be paid.
+	 */
+	public long relative_expiry() {
+		long ret = bindings.Bolt12Invoice_relative_expiry(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Whether the invoice has expired.
+	 */
+	public bool is_expired() {
+		bool ret = bindings.Bolt12Invoice_is_expired(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Fallback addresses for paying the invoice on-chain, in order of most-preferred to
+	 * least-preferred.
+	 */
+	public string[] fallbacks() {
+		long ret = bindings.Bolt12Invoice_fallbacks(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		int ret_conv_8_len = InternalUtils.getArrayLength(ret);
+		string[] ret_conv_8_arr = new string[ret_conv_8_len];
+		for (int i = 0; i < ret_conv_8_len; i++) {
+			long ret_conv_8 = InternalUtils.getU64ArrayElem(ret, i);
+			string ret_conv_8_conv = InternalUtils.decodeString(ret_conv_8);
+			ret_conv_8_arr[i] = ret_conv_8_conv;
+		}
+		bindings.free_buffer(ret);
+		return ret_conv_8_arr;
+	}
+
+	/**
+	 * Features pertaining to paying an invoice.
+	 */
+	public Bolt12InvoiceFeatures invoice_features() {
+		long ret = bindings.Bolt12Invoice_invoice_features(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Bolt12InvoiceFeatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Bolt12InvoiceFeatures(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * The public key corresponding to the key used to sign the invoice.
+	 */
+	public byte[] signing_pubkey() {
+		long ret = bindings.Bolt12Invoice_signing_pubkey(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
+		return ret_conv;
+	}
+
+	/**
 	 * The chains that may be used when paying a requested invoice.
 	 * 
 	 * From [`Offer::chains`]; `None` if the invoice was created in response to a [`Refund`].
@@ -188,20 +259,20 @@ public class Bolt12Invoice : CommonBase {
 	 * 
 	 * [`Offer::paths`]: crate::offers::offer::Offer::paths
 	 */
-	public BlindedPath[] message_paths() {
+	public BlindedMessagePath[] message_paths() {
 		long ret = bindings.Bolt12Invoice_message_paths(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		int ret_conv_13_len = InternalUtils.getArrayLength(ret);
-		BlindedPath[] ret_conv_13_arr = new BlindedPath[ret_conv_13_len];
-		for (int n = 0; n < ret_conv_13_len; n++) {
-			long ret_conv_13 = InternalUtils.getU64ArrayElem(ret, n);
-			org.ldk.structs.BlindedPath ret_conv_13_hu_conv = null; if (ret_conv_13 < 0 || ret_conv_13 > 4096) { ret_conv_13_hu_conv = new org.ldk.structs.BlindedPath(null, ret_conv_13); }
-			if (ret_conv_13_hu_conv != null) { ret_conv_13_hu_conv.ptrs_to.AddLast(this); };
-			ret_conv_13_arr[n] = ret_conv_13_hu_conv;
+		int ret_conv_20_len = InternalUtils.getArrayLength(ret);
+		BlindedMessagePath[] ret_conv_20_arr = new BlindedMessagePath[ret_conv_20_len];
+		for (int u = 0; u < ret_conv_20_len; u++) {
+			long ret_conv_20 = InternalUtils.getU64ArrayElem(ret, u);
+			org.ldk.structs.BlindedMessagePath ret_conv_20_hu_conv = null; if (ret_conv_20 < 0 || ret_conv_20 > 4096) { ret_conv_20_hu_conv = new org.ldk.structs.BlindedMessagePath(null, ret_conv_20); }
+			if (ret_conv_20_hu_conv != null) { ret_conv_20_hu_conv.ptrs_to.AddLast(this); };
+			ret_conv_20_arr[u] = ret_conv_20_hu_conv;
 		}
 		bindings.free_buffer(ret);
-		return ret_conv_13_arr;
+		return ret_conv_20_arr;
 	}
 
 	/**
@@ -293,34 +364,6 @@ public class Bolt12Invoice : CommonBase {
 	}
 
 	/**
-	 * Duration since the Unix epoch when the invoice was created.
-	 */
-	public long created_at() {
-		long ret = bindings.Bolt12Invoice_created_at(this.ptr);
-		GC.KeepAlive(this);
-		return ret;
-	}
-
-	/**
-	 * Duration since [`Bolt12Invoice::created_at`] when the invoice has expired and therefore
-	 * should no longer be paid.
-	 */
-	public long relative_expiry() {
-		long ret = bindings.Bolt12Invoice_relative_expiry(this.ptr);
-		GC.KeepAlive(this);
-		return ret;
-	}
-
-	/**
-	 * Whether the invoice has expired.
-	 */
-	public bool is_expired() {
-		bool ret = bindings.Bolt12Invoice_is_expired(this.ptr);
-		GC.KeepAlive(this);
-		return ret;
-	}
-
-	/**
 	 * SHA256 hash of the payment preimage that will be given in return for paying the invoice.
 	 */
 	public byte[] payment_hash() {
@@ -338,29 +381,6 @@ public class Bolt12Invoice : CommonBase {
 		long ret = bindings.Bolt12Invoice_amount_msats(this.ptr);
 		GC.KeepAlive(this);
 		return ret;
-	}
-
-	/**
-	 * Features pertaining to paying an invoice.
-	 */
-	public Bolt12InvoiceFeatures invoice_features() {
-		long ret = bindings.Bolt12Invoice_invoice_features(this.ptr);
-		GC.KeepAlive(this);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.Bolt12InvoiceFeatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Bolt12InvoiceFeatures(null, ret); }
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
-		return ret_hu_conv;
-	}
-
-	/**
-	 * The public key corresponding to the key used to sign the invoice.
-	 */
-	public byte[] signing_pubkey() {
-		long ret = bindings.Bolt12Invoice_signing_pubkey(this.ptr);
-		GC.KeepAlive(this);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
-		return ret_conv;
 	}
 
 	/**
@@ -386,12 +406,31 @@ public class Bolt12Invoice : CommonBase {
 	}
 
 	/**
-	 * Verifies that the invoice was for a request or refund created using the given key. Returns
-	 * the associated [`PaymentId`] to use when sending the payment.
+	 * Verifies that the invoice was for a request or refund created using the given key by
+	 * checking the payer metadata from the invoice request.
+	 * 
+	 * Returns the associated [`PaymentId`] to use when sending the payment.
 	 */
-	public Result_ThirtyTwoBytesNoneZ verify(org.ldk.structs.ExpandedKey key) {
-		long ret = bindings.Bolt12Invoice_verify(this.ptr, key.ptr);
+	public Result_ThirtyTwoBytesNoneZ verify_using_metadata(org.ldk.structs.ExpandedKey key) {
+		long ret = bindings.Bolt12Invoice_verify_using_metadata(this.ptr, key.ptr);
 		GC.KeepAlive(this);
+		GC.KeepAlive(key);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_ThirtyTwoBytesNoneZ ret_hu_conv = Result_ThirtyTwoBytesNoneZ.constr_from_ptr(ret);
+		if (this != null) { this.ptrs_to.AddLast(key); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Verifies that the invoice was for a request or refund created using the given key by
+	 * checking a payment id and nonce included with the [`BlindedMessagePath`] for which the invoice was
+	 * sent through.
+	 */
+	public Result_ThirtyTwoBytesNoneZ verify_using_payer_data(byte[] payment_id, org.ldk.structs.Nonce nonce, org.ldk.structs.ExpandedKey key) {
+		long ret = bindings.Bolt12Invoice_verify_using_payer_data(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), nonce.ptr, key.ptr);
+		GC.KeepAlive(this);
+		GC.KeepAlive(payment_id);
+		GC.KeepAlive(nonce);
 		GC.KeepAlive(key);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ThirtyTwoBytesNoneZ ret_hu_conv = Result_ThirtyTwoBytesNoneZ.constr_from_ptr(ret);
@@ -420,6 +459,17 @@ public class Bolt12Invoice : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
 		return ret_conv;
+	}
+
+	/**
+	 * Read a Bolt12Invoice from a byte array, created by Bolt12Invoice_write
+	 */
+	public static Result_Bolt12InvoiceDecodeErrorZ read(byte[] ser) {
+		long ret = bindings.Bolt12Invoice_read(InternalUtils.encodeUint8Array(ser));
+		GC.KeepAlive(ser);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_Bolt12InvoiceDecodeErrorZ ret_hu_conv = Result_Bolt12InvoiceDecodeErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
 	}
 
 }

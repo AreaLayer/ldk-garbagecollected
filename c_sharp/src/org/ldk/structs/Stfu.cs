@@ -7,7 +7,7 @@ namespace org { namespace ldk { namespace structs {
 
 
 /**
- * An stfu (quiescence) message to be sent by or received from the stfu initiator.
+ * An `stfu` (quiescence) message to be sent by or received from the stfu initiator.
  */
 public class Stfu : CommonBase {
 	internal Stfu(object _dummy, long ptr) : base(ptr) { }
@@ -34,7 +34,6 @@ public class Stfu : CommonBase {
 		bindings.Stfu_set_channel_id(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -65,7 +64,6 @@ public class Stfu : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Stfu ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Stfu(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id_arg); };
 		return ret_hu_conv;
 	}
 

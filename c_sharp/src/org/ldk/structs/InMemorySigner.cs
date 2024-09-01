@@ -7,7 +7,7 @@ namespace org { namespace ldk { namespace structs {
 
 
 /**
- * A simple implementation of [`WriteableEcdsaChannelSigner`] that just keeps the private keys in memory.
+ * A simple implementation of [`EcdsaChannelSigner`] that just keeps the private keys in memory.
  * 
  * This implementation performs no policy checks and is insufficient by itself as
  * a secure external signer.
@@ -378,19 +378,6 @@ public class InMemorySigner : CommonBase {
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		EcdsaChannelSigner ret_hu_conv = new EcdsaChannelSigner(null, ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
-		return ret_hu_conv;
-	}
-
-	/**
-	 * Constructs a new WriteableEcdsaChannelSigner which calls the relevant methods on this_arg.
-	 * This copies the `inner` pointer in this_arg and thus the returned WriteableEcdsaChannelSigner must be freed before this_arg is
-	 */
-	public WriteableEcdsaChannelSigner as_WriteableEcdsaChannelSigner() {
-		long ret = bindings.InMemorySigner_as_WriteableEcdsaChannelSigner(this.ptr);
-		GC.KeepAlive(this);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		WriteableEcdsaChannelSigner ret_hu_conv = new WriteableEcdsaChannelSigner(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
 		return ret_hu_conv;
 	}

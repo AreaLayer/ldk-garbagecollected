@@ -15,6 +15,32 @@ public class Bolt11InvoiceSignature : CommonBase {
 		if (ptr != 0) { bindings.Bolt11InvoiceSignature_free(ptr); }
 	}
 
+	public byte[] get_a() {
+		long ret = bindings.Bolt11InvoiceSignature_get_a(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
+		return ret_conv;
+	}
+
+	public void set_a(byte[] val) {
+		bindings.Bolt11InvoiceSignature_set_a(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(val, 68)));
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
+	}
+
+	/**
+	 * Constructs a new Bolt11InvoiceSignature given each field
+	 */
+	public static Bolt11InvoiceSignature of(byte[] a_arg) {
+		long ret = bindings.Bolt11InvoiceSignature_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a_arg, 68)));
+		GC.KeepAlive(a_arg);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Bolt11InvoiceSignature ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Bolt11InvoiceSignature(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
 	internal long clone_ptr() {
 		long ret = bindings.Bolt11InvoiceSignature_clone_ptr(this.ptr);
 		GC.KeepAlive(this);

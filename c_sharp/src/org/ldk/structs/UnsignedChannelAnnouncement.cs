@@ -36,7 +36,6 @@ public class UnsignedChannelAnnouncement : CommonBase {
 		bindings.UnsignedChannelAnnouncement_set_features(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -96,7 +95,6 @@ public class UnsignedChannelAnnouncement : CommonBase {
 		bindings.UnsignedChannelAnnouncement_set_node_id_1(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -118,7 +116,6 @@ public class UnsignedChannelAnnouncement : CommonBase {
 		bindings.UnsignedChannelAnnouncement_set_node_id_2(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -140,7 +137,6 @@ public class UnsignedChannelAnnouncement : CommonBase {
 		bindings.UnsignedChannelAnnouncement_set_bitcoin_key_1(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -162,7 +158,6 @@ public class UnsignedChannelAnnouncement : CommonBase {
 		bindings.UnsignedChannelAnnouncement_set_bitcoin_key_2(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -209,11 +204,6 @@ public class UnsignedChannelAnnouncement : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.UnsignedChannelAnnouncement ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.UnsignedChannelAnnouncement(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(features_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(node_id_1_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(node_id_2_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(bitcoin_key_1_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(bitcoin_key_2_arg); };
 		return ret_hu_conv;
 	}
 

@@ -20,27 +20,13 @@ public class NetworkUpdate : CommonBase {
 	internal static NetworkUpdate constr_from_ptr(long ptr) {
 		long raw_ty = bindings.LDKNetworkUpdate_ty_from_ptr(ptr);
 		switch (raw_ty) {
-			case 0: return new NetworkUpdate_ChannelUpdateMessage(ptr);
-			case 1: return new NetworkUpdate_ChannelFailure(ptr);
-			case 2: return new NetworkUpdate_NodeFailure(ptr);
+			case 0: return new NetworkUpdate_ChannelFailure(ptr);
+			case 1: return new NetworkUpdate_NodeFailure(ptr);
 			default:
 				throw new ArgumentException("Impossible enum variant");
 		}
 	}
 
-	/** A NetworkUpdate of type ChannelUpdateMessage */
-	public class NetworkUpdate_ChannelUpdateMessage : NetworkUpdate {
-		/**
-		 * The update to apply via [`NetworkGraph::update_channel`].
-		 */
-		public ChannelUpdate msg;
-		internal NetworkUpdate_ChannelUpdateMessage(long ptr) : base(null, ptr) {
-			long msg = bindings.LDKNetworkUpdate_ChannelUpdateMessage_get_msg(ptr);
-			org.ldk.structs.ChannelUpdate msg_hu_conv = null; if (msg < 0 || msg > 4096) { msg_hu_conv = new org.ldk.structs.ChannelUpdate(null, msg); }
-			if (msg_hu_conv != null) { msg_hu_conv.ptrs_to.AddLast(this); };
-			this.msg = msg_hu_conv;
-		}
-	}
 	/** A NetworkUpdate of type ChannelFailure */
 	public class NetworkUpdate_ChannelFailure : NetworkUpdate {
 		/**
@@ -90,19 +76,6 @@ public class NetworkUpdate : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.NetworkUpdate ret_hu_conv = org.ldk.structs.NetworkUpdate.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
-		return ret_hu_conv;
-	}
-
-	/**
-	 * Utility method to constructs a new ChannelUpdateMessage-variant NetworkUpdate
-	 */
-	public static NetworkUpdate channel_update_message(org.ldk.structs.ChannelUpdate msg) {
-		long ret = bindings.NetworkUpdate_channel_update_message(msg.ptr);
-		GC.KeepAlive(msg);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.NetworkUpdate ret_hu_conv = org.ldk.structs.NetworkUpdate.constr_from_ptr(ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 

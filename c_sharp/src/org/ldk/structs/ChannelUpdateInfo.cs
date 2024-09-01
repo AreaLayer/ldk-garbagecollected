@@ -16,62 +16,6 @@ public class ChannelUpdateInfo : CommonBase {
 	}
 
 	/**
-	 * When the last update to the channel direction was issued.
-	 * Value is opaque, as set in the announcement.
-	 */
-	public int get_last_update() {
-		int ret = bindings.ChannelUpdateInfo_get_last_update(this.ptr);
-		GC.KeepAlive(this);
-		return ret;
-	}
-
-	/**
-	 * When the last update to the channel direction was issued.
-	 * Value is opaque, as set in the announcement.
-	 */
-	public void set_last_update(int val) {
-		bindings.ChannelUpdateInfo_set_last_update(this.ptr, val);
-		GC.KeepAlive(this);
-		GC.KeepAlive(val);
-	}
-
-	/**
-	 * Whether the channel can be currently used for payments (in this one direction).
-	 */
-	public bool get_enabled() {
-		bool ret = bindings.ChannelUpdateInfo_get_enabled(this.ptr);
-		GC.KeepAlive(this);
-		return ret;
-	}
-
-	/**
-	 * Whether the channel can be currently used for payments (in this one direction).
-	 */
-	public void set_enabled(bool val) {
-		bindings.ChannelUpdateInfo_set_enabled(this.ptr, val);
-		GC.KeepAlive(this);
-		GC.KeepAlive(val);
-	}
-
-	/**
-	 * The difference in CLTV values that you must have when routing through this channel.
-	 */
-	public short get_cltv_expiry_delta() {
-		short ret = bindings.ChannelUpdateInfo_get_cltv_expiry_delta(this.ptr);
-		GC.KeepAlive(this);
-		return ret;
-	}
-
-	/**
-	 * The difference in CLTV values that you must have when routing through this channel.
-	 */
-	public void set_cltv_expiry_delta(short val) {
-		bindings.ChannelUpdateInfo_set_cltv_expiry_delta(this.ptr, val);
-		GC.KeepAlive(this);
-		GC.KeepAlive(val);
-	}
-
-	/**
 	 * The minimum value, which must be relayed to the next hop via the channel
 	 */
 	public long get_htlc_minimum_msat() {
@@ -126,7 +70,62 @@ public class ChannelUpdateInfo : CommonBase {
 		bindings.ChannelUpdateInfo_set_fees(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
+	}
+
+	/**
+	 * When the last update to the channel direction was issued.
+	 * Value is opaque, as set in the announcement.
+	 */
+	public int get_last_update() {
+		int ret = bindings.ChannelUpdateInfo_get_last_update(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * When the last update to the channel direction was issued.
+	 * Value is opaque, as set in the announcement.
+	 */
+	public void set_last_update(int val) {
+		bindings.ChannelUpdateInfo_set_last_update(this.ptr, val);
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
+	}
+
+	/**
+	 * The difference in CLTV values that you must have when routing through this channel.
+	 */
+	public short get_cltv_expiry_delta() {
+		short ret = bindings.ChannelUpdateInfo_get_cltv_expiry_delta(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * The difference in CLTV values that you must have when routing through this channel.
+	 */
+	public void set_cltv_expiry_delta(short val) {
+		bindings.ChannelUpdateInfo_set_cltv_expiry_delta(this.ptr, val);
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
+	}
+
+	/**
+	 * Whether the channel can be currently used for payments (in this one direction).
+	 */
+	public bool get_enabled() {
+		bool ret = bindings.ChannelUpdateInfo_get_enabled(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Whether the channel can be currently used for payments (in this one direction).
+	 */
+	public void set_enabled(bool val) {
+		bindings.ChannelUpdateInfo_set_enabled(this.ptr, val);
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
 	}
 
 	/**
@@ -158,7 +157,6 @@ public class ChannelUpdateInfo : CommonBase {
 		bindings.ChannelUpdateInfo_set_last_update_message(this.ptr, val == null ? 0 : val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -166,20 +164,18 @@ public class ChannelUpdateInfo : CommonBase {
 	 * 
 	 * Note that last_update_message_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static ChannelUpdateInfo of(int last_update_arg, bool enabled_arg, short cltv_expiry_delta_arg, long htlc_minimum_msat_arg, long htlc_maximum_msat_arg, org.ldk.structs.RoutingFees fees_arg, org.ldk.structs.ChannelUpdate last_update_message_arg) {
-		long ret = bindings.ChannelUpdateInfo_new(last_update_arg, enabled_arg, cltv_expiry_delta_arg, htlc_minimum_msat_arg, htlc_maximum_msat_arg, fees_arg.ptr, last_update_message_arg == null ? 0 : last_update_message_arg.ptr);
-		GC.KeepAlive(last_update_arg);
-		GC.KeepAlive(enabled_arg);
-		GC.KeepAlive(cltv_expiry_delta_arg);
+	public static ChannelUpdateInfo of(long htlc_minimum_msat_arg, long htlc_maximum_msat_arg, org.ldk.structs.RoutingFees fees_arg, int last_update_arg, short cltv_expiry_delta_arg, bool enabled_arg, org.ldk.structs.ChannelUpdate last_update_message_arg) {
+		long ret = bindings.ChannelUpdateInfo_new(htlc_minimum_msat_arg, htlc_maximum_msat_arg, fees_arg.ptr, last_update_arg, cltv_expiry_delta_arg, enabled_arg, last_update_message_arg == null ? 0 : last_update_message_arg.ptr);
 		GC.KeepAlive(htlc_minimum_msat_arg);
 		GC.KeepAlive(htlc_maximum_msat_arg);
 		GC.KeepAlive(fees_arg);
+		GC.KeepAlive(last_update_arg);
+		GC.KeepAlive(cltv_expiry_delta_arg);
+		GC.KeepAlive(enabled_arg);
 		GC.KeepAlive(last_update_message_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ChannelUpdateInfo ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelUpdateInfo(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(fees_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(last_update_message_arg); };
 		return ret_hu_conv;
 	}
 

@@ -34,7 +34,6 @@ public class HTLCDescriptor : CommonBase {
 		bindings.HTLCDescriptor_set_channel_derivation_parameters(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -144,7 +143,6 @@ public class HTLCDescriptor : CommonBase {
 		bindings.HTLCDescriptor_set_htlc(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -168,7 +166,6 @@ public class HTLCDescriptor : CommonBase {
 		bindings.HTLCDescriptor_set_preimage(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -207,9 +204,6 @@ public class HTLCDescriptor : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.HTLCDescriptor ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.HTLCDescriptor(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_derivation_parameters_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(htlc_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(preimage_arg); };
 		return ret_hu_conv;
 	}
 
@@ -347,12 +341,12 @@ public class HTLCDescriptor : CommonBase {
 	/**
 	 * Derives the channel signer required to sign the HTLC input.
 	 */
-	public WriteableEcdsaChannelSigner derive_channel_signer(org.ldk.structs.SignerProvider signer_provider) {
+	public EcdsaChannelSigner derive_channel_signer(org.ldk.structs.SignerProvider signer_provider) {
 		long ret = bindings.HTLCDescriptor_derive_channel_signer(this.ptr, signer_provider.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(signer_provider);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		WriteableEcdsaChannelSigner ret_hu_conv = new WriteableEcdsaChannelSigner(null, ret);
+		EcdsaChannelSigner ret_hu_conv = new EcdsaChannelSigner(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
 		if (this != null) { this.ptrs_to.AddLast(signer_provider); };
 		return ret_hu_conv;

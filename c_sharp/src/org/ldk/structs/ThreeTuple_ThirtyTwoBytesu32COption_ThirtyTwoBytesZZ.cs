@@ -77,7 +77,6 @@ public class ThreeTuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		ThreeTuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ ret_hu_conv = new ThreeTuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(c); };
 		return ret_hu_conv;
 	}
 

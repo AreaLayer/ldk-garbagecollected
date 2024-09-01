@@ -57,7 +57,6 @@ public class RecipientOnionFields : CommonBase {
 		bindings.RecipientOnionFields_set_payment_secret(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -103,7 +102,6 @@ public class RecipientOnionFields : CommonBase {
 		bindings.RecipientOnionFields_set_payment_metadata(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	internal long clone_ptr() {
@@ -212,7 +210,7 @@ public class RecipientOnionFields : CommonBase {
 		GC.KeepAlive(custom_tlvs);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RecipientOnionFieldsNoneZ ret_hu_conv = Result_RecipientOnionFieldsNoneZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.AddLast(this); };
+		;
 		return ret_hu_conv;
 	}
 

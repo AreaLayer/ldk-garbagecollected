@@ -176,14 +176,19 @@ public class ChannelMonitor : CommonBase {
 	 * An [`EventHandler`] may safely call back to the provider, though this shouldn't be needed in
 	 * order to handle these events.
 	 * 
+	 * Will return a [`ReplayEvent`] error if event handling failed and should eventually be retried.
+	 * 
 	 * [`SpendableOutputs`]: crate::events::Event::SpendableOutputs
 	 * [`BumpTransaction`]: crate::events::Event::BumpTransaction
 	 */
-	public void process_pending_events(org.ldk.structs.EventHandler handler) {
-		bindings.ChannelMonitor_process_pending_events(this.ptr, handler.ptr);
+	public Result_NoneReplayEventZ process_pending_events(org.ldk.structs.EventHandler handler) {
+		long ret = bindings.ChannelMonitor_process_pending_events(this.ptr, handler.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(handler);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_NoneReplayEventZ ret_hu_conv = Result_NoneReplayEventZ.constr_from_ptr(ret);
 		if (this != null) { this.ptrs_to.AddLast(handler); };
+		return ret_hu_conv;
 	}
 
 	/**
@@ -510,6 +515,15 @@ public class ChannelMonitor : CommonBase {
 		if (this != null) { this.ptrs_to.AddLast(broadcaster); };
 		if (this != null) { this.ptrs_to.AddLast(fee_estimator); };
 		if (this != null) { this.ptrs_to.AddLast(logger); };
+	}
+
+	/**
+	 * Returns true if the monitor has pending claim requests that are not fully confirmed yet.
+	 */
+	public bool has_pending_claims() {
+		bool ret = bindings.ChannelMonitor_has_pending_claims(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
 	}
 
 	/**

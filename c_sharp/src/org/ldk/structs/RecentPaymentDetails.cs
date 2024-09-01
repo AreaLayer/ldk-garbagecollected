@@ -163,7 +163,6 @@ public class RecentPaymentDetails : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.RecentPaymentDetails ret_hu_conv = org.ldk.structs.RecentPaymentDetails.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(payment_hash); };
 		return ret_hu_conv;
 	}
 

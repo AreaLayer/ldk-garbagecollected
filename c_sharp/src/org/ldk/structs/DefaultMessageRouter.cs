@@ -8,6 +8,13 @@ namespace org { namespace ldk { namespace structs {
 
 /**
  * A [`MessageRouter`] that can only route to a directly connected [`Destination`].
+ * 
+ * # Privacy
+ * 
+ * Creating [`BlindedMessagePath`]s may affect privacy since, if a suitable path cannot be found,
+ * it will create a one-hop path using the recipient as the introduction node if it is a announced
+ * node. Otherwise, there is no way to find a path to the introduction node in order to send a
+ * message, and thus an `Err` is returned.
  */
 public class DefaultMessageRouter : CommonBase {
 	internal DefaultMessageRouter(object _dummy, long ptr) : base(ptr) { }
