@@ -15,7 +15,16 @@ def safe_arg_name(arg_name):
     return "_" + arg_name if arg_name == "lock" or arg_name == "event" or arg_name == "params" else arg_name
 
 def arg_name_repl(s, arg_name):
-    return s.replace(arg_name, "_" + arg_name) if arg_name == "lock" or arg_name == "event" or arg_name == "params" else s
+    if arg_name == "lock" or arg_name == "event" or arg_name == "params":
+        names = [i for i in range(len(s)-1, -1, -1) if s.startswith(arg_name, i)]
+        separators = set([",", "(", ")", " ", "."])
+        for idx in names:
+            match = idx == 0 or s[idx - 1] in separators
+            match &= idx + len(arg_name) == len(s) or s[idx + len(arg_name)] in separators
+            if match:
+                s = s[0:idx] + "_" + s[idx:]
+        return s
+    return s
 
 class Consts:
     def __init__(self, DEBUG: bool, target: Target, outdir: str, **kwargs):
@@ -1133,15 +1142,16 @@ public class {struct_name.replace("LDK","")} : CommonBase {{
             out_c += f"\t\tcase {struct_name}_{var.var_name}: return {var_idx};\n"
             hu_conv_body = ""
             for idx, (field_ty, field_docs) in enumerate(var.fields):
+                arg_name = safe_arg_name(field_ty.arg_name)
                 if field_docs is not None:
                     java_hu_subclasses += "\t\t/**\n\t\t * " + field_docs.replace("\n", "\n\t\t * ") + "\n\t\t */\n"
-                java_hu_subclasses += f"\t\tpublic {field_ty.java_hu_ty} {field_ty.arg_name};\n"
+                java_hu_subclasses += f"\t\tpublic {field_ty.java_hu_ty} {arg_name};\n"
                 if field_ty.to_hu_conv is not None:
-                    hu_conv_body += f"\t\t\t{field_ty.java_ty} {field_ty.arg_name} = bindings.{struct_name}_{var.var_name}_get_{field_ty.arg_name}(ptr);\n"
-                    hu_conv_body += f"\t\t\t" + field_ty.to_hu_conv.replace("\n", "\n\t\t\t") + "\n"
-                    hu_conv_body += f"\t\t\tthis." + field_ty.arg_name + " = " + field_ty.to_hu_conv_name + ";\n"
+                    hu_conv_body += f"\t\t\t{field_ty.java_ty} {arg_name} = bindings.{struct_name}_{var.var_name}_get_{field_ty.arg_name}(ptr);\n"
+                    hu_conv_body += f"\t\t\t" + arg_name_repl(field_ty.to_hu_conv.replace("\n", "\n\t\t\t"), field_ty.arg_name) + "\n"
+                    hu_conv_body += f"\t\t\tthis." + arg_name + " = " + arg_name_repl(field_ty.to_hu_conv_name, field_ty.arg_name) + ";\n"
                 else:
-                    hu_conv_body += f"\t\t\tthis.{field_ty.arg_name} = bindings.{struct_name}_{var.var_name}_get_{field_ty.arg_name}(ptr);\n"
+                    hu_conv_body += f"\t\t\tthis.{arg_name} = bindings.{struct_name}_{var.var_name}_get_{arg_name}(ptr);\n"
             java_hu_subclasses += "\t\tinternal " + java_hu_type + "_" + var.var_name + "(long ptr) : base(null, ptr) {\n"
             java_hu_subclasses += hu_conv_body
             java_hu_subclasses += "\t\t}\n\t}\n"
