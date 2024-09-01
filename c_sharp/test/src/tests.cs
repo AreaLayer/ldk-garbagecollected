@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
+using System.Runtime.InteropServices;
 using org.ldk.enums;
 using org.ldk.util;
 using org.ldk.structs;
@@ -350,11 +352,106 @@ namespace tests {
 			Assert(offer.to_str() == offerStr, 109);
 		}
 
+		static Offer BuildOffer(Nonce nonce, KeysManager keys) {
+			Result_PublicKeyNoneZ id_res = keys.as_NodeSigner().get_node_id(Recipient.LDKRecipient_Node);
+			byte[] node_id = ((Result_PublicKeyNoneZ.Result_PublicKeyNoneZ_OK)id_res).res;
+			ExpandedKey inb_key = ExpandedKey.of(keys.as_NodeSigner().get_inbound_payment_key_material());
+			OfferWithDerivedMetadataBuilder builder = OfferWithDerivedMetadataBuilder.deriving_signing_pubkey(node_id, inb_key, nonce);
+			Result_OfferBolt12SemanticErrorZ res = builder.build();
+			return ((Result_OfferBolt12SemanticErrorZ.Result_OfferBolt12SemanticErrorZ_OK) res).res;
+		}
+
+		static InvoiceRequestWithDerivedPayerIdBuilder InvReqBuilderFromOffer(Offer offer, KeysManager keys) {
+			ExpandedKey inb_key = ExpandedKey.of(keys.as_NodeSigner().get_inbound_payment_key_material());
+			Nonce nonce = Nonce.from_entropy_source(keys.as_EntropySource());
+			Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ builder_res =
+				offer.request_invoice_deriving_payer_id(inb_key, nonce, new byte[32]);
+			InvoiceRequestWithDerivedPayerIdBuilder builder =
+				((Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ.Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ_OK)builder_res).res;
+			return builder;
+		}
+
+		static InvoiceRequest BuildInvReq(InvoiceRequestWithDerivedPayerIdBuilder builder) {
+			Result_InvoiceRequestBolt12SemanticErrorZ res = builder.build_and_sign();
+			return ((Result_InvoiceRequestBolt12SemanticErrorZ.Result_InvoiceRequestBolt12SemanticErrorZ_OK)res).res;
+		}
+
+		static InvoiceWithDerivedSigningPubkeyBuilder InvBuilderFromInvReq(Nonce receiver_nonce, InvoiceRequest invreq, KeysManager keys) {
+			ExpandedKey inb_key = ExpandedKey.of(keys.as_NodeSigner().get_inbound_payment_key_material());
+			Result_VerifiedInvoiceRequestNoneZ verified_res = invreq.verify_using_recipient_data(receiver_nonce, inb_key);
+			VerifiedInvoiceRequest verified_invreq =
+				((Result_VerifiedInvoiceRequestNoneZ.Result_VerifiedInvoiceRequestNoneZ_OK)verified_res).res;
+			Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ builder_res =
+				verified_invreq.respond_using_derived_keys(new BlindedPaymentPath[0], new byte[32]);
+			InvoiceWithDerivedSigningPubkeyBuilder builder =
+				((Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ.Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ_OK)builder_res).res;
+			return builder;
+		}
+
+		static InvoiceRequestWithDerivedPayerIdBuilder InvReqBuilder(Nonce receiver_nonce, KeysManager payer, KeysManager recipient) {
+			// Under the hood, InvoiceRequestWithDerivedPayerIdBuilder holds a reference to some
+			// fields in the Offer. Thus, we build an Offer here, then return only the builder,
+			// hoping the GC will cause us to free the Offer and use-after-free.
+			Offer offer = BuildOffer(receiver_nonce, payer);
+			return InvReqBuilderFromOffer(offer, recipient);
+		}
+
+		static InvoiceWithDerivedSigningPubkeyBuilder InvBuilderFromInvReqBuilder(Nonce receiver_nonce, InvoiceRequestWithDerivedPayerIdBuilder builder, KeysManager payer, KeysManager recipient) {
+			// Same as above, but for the Invoice itself
+			InvoiceRequest invreq = BuildInvReq(builder);
+			return InvBuilderFromInvReq(receiver_nonce, invreq, recipient);
+		}
+
+		static void Bolt12RespondTest() {
+			// Build an Invoice out of an Offer, step by step. We do each step in its own function
+			// to give the background GC a chance to free things out from under us.
+			KeysManager sender = KeysManager.of(new byte[32], 42, 42);
+			byte[] receiver_keys = new byte[32];
+			receiver_keys[10] = 42;
+			KeysManager receiver = KeysManager.of(receiver_keys, 42, 42);
+
+			// Run the GC between each step to see if the reference the builders hold to the
+			// original Offer/InvoiceRequest is freed out from under us before building.
+			Nonce receiver_nonce = Nonce.from_entropy_source(receiver.as_EntropySource());
+			InvoiceRequestWithDerivedPayerIdBuilder invreq_builder = InvReqBuilder(receiver_nonce, sender, receiver);
+			System.GC.Collect();
+			GC.WaitForPendingFinalizers();
+			InvoiceWithDerivedSigningPubkeyBuilder inv_builder = InvBuilderFromInvReqBuilder(receiver_nonce, invreq_builder, sender, receiver);
+			System.GC.Collect();
+			GC.WaitForPendingFinalizers();
+			Result_Bolt12InvoiceBolt12SemanticErrorZ inv_res = inv_builder.build_and_sign();
+			Assert(inv_res.is_ok(), 200);
+		}
+
+		static void GCLoop() {
+			while (Thread.CurrentThread.IsAlive) {
+				System.GC.Collect();
+				GC.WaitForPendingFinalizers();
+				try {
+					Thread.Sleep(new TimeSpan(1));
+				} catch (ThreadInterruptedException _) {
+					break;
+				}
+			}
+		}
+
 		static void Main(string[] args) {
+			Thread gc_thread = null;
+			if (!RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) {
+				// No idea why this dies on macOS, but it does, so disable it.
+				gc_thread = new Thread(GCLoop);
+				gc_thread.Start();
+			}
+
 			SimpleConstructionTest();
 			SimpleTraitTest();
 			NodeTest();
 			Bolt12ParseTest();
+
+			if (!RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) {
+				gc_thread.Interrupt();
+				gc_thread.Join();
+			}
 
 			Console.WriteLine("\n\nTESTS PASSED\n\n");
 			System.GC.Collect();
