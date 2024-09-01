@@ -2,6 +2,7 @@ import { TxOut } from '../structs/TxOut.mjs';
 import { TxIn } from '../structs/TxIn.mjs';
 import { BigEndianScalar } from '../structs/BigEndianScalar.mjs';
 import { WitnessProgram } from '../structs/WitnessProgram.mjs';
+import { BalanceSource } from '../enums/BalanceSource.mjs';
 import { BlindedFailure } from '../enums/BlindedFailure.mjs';
 import { Bolt11SemanticError } from '../enums/Bolt11SemanticError.mjs';
 import { Bolt12SemanticError } from '../enums/Bolt12SemanticError.mjs';
@@ -32,11 +33,12 @@ import { Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ } from
 import { Refund } from '../structs/Refund.mjs';
 import { Result_RefundBolt12SemanticErrorZ } from '../structs/Result_RefundBolt12SemanticErrorZ.mjs';
 import { Option_u64Z } from '../structs/Option_u64Z.mjs';
-import { BlindedPath } from '../structs/BlindedPath.mjs';
+import { BlindedMessagePath } from '../structs/BlindedMessagePath.mjs';
+import { DecodeError } from '../structs/DecodeError.mjs';
+import { Result_RefundDecodeErrorZ } from '../structs/Result_RefundDecodeErrorZ.mjs';
 import { Bolt12ParseError } from '../structs/Bolt12ParseError.mjs';
 import { Result_RefundBolt12ParseErrorZ } from '../structs/Result_RefundBolt12ParseErrorZ.mjs';
 import { Retry } from '../structs/Retry.mjs';
-import { DecodeError } from '../structs/DecodeError.mjs';
 import { Result_RetryDecodeErrorZ } from '../structs/Result_RetryDecodeErrorZ.mjs';
 import { ShutdownScript } from '../structs/ShutdownScript.mjs';
 import { APIError } from '../structs/APIError.mjs';
@@ -58,8 +60,7 @@ import { Option_AmountZ } from '../structs/Option_AmountZ.mjs';
 import { Quantity } from '../structs/Quantity.mjs';
 import { Option_QuantityZ } from '../structs/Option_QuantityZ.mjs';
 import { Result_ThirtyTwoBytesNoneZ } from '../structs/Result_ThirtyTwoBytesNoneZ.mjs';
-import { BlindedPayInfo } from '../structs/BlindedPayInfo.mjs';
-import { Result_BlindedPayInfoDecodeErrorZ } from '../structs/Result_BlindedPayInfoDecodeErrorZ.mjs';
+import { Result_Bolt12InvoiceDecodeErrorZ } from '../structs/Result_Bolt12InvoiceDecodeErrorZ.mjs';
 import { DelayedPaymentOutputDescriptor } from '../structs/DelayedPaymentOutputDescriptor.mjs';
 import { Result_DelayedPaymentOutputDescriptorDecodeErrorZ } from '../structs/Result_DelayedPaymentOutputDescriptorDecodeErrorZ.mjs';
 import { StaticPaymentOutputDescriptor } from '../structs/StaticPaymentOutputDescriptor.mjs';
@@ -74,8 +75,9 @@ import { ChannelDerivationParameters } from '../structs/ChannelDerivationParamet
 import { Result_ChannelDerivationParametersDecodeErrorZ } from '../structs/Result_ChannelDerivationParametersDecodeErrorZ.mjs';
 import { HTLCDescriptor } from '../structs/HTLCDescriptor.mjs';
 import { Result_HTLCDescriptorDecodeErrorZ } from '../structs/Result_HTLCDescriptorDecodeErrorZ.mjs';
-import { Result_NoneNoneZ } from '../structs/Result_NoneNoneZ.mjs';
 import { Result_PublicKeyNoneZ } from '../structs/Result_PublicKeyNoneZ.mjs';
+import { Result__u832NoneZ } from '../structs/Result__u832NoneZ.mjs';
+import { Result_NoneNoneZ } from '../structs/Result_NoneNoneZ.mjs';
 import { Option_BigEndianScalarZ } from '../structs/Option_BigEndianScalarZ.mjs';
 import { Result_RecoverableSignatureNoneZ } from '../structs/Result_RecoverableSignatureNoneZ.mjs';
 import { Result_ECDSASignatureNoneZ } from '../structs/Result_ECDSASignatureNoneZ.mjs';
@@ -91,8 +93,7 @@ import { ChannelPublicKeys } from '../structs/ChannelPublicKeys.mjs';
 import { ChannelTransactionParameters } from '../structs/ChannelTransactionParameters.mjs';
 import { ChannelSigner, ChannelSignerInterface } from '../structs/ChannelSigner.mjs';
 import { EcdsaChannelSigner, EcdsaChannelSignerInterface } from '../structs/EcdsaChannelSigner.mjs';
-import { WriteableEcdsaChannelSigner, WriteableEcdsaChannelSignerInterface } from '../structs/WriteableEcdsaChannelSigner.mjs';
-import { Result_WriteableEcdsaChannelSignerDecodeErrorZ } from '../structs/Result_WriteableEcdsaChannelSignerDecodeErrorZ.mjs';
+import { Result_EcdsaChannelSignerDecodeErrorZ } from '../structs/Result_EcdsaChannelSignerDecodeErrorZ.mjs';
 import { Result_CVec_u8ZNoneZ } from '../structs/Result_CVec_u8ZNoneZ.mjs';
 import { Result_ShutdownScriptNoneZ } from '../structs/Result_ShutdownScriptNoneZ.mjs';
 import { Option_u16Z } from '../structs/Option_u16Z.mjs';
@@ -100,15 +101,19 @@ import { Option_boolZ } from '../structs/Option_boolZ.mjs';
 import { Result_WitnessNoneZ } from '../structs/Result_WitnessNoneZ.mjs';
 import { InMemorySigner } from '../structs/InMemorySigner.mjs';
 import { Result_InMemorySignerDecodeErrorZ } from '../structs/Result_InMemorySignerDecodeErrorZ.mjs';
+import { RouteParameters } from '../structs/RouteParameters.mjs';
+import { ThreeTuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ } from '../structs/ThreeTuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ.mjs';
+import { Result_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ } from '../structs/Result_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ.mjs';
 import { ChannelDetails } from '../structs/ChannelDetails.mjs';
 import { Route } from '../structs/Route.mjs';
 import { LightningError } from '../structs/LightningError.mjs';
 import { Result_RouteLightningErrorZ } from '../structs/Result_RouteLightningErrorZ.mjs';
-import { TwoTuple_BlindedPayInfoBlindedPathZ } from '../structs/TwoTuple_BlindedPayInfoBlindedPathZ.mjs';
-import { Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ } from '../structs/Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ.mjs';
+import { BlindedPaymentPath } from '../structs/BlindedPaymentPath.mjs';
+import { Result_CVec_BlindedPaymentPathZNoneZ } from '../structs/Result_CVec_BlindedPaymentPathZNoneZ.mjs';
 import { OnionMessagePath } from '../structs/OnionMessagePath.mjs';
 import { Result_OnionMessagePathNoneZ } from '../structs/Result_OnionMessagePathNoneZ.mjs';
-import { Result_CVec_BlindedPathZNoneZ } from '../structs/Result_CVec_BlindedPathZNoneZ.mjs';
+import { Result_CVec_BlindedMessagePathZNoneZ } from '../structs/Result_CVec_BlindedMessagePathZNoneZ.mjs';
+import { MessageForwardNode } from '../structs/MessageForwardNode.mjs';
 import { InFlightHtlcs } from '../structs/InFlightHtlcs.mjs';
 import { Result_InFlightHtlcsDecodeErrorZ } from '../structs/Result_InFlightHtlcsDecodeErrorZ.mjs';
 import { RouteHop } from '../structs/RouteHop.mjs';
@@ -118,13 +123,12 @@ import { BlindedTail } from '../structs/BlindedTail.mjs';
 import { Result_BlindedTailDecodeErrorZ } from '../structs/Result_BlindedTailDecodeErrorZ.mjs';
 import { Path } from '../structs/Path.mjs';
 import { Result_RouteDecodeErrorZ } from '../structs/Result_RouteDecodeErrorZ.mjs';
-import { RouteParameters } from '../structs/RouteParameters.mjs';
 import { Result_RouteParametersDecodeErrorZ } from '../structs/Result_RouteParametersDecodeErrorZ.mjs';
 import { PaymentParameters } from '../structs/PaymentParameters.mjs';
 import { Result_PaymentParametersDecodeErrorZ } from '../structs/Result_PaymentParametersDecodeErrorZ.mjs';
 import { RouteHint } from '../structs/RouteHint.mjs';
-import { RouteHintHop } from '../structs/RouteHintHop.mjs';
 import { Result_RouteHintDecodeErrorZ } from '../structs/Result_RouteHintDecodeErrorZ.mjs';
+import { RouteHintHop } from '../structs/RouteHintHop.mjs';
 import { Result_RouteHintHopDecodeErrorZ } from '../structs/Result_RouteHintHopDecodeErrorZ.mjs';
 import { FixedPenaltyScorer } from '../structs/FixedPenaltyScorer.mjs';
 import { Result_FixedPenaltyScorerDecodeErrorZ } from '../structs/Result_FixedPenaltyScorerDecodeErrorZ.mjs';
@@ -174,10 +178,10 @@ import { InvoiceRequestWithDerivedPayerIdBuilder } from '../structs/InvoiceReque
 import { Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ } from '../structs/Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ.mjs';
 import { InvoiceRequestWithExplicitPayerIdBuilder } from '../structs/InvoiceRequestWithExplicitPayerIdBuilder.mjs';
 import { Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ } from '../structs/Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ.mjs';
+import { Result_OfferDecodeErrorZ } from '../structs/Result_OfferDecodeErrorZ.mjs';
 import { Result_OfferBolt12ParseErrorZ } from '../structs/Result_OfferBolt12ParseErrorZ.mjs';
 import { Result_NodeIdDecodeErrorZ } from '../structs/Result_NodeIdDecodeErrorZ.mjs';
 import { Result_PublicKeySecp256k1ErrorZ } from '../structs/Result_PublicKeySecp256k1ErrorZ.mjs';
-import { ChannelUpdate } from '../structs/ChannelUpdate.mjs';
 import { NetworkUpdate } from '../structs/NetworkUpdate.mjs';
 import { Option_NetworkUpdateZ } from '../structs/Option_NetworkUpdateZ.mjs';
 import { Result_COption_NetworkUpdateZDecodeErrorZ } from '../structs/Result_COption_NetworkUpdateZDecodeErrorZ.mjs';
@@ -189,6 +193,7 @@ import { Option_UtxoLookupZ } from '../structs/Option_UtxoLookupZ.mjs';
 import { Result_NoneLightningErrorZ } from '../structs/Result_NoneLightningErrorZ.mjs';
 import { Result_boolLightningErrorZ } from '../structs/Result_boolLightningErrorZ.mjs';
 import { ChannelAnnouncement } from '../structs/ChannelAnnouncement.mjs';
+import { ChannelUpdate } from '../structs/ChannelUpdate.mjs';
 import { ThreeTuple_ChannelAnnouncementChannelUpdateChannelUpdateZ } from '../structs/ThreeTuple_ChannelAnnouncementChannelUpdateChannelUpdateZ.mjs';
 import { Option_C3Tuple_ChannelAnnouncementChannelUpdateChannelUpdateZZ } from '../structs/Option_C3Tuple_ChannelAnnouncementChannelUpdateChannelUpdateZZ.mjs';
 import { AcceptChannel } from '../structs/AcceptChannel.mjs';
@@ -198,7 +203,7 @@ import { OpenChannelV2 } from '../structs/OpenChannelV2.mjs';
 import { FundingCreated } from '../structs/FundingCreated.mjs';
 import { FundingSigned } from '../structs/FundingSigned.mjs';
 import { Stfu } from '../structs/Stfu.mjs';
-import { Splice } from '../structs/Splice.mjs';
+import { SpliceInit } from '../structs/SpliceInit.mjs';
 import { SpliceAck } from '../structs/SpliceAck.mjs';
 import { SpliceLocked } from '../structs/SpliceLocked.mjs';
 import { TxAddInput } from '../structs/TxAddInput.mjs';
@@ -234,10 +239,12 @@ import { RoutingFees } from '../structs/RoutingFees.mjs';
 import { Result_RoutingFeesDecodeErrorZ } from '../structs/Result_RoutingFeesDecodeErrorZ.mjs';
 import { Hostname } from '../structs/Hostname.mjs';
 import { SocketAddress } from '../structs/SocketAddress.mjs';
+import { NodeAnnouncementDetails } from '../structs/NodeAnnouncementDetails.mjs';
 import { NodeAnnouncementInfo } from '../structs/NodeAnnouncementInfo.mjs';
 import { Result_NodeAnnouncementInfoDecodeErrorZ } from '../structs/Result_NodeAnnouncementInfoDecodeErrorZ.mjs';
 import { NodeAlias } from '../structs/NodeAlias.mjs';
 import { Result_NodeAliasDecodeErrorZ } from '../structs/Result_NodeAliasDecodeErrorZ.mjs';
+import { Option_NodeAnnouncementInfoZ } from '../structs/Option_NodeAnnouncementInfoZ.mjs';
 import { NodeInfo } from '../structs/NodeInfo.mjs';
 import { Result_NodeInfoDecodeErrorZ } from '../structs/Result_NodeInfoDecodeErrorZ.mjs';
 import { Result_NetworkGraphDecodeErrorZ } from '../structs/Result_NetworkGraphDecodeErrorZ.mjs';
@@ -276,12 +283,25 @@ import { Result_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ } from '../s
 import { Option_StrZ } from '../structs/Option_StrZ.mjs';
 import { Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ } from '../structs/Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ.mjs';
 import { Result_ThirtyTwoBytesAPIErrorZ } from '../structs/Result_ThirtyTwoBytesAPIErrorZ.mjs';
+import { Nonce } from '../structs/Nonce.mjs';
+import { OffersContext } from '../structs/OffersContext.mjs';
+import { Option_OffersContextZ } from '../structs/Option_OffersContextZ.mjs';
 import { InvoiceRequest } from '../structs/InvoiceRequest.mjs';
 import { InvoiceError } from '../structs/InvoiceError.mjs';
 import { OffersMessage } from '../structs/OffersMessage.mjs';
-import { Option_OffersMessageZ } from '../structs/Option_OffersMessageZ.mjs';
+import { ResponseInstruction } from '../structs/ResponseInstruction.mjs';
+import { TwoTuple_OffersMessageResponseInstructionZ } from '../structs/TwoTuple_OffersMessageResponseInstructionZ.mjs';
+import { Option_C2Tuple_OffersMessageResponseInstructionZZ } from '../structs/Option_C2Tuple_OffersMessageResponseInstructionZZ.mjs';
 import { Destination } from '../structs/Destination.mjs';
-import { ThreeTuple_OffersMessageDestinationBlindedPathZ } from '../structs/ThreeTuple_OffersMessageDestinationBlindedPathZ.mjs';
+import { MessageContext } from '../structs/MessageContext.mjs';
+import { MessageSendInstructions } from '../structs/MessageSendInstructions.mjs';
+import { TwoTuple_OffersMessageMessageSendInstructionsZ } from '../structs/TwoTuple_OffersMessageMessageSendInstructionsZ.mjs';
+import { ReleaseHeldHtlc } from '../structs/ReleaseHeldHtlc.mjs';
+import { TwoTuple_ReleaseHeldHtlcResponseInstructionZ } from '../structs/TwoTuple_ReleaseHeldHtlcResponseInstructionZ.mjs';
+import { Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ } from '../structs/Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ.mjs';
+import { HeldHtlcAvailable } from '../structs/HeldHtlcAvailable.mjs';
+import { AsyncPaymentsMessage } from '../structs/AsyncPaymentsMessage.mjs';
+import { TwoTuple_AsyncPaymentsMessageMessageSendInstructionsZ } from '../structs/TwoTuple_AsyncPaymentsMessageMessageSendInstructionsZ.mjs';
 import { PhantomRouteHints } from '../structs/PhantomRouteHints.mjs';
 import { Result_PhantomRouteHintsDecodeErrorZ } from '../structs/Result_PhantomRouteHintsDecodeErrorZ.mjs';
 import { BlindedForward } from '../structs/BlindedForward.mjs';
@@ -297,6 +317,7 @@ import { ChannelMonitorUpdate } from '../structs/ChannelMonitorUpdate.mjs';
 import { Watch, WatchInterface } from '../structs/Watch.mjs';
 import { BroadcasterInterface, BroadcasterInterfaceInterface } from '../structs/BroadcasterInterface.mjs';
 import { EntropySource, EntropySourceInterface } from '../structs/EntropySource.mjs';
+import { RawBolt11Invoice } from '../structs/RawBolt11Invoice.mjs';
 import { UnsignedInvoiceRequest } from '../structs/UnsignedInvoiceRequest.mjs';
 import { UnsignedChannelUpdate } from '../structs/UnsignedChannelUpdate.mjs';
 import { UnsignedNodeAnnouncement } from '../structs/UnsignedNodeAnnouncement.mjs';
@@ -324,6 +345,8 @@ import { Result_HTLCUpdateDecodeErrorZ } from '../structs/Result_HTLCUpdateDecod
 import { TwoTuple_OutPointCVec_u8ZZ } from '../structs/TwoTuple_OutPointCVec_u8ZZ.mjs';
 import { TwoTuple_u32CVec_u8ZZ } from '../structs/TwoTuple_u32CVec_u8ZZ.mjs';
 import { TwoTuple_ThirtyTwoBytesCVec_C2Tuple_u32CVec_u8ZZZZ } from '../structs/TwoTuple_ThirtyTwoBytesCVec_C2Tuple_u32CVec_u8ZZZZ.mjs';
+import { ReplayEvent } from '../structs/ReplayEvent.mjs';
+import { Result_NoneReplayEventZ } from '../structs/Result_NoneReplayEventZ.mjs';
 import { TwoTuple_u32TxOutZ } from '../structs/TwoTuple_u32TxOutZ.mjs';
 import { TwoTuple_ThirtyTwoBytesCVec_C2Tuple_u32TxOutZZZ } from '../structs/TwoTuple_ThirtyTwoBytesCVec_C2Tuple_u32TxOutZZZ.mjs';
 import { Balance } from '../structs/Balance.mjs';
@@ -331,11 +354,12 @@ import { TwoTuple_ThirtyTwoBytesChannelMonitorZ } from '../structs/TwoTuple_Thir
 import { Result_C2Tuple_ThirtyTwoBytesChannelMonitorZDecodeErrorZ } from '../structs/Result_C2Tuple_ThirtyTwoBytesChannelMonitorZDecodeErrorZ.mjs';
 import { Type, TypeInterface } from '../structs/Type.mjs';
 import { TwoTuple_PublicKeyTypeZ } from '../structs/TwoTuple_PublicKeyTypeZ.mjs';
-import { TwoTuple_PublicKeyCVec_SocketAddressZZ } from '../structs/TwoTuple_PublicKeyCVec_SocketAddressZZ.mjs';
 import { OnionMessageContents, OnionMessageContentsInterface } from '../structs/OnionMessageContents.mjs';
+import { TwoTuple_OnionMessageContentsResponseInstructionZ } from '../structs/TwoTuple_OnionMessageContentsResponseInstructionZ.mjs';
+import { Option_C2Tuple_OnionMessageContentsResponseInstructionZZ } from '../structs/Option_C2Tuple_OnionMessageContentsResponseInstructionZZ.mjs';
 import { Option_OnionMessageContentsZ } from '../structs/Option_OnionMessageContentsZ.mjs';
 import { Result_COption_OnionMessageContentsZDecodeErrorZ } from '../structs/Result_COption_OnionMessageContentsZDecodeErrorZ.mjs';
-import { ThreeTuple_OnionMessageContentsDestinationBlindedPathZ } from '../structs/ThreeTuple_OnionMessageContentsDestinationBlindedPathZ.mjs';
+import { TwoTuple_OnionMessageContentsMessageSendInstructionsZ } from '../structs/TwoTuple_OnionMessageContentsMessageSendInstructionsZ.mjs';
 import { Option_TypeZ } from '../structs/Option_TypeZ.mjs';
 import { Result_COption_TypeZDecodeErrorZ } from '../structs/Result_COption_TypeZDecodeErrorZ.mjs';
 import { Option_SocketAddressZ } from '../structs/Option_SocketAddressZ.mjs';
@@ -353,7 +377,6 @@ import { Result_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ } from '../s
 import { Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ } from '../structs/Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ.mjs';
 import { Result_UnsignedInvoiceRequestBolt12SemanticErrorZ } from '../structs/Result_UnsignedInvoiceRequestBolt12SemanticErrorZ.mjs';
 import { Result_InvoiceRequestBolt12SemanticErrorZ } from '../structs/Result_InvoiceRequestBolt12SemanticErrorZ.mjs';
-import { Option_SecretKeyZ } from '../structs/Option_SecretKeyZ.mjs';
 import { InvoiceWithExplicitSigningPubkeyBuilder } from '../structs/InvoiceWithExplicitSigningPubkeyBuilder.mjs';
 import { Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ } from '../structs/Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ.mjs';
 import { VerifiedInvoiceRequest } from '../structs/VerifiedInvoiceRequest.mjs';
@@ -373,7 +396,7 @@ import { UpdateFailMalformedHTLC } from '../structs/UpdateFailMalformedHTLC.mjs'
 import { Result_AcceptChannelDecodeErrorZ } from '../structs/Result_AcceptChannelDecodeErrorZ.mjs';
 import { Result_AcceptChannelV2DecodeErrorZ } from '../structs/Result_AcceptChannelV2DecodeErrorZ.mjs';
 import { Result_StfuDecodeErrorZ } from '../structs/Result_StfuDecodeErrorZ.mjs';
-import { Result_SpliceDecodeErrorZ } from '../structs/Result_SpliceDecodeErrorZ.mjs';
+import { Result_SpliceInitDecodeErrorZ } from '../structs/Result_SpliceInitDecodeErrorZ.mjs';
 import { Result_SpliceAckDecodeErrorZ } from '../structs/Result_SpliceAckDecodeErrorZ.mjs';
 import { Result_SpliceLockedDecodeErrorZ } from '../structs/Result_SpliceLockedDecodeErrorZ.mjs';
 import { Result_TxAddInputDecodeErrorZ } from '../structs/Result_TxAddInputDecodeErrorZ.mjs';
@@ -390,6 +413,8 @@ import { Result_ChannelReestablishDecodeErrorZ } from '../structs/Result_Channel
 import { Result_ClosingSignedDecodeErrorZ } from '../structs/Result_ClosingSignedDecodeErrorZ.mjs';
 import { ClosingSignedFeeRange } from '../structs/ClosingSignedFeeRange.mjs';
 import { Result_ClosingSignedFeeRangeDecodeErrorZ } from '../structs/Result_ClosingSignedFeeRangeDecodeErrorZ.mjs';
+import { CommitmentSignedBatch } from '../structs/CommitmentSignedBatch.mjs';
+import { Result_CommitmentSignedBatchDecodeErrorZ } from '../structs/Result_CommitmentSignedBatchDecodeErrorZ.mjs';
 import { CommitmentSigned } from '../structs/CommitmentSigned.mjs';
 import { Result_CommitmentSignedDecodeErrorZ } from '../structs/Result_CommitmentSignedDecodeErrorZ.mjs';
 import { Result_FundingCreatedDecodeErrorZ } from '../structs/Result_FundingCreatedDecodeErrorZ.mjs';
@@ -429,9 +454,6 @@ import { Result_ReplyShortChannelIdsEndDecodeErrorZ } from '../structs/Result_Re
 import { Result_QueryChannelRangeDecodeErrorZ } from '../structs/Result_QueryChannelRangeDecodeErrorZ.mjs';
 import { Result_ReplyChannelRangeDecodeErrorZ } from '../structs/Result_ReplyChannelRangeDecodeErrorZ.mjs';
 import { Result_GossipTimestampFilterDecodeErrorZ } from '../structs/Result_GossipTimestampFilterDecodeErrorZ.mjs';
-import { Bolt11Invoice } from '../structs/Bolt11Invoice.mjs';
-import { SignOrCreationError } from '../structs/SignOrCreationError.mjs';
-import { Result_Bolt11InvoiceSignOrCreationErrorZ } from '../structs/Result_Bolt11InvoiceSignOrCreationErrorZ.mjs';
 import { Option_InboundHTLCStateDetailsZ } from '../structs/Option_InboundHTLCStateDetailsZ.mjs';
 import { Result_COption_InboundHTLCStateDetailsZDecodeErrorZ } from '../structs/Result_COption_InboundHTLCStateDetailsZDecodeErrorZ.mjs';
 import { InboundHTLCDetails } from '../structs/InboundHTLCDetails.mjs';
@@ -447,6 +469,9 @@ import { Result_ChannelCounterpartyDecodeErrorZ } from '../structs/Result_Channe
 import { Option_ChannelShutdownStateZ } from '../structs/Option_ChannelShutdownStateZ.mjs';
 import { Result_ChannelDetailsDecodeErrorZ } from '../structs/Result_ChannelDetailsDecodeErrorZ.mjs';
 import { Result_ChannelShutdownStateDecodeErrorZ } from '../structs/Result_ChannelShutdownStateDecodeErrorZ.mjs';
+import { Result_HeldHtlcAvailableDecodeErrorZ } from '../structs/Result_HeldHtlcAvailableDecodeErrorZ.mjs';
+import { Result_ReleaseHeldHtlcDecodeErrorZ } from '../structs/Result_ReleaseHeldHtlcDecodeErrorZ.mjs';
+import { Result_AsyncPaymentsMessageDecodeErrorZ } from '../structs/Result_AsyncPaymentsMessageDecodeErrorZ.mjs';
 import { Result_OffersMessageDecodeErrorZ } from '../structs/Result_OffersMessageDecodeErrorZ.mjs';
 import { Option_HTLCClaimZ } from '../structs/Option_HTLCClaimZ.mjs';
 import { CounterpartyCommitmentSecrets } from '../structs/CounterpartyCommitmentSecrets.mjs';
@@ -471,6 +496,8 @@ import { Option_usizeZ } from '../structs/Option_usizeZ.mjs';
 import { Result_ShutdownScriptDecodeErrorZ } from '../structs/Result_ShutdownScriptDecodeErrorZ.mjs';
 import { InvalidShutdownScript } from '../structs/InvalidShutdownScript.mjs';
 import { Result_ShutdownScriptInvalidShutdownScriptZ } from '../structs/Result_ShutdownScriptInvalidShutdownScriptZ.mjs';
+import { FundingInfo } from '../structs/FundingInfo.mjs';
+import { Result_FundingInfoDecodeErrorZ } from '../structs/Result_FundingInfoDecodeErrorZ.mjs';
 import { PaymentPurpose } from '../structs/PaymentPurpose.mjs';
 import { Result_PaymentPurposeDecodeErrorZ } from '../structs/Result_PaymentPurposeDecodeErrorZ.mjs';
 import { ClaimedHTLC } from '../structs/ClaimedHTLC.mjs';
@@ -483,21 +510,24 @@ import { Result_COption_ClosureReasonZDecodeErrorZ } from '../structs/Result_COp
 import { HTLCDestination } from '../structs/HTLCDestination.mjs';
 import { Option_HTLCDestinationZ } from '../structs/Option_HTLCDestinationZ.mjs';
 import { Result_COption_HTLCDestinationZDecodeErrorZ } from '../structs/Result_COption_HTLCDestinationZDecodeErrorZ.mjs';
-import { Result_PaymentFailureReasonDecodeErrorZ } from '../structs/Result_PaymentFailureReasonDecodeErrorZ.mjs';
-import { Option_U128Z } from '../structs/Option_U128Z.mjs';
 import { Option_PaymentFailureReasonZ } from '../structs/Option_PaymentFailureReasonZ.mjs';
+import { Result_COption_PaymentFailureReasonZDecodeErrorZ } from '../structs/Result_COption_PaymentFailureReasonZDecodeErrorZ.mjs';
+import { Option_U128Z } from '../structs/Option_U128Z.mjs';
+import { Responder } from '../structs/Responder.mjs';
+import { ChannelParameters } from '../structs/ChannelParameters.mjs';
 import { AnchorDescriptor } from '../structs/AnchorDescriptor.mjs';
 import { BumpTransactionEvent } from '../structs/BumpTransactionEvent.mjs';
 import { Event } from '../structs/Event.mjs';
 import { Option_EventZ } from '../structs/Option_EventZ.mjs';
 import { Result_COption_EventZDecodeErrorZ } from '../structs/Result_COption_EventZDecodeErrorZ.mjs';
+import { Result_NonceDecodeErrorZ } from '../structs/Result_NonceDecodeErrorZ.mjs';
 import { Bolt11ParseError } from '../structs/Bolt11ParseError.mjs';
 import { Result_SiPrefixBolt11ParseErrorZ } from '../structs/Result_SiPrefixBolt11ParseErrorZ.mjs';
+import { Bolt11Invoice } from '../structs/Bolt11Invoice.mjs';
 import { ParseOrSemanticError } from '../structs/ParseOrSemanticError.mjs';
 import { Result_Bolt11InvoiceParseOrSemanticErrorZ } from '../structs/Result_Bolt11InvoiceParseOrSemanticErrorZ.mjs';
 import { SignedRawBolt11Invoice } from '../structs/SignedRawBolt11Invoice.mjs';
 import { Result_SignedRawBolt11InvoiceBolt11ParseErrorZ } from '../structs/Result_SignedRawBolt11InvoiceBolt11ParseErrorZ.mjs';
-import { RawBolt11Invoice } from '../structs/RawBolt11Invoice.mjs';
 import { Bolt11InvoiceSignature } from '../structs/Bolt11InvoiceSignature.mjs';
 import { ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ } from '../structs/ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ.mjs';
 import { PayeePubKey } from '../structs/PayeePubKey.mjs';
@@ -513,13 +543,17 @@ import { Result_PrivateRouteCreationErrorZ } from '../structs/Result_PrivateRout
 import { Result_OutPointDecodeErrorZ } from '../structs/Result_OutPointDecodeErrorZ.mjs';
 import { BigSize } from '../structs/BigSize.mjs';
 import { Result_BigSizeDecodeErrorZ } from '../structs/Result_BigSizeDecodeErrorZ.mjs';
+import { Result_UntrustedStringDecodeErrorZ } from '../structs/Result_UntrustedStringDecodeErrorZ.mjs';
 import { Result_HostnameDecodeErrorZ } from '../structs/Result_HostnameDecodeErrorZ.mjs';
 import { TransactionU16LenLimited } from '../structs/TransactionU16LenLimited.mjs';
 import { Result_TransactionU16LenLimitedNoneZ } from '../structs/Result_TransactionU16LenLimitedNoneZ.mjs';
 import { Result_TransactionU16LenLimitedDecodeErrorZ } from '../structs/Result_TransactionU16LenLimitedDecodeErrorZ.mjs';
-import { Result_UntrustedStringDecodeErrorZ } from '../structs/Result_UntrustedStringDecodeErrorZ.mjs';
 import { Result_ChannelIdDecodeErrorZ } from '../structs/Result_ChannelIdDecodeErrorZ.mjs';
 import { TwoTuple__u832u16Z } from '../structs/TwoTuple__u832u16Z.mjs';
+import { BlindedPayInfo } from '../structs/BlindedPayInfo.mjs';
+import { Result_BlindedPayInfoDecodeErrorZ } from '../structs/Result_BlindedPayInfoDecodeErrorZ.mjs';
+import { Result_BlindedPaymentPathNoneZ } from '../structs/Result_BlindedPaymentPathNoneZ.mjs';
+import { PaymentForwardNode } from '../structs/PaymentForwardNode.mjs';
 import { PaymentRelay } from '../structs/PaymentRelay.mjs';
 import { Result_PaymentRelayDecodeErrorZ } from '../structs/Result_PaymentRelayDecodeErrorZ.mjs';
 import { PaymentConstraints } from '../structs/PaymentConstraints.mjs';
@@ -528,9 +562,8 @@ import { Result_PaymentContextDecodeErrorZ } from '../structs/Result_PaymentCont
 import { Result_UnknownPaymentContextDecodeErrorZ } from '../structs/Result_UnknownPaymentContextDecodeErrorZ.mjs';
 import { Result_Bolt12OfferContextDecodeErrorZ } from '../structs/Result_Bolt12OfferContextDecodeErrorZ.mjs';
 import { Result_Bolt12RefundContextDecodeErrorZ } from '../structs/Result_Bolt12RefundContextDecodeErrorZ.mjs';
-import { Result_StrSecp256k1ErrorZ } from '../structs/Result_StrSecp256k1ErrorZ.mjs';
-import { ThreeTuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ } from '../structs/ThreeTuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ.mjs';
-import { Result_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ } from '../structs/Result_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ.mjs';
+import { Result_ResponderDecodeErrorZ } from '../structs/Result_ResponderDecodeErrorZ.mjs';
+import { Option_MessageContextZ } from '../structs/Option_MessageContextZ.mjs';
 import { ThreeTuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ } from '../structs/ThreeTuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ.mjs';
 import { SendError } from '../structs/SendError.mjs';
 import { Result_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ } from '../structs/Result_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ.mjs';
@@ -540,11 +573,10 @@ import { PeeledOnion } from '../structs/PeeledOnion.mjs';
 import { Result_PeeledOnionNoneZ } from '../structs/Result_PeeledOnionNoneZ.mjs';
 import { SendSuccess } from '../structs/SendSuccess.mjs';
 import { Result_SendSuccessSendErrorZ } from '../structs/Result_SendSuccessSendErrorZ.mjs';
-import { Result_BlindedPathNoneZ } from '../structs/Result_BlindedPathNoneZ.mjs';
-import { Result_C2Tuple_BlindedPayInfoBlindedPathZNoneZ } from '../structs/Result_C2Tuple_BlindedPayInfoBlindedPathZNoneZ.mjs';
-import { ForwardNode } from '../structs/ForwardNode.mjs';
-import { Result_BlindedPathDecodeErrorZ } from '../structs/Result_BlindedPathDecodeErrorZ.mjs';
+import { Result_NoneSendErrorZ } from '../structs/Result_NoneSendErrorZ.mjs';
 import { Result_BlindedHopDecodeErrorZ } from '../structs/Result_BlindedHopDecodeErrorZ.mjs';
+import { SignOrCreationError } from '../structs/SignOrCreationError.mjs';
+import { Result_Bolt11InvoiceSignOrCreationErrorZ } from '../structs/Result_Bolt11InvoiceSignOrCreationErrorZ.mjs';
 import { Result_InvoiceErrorDecodeErrorZ } from '../structs/Result_InvoiceErrorDecodeErrorZ.mjs';
 import { TrackedSpendableOutput } from '../structs/TrackedSpendableOutput.mjs';
 import { Result_TrackedSpendableOutputDecodeErrorZ } from '../structs/Result_TrackedSpendableOutputDecodeErrorZ.mjs';
@@ -575,8 +607,11 @@ import { Result_RevocationKeyDecodeErrorZ } from '../structs/Result_RevocationKe
 import { LockedChannelMonitor } from '../structs/LockedChannelMonitor.mjs';
 import { Result_LockedChannelMonitorNoneZ } from '../structs/Result_LockedChannelMonitorNoneZ.mjs';
 import { TwoTuple_OutPointChannelIdZ } from '../structs/TwoTuple_OutPointChannelIdZ.mjs';
-import { MonitorUpdateId } from '../structs/MonitorUpdateId.mjs';
-import { TwoTuple_OutPointCVec_MonitorUpdateIdZZ } from '../structs/TwoTuple_OutPointCVec_MonitorUpdateIdZZ.mjs';
+import { TwoTuple_OutPointCVec_u64ZZ } from '../structs/TwoTuple_OutPointCVec_u64ZZ.mjs';
+import { Result_BlindedMessagePathDecodeErrorZ } from '../structs/Result_BlindedMessagePathDecodeErrorZ.mjs';
+import { Result_BlindedMessagePathNoneZ } from '../structs/Result_BlindedMessagePathNoneZ.mjs';
+import { Result_MessageContextDecodeErrorZ } from '../structs/Result_MessageContextDecodeErrorZ.mjs';
+import { Result_OffersContextDecodeErrorZ } from '../structs/Result_OffersContextDecodeErrorZ.mjs';
 import { FirstHopCandidate } from '../structs/FirstHopCandidate.mjs';
 import { PublicHopCandidate } from '../structs/PublicHopCandidate.mjs';
 import { PrivateHopCandidate } from '../structs/PrivateHopCandidate.mjs';
@@ -591,7 +626,6 @@ import { LockableScore, LockableScoreInterface } from '../structs/LockableScore.
 import { WriteableScore, WriteableScoreInterface } from '../structs/WriteableScore.mjs';
 import { Persister, PersisterInterface } from '../structs/Persister.mjs';
 import { MonitorUpdatingPersister } from '../structs/MonitorUpdatingPersister.mjs';
-import { PrintableString } from '../structs/PrintableString.mjs';
 import { Listen, ListenInterface } from '../structs/Listen.mjs';
 import { Confirm, ConfirmInterface } from '../structs/Confirm.mjs';
 import { SpendingDelay } from '../structs/SpendingDelay.mjs';
@@ -609,6 +643,7 @@ import { ChainParameters } from '../structs/ChainParameters.mjs';
 import { MessageSendEventsProvider, MessageSendEventsProviderInterface } from '../structs/MessageSendEventsProvider.mjs';
 import { ChannelMessageHandler, ChannelMessageHandlerInterface } from '../structs/ChannelMessageHandler.mjs';
 import { OffersMessageHandler, OffersMessageHandlerInterface } from '../structs/OffersMessageHandler.mjs';
+import { AsyncPaymentsMessageHandler, AsyncPaymentsMessageHandlerInterface } from '../structs/AsyncPaymentsMessageHandler.mjs';
 import { NodeIdLookUp, NodeIdLookUpInterface } from '../structs/NodeIdLookUp.mjs';
 import { ChannelManagerReadArgs } from '../structs/ChannelManagerReadArgs.mjs';
 import { ExpandedKey } from '../structs/ExpandedKey.mjs';
@@ -627,11 +662,14 @@ import { MessageHandler } from '../structs/MessageHandler.mjs';
 import { SocketDescriptor, SocketDescriptorInterface } from '../structs/SocketDescriptor.mjs';
 import { PeerManager } from '../structs/PeerManager.mjs';
 import { DirectedChannelTransactionParameters } from '../structs/DirectedChannelTransactionParameters.mjs';
-import { OfferFeatures } from '../structs/OfferFeatures.mjs';
-import { InvoiceRequestFeatures } from '../structs/InvoiceRequestFeatures.mjs';
+import { Sha256 } from '../structs/Sha256.mjs';
+import { Bolt12PaymentError } from '../structs/Bolt12PaymentError.mjs';
 import { OfferWithExplicitMetadataBuilder } from '../structs/OfferWithExplicitMetadataBuilder.mjs';
+import { PrintableString } from '../structs/PrintableString.mjs';
+import { OfferFeatures } from '../structs/OfferFeatures.mjs';
 import { SignBolt12InvoiceFn, SignBolt12InvoiceFnInterface } from '../structs/SignBolt12InvoiceFn.mjs';
 import { TaggedHash } from '../structs/TaggedHash.mjs';
+import { InvoiceRequestFeatures } from '../structs/InvoiceRequestFeatures.mjs';
 import { ErroneousField } from '../structs/ErroneousField.mjs';
 import { SignInvoiceRequestFn, SignInvoiceRequestFnInterface } from '../structs/SignInvoiceRequestFn.mjs';
 import { SignError } from '../structs/SignError.mjs';
@@ -662,7 +700,6 @@ import { BumpTransactionEventHandler } from '../structs/BumpTransactionEventHand
 import { RapidGossipSync } from '../structs/RapidGossipSync.mjs';
 import { GossipSync } from '../structs/GossipSync.mjs';
 import { RawDataPart } from '../structs/RawDataPart.mjs';
-import { Sha256 } from '../structs/Sha256.mjs';
 import { ExpiryTime } from '../structs/ExpiryTime.mjs';
 import { MinFinalCltvExpiryDelta } from '../structs/MinFinalCltvExpiryDelta.mjs';
 import { Fallback } from '../structs/Fallback.mjs';
@@ -682,8 +719,9 @@ export interface PersistInterface {
 	 * channel's outpoint (and it is up to you to maintain a correct mapping between the outpoint
 	 * and the stored channel data). Note that you **must** persist every new monitor to disk.
 	 * 
-	 * The `update_id` is used to identify this call to [`ChainMonitor::channel_monitor_updated`],
-	 * if you return [`ChannelMonitorUpdateStatus::InProgress`].
+	 * The [`ChannelMonitor::get_latest_update_id`] uniquely links this call to [`ChainMonitor::channel_monitor_updated`].
+	 * For [`Persist::persist_new_channel`], it is only necessary to call [`ChainMonitor::channel_monitor_updated`]
+	 * when you return [`ChannelMonitorUpdateStatus::InProgress`].
 	 * 
 	 * See [`Writeable::write`] on [`ChannelMonitor`] for writing out a `ChannelMonitor`
 	 * and [`ChannelMonitorUpdateStatus`] for requirements when returning errors.
@@ -691,7 +729,7 @@ export interface PersistInterface {
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 * [`Writeable::write`]: crate::util::ser::Writeable::write
 	 */
-	persist_new_channel(channel_funding_outpoint: OutPoint, data: ChannelMonitor, update_id: MonitorUpdateId): ChannelMonitorUpdateStatus;
+	persist_new_channel(channel_funding_outpoint: OutPoint, monitor: ChannelMonitor): ChannelMonitorUpdateStatus;
 	/**Update one channel's data. The provided [`ChannelMonitor`] has already applied the given
 	 * update.
 	 * 
@@ -708,7 +746,9 @@ export interface PersistInterface {
 	 * If an implementer chooses to persist the updates only, they need to make
 	 * sure that all the updates are applied to the `ChannelMonitors` *before
 	 * the set of channel monitors is given to the `ChannelManager`
-	 * deserialization routine. See [`ChannelMonitor::update_monitor`] for
+	 * deserialization routine. If there are any gaps in the persisted [`ChannelMonitorUpdate`]s,
+	 * implementer can safely ignore [`ChannelMonitorUpdate`]s after the gap and load without them.
+	 * See [`ChannelMonitor::update_monitor`] for
 	 * applying a monitor update to a monitor. If full `ChannelMonitors` are
 	 * persisted, then there is no need to persist individual updates.
 	 * 
@@ -717,8 +757,10 @@ export interface PersistInterface {
 	 * them in batches. The size of each monitor grows `O(number of state updates)`
 	 * whereas updates are small and `O(1)`.
 	 * 
-	 * The `update_id` is used to identify this call to [`ChainMonitor::channel_monitor_updated`],
-	 * if you return [`ChannelMonitorUpdateStatus::InProgress`].
+	 * The [`ChannelMonitorUpdate::update_id`] or [`ChannelMonitor::get_latest_update_id`] uniquely
+	 * links this call to [`ChainMonitor::channel_monitor_updated`].
+	 * For [`Persist::update_persisted_channel`], it is only necessary to call [`ChainMonitor::channel_monitor_updated`]
+	 * when a [`ChannelMonitorUpdate`] is provided and when you return [`ChannelMonitorUpdateStatus::InProgress`].
 	 * 
 	 * See [`Writeable::write`] on [`ChannelMonitor`] for writing out a `ChannelMonitor`,
 	 * [`Writeable::write`] on [`ChannelMonitorUpdate`] for writing out an update, and
@@ -726,9 +768,9 @@ export interface PersistInterface {
 	 * 
 	 * [`Writeable::write`]: crate::util::ser::Writeable::write
 	 * 
-	 * Note that update (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 * Note that monitor_update (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	update_persisted_channel(channel_funding_outpoint: OutPoint, update: ChannelMonitorUpdate, data: ChannelMonitor, update_id: MonitorUpdateId): ChannelMonitorUpdateStatus;
+	update_persisted_channel(channel_funding_outpoint: OutPoint, monitor_update: ChannelMonitorUpdate, monitor: ChannelMonitor): ChannelMonitorUpdateStatus;
 	/**Prevents the channel monitor from being loaded on startup.
 	 * 
 	 * Archiving the data in a backup location (rather than deleting it fully) is useful for
@@ -774,7 +816,7 @@ class LDKPersistHolder {
  * All calls should generally spawn a background task and immediately return
  * [`ChannelMonitorUpdateStatus::InProgress`]. Once the update completes,
  * [`ChainMonitor::channel_monitor_updated`] should be called with the corresponding
- * [`MonitorUpdateId`].
+ * [`ChannelMonitor::get_latest_update_id`] or [`ChannelMonitorUpdate::update_id`].
  * 
  * Note that unlike the direct [`chain::Watch`] interface,
  * [`ChainMonitor::channel_monitor_updated`] must be called once for *each* update which occurs.
@@ -815,24 +857,20 @@ export class Persist extends CommonBase {
 	public static new_impl(arg: PersistInterface): Persist {
 		const impl_holder: LDKPersistHolder = new LDKPersistHolder();
 		let structImplementation = {
-			persist_new_channel (channel_funding_outpoint: bigint, data: bigint, update_id: bigint): ChannelMonitorUpdateStatus {
+			persist_new_channel (channel_funding_outpoint: bigint, monitor: bigint): ChannelMonitorUpdateStatus {
 				const channel_funding_outpoint_hu_conv: OutPoint = new OutPoint(null, channel_funding_outpoint);
 				CommonBase.add_ref_from(channel_funding_outpoint_hu_conv, this);
-				const data_hu_conv: ChannelMonitor = new ChannelMonitor(null, data);
-				const update_id_hu_conv: MonitorUpdateId = new MonitorUpdateId(null, update_id);
-				CommonBase.add_ref_from(update_id_hu_conv, this);
-				const ret: ChannelMonitorUpdateStatus = arg.persist_new_channel(channel_funding_outpoint_hu_conv, data_hu_conv, update_id_hu_conv);
+				const monitor_hu_conv: ChannelMonitor = new ChannelMonitor(null, monitor);
+				const ret: ChannelMonitorUpdateStatus = arg.persist_new_channel(channel_funding_outpoint_hu_conv, monitor_hu_conv);
 				return ret;
 			},
-			update_persisted_channel (channel_funding_outpoint: bigint, update: bigint, data: bigint, update_id: bigint): ChannelMonitorUpdateStatus {
+			update_persisted_channel (channel_funding_outpoint: bigint, monitor_update: bigint, monitor: bigint): ChannelMonitorUpdateStatus {
 				const channel_funding_outpoint_hu_conv: OutPoint = new OutPoint(null, channel_funding_outpoint);
 				CommonBase.add_ref_from(channel_funding_outpoint_hu_conv, this);
-				const update_hu_conv: ChannelMonitorUpdate = new ChannelMonitorUpdate(null, update);
-				CommonBase.add_ref_from(update_hu_conv, this);
-				const data_hu_conv: ChannelMonitor = new ChannelMonitor(null, data);
-				const update_id_hu_conv: MonitorUpdateId = new MonitorUpdateId(null, update_id);
-				CommonBase.add_ref_from(update_id_hu_conv, this);
-				const ret: ChannelMonitorUpdateStatus = arg.update_persisted_channel(channel_funding_outpoint_hu_conv, update_hu_conv, data_hu_conv, update_id_hu_conv);
+				const monitor_update_hu_conv: ChannelMonitorUpdate = new ChannelMonitorUpdate(null, monitor_update);
+				CommonBase.add_ref_from(monitor_update_hu_conv, this);
+				const monitor_hu_conv: ChannelMonitor = new ChannelMonitor(null, monitor);
+				const ret: ChannelMonitorUpdateStatus = arg.update_persisted_channel(channel_funding_outpoint_hu_conv, monitor_update_hu_conv, monitor_hu_conv);
 				return ret;
 			},
 			archive_persisted_channel (channel_funding_outpoint: bigint): void {
@@ -857,8 +895,9 @@ export class Persist extends CommonBase {
 	 * channel's outpoint (and it is up to you to maintain a correct mapping between the outpoint
 	 * and the stored channel data). Note that you **must** persist every new monitor to disk.
 	 * 
-	 * The `update_id` is used to identify this call to [`ChainMonitor::channel_monitor_updated`],
-	 * if you return [`ChannelMonitorUpdateStatus::InProgress`].
+	 * The [`ChannelMonitor::get_latest_update_id`] uniquely links this call to [`ChainMonitor::channel_monitor_updated`].
+	 * For [`Persist::persist_new_channel`], it is only necessary to call [`ChainMonitor::channel_monitor_updated`]
+	 * when you return [`ChannelMonitorUpdateStatus::InProgress`].
 	 * 
 	 * See [`Writeable::write`] on [`ChannelMonitor`] for writing out a `ChannelMonitor`
 	 * and [`ChannelMonitorUpdateStatus`] for requirements when returning errors.
@@ -866,11 +905,9 @@ export class Persist extends CommonBase {
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 * [`Writeable::write`]: crate::util::ser::Writeable::write
 	 */
-	public persist_new_channel(channel_funding_outpoint: OutPoint, data: ChannelMonitor, update_id: MonitorUpdateId): ChannelMonitorUpdateStatus {
-		const ret: ChannelMonitorUpdateStatus = bindings.Persist_persist_new_channel(this.ptr, CommonBase.get_ptr_of(channel_funding_outpoint), CommonBase.get_ptr_of(data), CommonBase.get_ptr_of(update_id));
-		CommonBase.add_ref_from(this, channel_funding_outpoint);
-		CommonBase.add_ref_from(this, data);
-		CommonBase.add_ref_from(this, update_id);
+	public persist_new_channel(channel_funding_outpoint: OutPoint, monitor: ChannelMonitor): ChannelMonitorUpdateStatus {
+		const ret: ChannelMonitorUpdateStatus = bindings.Persist_persist_new_channel(this.ptr, CommonBase.get_ptr_of(channel_funding_outpoint), CommonBase.get_ptr_of(monitor));
+		CommonBase.add_ref_from(this, monitor);
 		return ret;
 	}
 
@@ -891,7 +928,9 @@ export class Persist extends CommonBase {
 	 * If an implementer chooses to persist the updates only, they need to make
 	 * sure that all the updates are applied to the `ChannelMonitors` *before
 	 * the set of channel monitors is given to the `ChannelManager`
-	 * deserialization routine. See [`ChannelMonitor::update_monitor`] for
+	 * deserialization routine. If there are any gaps in the persisted [`ChannelMonitorUpdate`]s,
+	 * implementer can safely ignore [`ChannelMonitorUpdate`]s after the gap and load without them.
+	 * See [`ChannelMonitor::update_monitor`] for
 	 * applying a monitor update to a monitor. If full `ChannelMonitors` are
 	 * persisted, then there is no need to persist individual updates.
 	 * 
@@ -900,8 +939,10 @@ export class Persist extends CommonBase {
 	 * them in batches. The size of each monitor grows `O(number of state updates)`
 	 * whereas updates are small and `O(1)`.
 	 * 
-	 * The `update_id` is used to identify this call to [`ChainMonitor::channel_monitor_updated`],
-	 * if you return [`ChannelMonitorUpdateStatus::InProgress`].
+	 * The [`ChannelMonitorUpdate::update_id`] or [`ChannelMonitor::get_latest_update_id`] uniquely
+	 * links this call to [`ChainMonitor::channel_monitor_updated`].
+	 * For [`Persist::update_persisted_channel`], it is only necessary to call [`ChainMonitor::channel_monitor_updated`]
+	 * when a [`ChannelMonitorUpdate`] is provided and when you return [`ChannelMonitorUpdateStatus::InProgress`].
 	 * 
 	 * See [`Writeable::write`] on [`ChannelMonitor`] for writing out a `ChannelMonitor`,
 	 * [`Writeable::write`] on [`ChannelMonitorUpdate`] for writing out an update, and
@@ -909,14 +950,11 @@ export class Persist extends CommonBase {
 	 * 
 	 * [`Writeable::write`]: crate::util::ser::Writeable::write
 	 * 
-	 * Note that update (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 * Note that monitor_update (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public update_persisted_channel(channel_funding_outpoint: OutPoint, update: ChannelMonitorUpdate|null, data: ChannelMonitor, update_id: MonitorUpdateId): ChannelMonitorUpdateStatus {
-		const ret: ChannelMonitorUpdateStatus = bindings.Persist_update_persisted_channel(this.ptr, CommonBase.get_ptr_of(channel_funding_outpoint), update == null ? 0n : CommonBase.get_ptr_of(update), CommonBase.get_ptr_of(data), CommonBase.get_ptr_of(update_id));
-		CommonBase.add_ref_from(this, channel_funding_outpoint);
-		CommonBase.add_ref_from(this, update);
-		CommonBase.add_ref_from(this, data);
-		CommonBase.add_ref_from(this, update_id);
+	public update_persisted_channel(channel_funding_outpoint: OutPoint, monitor_update: ChannelMonitorUpdate|null, monitor: ChannelMonitor): ChannelMonitorUpdateStatus {
+		const ret: ChannelMonitorUpdateStatus = bindings.Persist_update_persisted_channel(this.ptr, CommonBase.get_ptr_of(channel_funding_outpoint), monitor_update == null ? 0n : CommonBase.get_ptr_of(monitor_update), CommonBase.get_ptr_of(monitor));
+		CommonBase.add_ref_from(this, monitor);
 		return ret;
 	}
 
@@ -928,7 +966,6 @@ export class Persist extends CommonBase {
 	 */
 	public archive_persisted_channel(channel_funding_outpoint: OutPoint): void {
 		bindings.Persist_archive_persisted_channel(this.ptr, CommonBase.get_ptr_of(channel_funding_outpoint));
-		CommonBase.add_ref_from(this, channel_funding_outpoint);
 	}
 
 }
