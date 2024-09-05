@@ -41,7 +41,6 @@ public class StaticPaymentOutputDescriptor extends CommonBase {
 		bindings.StaticPaymentOutputDescriptor_set_outpoint(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -132,7 +131,6 @@ public class StaticPaymentOutputDescriptor extends CommonBase {
 		bindings.StaticPaymentOutputDescriptor_set_channel_transaction_parameters(this.ptr, val == null ? 0 : val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -150,8 +148,6 @@ public class StaticPaymentOutputDescriptor extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.StaticPaymentOutputDescriptor ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.StaticPaymentOutputDescriptor(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(outpoint_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_transaction_parameters_arg); };
 		return ret_hu_conv;
 	}
 

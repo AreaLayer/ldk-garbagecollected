@@ -80,8 +80,6 @@ public class ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ : CommonBas
 		if (ret >= 0 && ret <= 4096) { return null; }
 		ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ ret_hu_conv = new ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(a); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(c); };
 		return ret_hu_conv;
 	}
 

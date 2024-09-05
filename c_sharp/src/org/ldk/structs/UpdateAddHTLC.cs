@@ -36,7 +36,6 @@ public class UpdateAddHTLC : CommonBase {
 		bindings.UpdateAddHTLC_set_channel_id(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -138,7 +137,6 @@ public class UpdateAddHTLC : CommonBase {
 		bindings.UpdateAddHTLC_set_skimmed_fee_msat(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -160,7 +158,6 @@ public class UpdateAddHTLC : CommonBase {
 		bindings.UpdateAddHTLC_set_onion_routing_packet(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -207,9 +204,6 @@ public class UpdateAddHTLC : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.UpdateAddHTLC ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.UpdateAddHTLC(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(skimmed_fee_msat_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(onion_routing_packet_arg); };
 		return ret_hu_conv;
 	}
 

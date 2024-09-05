@@ -83,8 +83,6 @@ public class ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ extends Com
 		if (ret >= 0 && ret <= 4096) { return null; }
 		ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ ret_hu_conv = new ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(a); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(c); };
 		return ret_hu_conv;
 	}
 

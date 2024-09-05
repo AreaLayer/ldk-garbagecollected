@@ -116,6 +116,8 @@ public class CandidateRouteHop extends CommonBase {
 	 * 
 	 * This primarily exists to track that we need to included a blinded path at the end of our
 	 * [`Route`], even though it doesn't actually add an additional hop in the payment.
+	 * 
+	 * [`BlindedPayInfo`]: crate::blinded_path::payment::BlindedPayInfo
 	 */
 	public final static class OneHopBlinded extends CandidateRouteHop {
 		public final org.ldk.structs.OneHopBlindedPathCandidate one_hop_blinded;
@@ -154,7 +156,6 @@ public class CandidateRouteHop extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CandidateRouteHop ret_hu_conv = org.ldk.structs.CandidateRouteHop.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(a); };
 		return ret_hu_conv;
 	}
 
@@ -167,7 +168,6 @@ public class CandidateRouteHop extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CandidateRouteHop ret_hu_conv = org.ldk.structs.CandidateRouteHop.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(a); };
 		return ret_hu_conv;
 	}
 
@@ -180,7 +180,6 @@ public class CandidateRouteHop extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CandidateRouteHop ret_hu_conv = org.ldk.structs.CandidateRouteHop.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(a); };
 		return ret_hu_conv;
 	}
 
@@ -193,7 +192,6 @@ public class CandidateRouteHop extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CandidateRouteHop ret_hu_conv = org.ldk.structs.CandidateRouteHop.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(a); };
 		return ret_hu_conv;
 	}
 
@@ -206,7 +204,6 @@ public class CandidateRouteHop extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CandidateRouteHop ret_hu_conv = org.ldk.structs.CandidateRouteHop.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(a); };
 		return ret_hu_conv;
 	}
 

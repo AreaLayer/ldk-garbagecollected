@@ -35,7 +35,6 @@ public class PendingHTLCInfo : CommonBase {
 		bindings.PendingHTLCInfo_set_routing(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -107,7 +106,6 @@ public class PendingHTLCInfo : CommonBase {
 		bindings.PendingHTLCInfo_set_incoming_amt_msat(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -203,7 +201,6 @@ public class PendingHTLCInfo : CommonBase {
 		bindings.PendingHTLCInfo_set_skimmed_fee_msat(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -221,9 +218,6 @@ public class PendingHTLCInfo : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PendingHTLCInfo ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.PendingHTLCInfo(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(routing_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(incoming_amt_msat_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(skimmed_fee_msat_arg); };
 		return ret_hu_conv;
 	}
 

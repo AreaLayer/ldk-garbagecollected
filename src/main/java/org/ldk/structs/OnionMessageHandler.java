@@ -38,16 +38,6 @@ public class OnionMessageHandler extends CommonBase {
 	}
 	public static interface OnionMessageHandlerInterface {
 		/**
-		 * Because much of the lightning network does not yet support forwarding onion messages, we
-		 * may need to directly connect to a node which will forward a message for us. In such a case,
-		 * this method will return the set of nodes which need connection by node_id and the
-		 * corresponding socket addresses where they may accept incoming connections.
-		 * 
-		 * Thus, this method should be polled regularly to detect messages await such a direct
-		 * connection.
-		 */
-		TwoTuple_PublicKeyCVec_SocketAddressZZ[] get_and_clear_connections_needed();
-		/**
 		 * Handle an incoming `onion_message` message from the given peer.
 		 */
 		void handle_onion_message(byte[] peer_node_id, OnionMessage msg);
@@ -95,12 +85,6 @@ public class OnionMessageHandler extends CommonBase {
 	public static OnionMessageHandler new_impl(OnionMessageHandlerInterface arg) {
 		final LDKOnionMessageHandlerHolder impl_holder = new LDKOnionMessageHandlerHolder();
 		impl_holder.held = new OnionMessageHandler(new bindings.LDKOnionMessageHandler() {
-			@Override public long[] get_and_clear_connections_needed() {
-				TwoTuple_PublicKeyCVec_SocketAddressZZ[] ret = arg.get_and_clear_connections_needed();
-				Reference.reachabilityFence(arg);
-				long[] result = ret != null ? Arrays.stream(ret).mapToLong(ret_conv_40 -> ret_conv_40.clone_ptr()).toArray() : null;
-				return result;
-			}
 			@Override public void handle_onion_message(byte[] peer_node_id, long msg) {
 				org.ldk.structs.OnionMessage msg_hu_conv = null; if (msg < 0 || msg > 4096) { msg_hu_conv = new org.ldk.structs.OnionMessage(null, msg); }
 				arg.handle_onion_message(peer_node_id, msg_hu_conv);
@@ -142,29 +126,6 @@ public class OnionMessageHandler extends CommonBase {
 		});
 		return impl_holder.held;
 	}
-	/**
-	 * Because much of the lightning network does not yet support forwarding onion messages, we
-	 * may need to directly connect to a node which will forward a message for us. In such a case,
-	 * this method will return the set of nodes which need connection by node_id and the
-	 * corresponding socket addresses where they may accept incoming connections.
-	 * 
-	 * Thus, this method should be polled regularly to detect messages await such a direct
-	 * connection.
-	 */
-	public TwoTuple_PublicKeyCVec_SocketAddressZZ[] get_and_clear_connections_needed() {
-		long[] ret = bindings.OnionMessageHandler_get_and_clear_connections_needed(this.ptr);
-		Reference.reachabilityFence(this);
-		int ret_conv_40_len = ret.length;
-		TwoTuple_PublicKeyCVec_SocketAddressZZ[] ret_conv_40_arr = new TwoTuple_PublicKeyCVec_SocketAddressZZ[ret_conv_40_len];
-		for (int o = 0; o < ret_conv_40_len; o++) {
-			long ret_conv_40 = ret[o];
-			TwoTuple_PublicKeyCVec_SocketAddressZZ ret_conv_40_hu_conv = new TwoTuple_PublicKeyCVec_SocketAddressZZ(null, ret_conv_40);
-			if (ret_conv_40_hu_conv != null) { ret_conv_40_hu_conv.ptrs_to.add(this); };
-			ret_conv_40_arr[o] = ret_conv_40_hu_conv;
-		}
-		return ret_conv_40_arr;
-	}
-
 	/**
 	 * Handle an incoming `onion_message` message from the given peer.
 	 */

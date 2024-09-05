@@ -43,7 +43,6 @@ public class PhantomRouteHints : CommonBase {
 		bindings.PhantomRouteHints_set_channels(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_16 => val_conv_16.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		foreach (ChannelDetails val_conv_16 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_16); }; };
 	}
 
 	/**
@@ -97,7 +96,6 @@ public class PhantomRouteHints : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PhantomRouteHints ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.PhantomRouteHints(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		foreach (ChannelDetails channels_arg_conv_16 in channels_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channels_arg_conv_16); }; };
 		return ret_hu_conv;
 	}
 

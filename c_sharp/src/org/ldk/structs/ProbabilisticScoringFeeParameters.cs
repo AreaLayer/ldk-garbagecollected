@@ -471,7 +471,6 @@ public class ProbabilisticScoringFeeParameters : CommonBase {
 		bindings.ProbabilisticScoringFeeParameters_add_banned_from_list(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(node_ids, node_ids_conv_8 => node_ids_conv_8.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(node_ids);
-		foreach (NodeId node_ids_conv_8 in node_ids) { if (this != null) { this.ptrs_to.AddLast(node_ids_conv_8); }; };
 	}
 
 	/**

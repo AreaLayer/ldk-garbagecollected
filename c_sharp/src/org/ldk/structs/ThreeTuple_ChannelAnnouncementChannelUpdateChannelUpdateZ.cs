@@ -81,9 +81,6 @@ public class ThreeTuple_ChannelAnnouncementChannelUpdateChannelUpdateZ : CommonB
 		if (ret >= 0 && ret <= 4096) { return null; }
 		ThreeTuple_ChannelAnnouncementChannelUpdateChannelUpdateZ ret_hu_conv = new ThreeTuple_ChannelAnnouncementChannelUpdateChannelUpdateZ(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(a); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(b); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(c); };
 		return ret_hu_conv;
 	}
 

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
+using System.Runtime.InteropServices;
 using org.ldk.enums;
 using org.ldk.util;
 using org.ldk.structs;
@@ -54,10 +56,10 @@ namespace tests {
 		}
 
 		class TestPersister : PersistInterface {
-			public ChannelMonitorUpdateStatus persist_new_channel(OutPoint channel_id, ChannelMonitor data, MonitorUpdateId update_id) {
+			public ChannelMonitorUpdateStatus persist_new_channel(OutPoint channel_id, ChannelMonitor data) {
 				return ChannelMonitorUpdateStatus.LDKChannelMonitorUpdateStatus_Completed;
 			}
-			public ChannelMonitorUpdateStatus update_persisted_channel(OutPoint channel_id, ChannelMonitorUpdate update, ChannelMonitor data, MonitorUpdateId update_id) {
+			public ChannelMonitorUpdateStatus update_persisted_channel(OutPoint channel_id, ChannelMonitorUpdate update, ChannelMonitor data) {
 				return ChannelMonitorUpdateStatus.LDKChannelMonitorUpdateStatus_Completed;
 			}
 			public void archive_persisted_channel(OutPoint channel_id) { }
@@ -65,8 +67,9 @@ namespace tests {
 
 		class TestEventHandler : EventHandlerInterface {
 			public List<Event> events = new List<Event>();
-			public void handle_event(Event ev) {
+			public Result_NoneReplayEventZ handle_event(Event ev) {
 				events.Add(ev);
+				return Result_NoneReplayEventZ.ok();
 			}
 		}
 		static Event get_event(ChannelManager manager) {
@@ -90,23 +93,26 @@ namespace tests {
 			public Result_RouteLightningErrorZ find_route_with_id(byte[] payer, RouteParameters param, ChannelDetails[] chans, InFlightHtlcs htlcs, byte[] payment_hash, byte[] payment_id) {
 				return inner.as_Router().find_route_with_id(payer, param, chans, htlcs, payment_hash, payment_id);
 			}
-			public Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, ReceiveTlvs tlvs, long amount_msats) {
-				Result_C2Tuple_BlindedPayInfoBlindedPathZNoneZ info_path = UtilMethods.BlindedPath_one_hop_for_payment(recipient, tlvs, 40, entropy);
-				TwoTuple_BlindedPayInfoBlindedPathZ hop = ((Result_C2Tuple_BlindedPayInfoBlindedPathZNoneZ.Result_C2Tuple_BlindedPayInfoBlindedPathZNoneZ_OK)info_path).res;
-				TwoTuple_BlindedPayInfoBlindedPathZ[] hops = new TwoTuple_BlindedPayInfoBlindedPathZ[1];
+			public Result_CVec_BlindedPaymentPathZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, ReceiveTlvs tlvs, long amount_msats) {
+				Result_BlindedPaymentPathNoneZ info_path = BlindedPaymentPath.one_hop(recipient, tlvs, 40, entropy);
+				BlindedPaymentPath hop = ((Result_BlindedPaymentPathNoneZ.Result_BlindedPaymentPathNoneZ_OK)info_path).res;
+				BlindedPaymentPath[] hops = new BlindedPaymentPath[1];
 				hops[0] = hop;
-				return Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ.ok(hops);
+				return Result_CVec_BlindedPaymentPathZNoneZ.ok(hops);
 			}
 
 			public Result_OnionMessagePathNoneZ find_path(byte[] sender, byte[][] peers, Destination dest) {
 				return inner.as_MessageRouter().find_path(sender, peers, dest);
 			}
-			public Result_CVec_BlindedPathZNoneZ create_blinded_paths(byte[] recipient, byte[][] peers) {
-				Result_BlindedPathNoneZ path = BlindedPath.one_hop_for_message(recipient, entropy);
+			public Result_CVec_BlindedMessagePathZNoneZ create_blinded_paths(byte[] recipient, MessageContext ctx, byte[][] peers) {
+				Result_BlindedMessagePathNoneZ path = BlindedMessagePath.one_hop(recipient, ctx, entropy);
 				Assert(path.is_ok(), 2);
-				BlindedPath[] paths = new BlindedPath[1];
-				paths[0] = ((Result_BlindedPathNoneZ.Result_BlindedPathNoneZ_OK)path).res;
-				return Result_CVec_BlindedPathZNoneZ.ok(paths);
+				BlindedMessagePath[] paths = new BlindedMessagePath[1];
+				paths[0] = ((Result_BlindedMessagePathNoneZ.Result_BlindedMessagePathNoneZ_OK)path).res;
+				return Result_CVec_BlindedMessagePathZNoneZ.ok(paths);
+			}
+			public Result_CVec_BlindedMessagePathZNoneZ create_compact_blinded_paths(byte[] recipient, MessageContext ctx, MessageForwardNode[] peers) {
+				return this.create_blinded_paths(recipient, ctx, new byte[0][]);
 			}
 		}
 
@@ -145,7 +151,7 @@ namespace tests {
 
 				manager = ChannelManager.of(estimator, chain_monitor.as_Watch(), ldk_broadcaster, router, logger, keys.as_EntropySource(), keys.as_NodeSigner(), keys.as_SignerProvider(), config, chain_params, 42);
 
-				messenger = OnionMessenger.of(keys.as_EntropySource(), keys.as_NodeSigner(), logger, manager.as_NodeIdLookUp(), MessageRouter.new_impl(router_wrapper), manager.as_OffersMessageHandler(), IgnoringMessageHandler.of().as_CustomOnionMessageHandler());
+				messenger = OnionMessenger.of(keys.as_EntropySource(), keys.as_NodeSigner(), logger, manager.as_NodeIdLookUp(), MessageRouter.new_impl(router_wrapper), manager.as_OffersMessageHandler(), IgnoringMessageHandler.of().as_AsyncPaymentsMessageHandler(), IgnoringMessageHandler.of().as_CustomOnionMessageHandler());
 			}
 		}
 
@@ -305,7 +311,7 @@ namespace tests {
 
 			// Now that we have a channel, pay using a BOLT12 offer!
 
-			Result_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ builder_res = node_b.manager.create_offer_builder();
+			Result_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ builder_res = node_b.manager.create_offer_builder(Option_u64Z.none());
 			Assert(builder_res.is_ok(), 29);
 			Result_OfferBolt12SemanticErrorZ offer_res = ((Result_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ.Result_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ_OK)builder_res).res.build();
 			Assert(offer_res.is_ok(), 30);
@@ -346,11 +352,106 @@ namespace tests {
 			Assert(offer.to_str() == offerStr, 109);
 		}
 
+		static Offer BuildOffer(Nonce nonce, KeysManager keys) {
+			Result_PublicKeyNoneZ id_res = keys.as_NodeSigner().get_node_id(Recipient.LDKRecipient_Node);
+			byte[] node_id = ((Result_PublicKeyNoneZ.Result_PublicKeyNoneZ_OK)id_res).res;
+			ExpandedKey inb_key = ExpandedKey.of(keys.as_NodeSigner().get_inbound_payment_key_material());
+			OfferWithDerivedMetadataBuilder builder = OfferWithDerivedMetadataBuilder.deriving_signing_pubkey(node_id, inb_key, nonce);
+			Result_OfferBolt12SemanticErrorZ res = builder.build();
+			return ((Result_OfferBolt12SemanticErrorZ.Result_OfferBolt12SemanticErrorZ_OK) res).res;
+		}
+
+		static InvoiceRequestWithDerivedPayerIdBuilder InvReqBuilderFromOffer(Offer offer, KeysManager keys) {
+			ExpandedKey inb_key = ExpandedKey.of(keys.as_NodeSigner().get_inbound_payment_key_material());
+			Nonce nonce = Nonce.from_entropy_source(keys.as_EntropySource());
+			Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ builder_res =
+				offer.request_invoice_deriving_payer_id(inb_key, nonce, new byte[32]);
+			InvoiceRequestWithDerivedPayerIdBuilder builder =
+				((Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ.Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ_OK)builder_res).res;
+			return builder;
+		}
+
+		static InvoiceRequest BuildInvReq(InvoiceRequestWithDerivedPayerIdBuilder builder) {
+			Result_InvoiceRequestBolt12SemanticErrorZ res = builder.build_and_sign();
+			return ((Result_InvoiceRequestBolt12SemanticErrorZ.Result_InvoiceRequestBolt12SemanticErrorZ_OK)res).res;
+		}
+
+		static InvoiceWithDerivedSigningPubkeyBuilder InvBuilderFromInvReq(Nonce receiver_nonce, InvoiceRequest invreq, KeysManager keys) {
+			ExpandedKey inb_key = ExpandedKey.of(keys.as_NodeSigner().get_inbound_payment_key_material());
+			Result_VerifiedInvoiceRequestNoneZ verified_res = invreq.verify_using_recipient_data(receiver_nonce, inb_key);
+			VerifiedInvoiceRequest verified_invreq =
+				((Result_VerifiedInvoiceRequestNoneZ.Result_VerifiedInvoiceRequestNoneZ_OK)verified_res).res;
+			Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ builder_res =
+				verified_invreq.respond_using_derived_keys(new BlindedPaymentPath[0], new byte[32]);
+			InvoiceWithDerivedSigningPubkeyBuilder builder =
+				((Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ.Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ_OK)builder_res).res;
+			return builder;
+		}
+
+		static InvoiceRequestWithDerivedPayerIdBuilder InvReqBuilder(Nonce receiver_nonce, KeysManager payer, KeysManager recipient) {
+			// Under the hood, InvoiceRequestWithDerivedPayerIdBuilder holds a reference to some
+			// fields in the Offer. Thus, we build an Offer here, then return only the builder,
+			// hoping the GC will cause us to free the Offer and use-after-free.
+			Offer offer = BuildOffer(receiver_nonce, payer);
+			return InvReqBuilderFromOffer(offer, recipient);
+		}
+
+		static InvoiceWithDerivedSigningPubkeyBuilder InvBuilderFromInvReqBuilder(Nonce receiver_nonce, InvoiceRequestWithDerivedPayerIdBuilder builder, KeysManager payer, KeysManager recipient) {
+			// Same as above, but for the Invoice itself
+			InvoiceRequest invreq = BuildInvReq(builder);
+			return InvBuilderFromInvReq(receiver_nonce, invreq, recipient);
+		}
+
+		static void Bolt12RespondTest() {
+			// Build an Invoice out of an Offer, step by step. We do each step in its own function
+			// to give the background GC a chance to free things out from under us.
+			KeysManager sender = KeysManager.of(new byte[32], 42, 42);
+			byte[] receiver_keys = new byte[32];
+			receiver_keys[10] = 42;
+			KeysManager receiver = KeysManager.of(receiver_keys, 42, 42);
+
+			// Run the GC between each step to see if the reference the builders hold to the
+			// original Offer/InvoiceRequest is freed out from under us before building.
+			Nonce receiver_nonce = Nonce.from_entropy_source(receiver.as_EntropySource());
+			InvoiceRequestWithDerivedPayerIdBuilder invreq_builder = InvReqBuilder(receiver_nonce, sender, receiver);
+			System.GC.Collect();
+			GC.WaitForPendingFinalizers();
+			InvoiceWithDerivedSigningPubkeyBuilder inv_builder = InvBuilderFromInvReqBuilder(receiver_nonce, invreq_builder, sender, receiver);
+			System.GC.Collect();
+			GC.WaitForPendingFinalizers();
+			Result_Bolt12InvoiceBolt12SemanticErrorZ inv_res = inv_builder.build_and_sign();
+			Assert(inv_res.is_ok(), 200);
+		}
+
+		static void GCLoop() {
+			while (Thread.CurrentThread.IsAlive) {
+				System.GC.Collect();
+				GC.WaitForPendingFinalizers();
+				try {
+					Thread.Sleep(new TimeSpan(1));
+				} catch (ThreadInterruptedException _) {
+					break;
+				}
+			}
+		}
+
 		static void Main(string[] args) {
+			Thread gc_thread = null;
+			if (!RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) {
+				// No idea why this dies on macOS, but it does, so disable it.
+				gc_thread = new Thread(GCLoop);
+				gc_thread.Start();
+			}
+
 			SimpleConstructionTest();
 			SimpleTraitTest();
 			NodeTest();
 			Bolt12ParseTest();
+
+			if (!RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) {
+				gc_thread.Interrupt();
+				gc_thread.Join();
+			}
 
 			Console.WriteLine("\n\nTESTS PASSED\n\n");
 			System.GC.Collect();

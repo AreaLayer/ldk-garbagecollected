@@ -62,7 +62,6 @@ public class ProbabilisticScorer extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ProbabilisticScorer ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ProbabilisticScorer(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(decay_params); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(network_graph); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(logger); };
 		return ret_hu_conv;
@@ -218,7 +217,6 @@ public class ProbabilisticScorer extends CommonBase {
 		Reference.reachabilityFence(arg_c);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ProbabilisticScorerDecodeErrorZ ret_hu_conv = Result_ProbabilisticScorerDecodeErrorZ.constr_from_ptr(ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(arg_a); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(arg_b); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(arg_c); };
 		return ret_hu_conv;

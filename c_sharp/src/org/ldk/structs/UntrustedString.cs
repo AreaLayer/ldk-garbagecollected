@@ -15,6 +15,28 @@ public class UntrustedString : CommonBase {
 		if (ptr != 0) { bindings.UntrustedString_free(ptr); }
 	}
 
+	/**
+	 * Serialize the UntrustedString object into a byte array which can be read by UntrustedString_read
+	 */
+	public byte[] write() {
+		long ret = bindings.UntrustedString_write(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
+		return ret_conv;
+	}
+
+	/**
+	 * Read a UntrustedString from a byte array, created by UntrustedString_write
+	 */
+	public static Result_UntrustedStringDecodeErrorZ read(byte[] ser) {
+		long ret = bindings.UntrustedString_read(InternalUtils.encodeUint8Array(ser));
+		GC.KeepAlive(ser);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_UntrustedStringDecodeErrorZ ret_hu_conv = Result_UntrustedStringDecodeErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
 	public string get_a() {
 		long ret = bindings.UntrustedString_get_a(this.ptr);
 		GC.KeepAlive(this);
@@ -88,28 +110,6 @@ public class UntrustedString : CommonBase {
 	public override int GetHashCode() {
 		return (int)this.hash();
 	}
-	/**
-	 * Serialize the UntrustedString object into a byte array which can be read by UntrustedString_read
-	 */
-	public byte[] write() {
-		long ret = bindings.UntrustedString_write(this.ptr);
-		GC.KeepAlive(this);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
-		return ret_conv;
-	}
-
-	/**
-	 * Read a UntrustedString from a byte array, created by UntrustedString_write
-	 */
-	public static Result_UntrustedStringDecodeErrorZ read(byte[] ser) {
-		long ret = bindings.UntrustedString_read(InternalUtils.encodeUint8Array(ser));
-		GC.KeepAlive(ser);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_UntrustedStringDecodeErrorZ ret_hu_conv = Result_UntrustedStringDecodeErrorZ.constr_from_ptr(ret);
-		return ret_hu_conv;
-	}
-
 	/**
 	 * Get the string representation of a UntrustedString object
 	 */

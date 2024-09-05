@@ -360,7 +360,6 @@ public class ChannelMessageHandler : CommonBase {
 			Option_CVec_ThirtyTwoBytesZZ ret = arg.get_chain_hashes();
 				GC.KeepAlive(arg);
 			long result = ret.clone_ptr();
-			if (impl_holder.held != null) { impl_holder.held.ptrs_to.AddLast(ret); };
 			return result;
 		}
 	}

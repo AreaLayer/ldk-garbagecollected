@@ -80,8 +80,6 @@ public class ThreeTuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ : Com
 		if (ret >= 0 && ret <= 4096) { return null; }
 		ThreeTuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ ret_hu_conv = new ThreeTuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(b); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(c); };
 		return ret_hu_conv;
 	}
 

@@ -36,7 +36,6 @@ public class UnsignedNodeAnnouncement : CommonBase {
 		bindings.UnsignedNodeAnnouncement_set_features(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -78,7 +77,6 @@ public class UnsignedNodeAnnouncement : CommonBase {
 		bindings.UnsignedNodeAnnouncement_set_node_id(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -124,7 +122,6 @@ public class UnsignedNodeAnnouncement : CommonBase {
 		bindings.UnsignedNodeAnnouncement_set_alias(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -155,7 +152,6 @@ public class UnsignedNodeAnnouncement : CommonBase {
 		bindings.UnsignedNodeAnnouncement_set_addresses(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_15 => val_conv_15.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		foreach (SocketAddress val_conv_15 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_15); }; };
 	}
 
 	/**
@@ -230,10 +226,6 @@ public class UnsignedNodeAnnouncement : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.UnsignedNodeAnnouncement ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.UnsignedNodeAnnouncement(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(features_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(node_id_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(alias_arg); };
-		foreach (SocketAddress addresses_arg_conv_15 in addresses_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(addresses_arg_conv_15); }; };
 		return ret_hu_conv;
 	}
 

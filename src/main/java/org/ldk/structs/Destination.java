@@ -44,11 +44,11 @@ public class Destination extends CommonBase {
 	 * We're sending this onion message to a blinded path.
 	 */
 	public final static class BlindedPath extends Destination {
-		public final org.ldk.structs.BlindedPath blinded_path;
+		public final org.ldk.structs.BlindedMessagePath blinded_path;
 		private BlindedPath(long ptr, bindings.LDKDestination.BlindedPath obj) {
 			super(null, ptr);
 			long blinded_path = obj.blinded_path;
-			org.ldk.structs.BlindedPath blinded_path_hu_conv = null; if (blinded_path < 0 || blinded_path > 4096) { blinded_path_hu_conv = new org.ldk.structs.BlindedPath(null, blinded_path); }
+			org.ldk.structs.BlindedMessagePath blinded_path_hu_conv = null; if (blinded_path < 0 || blinded_path > 4096) { blinded_path_hu_conv = new org.ldk.structs.BlindedMessagePath(null, blinded_path); }
 			if (blinded_path_hu_conv != null) { blinded_path_hu_conv.ptrs_to.add(this); };
 			this.blinded_path = blinded_path_hu_conv;
 		}
@@ -86,13 +86,12 @@ public class Destination extends CommonBase {
 	/**
 	 * Utility method to constructs a new BlindedPath-variant Destination
 	 */
-	public static Destination blinded_path(org.ldk.structs.BlindedPath a) {
+	public static Destination blinded_path(org.ldk.structs.BlindedMessagePath a) {
 		long ret = bindings.Destination_blinded_path(a.ptr);
 		Reference.reachabilityFence(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Destination ret_hu_conv = org.ldk.structs.Destination.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(a); };
 		return ret_hu_conv;
 	}
 

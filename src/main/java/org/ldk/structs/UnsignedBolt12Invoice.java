@@ -56,6 +56,66 @@ public class UnsignedBolt12Invoice extends CommonBase {
 	}
 
 	/**
+	 * Duration since the Unix epoch when the invoice was created.
+	 */
+	public long created_at() {
+		long ret = bindings.UnsignedBolt12Invoice_created_at(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Duration since
+	 * [`Bolt12Invoice::created_at`]
+	 * when the invoice has expired and therefore should no longer be paid.
+	 */
+	public long relative_expiry() {
+		long ret = bindings.UnsignedBolt12Invoice_relative_expiry(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Whether the invoice has expired.
+	 */
+	public boolean is_expired() {
+		boolean ret = bindings.UnsignedBolt12Invoice_is_expired(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Fallback addresses for paying the invoice on-chain, in order of most-preferred to
+	 * least-preferred.
+	 */
+	public String[] fallbacks() {
+		String[] ret = bindings.UnsignedBolt12Invoice_fallbacks(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Features pertaining to paying an invoice.
+	 */
+	public Bolt12InvoiceFeatures invoice_features() {
+		long ret = bindings.UnsignedBolt12Invoice_invoice_features(this.ptr);
+		Reference.reachabilityFence(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Bolt12InvoiceFeatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Bolt12InvoiceFeatures(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * The public key corresponding to the key used to sign the invoice.
+	 */
+	public byte[] signing_pubkey() {
+		byte[] ret = bindings.UnsignedBolt12Invoice_signing_pubkey(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
 	 * The chains that may be used when paying a requested invoice.
 	 * 
 	 * From [`Offer::chains`]; `None` if the invoice was created in response to a [`Refund`].
@@ -204,18 +264,18 @@ public class UnsignedBolt12Invoice extends CommonBase {
 	 * 
 	 * [`Offer::paths`]: crate::offers::offer::Offer::paths
 	 */
-	public BlindedPath[] message_paths() {
+	public BlindedMessagePath[] message_paths() {
 		long[] ret = bindings.UnsignedBolt12Invoice_message_paths(this.ptr);
 		Reference.reachabilityFence(this);
-		int ret_conv_13_len = ret.length;
-		BlindedPath[] ret_conv_13_arr = new BlindedPath[ret_conv_13_len];
-		for (int n = 0; n < ret_conv_13_len; n++) {
-			long ret_conv_13 = ret[n];
-			org.ldk.structs.BlindedPath ret_conv_13_hu_conv = null; if (ret_conv_13 < 0 || ret_conv_13 > 4096) { ret_conv_13_hu_conv = new org.ldk.structs.BlindedPath(null, ret_conv_13); }
-			if (ret_conv_13_hu_conv != null) { ret_conv_13_hu_conv.ptrs_to.add(this); };
-			ret_conv_13_arr[n] = ret_conv_13_hu_conv;
+		int ret_conv_20_len = ret.length;
+		BlindedMessagePath[] ret_conv_20_arr = new BlindedMessagePath[ret_conv_20_len];
+		for (int u = 0; u < ret_conv_20_len; u++) {
+			long ret_conv_20 = ret[u];
+			org.ldk.structs.BlindedMessagePath ret_conv_20_hu_conv = null; if (ret_conv_20 < 0 || ret_conv_20 > 4096) { ret_conv_20_hu_conv = new org.ldk.structs.BlindedMessagePath(null, ret_conv_20); }
+			if (ret_conv_20_hu_conv != null) { ret_conv_20_hu_conv.ptrs_to.add(this); };
+			ret_conv_20_arr[u] = ret_conv_20_hu_conv;
 		}
-		return ret_conv_13_arr;
+		return ret_conv_20_arr;
 	}
 
 	/**
@@ -304,34 +364,6 @@ public class UnsignedBolt12Invoice extends CommonBase {
 	}
 
 	/**
-	 * Duration since the Unix epoch when the invoice was created.
-	 */
-	public long created_at() {
-		long ret = bindings.UnsignedBolt12Invoice_created_at(this.ptr);
-		Reference.reachabilityFence(this);
-		return ret;
-	}
-
-	/**
-	 * Duration since [`Bolt12Invoice::created_at`] when the invoice has expired and therefore
-	 * should no longer be paid.
-	 */
-	public long relative_expiry() {
-		long ret = bindings.UnsignedBolt12Invoice_relative_expiry(this.ptr);
-		Reference.reachabilityFence(this);
-		return ret;
-	}
-
-	/**
-	 * Whether the invoice has expired.
-	 */
-	public boolean is_expired() {
-		boolean ret = bindings.UnsignedBolt12Invoice_is_expired(this.ptr);
-		Reference.reachabilityFence(this);
-		return ret;
-	}
-
-	/**
 	 * SHA256 hash of the payment preimage that will be given in return for paying the invoice.
 	 */
 	public byte[] payment_hash() {
@@ -345,27 +377,6 @@ public class UnsignedBolt12Invoice extends CommonBase {
 	 */
 	public long amount_msats() {
 		long ret = bindings.UnsignedBolt12Invoice_amount_msats(this.ptr);
-		Reference.reachabilityFence(this);
-		return ret;
-	}
-
-	/**
-	 * Features pertaining to paying an invoice.
-	 */
-	public Bolt12InvoiceFeatures invoice_features() {
-		long ret = bindings.UnsignedBolt12Invoice_invoice_features(this.ptr);
-		Reference.reachabilityFence(this);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.Bolt12InvoiceFeatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Bolt12InvoiceFeatures(null, ret); }
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
-		return ret_hu_conv;
-	}
-
-	/**
-	 * The public key corresponding to the key used to sign the invoice.
-	 */
-	public byte[] signing_pubkey() {
-		byte[] ret = bindings.UnsignedBolt12Invoice_signing_pubkey(this.ptr);
 		Reference.reachabilityFence(this);
 		return ret;
 	}

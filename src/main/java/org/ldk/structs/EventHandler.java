@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
  * 
  * An async variation also exists for implementations of [`EventsProvider`] that support async
  * event handling. The async event handler should satisfy the generic bounds: `F:
- * core::future::Future, H: Fn(Event) -> F`.
+ * core::future::Future<Output = Result<(), ReplayEvent>>, H: Fn(Event) -> F`.
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class EventHandler extends CommonBase {
@@ -46,17 +46,19 @@ public class EventHandler extends CommonBase {
 		 * 
 		 * See [`EventsProvider`] for details that must be considered when implementing this method.
 		 */
-		void handle_event(Event event);
+		Result_NoneReplayEventZ handle_event(Event event);
 	}
 	private static class LDKEventHandlerHolder { EventHandler held; }
 	public static EventHandler new_impl(EventHandlerInterface arg) {
 		final LDKEventHandlerHolder impl_holder = new LDKEventHandlerHolder();
 		impl_holder.held = new EventHandler(new bindings.LDKEventHandler() {
-			@Override public void handle_event(long event) {
+			@Override public long handle_event(long event) {
 				org.ldk.structs.Event event_hu_conv = org.ldk.structs.Event.constr_from_ptr(event);
 				if (event_hu_conv != null) { event_hu_conv.ptrs_to.add(this); };
-				arg.handle_event(event_hu_conv);
+				Result_NoneReplayEventZ ret = arg.handle_event(event_hu_conv);
 				Reference.reachabilityFence(arg);
+				long result = ret.clone_ptr();
+				return result;
 			}
 		});
 		return impl_holder.held;
@@ -66,11 +68,13 @@ public class EventHandler extends CommonBase {
 	 * 
 	 * See [`EventsProvider`] for details that must be considered when implementing this method.
 	 */
-	public void handle_event(org.ldk.structs.Event event) {
-		bindings.EventHandler_handle_event(this.ptr, event.ptr);
+	public Result_NoneReplayEventZ handle_event(org.ldk.structs.Event event) {
+		long ret = bindings.EventHandler_handle_event(this.ptr, event.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(event);
-		if (this != null) { this.ptrs_to.add(event); };
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_NoneReplayEventZ ret_hu_conv = Result_NoneReplayEventZ.constr_from_ptr(ret);
+		return ret_hu_conv;
 	}
 
 }

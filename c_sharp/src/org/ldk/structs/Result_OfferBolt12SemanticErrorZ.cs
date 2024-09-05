@@ -43,7 +43,6 @@ public class Result_OfferBolt12SemanticErrorZ : CommonBase {
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_OfferBolt12SemanticErrorZ ret_hu_conv = Result_OfferBolt12SemanticErrorZ.constr_from_ptr(ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(o); };
 		return ret_hu_conv;
 	}
 

@@ -111,18 +111,18 @@ public class Refund extends CommonBase {
 	 * Paths to the sender originating from publicly reachable nodes. Blinded paths provide sender
 	 * privacy by obfuscating its node id.
 	 */
-	public BlindedPath[] paths() {
+	public BlindedMessagePath[] paths() {
 		long[] ret = bindings.Refund_paths(this.ptr);
 		Reference.reachabilityFence(this);
-		int ret_conv_13_len = ret.length;
-		BlindedPath[] ret_conv_13_arr = new BlindedPath[ret_conv_13_len];
-		for (int n = 0; n < ret_conv_13_len; n++) {
-			long ret_conv_13 = ret[n];
-			org.ldk.structs.BlindedPath ret_conv_13_hu_conv = null; if (ret_conv_13 < 0 || ret_conv_13 > 4096) { ret_conv_13_hu_conv = new org.ldk.structs.BlindedPath(null, ret_conv_13); }
-			if (ret_conv_13_hu_conv != null) { ret_conv_13_hu_conv.ptrs_to.add(this); };
-			ret_conv_13_arr[n] = ret_conv_13_hu_conv;
+		int ret_conv_20_len = ret.length;
+		BlindedMessagePath[] ret_conv_20_arr = new BlindedMessagePath[ret_conv_20_len];
+		for (int u = 0; u < ret_conv_20_len; u++) {
+			long ret_conv_20 = ret[u];
+			org.ldk.structs.BlindedMessagePath ret_conv_20_hu_conv = null; if (ret_conv_20 < 0 || ret_conv_20 > 4096) { ret_conv_20_hu_conv = new org.ldk.structs.BlindedMessagePath(null, ret_conv_20); }
+			if (ret_conv_20_hu_conv != null) { ret_conv_20_hu_conv.ptrs_to.add(this); };
+			ret_conv_20_arr[u] = ret_conv_20_hu_conv;
 		}
-		return ret_conv_13_arr;
+		return ret_conv_20_arr;
 	}
 
 	/**
@@ -220,6 +220,17 @@ public class Refund extends CommonBase {
 	@Override public int hashCode() {
 		return (int)this.hash();
 	}
+	/**
+	 * Read a Refund from a byte array, created by Refund_write
+	 */
+	public static Result_RefundDecodeErrorZ read(byte[] ser) {
+		long ret = bindings.Refund_read(ser);
+		Reference.reachabilityFence(ser);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_RefundDecodeErrorZ ret_hu_conv = Result_RefundDecodeErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
 	/**
 	 * Serialize the Refund object into a byte array which can be read by Refund_read
 	 */

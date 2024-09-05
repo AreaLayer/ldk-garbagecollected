@@ -55,7 +55,6 @@ public class Result_CVec_UtxoZNoneZ extends CommonBase {
 		Reference.reachabilityFence(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CVec_UtxoZNoneZ ret_hu_conv = Result_CVec_UtxoZNoneZ.constr_from_ptr(ret);
-		for (Utxo o_conv_6: o) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(o_conv_6); }; };
 		return ret_hu_conv;
 	}
 

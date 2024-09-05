@@ -36,7 +36,6 @@ public class RouteParameters : CommonBase {
 		bindings.RouteParameters_set_payment_params(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -86,7 +85,6 @@ public class RouteParameters : CommonBase {
 		bindings.RouteParameters_set_max_total_routing_fee_msat(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -100,8 +98,6 @@ public class RouteParameters : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.RouteParameters ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.RouteParameters(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(payment_params_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(max_total_routing_fee_msat_arg); };
 		return ret_hu_conv;
 	}
 
@@ -164,7 +160,22 @@ public class RouteParameters : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.RouteParameters ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.RouteParameters(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(payment_params); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Sets the maximum number of hops that can be included in a payment path, based on the provided
+	 * [`RecipientOnionFields`] and blinded paths.
+	 */
+	public Result_NoneNoneZ set_max_path_length(org.ldk.structs.RecipientOnionFields recipient_onion, bool is_keysend, int best_block_height) {
+		long ret = bindings.RouteParameters_set_max_path_length(this.ptr, recipient_onion.ptr, is_keysend, best_block_height);
+		GC.KeepAlive(this);
+		GC.KeepAlive(recipient_onion);
+		GC.KeepAlive(is_keysend);
+		GC.KeepAlive(best_block_height);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_NoneNoneZ ret_hu_conv = Result_NoneNoneZ.constr_from_ptr(ret);
+		if (this != null) { this.ptrs_to.AddLast(recipient_onion); };
 		return ret_hu_conv;
 	}
 

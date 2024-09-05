@@ -150,8 +150,6 @@ public class Watch extends CommonBase {
 		Reference.reachabilityFence(monitor);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ChannelMonitorUpdateStatusNoneZ ret_hu_conv = Result_ChannelMonitorUpdateStatusNoneZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.add(funding_txo); };
-		if (this != null) { this.ptrs_to.add(monitor); };
 		return ret_hu_conv;
 	}
 
@@ -177,7 +175,6 @@ public class Watch extends CommonBase {
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(funding_txo);
 		Reference.reachabilityFence(update);
-		if (this != null) { this.ptrs_to.add(funding_txo); };
 		if (this != null) { this.ptrs_to.add(update); };
 		return ret;
 	}

@@ -16,7 +16,7 @@ namespace org { namespace ldk { namespace structs {
  * Offers may be denominated in currency other than bitcoin but are ultimately paid using the
  * latter.
  * 
- * Through the use of [`BlindedPath`]s, offers provide recipient privacy.
+ * Through the use of [`BlindedMessagePath`]s, offers provide recipient privacy.
  * 
  * [`InvoiceRequest`]: crate::offers::invoice_request::InvoiceRequest
  * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
@@ -150,20 +150,20 @@ public class Offer : CommonBase {
 	 * Paths to the recipient originating from publicly reachable nodes. Blinded paths provide
 	 * recipient privacy by obfuscating its node id.
 	 */
-	public BlindedPath[] paths() {
+	public BlindedMessagePath[] paths() {
 		long ret = bindings.Offer_paths(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		int ret_conv_13_len = InternalUtils.getArrayLength(ret);
-		BlindedPath[] ret_conv_13_arr = new BlindedPath[ret_conv_13_len];
-		for (int n = 0; n < ret_conv_13_len; n++) {
-			long ret_conv_13 = InternalUtils.getU64ArrayElem(ret, n);
-			org.ldk.structs.BlindedPath ret_conv_13_hu_conv = null; if (ret_conv_13 < 0 || ret_conv_13 > 4096) { ret_conv_13_hu_conv = new org.ldk.structs.BlindedPath(null, ret_conv_13); }
-			if (ret_conv_13_hu_conv != null) { ret_conv_13_hu_conv.ptrs_to.AddLast(this); };
-			ret_conv_13_arr[n] = ret_conv_13_hu_conv;
+		int ret_conv_20_len = InternalUtils.getArrayLength(ret);
+		BlindedMessagePath[] ret_conv_20_arr = new BlindedMessagePath[ret_conv_20_len];
+		for (int u = 0; u < ret_conv_20_len; u++) {
+			long ret_conv_20 = InternalUtils.getU64ArrayElem(ret, u);
+			org.ldk.structs.BlindedMessagePath ret_conv_20_hu_conv = null; if (ret_conv_20 < 0 || ret_conv_20 > 4096) { ret_conv_20_hu_conv = new org.ldk.structs.BlindedMessagePath(null, ret_conv_20); }
+			if (ret_conv_20_hu_conv != null) { ret_conv_20_hu_conv.ptrs_to.AddLast(this); };
+			ret_conv_20_arr[u] = ret_conv_20_hu_conv;
 		}
 		bindings.free_buffer(ret);
-		return ret_conv_13_arr;
+		return ret_conv_20_arr;
 	}
 
 	/**
@@ -258,8 +258,9 @@ public class Offer : CommonBase {
 	 * - derives the [`InvoiceRequest::payer_id`] such that a different key can be used for each
 	 * request,
 	 * - sets [`InvoiceRequest::payer_metadata`] when [`InvoiceRequestBuilder::build`] is called
-	 * such that it can be used by [`Bolt12Invoice::verify`] to determine if the invoice was
-	 * requested using a base [`ExpandedKey`] from which the payer id was derived, and
+	 * such that it can be used by [`Bolt12Invoice::verify_using_metadata`] to determine if the
+	 * invoice was requested using a base [`ExpandedKey`] from which the payer id was derived,
+	 * and
 	 * - includes the [`PaymentId`] encrypted in [`InvoiceRequest::payer_metadata`] so that it can
 	 * be used when sending the payment for the requested invoice.
 	 * 
@@ -267,19 +268,18 @@ public class Offer : CommonBase {
 	 * 
 	 * [`InvoiceRequest::payer_id`]: crate::offers::invoice_request::InvoiceRequest::payer_id
 	 * [`InvoiceRequest::payer_metadata`]: crate::offers::invoice_request::InvoiceRequest::payer_metadata
-	 * [`Bolt12Invoice::verify`]: crate::offers::invoice::Bolt12Invoice::verify
+	 * [`Bolt12Invoice::verify_using_metadata`]: crate::offers::invoice::Bolt12Invoice::verify_using_metadata
 	 * [`ExpandedKey`]: crate::ln::inbound_payment::ExpandedKey
 	 */
-	public Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ request_invoice_deriving_payer_id(org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.EntropySource entropy_source, byte[] payment_id) {
-		long ret = bindings.Offer_request_invoice_deriving_payer_id(this.ptr, expanded_key.ptr, entropy_source.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
+	public Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ request_invoice_deriving_payer_id(org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.Nonce nonce, byte[] payment_id) {
+		long ret = bindings.Offer_request_invoice_deriving_payer_id(this.ptr, expanded_key.ptr, nonce.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(expanded_key);
-		GC.KeepAlive(entropy_source);
+		GC.KeepAlive(nonce);
 		GC.KeepAlive(payment_id);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ ret_hu_conv = Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
 		if (this != null) { this.ptrs_to.AddLast(expanded_key); };
-		if (this != null) { this.ptrs_to.AddLast(entropy_source); };
 		return ret_hu_conv;
 	}
 
@@ -291,17 +291,16 @@ public class Offer : CommonBase {
 	 * 
 	 * [`InvoiceRequest::payer_id`]: crate::offers::invoice_request::InvoiceRequest::payer_id
 	 */
-	public Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ request_invoice_deriving_metadata(byte[] payer_id, org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.EntropySource entropy_source, byte[] payment_id) {
-		long ret = bindings.Offer_request_invoice_deriving_metadata(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payer_id, 33)), expanded_key.ptr, entropy_source.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
+	public Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ request_invoice_deriving_metadata(byte[] payer_id, org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.Nonce nonce, byte[] payment_id) {
+		long ret = bindings.Offer_request_invoice_deriving_metadata(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payer_id, 33)), expanded_key.ptr, nonce.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(payer_id);
 		GC.KeepAlive(expanded_key);
-		GC.KeepAlive(entropy_source);
+		GC.KeepAlive(nonce);
 		GC.KeepAlive(payment_id);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ ret_hu_conv = Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
 		if (this != null) { this.ptrs_to.AddLast(expanded_key); };
-		if (this != null) { this.ptrs_to.AddLast(entropy_source); };
 		return ret_hu_conv;
 	}
 
@@ -342,6 +341,17 @@ public class Offer : CommonBase {
 	public override int GetHashCode() {
 		return (int)this.hash();
 	}
+	/**
+	 * Read a Offer from a byte array, created by Offer_write
+	 */
+	public static Result_OfferDecodeErrorZ read(byte[] ser) {
+		long ret = bindings.Offer_read(InternalUtils.encodeUint8Array(ser));
+		GC.KeepAlive(ser);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_OfferDecodeErrorZ ret_hu_conv = Result_OfferDecodeErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
 	/**
 	 * Serialize the Offer object into a byte array which can be read by Offer_read
 	 */

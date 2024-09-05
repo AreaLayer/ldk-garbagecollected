@@ -60,8 +60,8 @@ class HumanObjectPeerTestInstance {
                 @Override public Result_ThirtyTwoBytesNoneZ ecdh(Recipient recipient, byte[] other_key, Option_BigEndianScalarZ tweak) {
                     return underlying_ns.ecdh(recipient, other_key, tweak);
                 }
-                @Override public Result_RecoverableSignatureNoneZ sign_invoice(byte[] hrp_bytes, UInt5[] invoice_data, Recipient recipient) {
-                    return underlying_ns.sign_invoice(hrp_bytes, invoice_data, recipient);
+                @Override public Result_RecoverableSignatureNoneZ sign_invoice(RawBolt11Invoice invoice, Recipient recipient) {
+                    return underlying_ns.sign_invoice(invoice, recipient);
                 }
                 @Override public Result_SchnorrSignatureNoneZ sign_bolt12_invoice_request(UnsignedInvoiceRequest invoice_request) {
                     return underlying_ns.sign_bolt12_invoice_request(invoice_request);
@@ -84,23 +84,26 @@ class HumanObjectPeerTestInstance {
                     return underlying_sp.generate_channel_keys_id(inbound, channel_value_satoshis, user_channel_id);
                 }
                 @Override
-                public WriteableEcdsaChannelSigner derive_channel_signer(long channel_value_satoshis, byte[] channel_keys_id) {
+                public EcdsaChannelSigner derive_channel_signer(long channel_value_satoshis, byte[] channel_keys_id) {
                     if (!use_full_km_wrapper) {
-                        WriteableEcdsaChannelSigner underlying_signer = underlying_sp.derive_channel_signer(channel_value_satoshis, channel_keys_id);
+                        EcdsaChannelSigner underlying_signer = underlying_sp.derive_channel_signer(channel_value_satoshis, channel_keys_id);
                         must_free_objs.add(new WeakReference<>(underlying_signer));
                         return underlying_signer;
                     } else {
-                        WriteableEcdsaChannelSigner underlying_wecs = underlying_sp.derive_channel_signer(channel_value_satoshis, channel_keys_id);
-                        EcdsaChannelSigner underlying_ecs = underlying_wecs.get_ecdsa_channel_signer();
+                        EcdsaChannelSigner underlying_ecs = underlying_sp.derive_channel_signer(channel_value_satoshis, channel_keys_id);
                         ChannelSigner underlying_cs = underlying_ecs.get_channel_signer();
                         ChannelSigner.ChannelSignerInterface csi = new ChannelSigner.ChannelSignerInterface() {
-                            @Override public byte[] get_per_commitment_point(long idx) { return underlying_cs.get_per_commitment_point(idx); }
-                            @Override public byte[] release_commitment_secret(long idx) { return underlying_cs.release_commitment_secret(idx); }
+                            @Override public Result_PublicKeyNoneZ get_per_commitment_point(long idx) { return underlying_cs.get_per_commitment_point(idx); }
+                            @Override public Result__u832NoneZ release_commitment_secret(long idx) { return underlying_cs.release_commitment_secret(idx); }
                             @Override public Result_NoneNoneZ validate_holder_commitment(HolderCommitmentTransaction holder_tx, byte[][] preimages) {
-                                return underlying_cs.validate_holder_commitment(holder_tx, preimages);
+                                Result_NoneNoneZ res = underlying_cs.validate_holder_commitment(holder_tx, preimages);
+                                mid_test_must_free_objs.add(new WeakReference<>(res));
+                                return res;
                             }
                             @Override public Result_NoneNoneZ validate_counterparty_revocation(long idx, byte[] secret) {
-                                return underlying_cs.validate_counterparty_revocation(idx, secret);
+                                Result_NoneNoneZ res = underlying_cs.validate_counterparty_revocation(idx, secret);
+                                mid_test_must_free_objs.add(new WeakReference<>(res));
+                                return res;
                             }
                             @Override public byte[] channel_keys_id() { return underlying_cs.channel_keys_id(); }
                             @Override public void provide_channel_parameters(ChannelTransactionParameters channel_parameters) {
@@ -136,15 +139,10 @@ class HumanObjectPeerTestInstance {
                                 return underlying_ecs.sign_channel_announcement_with_funding_key(msg);
                             }
                         };
-                        WriteableEcdsaChannelSigner.WriteableEcdsaChannelSignerInterface wecsi = new WriteableEcdsaChannelSigner.WriteableEcdsaChannelSignerInterface() {
-                            @Override public byte[] write() { return underlying_wecs.write(); }
-                        };
-                        WriteableEcdsaChannelSigner resp = WriteableEcdsaChannelSigner.new_impl(wecsi, ecsi, csi, underlying_cs.get_pubkeys());
-                        must_free_objs.add(new WeakReference<>(wecsi));
+                        EcdsaChannelSigner resp = EcdsaChannelSigner.new_impl(ecsi, csi, underlying_cs.get_pubkeys());
                         must_free_objs.add(new WeakReference<>(ecsi));
                         must_free_objs.add(new WeakReference<>(csi));
                         must_free_objs.add(new WeakReference<>(resp));
-                        must_free_objs.add(new WeakReference<>(underlying_wecs));
                         must_free_objs.add(new WeakReference<>(underlying_ecs));
                         must_free_objs.add(new WeakReference<>(underlying_cs));
                         return resp;
@@ -152,7 +150,7 @@ class HumanObjectPeerTestInstance {
                 }
 
                 @Override
-                public Result_WriteableEcdsaChannelSignerDecodeErrorZ read_chan_signer(byte[] reader) {
+                public Result_EcdsaChannelSignerDecodeErrorZ read_chan_signer(byte[] reader) {
                     return underlying_sp.read_chan_signer(reader);
                 }
             });
@@ -198,7 +196,7 @@ class HumanObjectPeerTestInstance {
 
         UserConfig get_config() {
             ChannelHandshakeConfig channel_config = ChannelHandshakeConfig.with_default();
-            channel_config.set_announced_channel(true);
+            channel_config.set_announce_for_forwarding(true);
             UserConfig config = UserConfig.with_default();
             config.set_channel_handshake_config(channel_config);
             return config;
@@ -275,7 +273,7 @@ class HumanObjectPeerTestInstance {
             this.seed = seed;
             Persist persister = Persist.new_impl(new Persist.PersistInterface() {
                 @Override
-                public ChannelMonitorUpdateStatus persist_new_channel(OutPoint id, ChannelMonitor data, MonitorUpdateId update_id) {
+                public ChannelMonitorUpdateStatus persist_new_channel(OutPoint id, ChannelMonitor data) {
                     synchronized (monitors) {
                         String key = Arrays.toString(ChannelId.v1_from_funding_outpoint(id).get_a());
                         ChannelMonitor res = test_mon_roundtrip(id, data.write());
@@ -285,7 +283,7 @@ class HumanObjectPeerTestInstance {
                 }
 
                 @Override
-                public ChannelMonitorUpdateStatus update_persisted_channel(OutPoint id, ChannelMonitorUpdate update, ChannelMonitor data, MonitorUpdateId update_id) {
+                public ChannelMonitorUpdateStatus update_persisted_channel(OutPoint id, ChannelMonitorUpdate update, ChannelMonitor data) {
                     synchronized (monitors) {
                         String key = Arrays.toString(ChannelId.v1_from_funding_outpoint(id).get_a());
                         ChannelMonitor res = test_mon_roundtrip(id, data.write());
@@ -370,6 +368,10 @@ class HumanObjectPeerTestInstance {
                     }
                     return ret;
                 }
+                @Override public void peer_disconnected(byte[] their_node_id) {}
+                @Override public Result_NoneNoneZ peer_connected(byte[] their_node_id, Init msg, boolean inbound) {
+                    return Result_NoneNoneZ.ok();
+                }
                 @Override public NodeFeatures provided_node_features() {
                     return NodeFeatures.empty();
                 }
@@ -423,11 +425,12 @@ class HumanObjectPeerTestInstance {
                             },
                         this.tx_broadcaster, this.logger);
                 constructor.chain_sync_completed(new ChannelManagerConstructor.EventHandler() {
-                    @Override public void handle_event(Event event) {
+                    @Override public Result_NoneReplayEventZ handle_event(Event event) {
                         synchronized (pending_manager_events) {
                             pending_manager_events.add(event);
                             pending_manager_events.notifyAll();
                         }
+                        return Result_NoneReplayEventZ.ok();
                     }
                     @Override public void persist_manager(byte[] channel_manager_bytes) { assert channel_manager_bytes.length > 1; }
                     @Override public void persist_network_graph(byte[] graph_bytes) { assert graph_bytes.length > 1; network_graph_persists += 1; }
@@ -444,8 +447,8 @@ class HumanObjectPeerTestInstance {
                     }
 
                     @Override
-                    public Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, ReceiveTlvs tlvs, long amount_msats) {
-                        return Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ.err();
+                    public Result_CVec_BlindedPaymentPathZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, ReceiveTlvs tlvs, long amount_msats) {
+                        return Result_CVec_BlindedPaymentPathZNoneZ.err();
                     }
 
                     @Override
@@ -475,8 +478,11 @@ class HumanObjectPeerTestInstance {
                     @Override public Result_OnionMessagePathNoneZ find_path(byte[] sender, byte[][] peers, Destination destination) {
                         return Result_OnionMessagePathNoneZ.err();
                     }
-                    @Override public Result_CVec_BlindedPathZNoneZ create_blinded_paths(byte[] recipient, byte[][] peers) {
-                        return Result_CVec_BlindedPathZNoneZ.err();
+                    @Override public Result_CVec_BlindedMessagePathZNoneZ create_blinded_paths(byte[] recipient, MessageContext context, byte[][] peers) {
+                        return Result_CVec_BlindedMessagePathZNoneZ.err();
+                    }
+                    @Override public Result_CVec_BlindedMessagePathZNoneZ create_compact_blinded_paths(byte[] recipient, MessageContext context, MessageForwardNode[] peers) {
+                        return Result_CVec_BlindedMessagePathZNoneZ.err();
                     }
                 });
                 ChainParameters params = ChainParameters.of(Network.LDKNetwork_Bitcoin, BestBlock.of(new byte[32], 0));
@@ -529,11 +535,12 @@ class HumanObjectPeerTestInstance {
                     this.net_graph = this.constructor.net_graph;
                     setup_route_handler();
                     constructor.chain_sync_completed(new ChannelManagerConstructor.EventHandler() {
-                        @Override public void handle_event(Event event) {
+                        @Override public Result_NoneReplayEventZ handle_event(Event event) {
                             synchronized (pending_manager_events) {
                                 pending_manager_events.add(event);
                                 pending_manager_events.notifyAll();
                             }
+                            return Result_NoneReplayEventZ.ok();
                         }
                         @Override public void persist_manager(byte[] channel_manager_bytes) { assert channel_manager_bytes.length > 1; }
                         @Override public void persist_network_graph(byte[] graph_bytes) { assert graph_bytes.length > 1; network_graph_persists += 1; }
@@ -561,8 +568,8 @@ class HumanObjectPeerTestInstance {
                     }
 
                     @Override
-                    public Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, ReceiveTlvs tlvs, long amount_msats) {
-                        return Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ.err();
+                    public Result_CVec_BlindedPaymentPathZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, ReceiveTlvs tlvs, long amount_msats) {
+                        return Result_CVec_BlindedPaymentPathZNoneZ.err();
                     }
 
                     @Override
@@ -592,8 +599,12 @@ class HumanObjectPeerTestInstance {
                     @Override public Result_OnionMessagePathNoneZ find_path(byte[] sender, byte[][] peers, Destination destination) {
                         return Result_OnionMessagePathNoneZ.err();
                     }
-                    @Override public Result_CVec_BlindedPathZNoneZ create_blinded_paths(byte[] recipient, byte[][] peers) {
-                        return Result_CVec_BlindedPathZNoneZ.err();
+                    @Override public Result_CVec_BlindedMessagePathZNoneZ create_blinded_paths(byte[] recipient, MessageContext context, byte[][] peers) {
+                        return Result_CVec_BlindedMessagePathZNoneZ.err();
+                    }
+                    @Override
+                    public Result_CVec_BlindedMessagePathZNoneZ create_compact_blinded_paths(byte[] recipient, MessageContext context, MessageForwardNode[] peers) {
+                        return Result_CVec_BlindedMessagePathZNoneZ.err();
                     }
                 });
                 this.setup_route_handler();
@@ -692,7 +703,10 @@ class HumanObjectPeerTestInstance {
                 }
             } else if (chain_monitor != null) {
                 ArrayList<Event> l = new ArrayList<Event>();
-                chain_monitor.as_EventsProvider().process_pending_events(EventHandler.new_impl(l::add));
+                chain_monitor.as_EventsProvider().process_pending_events(EventHandler.new_impl(event -> {
+                    l.add(event);
+                    return Result_NoneReplayEventZ.ok();
+                }));
                 assert l.size() == expected_len;
                 return l.toArray(new Event[0]);
             } else {
@@ -700,10 +714,9 @@ class HumanObjectPeerTestInstance {
                     assert monitors.size() == 1;
                     for (ChannelMonitor mon : monitors.values()) {
                         ArrayList<Event> res = new ArrayList<Event>();
-                        EventHandler handler = EventHandler.new_impl(new EventHandler.EventHandlerInterface() {
-                            @Override public void handle_event(Event event) {
-                                res.add(event);
-                            }
+                        EventHandler handler = EventHandler.new_impl(event -> {
+                            res.add(event);
+                            return Result_NoneReplayEventZ.ok();
                         });
                         mon.process_pending_events(handler);
                         assert res.size() == expected_len;
@@ -741,7 +754,10 @@ class HumanObjectPeerTestInstance {
                         peer1.nio_peer_handler.check_events();
                         peer2.nio_peer_handler.check_events();
                     }
-                    chan_manager.as_EventsProvider().process_pending_events(EventHandler.new_impl(l::add));
+                    chan_manager.as_EventsProvider().process_pending_events(EventHandler.new_impl(event -> {
+                        l.add(event);
+                        return Result_NoneReplayEventZ.ok();
+                    }));
                 }
                 return l.toArray(new Event[0]);
             }
@@ -817,7 +833,7 @@ class HumanObjectPeerTestInstance {
             });
             runqueue.notifyAll();
         }
-        must_free_objs.add(new WeakReference<>(data));
+        mid_test_must_free_objs.add(new WeakReference<>(data));
     }
 
     void connect_peers(final Peer peer1, final Peer peer2) {
@@ -875,21 +891,27 @@ class HumanObjectPeerTestInstance {
         connect_peers(peer1, peer2);
 
         UInt128 user_id = new UInt128(new byte[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16});
+        mid_test_must_free_objs.add(new WeakReference<>(user_id));
 
         Result_ChannelIdAPIErrorZ cc_res = peer1.chan_manager.create_channel(peer2.node_id, 100000, 1000, user_id, null, null);
         assert cc_res instanceof Result_ChannelIdAPIErrorZ.Result_ChannelIdAPIErrorZ_OK;
+        mid_test_must_free_objs.add(new WeakReference<>(cc_res));
 
         // Previously, this was a SEGFAULT instead of get_funding_txo() returning null.
         ChannelDetails pre_funding_chan = peer1.chan_manager.list_channels()[0];
         assert pre_funding_chan.get_funding_txo() == null;
+        mid_test_must_free_objs.add(new WeakReference<>(pre_funding_chan));
 
         Event[] events = peer1.get_manager_events(1, peer1, peer2);
         assert events[0] instanceof Event.FundingGenerationReady;
+        mid_test_must_free_objs.add(new WeakReference<>(events[0]));
         assert ((Event.FundingGenerationReady) events[0]).channel_value_satoshis == 100000;
         assert ((Event.FundingGenerationReady) events[0]).user_channel_id.equals(user_id);
         byte[] funding_spk = ((Event.FundingGenerationReady) events[0]).output_script;
         assert funding_spk.length == 34 && funding_spk[0] == 0 && funding_spk[1] == 32; // P2WSH
+        mid_test_must_free_objs.add(new WeakReference<>(((Event.FundingGenerationReady) events[0]).user_channel_id));
         ChannelId chan_id = ((Event.FundingGenerationReady) events[0]).temporary_channel_id;
+        mid_test_must_free_objs.add(new WeakReference<>(chan_id));
 
         BitcoinNetworkParams bitcoinj_net = BitcoinNetworkParams.of(BitcoinNetwork.MAINNET);
 
@@ -914,12 +936,15 @@ class HumanObjectPeerTestInstance {
 
         events = peer1.get_manager_events(1, peer1, peer2);
         assert events[0] instanceof Event.ChannelPending;
+        mid_test_must_free_objs.add(new WeakReference<>(events[0]));
 
         events = peer2.get_manager_events(1, peer1, peer2);
         assert events[0] instanceof Event.ChannelPending;
+        mid_test_must_free_objs.add(new WeakReference<>(events[0]));
 
         assert peer1.broadcast_set.size() == 1;
         assert Arrays.equals(peer1.broadcast_set.get(0), funding.bitcoinSerialize());
+        mid_test_must_free_objs.add(new WeakReference<>(peer1.broadcast_set.get(0)));
         peer1.broadcast_set.clear();
 
         Block b = new Block(bitcoinj_net, 2, Sha256Hash.ZERO_HASH, Sha256Hash.ZERO_HASH, 42, 0, 0, Arrays.asList(new Transaction[]{funding}));
@@ -937,9 +962,11 @@ class HumanObjectPeerTestInstance {
 
         events = peer1.get_manager_events(1, peer1, peer2);
         assert events[0] instanceof Event.ChannelReady;
+        mid_test_must_free_objs.add(new WeakReference<>(events[0]));
 
         events = peer2.get_manager_events(1, peer1, peer2);
         assert events[0] instanceof Event.ChannelReady;
+        mid_test_must_free_objs.add(new WeakReference<>(events[0]));
 
         ChannelDetails[] peer1_chans = peer1.chan_manager.list_usable_channels();
         ChannelDetails[] peer2_chans = peer2.chan_manager.list_usable_channels();
@@ -952,6 +979,8 @@ class HumanObjectPeerTestInstance {
         assert ((Option_u64Z.Some)short_chan_id).some == (1L << 40); // 0th output in the 0th transaction in the 1st block
         assert Arrays.equals(peer1_chans[0].get_channel_id().get_a(), funding.getTxId().getReversedBytes());
         assert Arrays.equals(peer2_chans[0].get_channel_id().get_a(), funding.getTxId().getReversedBytes());
+        mid_test_must_free_objs.add(new WeakReference<>(peer1_chans[0]));
+        mid_test_must_free_objs.add(new WeakReference<>(peer2_chans[0]));
 
         // Generate a random invoice description to exercise the string conversion logic a good bit
         String invoice_description;
@@ -964,19 +993,20 @@ class HumanObjectPeerTestInstance {
         Result_Bolt11InvoiceSignOrCreationErrorZ invoice = UtilMethods.create_invoice_from_channelmanager(peer2.chan_manager, peer2.node_signer, peer2.logger, Currency.LDKCurrency_Bitcoin, Option_u64Z.some(10000000), invoice_description, 7200, Option_u16Z.none());
         assert invoice instanceof Result_Bolt11InvoiceSignOrCreationErrorZ.Result_Bolt11InvoiceSignOrCreationErrorZ_OK;
         System.out.println("Got invoice: " + ((Result_Bolt11InvoiceSignOrCreationErrorZ.Result_Bolt11InvoiceSignOrCreationErrorZ_OK) invoice).res.to_str());
+        mid_test_must_free_objs.add(new WeakReference<>(invoice));
+        mid_test_must_free_objs.add(new WeakReference<>(((Result_Bolt11InvoiceSignOrCreationErrorZ.Result_Bolt11InvoiceSignOrCreationErrorZ_OK) invoice).res));
 
-        String fuck = ((Result_Bolt11InvoiceSignOrCreationErrorZ.Result_Bolt11InvoiceSignOrCreationErrorZ_OK) invoice).res.to_str();
-        Result_Bolt11InvoiceParseOrSemanticErrorZ parsed_invoice = Bolt11Invoice.from_str(fuck);
-if (parsed_invoice instanceof Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_Bolt11InvoiceParseOrSemanticErrorZ_Err) {
-    System.err.println(((Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_Bolt11InvoiceParseOrSemanticErrorZ_Err) parsed_invoice).err.to_str());
-}
+        String invoice_string = ((Result_Bolt11InvoiceSignOrCreationErrorZ.Result_Bolt11InvoiceSignOrCreationErrorZ_OK) invoice).res.to_str();
+        Result_Bolt11InvoiceParseOrSemanticErrorZ parsed_invoice = Bolt11Invoice.from_str(invoice_string);
         assert parsed_invoice instanceof Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_Bolt11InvoiceParseOrSemanticErrorZ_OK;
+        mid_test_must_free_objs.add(new WeakReference<>(parsed_invoice));
         assert ((Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_Bolt11InvoiceParseOrSemanticErrorZ_OK) parsed_invoice).res.fallback_addresses().length == 0;
         assert Arrays.equals(((Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_Bolt11InvoiceParseOrSemanticErrorZ_OK) parsed_invoice).res.payment_hash(), ((Result_Bolt11InvoiceSignOrCreationErrorZ.Result_Bolt11InvoiceSignOrCreationErrorZ_OK) invoice).res.payment_hash());
         SignedRawBolt11Invoice signed_raw = ((Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_Bolt11InvoiceParseOrSemanticErrorZ_OK) parsed_invoice).res.into_signed_raw();
+        mid_test_must_free_objs.add(new WeakReference<>(signed_raw));
         RawBolt11Invoice raw_invoice = signed_raw.raw_invoice();
-        byte[] desc_hash = raw_invoice.signable_hash();
         Description raw_invoice_description = raw_invoice.description();
+        mid_test_must_free_objs.add(new WeakReference<>(raw_invoice_description));
         String description_string = raw_invoice_description.into_inner().get_a();
         boolean has_null = false;
         for (byte db : invoice_description.getBytes())
@@ -997,7 +1027,9 @@ if (parsed_invoice instanceof Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_B
                 System.currentTimeMillis() / 1000);
         assert phantom_invoice.is_ok();
         RouteHint[] hints = ((Result_Bolt11InvoiceSignOrCreationErrorZ.Result_Bolt11InvoiceSignOrCreationErrorZ_OK)phantom_invoice).res.route_hints();
+        mid_test_must_free_objs.add(new WeakReference<>(((Result_Bolt11InvoiceSignOrCreationErrorZ.Result_Bolt11InvoiceSignOrCreationErrorZ_OK)phantom_invoice).res));
         assert hints.length == 1;
+        mid_test_must_free_objs.add(new WeakReference<>(hints[0]));
         RouteHintHop[] val = hints[0].get_a();
         assert hints[0].get_a().length == 1; // Our one channel is public so we should just have a single-hop hint
 
@@ -1010,7 +1042,7 @@ if (parsed_invoice instanceof Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_B
             RouteHint[] route_hints = ((Result_Bolt11InvoiceSignOrCreationErrorZ.Result_Bolt11InvoiceSignOrCreationErrorZ_OK) invoice).res.route_hints();
 
             Payee payee = Payee.clear(peer2.node_id, route_hints, invoice_features, 42);
-            PaymentParameters pay_params = PaymentParameters.of(payee, Option_u64Z.none(), 6*24*14, (byte)1, (byte)2, new long[0], new long[0]);
+            PaymentParameters pay_params = PaymentParameters.of(payee, Option_u64Z.none(), 6*24*14, (byte)5, (byte)10, (byte)2, new long[0], new long[0]);
             RouteParameters route_params = RouteParameters.from_payment_params_and_value(pay_params, 10000000);
             Result_RouteLightningErrorZ route_res = UtilMethods.find_route(
                     peer1.chan_manager.get_our_node_id(), route_params, peer1.net_graph,
@@ -1019,6 +1051,10 @@ if (parsed_invoice instanceof Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_B
                     ProbabilisticScoringFeeParameters.with_default(), new byte[32]);
             assert route_res instanceof Result_RouteLightningErrorZ.Result_RouteLightningErrorZ_OK;
             Route route = ((Result_RouteLightningErrorZ.Result_RouteLightningErrorZ_OK) route_res).res;
+            mid_test_must_free_objs.add(new WeakReference<>(payee));
+            mid_test_must_free_objs.add(new WeakReference<>(pay_params));
+            mid_test_must_free_objs.add(new WeakReference<>(route_params));
+            mid_test_must_free_objs.add(new WeakReference<>(route));
             assert route.get_paths().length == 1;
             assert route.get_paths()[0].get_hops().length == 1;
             assert route.get_paths()[0].final_value_msat() == 10000000;
@@ -1037,7 +1073,9 @@ if (parsed_invoice instanceof Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_B
             Path[] paths = new Path[1];
             paths[0] = Path.of(hops, null);
             Route r2 = Route.of(paths, RouteParameters.from_payment_params_and_value(pay_params, 100));
+            mid_test_must_free_objs.add(new WeakReference<>(r2));
             payment_res = peer1.chan_manager.send_payment_with_route(r2, payment_hash, RecipientOnionFields.secret_only(payment_secret), payment_id);
+            mid_test_must_free_objs.add(new WeakReference<>(payment_res));
             assert payment_res instanceof Result_NonePaymentSendFailureZ.Result_NonePaymentSendFailureZ_Err;
         } else {
             Result_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ pay_params_res =
@@ -1045,7 +1083,14 @@ if (parsed_invoice instanceof Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_B
             assert pay_params_res.is_ok();
             Result_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ.Result_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ_OK pay_params =
                 (Result_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ.Result_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ_OK)pay_params_res;
-            Result_NoneRetryableSendFailureZ pay_res = peer1.chan_manager.send_payment(pay_params.res.get_a(), pay_params.res.get_b(), new byte[32], pay_params.res.get_c(), Retry.attempts(0));
+            RecipientOnionFields onion_fields = pay_params.res.get_b();
+            RouteParameters route_params = pay_params.res.get_c();
+            Result_NoneRetryableSendFailureZ pay_res = peer1.chan_manager.send_payment(pay_params.res.get_a(), onion_fields, new byte[32], route_params, Retry.attempts(0));
+            mid_test_must_free_objs.add(new WeakReference<>(onion_fields));
+            mid_test_must_free_objs.add(new WeakReference<>(pay_res));
+            mid_test_must_free_objs.add(new WeakReference<>(route_params));
+            mid_test_must_free_objs.add(new WeakReference<>(pay_params));
+            mid_test_must_free_objs.add(new WeakReference<>(pay_params_res));
             assert pay_res.is_ok();
         }
 
@@ -1076,9 +1121,9 @@ if (parsed_invoice instanceof Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_B
 
     boolean cross_reload_ref_pollution = false;
     class TestState {
-        private final WeakReference<Peer> ref_block;
-        private final Peer peer1;
-        private final Peer peer2;
+        final WeakReference<Peer> ref_block;
+        final Peer peer1;
+        final Peer peer2;
         public Sha256Hash best_blockhash;
 
         public TestState(WeakReference<Peer> ref_block, Peer peer1, Peer peer2, Sha256Hash best_blockhash) {
@@ -1089,17 +1134,6 @@ if (parsed_invoice instanceof Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_B
         }
     }
     void do_test_message_handler_b(TestState state) throws Exception {
-        GcCheck obj = new GcCheck();
-        if (state.ref_block != null) {
-            // Ensure the original peers get freed before we move on. Note that we have to be in a different function
-            // scope to do so as the (at least current OpenJDK) JRE won't release anything created in the same scope.
-            while (!cross_reload_ref_pollution && state.ref_block.get() != null) {
-                System.gc();
-                System.runFinalization();
-            }
-            connect_peers(state.peer1, state.peer2);
-        }
-
         Event[] events = state.peer2.get_manager_events(1, state.peer1, state.peer2);
         assert events[0] instanceof Event.PendingHTLCsForwardable;
         state.peer2.chan_manager.process_pending_htlc_forwards();
@@ -1153,7 +1187,7 @@ if (parsed_invoice instanceof Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_B
                 while (state.peer2.broadcast_set.size() != 1) state.peer2.broadcast_set.wait();
             }
         } else {
-            state.peer1.chan_manager.force_close_all_channels_broadcasting_latest_txn();
+            state.peer1.chan_manager.force_close_all_channels_broadcasting_latest_txn("Force closing");
             maybe_exchange_peer_messages(state.peer1, state.peer2);
             synchronized (state.peer1.broadcast_set) {
                 while (state.peer1.broadcast_set.size() != 1) state.peer1.broadcast_set.wait();
@@ -1220,6 +1254,8 @@ if (parsed_invoice instanceof Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_B
                 assert built_tx.getOutput(0).getValue().value == 420;
             }
 
+            state.peer1.peer_manager.disconnect_all_peers();
+
             while (state.peer1.peer_manager.list_peers().length != 0 || state.peer2.peer_manager.list_peers().length != 0) {
                 // LDK disconnects peers before sending an error message, so wait for disconnection.
                 Thread.sleep(10);
@@ -1279,13 +1315,6 @@ if (parsed_invoice instanceof Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_B
         if (state.peer1.net_graph != null)
             state.peer1.net_graph.write();
 
-        // Construct the only Option_Enum::Variant(OpaqueStruct) we have in the codebase as this used to cause double-frees:
-        byte[] serd = new byte[] {(byte)0xd9,(byte)0x77,(byte)0xcb,(byte)0x9b,(byte)0x53,(byte)0xd9,(byte)0x3a,(byte)0x6f,(byte)0xf6,(byte)0x4b,(byte)0xb5,(byte)0xf1,(byte)0xe1,(byte)0x58,(byte)0xb4,(byte)0x09,(byte)0x4b,(byte)0x66,(byte)0xe7,(byte)0x98,(byte)0xfb,(byte)0x12,(byte)0x91,(byte)0x11,(byte)0x68,(byte)0xa3,(byte)0xcc,(byte)0xdf,(byte)0x80,(byte)0xa8,(byte)0x30,(byte)0x96,(byte)0x34,(byte)0x0a,(byte)0x6a,(byte)0x95,(byte)0xda,(byte)0x0a,(byte)0xe8,(byte)0xd9,(byte)0xf7,(byte)0x76,(byte)0x52,(byte)0x8e,(byte)0xec,(byte)0xdb,(byte)0xb7,(byte)0x47,(byte)0xeb,(byte)0x6b,(byte)0x54,(byte)0x54,(byte)0x95,(byte)0xa4,(byte)0x31,(byte)0x9e,(byte)0xd5,(byte)0x37,(byte)0x8e,(byte)0x35,(byte)0xb2,(byte)0x1e,(byte)0x07,(byte)0x3a,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x01,(byte)0x19,(byte)0xd6,(byte)0x68,(byte)0x9c,(byte)0x08,(byte)0x5a,(byte)0xe1,(byte)0x65,(byte)0x83,(byte)0x1e,(byte)0x93,(byte)0x4f,(byte)0xf7,(byte)0x63,(byte)0xae,(byte)0x46,(byte)0xa2,(byte)0xa6,(byte)0xc1,(byte)0x72,(byte)0xb3,(byte)0xf1,(byte)0xb6,(byte)0x0a,(byte)0x8c,(byte)0xe2,(byte)0x6f,(byte)0x00,(byte)0x08,(byte)0x3a,(byte)0x84,(byte)0x00,(byte)0x00,(byte)0x03,(byte)0x4d,(byte)0x01,(byte)0x34,(byte)0x13,(byte)0xa7,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x90,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x0f,(byte)0x42,(byte)0x40,(byte)0x00,(byte)0x00,(byte)0x27,(byte)0x10,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x14,(byte)0xde,(byte)0xad,(byte)0xbe,(byte)0xef,(byte)0x42,(byte)0x42,(byte)0x42,(byte)0x42};
-        Result_ChannelUpdateDecodeErrorZ upd_msg = ChannelUpdate.read(serd);
-        assert upd_msg instanceof Result_ChannelUpdateDecodeErrorZ.Result_ChannelUpdateDecodeErrorZ_OK;
-        assert ((Result_ChannelUpdateDecodeErrorZ.Result_ChannelUpdateDecodeErrorZ_OK) upd_msg).res.get_contents().get_htlc_maximum_msat() == 0xdeadbeef42424242L;
-        Option_NetworkUpdateZ upd = Option_NetworkUpdateZ.some(NetworkUpdate.channel_update_message(((Result_ChannelUpdateDecodeErrorZ.Result_ChannelUpdateDecodeErrorZ_OK) upd_msg).res));
-
         if (use_chan_manager_constructor) {
             // Lock the scorer twice back-to-back to check that the try-with-resources AutoCloseable on the scorer works.
             try (ChannelManagerConstructor.ScorerWrapper score = state.peer1.constructor.get_locked_scorer()) {
@@ -1294,7 +1323,8 @@ if (parsed_invoice instanceof Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_B
         }
     }
 
-    java.util.LinkedList<WeakReference<Object>> must_free_objs = new java.util.LinkedList();
+    LinkedList<WeakReference<Object>> must_free_objs = new LinkedList();
+    LinkedList<WeakReference<Object>> mid_test_must_free_objs = new LinkedList();
     int gc_count = 0;
     int gc_exp_count = 0;
     class GcCheck {
@@ -1305,11 +1335,33 @@ if (parsed_invoice instanceof Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_B
             super.finalize();
         }
     }
+    void block_on_gc(TestState state) {
+        GcCheck obj = new GcCheck();
+        System.gc();
+        System.runFinalization();
+        // Ensure the original peers get freed before we move on. Note that we have to be in a different function
+        // scope to do so as the (at least current OpenJDK) JRE won't release anything created in the same scope.
+        while (!cross_reload_ref_pollution && state.ref_block.get() != null) {
+            System.gc();
+            System.runFinalization();
+        }
+
+for (WeakReference<Object> o : mid_test_must_free_objs)
+if (o.get() != null) {
+System.err.println("HI");
+}
+        for (WeakReference<Object> o : mid_test_must_free_objs)
+            assert o.get() == null;
+    }
 }
 public class HumanObjectPeerTest {
     static HumanObjectPeerTestInstance do_test_run(boolean nice_close, boolean use_km_wrapper, boolean use_full_km_wrapper, boolean use_manual_watch, boolean reload_peers, boolean break_cross_peer_refs, boolean nio_peer_handler, boolean use_ignoring_routing_handler, boolean use_chan_manager_constructor, boolean use_invoice_payer) throws Exception {
         HumanObjectPeerTestInstance instance = new HumanObjectPeerTestInstance(nice_close, use_km_wrapper, use_full_km_wrapper, use_manual_watch, reload_peers, break_cross_peer_refs, nio_peer_handler, !nio_peer_handler, use_ignoring_routing_handler, use_chan_manager_constructor, use_invoice_payer);
         HumanObjectPeerTestInstance.TestState state = instance.do_test_message_handler();
+        if (state.ref_block != null) {
+            instance.block_on_gc(state);
+            instance.connect_peers(state.peer1, state.peer2);
+        }
         instance.do_test_message_handler_b(state);
         return instance;
     }
@@ -1320,6 +1372,8 @@ public class HumanObjectPeerTest {
             System.runFinalization();
         }
         for (WeakReference<Object> o : instance.must_free_objs)
+            assert o.get() == null;
+        for (WeakReference<Object> o : instance.mid_test_must_free_objs)
             assert o.get() == null;
     }
     public static final int TEST_ITERATIONS = (1 << 10);

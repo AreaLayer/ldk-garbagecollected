@@ -30,6 +30,7 @@ public class ClosureReason : CommonBase {
 			case 10: return new ClosureReason_CounterpartyCoopClosedUnfundedChannel(ptr);
 			case 11: return new ClosureReason_FundingBatchClosure(ptr);
 			case 12: return new ClosureReason_HTLCsTimedOut(ptr);
+			case 13: return new ClosureReason_PeerFeerateTooLow(ptr);
 			default:
 				throw new ArgumentException("Impossible enum variant");
 		}
@@ -56,7 +57,26 @@ public class ClosureReason : CommonBase {
 	}
 	/** A ClosureReason of type HolderForceClosed */
 	public class ClosureReason_HolderForceClosed : ClosureReason {
+		/**
+		 * Whether or not the latest transaction was broadcasted when the channel was force
+		 * closed.
+		 * 
+		 * Channels closed using [`ChannelManager::force_close_broadcasting_latest_txn`] will have
+		 * this field set to true, whereas channels closed using [`ChannelManager::force_close_without_broadcasting_txn`]
+		 * or force-closed prior to being funded will have this field set to false.
+		 * 
+		 * This will be `None` for objects generated or written by LDK 0.0.123 and
+		 * earlier.
+		 * 
+		 * [`ChannelManager::force_close_broadcasting_latest_txn`]: crate::ln::channelmanager::ChannelManager::force_close_broadcasting_latest_txn.
+		 * [`ChannelManager::force_close_without_broadcasting_txn`]: crate::ln::channelmanager::ChannelManager::force_close_without_broadcasting_txn.
+		 */
+		public Option_boolZ broadcasted_latest_txn;
 		internal ClosureReason_HolderForceClosed(long ptr) : base(null, ptr) {
+			long broadcasted_latest_txn = bindings.LDKClosureReason_HolderForceClosed_get_broadcasted_latest_txn(ptr);
+			org.ldk.structs.Option_boolZ broadcasted_latest_txn_hu_conv = org.ldk.structs.Option_boolZ.constr_from_ptr(broadcasted_latest_txn);
+			if (broadcasted_latest_txn_hu_conv != null) { broadcasted_latest_txn_hu_conv.ptrs_to.AddLast(this); };
+			this.broadcasted_latest_txn = broadcasted_latest_txn_hu_conv;
 		}
 	}
 	/** A ClosureReason of type LegacyCooperativeClosure */
@@ -121,6 +141,23 @@ public class ClosureReason : CommonBase {
 		internal ClosureReason_HTLCsTimedOut(long ptr) : base(null, ptr) {
 		}
 	}
+	/** A ClosureReason of type PeerFeerateTooLow */
+	public class ClosureReason_PeerFeerateTooLow : ClosureReason {
+		/**
+		 * The feerate on our channel set by our peer.
+		 */
+		public int peer_feerate_sat_per_kw;
+		/**
+		 * The required feerate we enforce, from our [`FeeEstimator`].
+		 * 
+		 * [`FeeEstimator`]: crate::chain::chaininterface::FeeEstimator
+		 */
+		public int required_feerate_sat_per_kw;
+		internal ClosureReason_PeerFeerateTooLow(long ptr) : base(null, ptr) {
+			this.peer_feerate_sat_per_kw = bindings.LDKClosureReason_PeerFeerateTooLow_get_peer_feerate_sat_per_kw(ptr);
+			this.required_feerate_sat_per_kw = bindings.LDKClosureReason_PeerFeerateTooLow_get_required_feerate_sat_per_kw(ptr);
+		}
+	}
 	internal long clone_ptr() {
 		long ret = bindings.ClosureReason_clone_ptr(this.ptr);
 		GC.KeepAlive(this);
@@ -148,15 +185,15 @@ public class ClosureReason : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ClosureReason ret_hu_conv = org.ldk.structs.ClosureReason.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(peer_msg); };
 		return ret_hu_conv;
 	}
 
 	/**
 	 * Utility method to constructs a new HolderForceClosed-variant ClosureReason
 	 */
-	public static ClosureReason holder_force_closed() {
-		long ret = bindings.ClosureReason_holder_force_closed();
+	public static ClosureReason holder_force_closed(org.ldk.structs.Option_boolZ broadcasted_latest_txn) {
+		long ret = bindings.ClosureReason_holder_force_closed(broadcasted_latest_txn.ptr);
+		GC.KeepAlive(broadcasted_latest_txn);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ClosureReason ret_hu_conv = org.ldk.structs.ClosureReason.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
@@ -279,6 +316,19 @@ public class ClosureReason : CommonBase {
 	 */
 	public static ClosureReason htlcs_timed_out() {
 		long ret = bindings.ClosureReason_htlcs_timed_out();
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ClosureReason ret_hu_conv = org.ldk.structs.ClosureReason.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new PeerFeerateTooLow-variant ClosureReason
+	 */
+	public static ClosureReason peer_feerate_too_low(int peer_feerate_sat_per_kw, int required_feerate_sat_per_kw) {
+		long ret = bindings.ClosureReason_peer_feerate_too_low(peer_feerate_sat_per_kw, required_feerate_sat_per_kw);
+		GC.KeepAlive(peer_feerate_sat_per_kw);
+		GC.KeepAlive(required_feerate_sat_per_kw);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ClosureReason ret_hu_conv = org.ldk.structs.ClosureReason.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };

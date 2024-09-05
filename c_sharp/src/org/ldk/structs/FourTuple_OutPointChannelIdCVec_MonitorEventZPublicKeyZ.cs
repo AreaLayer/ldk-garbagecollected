@@ -100,9 +100,6 @@ public class FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ : CommonBas
 		if (ret >= 0 && ret <= 4096) { return null; }
 		FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ ret_hu_conv = new FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(a); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(b); };
-		foreach (MonitorEvent c_conv_14 in c) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(c_conv_14); }; };
 		return ret_hu_conv;
 	}
 

@@ -51,7 +51,6 @@ public class MessageSendEventsProvider extends CommonBase {
 				MessageSendEvent[] ret = arg.get_and_clear_pending_msg_events();
 				Reference.reachabilityFence(arg);
 				long[] result = ret != null ? Arrays.stream(ret).mapToLong(ret_conv_18 -> ret_conv_18.clone_ptr()).toArray() : null;
-				for (MessageSendEvent ret_conv_18: ret) { if (impl_holder.held != null) { impl_holder.held.ptrs_to.add(ret_conv_18); }; };
 				return result;
 			}
 		});

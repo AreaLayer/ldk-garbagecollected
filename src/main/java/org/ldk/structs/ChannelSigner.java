@@ -10,6 +10,10 @@ import javax.annotation.Nullable;
 /**
  * A trait to handle Lightning channel key material without concretizing the channel type or
  * the signature mechanism.
+ * 
+ * Several methods allow error types to be returned to support async signing. This feature
+ * is not yet complete, and panics may occur in certain situations when returning errors
+ * for these methods.
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class ChannelSigner extends CommonBase {
@@ -42,8 +46,12 @@ public class ChannelSigner extends CommonBase {
 		 * Gets the per-commitment point for a specific commitment number
 		 * 
 		 * Note that the commitment number starts at `(1 << 48) - 1` and counts backwards.
+		 * 
+		 * If the signer returns `Err`, then the user is responsible for either force-closing the channel
+		 * or calling `ChannelManager::signer_unblocked` (this method is only available when the
+		 * `async_signing` cfg flag is enabled) once the signature is ready.
 		 */
-		byte[] get_per_commitment_point(long idx);
+		Result_PublicKeyNoneZ get_per_commitment_point(long idx);
 		/**
 		 * Gets the commitment secret for a specific commitment number as part of the revocation process
 		 * 
@@ -54,7 +62,7 @@ public class ChannelSigner extends CommonBase {
 		 * 
 		 * Note that the commitment number starts at `(1 << 48) - 1` and counts backwards.
 		 */
-		byte[] release_commitment_secret(long idx);
+		Result__u832NoneZ release_commitment_secret(long idx);
 		/**
 		 * Validate the counterparty's signatures on the holder commitment transaction and HTLCs.
 		 * 
@@ -101,16 +109,16 @@ public class ChannelSigner extends CommonBase {
 	public static ChannelSigner new_impl(ChannelSignerInterface arg, ChannelPublicKeys pubkeys) {
 		final LDKChannelSignerHolder impl_holder = new LDKChannelSignerHolder();
 		impl_holder.held = new ChannelSigner(new bindings.LDKChannelSigner() {
-			@Override public byte[] get_per_commitment_point(long idx) {
-				byte[] ret = arg.get_per_commitment_point(idx);
+			@Override public long get_per_commitment_point(long idx) {
+				Result_PublicKeyNoneZ ret = arg.get_per_commitment_point(idx);
 				Reference.reachabilityFence(arg);
-				byte[] result = InternalUtils.check_arr_len(ret, 33);
+				long result = ret.clone_ptr();
 				return result;
 			}
-			@Override public byte[] release_commitment_secret(long idx) {
-				byte[] ret = arg.release_commitment_secret(idx);
+			@Override public long release_commitment_secret(long idx) {
+				Result__u832NoneZ ret = arg.release_commitment_secret(idx);
 				Reference.reachabilityFence(arg);
-				byte[] result = InternalUtils.check_arr_len(ret, 32);
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long validate_holder_commitment(long holder_tx, byte[][] outbound_htlc_preimages) {
@@ -144,12 +152,18 @@ public class ChannelSigner extends CommonBase {
 	 * Gets the per-commitment point for a specific commitment number
 	 * 
 	 * Note that the commitment number starts at `(1 << 48) - 1` and counts backwards.
+	 * 
+	 * If the signer returns `Err`, then the user is responsible for either force-closing the channel
+	 * or calling `ChannelManager::signer_unblocked` (this method is only available when the
+	 * `async_signing` cfg flag is enabled) once the signature is ready.
 	 */
-	public byte[] get_per_commitment_point(long idx) {
-		byte[] ret = bindings.ChannelSigner_get_per_commitment_point(this.ptr, idx);
+	public Result_PublicKeyNoneZ get_per_commitment_point(long idx) {
+		long ret = bindings.ChannelSigner_get_per_commitment_point(this.ptr, idx);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(idx);
-		return ret;
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_PublicKeyNoneZ ret_hu_conv = Result_PublicKeyNoneZ.constr_from_ptr(ret);
+		return ret_hu_conv;
 	}
 
 	/**
@@ -162,11 +176,13 @@ public class ChannelSigner extends CommonBase {
 	 * 
 	 * Note that the commitment number starts at `(1 << 48) - 1` and counts backwards.
 	 */
-	public byte[] release_commitment_secret(long idx) {
-		byte[] ret = bindings.ChannelSigner_release_commitment_secret(this.ptr, idx);
+	public Result__u832NoneZ release_commitment_secret(long idx) {
+		long ret = bindings.ChannelSigner_release_commitment_secret(this.ptr, idx);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(idx);
-		return ret;
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result__u832NoneZ ret_hu_conv = Result__u832NoneZ.constr_from_ptr(ret);
+		return ret_hu_conv;
 	}
 
 	/**

@@ -26,7 +26,7 @@ public class MessageSendEvent : CommonBase {
 			case 4: return new MessageSendEvent_SendFundingCreated(ptr);
 			case 5: return new MessageSendEvent_SendFundingSigned(ptr);
 			case 6: return new MessageSendEvent_SendStfu(ptr);
-			case 7: return new MessageSendEvent_SendSplice(ptr);
+			case 7: return new MessageSendEvent_SendSpliceInit(ptr);
 			case 8: return new MessageSendEvent_SendSpliceAck(ptr);
 			case 9: return new MessageSendEvent_SendSpliceLocked(ptr);
 			case 10: return new MessageSendEvent_SendTxAddInput(ptr);
@@ -200,8 +200,8 @@ public class MessageSendEvent : CommonBase {
 			this.msg = msg_hu_conv;
 		}
 	}
-	/** A MessageSendEvent of type SendSplice */
-	public class MessageSendEvent_SendSplice : MessageSendEvent {
+	/** A MessageSendEvent of type SendSpliceInit */
+	public class MessageSendEvent_SendSpliceInit : MessageSendEvent {
 		/**
 		 * The node_id of the node which should receive this message
 		 */
@@ -209,13 +209,13 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public Splice msg;
-		internal MessageSendEvent_SendSplice(long ptr) : base(null, ptr) {
-			long node_id = bindings.LDKMessageSendEvent_SendSplice_get_node_id(ptr);
+		public SpliceInit msg;
+		internal MessageSendEvent_SendSpliceInit(long ptr) : base(null, ptr) {
+			long node_id = bindings.LDKMessageSendEvent_SendSpliceInit_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
 			this.node_id = node_id_conv;
-			long msg = bindings.LDKMessageSendEvent_SendSplice_get_msg(ptr);
-			org.ldk.structs.Splice msg_hu_conv = null; if (msg < 0 || msg > 4096) { msg_hu_conv = new org.ldk.structs.Splice(null, msg); }
+			long msg = bindings.LDKMessageSendEvent_SendSpliceInit_get_msg(ptr);
+			org.ldk.structs.SpliceInit msg_hu_conv = null; if (msg < 0 || msg > 4096) { msg_hu_conv = new org.ldk.structs.SpliceInit(null, msg); }
 			if (msg_hu_conv != null) { msg_hu_conv.ptrs_to.AddLast(this); };
 			this.msg = msg_hu_conv;
 		}
@@ -805,7 +805,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -819,7 +818,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -833,7 +831,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -847,7 +844,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -861,7 +857,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -875,7 +870,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -889,21 +883,19 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
 	/**
-	 * Utility method to constructs a new SendSplice-variant MessageSendEvent
+	 * Utility method to constructs a new SendSpliceInit-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_splice(byte[] node_id, org.ldk.structs.Splice msg) {
-		long ret = bindings.MessageSendEvent_send_splice(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
+	public static MessageSendEvent send_splice_init(byte[] node_id, org.ldk.structs.SpliceInit msg) {
+		long ret = bindings.MessageSendEvent_send_splice_init(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -917,7 +909,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -931,7 +922,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -945,7 +935,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -959,7 +948,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -973,7 +961,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -987,7 +974,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -1001,7 +987,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -1015,7 +1000,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -1029,7 +1013,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -1043,7 +1026,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -1057,7 +1039,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -1071,7 +1052,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -1085,7 +1065,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -1099,7 +1078,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(updates); };
 		return ret_hu_conv;
 	}
 
@@ -1113,7 +1091,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -1127,7 +1104,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -1141,7 +1117,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -1155,7 +1130,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -1170,8 +1144,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(update_msg); };
 		return ret_hu_conv;
 	}
 
@@ -1185,8 +1157,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(update_msg); };
 		return ret_hu_conv;
 	}
 
@@ -1199,7 +1169,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -1212,7 +1181,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -1226,7 +1194,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -1240,7 +1207,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(action); };
 		return ret_hu_conv;
 	}
 
@@ -1254,7 +1220,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -1268,7 +1233,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -1282,7 +1246,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -1296,7 +1259,6 @@ public class MessageSendEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageSendEvent ret_hu_conv = org.ldk.structs.MessageSendEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 

@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 
 
 /**
- * An stfu (quiescence) message to be sent by or received from the stfu initiator.
+ * An `stfu` (quiescence) message to be sent by or received from the stfu initiator.
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class Stfu extends CommonBase {
@@ -39,7 +39,6 @@ public class Stfu extends CommonBase {
 		bindings.Stfu_set_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -70,7 +69,6 @@ public class Stfu extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Stfu ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Stfu(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id_arg); };
 		return ret_hu_conv;
 	}
 

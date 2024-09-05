@@ -68,8 +68,6 @@ public class TwoTuple_OutPointChannelIdZ : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		TwoTuple_OutPointChannelIdZ ret_hu_conv = new TwoTuple_OutPointChannelIdZ(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(a); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(b); };
 		return ret_hu_conv;
 	}
 

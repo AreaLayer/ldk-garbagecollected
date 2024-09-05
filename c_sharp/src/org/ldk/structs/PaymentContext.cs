@@ -6,10 +6,9 @@ using System;
 namespace org { namespace ldk { namespace structs {
 
 /**
- * The context of an inbound payment, which is included in a [`BlindedPath`] via [`ReceiveTlvs`]
- * and surfaced in [`PaymentPurpose`].
+ * The context of an inbound payment, which is included in a [`BlindedPaymentPath`] via
+ * [`ReceiveTlvs`] and surfaced in [`PaymentPurpose`].
  * 
- * [`BlindedPath`]: crate::blinded_path::BlindedPath
  * [`PaymentPurpose`]: crate::events::PaymentPurpose
  */
 public class PaymentContext : CommonBase {
@@ -86,7 +85,6 @@ public class PaymentContext : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PaymentContext ret_hu_conv = org.ldk.structs.PaymentContext.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(a); };
 		return ret_hu_conv;
 	}
 
@@ -99,7 +97,6 @@ public class PaymentContext : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PaymentContext ret_hu_conv = org.ldk.structs.PaymentContext.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(a); };
 		return ret_hu_conv;
 	}
 
@@ -112,7 +109,6 @@ public class PaymentContext : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PaymentContext ret_hu_conv = org.ldk.structs.PaymentContext.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(a); };
 		return ret_hu_conv;
 	}
 

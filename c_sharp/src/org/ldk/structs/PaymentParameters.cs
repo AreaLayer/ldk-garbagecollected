@@ -34,7 +34,6 @@ public class PaymentParameters : CommonBase {
 		bindings.PaymentParameters_set_payee(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -56,7 +55,6 @@ public class PaymentParameters : CommonBase {
 		bindings.PaymentParameters_set_expiry_time(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -95,6 +93,26 @@ public class PaymentParameters : CommonBase {
 	 */
 	public void set_max_path_count(byte val) {
 		bindings.PaymentParameters_set_max_path_count(this.ptr, val);
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
+	}
+
+	/**
+	 * The maximum number of [`Path::hops`] in any returned path.
+	 * Defaults to [`MAX_PATH_LENGTH_ESTIMATE`].
+	 */
+	public byte get_max_path_length() {
+		byte ret = bindings.PaymentParameters_get_max_path_length(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * The maximum number of [`Path::hops`] in any returned path.
+	 * Defaults to [`MAX_PATH_LENGTH_ESTIMATE`].
+	 */
+	public void set_max_path_length(byte val) {
+		bindings.PaymentParameters_set_max_path_length(this.ptr, val);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 	}
@@ -196,20 +214,19 @@ public class PaymentParameters : CommonBase {
 	/**
 	 * Constructs a new PaymentParameters given each field
 	 */
-	public static PaymentParameters of(org.ldk.structs.Payee payee_arg, org.ldk.structs.Option_u64Z expiry_time_arg, int max_total_cltv_expiry_delta_arg, byte max_path_count_arg, byte max_channel_saturation_power_of_half_arg, long[] previously_failed_channels_arg, long[] previously_failed_blinded_path_idxs_arg) {
-		long ret = bindings.PaymentParameters_new(payee_arg.ptr, expiry_time_arg.ptr, max_total_cltv_expiry_delta_arg, max_path_count_arg, max_channel_saturation_power_of_half_arg, InternalUtils.encodeUint64Array(previously_failed_channels_arg), InternalUtils.encodeUint64Array(previously_failed_blinded_path_idxs_arg));
+	public static PaymentParameters of(org.ldk.structs.Payee payee_arg, org.ldk.structs.Option_u64Z expiry_time_arg, int max_total_cltv_expiry_delta_arg, byte max_path_count_arg, byte max_path_length_arg, byte max_channel_saturation_power_of_half_arg, long[] previously_failed_channels_arg, long[] previously_failed_blinded_path_idxs_arg) {
+		long ret = bindings.PaymentParameters_new(payee_arg.ptr, expiry_time_arg.ptr, max_total_cltv_expiry_delta_arg, max_path_count_arg, max_path_length_arg, max_channel_saturation_power_of_half_arg, InternalUtils.encodeUint64Array(previously_failed_channels_arg), InternalUtils.encodeUint64Array(previously_failed_blinded_path_idxs_arg));
 		GC.KeepAlive(payee_arg);
 		GC.KeepAlive(expiry_time_arg);
 		GC.KeepAlive(max_total_cltv_expiry_delta_arg);
 		GC.KeepAlive(max_path_count_arg);
+		GC.KeepAlive(max_path_length_arg);
 		GC.KeepAlive(max_channel_saturation_power_of_half_arg);
 		GC.KeepAlive(previously_failed_channels_arg);
 		GC.KeepAlive(previously_failed_blinded_path_idxs_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PaymentParameters ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.PaymentParameters(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(payee_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(expiry_time_arg); };
 		return ret_hu_conv;
 	}
 
@@ -341,8 +358,8 @@ public class PaymentParameters : CommonBase {
 	/**
 	 * Creates parameters for paying to a blinded payee from the provided blinded route hints.
 	 */
-	public static PaymentParameters blinded(TwoTuple_BlindedPayInfoBlindedPathZ[] blinded_route_hints) {
-		long ret = bindings.PaymentParameters_blinded(InternalUtils.encodeUint64Array(InternalUtils.mapArray(blinded_route_hints, blinded_route_hints_conv_37 => blinded_route_hints_conv_37.ptr)));
+	public static PaymentParameters blinded(BlindedPaymentPath[] blinded_route_hints) {
+		long ret = bindings.PaymentParameters_blinded(InternalUtils.encodeUint64Array(InternalUtils.mapArray(blinded_route_hints, blinded_route_hints_conv_20 => blinded_route_hints_conv_20.ptr)));
 		GC.KeepAlive(blinded_route_hints);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PaymentParameters ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.PaymentParameters(null, ret); }

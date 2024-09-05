@@ -89,7 +89,7 @@ public class Bolt11Invoice : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.SignedRawBolt11Invoice ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.SignedRawBolt11Invoice(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
-		if (this != null) { this.ptrs_to.AddLast(this); };
+		;
 		return ret_hu_conv;
 	}
 
@@ -131,7 +131,6 @@ public class Bolt11Invoice : CommonBase {
 		GC.KeepAlive(signed_invoice);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_Bolt11InvoiceBolt11SemanticErrorZ ret_hu_conv = Result_Bolt11InvoiceBolt11SemanticErrorZ.constr_from_ptr(ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(signed_invoice); };
 		return ret_hu_conv;
 	}
 

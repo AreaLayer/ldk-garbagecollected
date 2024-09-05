@@ -13,6 +13,9 @@ public interface OnionMessageContentsInterface {
 	/**Returns the TLV type identifying the message contents. MUST be >= 64.
 	 */
 	long tlv_type();
+	/**Returns the message type
+	 */
+	string msg_type();
 	/**Serialize the object into a byte array
 	 */
 	byte[] write();
@@ -42,6 +45,12 @@ public class OnionMessageContents : CommonBase {
 			long ret = arg.tlv_type();
 				GC.KeepAlive(arg);
 			return ret;
+		}
+		public long msg_type() {
+			string ret = arg.msg_type();
+				GC.KeepAlive(arg);
+			long result = InternalUtils.encodeString(ret);
+			return result;
 		}
 		public long write() {
 			byte[] ret = arg.write();
@@ -76,6 +85,17 @@ public class OnionMessageContents : CommonBase {
 		long ret = bindings.OnionMessageContents_tlv_type(this.ptr);
 		GC.KeepAlive(this);
 		return ret;
+	}
+
+	/**
+	 * Returns the message type
+	 */
+	public string msg_type() {
+		long ret = bindings.OnionMessageContents_msg_type(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		string ret_conv = InternalUtils.decodeString(ret);
+		return ret_conv;
 	}
 
 	/**

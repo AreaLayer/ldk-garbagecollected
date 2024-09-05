@@ -101,9 +101,6 @@ public class FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ extends Com
 		if (ret >= 0 && ret <= 4096) { return null; }
 		FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ ret_hu_conv = new FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(a); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(b); };
-		for (MonitorEvent c_conv_14: c) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(c_conv_14); }; };
 		return ret_hu_conv;
 	}
 

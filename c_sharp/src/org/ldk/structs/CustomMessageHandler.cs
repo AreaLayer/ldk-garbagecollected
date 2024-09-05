@@ -20,6 +20,16 @@ public interface CustomMessageHandlerInterface {
 	 * connection to the node exists, then the message is simply not sent.
 	 */
 	TwoTuple_PublicKeyTypeZ[] get_and_clear_pending_msg();
+	/**Indicates a peer disconnected.
+	 */
+	void peer_disconnected(byte[] their_node_id);
+	/**Handle a peer connecting.
+	 * 
+	 * May return an `Err(())` if the features the peer supports are not sufficient to communicate
+	 * with us. Implementors should be somewhat conservative about doing so, however, as other
+	 * message handlers may still wish to communicate with this peer.
+	 */
+	Result_NoneNoneZ peer_connected(byte[] their_node_id, Init msg, bool inbound);
 	/**Gets the node feature flags which this handler itself supports. All available handlers are
 	 * queried similarly and their feature flags are OR'd together to form the [`NodeFeatures`]
 	 * which are broadcasted in our [`NodeAnnouncement`] message.
@@ -73,6 +83,19 @@ public class CustomMessageHandler : CommonBase {
 			TwoTuple_PublicKeyTypeZ[] ret = arg.get_and_clear_pending_msg();
 				GC.KeepAlive(arg);
 			long result = InternalUtils.encodeUint64Array(InternalUtils.mapArray(ret, ret_conv_25 => ret_conv_25.clone_ptr()));
+			return result;
+		}
+		public void peer_disconnected(long _their_node_id) {
+			byte[] _their_node_id_conv = InternalUtils.decodeUint8Array(_their_node_id);
+			arg.peer_disconnected(_their_node_id_conv);
+				GC.KeepAlive(arg);
+		}
+		public long peer_connected(long _their_node_id, long _msg, bool _inbound) {
+			byte[] _their_node_id_conv = InternalUtils.decodeUint8Array(_their_node_id);
+			org.ldk.structs.Init _msg_hu_conv = null; if (_msg < 0 || _msg > 4096) { _msg_hu_conv = new org.ldk.structs.Init(null, _msg); }
+			Result_NoneNoneZ ret = arg.peer_connected(_their_node_id_conv, _msg_hu_conv, _inbound);
+				GC.KeepAlive(arg);
+			long result = ret.clone_ptr();
 			return result;
 		}
 		public long provided_node_features() {
@@ -139,6 +162,34 @@ public class CustomMessageHandler : CommonBase {
 		}
 		bindings.free_buffer(ret);
 		return ret_conv_25_arr;
+	}
+
+	/**
+	 * Indicates a peer disconnected.
+	 */
+	public void peer_disconnected(byte[] their_node_id) {
+		bindings.CustomMessageHandler_peer_disconnected(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)));
+		GC.KeepAlive(this);
+		GC.KeepAlive(their_node_id);
+	}
+
+	/**
+	 * Handle a peer connecting.
+	 * 
+	 * May return an `Err(())` if the features the peer supports are not sufficient to communicate
+	 * with us. Implementors should be somewhat conservative about doing so, however, as other
+	 * message handlers may still wish to communicate with this peer.
+	 */
+	public Result_NoneNoneZ peer_connected(byte[] their_node_id, org.ldk.structs.Init msg, bool inbound) {
+		long ret = bindings.CustomMessageHandler_peer_connected(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)), msg.ptr, inbound);
+		GC.KeepAlive(this);
+		GC.KeepAlive(their_node_id);
+		GC.KeepAlive(msg);
+		GC.KeepAlive(inbound);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_NoneNoneZ ret_hu_conv = Result_NoneNoneZ.constr_from_ptr(ret);
+		if (this != null) { this.ptrs_to.AddLast(msg); };
+		return ret_hu_conv;
 	}
 
 	/**

@@ -71,7 +71,6 @@ public class PeerDetails extends CommonBase {
 		bindings.PeerDetails_set_socket_address(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -93,7 +92,6 @@ public class PeerDetails extends CommonBase {
 		bindings.PeerDetails_set_init_features(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -130,8 +128,6 @@ public class PeerDetails extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PeerDetails ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.PeerDetails(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(socket_address_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(init_features_arg); };
 		return ret_hu_conv;
 	}
 

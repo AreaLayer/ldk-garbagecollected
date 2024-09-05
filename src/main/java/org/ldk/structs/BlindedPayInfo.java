@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 
 
 /**
- * Information needed to route a payment across a [`BlindedPath`].
+ * Information needed to route a payment across a [`BlindedPaymentPath`].
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class BlindedPayInfo extends CommonBase {
@@ -143,7 +143,6 @@ public class BlindedPayInfo extends CommonBase {
 		bindings.BlindedPayInfo_set_features(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -160,7 +159,6 @@ public class BlindedPayInfo extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.BlindedPayInfo ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.BlindedPayInfo(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(features_arg); };
 		return ret_hu_conv;
 	}
 

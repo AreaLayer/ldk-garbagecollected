@@ -556,5 +556,23 @@ public class EcdsaChannelSigner : CommonBase {
 		return ret_hu_conv;
 	}
 
+	internal long clone_ptr() {
+		long ret = bindings.EcdsaChannelSigner_clone_ptr(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Creates a copy of a EcdsaChannelSigner
+	 */
+	public EcdsaChannelSigner clone() {
+		long ret = bindings.EcdsaChannelSigner_clone(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		EcdsaChannelSigner ret_hu_conv = new EcdsaChannelSigner(null, ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
+	}
+
 }
 } } }

@@ -145,8 +145,6 @@ public class Watch : CommonBase {
 		GC.KeepAlive(monitor);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ChannelMonitorUpdateStatusNoneZ ret_hu_conv = Result_ChannelMonitorUpdateStatusNoneZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.AddLast(funding_txo); };
-		if (this != null) { this.ptrs_to.AddLast(monitor); };
 		return ret_hu_conv;
 	}
 
@@ -172,7 +170,6 @@ public class Watch : CommonBase {
 		GC.KeepAlive(this);
 		GC.KeepAlive(funding_txo);
 		GC.KeepAlive(update);
-		if (this != null) { this.ptrs_to.AddLast(funding_txo); };
 		if (this != null) { this.ptrs_to.AddLast(update); };
 		return ret;
 	}

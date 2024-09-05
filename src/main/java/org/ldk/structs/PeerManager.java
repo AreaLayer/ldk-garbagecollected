@@ -133,7 +133,6 @@ public class PeerManager extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CVec_u8ZPeerHandleErrorZ ret_hu_conv = Result_CVec_u8ZPeerHandleErrorZ.constr_from_ptr(ret);
 		if (this != null) { this.ptrs_to.add(descriptor); };
-		if (this != null) { this.ptrs_to.add(remote_network_address); };
 		return ret_hu_conv;
 	}
 
@@ -162,7 +161,6 @@ public class PeerManager extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NonePeerHandleErrorZ ret_hu_conv = Result_NonePeerHandleErrorZ.constr_from_ptr(ret);
 		if (this != null) { this.ptrs_to.add(descriptor); };
-		if (this != null) { this.ptrs_to.add(remote_network_address); };
 		return ret_hu_conv;
 	}
 
@@ -316,7 +314,6 @@ public class PeerManager extends CommonBase {
 		Reference.reachabilityFence(rgb);
 		Reference.reachabilityFence(alias);
 		Reference.reachabilityFence(addresses);
-		for (SocketAddress addresses_conv_15: addresses) { if (this != null) { this.ptrs_to.add(addresses_conv_15); }; };
 	}
 
 }

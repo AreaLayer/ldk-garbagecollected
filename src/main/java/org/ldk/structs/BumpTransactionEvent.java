@@ -259,9 +259,6 @@ public class BumpTransactionEvent extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.BumpTransactionEvent ret_hu_conv = org.ldk.structs.BumpTransactionEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(anchor_descriptor); };
-		for (HTLCOutputInCommitment pending_htlcs_conv_24: pending_htlcs) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(pending_htlcs_conv_24); }; };
 		return ret_hu_conv;
 	}
 
@@ -279,8 +276,6 @@ public class BumpTransactionEvent extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.BumpTransactionEvent ret_hu_conv = org.ldk.structs.BumpTransactionEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id); };
-		for (HTLCDescriptor htlc_descriptors_conv_16: htlc_descriptors) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(htlc_descriptors_conv_16); }; };
 		return ret_hu_conv;
 	}
 

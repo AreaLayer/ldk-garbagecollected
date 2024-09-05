@@ -57,7 +57,6 @@ public class RouteHop : CommonBase {
 		bindings.RouteHop_set_node_features(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -99,16 +98,14 @@ public class RouteHop : CommonBase {
 		bindings.RouteHop_set_channel_features(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
 	 * The fee taken on this hop (for paying for the use of the *next* channel in the path).
 	 * If this is the last hop in [`Path::hops`]:
-	 * if we're sending to a [`BlindedPath`], this is the fee paid for use of the entire blinded path
+	 * if we're sending to a [`BlindedPaymentPath`], this is the fee paid for use of the entire
+	 * blinded path
 	 * otherwise, this is the full value of this [`Path`]'s part of the payment
-	 * 
-	 * [`BlindedPath`]: crate::blinded_path::BlindedPath
 	 */
 	public long get_fee_msat() {
 		long ret = bindings.RouteHop_get_fee_msat(this.ptr);
@@ -119,10 +116,9 @@ public class RouteHop : CommonBase {
 	/**
 	 * The fee taken on this hop (for paying for the use of the *next* channel in the path).
 	 * If this is the last hop in [`Path::hops`]:
-	 * if we're sending to a [`BlindedPath`], this is the fee paid for use of the entire blinded path
+	 * if we're sending to a [`BlindedPaymentPath`], this is the fee paid for use of the entire
+	 * blinded path
 	 * otherwise, this is the full value of this [`Path`]'s part of the payment
-	 * 
-	 * [`BlindedPath`]: crate::blinded_path::BlindedPath
 	 */
 	public void set_fee_msat(long val) {
 		bindings.RouteHop_set_fee_msat(this.ptr, val);
@@ -133,10 +129,9 @@ public class RouteHop : CommonBase {
 	/**
 	 * The CLTV delta added for this hop.
 	 * If this is the last hop in [`Path::hops`]:
-	 * if we're sending to a [`BlindedPath`], this is the CLTV delta for the entire blinded path
+	 * if we're sending to a [`BlindedPaymentPath`], this is the CLTV delta for the entire blinded
+	 * path
 	 * otherwise, this is the CLTV delta expected at the destination
-	 * 
-	 * [`BlindedPath`]: crate::blinded_path::BlindedPath
 	 */
 	public int get_cltv_expiry_delta() {
 		int ret = bindings.RouteHop_get_cltv_expiry_delta(this.ptr);
@@ -147,10 +142,9 @@ public class RouteHop : CommonBase {
 	/**
 	 * The CLTV delta added for this hop.
 	 * If this is the last hop in [`Path::hops`]:
-	 * if we're sending to a [`BlindedPath`], this is the CLTV delta for the entire blinded path
+	 * if we're sending to a [`BlindedPaymentPath`], this is the CLTV delta for the entire blinded
+	 * path
 	 * otherwise, this is the CLTV delta expected at the destination
-	 * 
-	 * [`BlindedPath`]: crate::blinded_path::BlindedPath
 	 */
 	public void set_cltv_expiry_delta(int val) {
 		bindings.RouteHop_set_cltv_expiry_delta(this.ptr, val);
@@ -205,8 +199,6 @@ public class RouteHop : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.RouteHop ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.RouteHop(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(node_features_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_features_arg); };
 		return ret_hu_conv;
 	}
 

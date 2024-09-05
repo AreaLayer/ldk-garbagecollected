@@ -57,7 +57,6 @@ public class ProbabilisticScorer : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ProbabilisticScorer ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ProbabilisticScorer(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(decay_params); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(network_graph); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(logger); };
 		return ret_hu_conv;
@@ -215,7 +214,6 @@ public class ProbabilisticScorer : CommonBase {
 		GC.KeepAlive(arg_c);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ProbabilisticScorerDecodeErrorZ ret_hu_conv = Result_ProbabilisticScorerDecodeErrorZ.constr_from_ptr(ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(arg_a); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(arg_b); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(arg_c); };
 		return ret_hu_conv;

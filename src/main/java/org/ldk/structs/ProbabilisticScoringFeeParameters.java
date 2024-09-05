@@ -476,7 +476,6 @@ public class ProbabilisticScoringFeeParameters extends CommonBase {
 		bindings.ProbabilisticScoringFeeParameters_add_banned_from_list(this.ptr, node_ids != null ? Arrays.stream(node_ids).mapToLong(node_ids_conv_8 -> node_ids_conv_8.ptr).toArray() : null);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(node_ids);
-		for (NodeId node_ids_conv_8: node_ids) { if (this != null) { this.ptrs_to.add(node_ids_conv_8); }; };
 	}
 
 	/**

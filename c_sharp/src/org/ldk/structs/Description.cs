@@ -66,8 +66,8 @@ public class Description : CommonBase {
 		return this.eq((Description)o);
 	}
 	/**
-	 * Creates a new `Description` if `description` is at most 1023 __bytes__ long,
-	 * returns [`CreationError::DescriptionTooLong`] otherwise
+	 * Creates a new `Description` if `description` is at most 1023 * 5 bits (i.e., 639 bytes)
+	 * long, and returns [`CreationError::DescriptionTooLong`] otherwise.
 	 * 
 	 * Please note that single characters may use more than one byte due to UTF8 encoding.
 	 */
@@ -88,7 +88,19 @@ public class Description : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.UntrustedString ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.UntrustedString(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
-		if (this != null) { this.ptrs_to.AddLast(this); };
+		;
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Get a reference to the underlying description [`UntrustedString`]
+	 */
+	public UntrustedString as_inner() {
+		long ret = bindings.Description_as_inner(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.UntrustedString ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.UntrustedString(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
 		return ret_hu_conv;
 	}
 

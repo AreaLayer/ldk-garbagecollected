@@ -70,7 +70,6 @@ public class TwoTuple_OutPointCVec_u8ZZ extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		TwoTuple_OutPointCVec_u8ZZ ret_hu_conv = new TwoTuple_OutPointCVec_u8ZZ(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(a); };
 		return ret_hu_conv;
 	}
 

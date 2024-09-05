@@ -48,6 +48,10 @@ public enum Secp256k1Error {
 	 * The only valid parity values are 0 or 1.
 	 */
 	LDKSecp256k1Error_InvalidParityValue,
+	/**
+	 * Invalid Elligator Swift Value
+	 */
+	LDKSecp256k1Error_InvalidEllSwift,
 	; static native void init();
 	static { org.ldk.impl.bindings.run_statics(); init(); }
 }

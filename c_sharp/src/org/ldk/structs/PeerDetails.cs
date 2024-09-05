@@ -68,7 +68,6 @@ public class PeerDetails : CommonBase {
 		bindings.PeerDetails_set_socket_address(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -90,7 +89,6 @@ public class PeerDetails : CommonBase {
 		bindings.PeerDetails_set_init_features(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -127,8 +125,6 @@ public class PeerDetails : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PeerDetails ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.PeerDetails(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(socket_address_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(init_features_arg); };
 		return ret_hu_conv;
 	}
 

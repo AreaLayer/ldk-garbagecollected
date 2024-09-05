@@ -132,7 +132,6 @@ public class RoutingMessageHandler : CommonBase {
 			Option_C3Tuple_ChannelAnnouncementChannelUpdateChannelUpdateZZ ret = arg.get_next_channel_announcement(_starting_point);
 				GC.KeepAlive(arg);
 			long result = ret.clone_ptr();
-			if (impl_holder.held != null) { impl_holder.held.ptrs_to.AddLast(ret); };
 			return result;
 		}
 		public long get_next_node_announcement(long _starting_point) {
@@ -294,7 +293,6 @@ public class RoutingMessageHandler : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.NodeAnnouncement ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.NodeAnnouncement(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
-		if (this != null) { this.ptrs_to.AddLast(starting_point); };
 		return ret_hu_conv;
 	}
 
@@ -331,7 +329,6 @@ public class RoutingMessageHandler : CommonBase {
 		GC.KeepAlive(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneLightningErrorZ ret_hu_conv = Result_NoneLightningErrorZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -348,7 +345,6 @@ public class RoutingMessageHandler : CommonBase {
 		GC.KeepAlive(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneLightningErrorZ ret_hu_conv = Result_NoneLightningErrorZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -363,7 +359,6 @@ public class RoutingMessageHandler : CommonBase {
 		GC.KeepAlive(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneLightningErrorZ ret_hu_conv = Result_NoneLightningErrorZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 
@@ -378,7 +373,6 @@ public class RoutingMessageHandler : CommonBase {
 		GC.KeepAlive(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneLightningErrorZ ret_hu_conv = Result_NoneLightningErrorZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.AddLast(msg); };
 		return ret_hu_conv;
 	}
 

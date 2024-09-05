@@ -54,11 +54,11 @@ public class SignerProvider extends CommonBase {
 		 * re-derived from its `channel_keys_id`, which can be obtained through its trait method
 		 * [`ChannelSigner::channel_keys_id`].
 		 */
-		WriteableEcdsaChannelSigner derive_channel_signer(long channel_value_satoshis, byte[] channel_keys_id);
+		EcdsaChannelSigner derive_channel_signer(long channel_value_satoshis, byte[] channel_keys_id);
 		/**
 		 * Reads a [`Signer`] for this [`SignerProvider`] from the given input stream.
 		 * This is only called during deserialization of other objects which contain
-		 * [`WriteableEcdsaChannelSigner`]-implementing objects (i.e., [`ChannelMonitor`]s and [`ChannelManager`]s).
+		 * [`EcdsaChannelSigner`]-implementing objects (i.e., [`ChannelMonitor`]s and [`ChannelManager`]s).
 		 * The bytes are exactly those which `<Self::Signer as Writeable>::write()` writes, and
 		 * contain no versioning scheme. You may wish to include your own version prefix and ensure
 		 * you've read all of the provided bytes to ensure no corruption occurred.
@@ -70,7 +70,7 @@ public class SignerProvider extends CommonBase {
 		 * [`ChannelMonitor`]: crate::chain::channelmonitor::ChannelMonitor
 		 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 		 */
-		Result_WriteableEcdsaChannelSignerDecodeErrorZ read_chan_signer(byte[] reader);
+		Result_EcdsaChannelSignerDecodeErrorZ read_chan_signer(byte[] reader);
 		/**
 		 * Get a script pubkey which we send funds to when claiming on-chain contestable outputs.
 		 * 
@@ -105,14 +105,14 @@ public class SignerProvider extends CommonBase {
 				return result;
 			}
 			@Override public long derive_channel_signer(long channel_value_satoshis, byte[] channel_keys_id) {
-				WriteableEcdsaChannelSigner ret = arg.derive_channel_signer(channel_value_satoshis, channel_keys_id);
+				EcdsaChannelSigner ret = arg.derive_channel_signer(channel_value_satoshis, channel_keys_id);
 				Reference.reachabilityFence(arg);
 				long result = ret.clone_ptr();
 				if (impl_holder.held != null) { impl_holder.held.ptrs_to.add(ret); };
 				return result;
 			}
 			@Override public long read_chan_signer(byte[] reader) {
-				Result_WriteableEcdsaChannelSignerDecodeErrorZ ret = arg.read_chan_signer(reader);
+				Result_EcdsaChannelSignerDecodeErrorZ ret = arg.read_chan_signer(reader);
 				Reference.reachabilityFence(arg);
 				long result = ret.clone_ptr();
 				return result;
@@ -157,13 +157,13 @@ public class SignerProvider extends CommonBase {
 	 * re-derived from its `channel_keys_id`, which can be obtained through its trait method
 	 * [`ChannelSigner::channel_keys_id`].
 	 */
-	public WriteableEcdsaChannelSigner derive_channel_signer(long channel_value_satoshis, byte[] channel_keys_id) {
+	public EcdsaChannelSigner derive_channel_signer(long channel_value_satoshis, byte[] channel_keys_id) {
 		long ret = bindings.SignerProvider_derive_channel_signer(this.ptr, channel_value_satoshis, InternalUtils.check_arr_len(channel_keys_id, 32));
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(channel_value_satoshis);
 		Reference.reachabilityFence(channel_keys_id);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		WriteableEcdsaChannelSigner ret_hu_conv = new WriteableEcdsaChannelSigner(null, ret);
+		EcdsaChannelSigner ret_hu_conv = new EcdsaChannelSigner(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
 		return ret_hu_conv;
 	}
@@ -171,7 +171,7 @@ public class SignerProvider extends CommonBase {
 	/**
 	 * Reads a [`Signer`] for this [`SignerProvider`] from the given input stream.
 	 * This is only called during deserialization of other objects which contain
-	 * [`WriteableEcdsaChannelSigner`]-implementing objects (i.e., [`ChannelMonitor`]s and [`ChannelManager`]s).
+	 * [`EcdsaChannelSigner`]-implementing objects (i.e., [`ChannelMonitor`]s and [`ChannelManager`]s).
 	 * The bytes are exactly those which `<Self::Signer as Writeable>::write()` writes, and
 	 * contain no versioning scheme. You may wish to include your own version prefix and ensure
 	 * you've read all of the provided bytes to ensure no corruption occurred.
@@ -183,12 +183,12 @@ public class SignerProvider extends CommonBase {
 	 * [`ChannelMonitor`]: crate::chain::channelmonitor::ChannelMonitor
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 */
-	public Result_WriteableEcdsaChannelSignerDecodeErrorZ read_chan_signer(byte[] reader) {
+	public Result_EcdsaChannelSignerDecodeErrorZ read_chan_signer(byte[] reader) {
 		long ret = bindings.SignerProvider_read_chan_signer(this.ptr, reader);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(reader);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_WriteableEcdsaChannelSignerDecodeErrorZ ret_hu_conv = Result_WriteableEcdsaChannelSignerDecodeErrorZ.constr_from_ptr(ret);
+		Result_EcdsaChannelSignerDecodeErrorZ ret_hu_conv = Result_EcdsaChannelSignerDecodeErrorZ.constr_from_ptr(ret);
 		return ret_hu_conv;
 	}
 

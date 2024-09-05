@@ -28,6 +28,9 @@ public class Event extends CommonBase {
 		if (raw_val.getClass() == bindings.LDKEvent.FundingGenerationReady.class) {
 			return new FundingGenerationReady(ptr, (bindings.LDKEvent.FundingGenerationReady)raw_val);
 		}
+		if (raw_val.getClass() == bindings.LDKEvent.FundingTxBroadcastSafe.class) {
+			return new FundingTxBroadcastSafe(ptr, (bindings.LDKEvent.FundingTxBroadcastSafe)raw_val);
+		}
 		if (raw_val.getClass() == bindings.LDKEvent.PaymentClaimable.class) {
 			return new PaymentClaimable(ptr, (bindings.LDKEvent.PaymentClaimable)raw_val);
 		}
@@ -37,8 +40,8 @@ public class Event extends CommonBase {
 		if (raw_val.getClass() == bindings.LDKEvent.ConnectionNeeded.class) {
 			return new ConnectionNeeded(ptr, (bindings.LDKEvent.ConnectionNeeded)raw_val);
 		}
-		if (raw_val.getClass() == bindings.LDKEvent.InvoiceRequestFailed.class) {
-			return new InvoiceRequestFailed(ptr, (bindings.LDKEvent.InvoiceRequestFailed)raw_val);
+		if (raw_val.getClass() == bindings.LDKEvent.InvoiceReceived.class) {
+			return new InvoiceReceived(ptr, (bindings.LDKEvent.InvoiceReceived)raw_val);
 		}
 		if (raw_val.getClass() == bindings.LDKEvent.PaymentSent.class) {
 			return new PaymentSent(ptr, (bindings.LDKEvent.PaymentSent)raw_val);
@@ -91,6 +94,12 @@ public class Event extends CommonBase {
 		if (raw_val.getClass() == bindings.LDKEvent.BumpTransaction.class) {
 			return new BumpTransaction(ptr, (bindings.LDKEvent.BumpTransaction)raw_val);
 		}
+		if (raw_val.getClass() == bindings.LDKEvent.OnionMessageIntercepted.class) {
+			return new OnionMessageIntercepted(ptr, (bindings.LDKEvent.OnionMessageIntercepted)raw_val);
+		}
+		if (raw_val.getClass() == bindings.LDKEvent.OnionMessagePeerConnected.class) {
+			return new OnionMessagePeerConnected(ptr, (bindings.LDKEvent.OnionMessagePeerConnected)raw_val);
+		}
 		assert false; return null; // Unreachable without extending the (internal) bindings interface
 	}
 
@@ -100,6 +109,10 @@ public class Event extends CommonBase {
 	 * Generated in [`ChannelManager`] message handling.
 	 * Note that *all inputs* in the funding transaction must spend SegWit outputs or your
 	 * counterparty can steal your funds!
+	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`), but won't be persisted across restarts.
 	 * 
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 * [`ChannelManager::funding_transaction_generated`]: crate::ln::channelmanager::ChannelManager::funding_transaction_generated
@@ -154,6 +167,63 @@ public class Event extends CommonBase {
 		}
 	}
 	/**
+	 * Used to indicate that the counterparty node has provided the signature(s) required to
+	 * recover our funds in case they go offline.
+	 * 
+	 * It is safe (and your responsibility) to broadcast the funding transaction upon receiving this
+	 * event.
+	 * 
+	 * This event is only emitted if you called
+	 * [`ChannelManager::unsafe_manual_funding_transaction_generated`] instead of
+	 * [`ChannelManager::funding_transaction_generated`].
+	 * 
+	 * [`ChannelManager::unsafe_manual_funding_transaction_generated`]: crate::ln::channelmanager::ChannelManager::unsafe_manual_funding_transaction_generated
+	 * [`ChannelManager::funding_transaction_generated`]: crate::ln::channelmanager::ChannelManager::funding_transaction_generated
+	 */
+	public final static class FundingTxBroadcastSafe extends Event {
+		/**
+		 * The `channel_id` indicating which channel has reached this stage.
+		*/
+		public final org.ldk.structs.ChannelId channel_id;
+		/**
+		 * The `user_channel_id` value passed in to [`ChannelManager::create_channel`].
+		 * 
+		 * [`ChannelManager::create_channel`]: crate::ln::channelmanager::ChannelManager::create_channel
+		*/
+		public final org.ldk.util.UInt128 user_channel_id;
+		/**
+		 * The outpoint of the channel's funding transaction.
+		*/
+		public final org.ldk.structs.OutPoint funding_txo;
+		/**
+		 * The `node_id` of the channel counterparty.
+		*/
+		public final byte[] counterparty_node_id;
+		/**
+		 * The `temporary_channel_id` this channel used to be known by during channel establishment.
+		*/
+		public final org.ldk.structs.ChannelId former_temporary_channel_id;
+		private FundingTxBroadcastSafe(long ptr, bindings.LDKEvent.FundingTxBroadcastSafe obj) {
+			super(null, ptr);
+			long channel_id = obj.channel_id;
+			org.ldk.structs.ChannelId channel_id_hu_conv = null; if (channel_id < 0 || channel_id > 4096) { channel_id_hu_conv = new org.ldk.structs.ChannelId(null, channel_id); }
+			if (channel_id_hu_conv != null) { channel_id_hu_conv.ptrs_to.add(this); };
+			this.channel_id = channel_id_hu_conv;
+			byte[] user_channel_id = obj.user_channel_id;
+			org.ldk.util.UInt128 user_channel_id_conv = new org.ldk.util.UInt128(user_channel_id);
+			this.user_channel_id = user_channel_id_conv;
+			long funding_txo = obj.funding_txo;
+			org.ldk.structs.OutPoint funding_txo_hu_conv = null; if (funding_txo < 0 || funding_txo > 4096) { funding_txo_hu_conv = new org.ldk.structs.OutPoint(null, funding_txo); }
+			if (funding_txo_hu_conv != null) { funding_txo_hu_conv.ptrs_to.add(this); };
+			this.funding_txo = funding_txo_hu_conv;
+			this.counterparty_node_id = obj.counterparty_node_id;
+			long former_temporary_channel_id = obj.former_temporary_channel_id;
+			org.ldk.structs.ChannelId former_temporary_channel_id_hu_conv = null; if (former_temporary_channel_id < 0 || former_temporary_channel_id > 4096) { former_temporary_channel_id_hu_conv = new org.ldk.structs.ChannelId(null, former_temporary_channel_id); }
+			if (former_temporary_channel_id_hu_conv != null) { former_temporary_channel_id_hu_conv.ptrs_to.add(this); };
+			this.former_temporary_channel_id = former_temporary_channel_id_hu_conv;
+		}
+	}
+	/**
 	 * Indicates that we've been offered a payment and it needs to be claimed via calling
 	 * [`ChannelManager::claim_funds`] with the preimage given in [`PaymentPurpose`].
 	 * 
@@ -182,6 +252,10 @@ public class Event extends CommonBase {
 	 * 
 	 * # Note
 	 * This event used to be called `PaymentReceived` in LDK versions 0.0.112 and earlier.
+	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`) and will be persisted across restarts.
 	 * 
 	 * [`ChannelManager::claim_funds`]: crate::ln::channelmanager::ChannelManager::claim_funds
 	 * [`ChannelManager::claim_funds_with_known_custom_tlvs`]: crate::ln::channelmanager::ChannelManager::claim_funds_with_known_custom_tlvs
@@ -305,6 +379,10 @@ public class Event extends CommonBase {
 	 * [`ChannelManager::claim_funds`] twice for the same [`Event::PaymentClaimable`] you may get
 	 * multiple `PaymentClaimed` events.
 	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`) and will be persisted across restarts.
+	 * 
 	 * [`ChannelManager::claim_funds`]: crate::ln::channelmanager::ChannelManager::claim_funds
 	 */
 	public final static class PaymentClaimed extends Event {
@@ -344,6 +422,15 @@ public class Event extends CommonBase {
 		 * serialized prior to LDK version 0.0.117.
 		*/
 		public final org.ldk.structs.Option_u64Z sender_intended_total_msat;
+		/**
+		 * The fields in the onion which were received with each HTLC. Only fields which were
+		 * identical in each HTLC involved in the payment will be included here.
+		 * 
+		 * Payments received on LDK versions prior to 0.0.124 will have this field unset.
+		 * 
+		 * Note that this (or a relevant inner pointer) may be NULL or all-0s to represent None
+		*/
+		@Nullable public final org.ldk.structs.RecipientOnionFields onion_fields;
 		private PaymentClaimed(long ptr, bindings.LDKEvent.PaymentClaimed obj) {
 			super(null, ptr);
 			this.receiver_node_id = obj.receiver_node_id;
@@ -367,6 +454,10 @@ public class Event extends CommonBase {
 			org.ldk.structs.Option_u64Z sender_intended_total_msat_hu_conv = org.ldk.structs.Option_u64Z.constr_from_ptr(sender_intended_total_msat);
 			if (sender_intended_total_msat_hu_conv != null) { sender_intended_total_msat_hu_conv.ptrs_to.add(this); };
 			this.sender_intended_total_msat = sender_intended_total_msat_hu_conv;
+			long onion_fields = obj.onion_fields;
+			org.ldk.structs.RecipientOnionFields onion_fields_hu_conv = null; if (onion_fields < 0 || onion_fields > 4096) { onion_fields_hu_conv = new org.ldk.structs.RecipientOnionFields(null, onion_fields); }
+			if (onion_fields_hu_conv != null) { onion_fields_hu_conv.ptrs_to.add(this); };
+			this.onion_fields = onion_fields_hu_conv;
 		}
 	}
 	/**
@@ -378,6 +469,11 @@ public class Event extends CommonBase {
 	 * 
 	 * This event will not be generated for onion message forwards; only for sends including
 	 * replies. Handlers should connect to the node otherwise any buffered messages may be lost.
+	 * 
+	 * # Failure Behavior and Persistence
+	 * This event won't be replayed after failures-to-handle
+	 * (i.e., the event handler returning `Err(ReplayEvent ())`), and also won't be persisted
+	 * across restarts.
 	 * 
 	 * [`OnionMessage`]: msgs::OnionMessage
 	 * [`MessageRouter`]: crate::onion_message::messenger::MessageRouter
@@ -409,23 +505,64 @@ public class Event extends CommonBase {
 		}
 	}
 	/**
-	 * Indicates a request for an invoice failed to yield a response in a reasonable amount of time
-	 * or was explicitly abandoned by [`ChannelManager::abandon_payment`]. This may be for an
-	 * [`InvoiceRequest`] sent for an [`Offer`] or for a [`Refund`] that hasn't been redeemed.
+	 * Indicates a [`Bolt12Invoice`] in response to an [`InvoiceRequest`] or a [`Refund`] was
+	 * received.
 	 * 
-	 * [`ChannelManager::abandon_payment`]: crate::ln::channelmanager::ChannelManager::abandon_payment
+	 * This event will only be generated if [`UserConfig::manually_handle_bolt12_invoices`] is set.
+	 * Use [`ChannelManager::send_payment_for_bolt12_invoice`] to pay the invoice or
+	 * [`ChannelManager::abandon_payment`] to abandon the associated payment. See those docs for
+	 * further details.
+	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`) and will be persisted across restarts.
+	 * 
 	 * [`InvoiceRequest`]: crate::offers::invoice_request::InvoiceRequest
-	 * [`Offer`]: crate::offers::offer::Offer
 	 * [`Refund`]: crate::offers::refund::Refund
+	 * [`UserConfig::manually_handle_bolt12_invoices`]: crate::util::config::UserConfig::manually_handle_bolt12_invoices
+	 * [`ChannelManager::send_payment_for_bolt12_invoice`]: crate::ln::channelmanager::ChannelManager::send_payment_for_bolt12_invoice
+	 * [`ChannelManager::abandon_payment`]: crate::ln::channelmanager::ChannelManager::abandon_payment
 	 */
-	public final static class InvoiceRequestFailed extends Event {
+	public final static class InvoiceReceived extends Event {
 		/**
-		 * The `payment_id` to have been associated with payment for the requested invoice.
+		 * The `payment_id` associated with payment for the invoice.
 		*/
 		public final byte[] payment_id;
-		private InvoiceRequestFailed(long ptr, bindings.LDKEvent.InvoiceRequestFailed obj) {
+		/**
+		 * The invoice to pay.
+		*/
+		public final org.ldk.structs.Bolt12Invoice invoice;
+		/**
+		 * The context of the [`BlindedMessagePath`] used to send the invoice.
+		 * 
+		 * [`BlindedMessagePath`]: crate::blinded_path::message::BlindedMessagePath
+		*/
+		public final org.ldk.structs.Option_OffersContextZ context;
+		/**
+		 * A responder for replying with an [`InvoiceError`] if needed.
+		 * 
+		 * `None` if the invoice wasn't sent with a reply path.
+		 * 
+		 * [`InvoiceError`]: crate::offers::invoice_error::InvoiceError
+		 * 
+		 * Note that this (or a relevant inner pointer) may be NULL or all-0s to represent None
+		*/
+		@Nullable public final org.ldk.structs.Responder responder;
+		private InvoiceReceived(long ptr, bindings.LDKEvent.InvoiceReceived obj) {
 			super(null, ptr);
 			this.payment_id = obj.payment_id;
+			long invoice = obj.invoice;
+			org.ldk.structs.Bolt12Invoice invoice_hu_conv = null; if (invoice < 0 || invoice > 4096) { invoice_hu_conv = new org.ldk.structs.Bolt12Invoice(null, invoice); }
+			if (invoice_hu_conv != null) { invoice_hu_conv.ptrs_to.add(this); };
+			this.invoice = invoice_hu_conv;
+			long context = obj.context;
+			org.ldk.structs.Option_OffersContextZ context_hu_conv = org.ldk.structs.Option_OffersContextZ.constr_from_ptr(context);
+			if (context_hu_conv != null) { context_hu_conv.ptrs_to.add(this); };
+			this.context = context_hu_conv;
+			long responder = obj.responder;
+			org.ldk.structs.Responder responder_hu_conv = null; if (responder < 0 || responder > 4096) { responder_hu_conv = new org.ldk.structs.Responder(null, responder); }
+			if (responder_hu_conv != null) { responder_hu_conv.ptrs_to.add(this); };
+			this.responder = responder_hu_conv;
 		}
 	}
 	/**
@@ -434,6 +571,10 @@ public class Event extends CommonBase {
 	 * 
 	 * Note for MPP payments: in rare cases, this event may be preceded by a `PaymentPathFailed`
 	 * event. In this situation, you SHOULD treat this payment as having succeeded.
+	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`) and will be persisted across restarts.
 	 */
 	public final static class PaymentSent extends Event {
 		/**
@@ -462,6 +603,8 @@ public class Event extends CommonBase {
 		 * 
 		 * If the recipient or an intermediate node misbehaves and gives us free money, this may
 		 * overstate the amount paid, though this is unlikely.
+		 * 
+		 * This is only `None` for payments initiated on LDK versions prior to 0.0.103.
 		 * 
 		 * [`Route::get_total_fees`]: crate::routing::router::Route::get_total_fees
 		*/
@@ -493,6 +636,10 @@ public class Event extends CommonBase {
 	 * received and processed. In this case, the [`Event::PaymentFailed`] event MUST be ignored,
 	 * and the payment MUST be treated as having succeeded.
 	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`) and will be persisted across restarts.
+	 * 
 	 * [`Retry`]: crate::ln::channelmanager::Retry
 	 * [`ChannelManager::abandon_payment`]: crate::ln::channelmanager::ChannelManager::abandon_payment
 	 */
@@ -504,20 +651,26 @@ public class Event extends CommonBase {
 		*/
 		public final byte[] payment_id;
 		/**
-		 * The hash that was given to [`ChannelManager::send_payment`].
+		 * The hash that was given to [`ChannelManager::send_payment`]. `None` if the payment failed
+		 * before receiving an invoice when paying a BOLT12 [`Offer`].
 		 * 
 		 * [`ChannelManager::send_payment`]: crate::ln::channelmanager::ChannelManager::send_payment
+		 * [`Offer`]: crate::offers::offer::Offer
 		*/
-		public final byte[] payment_hash;
+		public final org.ldk.structs.Option_ThirtyTwoBytesZ payment_hash;
 		/**
 		 * The reason the payment failed. This is only `None` for events generated or serialized
-		 * by versions prior to 0.0.115.
+		 * by versions prior to 0.0.115, or when downgrading to a version with a reason that was
+		 * added after.
 		*/
 		public final org.ldk.structs.Option_PaymentFailureReasonZ reason;
 		private PaymentFailed(long ptr, bindings.LDKEvent.PaymentFailed obj) {
 			super(null, ptr);
 			this.payment_id = obj.payment_id;
-			this.payment_hash = obj.payment_hash;
+			long payment_hash = obj.payment_hash;
+			org.ldk.structs.Option_ThirtyTwoBytesZ payment_hash_hu_conv = org.ldk.structs.Option_ThirtyTwoBytesZ.constr_from_ptr(payment_hash);
+			if (payment_hash_hu_conv != null) { payment_hash_hu_conv.ptrs_to.add(this); };
+			this.payment_hash = payment_hash_hu_conv;
 			long reason = obj.reason;
 			org.ldk.structs.Option_PaymentFailureReasonZ reason_hu_conv = org.ldk.structs.Option_PaymentFailureReasonZ.constr_from_ptr(reason);
 			if (reason_hu_conv != null) { reason_hu_conv.ptrs_to.add(this); };
@@ -529,6 +682,10 @@ public class Event extends CommonBase {
 	 * 
 	 * Always generated after [`Event::PaymentSent`] and thus useful for scoring channels. See
 	 * [`Event::PaymentSent`] for obtaining the payment preimage.
+	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`) and will be persisted across restarts.
 	 */
 	public final static class PaymentPathSuccessful extends Event {
 		/**
@@ -573,6 +730,10 @@ public class Event extends CommonBase {
 	 * 
 	 * See [`ChannelManager::abandon_payment`] for giving up on this payment before its retries have
 	 * been exhausted.
+	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`) and will be persisted across restarts.
 	 * 
 	 * [`ChannelManager::abandon_payment`]: crate::ln::channelmanager::ChannelManager::abandon_payment
 	 */
@@ -644,6 +805,10 @@ public class Event extends CommonBase {
 	}
 	/**
 	 * Indicates that a probe payment we sent returned successful, i.e., only failed at the destination.
+	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`) and will be persisted across restarts.
 	 */
 	public final static class ProbeSuccessful extends Event {
 		/**
@@ -674,6 +839,10 @@ public class Event extends CommonBase {
 	}
 	/**
 	 * Indicates that a probe payment we sent failed at an intermediary node on the path.
+	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`) and will be persisted across restarts.
 	 */
 	public final static class ProbeFailed extends Event {
 		/**
@@ -718,6 +887,10 @@ public class Event extends CommonBase {
 	 * Used to indicate that [`ChannelManager::process_pending_htlc_forwards`] should be called at
 	 * a time in the future.
 	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`) and will be regenerated after restarts.
+	 * 
 	 * [`ChannelManager::process_pending_htlc_forwards`]: crate::ln::channelmanager::ChannelManager::process_pending_htlc_forwards
 	 */
 	public final static class PendingHTLCsForwardable extends Event {
@@ -741,6 +914,10 @@ public class Event extends CommonBase {
 	 * [`ChannelManager::forward_intercepted_htlc`] or
 	 * [`ChannelManager::fail_intercepted_htlc`] MUST be called in response to this event. See
 	 * their docs for more information.
+	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`) and will be persisted across restarts.
 	 * 
 	 * [`ChannelManager::get_intercept_scid`]: crate::ln::channelmanager::ChannelManager::get_intercept_scid
 	 * [`UserConfig::accept_intercept_htlcs`]: crate::util::config::UserConfig::accept_intercept_htlcs
@@ -797,6 +974,10 @@ public class Event extends CommonBase {
 	 * You may hand them to the [`OutputSweeper`] utility which will store and (re-)generate spending
 	 * transactions for you.
 	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`) and will be persisted across restarts.
+	 * 
 	 * [`OutputSweeper`]: crate::util::sweep::OutputSweeper
 	 */
 	public final static class SpendableOutputs extends Event {
@@ -833,6 +1014,10 @@ public class Event extends CommonBase {
 	/**
 	 * This event is generated when a payment has been successfully forwarded through us and a
 	 * forwarding fee earned.
+	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`) and will be persisted across restarts.
 	 */
 	public final static class PaymentForwarded extends Event {
 		/**
@@ -948,6 +1133,10 @@ public class Event extends CommonBase {
 	 * This event is emitted when the funding transaction has been signed and is broadcast to the
 	 * network. For 0conf channels it will be immediately followed by the corresponding
 	 * [`Event::ChannelReady`] event.
+	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`) and will be persisted across restarts.
 	 */
 	public final static class ChannelPending extends Event {
 		/**
@@ -1018,6 +1207,10 @@ public class Event extends CommonBase {
 	 * be used. This event is emitted either when the funding transaction has been confirmed
 	 * on-chain, or, in case of a 0conf channel, when both parties have confirmed the channel
 	 * establishment.
+	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`) and will be persisted across restarts.
 	 */
 	public final static class ChannelReady extends Event {
 		/**
@@ -1069,6 +1262,10 @@ public class Event extends CommonBase {
 	 * 
 	 * [`ChannelManager::accept_inbound_channel`]: crate::ln::channelmanager::ChannelManager::accept_inbound_channel
 	 * [`UserConfig::manually_accept_inbound_channels`]: crate::util::config::UserConfig::manually_accept_inbound_channels
+	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`) and will be persisted across restarts.
 	 */
 	public final static class ChannelClosed extends Event {
 		/**
@@ -1144,6 +1341,10 @@ public class Event extends CommonBase {
 	 * inputs for another purpose.
 	 * 
 	 * This event is not guaranteed to be generated for channels that are closed due to a restart.
+	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`) and will be persisted across restarts.
 	 */
 	public final static class DiscardFunding extends Event {
 		/**
@@ -1153,14 +1354,17 @@ public class Event extends CommonBase {
 		/**
 		 * The full transaction received from the user
 		*/
-		public final byte[] transaction;
+		public final org.ldk.structs.FundingInfo funding_info;
 		private DiscardFunding(long ptr, bindings.LDKEvent.DiscardFunding obj) {
 			super(null, ptr);
 			long channel_id = obj.channel_id;
 			org.ldk.structs.ChannelId channel_id_hu_conv = null; if (channel_id < 0 || channel_id > 4096) { channel_id_hu_conv = new org.ldk.structs.ChannelId(null, channel_id); }
 			if (channel_id_hu_conv != null) { channel_id_hu_conv.ptrs_to.add(this); };
 			this.channel_id = channel_id_hu_conv;
-			this.transaction = obj.transaction;
+			long funding_info = obj.funding_info;
+			org.ldk.structs.FundingInfo funding_info_hu_conv = org.ldk.structs.FundingInfo.constr_from_ptr(funding_info);
+			if (funding_info_hu_conv != null) { funding_info_hu_conv.ptrs_to.add(this); };
+			this.funding_info = funding_info_hu_conv;
 		}
 	}
 	/**
@@ -1172,6 +1376,10 @@ public class Event extends CommonBase {
 	 * 
 	 * The event is only triggered when a new open channel request is received and the
 	 * [`UserConfig::manually_accept_inbound_channels`] config flag is set to true.
+	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`) and will be persisted across restarts.
 	 * 
 	 * [`ChannelManager::accept_inbound_channel`]: crate::ln::channelmanager::ChannelManager::accept_inbound_channel
 	 * [`ChannelManager::force_close_without_broadcasting_txn`]: crate::ln::channelmanager::ChannelManager::force_close_without_broadcasting_txn
@@ -1227,6 +1435,14 @@ public class Event extends CommonBase {
 		 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 		*/
 		public final org.ldk.structs.ChannelTypeFeatures channel_type;
+		/**
+		 * True if this channel is (or will be) publicly-announced.
+		*/
+		public final boolean is_announced;
+		/**
+		 * Channel parameters given by the counterparty.
+		*/
+		public final org.ldk.structs.ChannelParameters params;
 		private OpenChannelRequest(long ptr, bindings.LDKEvent.OpenChannelRequest obj) {
 			super(null, ptr);
 			long temporary_channel_id = obj.temporary_channel_id;
@@ -1240,6 +1456,11 @@ public class Event extends CommonBase {
 			org.ldk.structs.ChannelTypeFeatures channel_type_hu_conv = null; if (channel_type < 0 || channel_type > 4096) { channel_type_hu_conv = new org.ldk.structs.ChannelTypeFeatures(null, channel_type); }
 			if (channel_type_hu_conv != null) { channel_type_hu_conv.ptrs_to.add(this); };
 			this.channel_type = channel_type_hu_conv;
+			this.is_announced = obj.is_announced;
+			long params = obj.params;
+			org.ldk.structs.ChannelParameters params_hu_conv = null; if (params < 0 || params > 4096) { params_hu_conv = new org.ldk.structs.ChannelParameters(null, params); }
+			if (params_hu_conv != null) { params_hu_conv.ptrs_to.add(this); };
+			this.params = params_hu_conv;
 		}
 	}
 	/**
@@ -1255,6 +1476,10 @@ public class Event extends CommonBase {
 	 * 
 	 * This event, however, does not get generated if an HTLC fails to meet the forwarding
 	 * requirements (i.e. insufficient fees paid, or a CLTV that is too soon).
+	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`) and will be persisted across restarts.
 	 */
 	public final static class HTLCHandlingFailed extends Event {
 		/**
@@ -1285,6 +1510,10 @@ public class Event extends CommonBase {
 	 * [`ChannelHandshakeConfig::negotiate_anchors_zero_fee_htlc_tx`] config flag is set to true.
 	 * It is limited to the scope of channels with anchor outputs.
 	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`), but will only be regenerated as needed after restarts.
+	 * 
 	 * [`ChannelHandshakeConfig::negotiate_anchors_zero_fee_htlc_tx`]: crate::util::config::ChannelHandshakeConfig::negotiate_anchors_zero_fee_htlc_tx
 	 */
 	public final static class BumpTransaction extends Event {
@@ -1295,6 +1524,60 @@ public class Event extends CommonBase {
 			org.ldk.structs.BumpTransactionEvent bump_transaction_hu_conv = org.ldk.structs.BumpTransactionEvent.constr_from_ptr(bump_transaction);
 			if (bump_transaction_hu_conv != null) { bump_transaction_hu_conv.ptrs_to.add(this); };
 			this.bump_transaction = bump_transaction_hu_conv;
+		}
+	}
+	/**
+	 * We received an onion message that is intended to be forwarded to a peer
+	 * that is currently offline. This event will only be generated if the
+	 * `OnionMessenger` was initialized with
+	 * [`OnionMessenger::new_with_offline_peer_interception`], see its docs.
+	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`), but won't be persisted across restarts.
+	 * 
+	 * [`OnionMessenger::new_with_offline_peer_interception`]: crate::onion_message::messenger::OnionMessenger::new_with_offline_peer_interception
+	 */
+	public final static class OnionMessageIntercepted extends Event {
+		/**
+		 * The node id of the offline peer.
+		*/
+		public final byte[] peer_node_id;
+		/**
+		 * The onion message intended to be forwarded to `peer_node_id`.
+		*/
+		public final org.ldk.structs.OnionMessage message;
+		private OnionMessageIntercepted(long ptr, bindings.LDKEvent.OnionMessageIntercepted obj) {
+			super(null, ptr);
+			this.peer_node_id = obj.peer_node_id;
+			long message = obj.message;
+			org.ldk.structs.OnionMessage message_hu_conv = null; if (message < 0 || message > 4096) { message_hu_conv = new org.ldk.structs.OnionMessage(null, message); }
+			if (message_hu_conv != null) { message_hu_conv.ptrs_to.add(this); };
+			this.message = message_hu_conv;
+		}
+	}
+	/**
+	 * Indicates that an onion message supporting peer has come online and it may
+	 * be time to forward any onion messages that were previously intercepted for
+	 * them. This event will only be generated if the `OnionMessenger` was
+	 * initialized with
+	 * [`OnionMessenger::new_with_offline_peer_interception`], see its docs.
+	 * 
+	 * # Failure Behavior and Persistence
+	 * This event will eventually be replayed after failures-to-handle (i.e., the event handler
+	 * returning `Err(ReplayEvent ())`), but won't be persisted across restarts.
+	 * 
+	 * [`OnionMessenger::new_with_offline_peer_interception`]: crate::onion_message::messenger::OnionMessenger::new_with_offline_peer_interception
+	 */
+	public final static class OnionMessagePeerConnected extends Event {
+		/**
+		 * The node id of the peer we just connected to, who advertises support for
+		 * onion messages.
+		*/
+		public final byte[] peer_node_id;
+		private OnionMessagePeerConnected(long ptr, bindings.LDKEvent.OnionMessagePeerConnected obj) {
+			super(null, ptr);
+			this.peer_node_id = obj.peer_node_id;
 		}
 	}
 	long clone_ptr() {
@@ -1328,7 +1611,22 @@ public class Event extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(temporary_channel_id); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new FundingTxBroadcastSafe-variant Event
+	 */
+	public static Event funding_tx_broadcast_safe(org.ldk.structs.ChannelId channel_id, org.ldk.util.UInt128 user_channel_id, org.ldk.structs.OutPoint funding_txo, byte[] counterparty_node_id, org.ldk.structs.ChannelId former_temporary_channel_id) {
+		long ret = bindings.Event_funding_tx_broadcast_safe(channel_id.ptr, user_channel_id.getLEBytes(), funding_txo.ptr, InternalUtils.check_arr_len(counterparty_node_id, 33), former_temporary_channel_id.ptr);
+		Reference.reachabilityFence(channel_id);
+		Reference.reachabilityFence(user_channel_id);
+		Reference.reachabilityFence(funding_txo);
+		Reference.reachabilityFence(counterparty_node_id);
+		Reference.reachabilityFence(former_temporary_channel_id);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
 		return ret_hu_conv;
 	}
 
@@ -1349,31 +1647,24 @@ public class Event extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(onion_fields); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(purpose); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(via_channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(via_user_channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(claim_deadline); };
 		return ret_hu_conv;
 	}
 
 	/**
 	 * Utility method to constructs a new PaymentClaimed-variant Event
 	 */
-	public static Event payment_claimed(byte[] receiver_node_id, byte[] payment_hash, long amount_msat, org.ldk.structs.PaymentPurpose purpose, ClaimedHTLC[] htlcs, org.ldk.structs.Option_u64Z sender_intended_total_msat) {
-		long ret = bindings.Event_payment_claimed(InternalUtils.check_arr_len(receiver_node_id, 33), InternalUtils.check_arr_len(payment_hash, 32), amount_msat, purpose.ptr, htlcs != null ? Arrays.stream(htlcs).mapToLong(htlcs_conv_13 -> htlcs_conv_13.ptr).toArray() : null, sender_intended_total_msat.ptr);
+	public static Event payment_claimed(byte[] receiver_node_id, byte[] payment_hash, long amount_msat, org.ldk.structs.PaymentPurpose purpose, ClaimedHTLC[] htlcs, org.ldk.structs.Option_u64Z sender_intended_total_msat, org.ldk.structs.RecipientOnionFields onion_fields) {
+		long ret = bindings.Event_payment_claimed(InternalUtils.check_arr_len(receiver_node_id, 33), InternalUtils.check_arr_len(payment_hash, 32), amount_msat, purpose.ptr, htlcs != null ? Arrays.stream(htlcs).mapToLong(htlcs_conv_13 -> htlcs_conv_13.ptr).toArray() : null, sender_intended_total_msat.ptr, onion_fields.ptr);
 		Reference.reachabilityFence(receiver_node_id);
 		Reference.reachabilityFence(payment_hash);
 		Reference.reachabilityFence(amount_msat);
 		Reference.reachabilityFence(purpose);
 		Reference.reachabilityFence(htlcs);
 		Reference.reachabilityFence(sender_intended_total_msat);
+		Reference.reachabilityFence(onion_fields);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(purpose); };
-		for (ClaimedHTLC htlcs_conv_13: htlcs) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(htlcs_conv_13); }; };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(sender_intended_total_msat); };
 		return ret_hu_conv;
 	}
 
@@ -1387,16 +1678,18 @@ public class Event extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		for (SocketAddress addresses_conv_15: addresses) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(addresses_conv_15); }; };
 		return ret_hu_conv;
 	}
 
 	/**
-	 * Utility method to constructs a new InvoiceRequestFailed-variant Event
+	 * Utility method to constructs a new InvoiceReceived-variant Event
 	 */
-	public static Event invoice_request_failed(byte[] payment_id) {
-		long ret = bindings.Event_invoice_request_failed(InternalUtils.check_arr_len(payment_id, 32));
+	public static Event invoice_received(byte[] payment_id, org.ldk.structs.Bolt12Invoice invoice, org.ldk.structs.Option_OffersContextZ context, org.ldk.structs.Responder responder) {
+		long ret = bindings.Event_invoice_received(InternalUtils.check_arr_len(payment_id, 32), invoice.ptr, context.ptr, responder.ptr);
 		Reference.reachabilityFence(payment_id);
+		Reference.reachabilityFence(invoice);
+		Reference.reachabilityFence(context);
+		Reference.reachabilityFence(responder);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
@@ -1415,23 +1708,20 @@ public class Event extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payment_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(fee_paid_msat); };
 		return ret_hu_conv;
 	}
 
 	/**
 	 * Utility method to constructs a new PaymentFailed-variant Event
 	 */
-	public static Event payment_failed(byte[] payment_id, byte[] payment_hash, org.ldk.structs.Option_PaymentFailureReasonZ reason) {
-		long ret = bindings.Event_payment_failed(InternalUtils.check_arr_len(payment_id, 32), InternalUtils.check_arr_len(payment_hash, 32), reason.ptr);
+	public static Event payment_failed(byte[] payment_id, org.ldk.structs.Option_ThirtyTwoBytesZ payment_hash, org.ldk.structs.Option_PaymentFailureReasonZ reason) {
+		long ret = bindings.Event_payment_failed(InternalUtils.check_arr_len(payment_id, 32), payment_hash.ptr, reason.ptr);
 		Reference.reachabilityFence(payment_id);
 		Reference.reachabilityFence(payment_hash);
 		Reference.reachabilityFence(reason);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(reason); };
 		return ret_hu_conv;
 	}
 
@@ -1446,8 +1736,6 @@ public class Event extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payment_hash); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(path); };
 		return ret_hu_conv;
 	}
 
@@ -1465,10 +1753,6 @@ public class Event extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payment_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(failure); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(path); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(short_channel_id); };
 		return ret_hu_conv;
 	}
 
@@ -1483,7 +1767,6 @@ public class Event extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(path); };
 		return ret_hu_conv;
 	}
 
@@ -1499,8 +1782,6 @@ public class Event extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(path); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(short_channel_id); };
 		return ret_hu_conv;
 	}
 
@@ -1542,8 +1823,6 @@ public class Event extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		for (SpendableOutputDescriptor outputs_conv_27: outputs) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(outputs_conv_27); }; };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id); };
 		return ret_hu_conv;
 	}
 
@@ -1563,13 +1842,6 @@ public class Event extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(prev_channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(next_channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(prev_user_channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(next_user_channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(total_fee_earned_msat); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(skimmed_fee_msat); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(outbound_amount_forwarded_msat); };
 		return ret_hu_conv;
 	}
 
@@ -1587,10 +1859,6 @@ public class Event extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(former_temporary_channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(funding_txo); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_type); };
 		return ret_hu_conv;
 	}
 
@@ -1606,8 +1874,6 @@ public class Event extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_type); };
 		return ret_hu_conv;
 	}
 
@@ -1625,42 +1891,37 @@ public class Event extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(reason); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_capacity_sats); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_funding_txo); };
 		return ret_hu_conv;
 	}
 
 	/**
 	 * Utility method to constructs a new DiscardFunding-variant Event
 	 */
-	public static Event discard_funding(org.ldk.structs.ChannelId channel_id, byte[] transaction) {
-		long ret = bindings.Event_discard_funding(channel_id.ptr, transaction);
+	public static Event discard_funding(org.ldk.structs.ChannelId channel_id, org.ldk.structs.FundingInfo funding_info) {
+		long ret = bindings.Event_discard_funding(channel_id.ptr, funding_info.ptr);
 		Reference.reachabilityFence(channel_id);
-		Reference.reachabilityFence(transaction);
+		Reference.reachabilityFence(funding_info);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id); };
 		return ret_hu_conv;
 	}
 
 	/**
 	 * Utility method to constructs a new OpenChannelRequest-variant Event
 	 */
-	public static Event open_channel_request(org.ldk.structs.ChannelId temporary_channel_id, byte[] counterparty_node_id, long funding_satoshis, long push_msat, org.ldk.structs.ChannelTypeFeatures channel_type) {
-		long ret = bindings.Event_open_channel_request(temporary_channel_id.ptr, InternalUtils.check_arr_len(counterparty_node_id, 33), funding_satoshis, push_msat, channel_type.ptr);
+	public static Event open_channel_request(org.ldk.structs.ChannelId temporary_channel_id, byte[] counterparty_node_id, long funding_satoshis, long push_msat, org.ldk.structs.ChannelTypeFeatures channel_type, boolean is_announced, org.ldk.structs.ChannelParameters params) {
+		long ret = bindings.Event_open_channel_request(temporary_channel_id.ptr, InternalUtils.check_arr_len(counterparty_node_id, 33), funding_satoshis, push_msat, channel_type.ptr, is_announced, params.ptr);
 		Reference.reachabilityFence(temporary_channel_id);
 		Reference.reachabilityFence(counterparty_node_id);
 		Reference.reachabilityFence(funding_satoshis);
 		Reference.reachabilityFence(push_msat);
 		Reference.reachabilityFence(channel_type);
+		Reference.reachabilityFence(is_announced);
+		Reference.reachabilityFence(params);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(temporary_channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_type); };
 		return ret_hu_conv;
 	}
 
@@ -1674,8 +1935,6 @@ public class Event extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(prev_channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(failed_next_destination); };
 		return ret_hu_conv;
 	}
 
@@ -1688,7 +1947,31 @@ public class Event extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(a); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new OnionMessageIntercepted-variant Event
+	 */
+	public static Event onion_message_intercepted(byte[] peer_node_id, org.ldk.structs.OnionMessage message) {
+		long ret = bindings.Event_onion_message_intercepted(InternalUtils.check_arr_len(peer_node_id, 33), message.ptr);
+		Reference.reachabilityFence(peer_node_id);
+		Reference.reachabilityFence(message);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new OnionMessagePeerConnected-variant Event
+	 */
+	public static Event onion_message_peer_connected(byte[] peer_node_id) {
+		long ret = bindings.Event_onion_message_peer_connected(InternalUtils.check_arr_len(peer_node_id, 33));
+		Reference.reachabilityFence(peer_node_id);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
 		return ret_hu_conv;
 	}
 

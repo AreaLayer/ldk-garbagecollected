@@ -40,7 +40,6 @@ public class ChannelInfo extends CommonBase {
 		bindings.ChannelInfo_set_features(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -62,7 +61,48 @@ public class ChannelInfo extends CommonBase {
 		bindings.ChannelInfo_set_node_one(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
+	}
+
+	/**
+	 * Source node of the second direction of a channel
+	 */
+	public NodeId get_node_two() {
+		long ret = bindings.ChannelInfo_get_node_two(this.ptr);
+		Reference.reachabilityFence(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.NodeId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.NodeId(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Source node of the second direction of a channel
+	 */
+	public void set_node_two(org.ldk.structs.NodeId val) {
+		bindings.ChannelInfo_set_node_two(this.ptr, val.ptr);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
+	}
+
+	/**
+	 * The channel capacity as seen on-chain, if chain lookup is available.
+	 */
+	public Option_u64Z get_capacity_sats() {
+		long ret = bindings.ChannelInfo_get_capacity_sats(this.ptr);
+		Reference.reachabilityFence(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Option_u64Z ret_hu_conv = org.ldk.structs.Option_u64Z.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * The channel capacity as seen on-chain, if chain lookup is available.
+	 */
+	public void set_capacity_sats(org.ldk.structs.Option_u64Z val) {
+		bindings.ChannelInfo_set_capacity_sats(this.ptr, val.ptr);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
 	}
 
 	/**
@@ -89,29 +129,6 @@ public class ChannelInfo extends CommonBase {
 		bindings.ChannelInfo_set_one_to_two(this.ptr, val == null ? 0 : val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
-	}
-
-	/**
-	 * Source node of the second direction of a channel
-	 */
-	public NodeId get_node_two() {
-		long ret = bindings.ChannelInfo_get_node_two(this.ptr);
-		Reference.reachabilityFence(this);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.NodeId ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.NodeId(null, ret); }
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
-		return ret_hu_conv;
-	}
-
-	/**
-	 * Source node of the second direction of a channel
-	 */
-	public void set_node_two(org.ldk.structs.NodeId val) {
-		bindings.ChannelInfo_set_node_two(this.ptr, val.ptr);
-		Reference.reachabilityFence(this);
-		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -138,29 +155,6 @@ public class ChannelInfo extends CommonBase {
 		bindings.ChannelInfo_set_two_to_one(this.ptr, val == null ? 0 : val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
-	}
-
-	/**
-	 * The channel capacity as seen on-chain, if chain lookup is available.
-	 */
-	public Option_u64Z get_capacity_sats() {
-		long ret = bindings.ChannelInfo_get_capacity_sats(this.ptr);
-		Reference.reachabilityFence(this);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.Option_u64Z ret_hu_conv = org.ldk.structs.Option_u64Z.constr_from_ptr(ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
-		return ret_hu_conv;
-	}
-
-	/**
-	 * The channel capacity as seen on-chain, if chain lookup is available.
-	 */
-	public void set_capacity_sats(org.ldk.structs.Option_u64Z val) {
-		bindings.ChannelInfo_set_capacity_sats(this.ptr, val.ptr);
-		Reference.reachabilityFence(this);
-		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -193,7 +187,6 @@ public class ChannelInfo extends CommonBase {
 		bindings.ChannelInfo_set_announcement_message(this.ptr, val == null ? 0 : val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	long clone_ptr() {

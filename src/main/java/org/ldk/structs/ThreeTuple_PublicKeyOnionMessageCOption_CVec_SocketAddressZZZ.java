@@ -83,8 +83,6 @@ public class ThreeTuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ exten
 		if (ret >= 0 && ret <= 4096) { return null; }
 		ThreeTuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ ret_hu_conv = new ThreeTuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(b); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(c); };
 		return ret_hu_conv;
 	}
 

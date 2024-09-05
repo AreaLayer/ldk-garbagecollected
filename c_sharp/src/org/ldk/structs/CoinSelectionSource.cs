@@ -149,7 +149,6 @@ public class CoinSelectionSource : CommonBase {
 		GC.KeepAlive(target_feerate_sat_per_1000_weight);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CoinSelectionNoneZ ret_hu_conv = Result_CoinSelectionNoneZ.constr_from_ptr(ret);
-		foreach (Input must_spend_conv_7 in must_spend) { if (this != null) { this.ptrs_to.AddLast(must_spend_conv_7); }; };
 		return ret_hu_conv;
 	}
 

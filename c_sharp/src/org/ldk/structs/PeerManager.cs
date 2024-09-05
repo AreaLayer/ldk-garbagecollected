@@ -129,7 +129,6 @@ public class PeerManager : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CVec_u8ZPeerHandleErrorZ ret_hu_conv = Result_CVec_u8ZPeerHandleErrorZ.constr_from_ptr(ret);
 		if (this != null) { this.ptrs_to.AddLast(descriptor); };
-		if (this != null) { this.ptrs_to.AddLast(remote_network_address); };
 		return ret_hu_conv;
 	}
 
@@ -158,7 +157,6 @@ public class PeerManager : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NonePeerHandleErrorZ ret_hu_conv = Result_NonePeerHandleErrorZ.constr_from_ptr(ret);
 		if (this != null) { this.ptrs_to.AddLast(descriptor); };
-		if (this != null) { this.ptrs_to.AddLast(remote_network_address); };
 		return ret_hu_conv;
 	}
 
@@ -312,7 +310,6 @@ public class PeerManager : CommonBase {
 		GC.KeepAlive(rgb);
 		GC.KeepAlive(alias);
 		GC.KeepAlive(addresses);
-		foreach (SocketAddress addresses_conv_15 in addresses) { if (this != null) { this.ptrs_to.AddLast(addresses_conv_15); }; };
 	}
 
 }

@@ -66,7 +66,6 @@ public class Option_CVec_SocketAddressZZ extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_CVec_SocketAddressZZ ret_hu_conv = org.ldk.structs.Option_CVec_SocketAddressZZ.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		for (SocketAddress o_conv_15: o) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(o_conv_15); }; };
 		return ret_hu_conv;
 	}
 

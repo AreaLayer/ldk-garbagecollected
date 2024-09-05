@@ -16,14 +16,16 @@ public interface OffersMessageHandlerInterface {
 	 * The returned [`OffersMessage`], if any, is enqueued to be sent by [`OnionMessenger`].
 	 * 
 	 * [`OnionMessenger`]: crate::onion_message::messenger::OnionMessenger
+	 * 
+	 * Note that responder (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	Option_OffersMessageZ handle_message(OffersMessage message);
+	Option_C2Tuple_OffersMessageResponseInstructionZZ handle_message(OffersMessage message, Option_OffersContextZ context, Responder responder);
 	/**Releases any [`OffersMessage`]s that need to be sent.
 	 * 
 	 * Typically, this is used for messages initiating a payment flow rather than in response to
 	 * another message. The latter should use the return value of [`Self::handle_message`].
 	 */
-	ThreeTuple_OffersMessageDestinationBlindedPathZ[] release_pending_messages();
+	TwoTuple_OffersMessageMessageSendInstructionsZ[] release_pending_messages();
 }
 
 /**
@@ -45,19 +47,22 @@ public class OffersMessageHandler : CommonBase {
 		internal LDKOffersMessageHandlerImpl(OffersMessageHandlerInterface arg, LDKOffersMessageHandlerHolder impl_holder) { this.arg = arg; this.impl_holder = impl_holder; }
 		private OffersMessageHandlerInterface arg;
 		private LDKOffersMessageHandlerHolder impl_holder;
-		public long handle_message(long _message) {
+		public long handle_message(long _message, long _context, long _responder) {
 			org.ldk.structs.OffersMessage _message_hu_conv = org.ldk.structs.OffersMessage.constr_from_ptr(_message);
 			if (_message_hu_conv != null) { _message_hu_conv.ptrs_to.AddLast(this); };
-			Option_OffersMessageZ ret = arg.handle_message(_message_hu_conv);
+			org.ldk.structs.Option_OffersContextZ _context_hu_conv = org.ldk.structs.Option_OffersContextZ.constr_from_ptr(_context);
+			if (_context_hu_conv != null) { _context_hu_conv.ptrs_to.AddLast(this); };
+			org.ldk.structs.Responder _responder_hu_conv = null; if (_responder < 0 || _responder > 4096) { _responder_hu_conv = new org.ldk.structs.Responder(null, _responder); }
+			if (_responder_hu_conv != null) { _responder_hu_conv.ptrs_to.AddLast(this); };
+			Option_C2Tuple_OffersMessageResponseInstructionZZ ret = arg.handle_message(_message_hu_conv, _context_hu_conv, _responder_hu_conv);
 				GC.KeepAlive(arg);
 			long result = ret.clone_ptr();
-			if (impl_holder.held != null) { impl_holder.held.ptrs_to.AddLast(ret); };
 			return result;
 		}
 		public long release_pending_messages() {
-			ThreeTuple_OffersMessageDestinationBlindedPathZ[] ret = arg.release_pending_messages();
+			TwoTuple_OffersMessageMessageSendInstructionsZ[] ret = arg.release_pending_messages();
 				GC.KeepAlive(arg);
-			long result = InternalUtils.encodeUint64Array(InternalUtils.mapArray(ret, ret_conv_49 => ret_conv_49.clone_ptr()));
+			long result = InternalUtils.encodeUint64Array(InternalUtils.mapArray(ret, ret_conv_48 => ret_conv_48.clone_ptr()));
 			return result;
 		}
 	}
@@ -81,15 +86,18 @@ public class OffersMessageHandler : CommonBase {
 	 * The returned [`OffersMessage`], if any, is enqueued to be sent by [`OnionMessenger`].
 	 * 
 	 * [`OnionMessenger`]: crate::onion_message::messenger::OnionMessenger
+	 * 
+	 * Note that responder (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public Option_OffersMessageZ handle_message(org.ldk.structs.OffersMessage message) {
-		long ret = bindings.OffersMessageHandler_handle_message(this.ptr, message.ptr);
+	public Option_C2Tuple_OffersMessageResponseInstructionZZ handle_message(org.ldk.structs.OffersMessage message, org.ldk.structs.Option_OffersContextZ context, org.ldk.structs.Responder responder) {
+		long ret = bindings.OffersMessageHandler_handle_message(this.ptr, message.ptr, context.ptr, responder == null ? 0 : responder.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(message);
+		GC.KeepAlive(context);
+		GC.KeepAlive(responder);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.Option_OffersMessageZ ret_hu_conv = org.ldk.structs.Option_OffersMessageZ.constr_from_ptr(ret);
+		org.ldk.structs.Option_C2Tuple_OffersMessageResponseInstructionZZ ret_hu_conv = org.ldk.structs.Option_C2Tuple_OffersMessageResponseInstructionZZ.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
-		if (this != null) { this.ptrs_to.AddLast(message); };
 		return ret_hu_conv;
 	}
 
@@ -99,20 +107,20 @@ public class OffersMessageHandler : CommonBase {
 	 * Typically, this is used for messages initiating a payment flow rather than in response to
 	 * another message. The latter should use the return value of [`Self::handle_message`].
 	 */
-	public ThreeTuple_OffersMessageDestinationBlindedPathZ[] release_pending_messages() {
+	public TwoTuple_OffersMessageMessageSendInstructionsZ[] release_pending_messages() {
 		long ret = bindings.OffersMessageHandler_release_pending_messages(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		int ret_conv_49_len = InternalUtils.getArrayLength(ret);
-		ThreeTuple_OffersMessageDestinationBlindedPathZ[] ret_conv_49_arr = new ThreeTuple_OffersMessageDestinationBlindedPathZ[ret_conv_49_len];
-		for (int x = 0; x < ret_conv_49_len; x++) {
-			long ret_conv_49 = InternalUtils.getU64ArrayElem(ret, x);
-			ThreeTuple_OffersMessageDestinationBlindedPathZ ret_conv_49_hu_conv = new ThreeTuple_OffersMessageDestinationBlindedPathZ(null, ret_conv_49);
-			if (ret_conv_49_hu_conv != null) { ret_conv_49_hu_conv.ptrs_to.AddLast(this); };
-			ret_conv_49_arr[x] = ret_conv_49_hu_conv;
+		int ret_conv_48_len = InternalUtils.getArrayLength(ret);
+		TwoTuple_OffersMessageMessageSendInstructionsZ[] ret_conv_48_arr = new TwoTuple_OffersMessageMessageSendInstructionsZ[ret_conv_48_len];
+		for (int w = 0; w < ret_conv_48_len; w++) {
+			long ret_conv_48 = InternalUtils.getU64ArrayElem(ret, w);
+			TwoTuple_OffersMessageMessageSendInstructionsZ ret_conv_48_hu_conv = new TwoTuple_OffersMessageMessageSendInstructionsZ(null, ret_conv_48);
+			if (ret_conv_48_hu_conv != null) { ret_conv_48_hu_conv.ptrs_to.AddLast(this); };
+			ret_conv_48_arr[w] = ret_conv_48_hu_conv;
 		}
 		bindings.free_buffer(ret);
-		return ret_conv_49_arr;
+		return ret_conv_48_arr;
 	}
 
 }

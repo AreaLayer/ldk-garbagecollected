@@ -44,7 +44,6 @@ public class CoinSelection : CommonBase {
 		bindings.CoinSelection_set_confirmed_utxos(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_6 => val_conv_6.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		foreach (Utxo val_conv_6 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_6); }; };
 	}
 
 	/**
@@ -72,7 +71,6 @@ public class CoinSelection : CommonBase {
 		bindings.CoinSelection_set_change_output(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -85,8 +83,6 @@ public class CoinSelection : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CoinSelection ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.CoinSelection(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		foreach (Utxo confirmed_utxos_arg_conv_6 in confirmed_utxos_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(confirmed_utxos_arg_conv_6); }; };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(change_output_arg); };
 		return ret_hu_conv;
 	}
 

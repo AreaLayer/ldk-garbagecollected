@@ -58,6 +58,18 @@ public class CustomMessageHandler extends CommonBase {
 		 */
 		TwoTuple_PublicKeyTypeZ[] get_and_clear_pending_msg();
 		/**
+		 * Indicates a peer disconnected.
+		 */
+		void peer_disconnected(byte[] their_node_id);
+		/**
+		 * Handle a peer connecting.
+		 * 
+		 * May return an `Err(())` if the features the peer supports are not sufficient to communicate
+		 * with us. Implementors should be somewhat conservative about doing so, however, as other
+		 * message handlers may still wish to communicate with this peer.
+		 */
+		Result_NoneNoneZ peer_connected(byte[] their_node_id, Init msg, boolean inbound);
+		/**
 		 * Gets the node feature flags which this handler itself supports. All available handlers are
 		 * queried similarly and their feature flags are OR'd together to form the [`NodeFeatures`]
 		 * which are broadcasted in our [`NodeAnnouncement`] message.
@@ -90,6 +102,17 @@ public class CustomMessageHandler extends CommonBase {
 				TwoTuple_PublicKeyTypeZ[] ret = arg.get_and_clear_pending_msg();
 				Reference.reachabilityFence(arg);
 				long[] result = ret != null ? Arrays.stream(ret).mapToLong(ret_conv_25 -> ret_conv_25.clone_ptr()).toArray() : null;
+				return result;
+			}
+			@Override public void peer_disconnected(byte[] their_node_id) {
+				arg.peer_disconnected(their_node_id);
+				Reference.reachabilityFence(arg);
+			}
+			@Override public long peer_connected(byte[] their_node_id, long msg, boolean inbound) {
+				org.ldk.structs.Init msg_hu_conv = null; if (msg < 0 || msg > 4096) { msg_hu_conv = new org.ldk.structs.Init(null, msg); }
+				Result_NoneNoneZ ret = arg.peer_connected(their_node_id, msg_hu_conv, inbound);
+				Reference.reachabilityFence(arg);
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long provided_node_features() {
@@ -150,6 +173,34 @@ public class CustomMessageHandler extends CommonBase {
 			ret_conv_25_arr[z] = ret_conv_25_hu_conv;
 		}
 		return ret_conv_25_arr;
+	}
+
+	/**
+	 * Indicates a peer disconnected.
+	 */
+	public void peer_disconnected(byte[] their_node_id) {
+		bindings.CustomMessageHandler_peer_disconnected(this.ptr, InternalUtils.check_arr_len(their_node_id, 33));
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(their_node_id);
+	}
+
+	/**
+	 * Handle a peer connecting.
+	 * 
+	 * May return an `Err(())` if the features the peer supports are not sufficient to communicate
+	 * with us. Implementors should be somewhat conservative about doing so, however, as other
+	 * message handlers may still wish to communicate with this peer.
+	 */
+	public Result_NoneNoneZ peer_connected(byte[] their_node_id, org.ldk.structs.Init msg, boolean inbound) {
+		long ret = bindings.CustomMessageHandler_peer_connected(this.ptr, InternalUtils.check_arr_len(their_node_id, 33), msg.ptr, inbound);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(their_node_id);
+		Reference.reachabilityFence(msg);
+		Reference.reachabilityFence(inbound);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_NoneNoneZ ret_hu_conv = Result_NoneNoneZ.constr_from_ptr(ret);
+		if (this != null) { this.ptrs_to.add(msg); };
+		return ret_hu_conv;
 	}
 
 	/**

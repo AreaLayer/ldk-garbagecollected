@@ -15,6 +15,28 @@ public class RouteHint : CommonBase {
 		if (ptr != 0) { bindings.RouteHint_free(ptr); }
 	}
 
+	/**
+	 * Serialize the RouteHint object into a byte array which can be read by RouteHint_read
+	 */
+	public byte[] write() {
+		long ret = bindings.RouteHint_write(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
+		return ret_conv;
+	}
+
+	/**
+	 * Read a RouteHint from a byte array, created by RouteHint_write
+	 */
+	public static Result_RouteHintDecodeErrorZ read(byte[] ser) {
+		long ret = bindings.RouteHint_read(InternalUtils.encodeUint8Array(ser));
+		GC.KeepAlive(ser);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_RouteHintDecodeErrorZ ret_hu_conv = Result_RouteHintDecodeErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
 	public RouteHintHop[] get_a() {
 		long ret = bindings.RouteHint_get_a(this.ptr);
 		GC.KeepAlive(this);
@@ -35,7 +57,6 @@ public class RouteHint : CommonBase {
 		bindings.RouteHint_set_a(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_14 => val_conv_14.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		foreach (RouteHintHop val_conv_14 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_14); }; };
 	}
 
 	/**
@@ -47,7 +68,6 @@ public class RouteHint : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.RouteHint ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.RouteHint(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		foreach (RouteHintHop a_arg_conv_14 in a_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(a_arg_conv_14); }; };
 		return ret_hu_conv;
 	}
 
@@ -98,27 +118,5 @@ public class RouteHint : CommonBase {
 		if (!(o is RouteHint)) return false;
 		return this.eq((RouteHint)o);
 	}
-	/**
-	 * Serialize the RouteHint object into a byte array which can be read by RouteHint_read
-	 */
-	public byte[] write() {
-		long ret = bindings.RouteHint_write(this.ptr);
-		GC.KeepAlive(this);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
-		return ret_conv;
-	}
-
-	/**
-	 * Read a RouteHint from a byte array, created by RouteHint_write
-	 */
-	public static Result_RouteHintDecodeErrorZ read(byte[] ser) {
-		long ret = bindings.RouteHint_read(InternalUtils.encodeUint8Array(ser));
-		GC.KeepAlive(ser);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_RouteHintDecodeErrorZ ret_hu_conv = Result_RouteHintDecodeErrorZ.constr_from_ptr(ret);
-		return ret_hu_conv;
-	}
-
 }
 } } }

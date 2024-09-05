@@ -14,7 +14,7 @@ public interface EventHandlerInterface {
 	 * 
 	 * See [`EventsProvider`] for details that must be considered when implementing this method.
 	 */
-	void handle_event(Event _event);
+	Result_NoneReplayEventZ handle_event(Event _event);
 }
 
 /**
@@ -22,7 +22,7 @@ public interface EventHandlerInterface {
  * 
  * An async variation also exists for implementations of [`EventsProvider`] that support async
  * event handling. The async event handler should satisfy the generic bounds: `F:
- * core::future::Future, H: Fn(Event) -> F`.
+ * core::future::Future<Output = Result<(), ReplayEvent>>, H: Fn(Event) -> F`.
  */
 public class EventHandler : CommonBase {
 	internal bindings.LDKEventHandler bindings_instance;
@@ -38,11 +38,13 @@ public class EventHandler : CommonBase {
 		internal LDKEventHandlerImpl(EventHandlerInterface arg, LDKEventHandlerHolder impl_holder) { this.arg = arg; this.impl_holder = impl_holder; }
 		private EventHandlerInterface arg;
 		private LDKEventHandlerHolder impl_holder;
-		public void handle_event(long _event) {
+		public long handle_event(long _event) {
 			org.ldk.structs.Event _event_hu_conv = org.ldk.structs.Event.constr_from_ptr(_event);
 			if (_event_hu_conv != null) { _event_hu_conv.ptrs_to.AddLast(this); };
-			arg.handle_event(_event_hu_conv);
+			Result_NoneReplayEventZ ret = arg.handle_event(_event_hu_conv);
 				GC.KeepAlive(arg);
+			long result = ret.clone_ptr();
+			return result;
 		}
 	}
 
@@ -63,11 +65,13 @@ public class EventHandler : CommonBase {
 	 * 
 	 * See [`EventsProvider`] for details that must be considered when implementing this method.
 	 */
-	public void handle_event(org.ldk.structs.Event _event) {
-		bindings.EventHandler_handle_event(this.ptr, _event.ptr);
+	public Result_NoneReplayEventZ handle_event(org.ldk.structs.Event _event) {
+		long ret = bindings.EventHandler_handle_event(this.ptr, _event.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(_event);
-		if (this != null) { this.ptrs_to.AddLast(_event); };
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_NoneReplayEventZ ret_hu_conv = Result_NoneReplayEventZ.constr_from_ptr(ret);
+		return ret_hu_conv;
 	}
 
 }

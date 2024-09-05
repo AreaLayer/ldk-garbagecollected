@@ -52,7 +52,6 @@ public class OutputSweeper extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.OutputSweeper ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.OutputSweeper(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(best_block); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(broadcaster); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(fee_estimator); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(chain_data_source); };
@@ -91,9 +90,6 @@ public class OutputSweeper extends CommonBase {
 		Reference.reachabilityFence(delay_until_height);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneNoneZ ret_hu_conv = Result_NoneNoneZ.constr_from_ptr(ret);
-		for (SpendableOutputDescriptor output_descriptors_conv_27: output_descriptors) { if (this != null) { this.ptrs_to.add(output_descriptors_conv_27); }; };
-		if (this != null) { this.ptrs_to.add(channel_id); };
-		if (this != null) { this.ptrs_to.add(delay_until_height); };
 		return ret_hu_conv;
 	}
 

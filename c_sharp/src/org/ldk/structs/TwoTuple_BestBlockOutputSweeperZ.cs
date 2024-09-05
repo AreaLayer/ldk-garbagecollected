@@ -56,8 +56,7 @@ public class TwoTuple_BestBlockOutputSweeperZ : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		TwoTuple_BestBlockOutputSweeperZ ret_hu_conv = new TwoTuple_BestBlockOutputSweeperZ(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(a); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(b_best_block); };
+		;
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(b_broadcaster); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(b_fee_estimator); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(b_chain_data_source); };

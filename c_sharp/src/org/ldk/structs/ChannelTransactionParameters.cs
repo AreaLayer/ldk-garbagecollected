@@ -38,7 +38,6 @@ public class ChannelTransactionParameters : CommonBase {
 		bindings.ChannelTransactionParameters_set_holder_pubkeys(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -104,7 +103,6 @@ public class ChannelTransactionParameters : CommonBase {
 		bindings.ChannelTransactionParameters_set_counterparty_parameters(this.ptr, val == null ? 0 : val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -130,7 +128,6 @@ public class ChannelTransactionParameters : CommonBase {
 		bindings.ChannelTransactionParameters_set_funding_outpoint(this.ptr, val == null ? 0 : val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -154,7 +151,6 @@ public class ChannelTransactionParameters : CommonBase {
 		bindings.ChannelTransactionParameters_set_channel_type_features(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -174,10 +170,6 @@ public class ChannelTransactionParameters : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ChannelTransactionParameters ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelTransactionParameters(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(holder_pubkeys_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(counterparty_parameters_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(funding_outpoint_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_type_features_arg); };
 		return ret_hu_conv;
 	}
 

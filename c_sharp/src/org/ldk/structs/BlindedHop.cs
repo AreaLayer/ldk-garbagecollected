@@ -18,7 +18,7 @@ public class BlindedHop : CommonBase {
 	}
 
 	/**
-	 * The blinded node id of this hop in a [`BlindedPath`].
+	 * The blinded node id of this hop in a blinded path.
 	 */
 	public byte[] get_blinded_node_id() {
 		long ret = bindings.BlindedHop_get_blinded_node_id(this.ptr);
@@ -29,7 +29,7 @@ public class BlindedHop : CommonBase {
 	}
 
 	/**
-	 * The blinded node id of this hop in a [`BlindedPath`].
+	 * The blinded node id of this hop in a blinded path.
 	 */
 	public void set_blinded_node_id(byte[] val) {
 		bindings.BlindedHop_set_blinded_node_id(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(val, 33)));
@@ -38,7 +38,7 @@ public class BlindedHop : CommonBase {
 	}
 
 	/**
-	 * The encrypted payload intended for this hop in a [`BlindedPath`].
+	 * The encrypted payload intended for this hop in a blinded path.
 	 * 
 	 * Returns a copy of the field.
 	 */
@@ -51,7 +51,7 @@ public class BlindedHop : CommonBase {
 	}
 
 	/**
-	 * The encrypted payload intended for this hop in a [`BlindedPath`].
+	 * The encrypted payload intended for this hop in a blinded path.
 	 */
 	public void set_encrypted_payload(byte[] val) {
 		bindings.BlindedHop_set_encrypted_payload(this.ptr, InternalUtils.encodeUint8Array(val));

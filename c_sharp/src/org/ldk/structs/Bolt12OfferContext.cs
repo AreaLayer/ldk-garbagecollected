@@ -40,7 +40,6 @@ public class Bolt12OfferContext : CommonBase {
 		bindings.Bolt12OfferContext_set_offer_id(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -68,7 +67,6 @@ public class Bolt12OfferContext : CommonBase {
 		bindings.Bolt12OfferContext_set_invoice_request(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -81,8 +79,6 @@ public class Bolt12OfferContext : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Bolt12OfferContext ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Bolt12OfferContext(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(offer_id_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(invoice_request_arg); };
 		return ret_hu_conv;
 	}
 

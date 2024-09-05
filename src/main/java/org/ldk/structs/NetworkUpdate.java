@@ -24,9 +24,6 @@ public class NetworkUpdate extends CommonBase {
 	}
 	static NetworkUpdate constr_from_ptr(long ptr) {
 		bindings.LDKNetworkUpdate raw_val = bindings.LDKNetworkUpdate_ref_from_ptr(ptr);
-		if (raw_val.getClass() == bindings.LDKNetworkUpdate.ChannelUpdateMessage.class) {
-			return new ChannelUpdateMessage(ptr, (bindings.LDKNetworkUpdate.ChannelUpdateMessage)raw_val);
-		}
 		if (raw_val.getClass() == bindings.LDKNetworkUpdate.ChannelFailure.class) {
 			return new ChannelFailure(ptr, (bindings.LDKNetworkUpdate.ChannelFailure)raw_val);
 		}
@@ -36,23 +33,6 @@ public class NetworkUpdate extends CommonBase {
 		assert false; return null; // Unreachable without extending the (internal) bindings interface
 	}
 
-	/**
-	 * An error indicating a `channel_update` messages should be applied via
-	 * [`NetworkGraph::update_channel`].
-	 */
-	public final static class ChannelUpdateMessage extends NetworkUpdate {
-		/**
-		 * The update to apply via [`NetworkGraph::update_channel`].
-		*/
-		public final org.ldk.structs.ChannelUpdate msg;
-		private ChannelUpdateMessage(long ptr, bindings.LDKNetworkUpdate.ChannelUpdateMessage obj) {
-			super(null, ptr);
-			long msg = obj.msg;
-			org.ldk.structs.ChannelUpdate msg_hu_conv = null; if (msg < 0 || msg > 4096) { msg_hu_conv = new org.ldk.structs.ChannelUpdate(null, msg); }
-			if (msg_hu_conv != null) { msg_hu_conv.ptrs_to.add(this); };
-			this.msg = msg_hu_conv;
-		}
-	}
 	/**
 	 * An error indicating that a channel failed to route a payment, which should be applied via
 	 * [`NetworkGraph::channel_failed_permanent`] if permanent.
@@ -108,19 +88,6 @@ public class NetworkUpdate extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.NetworkUpdate ret_hu_conv = org.ldk.structs.NetworkUpdate.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
-		return ret_hu_conv;
-	}
-
-	/**
-	 * Utility method to constructs a new ChannelUpdateMessage-variant NetworkUpdate
-	 */
-	public static NetworkUpdate channel_update_message(org.ldk.structs.ChannelUpdate msg) {
-		long ret = bindings.NetworkUpdate_channel_update_message(msg.ptr);
-		Reference.reachabilityFence(msg);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.NetworkUpdate ret_hu_conv = org.ldk.structs.NetworkUpdate.constr_from_ptr(ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(msg); };
 		return ret_hu_conv;
 	}
 

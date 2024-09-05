@@ -90,10 +90,10 @@ function get_chanman(): Node {
 	} as ldk.LoggerInterface);
 
 	const persister = ldk.Persist.new_impl({
-		persist_new_channel(_channel_id: ldk.OutPoint, _data: ldk.ChannelMonitor, _update_id: ldk.MonitorUpdateId): ldk.ChannelMonitorUpdateStatus {
+		persist_new_channel(_channel_id: ldk.OutPoint, _data: ldk.ChannelMonitor): ldk.ChannelMonitorUpdateStatus {
 			return ldk.ChannelMonitorUpdateStatus.LDKChannelMonitorUpdateStatus_Completed;
 		},
-		update_persisted_channel(_channel_id: ldk.OutPoint, _update: ldk.ChannelMonitorUpdate, _data: ldk.ChannelMonitor, _update_id: ldk.MonitorUpdateId): ldk.ChannelMonitorUpdateStatus {
+		update_persisted_channel(_channel_id: ldk.OutPoint, _update: ldk.ChannelMonitorUpdate, _data: ldk.ChannelMonitor): ldk.ChannelMonitorUpdateStatus {
 			return ldk.ChannelMonitorUpdateStatus.LDKChannelMonitorUpdateStatus_Completed;
 		}
 	} as ldk.PersistInterface);
@@ -165,8 +165,9 @@ function assign_u64(arr: Uint8Array, offset: number, value: bigint) {
 function get_event(chan_man: ldk.ChannelManager): ldk.Event {
 	const events: Array<ldk.Event> = [];
 	const event_handler = ldk.EventHandler.new_impl({
-		handle_event(event: ldk.Event): void {
+		handle_event(event: ldk.Event): ldk.Result_NoneReplayEventZ {
 			events.push(event);
+			return ldk.Result_NoneReplayEventZ.constructor_ok();
 		}
 	} as ldk.EventHandlerInterface);
 
@@ -330,7 +331,7 @@ tests.push(async () => {
 			a_handled_msg = true;
 			return ldk.Option_OnionMessageContentsZ.constructor_none();
 		},
-		release_pending_custom_messages(): ldk.ThreeTuple_OnionMessageContentsDestinationBlindedPathZ[] {
+		release_pending_custom_messages(): ldk.TwoTuple_OnionMessageContentsMessageSendInstructionsZ[] {
 			return [];
 		},
 	} as ldk.CustomOnionMessageHandlerInterface);
@@ -339,7 +340,8 @@ tests.push(async () => {
 		.constructor_new(a.net_graph, a.keys_manager.as_EntropySource()).as_MessageRouter();
 	const underlying_om_a = ldk.OnionMessenger.constructor_new(
 		a.keys_manager.as_EntropySource(), a.keys_manager.as_NodeSigner(), a.logger,
-		a.chan_man.as_NodeIdLookUp(), a_msg_router, ignorer.as_OffersMessageHandler(), om_handler_a);
+		a.chan_man.as_NodeIdLookUp(), a_msg_router, ignorer.as_OffersMessageHandler(),
+		ignorer.as_AsyncPaymentsMessageHandler(), om_handler_a);
 	const om_a = ldk.OnionMessageHandler.new_impl({
 		handle_onion_message(peer_node_id: Uint8Array, msg: ldk.OnionMessage) {
 			underlying_om_a.as_OnionMessageHandler().handle_onion_message(peer_node_id, msg);
@@ -378,14 +380,15 @@ tests.push(async () => {
 			b_handled_msg = true;
 			return ldk.Option_OnionMessageContentsZ.constructor_none();
 		},
-		release_pending_custom_messages(): ldk.ThreeTuple_OnionMessageContentsDestinationBlindedPathZ[] {
+		release_pending_custom_messages(): ldk.TwoTuple_OnionMessageContentsMessageSendInstructionsZ[] {
 			return [];
 		}
 	} as ldk.CustomOnionMessageHandlerInterface);
 	const msg_router_b = ldk.DefaultMessageRouter
 		.constructor_new(b.net_graph, b.keys_manager.as_EntropySource()).as_MessageRouter();
-	const om_b = ldk.OnionMessenger.constructor_new(b.keys_manager.as_EntropySource(), b.keys_manager.as_NodeSigner(),
-		b.logger, b.chan_man.as_NodeIdLookUp(), msg_router_b, ignorer.as_OffersMessageHandler(), om_handler_b);
+	const om_b = ldk.OnionMessenger.constructor_new(b.keys_manager.as_EntropySource(),
+		b.keys_manager.as_NodeSigner(), b.logger, b.chan_man.as_NodeIdLookUp(), msg_router_b,
+		ignorer.as_OffersMessageHandler(), ignorer.as_AsyncPaymentsMessageHandler(), om_handler_b);
 
 	const pm_a = ldk.PeerManager.constructor_new(a.chan_man.as_ChannelMessageHandler(), ignorer.as_RoutingMessageHandler(),
 		om_a, ignorer.as_CustomMessageHandler(), 0xdeadbeef,
@@ -453,7 +456,8 @@ tests.push(async () => {
 				return ret;
 			},
 			debug_str(): string { return "Onion Message A Contents"; }
-		} as ldk.OnionMessageContentsInterface), ldk.Destination.constructor_node(b.node_id), null);
+		} as ldk.OnionMessageContentsInterface),
+		ldk.MessageSendInstructions.constructor_without_reply_path(ldk.Destination.constructor_node(b.node_id)));
 	pm_a.process_events();
 	assert(b_handled_msg);
 
@@ -466,7 +470,8 @@ tests.push(async () => {
 				return ret;
 			},
 			debug_str(): string { return "Onion Message A Contents"; }
-		} as ldk.OnionMessageContentsInterface), ldk.Destination.constructor_node(a.node_id), null);
+		} as ldk.OnionMessageContentsInterface),
+		ldk.MessageSendInstructions.constructor_without_reply_path(ldk.Destination.constructor_node(a.node_id)));
 	pm_b.process_events();
 	assert(a_handled_msg);
 

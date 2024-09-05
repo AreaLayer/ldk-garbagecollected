@@ -47,7 +47,6 @@ public class OutputSweeper : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.OutputSweeper ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.OutputSweeper(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(best_block); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(broadcaster); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(fee_estimator); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(chain_data_source); };
@@ -86,9 +85,6 @@ public class OutputSweeper : CommonBase {
 		GC.KeepAlive(delay_until_height);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneNoneZ ret_hu_conv = Result_NoneNoneZ.constr_from_ptr(ret);
-		foreach (SpendableOutputDescriptor output_descriptors_conv_27 in output_descriptors) { if (this != null) { this.ptrs_to.AddLast(output_descriptors_conv_27); }; };
-		if (this != null) { this.ptrs_to.AddLast(channel_id); };
-		if (this != null) { this.ptrs_to.AddLast(delay_until_height); };
 		return ret_hu_conv;
 	}
 

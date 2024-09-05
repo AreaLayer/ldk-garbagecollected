@@ -46,7 +46,6 @@ public class PhantomRouteHints extends CommonBase {
 		bindings.PhantomRouteHints_set_channels(this.ptr, val != null ? Arrays.stream(val).mapToLong(val_conv_16 -> val_conv_16.ptr).toArray() : null);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		for (ChannelDetails val_conv_16: val) { if (this != null) { this.ptrs_to.add(val_conv_16); }; };
 	}
 
 	/**
@@ -98,7 +97,6 @@ public class PhantomRouteHints extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PhantomRouteHints ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.PhantomRouteHints(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		for (ChannelDetails channels_arg_conv_16: channels_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channels_arg_conv_16); }; };
 		return ret_hu_conv;
 	}
 

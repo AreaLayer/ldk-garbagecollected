@@ -59,7 +59,6 @@ public class OnionMessagePath extends CommonBase {
 		bindings.OnionMessagePath_set_destination(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -89,7 +88,6 @@ public class OnionMessagePath extends CommonBase {
 		bindings.OnionMessagePath_set_first_node_addresses(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -103,8 +101,6 @@ public class OnionMessagePath extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.OnionMessagePath ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.OnionMessagePath(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(destination_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(first_node_addresses_arg); };
 		return ret_hu_conv;
 	}
 

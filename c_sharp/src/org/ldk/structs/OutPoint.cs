@@ -9,7 +9,7 @@ namespace org { namespace ldk { namespace structs {
 /**
  * A reference to a transaction output.
  * 
- * Differs from bitcoin::blockdata::transaction::OutPoint as the index is a u16 instead of u32
+ * Differs from bitcoin::transaction::OutPoint as the index is a u16 instead of u32
  * due to LN's restrictions on index values. Should reduce (possibly) unsafe conversions this way.
  */
 public class OutPoint : CommonBase {

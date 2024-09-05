@@ -115,13 +115,15 @@ public class MonitorUpdatingPersister : CommonBase {
 	 * - [`MonitorUpdatingPersister`] will potentially have more listing to do if you need to run
 	 * [`MonitorUpdatingPersister::cleanup_stale_updates`].
 	 */
-	public static MonitorUpdatingPersister of(org.ldk.structs.KVStore kv_store, org.ldk.structs.Logger logger, long maximum_pending_updates, org.ldk.structs.EntropySource entropy_source, org.ldk.structs.SignerProvider signer_provider) {
-		long ret = bindings.MonitorUpdatingPersister_new(kv_store.ptr, logger.ptr, maximum_pending_updates, entropy_source.ptr, signer_provider.ptr);
+	public static MonitorUpdatingPersister of(org.ldk.structs.KVStore kv_store, org.ldk.structs.Logger logger, long maximum_pending_updates, org.ldk.structs.EntropySource entropy_source, org.ldk.structs.SignerProvider signer_provider, org.ldk.structs.BroadcasterInterface broadcaster, org.ldk.structs.FeeEstimator fee_estimator) {
+		long ret = bindings.MonitorUpdatingPersister_new(kv_store.ptr, logger.ptr, maximum_pending_updates, entropy_source.ptr, signer_provider.ptr, broadcaster.ptr, fee_estimator.ptr);
 		GC.KeepAlive(kv_store);
 		GC.KeepAlive(logger);
 		GC.KeepAlive(maximum_pending_updates);
 		GC.KeepAlive(entropy_source);
 		GC.KeepAlive(signer_provider);
+		GC.KeepAlive(broadcaster);
+		GC.KeepAlive(fee_estimator);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MonitorUpdatingPersister ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.MonitorUpdatingPersister(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
@@ -129,6 +131,8 @@ public class MonitorUpdatingPersister : CommonBase {
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(logger); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(entropy_source); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(signer_provider); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(broadcaster); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(fee_estimator); };
 		return ret_hu_conv;
 	}
 
@@ -139,15 +143,11 @@ public class MonitorUpdatingPersister : CommonBase {
 	 * [`io::ErrorKind::NotFound`] variant correctly. For more information, please see the
 	 * documentation for [`MonitorUpdatingPersister`].
 	 */
-	public Result_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ read_all_channel_monitors_with_updates(org.ldk.structs.BroadcasterInterface broadcaster, org.ldk.structs.FeeEstimator fee_estimator) {
-		long ret = bindings.MonitorUpdatingPersister_read_all_channel_monitors_with_updates(this.ptr, broadcaster.ptr, fee_estimator.ptr);
+	public Result_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ read_all_channel_monitors_with_updates() {
+		long ret = bindings.MonitorUpdatingPersister_read_all_channel_monitors_with_updates(this.ptr);
 		GC.KeepAlive(this);
-		GC.KeepAlive(broadcaster);
-		GC.KeepAlive(fee_estimator);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ ret_hu_conv = Result_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.AddLast(broadcaster); };
-		if (this != null) { this.ptrs_to.AddLast(fee_estimator); };
 		return ret_hu_conv;
 	}
 
@@ -170,16 +170,12 @@ public class MonitorUpdatingPersister : CommonBase {
 	 * Loading a large number of monitors will be faster if done in parallel. You can use this
 	 * function to accomplish this. Take care to limit the number of parallel readers.
 	 */
-	public Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ read_channel_monitor_with_updates(org.ldk.structs.BroadcasterInterface broadcaster, org.ldk.structs.FeeEstimator fee_estimator, string monitor_key) {
-		long ret = bindings.MonitorUpdatingPersister_read_channel_monitor_with_updates(this.ptr, broadcaster.ptr, fee_estimator.ptr, InternalUtils.encodeString(monitor_key));
+	public Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ read_channel_monitor_with_updates(string monitor_key) {
+		long ret = bindings.MonitorUpdatingPersister_read_channel_monitor_with_updates(this.ptr, InternalUtils.encodeString(monitor_key));
 		GC.KeepAlive(this);
-		GC.KeepAlive(broadcaster);
-		GC.KeepAlive(fee_estimator);
 		GC.KeepAlive(monitor_key);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ ret_hu_conv = Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.AddLast(broadcaster); };
-		if (this != null) { this.ptrs_to.AddLast(fee_estimator); };
 		return ret_hu_conv;
 	}
 

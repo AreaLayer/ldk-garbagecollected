@@ -80,7 +80,6 @@ public class ThreeTuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ extends Common
 		if (ret >= 0 && ret <= 4096) { return null; }
 		ThreeTuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ ret_hu_conv = new ThreeTuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(c); };
 		return ret_hu_conv;
 	}
 

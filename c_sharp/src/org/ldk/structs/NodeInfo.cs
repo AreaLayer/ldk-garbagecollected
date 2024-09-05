@@ -42,13 +42,13 @@ public class NodeInfo : CommonBase {
 	 * Optional because we store a Node entry after learning about it from
 	 * a channel announcement, but before receiving a node announcement.
 	 * 
-	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 * Returns a copy of the field.
 	 */
-	public NodeAnnouncementInfo get_announcement_info() {
+	public Option_NodeAnnouncementInfoZ get_announcement_info() {
 		long ret = bindings.NodeInfo_get_announcement_info(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.NodeAnnouncementInfo ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.NodeAnnouncementInfo(null, ret); }
+		org.ldk.structs.Option_NodeAnnouncementInfoZ ret_hu_conv = org.ldk.structs.Option_NodeAnnouncementInfoZ.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
 		return ret_hu_conv;
 	}
@@ -57,30 +57,11 @@ public class NodeInfo : CommonBase {
 	 * More information about a node from node_announcement.
 	 * Optional because we store a Node entry after learning about it from
 	 * a channel announcement, but before receiving a node announcement.
-	 * 
-	 * Note that val (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public void set_announcement_info(org.ldk.structs.NodeAnnouncementInfo val) {
-		bindings.NodeInfo_set_announcement_info(this.ptr, val == null ? 0 : val.ptr);
+	public void set_announcement_info(org.ldk.structs.Option_NodeAnnouncementInfoZ val) {
+		bindings.NodeInfo_set_announcement_info(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
-	}
-
-	/**
-	 * Constructs a new NodeInfo given each field
-	 * 
-	 * Note that announcement_info_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
-	 */
-	public static NodeInfo of(long[] channels_arg, org.ldk.structs.NodeAnnouncementInfo announcement_info_arg) {
-		long ret = bindings.NodeInfo_new(InternalUtils.encodeUint64Array(channels_arg), announcement_info_arg == null ? 0 : announcement_info_arg.ptr);
-		GC.KeepAlive(channels_arg);
-		GC.KeepAlive(announcement_info_arg);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.NodeInfo ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.NodeInfo(null, ret); }
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(announcement_info_arg); };
-		return ret_hu_conv;
 	}
 
 	internal long clone_ptr() {

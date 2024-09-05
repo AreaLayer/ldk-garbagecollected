@@ -175,7 +175,6 @@ public class PaymentPurpose : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PaymentPurpose ret_hu_conv = org.ldk.structs.PaymentPurpose.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(payment_preimage); };
 		return ret_hu_conv;
 	}
 
@@ -190,8 +189,6 @@ public class PaymentPurpose : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PaymentPurpose ret_hu_conv = org.ldk.structs.PaymentPurpose.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(payment_preimage); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(payment_context); };
 		return ret_hu_conv;
 	}
 
@@ -206,8 +203,6 @@ public class PaymentPurpose : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PaymentPurpose ret_hu_conv = org.ldk.structs.PaymentPurpose.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(payment_preimage); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(payment_context); };
 		return ret_hu_conv;
 	}
 

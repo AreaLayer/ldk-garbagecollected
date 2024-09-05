@@ -38,7 +38,6 @@ public class RawBolt11Invoice : CommonBase {
 		bindings.RawBolt11Invoice_set_data(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**

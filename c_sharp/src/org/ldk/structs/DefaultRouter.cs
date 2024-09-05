@@ -8,6 +8,11 @@ namespace org { namespace ldk { namespace structs {
 
 /**
  * A [`Router`] implemented using [`find_route`].
+ * 
+ * # Privacy
+ * 
+ * Implements [`MessageRouter`] by delegating to [`DefaultMessageRouter`]. See those docs for
+ * privacy implications.
  */
 public class DefaultRouter : CommonBase {
 	internal DefaultRouter(object _dummy, long ptr) : base(ptr) { }
@@ -32,7 +37,6 @@ public class DefaultRouter : CommonBase {
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(logger); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(entropy_source); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(scorer); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(score_params); };
 		return ret_hu_conv;
 	}
 

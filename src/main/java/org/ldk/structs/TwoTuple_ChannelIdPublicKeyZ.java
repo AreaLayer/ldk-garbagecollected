@@ -70,7 +70,6 @@ public class TwoTuple_ChannelIdPublicKeyZ extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		TwoTuple_ChannelIdPublicKeyZ ret_hu_conv = new TwoTuple_ChannelIdPublicKeyZ(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(a); };
 		return ret_hu_conv;
 	}
 

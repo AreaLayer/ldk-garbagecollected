@@ -271,7 +271,6 @@ public class ChannelManagerReadArgs : CommonBase {
 		bindings.ChannelManagerReadArgs_set_default_config(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -302,7 +301,6 @@ public class ChannelManagerReadArgs : CommonBase {
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(tx_broadcaster); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(router); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(logger); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(default_config); };
 		foreach (ChannelMonitor channel_monitors_conv_16 in channel_monitors) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_monitors_conv_16); }; };
 		return ret_hu_conv;
 	}

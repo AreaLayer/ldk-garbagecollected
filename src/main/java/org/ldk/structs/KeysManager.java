@@ -72,7 +72,7 @@ public class KeysManager extends CommonBase {
 	}
 
 	/**
-	 * Derive an old [`WriteableEcdsaChannelSigner`] containing per-channel secrets based on a key derivation parameters.
+	 * Derive an old [`EcdsaChannelSigner`] containing per-channel secrets based on a key derivation parameters.
 	 */
 	public InMemorySigner derive_channel_keys(long channel_value_satoshis, byte[] params) {
 		long ret = bindings.KeysManager_derive_channel_keys(this.ptr, channel_value_satoshis, InternalUtils.check_arr_len(params, 32));
@@ -86,7 +86,7 @@ public class KeysManager extends CommonBase {
 	}
 
 	/**
-	 * Signs the given [`PartiallySignedTransaction`] which spends the given [`SpendableOutputDescriptor`]s.
+	 * Signs the given [`Psbt`] which spends the given [`SpendableOutputDescriptor`]s.
 	 * The resulting inputs will be finalized and the PSBT will be ready for broadcast if there
 	 * are no other inputs that need signing.
 	 * 
@@ -102,7 +102,6 @@ public class KeysManager extends CommonBase {
 		Reference.reachabilityFence(psbt);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CVec_u8ZNoneZ ret_hu_conv = Result_CVec_u8ZNoneZ.constr_from_ptr(ret);
-		for (SpendableOutputDescriptor descriptors_conv_27: descriptors) { if (this != null) { this.ptrs_to.add(descriptors_conv_27); }; };
 		return ret_hu_conv;
 	}
 

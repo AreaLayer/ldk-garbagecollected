@@ -80,7 +80,6 @@ public class RapidGossipSync : CommonBase {
 		GC.KeepAlive(current_time_unix);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_u32GraphSyncErrorZ ret_hu_conv = Result_u32GraphSyncErrorZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.AddLast(current_time_unix); };
 		return ret_hu_conv;
 	}
 

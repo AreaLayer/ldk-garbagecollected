@@ -173,15 +173,22 @@ public class ChannelManagerConstructor {
                 }
 
                 @Override
-                public Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, ReceiveTlvs tlvs, long amount_msats) {
+                public Result_CVec_BlindedPaymentPathZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, ReceiveTlvs tlvs, long amount_msats) {
                     return default_router.as_Router().create_blinded_payment_paths(recipient, first_hops, tlvs, amount_msats);
                 }
             }, new MessageRouter.MessageRouterInterface() {
                 @Override public Result_OnionMessagePathNoneZ find_path(byte[] sender, byte[][] peers, Destination destination) {
                     return default_router.as_MessageRouter().find_path(sender, peers, destination);
                 }
-                @Override public Result_CVec_BlindedPathZNoneZ create_blinded_paths(byte[] recipient, byte[][] peers) {
-                    return default_router.as_MessageRouter().create_blinded_paths(recipient, peers);
+
+                @Override
+                public Result_CVec_BlindedMessagePathZNoneZ create_blinded_paths(byte[] recipient, MessageContext context, byte[][] peers) {
+                    return default_router.as_MessageRouter().create_blinded_paths(recipient, context, peers);
+                }
+
+                @Override
+                public Result_CVec_BlindedMessagePathZNoneZ create_compact_blinded_paths(byte[] recipient, MessageContext context, MessageForwardNode[] peers) {
+                    return default_router.as_MessageRouter().create_compact_blinded_paths(recipient, context, peers);
                 }
             });
         } else {
@@ -251,15 +258,22 @@ public class ChannelManagerConstructor {
                 }
 
                 @Override
-                public Result_CVec_C2Tuple_BlindedPayInfoBlindedPathZZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, ReceiveTlvs tlvs, long amount_msats) {
+                public Result_CVec_BlindedPaymentPathZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, ReceiveTlvs tlvs, long amount_msats) {
                     return default_router.as_Router().create_blinded_payment_paths(recipient, first_hops, tlvs, amount_msats);
                 }
             }, new MessageRouter.MessageRouterInterface() {
                 @Override public Result_OnionMessagePathNoneZ find_path(byte[] sender, byte[][] peers, Destination destination) {
                     return default_router.as_MessageRouter().find_path(sender, peers, destination);
                 }
-                @Override public Result_CVec_BlindedPathZNoneZ create_blinded_paths(byte[] recipient, byte[][] peers) {
-                    return default_router.as_MessageRouter().create_blinded_paths(recipient, peers);
+
+                @Override
+                public Result_CVec_BlindedMessagePathZNoneZ create_blinded_paths(byte[] recipient, MessageContext context, byte[][] peers) {
+                    return default_router.as_MessageRouter().create_blinded_paths(recipient, context, peers);
+                }
+
+                @Override
+                public Result_CVec_BlindedMessagePathZNoneZ create_compact_blinded_paths(byte[] recipient, MessageContext context, MessageForwardNode[] peers) {
+                    return default_router.as_MessageRouter().create_compact_blinded_paths(recipient, context, peers);
                 }
             });
         } else {
@@ -280,7 +294,7 @@ public class ChannelManagerConstructor {
      * a background thread is started which will automatically call these methods for you when events occur.
      */
     public interface EventHandler {
-        void handle_event(Event events);
+        Result_NoneReplayEventZ handle_event(Event events);
         void persist_manager(byte[] channel_manager_bytes);
         void persist_network_graph(byte[] network_graph);
         void persist_scorer(byte[] scorer_bytes);
@@ -314,7 +328,10 @@ public class ChannelManagerConstructor {
             routing_msg_handler = graph_msg_handler.as_RoutingMessageHandler();
         else
             routing_msg_handler = ignoring_handler.as_RoutingMessageHandler();
-        OnionMessenger messenger = OnionMessenger.of(this.entropy_source, this.node_signer, this.logger, this.channel_manager.as_NodeIdLookUp(), this.router.get_message_router(), channel_manager.as_OffersMessageHandler(), IgnoringMessageHandler.of().as_CustomOnionMessageHandler());
+        OnionMessenger messenger = OnionMessenger.of(this.entropy_source, this.node_signer, this.logger,
+                this.channel_manager.as_NodeIdLookUp(), this.router.get_message_router(),
+                channel_manager.as_OffersMessageHandler(), IgnoringMessageHandler.of().as_AsyncPaymentsMessageHandler(),
+                IgnoringMessageHandler.of().as_CustomOnionMessageHandler());
         this.peer_manager = PeerManager.of(channel_manager.as_ChannelMessageHandler(),
                 routing_msg_handler, messenger.as_OnionMessageHandler(),
                 ignoring_handler.as_CustomMessageHandler(), (int)(System.currentTimeMillis() / 1000),
@@ -352,7 +369,7 @@ public class ChannelManagerConstructor {
                 event_handler.persist_scorer(scorer.write());
                 return Result_NoneIOErrorZ.ok();
             }
-        }), ldk_handler, this.chain_monitor, this.channel_manager, gossip_sync, peer_manager, this.logger, writeable_score);
+        }), ldk_handler, this.chain_monitor, this.channel_manager, messenger, gossip_sync, peer_manager, this.logger, writeable_score);
     }
 
     /**

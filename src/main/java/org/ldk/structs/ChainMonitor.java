@@ -67,8 +67,7 @@ public class ChainMonitor extends CommonBase {
 	 * claims which are awaiting confirmation.
 	 * 
 	 * Includes the balances from each [`ChannelMonitor`] *except* those included in
-	 * `ignored_channels`, allowing you to filter out balances from channels which are still open
-	 * (and whose balance should likely be pulled from the [`ChannelDetails`]).
+	 * `ignored_channels`.
 	 * 
 	 * See [`ChannelMonitor::get_claimable_balances`] for more details on the exact criteria for
 	 * inclusion in the return value.
@@ -85,7 +84,6 @@ public class ChainMonitor extends CommonBase {
 			if (ret_conv_9_hu_conv != null) { ret_conv_9_hu_conv.ptrs_to.add(this); };
 			ret_conv_9_arr[j] = ret_conv_9_hu_conv;
 		}
-		for (ChannelDetails ignored_channels_conv_16: ignored_channels) { if (this != null) { this.ptrs_to.add(ignored_channels_conv_16); }; };
 		return ret_conv_9_arr;
 	}
 
@@ -102,7 +100,6 @@ public class ChainMonitor extends CommonBase {
 		Reference.reachabilityFence(funding_txo);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_LockedChannelMonitorNoneZ ret_hu_conv = Result_LockedChannelMonitorNoneZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.add(funding_txo); };
 		return ret_hu_conv;
 	}
 
@@ -128,19 +125,22 @@ public class ChainMonitor extends CommonBase {
 
 	/**
 	 * Lists the pending updates for each [`ChannelMonitor`] (by `OutPoint` being monitored).
+	 * Each `Vec<u64>` contains `update_id`s from [`ChannelMonitor::get_latest_update_id`] for updates
+	 * that have not yet been fully persisted. Note that if a full monitor is persisted all the pending
+	 * monitor updates must be individually marked completed by calling [`ChainMonitor::channel_monitor_updated`].
 	 */
-	public TwoTuple_OutPointCVec_MonitorUpdateIdZZ[] list_pending_monitor_updates() {
+	public TwoTuple_OutPointCVec_u64ZZ[] list_pending_monitor_updates() {
 		long[] ret = bindings.ChainMonitor_list_pending_monitor_updates(this.ptr);
 		Reference.reachabilityFence(this);
-		int ret_conv_41_len = ret.length;
-		TwoTuple_OutPointCVec_MonitorUpdateIdZZ[] ret_conv_41_arr = new TwoTuple_OutPointCVec_MonitorUpdateIdZZ[ret_conv_41_len];
-		for (int p = 0; p < ret_conv_41_len; p++) {
-			long ret_conv_41 = ret[p];
-			TwoTuple_OutPointCVec_MonitorUpdateIdZZ ret_conv_41_hu_conv = new TwoTuple_OutPointCVec_MonitorUpdateIdZZ(null, ret_conv_41);
-			if (ret_conv_41_hu_conv != null) { ret_conv_41_hu_conv.ptrs_to.add(this); };
-			ret_conv_41_arr[p] = ret_conv_41_hu_conv;
+		int ret_conv_29_len = ret.length;
+		TwoTuple_OutPointCVec_u64ZZ[] ret_conv_29_arr = new TwoTuple_OutPointCVec_u64ZZ[ret_conv_29_len];
+		for (int d = 0; d < ret_conv_29_len; d++) {
+			long ret_conv_29 = ret[d];
+			TwoTuple_OutPointCVec_u64ZZ ret_conv_29_hu_conv = new TwoTuple_OutPointCVec_u64ZZ(null, ret_conv_29);
+			if (ret_conv_29_hu_conv != null) { ret_conv_29_hu_conv.ptrs_to.add(this); };
+			ret_conv_29_arr[d] = ret_conv_29_hu_conv;
 		}
-		return ret_conv_41_arr;
+		return ret_conv_29_arr;
 	}
 
 	/**
@@ -151,22 +151,27 @@ public class ChainMonitor extends CommonBase {
 	 * 1) This [`ChainMonitor`] calls [`Persist::update_persisted_channel`] which stores the
 	 * update to disk and begins updating any remote (e.g. watchtower/backup) copies,
 	 * returning [`ChannelMonitorUpdateStatus::InProgress`],
-	 * 2) once all remote copies are updated, you call this function with the
-	 * `completed_update_id` that completed, and once all pending updates have completed the
-	 * channel will be re-enabled.
+	 * 2) once all remote copies are updated, you call this function with [`ChannelMonitor::get_latest_update_id`]
+	 * or [`ChannelMonitorUpdate::update_id`] as the `completed_update_id`, and once all pending
+	 * updates have completed the channel will be re-enabled.
+	 * 
+	 * It is only necessary to call [`ChainMonitor::channel_monitor_updated`] when you return [`ChannelMonitorUpdateStatus::InProgress`]
+	 * from [`Persist`] and either:
+	 * 1. A new [`ChannelMonitor`] was added in [`Persist::persist_new_channel`], or
+	 * 2. A [`ChannelMonitorUpdate`] was provided as part of [`Persist::update_persisted_channel`].
+	 * Note that we don't care about calls to [`Persist::update_persisted_channel`] where no
+	 * [`ChannelMonitorUpdate`] was provided.
 	 * 
 	 * Returns an [`APIError::APIMisuseError`] if `funding_txo` does not match any currently
 	 * registered [`ChannelMonitor`]s.
 	 */
-	public Result_NoneAPIErrorZ channel_monitor_updated(org.ldk.structs.OutPoint funding_txo, org.ldk.structs.MonitorUpdateId completed_update_id) {
-		long ret = bindings.ChainMonitor_channel_monitor_updated(this.ptr, funding_txo.ptr, completed_update_id.ptr);
+	public Result_NoneAPIErrorZ channel_monitor_updated(org.ldk.structs.OutPoint funding_txo, long completed_update_id) {
+		long ret = bindings.ChainMonitor_channel_monitor_updated(this.ptr, funding_txo.ptr, completed_update_id);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(funding_txo);
 		Reference.reachabilityFence(completed_update_id);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneAPIErrorZ ret_hu_conv = Result_NoneAPIErrorZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.add(funding_txo); };
-		if (this != null) { this.ptrs_to.add(completed_update_id); };
 		return ret_hu_conv;
 	}
 
@@ -213,7 +218,6 @@ public class ChainMonitor extends CommonBase {
 		bindings.ChainMonitor_signer_unblocked(this.ptr, monitor_opt == null ? 0 : monitor_opt.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(monitor_opt);
-		if (this != null) { this.ptrs_to.add(monitor_opt); };
 	}
 
 	/**

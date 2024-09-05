@@ -76,8 +76,8 @@ public class SendError extends CommonBase {
 		}
 	}
 	/**
-	 * The provided [`Destination`] was an invalid [`BlindedPath`] due to not having any blinded
-	 * hops.
+	 * The provided [`Destination`] was an invalid [`BlindedMessagePath`] due to not having any
+	 * blinded hops.
 	 */
 	public final static class TooFewBlindedHops extends SendError {
 		private TooFewBlindedHops(long ptr, bindings.LDKSendError.TooFewBlindedHops obj) {
@@ -95,7 +95,11 @@ public class SendError extends CommonBase {
 		}
 	}
 	/**
-	 * A path from the sender to the destination could not be found by the [`MessageRouter`].
+	 * Indicates that a path could not be found by the [`MessageRouter`].
+	 * 
+	 * This occurs when either:
+	 * - No path from the sender to the destination was found to send the onion message
+	 * - No reply path to the sender could be created when responding to an onion message
 	 */
 	public final static class PathNotFound extends SendError {
 		private PathNotFound(long ptr, bindings.LDKSendError.PathNotFound obj) {

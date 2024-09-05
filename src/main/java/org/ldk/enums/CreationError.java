@@ -21,16 +21,11 @@ public enum CreationError {
 	 */
 	LDKCreationError_InvalidAmount,
 	/**
-	 * Route hints were required for this invoice and were missing. Applies to
-	 * [phantom invoices].
-	 * 
-	 * [phantom invoices]: crate::utils::create_phantom_invoice
+	 * Route hints were required for this invoice and were missing.
 	 */
 	LDKCreationError_MissingRouteHints,
 	/**
-	 * The provided `min_final_cltv_expiry_delta` was less than [`MIN_FINAL_CLTV_EXPIRY_DELTA`].
-	 * 
-	 * [`MIN_FINAL_CLTV_EXPIRY_DELTA`]: lightning::ln::channelmanager::MIN_FINAL_CLTV_EXPIRY_DELTA
+	 * The provided `min_final_cltv_expiry_delta` was less than rust-lightning's minimum.
 	 */
 	LDKCreationError_MinFinalCltvExpiryDeltaTooShort,
 	; static native void init();

@@ -50,6 +50,23 @@ public class Sleeper extends CommonBase {
 	}
 
 	/**
+	 * Constructs a new sleeper from three futures, allowing blocking on all three at once.
+	 */
+	public static Sleeper from_three_futures(org.ldk.structs.Future fut_a, org.ldk.structs.Future fut_b, org.ldk.structs.Future fut_c) {
+		long ret = bindings.Sleeper_from_three_futures(fut_a.ptr, fut_b.ptr, fut_c.ptr);
+		Reference.reachabilityFence(fut_a);
+		Reference.reachabilityFence(fut_b);
+		Reference.reachabilityFence(fut_c);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Sleeper ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Sleeper(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(fut_a); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(fut_b); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(fut_c); };
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Constructs a new sleeper on many futures, allowing blocking on all at once.
 	 */
 	public static Sleeper of(Future[] futures) {

@@ -36,7 +36,6 @@ public class DelayedPaymentOutputDescriptor : CommonBase {
 		bindings.DelayedPaymentOutputDescriptor_set_outpoint(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -120,7 +119,6 @@ public class DelayedPaymentOutputDescriptor : CommonBase {
 		bindings.DelayedPaymentOutputDescriptor_set_revocation_pubkey(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -192,7 +190,6 @@ public class DelayedPaymentOutputDescriptor : CommonBase {
 		bindings.DelayedPaymentOutputDescriptor_set_channel_transaction_parameters(this.ptr, val == null ? 0 : val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -213,9 +210,6 @@ public class DelayedPaymentOutputDescriptor : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.DelayedPaymentOutputDescriptor ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.DelayedPaymentOutputDescriptor(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(outpoint_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(revocation_pubkey_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_transaction_parameters_arg); };
 		return ret_hu_conv;
 	}
 

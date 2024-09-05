@@ -22,27 +22,30 @@ public class Event : CommonBase {
 		long raw_ty = bindings.LDKEvent_ty_from_ptr(ptr);
 		switch (raw_ty) {
 			case 0: return new Event_FundingGenerationReady(ptr);
-			case 1: return new Event_PaymentClaimable(ptr);
-			case 2: return new Event_PaymentClaimed(ptr);
-			case 3: return new Event_ConnectionNeeded(ptr);
-			case 4: return new Event_InvoiceRequestFailed(ptr);
-			case 5: return new Event_PaymentSent(ptr);
-			case 6: return new Event_PaymentFailed(ptr);
-			case 7: return new Event_PaymentPathSuccessful(ptr);
-			case 8: return new Event_PaymentPathFailed(ptr);
-			case 9: return new Event_ProbeSuccessful(ptr);
-			case 10: return new Event_ProbeFailed(ptr);
-			case 11: return new Event_PendingHTLCsForwardable(ptr);
-			case 12: return new Event_HTLCIntercepted(ptr);
-			case 13: return new Event_SpendableOutputs(ptr);
-			case 14: return new Event_PaymentForwarded(ptr);
-			case 15: return new Event_ChannelPending(ptr);
-			case 16: return new Event_ChannelReady(ptr);
-			case 17: return new Event_ChannelClosed(ptr);
-			case 18: return new Event_DiscardFunding(ptr);
-			case 19: return new Event_OpenChannelRequest(ptr);
-			case 20: return new Event_HTLCHandlingFailed(ptr);
-			case 21: return new Event_BumpTransaction(ptr);
+			case 1: return new Event_FundingTxBroadcastSafe(ptr);
+			case 2: return new Event_PaymentClaimable(ptr);
+			case 3: return new Event_PaymentClaimed(ptr);
+			case 4: return new Event_ConnectionNeeded(ptr);
+			case 5: return new Event_InvoiceReceived(ptr);
+			case 6: return new Event_PaymentSent(ptr);
+			case 7: return new Event_PaymentFailed(ptr);
+			case 8: return new Event_PaymentPathSuccessful(ptr);
+			case 9: return new Event_PaymentPathFailed(ptr);
+			case 10: return new Event_ProbeSuccessful(ptr);
+			case 11: return new Event_ProbeFailed(ptr);
+			case 12: return new Event_PendingHTLCsForwardable(ptr);
+			case 13: return new Event_HTLCIntercepted(ptr);
+			case 14: return new Event_SpendableOutputs(ptr);
+			case 15: return new Event_PaymentForwarded(ptr);
+			case 16: return new Event_ChannelPending(ptr);
+			case 17: return new Event_ChannelReady(ptr);
+			case 18: return new Event_ChannelClosed(ptr);
+			case 19: return new Event_DiscardFunding(ptr);
+			case 20: return new Event_OpenChannelRequest(ptr);
+			case 21: return new Event_HTLCHandlingFailed(ptr);
+			case 22: return new Event_BumpTransaction(ptr);
+			case 23: return new Event_OnionMessageIntercepted(ptr);
+			case 24: return new Event_OnionMessagePeerConnected(ptr);
 			default:
 				throw new ArgumentException("Impossible enum variant");
 		}
@@ -99,6 +102,51 @@ public class Event : CommonBase {
 			long user_channel_id = bindings.LDKEvent_FundingGenerationReady_get_user_channel_id(ptr);
 			org.ldk.util.UInt128 user_channel_id_conv = new org.ldk.util.UInt128(user_channel_id);
 			this.user_channel_id = user_channel_id_conv;
+		}
+	}
+	/** A Event of type FundingTxBroadcastSafe */
+	public class Event_FundingTxBroadcastSafe : Event {
+		/**
+		 * The `channel_id` indicating which channel has reached this stage.
+		 */
+		public ChannelId channel_id;
+		/**
+		 * The `user_channel_id` value passed in to [`ChannelManager::create_channel`].
+		 * 
+		 * [`ChannelManager::create_channel`]: crate::ln::channelmanager::ChannelManager::create_channel
+		 */
+		public UInt128 user_channel_id;
+		/**
+		 * The outpoint of the channel's funding transaction.
+		 */
+		public OutPoint funding_txo;
+		/**
+		 * The `node_id` of the channel counterparty.
+		 */
+		public byte[] counterparty_node_id;
+		/**
+		 * The `temporary_channel_id` this channel used to be known by during channel establishment.
+		 */
+		public ChannelId former_temporary_channel_id;
+		internal Event_FundingTxBroadcastSafe(long ptr) : base(null, ptr) {
+			long channel_id = bindings.LDKEvent_FundingTxBroadcastSafe_get_channel_id(ptr);
+			org.ldk.structs.ChannelId channel_id_hu_conv = null; if (channel_id < 0 || channel_id > 4096) { channel_id_hu_conv = new org.ldk.structs.ChannelId(null, channel_id); }
+			if (channel_id_hu_conv != null) { channel_id_hu_conv.ptrs_to.AddLast(this); };
+			this.channel_id = channel_id_hu_conv;
+			long user_channel_id = bindings.LDKEvent_FundingTxBroadcastSafe_get_user_channel_id(ptr);
+			org.ldk.util.UInt128 user_channel_id_conv = new org.ldk.util.UInt128(user_channel_id);
+			this.user_channel_id = user_channel_id_conv;
+			long funding_txo = bindings.LDKEvent_FundingTxBroadcastSafe_get_funding_txo(ptr);
+			org.ldk.structs.OutPoint funding_txo_hu_conv = null; if (funding_txo < 0 || funding_txo > 4096) { funding_txo_hu_conv = new org.ldk.structs.OutPoint(null, funding_txo); }
+			if (funding_txo_hu_conv != null) { funding_txo_hu_conv.ptrs_to.AddLast(this); };
+			this.funding_txo = funding_txo_hu_conv;
+			long counterparty_node_id = bindings.LDKEvent_FundingTxBroadcastSafe_get_counterparty_node_id(ptr);
+			byte[] counterparty_node_id_conv = InternalUtils.decodeUint8Array(counterparty_node_id);
+			this.counterparty_node_id = counterparty_node_id_conv;
+			long former_temporary_channel_id = bindings.LDKEvent_FundingTxBroadcastSafe_get_former_temporary_channel_id(ptr);
+			org.ldk.structs.ChannelId former_temporary_channel_id_hu_conv = null; if (former_temporary_channel_id < 0 || former_temporary_channel_id > 4096) { former_temporary_channel_id_hu_conv = new org.ldk.structs.ChannelId(null, former_temporary_channel_id); }
+			if (former_temporary_channel_id_hu_conv != null) { former_temporary_channel_id_hu_conv.ptrs_to.AddLast(this); };
+			this.former_temporary_channel_id = former_temporary_channel_id_hu_conv;
 		}
 	}
 	/** A Event of type PaymentClaimable */
@@ -245,6 +293,15 @@ public class Event : CommonBase {
 		 * serialized prior to LDK version 0.0.117.
 		 */
 		public Option_u64Z sender_intended_total_msat;
+		/**
+		 * The fields in the onion which were received with each HTLC. Only fields which were
+		 * identical in each HTLC involved in the payment will be included here.
+		 * 
+		 * Payments received on LDK versions prior to 0.0.124 will have this field unset.
+		 * 
+		 * Note that this (or a relevant inner pointer) may be NULL or all-0s to represent None
+		 */
+		public RecipientOnionFields onion_fields;
 		internal Event_PaymentClaimed(long ptr) : base(null, ptr) {
 			long receiver_node_id = bindings.LDKEvent_PaymentClaimed_get_receiver_node_id(ptr);
 			byte[] receiver_node_id_conv = InternalUtils.decodeUint8Array(receiver_node_id);
@@ -272,6 +329,10 @@ public class Event : CommonBase {
 			org.ldk.structs.Option_u64Z sender_intended_total_msat_hu_conv = org.ldk.structs.Option_u64Z.constr_from_ptr(sender_intended_total_msat);
 			if (sender_intended_total_msat_hu_conv != null) { sender_intended_total_msat_hu_conv.ptrs_to.AddLast(this); };
 			this.sender_intended_total_msat = sender_intended_total_msat_hu_conv;
+			long onion_fields = bindings.LDKEvent_PaymentClaimed_get_onion_fields(ptr);
+			org.ldk.structs.RecipientOnionFields onion_fields_hu_conv = null; if (onion_fields < 0 || onion_fields > 4096) { onion_fields_hu_conv = new org.ldk.structs.RecipientOnionFields(null, onion_fields); }
+			if (onion_fields_hu_conv != null) { onion_fields_hu_conv.ptrs_to.AddLast(this); };
+			this.onion_fields = onion_fields_hu_conv;
 		}
 	}
 	/** A Event of type ConnectionNeeded */
@@ -301,16 +362,48 @@ public class Event : CommonBase {
 			this.addresses = addresses_conv_15_arr;
 		}
 	}
-	/** A Event of type InvoiceRequestFailed */
-	public class Event_InvoiceRequestFailed : Event {
+	/** A Event of type InvoiceReceived */
+	public class Event_InvoiceReceived : Event {
 		/**
-		 * The `payment_id` to have been associated with payment for the requested invoice.
+		 * The `payment_id` associated with payment for the invoice.
 		 */
 		public byte[] payment_id;
-		internal Event_InvoiceRequestFailed(long ptr) : base(null, ptr) {
-			long payment_id = bindings.LDKEvent_InvoiceRequestFailed_get_payment_id(ptr);
+		/**
+		 * The invoice to pay.
+		 */
+		public Bolt12Invoice invoice;
+		/**
+		 * The context of the [`BlindedMessagePath`] used to send the invoice.
+		 * 
+		 * [`BlindedMessagePath`]: crate::blinded_path::message::BlindedMessagePath
+		 */
+		public Option_OffersContextZ context;
+		/**
+		 * A responder for replying with an [`InvoiceError`] if needed.
+		 * 
+		 * `None` if the invoice wasn't sent with a reply path.
+		 * 
+		 * [`InvoiceError`]: crate::offers::invoice_error::InvoiceError
+		 * 
+		 * Note that this (or a relevant inner pointer) may be NULL or all-0s to represent None
+		 */
+		public Responder responder;
+		internal Event_InvoiceReceived(long ptr) : base(null, ptr) {
+			long payment_id = bindings.LDKEvent_InvoiceReceived_get_payment_id(ptr);
 			byte[] payment_id_conv = InternalUtils.decodeUint8Array(payment_id);
 			this.payment_id = payment_id_conv;
+			long invoice = bindings.LDKEvent_InvoiceReceived_get_invoice(ptr);
+			org.ldk.structs.Bolt12Invoice invoice_hu_conv = null; if (invoice < 0 || invoice > 4096) { invoice_hu_conv = new org.ldk.structs.Bolt12Invoice(null, invoice); }
+			if (invoice_hu_conv != null) { invoice_hu_conv.ptrs_to.AddLast(this); };
+			this.invoice = invoice_hu_conv;
+			long context = bindings.LDKEvent_InvoiceReceived_get_context(ptr);
+			org.ldk.structs.Option_OffersContextZ context_hu_conv = org.ldk.structs.Option_OffersContextZ.constr_from_ptr(context);
+			if (context_hu_conv != null) { context_hu_conv.ptrs_to.AddLast(this); };
+			this.context = context_hu_conv;
+			long responder = bindings.LDKEvent_InvoiceReceived_get_responder(ptr);
+			org.ldk.structs.Responder responder_hu_conv = null; if (responder < 0 || responder > 4096) { responder_hu_conv = new org.ldk.structs.Responder(null, responder); }
+			if (responder_hu_conv != null) { responder_hu_conv.ptrs_to.AddLast(this); };
+			this.responder = responder_hu_conv;
 		}
 	}
 	/** A Event of type PaymentSent */
@@ -342,6 +435,8 @@ public class Event : CommonBase {
 		 * If the recipient or an intermediate node misbehaves and gives us free money, this may
 		 * overstate the amount paid, though this is unlikely.
 		 * 
+		 * This is only `None` for payments initiated on LDK versions prior to 0.0.103.
+		 * 
 		 * [`Route::get_total_fees`]: crate::routing::router::Route::get_total_fees
 		 */
 		public Option_u64Z fee_paid_msat;
@@ -371,14 +466,17 @@ public class Event : CommonBase {
 		 */
 		public byte[] payment_id;
 		/**
-		 * The hash that was given to [`ChannelManager::send_payment`].
+		 * The hash that was given to [`ChannelManager::send_payment`]. `None` if the payment failed
+		 * before receiving an invoice when paying a BOLT12 [`Offer`].
 		 * 
 		 * [`ChannelManager::send_payment`]: crate::ln::channelmanager::ChannelManager::send_payment
+		 * [`Offer`]: crate::offers::offer::Offer
 		 */
-		public byte[] payment_hash;
+		public Option_ThirtyTwoBytesZ payment_hash;
 		/**
 		 * The reason the payment failed. This is only `None` for events generated or serialized
-		 * by versions prior to 0.0.115.
+		 * by versions prior to 0.0.115, or when downgrading to a version with a reason that was
+		 * added after.
 		 */
 		public Option_PaymentFailureReasonZ reason;
 		internal Event_PaymentFailed(long ptr) : base(null, ptr) {
@@ -386,8 +484,9 @@ public class Event : CommonBase {
 			byte[] payment_id_conv = InternalUtils.decodeUint8Array(payment_id);
 			this.payment_id = payment_id_conv;
 			long payment_hash = bindings.LDKEvent_PaymentFailed_get_payment_hash(ptr);
-			byte[] payment_hash_conv = InternalUtils.decodeUint8Array(payment_hash);
-			this.payment_hash = payment_hash_conv;
+			org.ldk.structs.Option_ThirtyTwoBytesZ payment_hash_hu_conv = org.ldk.structs.Option_ThirtyTwoBytesZ.constr_from_ptr(payment_hash);
+			if (payment_hash_hu_conv != null) { payment_hash_hu_conv.ptrs_to.AddLast(this); };
+			this.payment_hash = payment_hash_hu_conv;
 			long reason = bindings.LDKEvent_PaymentFailed_get_reason(ptr);
 			org.ldk.structs.Option_PaymentFailureReasonZ reason_hu_conv = org.ldk.structs.Option_PaymentFailureReasonZ.constr_from_ptr(reason);
 			if (reason_hu_conv != null) { reason_hu_conv.ptrs_to.AddLast(this); };
@@ -955,15 +1054,16 @@ public class Event : CommonBase {
 		/**
 		 * The full transaction received from the user
 		 */
-		public byte[] transaction;
+		public FundingInfo funding_info;
 		internal Event_DiscardFunding(long ptr) : base(null, ptr) {
 			long channel_id = bindings.LDKEvent_DiscardFunding_get_channel_id(ptr);
 			org.ldk.structs.ChannelId channel_id_hu_conv = null; if (channel_id < 0 || channel_id > 4096) { channel_id_hu_conv = new org.ldk.structs.ChannelId(null, channel_id); }
 			if (channel_id_hu_conv != null) { channel_id_hu_conv.ptrs_to.AddLast(this); };
 			this.channel_id = channel_id_hu_conv;
-			long transaction = bindings.LDKEvent_DiscardFunding_get_transaction(ptr);
-			byte[] transaction_conv = InternalUtils.decodeUint8Array(transaction);
-			this.transaction = transaction_conv;
+			long funding_info = bindings.LDKEvent_DiscardFunding_get_funding_info(ptr);
+			org.ldk.structs.FundingInfo funding_info_hu_conv = org.ldk.structs.FundingInfo.constr_from_ptr(funding_info);
+			if (funding_info_hu_conv != null) { funding_info_hu_conv.ptrs_to.AddLast(this); };
+			this.funding_info = funding_info_hu_conv;
 		}
 	}
 	/** A Event of type OpenChannelRequest */
@@ -1017,6 +1117,14 @@ public class Event : CommonBase {
 		 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 		 */
 		public ChannelTypeFeatures channel_type;
+		/**
+		 * True if this channel is (or will be) publicly-announced.
+		 */
+		public bool is_announced;
+		/**
+		 * Channel parameters given by the counterparty.
+		 */
+		public ChannelParameters _params;
 		internal Event_OpenChannelRequest(long ptr) : base(null, ptr) {
 			long temporary_channel_id = bindings.LDKEvent_OpenChannelRequest_get_temporary_channel_id(ptr);
 			org.ldk.structs.ChannelId temporary_channel_id_hu_conv = null; if (temporary_channel_id < 0 || temporary_channel_id > 4096) { temporary_channel_id_hu_conv = new org.ldk.structs.ChannelId(null, temporary_channel_id); }
@@ -1031,6 +1139,11 @@ public class Event : CommonBase {
 			org.ldk.structs.ChannelTypeFeatures channel_type_hu_conv = null; if (channel_type < 0 || channel_type > 4096) { channel_type_hu_conv = new org.ldk.structs.ChannelTypeFeatures(null, channel_type); }
 			if (channel_type_hu_conv != null) { channel_type_hu_conv.ptrs_to.AddLast(this); };
 			this.channel_type = channel_type_hu_conv;
+			this.is_announced = bindings.LDKEvent_OpenChannelRequest_get_is_announced(ptr);
+			long _params = bindings.LDKEvent_OpenChannelRequest_get_params(ptr);
+			org.ldk.structs.ChannelParameters params_hu_conv = null; if (_params < 0 || _params > 4096) { params_hu_conv = new org.ldk.structs.ChannelParameters(null, _params); }
+			if (params_hu_conv != null) { params_hu_conv.ptrs_to.AddLast(this); };
+			this._params = params_hu_conv;
 		}
 	}
 	/** A Event of type HTLCHandlingFailed */
@@ -1064,6 +1177,39 @@ public class Event : CommonBase {
 			this.bump_transaction = bump_transaction_hu_conv;
 		}
 	}
+	/** A Event of type OnionMessageIntercepted */
+	public class Event_OnionMessageIntercepted : Event {
+		/**
+		 * The node id of the offline peer.
+		 */
+		public byte[] peer_node_id;
+		/**
+		 * The onion message intended to be forwarded to `peer_node_id`.
+		 */
+		public OnionMessage message;
+		internal Event_OnionMessageIntercepted(long ptr) : base(null, ptr) {
+			long peer_node_id = bindings.LDKEvent_OnionMessageIntercepted_get_peer_node_id(ptr);
+			byte[] peer_node_id_conv = InternalUtils.decodeUint8Array(peer_node_id);
+			this.peer_node_id = peer_node_id_conv;
+			long message = bindings.LDKEvent_OnionMessageIntercepted_get_message(ptr);
+			org.ldk.structs.OnionMessage message_hu_conv = null; if (message < 0 || message > 4096) { message_hu_conv = new org.ldk.structs.OnionMessage(null, message); }
+			if (message_hu_conv != null) { message_hu_conv.ptrs_to.AddLast(this); };
+			this.message = message_hu_conv;
+		}
+	}
+	/** A Event of type OnionMessagePeerConnected */
+	public class Event_OnionMessagePeerConnected : Event {
+		/**
+		 * The node id of the peer we just connected to, who advertises support for
+		 * onion messages.
+		 */
+		public byte[] peer_node_id;
+		internal Event_OnionMessagePeerConnected(long ptr) : base(null, ptr) {
+			long peer_node_id = bindings.LDKEvent_OnionMessagePeerConnected_get_peer_node_id(ptr);
+			byte[] peer_node_id_conv = InternalUtils.decodeUint8Array(peer_node_id);
+			this.peer_node_id = peer_node_id_conv;
+		}
+	}
 	internal long clone_ptr() {
 		long ret = bindings.Event_clone_ptr(this.ptr);
 		GC.KeepAlive(this);
@@ -1095,7 +1241,22 @@ public class Event : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(temporary_channel_id); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new FundingTxBroadcastSafe-variant Event
+	 */
+	public static Event funding_tx_broadcast_safe(org.ldk.structs.ChannelId channel_id, org.ldk.util.UInt128 user_channel_id, org.ldk.structs.OutPoint funding_txo, byte[] counterparty_node_id, org.ldk.structs.ChannelId former_temporary_channel_id) {
+		long ret = bindings.Event_funding_tx_broadcast_safe(channel_id.ptr, InternalUtils.encodeUint8Array(user_channel_id.getLEBytes()), funding_txo.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)), former_temporary_channel_id.ptr);
+		GC.KeepAlive(channel_id);
+		GC.KeepAlive(user_channel_id);
+		GC.KeepAlive(funding_txo);
+		GC.KeepAlive(counterparty_node_id);
+		GC.KeepAlive(former_temporary_channel_id);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
 		return ret_hu_conv;
 	}
 
@@ -1116,31 +1277,24 @@ public class Event : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(onion_fields); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(purpose); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(via_channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(via_user_channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(claim_deadline); };
 		return ret_hu_conv;
 	}
 
 	/**
 	 * Utility method to constructs a new PaymentClaimed-variant Event
 	 */
-	public static Event payment_claimed(byte[] receiver_node_id, byte[] payment_hash, long amount_msat, org.ldk.structs.PaymentPurpose purpose, ClaimedHTLC[] htlcs, org.ldk.structs.Option_u64Z sender_intended_total_msat) {
-		long ret = bindings.Event_payment_claimed(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(receiver_node_id, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), amount_msat, purpose.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(htlcs, htlcs_conv_13 => htlcs_conv_13.ptr)), sender_intended_total_msat.ptr);
+	public static Event payment_claimed(byte[] receiver_node_id, byte[] payment_hash, long amount_msat, org.ldk.structs.PaymentPurpose purpose, ClaimedHTLC[] htlcs, org.ldk.structs.Option_u64Z sender_intended_total_msat, org.ldk.structs.RecipientOnionFields onion_fields) {
+		long ret = bindings.Event_payment_claimed(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(receiver_node_id, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), amount_msat, purpose.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(htlcs, htlcs_conv_13 => htlcs_conv_13.ptr)), sender_intended_total_msat.ptr, onion_fields.ptr);
 		GC.KeepAlive(receiver_node_id);
 		GC.KeepAlive(payment_hash);
 		GC.KeepAlive(amount_msat);
 		GC.KeepAlive(purpose);
 		GC.KeepAlive(htlcs);
 		GC.KeepAlive(sender_intended_total_msat);
+		GC.KeepAlive(onion_fields);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(purpose); };
-		foreach (ClaimedHTLC htlcs_conv_13 in htlcs) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(htlcs_conv_13); }; };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(sender_intended_total_msat); };
 		return ret_hu_conv;
 	}
 
@@ -1154,16 +1308,18 @@ public class Event : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		foreach (SocketAddress addresses_conv_15 in addresses) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(addresses_conv_15); }; };
 		return ret_hu_conv;
 	}
 
 	/**
-	 * Utility method to constructs a new InvoiceRequestFailed-variant Event
+	 * Utility method to constructs a new InvoiceReceived-variant Event
 	 */
-	public static Event invoice_request_failed(byte[] payment_id) {
-		long ret = bindings.Event_invoice_request_failed(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
+	public static Event invoice_received(byte[] payment_id, org.ldk.structs.Bolt12Invoice invoice, org.ldk.structs.Option_OffersContextZ context, org.ldk.structs.Responder responder) {
+		long ret = bindings.Event_invoice_received(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), invoice.ptr, context.ptr, responder.ptr);
 		GC.KeepAlive(payment_id);
+		GC.KeepAlive(invoice);
+		GC.KeepAlive(context);
+		GC.KeepAlive(responder);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
@@ -1182,23 +1338,20 @@ public class Event : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(payment_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(fee_paid_msat); };
 		return ret_hu_conv;
 	}
 
 	/**
 	 * Utility method to constructs a new PaymentFailed-variant Event
 	 */
-	public static Event payment_failed(byte[] payment_id, byte[] payment_hash, org.ldk.structs.Option_PaymentFailureReasonZ reason) {
-		long ret = bindings.Event_payment_failed(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), reason.ptr);
+	public static Event payment_failed(byte[] payment_id, org.ldk.structs.Option_ThirtyTwoBytesZ payment_hash, org.ldk.structs.Option_PaymentFailureReasonZ reason) {
+		long ret = bindings.Event_payment_failed(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), payment_hash.ptr, reason.ptr);
 		GC.KeepAlive(payment_id);
 		GC.KeepAlive(payment_hash);
 		GC.KeepAlive(reason);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(reason); };
 		return ret_hu_conv;
 	}
 
@@ -1213,8 +1366,6 @@ public class Event : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(payment_hash); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(path); };
 		return ret_hu_conv;
 	}
 
@@ -1232,10 +1383,6 @@ public class Event : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(payment_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(failure); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(path); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(short_channel_id); };
 		return ret_hu_conv;
 	}
 
@@ -1250,7 +1397,6 @@ public class Event : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(path); };
 		return ret_hu_conv;
 	}
 
@@ -1266,8 +1412,6 @@ public class Event : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(path); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(short_channel_id); };
 		return ret_hu_conv;
 	}
 
@@ -1309,8 +1453,6 @@ public class Event : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		foreach (SpendableOutputDescriptor outputs_conv_27 in outputs) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(outputs_conv_27); }; };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id); };
 		return ret_hu_conv;
 	}
 
@@ -1330,13 +1472,6 @@ public class Event : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(prev_channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(next_channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(prev_user_channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(next_user_channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(total_fee_earned_msat); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(skimmed_fee_msat); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(outbound_amount_forwarded_msat); };
 		return ret_hu_conv;
 	}
 
@@ -1354,10 +1489,6 @@ public class Event : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(former_temporary_channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(funding_txo); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_type); };
 		return ret_hu_conv;
 	}
 
@@ -1373,8 +1504,6 @@ public class Event : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_type); };
 		return ret_hu_conv;
 	}
 
@@ -1392,42 +1521,37 @@ public class Event : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(reason); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_capacity_sats); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_funding_txo); };
 		return ret_hu_conv;
 	}
 
 	/**
 	 * Utility method to constructs a new DiscardFunding-variant Event
 	 */
-	public static Event discard_funding(org.ldk.structs.ChannelId channel_id, byte[] transaction) {
-		long ret = bindings.Event_discard_funding(channel_id.ptr, InternalUtils.encodeUint8Array(transaction));
+	public static Event discard_funding(org.ldk.structs.ChannelId channel_id, org.ldk.structs.FundingInfo funding_info) {
+		long ret = bindings.Event_discard_funding(channel_id.ptr, funding_info.ptr);
 		GC.KeepAlive(channel_id);
-		GC.KeepAlive(transaction);
+		GC.KeepAlive(funding_info);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id); };
 		return ret_hu_conv;
 	}
 
 	/**
 	 * Utility method to constructs a new OpenChannelRequest-variant Event
 	 */
-	public static Event open_channel_request(org.ldk.structs.ChannelId temporary_channel_id, byte[] counterparty_node_id, long funding_satoshis, long push_msat, org.ldk.structs.ChannelTypeFeatures channel_type) {
-		long ret = bindings.Event_open_channel_request(temporary_channel_id.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)), funding_satoshis, push_msat, channel_type.ptr);
+	public static Event open_channel_request(org.ldk.structs.ChannelId temporary_channel_id, byte[] counterparty_node_id, long funding_satoshis, long push_msat, org.ldk.structs.ChannelTypeFeatures channel_type, bool is_announced, org.ldk.structs.ChannelParameters _params) {
+		long ret = bindings.Event_open_channel_request(temporary_channel_id.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)), funding_satoshis, push_msat, channel_type.ptr, is_announced, _params.ptr);
 		GC.KeepAlive(temporary_channel_id);
 		GC.KeepAlive(counterparty_node_id);
 		GC.KeepAlive(funding_satoshis);
 		GC.KeepAlive(push_msat);
 		GC.KeepAlive(channel_type);
+		GC.KeepAlive(is_announced);
+		GC.KeepAlive(_params);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(temporary_channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_type); };
 		return ret_hu_conv;
 	}
 
@@ -1441,8 +1565,6 @@ public class Event : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(prev_channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(failed_next_destination); };
 		return ret_hu_conv;
 	}
 
@@ -1455,7 +1577,31 @@ public class Event : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(a); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new OnionMessageIntercepted-variant Event
+	 */
+	public static Event onion_message_intercepted(byte[] peer_node_id, org.ldk.structs.OnionMessage message) {
+		long ret = bindings.Event_onion_message_intercepted(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(peer_node_id, 33)), message.ptr);
+		GC.KeepAlive(peer_node_id);
+		GC.KeepAlive(message);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new OnionMessagePeerConnected-variant Event
+	 */
+	public static Event onion_message_peer_connected(byte[] peer_node_id) {
+		long ret = bindings.Event_onion_message_peer_connected(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(peer_node_id, 33)));
+		GC.KeepAlive(peer_node_id);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Event ret_hu_conv = org.ldk.structs.Event.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
 		return ret_hu_conv;
 	}
 

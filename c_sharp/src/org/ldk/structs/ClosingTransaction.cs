@@ -79,7 +79,6 @@ public class ClosingTransaction : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ClosingTransaction ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ClosingTransaction(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(funding_outpoint); };
 		return ret_hu_conv;
 	}
 
@@ -114,7 +113,6 @@ public class ClosingTransaction : CommonBase {
 		GC.KeepAlive(funding_outpoint);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_TrustedClosingTransactionNoneZ ret_hu_conv = Result_TrustedClosingTransactionNoneZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.AddLast(funding_outpoint); };
 		return ret_hu_conv;
 	}
 

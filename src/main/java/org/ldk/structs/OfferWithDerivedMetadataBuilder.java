@@ -44,27 +44,29 @@ public class OfferWithDerivedMetadataBuilder extends CommonBase {
 
 	/**
 	 * Similar to [`OfferBuilder::new`] except, if [`OfferBuilder::path`] is called, the signing
-	 * pubkey is derived from the given [`ExpandedKey`] and [`EntropySource`]. This provides
-	 * recipient privacy by using a different signing pubkey for each offer. Otherwise, the
-	 * provided `node_id` is used for the signing pubkey.
+	 * pubkey is derived from the given [`ExpandedKey`] and [`Nonce`]. This provides recipient
+	 * privacy by using a different signing pubkey for each offer. Otherwise, the provided
+	 * `node_id` is used for the signing pubkey.
 	 * 
 	 * Also, sets the metadata when [`OfferBuilder::build`] is called such that it can be used by
-	 * [`InvoiceRequest::verify`] to determine if the request was produced for the offer given an
-	 * [`ExpandedKey`].
+	 * [`InvoiceRequest::verify_using_metadata`] to determine if the request was produced for the
+	 * offer given an [`ExpandedKey`]. However, if [`OfferBuilder::path`] is called, then the
+	 * metadata will not be set and must be included in each [`BlindedMessagePath`] instead. In this case,
+	 * use [`InvoiceRequest::verify_using_recipient_data`].
 	 * 
-	 * [`InvoiceRequest::verify`]: crate::offers::invoice_request::InvoiceRequest::verify
+	 * [`InvoiceRequest::verify_using_metadata`]: crate::offers::invoice_request::InvoiceRequest::verify_using_metadata
+	 * [`InvoiceRequest::verify_using_recipient_data`]: crate::offers::invoice_request::InvoiceRequest::verify_using_recipient_data
 	 * [`ExpandedKey`]: crate::ln::inbound_payment::ExpandedKey
 	 */
-	public static OfferWithDerivedMetadataBuilder deriving_signing_pubkey(byte[] node_id, org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.EntropySource entropy_source) {
-		long ret = bindings.OfferWithDerivedMetadataBuilder_deriving_signing_pubkey(InternalUtils.check_arr_len(node_id, 33), expanded_key.ptr, entropy_source.ptr);
+	public static OfferWithDerivedMetadataBuilder deriving_signing_pubkey(byte[] node_id, org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.Nonce nonce) {
+		long ret = bindings.OfferWithDerivedMetadataBuilder_deriving_signing_pubkey(InternalUtils.check_arr_len(node_id, 33), expanded_key.ptr, nonce.ptr);
 		Reference.reachabilityFence(node_id);
 		Reference.reachabilityFence(expanded_key);
-		Reference.reachabilityFence(entropy_source);
+		Reference.reachabilityFence(nonce);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.OfferWithDerivedMetadataBuilder ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.OfferWithDerivedMetadataBuilder(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(expanded_key); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(entropy_source); };
 		return ret_hu_conv;
 	}
 
@@ -80,7 +82,7 @@ public class OfferWithDerivedMetadataBuilder extends CommonBase {
 		bindings.OfferWithDerivedMetadataBuilder_chain(this.ptr, network);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(network);
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 	}
 
 	/**
@@ -92,7 +94,7 @@ public class OfferWithDerivedMetadataBuilder extends CommonBase {
 		bindings.OfferWithDerivedMetadataBuilder_amount_msats(this.ptr, amount_msats);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(amount_msats);
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 	}
 
 	/**
@@ -105,7 +107,7 @@ public class OfferWithDerivedMetadataBuilder extends CommonBase {
 		bindings.OfferWithDerivedMetadataBuilder_absolute_expiry(this.ptr, absolute_expiry);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(absolute_expiry);
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 	}
 
 	/**
@@ -117,7 +119,7 @@ public class OfferWithDerivedMetadataBuilder extends CommonBase {
 		bindings.OfferWithDerivedMetadataBuilder_description(this.ptr, description);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(description);
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 	}
 
 	/**
@@ -129,7 +131,7 @@ public class OfferWithDerivedMetadataBuilder extends CommonBase {
 		bindings.OfferWithDerivedMetadataBuilder_issuer(this.ptr, issuer);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(issuer);
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 	}
 
 	/**
@@ -139,12 +141,11 @@ public class OfferWithDerivedMetadataBuilder extends CommonBase {
 	 * Successive calls to this method will add another blinded path. Caller is responsible for not
 	 * adding duplicate paths.
 	 */
-	public void path(org.ldk.structs.BlindedPath path) {
+	public void path(org.ldk.structs.BlindedMessagePath path) {
 		bindings.OfferWithDerivedMetadataBuilder_path(this.ptr, path.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(path);
-		if (this != null) { this.ptrs_to.add(path); };
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 	}
 
 	/**
@@ -157,8 +158,7 @@ public class OfferWithDerivedMetadataBuilder extends CommonBase {
 		bindings.OfferWithDerivedMetadataBuilder_supported_quantity(this.ptr, quantity.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(quantity);
-		if (this != null) { this.ptrs_to.add(quantity); };
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class OfferWithDerivedMetadataBuilder extends CommonBase {
 		Reference.reachabilityFence(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_OfferBolt12SemanticErrorZ ret_hu_conv = Result_OfferBolt12SemanticErrorZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 		return ret_hu_conv;
 	}
 

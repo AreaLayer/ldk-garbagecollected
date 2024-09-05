@@ -63,12 +63,42 @@ public class BlindedForward extends CommonBase {
 	}
 
 	/**
-	 * Constructs a new BlindedForward given each field
+	 * Overrides the next hop's [`msgs::UpdateAddHTLC::blinding_point`]. Set if this HTLC is being
+	 * forwarded within a [`BlindedPaymentPath`] that was concatenated to another blinded path that
+	 * starts at the next hop.
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static BlindedForward of(byte[] inbound_blinding_point_arg, org.ldk.enums.BlindedFailure failure_arg) {
-		long ret = bindings.BlindedForward_new(InternalUtils.check_arr_len(inbound_blinding_point_arg, 33), failure_arg);
+	@Nullable
+	public byte[] get_next_blinding_override() {
+		byte[] ret = bindings.BlindedForward_get_next_blinding_override(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Overrides the next hop's [`msgs::UpdateAddHTLC::blinding_point`]. Set if this HTLC is being
+	 * forwarded within a [`BlindedPaymentPath`] that was concatenated to another blinded path that
+	 * starts at the next hop.
+	 * 
+	 * Note that val (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	public void set_next_blinding_override(@Nullable byte[] val) {
+		bindings.BlindedForward_set_next_blinding_override(this.ptr, InternalUtils.check_arr_len(val, 33));
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
+	}
+
+	/**
+	 * Constructs a new BlindedForward given each field
+	 * 
+	 * Note that next_blinding_override_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	public static BlindedForward of(byte[] inbound_blinding_point_arg, org.ldk.enums.BlindedFailure failure_arg, @Nullable byte[] next_blinding_override_arg) {
+		long ret = bindings.BlindedForward_new(InternalUtils.check_arr_len(inbound_blinding_point_arg, 33), failure_arg, InternalUtils.check_arr_len(next_blinding_override_arg, 33));
 		Reference.reachabilityFence(inbound_blinding_point_arg);
 		Reference.reachabilityFence(failure_arg);
+		Reference.reachabilityFence(next_blinding_override_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.BlindedForward ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.BlindedForward(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };

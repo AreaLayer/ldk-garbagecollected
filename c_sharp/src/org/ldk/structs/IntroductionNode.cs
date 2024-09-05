@@ -6,7 +6,7 @@ using System;
 namespace org { namespace ldk { namespace structs {
 
 /**
- * The unblinded node in a [`BlindedPath`].
+ * The unblinded node in a blinded path.
  */
 public class IntroductionNode : CommonBase {
 	protected IntroductionNode(object _dummy, long ptr) : base(ptr) { }

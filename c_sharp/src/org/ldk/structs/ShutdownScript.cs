@@ -124,7 +124,7 @@ public class ShutdownScript : CommonBase {
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
-		if (this != null) { this.ptrs_to.AddLast(this); };
+		;
 		return ret_conv;
 	}
 

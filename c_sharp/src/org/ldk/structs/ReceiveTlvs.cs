@@ -55,7 +55,6 @@ public class ReceiveTlvs : CommonBase {
 		bindings.ReceiveTlvs_set_payment_constraints(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -77,7 +76,6 @@ public class ReceiveTlvs : CommonBase {
 		bindings.ReceiveTlvs_set_payment_context(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -91,8 +89,6 @@ public class ReceiveTlvs : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ReceiveTlvs ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ReceiveTlvs(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(payment_constraints_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(payment_context_arg); };
 		return ret_hu_conv;
 	}
 

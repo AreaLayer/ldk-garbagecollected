@@ -46,7 +46,6 @@ public class Route : CommonBase {
 		bindings.Route_set_paths(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_6 => val_conv_6.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		foreach (Path val_conv_6 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_6); }; };
 	}
 
 	/**
@@ -80,7 +79,6 @@ public class Route : CommonBase {
 		bindings.Route_set_route_params(this.ptr, val == null ? 0 : val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -95,8 +93,6 @@ public class Route : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Route ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Route(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		foreach (Path paths_arg_conv_6 in paths_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(paths_arg_conv_6); }; };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(route_params_arg); };
 		return ret_hu_conv;
 	}
 

@@ -47,7 +47,6 @@ public class CoinSelection extends CommonBase {
 		bindings.CoinSelection_set_confirmed_utxos(this.ptr, val != null ? Arrays.stream(val).mapToLong(val_conv_6 -> val_conv_6.ptr).toArray() : null);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		for (Utxo val_conv_6: val) { if (this != null) { this.ptrs_to.add(val_conv_6); }; };
 	}
 
 	/**
@@ -75,7 +74,6 @@ public class CoinSelection extends CommonBase {
 		bindings.CoinSelection_set_change_output(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -88,8 +86,6 @@ public class CoinSelection extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CoinSelection ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.CoinSelection(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		for (Utxo confirmed_utxos_arg_conv_6: confirmed_utxos_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(confirmed_utxos_arg_conv_6); }; };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(change_output_arg); };
 		return ret_hu_conv;
 	}
 

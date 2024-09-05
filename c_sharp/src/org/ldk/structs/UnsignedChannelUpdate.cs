@@ -74,19 +74,39 @@ public class UnsignedChannelUpdate : CommonBase {
 	}
 
 	/**
-	 * Channel flags
+	 * Flags pertaining to this message.
 	 */
-	public byte get_flags() {
-		byte ret = bindings.UnsignedChannelUpdate_get_flags(this.ptr);
+	public byte get_message_flags() {
+		byte ret = bindings.UnsignedChannelUpdate_get_message_flags(this.ptr);
 		GC.KeepAlive(this);
 		return ret;
 	}
 
 	/**
-	 * Channel flags
+	 * Flags pertaining to this message.
 	 */
-	public void set_flags(byte val) {
-		bindings.UnsignedChannelUpdate_set_flags(this.ptr, val);
+	public void set_message_flags(byte val) {
+		bindings.UnsignedChannelUpdate_set_message_flags(this.ptr, val);
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
+	}
+
+	/**
+	 * Flags pertaining to the channel, including to which direction in the channel this update
+	 * applies and whether the direction is currently able to forward HTLCs.
+	 */
+	public byte get_channel_flags() {
+		byte ret = bindings.UnsignedChannelUpdate_get_channel_flags(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Flags pertaining to the channel, including to which direction in the channel this update
+	 * applies and whether the direction is currently able to forward HTLCs.
+	 */
+	public void set_channel_flags(byte val) {
+		bindings.UnsignedChannelUpdate_set_channel_flags(this.ptr, val);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
 	}
@@ -230,12 +250,13 @@ public class UnsignedChannelUpdate : CommonBase {
 	/**
 	 * Constructs a new UnsignedChannelUpdate given each field
 	 */
-	public static UnsignedChannelUpdate of(byte[] chain_hash_arg, long short_channel_id_arg, int timestamp_arg, byte flags_arg, short cltv_expiry_delta_arg, long htlc_minimum_msat_arg, long htlc_maximum_msat_arg, int fee_base_msat_arg, int fee_proportional_millionths_arg, byte[] excess_data_arg) {
-		long ret = bindings.UnsignedChannelUpdate_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(chain_hash_arg, 32)), short_channel_id_arg, timestamp_arg, flags_arg, cltv_expiry_delta_arg, htlc_minimum_msat_arg, htlc_maximum_msat_arg, fee_base_msat_arg, fee_proportional_millionths_arg, InternalUtils.encodeUint8Array(excess_data_arg));
+	public static UnsignedChannelUpdate of(byte[] chain_hash_arg, long short_channel_id_arg, int timestamp_arg, byte message_flags_arg, byte channel_flags_arg, short cltv_expiry_delta_arg, long htlc_minimum_msat_arg, long htlc_maximum_msat_arg, int fee_base_msat_arg, int fee_proportional_millionths_arg, byte[] excess_data_arg) {
+		long ret = bindings.UnsignedChannelUpdate_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(chain_hash_arg, 32)), short_channel_id_arg, timestamp_arg, message_flags_arg, channel_flags_arg, cltv_expiry_delta_arg, htlc_minimum_msat_arg, htlc_maximum_msat_arg, fee_base_msat_arg, fee_proportional_millionths_arg, InternalUtils.encodeUint8Array(excess_data_arg));
 		GC.KeepAlive(chain_hash_arg);
 		GC.KeepAlive(short_channel_id_arg);
 		GC.KeepAlive(timestamp_arg);
-		GC.KeepAlive(flags_arg);
+		GC.KeepAlive(message_flags_arg);
+		GC.KeepAlive(channel_flags_arg);
 		GC.KeepAlive(cltv_expiry_delta_arg);
 		GC.KeepAlive(htlc_minimum_msat_arg);
 		GC.KeepAlive(htlc_maximum_msat_arg);

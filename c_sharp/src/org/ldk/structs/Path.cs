@@ -42,7 +42,6 @@ public class Path : CommonBase {
 		bindings.Path_set_hops(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(val, val_conv_10 => val_conv_10.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		foreach (RouteHop val_conv_10 in val) { if (this != null) { this.ptrs_to.AddLast(val_conv_10); }; };
 	}
 
 	/**
@@ -68,7 +67,6 @@ public class Path : CommonBase {
 		bindings.Path_set_blinded_tail(this.ptr, val == null ? 0 : val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -83,8 +81,6 @@ public class Path : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Path ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Path(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		foreach (RouteHop hops_arg_conv_10 in hops_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(hops_arg_conv_10); }; };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(blinded_tail_arg); };
 		return ret_hu_conv;
 	}
 

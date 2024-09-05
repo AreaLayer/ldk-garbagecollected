@@ -193,9 +193,6 @@ public class BumpTransactionEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.BumpTransactionEvent ret_hu_conv = org.ldk.structs.BumpTransactionEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(anchor_descriptor); };
-		foreach (HTLCOutputInCommitment pending_htlcs_conv_24 in pending_htlcs) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(pending_htlcs_conv_24); }; };
 		return ret_hu_conv;
 	}
 
@@ -213,8 +210,6 @@ public class BumpTransactionEvent : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.BumpTransactionEvent ret_hu_conv = org.ldk.structs.BumpTransactionEvent.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_id); };
-		foreach (HTLCDescriptor htlc_descriptors_conv_16 in htlc_descriptors) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(htlc_descriptors_conv_16); }; };
 		return ret_hu_conv;
 	}
 

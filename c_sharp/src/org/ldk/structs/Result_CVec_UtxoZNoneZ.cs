@@ -48,7 +48,6 @@ public class Result_CVec_UtxoZNoneZ : CommonBase {
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CVec_UtxoZNoneZ ret_hu_conv = Result_CVec_UtxoZNoneZ.constr_from_ptr(ret);
-		foreach (Utxo o_conv_6 in o) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(o_conv_6); }; };
 		return ret_hu_conv;
 	}
 

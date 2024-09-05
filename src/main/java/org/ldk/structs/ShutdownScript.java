@@ -125,7 +125,7 @@ public class ShutdownScript extends CommonBase {
 	public byte[] into_inner() {
 		byte[] ret = bindings.ShutdownScript_into_inner(this.ptr);
 		Reference.reachabilityFence(this);
-		if (this != null) { this.ptrs_to.add(this); };
+		;
 		return ret;
 	}
 

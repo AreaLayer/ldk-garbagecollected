@@ -59,7 +59,6 @@ public class InvoiceRequestFields extends CommonBase {
 		bindings.InvoiceRequestFields_set_quantity(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -88,7 +87,6 @@ public class InvoiceRequestFields extends CommonBase {
 		bindings.InvoiceRequestFields_set_payer_note_truncated(this.ptr, val == null ? 0 : val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
@@ -104,8 +102,6 @@ public class InvoiceRequestFields extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.InvoiceRequestFields ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.InvoiceRequestFields(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(quantity_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(payer_note_truncated_arg); };
 		return ret_hu_conv;
 	}
 

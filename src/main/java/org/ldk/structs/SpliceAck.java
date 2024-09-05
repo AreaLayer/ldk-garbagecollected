@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 
 
 /**
- * A splice_ack message to be received by or sent to the splice initiator.
+ * A `splice_ack` message to be received by or sent to the splice initiator.
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class SpliceAck extends CommonBase {
@@ -39,43 +39,24 @@ public class SpliceAck extends CommonBase {
 		bindings.SpliceAck_set_channel_id(this.ptr, val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	/**
-	 * The genesis hash of the blockchain where the channel is intended to be spliced
+	 * The amount the splice acceptor is intending to add to its channel balance (splice-in)
+	 * or remove from its channel balance (splice-out).
 	 */
-	public byte[] get_chain_hash() {
-		byte[] ret = bindings.SpliceAck_get_chain_hash(this.ptr);
+	public long get_funding_contribution_satoshis() {
+		long ret = bindings.SpliceAck_get_funding_contribution_satoshis(this.ptr);
 		Reference.reachabilityFence(this);
 		return ret;
 	}
 
 	/**
-	 * The genesis hash of the blockchain where the channel is intended to be spliced
+	 * The amount the splice acceptor is intending to add to its channel balance (splice-in)
+	 * or remove from its channel balance (splice-out).
 	 */
-	public void set_chain_hash(byte[] val) {
-		bindings.SpliceAck_set_chain_hash(this.ptr, InternalUtils.check_arr_len(val, 32));
-		Reference.reachabilityFence(this);
-		Reference.reachabilityFence(val);
-	}
-
-	/**
-	 * The intended change in channel capacity: the amount to be added (positive value)
-	 * or removed (negative value) by the sender (splice acceptor) by splicing into/from the channel.
-	 */
-	public long get_relative_satoshis() {
-		long ret = bindings.SpliceAck_get_relative_satoshis(this.ptr);
-		Reference.reachabilityFence(this);
-		return ret;
-	}
-
-	/**
-	 * The intended change in channel capacity: the amount to be added (positive value)
-	 * or removed (negative value) by the sender (splice acceptor) by splicing into/from the channel.
-	 */
-	public void set_relative_satoshis(long val) {
-		bindings.SpliceAck_set_relative_satoshis(this.ptr, val);
+	public void set_funding_contribution_satoshis(long val) {
+		bindings.SpliceAck_set_funding_contribution_satoshis(this.ptr, val);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 	}
@@ -99,18 +80,35 @@ public class SpliceAck extends CommonBase {
 	}
 
 	/**
+	 * If set, only confirmed inputs added (by the splice initiator) will be accepted
+	 */
+	public COption_NoneZ get_require_confirmed_inputs() {
+		COption_NoneZ ret = bindings.SpliceAck_get_require_confirmed_inputs(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * If set, only confirmed inputs added (by the splice initiator) will be accepted
+	 */
+	public void set_require_confirmed_inputs(org.ldk.enums.COption_NoneZ val) {
+		bindings.SpliceAck_set_require_confirmed_inputs(this.ptr, val);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
+	}
+
+	/**
 	 * Constructs a new SpliceAck given each field
 	 */
-	public static SpliceAck of(org.ldk.structs.ChannelId channel_id_arg, byte[] chain_hash_arg, long relative_satoshis_arg, byte[] funding_pubkey_arg) {
-		long ret = bindings.SpliceAck_new(channel_id_arg.ptr, InternalUtils.check_arr_len(chain_hash_arg, 32), relative_satoshis_arg, InternalUtils.check_arr_len(funding_pubkey_arg, 33));
+	public static SpliceAck of(org.ldk.structs.ChannelId channel_id_arg, long funding_contribution_satoshis_arg, byte[] funding_pubkey_arg, org.ldk.enums.COption_NoneZ require_confirmed_inputs_arg) {
+		long ret = bindings.SpliceAck_new(channel_id_arg.ptr, funding_contribution_satoshis_arg, InternalUtils.check_arr_len(funding_pubkey_arg, 33), require_confirmed_inputs_arg);
 		Reference.reachabilityFence(channel_id_arg);
-		Reference.reachabilityFence(chain_hash_arg);
-		Reference.reachabilityFence(relative_satoshis_arg);
+		Reference.reachabilityFence(funding_contribution_satoshis_arg);
 		Reference.reachabilityFence(funding_pubkey_arg);
+		Reference.reachabilityFence(require_confirmed_inputs_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.SpliceAck ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.SpliceAck(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_id_arg); };
 		return ret_hu_conv;
 	}
 

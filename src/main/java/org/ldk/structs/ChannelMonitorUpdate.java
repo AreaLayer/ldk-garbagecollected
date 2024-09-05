@@ -102,7 +102,6 @@ public class ChannelMonitorUpdate extends CommonBase {
 		bindings.ChannelMonitorUpdate_set_channel_id(this.ptr, val == null ? 0 : val.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		if (this != null) { this.ptrs_to.add(val); };
 	}
 
 	long clone_ptr() {

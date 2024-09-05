@@ -9,8 +9,8 @@ namespace org { namespace ldk { namespace structs {
 /**
  * Top-level config which holds ChannelHandshakeLimits and ChannelConfig.
  * 
- * Default::default() provides sane defaults for most configurations
- * (but currently with 0 relay fees!)
+ * `Default::default()` provides sane defaults for most configurations
+ * (but currently with zero relay fees!)
  */
 public class UserConfig : CommonBase {
 	internal UserConfig(object _dummy, long ptr) : base(ptr) { }
@@ -37,7 +37,6 @@ public class UserConfig : CommonBase {
 		bindings.UserConfig_set_channel_handshake_config(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -59,7 +58,6 @@ public class UserConfig : CommonBase {
 		bindings.UserConfig_set_channel_handshake_limits(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
@@ -81,17 +79,16 @@ public class UserConfig : CommonBase {
 		bindings.UserConfig_set_channel_config(this.ptr, val.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(val);
-		if (this != null) { this.ptrs_to.AddLast(val); };
 	}
 
 	/**
-	 * If this is set to false, we will reject any HTLCs which were to be forwarded over private
+	 * If this is set to `false`, we will reject any HTLCs which were to be forwarded over private
 	 * channels. This prevents us from taking on HTLC-forwarding risk when we intend to run as a
 	 * node which is not online reliably.
 	 * 
 	 * For nodes which are not online reliably, you should set all channels to *not* be announced
-	 * (using [`ChannelHandshakeConfig::announced_channel`] and
-	 * [`ChannelHandshakeLimits::force_announced_channel_preference`]) and set this to false to
+	 * (using [`ChannelHandshakeConfig::announce_for_forwarding`] and
+	 * [`ChannelHandshakeLimits::force_announced_channel_preference`]) and set this to `false` to
 	 * ensure you are not exposed to any forwarding risk.
 	 * 
 	 * Note that because you cannot change a channel's announced state after creation, there is no
@@ -100,7 +97,7 @@ public class UserConfig : CommonBase {
 	 * all your channels and open new ones. For privacy, you should also change your node_id
 	 * (swapping all private and public key material for new ones) at that time.
 	 * 
-	 * Default value: false.
+	 * Default value: `false`
 	 */
 	public bool get_accept_forwards_to_priv_channels() {
 		bool ret = bindings.UserConfig_get_accept_forwards_to_priv_channels(this.ptr);
@@ -109,13 +106,13 @@ public class UserConfig : CommonBase {
 	}
 
 	/**
-	 * If this is set to false, we will reject any HTLCs which were to be forwarded over private
+	 * If this is set to `false`, we will reject any HTLCs which were to be forwarded over private
 	 * channels. This prevents us from taking on HTLC-forwarding risk when we intend to run as a
 	 * node which is not online reliably.
 	 * 
 	 * For nodes which are not online reliably, you should set all channels to *not* be announced
-	 * (using [`ChannelHandshakeConfig::announced_channel`] and
-	 * [`ChannelHandshakeLimits::force_announced_channel_preference`]) and set this to false to
+	 * (using [`ChannelHandshakeConfig::announce_for_forwarding`] and
+	 * [`ChannelHandshakeLimits::force_announced_channel_preference`]) and set this to `false` to
 	 * ensure you are not exposed to any forwarding risk.
 	 * 
 	 * Note that because you cannot change a channel's announced state after creation, there is no
@@ -124,7 +121,7 @@ public class UserConfig : CommonBase {
 	 * all your channels and open new ones. For privacy, you should also change your node_id
 	 * (swapping all private and public key material for new ones) at that time.
 	 * 
-	 * Default value: false.
+	 * Default value: `false`
 	 */
 	public void set_accept_forwards_to_priv_channels(bool val) {
 		bindings.UserConfig_set_accept_forwards_to_priv_channels(this.ptr, val);
@@ -133,8 +130,9 @@ public class UserConfig : CommonBase {
 	}
 
 	/**
-	 * If this is set to false, we do not accept inbound requests to open a new channel.
-	 * Default value: true.
+	 * If this is set to `false`, we do not accept inbound requests to open a new channel.
+	 * 
+	 * Default value: `true`
 	 */
 	public bool get_accept_inbound_channels() {
 		bool ret = bindings.UserConfig_get_accept_inbound_channels(this.ptr);
@@ -143,8 +141,9 @@ public class UserConfig : CommonBase {
 	}
 
 	/**
-	 * If this is set to false, we do not accept inbound requests to open a new channel.
-	 * Default value: true.
+	 * If this is set to `false`, we do not accept inbound requests to open a new channel.
+	 * 
+	 * Default value: `true`
 	 */
 	public void set_accept_inbound_channels(bool val) {
 		bindings.UserConfig_set_accept_inbound_channels(this.ptr, val);
@@ -153,15 +152,15 @@ public class UserConfig : CommonBase {
 	}
 
 	/**
-	 * If this is set to true, the user needs to manually accept inbound requests to open a new
+	 * If this is set to `true`, the user needs to manually accept inbound requests to open a new
 	 * channel.
 	 * 
-	 * When set to true, [`Event::OpenChannelRequest`] will be triggered once a request to open a
+	 * When set to `true`, [`Event::OpenChannelRequest`] will be triggered once a request to open a
 	 * new inbound channel is received through a [`msgs::OpenChannel`] message. In that case, a
 	 * [`msgs::AcceptChannel`] message will not be sent back to the counterparty node unless the
 	 * user explicitly chooses to accept the request.
 	 * 
-	 * Default value: false.
+	 * Default value: `false`
 	 * 
 	 * [`Event::OpenChannelRequest`]: crate::events::Event::OpenChannelRequest
 	 * [`msgs::OpenChannel`]: crate::ln::msgs::OpenChannel
@@ -174,15 +173,15 @@ public class UserConfig : CommonBase {
 	}
 
 	/**
-	 * If this is set to true, the user needs to manually accept inbound requests to open a new
+	 * If this is set to `true`, the user needs to manually accept inbound requests to open a new
 	 * channel.
 	 * 
-	 * When set to true, [`Event::OpenChannelRequest`] will be triggered once a request to open a
+	 * When set to `true`, [`Event::OpenChannelRequest`] will be triggered once a request to open a
 	 * new inbound channel is received through a [`msgs::OpenChannel`] message. In that case, a
 	 * [`msgs::AcceptChannel`] message will not be sent back to the counterparty node unless the
 	 * user explicitly chooses to accept the request.
 	 * 
-	 * Default value: false.
+	 * Default value: `false`
 	 * 
 	 * [`Event::OpenChannelRequest`]: crate::events::Event::OpenChannelRequest
 	 * [`msgs::OpenChannel`]: crate::ln::msgs::OpenChannel
@@ -195,13 +194,13 @@ public class UserConfig : CommonBase {
 	}
 
 	/**
-	 * If this is set to true, LDK will intercept HTLCs that are attempting to be forwarded over
+	 * If this is set to `true`, LDK will intercept HTLCs that are attempting to be forwarded over
 	 * fake short channel ids generated via [`ChannelManager::get_intercept_scid`]. Upon HTLC
 	 * intercept, LDK will generate an [`Event::HTLCIntercepted`] which MUST be handled by the user.
 	 * 
-	 * Setting this to true may break backwards compatibility with LDK versions < 0.0.113.
+	 * Setting this to `true` may break backwards compatibility with LDK versions < 0.0.113.
 	 * 
-	 * Default value: false.
+	 * Default value: `false`
 	 * 
 	 * [`ChannelManager::get_intercept_scid`]: crate::ln::channelmanager::ChannelManager::get_intercept_scid
 	 * [`Event::HTLCIntercepted`]: crate::events::Event::HTLCIntercepted
@@ -213,13 +212,13 @@ public class UserConfig : CommonBase {
 	}
 
 	/**
-	 * If this is set to true, LDK will intercept HTLCs that are attempting to be forwarded over
+	 * If this is set to `true`, LDK will intercept HTLCs that are attempting to be forwarded over
 	 * fake short channel ids generated via [`ChannelManager::get_intercept_scid`]. Upon HTLC
 	 * intercept, LDK will generate an [`Event::HTLCIntercepted`] which MUST be handled by the user.
 	 * 
-	 * Setting this to true may break backwards compatibility with LDK versions < 0.0.113.
+	 * Setting this to `true` may break backwards compatibility with LDK versions < 0.0.113.
 	 * 
-	 * Default value: false.
+	 * Default value: `false`
 	 * 
 	 * [`ChannelManager::get_intercept_scid`]: crate::ln::channelmanager::ChannelManager::get_intercept_scid
 	 * [`Event::HTLCIntercepted`]: crate::events::Event::HTLCIntercepted
@@ -231,14 +230,14 @@ public class UserConfig : CommonBase {
 	}
 
 	/**
-	 * If this is set to false, when receiving a keysend payment we'll fail it if it has multiple
-	 * parts. If this is set to true, we'll accept the payment.
+	 * If this is set to `false`, when receiving a keysend payment we'll fail it if it has multiple
+	 * parts. If this is set to `true`, we'll accept the payment.
 	 * 
-	 * Setting this to true will break backwards compatibility upon downgrading to an LDK
-	 * version < 0.0.116 while receiving an MPP keysend. If we have already received an MPP
+	 * Setting this to `true` will break backwards compatibility upon downgrading to an LDK
+	 * version prior to 0.0.116 while receiving an MPP keysend. If we have already received an MPP
 	 * keysend, downgrading will cause us to fail to deserialize [`ChannelManager`].
 	 * 
-	 * Default value: false.
+	 * Default value: `false`
 	 * 
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 */
@@ -249,14 +248,14 @@ public class UserConfig : CommonBase {
 	}
 
 	/**
-	 * If this is set to false, when receiving a keysend payment we'll fail it if it has multiple
-	 * parts. If this is set to true, we'll accept the payment.
+	 * If this is set to `false`, when receiving a keysend payment we'll fail it if it has multiple
+	 * parts. If this is set to `true`, we'll accept the payment.
 	 * 
-	 * Setting this to true will break backwards compatibility upon downgrading to an LDK
-	 * version < 0.0.116 while receiving an MPP keysend. If we have already received an MPP
+	 * Setting this to `true` will break backwards compatibility upon downgrading to an LDK
+	 * version prior to 0.0.116 while receiving an MPP keysend. If we have already received an MPP
 	 * keysend, downgrading will cause us to fail to deserialize [`ChannelManager`].
 	 * 
-	 * Default value: false.
+	 * Default value: `false`
 	 * 
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 */
@@ -267,10 +266,52 @@ public class UserConfig : CommonBase {
 	}
 
 	/**
+	 * If this is set to `true`, the user needs to manually pay [`Bolt12Invoice`]s when received.
+	 * 
+	 * When set to `true`, [`Event::InvoiceReceived`] will be generated for each received
+	 * [`Bolt12Invoice`] instead of being automatically paid after verification. Use
+	 * [`ChannelManager::send_payment_for_bolt12_invoice`] to pay the invoice or
+	 * [`ChannelManager::abandon_payment`] to abandon the associated payment.
+	 * 
+	 * Default value: `false`
+	 * 
+	 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
+	 * [`Event::InvoiceReceived`]: crate::events::Event::InvoiceReceived
+	 * [`ChannelManager::send_payment_for_bolt12_invoice`]: crate::ln::channelmanager::ChannelManager::send_payment_for_bolt12_invoice
+	 * [`ChannelManager::abandon_payment`]: crate::ln::channelmanager::ChannelManager::abandon_payment
+	 */
+	public bool get_manually_handle_bolt12_invoices() {
+		bool ret = bindings.UserConfig_get_manually_handle_bolt12_invoices(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * If this is set to `true`, the user needs to manually pay [`Bolt12Invoice`]s when received.
+	 * 
+	 * When set to `true`, [`Event::InvoiceReceived`] will be generated for each received
+	 * [`Bolt12Invoice`] instead of being automatically paid after verification. Use
+	 * [`ChannelManager::send_payment_for_bolt12_invoice`] to pay the invoice or
+	 * [`ChannelManager::abandon_payment`] to abandon the associated payment.
+	 * 
+	 * Default value: `false`
+	 * 
+	 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
+	 * [`Event::InvoiceReceived`]: crate::events::Event::InvoiceReceived
+	 * [`ChannelManager::send_payment_for_bolt12_invoice`]: crate::ln::channelmanager::ChannelManager::send_payment_for_bolt12_invoice
+	 * [`ChannelManager::abandon_payment`]: crate::ln::channelmanager::ChannelManager::abandon_payment
+	 */
+	public void set_manually_handle_bolt12_invoices(bool val) {
+		bindings.UserConfig_set_manually_handle_bolt12_invoices(this.ptr, val);
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
+	}
+
+	/**
 	 * Constructs a new UserConfig given each field
 	 */
-	public static UserConfig of(org.ldk.structs.ChannelHandshakeConfig channel_handshake_config_arg, org.ldk.structs.ChannelHandshakeLimits channel_handshake_limits_arg, org.ldk.structs.ChannelConfig channel_config_arg, bool accept_forwards_to_priv_channels_arg, bool accept_inbound_channels_arg, bool manually_accept_inbound_channels_arg, bool accept_intercept_htlcs_arg, bool accept_mpp_keysend_arg) {
-		long ret = bindings.UserConfig_new(channel_handshake_config_arg.ptr, channel_handshake_limits_arg.ptr, channel_config_arg.ptr, accept_forwards_to_priv_channels_arg, accept_inbound_channels_arg, manually_accept_inbound_channels_arg, accept_intercept_htlcs_arg, accept_mpp_keysend_arg);
+	public static UserConfig of(org.ldk.structs.ChannelHandshakeConfig channel_handshake_config_arg, org.ldk.structs.ChannelHandshakeLimits channel_handshake_limits_arg, org.ldk.structs.ChannelConfig channel_config_arg, bool accept_forwards_to_priv_channels_arg, bool accept_inbound_channels_arg, bool manually_accept_inbound_channels_arg, bool accept_intercept_htlcs_arg, bool accept_mpp_keysend_arg, bool manually_handle_bolt12_invoices_arg) {
+		long ret = bindings.UserConfig_new(channel_handshake_config_arg.ptr, channel_handshake_limits_arg.ptr, channel_config_arg.ptr, accept_forwards_to_priv_channels_arg, accept_inbound_channels_arg, manually_accept_inbound_channels_arg, accept_intercept_htlcs_arg, accept_mpp_keysend_arg, manually_handle_bolt12_invoices_arg);
 		GC.KeepAlive(channel_handshake_config_arg);
 		GC.KeepAlive(channel_handshake_limits_arg);
 		GC.KeepAlive(channel_config_arg);
@@ -279,12 +320,10 @@ public class UserConfig : CommonBase {
 		GC.KeepAlive(manually_accept_inbound_channels_arg);
 		GC.KeepAlive(accept_intercept_htlcs_arg);
 		GC.KeepAlive(accept_mpp_keysend_arg);
+		GC.KeepAlive(manually_handle_bolt12_invoices_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.UserConfig ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.UserConfig(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_handshake_config_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_handshake_limits_arg); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_config_arg); };
 		return ret_hu_conv;
 	}
 

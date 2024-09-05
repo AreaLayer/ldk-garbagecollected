@@ -6,12 +6,22 @@ package org.ldk.enums;
  */
 public enum ConfirmationTarget {
 	/**
-	 * We have some funds available on chain which we need to spend prior to some expiry time at
-	 * which point our counterparty may be able to steal them. Generally we have in the high tens
-	 * to low hundreds of blocks to get our transaction on-chain, but we shouldn't risk too low a
-	 * fee - this should be a relatively high priority feerate.
+	 * The most aggressive (i.e. highest) feerate estimate available.
+	 * 
+	 * This is used to sanity-check our counterparty's feerates and should be as conservative as
+	 * possible to ensure that we don't confuse a peer using a very conservative estimator for one
+	 * trying to burn channel balance to dust.
 	 */
-	LDKConfirmationTarget_OnChainSweep,
+	LDKConfirmationTarget_MaximumFeeEstimate,
+	/**
+	 * We have some funds available on chain which we need to spend prior to some expiry time at
+	 * which point our counterparty may be able to steal them.
+	 * 
+	 * Generally we have in the high tens to low hundreds of blocks to get our transaction
+	 * on-chain (it doesn't have to happen in the next few blocks!), but we shouldn't risk too low
+	 * a fee - this should be a relatively high priority feerate.
+	 */
+	LDKConfirmationTarget_UrgentOnChainSweep,
 	/**
 	 * This is the lowest feerate we will allow our channel counterparty to have in an anchor
 	 * channel in order to close the channel if a channel party goes away.
@@ -93,14 +103,18 @@ public enum ConfirmationTarget {
 	 */
 	LDKConfirmationTarget_ChannelCloseMinimum,
 	/**
-	 * The feerate [`OutputSweeper`] will use on transactions spending
-	 * [`SpendableOutputDescriptor`]s after a channel closure.
+	 * The feerate used to claim on-chain funds when there is no particular urgency to do so.
+	 * 
+	 * It is used to get commitment transactions without any HTLCs confirmed in [`ChannelMonitor`]
+	 * and by  [`OutputSweeper`] on transactions spending [`SpendableOutputDescriptor`]s after a
+	 * channel closure.
 	 * 
 	 * Generally spending these outputs is safe as long as they eventually confirm, so a value
 	 * (slightly above) the mempool minimum should suffice. However, as this value will influence
 	 * how long funds will be unavailable after channel closure, [`FeeEstimator`] implementors
 	 * might want to choose a higher feerate to regain control over funds faster.
 	 * 
+	 * [`ChannelMonitor`]: crate::chain::channelmonitor::ChannelMonitor
 	 * [`OutputSweeper`]: crate::util::sweep::OutputSweeper
 	 * [`SpendableOutputDescriptor`]: crate::sign::SpendableOutputDescriptor
 	 */

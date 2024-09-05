@@ -31,7 +31,7 @@ public class Payee : CommonBase {
 		 * Aggregated routing info and blinded paths, for routing to the payee without knowing their
 		 * node id.
 		 */
-		public TwoTuple_BlindedPayInfoBlindedPathZ[] route_hints;
+		public BlindedPaymentPath[] route_hints;
 		/**
 		 * Features supported by the payee.
 		 * 
@@ -43,16 +43,16 @@ public class Payee : CommonBase {
 		public Bolt12InvoiceFeatures features;
 		internal Payee_Blinded(long ptr) : base(null, ptr) {
 			long route_hints = bindings.LDKPayee_Blinded_get_route_hints(ptr);
-			int route_hints_conv_37_len = InternalUtils.getArrayLength(route_hints);
-			TwoTuple_BlindedPayInfoBlindedPathZ[] route_hints_conv_37_arr = new TwoTuple_BlindedPayInfoBlindedPathZ[route_hints_conv_37_len];
-			for (int l = 0; l < route_hints_conv_37_len; l++) {
-				long route_hints_conv_37 = InternalUtils.getU64ArrayElem(route_hints, l);
-				TwoTuple_BlindedPayInfoBlindedPathZ route_hints_conv_37_hu_conv = new TwoTuple_BlindedPayInfoBlindedPathZ(null, route_hints_conv_37);
-				if (route_hints_conv_37_hu_conv != null) { route_hints_conv_37_hu_conv.ptrs_to.AddLast(this); };
-				route_hints_conv_37_arr[l] = route_hints_conv_37_hu_conv;
+			int route_hints_conv_20_len = InternalUtils.getArrayLength(route_hints);
+			BlindedPaymentPath[] route_hints_conv_20_arr = new BlindedPaymentPath[route_hints_conv_20_len];
+			for (int u = 0; u < route_hints_conv_20_len; u++) {
+				long route_hints_conv_20 = InternalUtils.getU64ArrayElem(route_hints, u);
+				org.ldk.structs.BlindedPaymentPath route_hints_conv_20_hu_conv = null; if (route_hints_conv_20 < 0 || route_hints_conv_20 > 4096) { route_hints_conv_20_hu_conv = new org.ldk.structs.BlindedPaymentPath(null, route_hints_conv_20); }
+				if (route_hints_conv_20_hu_conv != null) { route_hints_conv_20_hu_conv.ptrs_to.AddLast(this); };
+				route_hints_conv_20_arr[u] = route_hints_conv_20_hu_conv;
 			}
 			bindings.free_buffer(route_hints);
-			this.route_hints = route_hints_conv_37_arr;
+			this.route_hints = route_hints_conv_20_arr;
 			long features = bindings.LDKPayee_Blinded_get_features(ptr);
 			org.ldk.structs.Bolt12InvoiceFeatures features_hu_conv = null; if (features < 0 || features > 4096) { features_hu_conv = new org.ldk.structs.Bolt12InvoiceFeatures(null, features); }
 			if (features_hu_conv != null) { features_hu_conv.ptrs_to.AddLast(this); };
@@ -127,14 +127,13 @@ public class Payee : CommonBase {
 	/**
 	 * Utility method to constructs a new Blinded-variant Payee
 	 */
-	public static Payee blinded(TwoTuple_BlindedPayInfoBlindedPathZ[] route_hints, org.ldk.structs.Bolt12InvoiceFeatures features) {
-		long ret = bindings.Payee_blinded(InternalUtils.encodeUint64Array(InternalUtils.mapArray(route_hints, route_hints_conv_37 => route_hints_conv_37.ptr)), features.ptr);
+	public static Payee blinded(BlindedPaymentPath[] route_hints, org.ldk.structs.Bolt12InvoiceFeatures features) {
+		long ret = bindings.Payee_blinded(InternalUtils.encodeUint64Array(InternalUtils.mapArray(route_hints, route_hints_conv_20 => route_hints_conv_20.ptr)), features.ptr);
 		GC.KeepAlive(route_hints);
 		GC.KeepAlive(features);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Payee ret_hu_conv = org.ldk.structs.Payee.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(features); };
 		return ret_hu_conv;
 	}
 
@@ -150,8 +149,6 @@ public class Payee : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Payee ret_hu_conv = org.ldk.structs.Payee.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		foreach (RouteHint route_hints_conv_11 in route_hints) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(route_hints_conv_11); }; };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(features); };
 		return ret_hu_conv;
 	}
 

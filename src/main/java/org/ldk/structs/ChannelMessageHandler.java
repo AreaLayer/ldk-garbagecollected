@@ -376,7 +376,6 @@ public class ChannelMessageHandler extends CommonBase {
 				Option_CVec_ThirtyTwoBytesZZ ret = arg.get_chain_hashes();
 				Reference.reachabilityFence(arg);
 				long result = ret.clone_ptr();
-				if (impl_holder.held != null) { impl_holder.held.ptrs_to.add(ret); };
 				return result;
 			}
 		}, MessageSendEventsProvider.new_impl(MessageSendEventsProvider_impl).bindings_instance);

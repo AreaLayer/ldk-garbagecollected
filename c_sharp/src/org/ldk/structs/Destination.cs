@@ -35,10 +35,10 @@ public class Destination : CommonBase {
 	}
 	/** A Destination of type BlindedPath */
 	public class Destination_BlindedPath : Destination {
-		public BlindedPath blinded_path;
+		public BlindedMessagePath blinded_path;
 		internal Destination_BlindedPath(long ptr) : base(null, ptr) {
 			long blinded_path = bindings.LDKDestination_BlindedPath_get_blinded_path(ptr);
-			org.ldk.structs.BlindedPath blinded_path_hu_conv = null; if (blinded_path < 0 || blinded_path > 4096) { blinded_path_hu_conv = new org.ldk.structs.BlindedPath(null, blinded_path); }
+			org.ldk.structs.BlindedMessagePath blinded_path_hu_conv = null; if (blinded_path < 0 || blinded_path > 4096) { blinded_path_hu_conv = new org.ldk.structs.BlindedMessagePath(null, blinded_path); }
 			if (blinded_path_hu_conv != null) { blinded_path_hu_conv.ptrs_to.AddLast(this); };
 			this.blinded_path = blinded_path_hu_conv;
 		}
@@ -76,13 +76,12 @@ public class Destination : CommonBase {
 	/**
 	 * Utility method to constructs a new BlindedPath-variant Destination
 	 */
-	public static Destination blinded_path(org.ldk.structs.BlindedPath a) {
+	public static Destination blinded_path(org.ldk.structs.BlindedMessagePath a) {
 		long ret = bindings.Destination_blinded_path(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Destination ret_hu_conv = org.ldk.structs.Destination.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(a); };
 		return ret_hu_conv;
 	}
 

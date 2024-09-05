@@ -21,6 +21,26 @@ public class Bolt12InvoiceFeatures extends CommonBase {
 	}
 
 	/**
+	 * Serialize the Bolt12InvoiceFeatures object into a byte array which can be read by Bolt12InvoiceFeatures_read
+	 */
+	public byte[] write() {
+		byte[] ret = bindings.Bolt12InvoiceFeatures_write(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Read a Bolt12InvoiceFeatures from a byte array, created by Bolt12InvoiceFeatures_write
+	 */
+	public static Result_Bolt12InvoiceFeaturesDecodeErrorZ read(byte[] ser) {
+		long ret = bindings.Bolt12InvoiceFeatures_read(ser);
+		Reference.reachabilityFence(ser);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_Bolt12InvoiceFeaturesDecodeErrorZ ret_hu_conv = Result_Bolt12InvoiceFeaturesDecodeErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Checks if two Bolt12InvoiceFeaturess contain equal inner contents.
 	 * This ignores pointers and is_owned flags and looks at the values in fields.
 	 * Two objects with NULL inner values will be considered "equal" here.
@@ -79,10 +99,40 @@ public class Bolt12InvoiceFeatures extends CommonBase {
 	}
 
 	/**
+	 * Returns the feature set as a list of bytes, in little-endian. This is in reverse byte order
+	 * from most on-the-wire encodings.
+	 */
+	public byte[] le_flags() {
+		byte[] ret = bindings.Bolt12InvoiceFeatures_le_flags(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Returns true if this `Features` has any optional flags set
+	 */
+	public boolean supports_any_optional_bits() {
+		boolean ret = bindings.Bolt12InvoiceFeatures_supports_any_optional_bits(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
 	 * Returns true if this `Features` object contains required features unknown by `other`.
 	 */
 	public boolean requires_unknown_bits_from(org.ldk.structs.Bolt12InvoiceFeatures other) {
 		boolean ret = bindings.Bolt12InvoiceFeatures_requires_unknown_bits_from(this.ptr, other.ptr);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(other);
+		if (this != null) { this.ptrs_to.add(other); };
+		return ret;
+	}
+
+	/**
+	 * Returns the set of required features unknown by `other`, as their bit position.
+	 */
+	public long[] required_unknown_bits_from(org.ldk.structs.Bolt12InvoiceFeatures other) {
+		long[] ret = bindings.Bolt12InvoiceFeatures_required_unknown_bits_from(this.ptr, other.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(other);
 		if (this != null) { this.ptrs_to.add(other); };
@@ -95,6 +145,15 @@ public class Bolt12InvoiceFeatures extends CommonBase {
 	 */
 	public boolean requires_unknown_bits() {
 		boolean ret = bindings.Bolt12InvoiceFeatures_requires_unknown_bits(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Returns true if this `Features` supports any bits which we do not know of
+	 */
+	public boolean supports_unknown_bits() {
+		boolean ret = bindings.Bolt12InvoiceFeatures_supports_unknown_bits(this.ptr);
 		Reference.reachabilityFence(this);
 		return ret;
 	}
@@ -168,26 +227,6 @@ public class Bolt12InvoiceFeatures extends CommonBase {
 		Reference.reachabilityFence(bit);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneNoneZ ret_hu_conv = Result_NoneNoneZ.constr_from_ptr(ret);
-		return ret_hu_conv;
-	}
-
-	/**
-	 * Serialize the Bolt12InvoiceFeatures object into a byte array which can be read by Bolt12InvoiceFeatures_read
-	 */
-	public byte[] write() {
-		byte[] ret = bindings.Bolt12InvoiceFeatures_write(this.ptr);
-		Reference.reachabilityFence(this);
-		return ret;
-	}
-
-	/**
-	 * Read a Bolt12InvoiceFeatures from a byte array, created by Bolt12InvoiceFeatures_write
-	 */
-	public static Result_Bolt12InvoiceFeaturesDecodeErrorZ read(byte[] ser) {
-		long ret = bindings.Bolt12InvoiceFeatures_read(ser);
-		Reference.reachabilityFence(ser);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_Bolt12InvoiceFeaturesDecodeErrorZ ret_hu_conv = Result_Bolt12InvoiceFeaturesDecodeErrorZ.constr_from_ptr(ret);
 		return ret_hu_conv;
 	}
 

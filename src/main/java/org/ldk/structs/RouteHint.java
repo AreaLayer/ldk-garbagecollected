@@ -20,6 +20,26 @@ public class RouteHint extends CommonBase {
 		if (ptr != 0) { bindings.RouteHint_free(ptr); }
 	}
 
+	/**
+	 * Serialize the RouteHint object into a byte array which can be read by RouteHint_read
+	 */
+	public byte[] write() {
+		byte[] ret = bindings.RouteHint_write(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Read a RouteHint from a byte array, created by RouteHint_write
+	 */
+	public static Result_RouteHintDecodeErrorZ read(byte[] ser) {
+		long ret = bindings.RouteHint_read(ser);
+		Reference.reachabilityFence(ser);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_RouteHintDecodeErrorZ ret_hu_conv = Result_RouteHintDecodeErrorZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
 	public RouteHintHop[] get_a() {
 		long[] ret = bindings.RouteHint_get_a(this.ptr);
 		Reference.reachabilityFence(this);
@@ -38,7 +58,6 @@ public class RouteHint extends CommonBase {
 		bindings.RouteHint_set_a(this.ptr, val != null ? Arrays.stream(val).mapToLong(val_conv_14 -> val_conv_14.ptr).toArray() : null);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
-		for (RouteHintHop val_conv_14: val) { if (this != null) { this.ptrs_to.add(val_conv_14); }; };
 	}
 
 	/**
@@ -50,7 +69,6 @@ public class RouteHint extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.RouteHint ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.RouteHint(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		for (RouteHintHop a_arg_conv_14: a_arg) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(a_arg_conv_14); }; };
 		return ret_hu_conv;
 	}
 
@@ -101,24 +119,4 @@ public class RouteHint extends CommonBase {
 		if (!(o instanceof RouteHint)) return false;
 		return this.eq((RouteHint)o);
 	}
-	/**
-	 * Serialize the RouteHint object into a byte array which can be read by RouteHint_read
-	 */
-	public byte[] write() {
-		byte[] ret = bindings.RouteHint_write(this.ptr);
-		Reference.reachabilityFence(this);
-		return ret;
-	}
-
-	/**
-	 * Read a RouteHint from a byte array, created by RouteHint_write
-	 */
-	public static Result_RouteHintDecodeErrorZ read(byte[] ser) {
-		long ret = bindings.RouteHint_read(ser);
-		Reference.reachabilityFence(ser);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_RouteHintDecodeErrorZ ret_hu_conv = Result_RouteHintDecodeErrorZ.constr_from_ptr(ret);
-		return ret_hu_conv;
-	}
-
 }
