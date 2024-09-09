@@ -47,7 +47,7 @@ The releases for Java, C#, and TypeScript are all deterministic. You should be a
 the release binaries identically by running the scripts run in CI, see
 [.github/workflows/build.yml](.github/workflows/build.yml).
 
-Releases for all platforma re built on Linux as that is the easiest way to get things
+Releases for all platforms are built on Linux as that is the easiest way to get things
 deterministic, however building on macOS should also work. Building on Windows is not currently
 supported.
 
