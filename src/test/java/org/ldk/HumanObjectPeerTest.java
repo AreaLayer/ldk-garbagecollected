@@ -1,10 +1,8 @@
 package org.ldk;
 
-import org.bitcoinj.base.BitcoinNetwork;
 import org.bitcoinj.base.Coin;
 import org.bitcoinj.base.Sha256Hash;
 import org.bitcoinj.core.*;
-import org.bitcoinj.params.BitcoinNetworkParams;
 import org.bitcoinj.script.Script;
 import org.junit.jupiter.api.Test;
 import org.ldk.batteries.ChannelManagerConstructor;
@@ -19,6 +17,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.time.Instant;
 import java.util.*;
 import java.util.function.IntConsumer;
 
@@ -35,6 +35,7 @@ class HumanObjectPeerTestInstance {
     private final boolean use_chan_manager_constructor;
     private final boolean use_invoice_payer;
     TxOut gossip_txout = null;
+    final Instant TIME_42 = Instant.ofEpochSecond(42);
 
     HumanObjectPeerTestInstance(boolean nice_close, boolean use_km_wrapper, boolean use_full_km_wrapper, boolean use_manual_watch, boolean reload_peers, boolean break_cross_peer_refs, boolean use_nio_peer_handler, boolean use_filter, boolean use_ignore_handler, boolean use_chan_manager_constructor, boolean use_invoice_payer) {
         this.nice_close = nice_close;
@@ -653,17 +654,17 @@ class HumanObjectPeerTestInstance {
         }
 
         TwoTuple_ThirtyTwoBytesCVec_C2Tuple_u32TxOutZZZ[] connect_block(Block b, int height, long expected_monitor_update_len) {
-            byte[] header = Arrays.copyOfRange(b.bitcoinSerialize(), 0, 80);
+            byte[] header = Arrays.copyOfRange(b.serialize(), 0, 80);
             TwoTuple_usizeTransactionZ[] txn;
             if (b.hasTransactions()) {
                 assert b.getTransactions().size() == 1;
-                TwoTuple_usizeTransactionZ txp = TwoTuple_usizeTransactionZ.of((long) 0, b.getTransactions().get(0).bitcoinSerialize());
+                TwoTuple_usizeTransactionZ txp = TwoTuple_usizeTransactionZ.of((long) 0, b.getTransactions().get(0).serialize());
                 txn = new TwoTuple_usizeTransactionZ[]{txp};
             } else
                 txn = new TwoTuple_usizeTransactionZ[0];
             if (chain_monitor != null) {
-                chan_manager.as_Listen().block_connected(b.bitcoinSerialize(), height);
-                chain_monitor.as_Listen().block_connected(b.bitcoinSerialize(), height);
+                chan_manager.as_Listen().block_connected(b.serialize(), height);
+                chain_monitor.as_Listen().block_connected(b.serialize(), height);
             } else {
                 chan_manager.as_Confirm().transactions_confirmed(header, txn, height);
                 chan_manager.as_Confirm().best_block_updated(header, height);
@@ -769,7 +770,7 @@ class HumanObjectPeerTestInstance {
     static class DescriptorHolder { SocketDescriptor val; }
 
     boolean running = false;
-    final LinkedList<Runnable> runqueue = new LinkedList();
+    final LinkedList<Runnable> runqueue = new LinkedList<>();
     boolean ran = false;
     Thread t = new Thread(() -> {
             while (true) {
@@ -913,16 +914,13 @@ class HumanObjectPeerTestInstance {
         ChannelId chan_id = ((Event.FundingGenerationReady) events[0]).temporary_channel_id;
         mid_test_must_free_objs.add(new WeakReference<>(chan_id));
 
-        BitcoinNetworkParams bitcoinj_net = BitcoinNetworkParams.of(BitcoinNetwork.MAINNET);
-
-        Transaction funding_input = new Transaction(bitcoinj_net);
-        funding_input.addOutput(Coin.SATOSHI.multiply(100000), new Script(funding_spk));
-        Transaction funding = new Transaction(bitcoinj_net);
+        Transaction funding_input = new Transaction();
+        funding_input.addOutput(Coin.ofSat(100000), Script.parse(funding_spk));
+        Transaction funding = new Transaction();
         funding.addInput(funding_input.getOutput(0));
-        funding.getInputs().get(0).setWitness(new TransactionWitness(2)); // Make sure we don't complain about lack of witness
-        funding.getInput(0).getWitness().setPush(0, new byte[]{0x1});
-        funding.addOutput(Coin.SATOSHI.multiply(100000), new Script(funding_spk));
-        Result_NoneAPIErrorZ funding_res = peer1.chan_manager.funding_transaction_generated(chan_id, peer2.node_id, funding.bitcoinSerialize());
+        funding.getInput(0).setWitness(TransactionWitness.of(new byte[]{0x1})); // Make sure we don't complain about lack of witness
+        funding.addOutput(Coin.ofSat(100000), Script.parse(funding_spk));
+        Result_NoneAPIErrorZ funding_res = peer1.chan_manager.funding_transaction_generated(chan_id, peer2.node_id, funding.serialize());
         assert funding_res instanceof Result_NoneAPIErrorZ.Result_NoneAPIErrorZ_OK;
 
         gossip_txout = new TxOut(100000, funding_spk);
@@ -943,16 +941,16 @@ class HumanObjectPeerTestInstance {
         mid_test_must_free_objs.add(new WeakReference<>(events[0]));
 
         assert peer1.broadcast_set.size() == 1;
-        assert Arrays.equals(peer1.broadcast_set.get(0), funding.bitcoinSerialize());
+        assert Arrays.equals(peer1.broadcast_set.get(0), funding.serialize());
         mid_test_must_free_objs.add(new WeakReference<>(peer1.broadcast_set.get(0)));
         peer1.broadcast_set.clear();
 
-        Block b = new Block(bitcoinj_net, 2, Sha256Hash.ZERO_HASH, Sha256Hash.ZERO_HASH, 42, 0, 0, Arrays.asList(new Transaction[]{funding}));
+        Block b = new Block(2, Sha256Hash.ZERO_HASH, Sha256Hash.ZERO_HASH, TIME_42, 0, 0, List.of(funding));
         peer1.connect_block(b, 1, 0);
         peer2.connect_block(b, 1, 0);
 
         for (int height = 2; height < 10; height++) {
-            b = new Block(bitcoinj_net, 2, b.getHash(), Sha256Hash.ZERO_HASH, 42, 0, 0, Arrays.asList(new Transaction[0]));
+            b = new Block(2, b.getHash(), Sha256Hash.ZERO_HASH, TIME_42, 0, 0, List.of());
             peer1.connect_block(b, height, 0);
             peer2.connect_block(b, height, 0);
         }
@@ -977,8 +975,8 @@ class HumanObjectPeerTestInstance {
         Option_u64Z short_chan_id = peer1_chans[0].get_short_channel_id();
         assert short_chan_id instanceof Option_u64Z.Some;
         assert ((Option_u64Z.Some)short_chan_id).some == (1L << 40); // 0th output in the 0th transaction in the 1st block
-        assert Arrays.equals(peer1_chans[0].get_channel_id().get_a(), funding.getTxId().getReversedBytes());
-        assert Arrays.equals(peer2_chans[0].get_channel_id().get_a(), funding.getTxId().getReversedBytes());
+        assert Arrays.equals(peer1_chans[0].get_channel_id().get_a(), funding.getTxId().serialize());
+        assert Arrays.equals(peer2_chans[0].get_channel_id().get_a(), funding.getTxId().serialize());
         mid_test_must_free_objs.add(new WeakReference<>(peer1_chans[0]));
         mid_test_must_free_objs.add(new WeakReference<>(peer2_chans[0]));
 
@@ -1222,21 +1220,19 @@ class HumanObjectPeerTestInstance {
         }
 
         if (!nice_close) {
-            BitcoinNetworkParams bitcoinj_net = BitcoinNetworkParams.of(BitcoinNetwork.MAINNET);
-            Transaction tx = new Transaction(bitcoinj_net, state.peer1.broadcast_set.getFirst());
-            Block b = new Block(bitcoinj_net, 2, state.best_blockhash, Sha256Hash.ZERO_HASH, 42, 0, 0,
-                    Arrays.asList(new Transaction[]{tx}));
+            Transaction tx = Transaction.read(ByteBuffer.wrap(state.peer1.broadcast_set.getFirst()));
+            Block b = new Block(2, state.best_blockhash, Sha256Hash.ZERO_HASH, TIME_42, 0, 0, List.of(tx));
             TwoTuple_ThirtyTwoBytesCVec_C2Tuple_u32TxOutZZZ[] watch_outputs = state.peer2.connect_block(b, 10, 1);
             if (watch_outputs != null) { // We only process watch_outputs manually when we use a manually-build Watch impl
                 assert watch_outputs.length == 1;
-                assert Arrays.equals(watch_outputs[0].get_a(), tx.getTxId().getReversedBytes());
+                assert Arrays.equals(watch_outputs[0].get_a(), tx.getTxId().serialize());
                 assert watch_outputs[0].get_b().length == 2;
                 assert watch_outputs[0].get_b()[0].get_a() == 0;
                 assert watch_outputs[0].get_b()[1].get_a() == 1;
             }
 
             for (int i = 11; i < 21; i++) {
-                b = new Block(bitcoinj_net, 2, b.getHash(), Sha256Hash.ZERO_HASH, 42, 0, 0, new ArrayList<>());
+                b = new Block(2, b.getHash(), Sha256Hash.ZERO_HASH, TIME_42, 0, 0, List.of());
                 state.peer2.connect_block(b, i, 0);
             }
 
@@ -1247,7 +1243,7 @@ class HumanObjectPeerTestInstance {
                 TxOut[] additional_outputs = new TxOut[]{new TxOut(420, new byte[]{0x42})};
                 Result_TransactionNoneZ tx_res = state.peer2.explicit_keys_manager.as_OutputSpender().spend_spendable_outputs(((Event.SpendableOutputs) broadcastable_event[0]).outputs, additional_outputs, new byte[]{0x00}, 253, Option_u32Z.none());
                 assert tx_res instanceof Result_TransactionNoneZ.Result_TransactionNoneZ_OK;
-                Transaction built_tx = new Transaction(bitcoinj_net, ((Result_TransactionNoneZ.Result_TransactionNoneZ_OK) tx_res).res);
+                Transaction built_tx = Transaction.read(ByteBuffer.wrap(((Result_TransactionNoneZ.Result_TransactionNoneZ_OK) tx_res).res));
                 assert built_tx.getOutputs().size() == 2;
                 assert Arrays.equals(built_tx.getOutput(1).getScriptBytes(), new byte[]{0x00});
                 assert Arrays.equals(built_tx.getOutput(0).getScriptBytes(), new byte[]{0x42});
@@ -1323,8 +1319,8 @@ class HumanObjectPeerTestInstance {
         }
     }
 
-    LinkedList<WeakReference<Object>> must_free_objs = new LinkedList();
-    LinkedList<WeakReference<Object>> mid_test_must_free_objs = new LinkedList();
+    LinkedList<WeakReference<Object>> must_free_objs = new LinkedList<>();
+    LinkedList<WeakReference<Object>> mid_test_must_free_objs = new LinkedList<>();
     int gc_count = 0;
     int gc_exp_count = 0;
     class GcCheck {
