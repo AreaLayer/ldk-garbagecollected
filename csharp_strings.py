@@ -595,6 +595,9 @@ int CS_LDK_register_{fn_suffix}_invoker(invoker_{fn_suffix} invoker) {{
         else:
             assert False
 
+    def check_c_arr_null(self, arr_name):
+        return arr_name + " != 0"
+
     def constr_hu_array(self, ty_info, arr_len):
         base_ty = ty_info.subty.java_hu_ty.split("[")[0].split("<")[0]
         conv = "new " + base_ty + "[" + arr_len + "]"

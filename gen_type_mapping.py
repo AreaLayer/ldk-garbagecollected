@@ -194,7 +194,7 @@ class TypeMappingGenerator:
                     to_hu_conv += ";\n"
                     pfx = ""
                     if is_nullable:
-                        to_hu_conv += "if (" + arr_name + " != null) {\n"
+                        to_hu_conv += "if (" + self.consts.check_c_arr_null(arr_name) + ") {\n"
                         pfx = "\t"
                     to_hu_conv += pfx + self.consts.for_n_in_range(idxc, "0", conv_name + "_len") + "\n"
 

@@ -786,6 +786,8 @@ import javax.annotation.Nullable;
         return arr_name + ".length"
     def get_java_arr_elem(self, elem_ty, arr_name, idx):
         return arr_name + "[" + idx + "]"
+    def check_c_arr_null(self, arr_name):
+        return arr_name + " != null"
     def constr_hu_array(self, ty_info, arr_len):
         base_ty = ty_info.subty.java_hu_ty.split("[")[0].split("<")[0]
         conv = "new " + base_ty + "[" + arr_len + "]"
