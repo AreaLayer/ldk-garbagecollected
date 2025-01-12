@@ -82,9 +82,11 @@ namespace tests {
 
 		class TestRouter : RouterInterface, MessageRouterInterface {
 			DefaultRouter inner;
+			DefaultMessageRouter inner_msg;
 			EntropySource entropy;
-			public TestRouter(DefaultRouter inner, EntropySource entropy) {
+			public TestRouter(DefaultRouter inner, DefaultMessageRouter inner_msg, EntropySource entropy) {
 				this.inner = inner;
+				this.inner_msg = inner_msg;
 				this.entropy = entropy;
 			}
 			public Result_RouteLightningErrorZ find_route(byte[] payer, RouteParameters param, ChannelDetails[] chans, InFlightHtlcs htlcs) {
@@ -102,7 +104,7 @@ namespace tests {
 			}
 
 			public Result_OnionMessagePathNoneZ find_path(byte[] sender, byte[][] peers, Destination dest) {
-				return inner.as_MessageRouter().find_path(sender, peers, dest);
+				return inner_msg.as_MessageRouter().find_path(sender, peers, dest);
 			}
 			public Result_CVec_BlindedMessagePathZNoneZ create_blinded_paths(byte[] recipient, MessageContext ctx, byte[][] peers) {
 				Result_BlindedMessagePathNoneZ path = BlindedMessagePath.one_hop(recipient, ctx, entropy);
@@ -143,15 +145,17 @@ namespace tests {
 				scorer = MultiThreadedLockableScore.of(ProbabilisticScorer.of(ProbabilisticScoringDecayParameters.with_default(), graph, logger).as_Score());
 
 				DefaultRouter router_impl = DefaultRouter.of(graph, logger, keys.as_EntropySource(), scorer.as_LockableScore(), ProbabilisticScoringFeeParameters.with_default());
-				TestRouter router_wrapper = new TestRouter(router_impl, keys.as_EntropySource());
-				router = Router.new_impl(router_wrapper, router_wrapper);
+				DefaultMessageRouter msg_router_impl = DefaultMessageRouter.of(graph, keys.as_EntropySource());
+				TestRouter router_wrapper = new TestRouter(router_impl, msg_router_impl, keys.as_EntropySource());
+				router = Router.new_impl(router_wrapper);
+				MessageRouter msg_router = MessageRouter.new_impl(router_wrapper);
 
 				UserConfig config = UserConfig.with_default();
 				config.set_manually_accept_inbound_channels(true);
 
-				manager = ChannelManager.of(estimator, chain_monitor.as_Watch(), ldk_broadcaster, router, logger, keys.as_EntropySource(), keys.as_NodeSigner(), keys.as_SignerProvider(), config, chain_params, 42);
+				manager = ChannelManager.of(estimator, chain_monitor.as_Watch(), ldk_broadcaster, router, msg_router, logger, keys.as_EntropySource(), keys.as_NodeSigner(), keys.as_SignerProvider(), config, chain_params, 42);
 
-				messenger = OnionMessenger.of(keys.as_EntropySource(), keys.as_NodeSigner(), logger, manager.as_NodeIdLookUp(), MessageRouter.new_impl(router_wrapper), manager.as_OffersMessageHandler(), IgnoringMessageHandler.of().as_AsyncPaymentsMessageHandler(), IgnoringMessageHandler.of().as_CustomOnionMessageHandler());
+				messenger = OnionMessenger.of(keys.as_EntropySource(), keys.as_NodeSigner(), logger, manager.as_NodeIdLookUp(), MessageRouter.new_impl(router_wrapper), manager.as_OffersMessageHandler(), IgnoringMessageHandler.of().as_AsyncPaymentsMessageHandler(), manager.as_DNSResolverMessageHandler(), IgnoringMessageHandler.of().as_CustomOnionMessageHandler());
 			}
 		}
 
@@ -341,7 +345,7 @@ namespace tests {
 			Result_OfferBolt12ParseErrorZ offer_res = Offer.from_str(offerStr);
 			Assert(offer_res.is_ok(), 100);
 			Offer offer = ((Result_OfferBolt12ParseErrorZ.Result_OfferBolt12ParseErrorZ_OK)offer_res).res;
-			Assert(BitConverter.ToString(offer.signing_pubkey()).Replace("-", "").ToLower() == expectedPubkey, 101);
+			Assert(BitConverter.ToString(offer.issuer_signing_pubkey()).Replace("-", "").ToLower() == expectedPubkey, 101);
 			Assert(offer.description().get_a() == expectedDescription, 102);
 			Assert(offer.issuer() == null, 103);
 			Assert(!offer.is_expired(), 104);
@@ -355,29 +359,29 @@ namespace tests {
 		static Offer BuildOffer(Nonce nonce, KeysManager keys) {
 			Result_PublicKeyNoneZ id_res = keys.as_NodeSigner().get_node_id(Recipient.LDKRecipient_Node);
 			byte[] node_id = ((Result_PublicKeyNoneZ.Result_PublicKeyNoneZ_OK)id_res).res;
-			ExpandedKey inb_key = ExpandedKey.of(keys.as_NodeSigner().get_inbound_payment_key_material());
+			ExpandedKey inb_key = keys.as_NodeSigner().get_inbound_payment_key();
 			OfferWithDerivedMetadataBuilder builder = OfferWithDerivedMetadataBuilder.deriving_signing_pubkey(node_id, inb_key, nonce);
 			Result_OfferBolt12SemanticErrorZ res = builder.build();
 			return ((Result_OfferBolt12SemanticErrorZ.Result_OfferBolt12SemanticErrorZ_OK) res).res;
 		}
 
-		static InvoiceRequestWithDerivedPayerIdBuilder InvReqBuilderFromOffer(Offer offer, KeysManager keys) {
-			ExpandedKey inb_key = ExpandedKey.of(keys.as_NodeSigner().get_inbound_payment_key_material());
+		static InvoiceRequestWithDerivedPayerSigningPubkeyBuilder InvReqBuilderFromOffer(Offer offer, KeysManager keys) {
+			ExpandedKey inb_key = keys.as_NodeSigner().get_inbound_payment_key();
 			Nonce nonce = Nonce.from_entropy_source(keys.as_EntropySource());
-			Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ builder_res =
-				offer.request_invoice_deriving_payer_id(inb_key, nonce, new byte[32]);
-			InvoiceRequestWithDerivedPayerIdBuilder builder =
-				((Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ.Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ_OK)builder_res).res;
+			Result_InvoiceRequestWithDerivedPayerSigningPubkeyBuilderBolt12SemanticErrorZ builder_res =
+				offer.request_invoice(inb_key, nonce, new byte[32]);
+			InvoiceRequestWithDerivedPayerSigningPubkeyBuilder builder =
+				((Result_InvoiceRequestWithDerivedPayerSigningPubkeyBuilderBolt12SemanticErrorZ.Result_InvoiceRequestWithDerivedPayerSigningPubkeyBuilderBolt12SemanticErrorZ_OK)builder_res).res;
 			return builder;
 		}
 
-		static InvoiceRequest BuildInvReq(InvoiceRequestWithDerivedPayerIdBuilder builder) {
+		static InvoiceRequest BuildInvReq(InvoiceRequestWithDerivedPayerSigningPubkeyBuilder builder) {
 			Result_InvoiceRequestBolt12SemanticErrorZ res = builder.build_and_sign();
 			return ((Result_InvoiceRequestBolt12SemanticErrorZ.Result_InvoiceRequestBolt12SemanticErrorZ_OK)res).res;
 		}
 
 		static InvoiceWithDerivedSigningPubkeyBuilder InvBuilderFromInvReq(Nonce receiver_nonce, InvoiceRequest invreq, KeysManager keys) {
-			ExpandedKey inb_key = ExpandedKey.of(keys.as_NodeSigner().get_inbound_payment_key_material());
+			ExpandedKey inb_key = keys.as_NodeSigner().get_inbound_payment_key();
 			Result_VerifiedInvoiceRequestNoneZ verified_res = invreq.verify_using_recipient_data(receiver_nonce, inb_key);
 			VerifiedInvoiceRequest verified_invreq =
 				((Result_VerifiedInvoiceRequestNoneZ.Result_VerifiedInvoiceRequestNoneZ_OK)verified_res).res;
@@ -388,15 +392,15 @@ namespace tests {
 			return builder;
 		}
 
-		static InvoiceRequestWithDerivedPayerIdBuilder InvReqBuilder(Nonce receiver_nonce, KeysManager payer, KeysManager recipient) {
-			// Under the hood, InvoiceRequestWithDerivedPayerIdBuilder holds a reference to some
+		static InvoiceRequestWithDerivedPayerSigningPubkeyBuilder InvReqBuilder(Nonce receiver_nonce, KeysManager payer, KeysManager recipient) {
+			// Under the hood, InvoiceRequestWithDerivedPayerSigningPubkeyBuilder holds a reference to some
 			// fields in the Offer. Thus, we build an Offer here, then return only the builder,
 			// hoping the GC will cause us to free the Offer and use-after-free.
 			Offer offer = BuildOffer(receiver_nonce, payer);
 			return InvReqBuilderFromOffer(offer, recipient);
 		}
 
-		static InvoiceWithDerivedSigningPubkeyBuilder InvBuilderFromInvReqBuilder(Nonce receiver_nonce, InvoiceRequestWithDerivedPayerIdBuilder builder, KeysManager payer, KeysManager recipient) {
+		static InvoiceWithDerivedSigningPubkeyBuilder InvBuilderFromInvReqBuilder(Nonce receiver_nonce, InvoiceRequestWithDerivedPayerSigningPubkeyBuilder builder, KeysManager payer, KeysManager recipient) {
 			// Same as above, but for the Invoice itself
 			InvoiceRequest invreq = BuildInvReq(builder);
 			return InvBuilderFromInvReq(receiver_nonce, invreq, recipient);
@@ -413,7 +417,7 @@ namespace tests {
 			// Run the GC between each step to see if the reference the builders hold to the
 			// original Offer/InvoiceRequest is freed out from under us before building.
 			Nonce receiver_nonce = Nonce.from_entropy_source(receiver.as_EntropySource());
-			InvoiceRequestWithDerivedPayerIdBuilder invreq_builder = InvReqBuilder(receiver_nonce, sender, receiver);
+			InvoiceRequestWithDerivedPayerSigningPubkeyBuilder invreq_builder = InvReqBuilder(receiver_nonce, sender, receiver);
 			System.GC.Collect();
 			GC.WaitForPendingFinalizers();
 			InvoiceWithDerivedSigningPubkeyBuilder inv_builder = InvBuilderFromInvReqBuilder(receiver_nonce, invreq_builder, sender, receiver);
