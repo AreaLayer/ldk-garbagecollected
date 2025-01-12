@@ -110,12 +110,13 @@ function get_chanman(): Node {
 	const scorer = ldk.ProbabilisticScorer.constructor_new(ldk.ProbabilisticScoringDecayParameters.constructor_default(), net_graph, logger);
 	const lockable_score = ldk.MultiThreadedLockableScore.constructor_new(scorer.as_Score());
 	const router = ldk.DefaultRouter.constructor_new(net_graph, logger, keys_manager.as_EntropySource(), lockable_score.as_LockableScore(), ldk.ProbabilisticScoringFeeParameters.constructor_default());
+	const msg_router = ldk.DefaultMessageRouter.constructor_new(net_graph, keys_manager.as_EntropySource());
 
 	const config = ldk.UserConfig.constructor_default();
 	const params = ldk.ChainParameters.constructor_new(ldk.Network.LDKNetwork_Testnet, ldk.BestBlock.constructor_from_network(ldk.Network.LDKNetwork_Testnet));
 	const chan_man = ldk.ChannelManager.constructor_new(fee_est, chain_watch, tx_broadcaster!, router.as_Router(),
-		logger, keys_manager.as_EntropySource(), keys_manager.as_NodeSigner(), keys_manager.as_SignerProvider(),
-		config, params, 42);
+		msg_router.as_MessageRouter(), logger, keys_manager.as_EntropySource(), keys_manager.as_NodeSigner(),
+		keys_manager.as_SignerProvider(), config, params, 42);
 	return new Node(chan_man, tx_broadcasted, logger, keys_manager, net_graph);
 }
 
@@ -341,7 +342,8 @@ tests.push(async () => {
 	const underlying_om_a = ldk.OnionMessenger.constructor_new(
 		a.keys_manager.as_EntropySource(), a.keys_manager.as_NodeSigner(), a.logger,
 		a.chan_man.as_NodeIdLookUp(), a_msg_router, ignorer.as_OffersMessageHandler(),
-		ignorer.as_AsyncPaymentsMessageHandler(), om_handler_a);
+		ignorer.as_AsyncPaymentsMessageHandler(), a.chan_man.as_DNSResolverMessageHandler(),
+		om_handler_a);
 	const om_a = ldk.OnionMessageHandler.new_impl({
 		handle_onion_message(peer_node_id: Uint8Array, msg: ldk.OnionMessage) {
 			underlying_om_a.as_OnionMessageHandler().handle_onion_message(peer_node_id, msg);
@@ -388,7 +390,8 @@ tests.push(async () => {
 		.constructor_new(b.net_graph, b.keys_manager.as_EntropySource()).as_MessageRouter();
 	const om_b = ldk.OnionMessenger.constructor_new(b.keys_manager.as_EntropySource(),
 		b.keys_manager.as_NodeSigner(), b.logger, b.chan_man.as_NodeIdLookUp(), msg_router_b,
-		ignorer.as_OffersMessageHandler(), ignorer.as_AsyncPaymentsMessageHandler(), om_handler_b);
+		ignorer.as_OffersMessageHandler(), ignorer.as_AsyncPaymentsMessageHandler(),
+		b.chan_man.as_DNSResolverMessageHandler(), om_handler_b);
 
 	const pm_a = ldk.PeerManager.constructor_new(a.chan_man.as_ChannelMessageHandler(), ignorer.as_RoutingMessageHandler(),
 		om_a, ignorer.as_CustomMessageHandler(), 0xdeadbeef,
