@@ -7,7 +7,9 @@ namespace org { namespace ldk { namespace structs {
 
 
 /**
- * A tx_abort message which signals the cancellation of an in-progress transaction negotiation.
+ * A [`tx_abort`] message which signals the cancellation of an in-progress transaction negotiation.
+ * 
+ * [`tx_abort`]: https://github.com/lightning/bolts/blob/master/02-peer-protocol.md#the-tx_abort-message
  */
 public class TxAbort : CommonBase {
 	internal TxAbort(object _dummy, long ptr) : base(ptr) { }

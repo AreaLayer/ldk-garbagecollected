@@ -56,6 +56,7 @@ public class ClaimedHTLC : CommonBase {
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.util.UInt128 ret_conv = new org.ldk.util.UInt128(ret);
+		bindings.free_buffer(ret);
 		return ret_conv;
 	}
 

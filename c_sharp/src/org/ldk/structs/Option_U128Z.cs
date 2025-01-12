@@ -30,6 +30,7 @@ public class Option_U128Z : CommonBase {
 		internal Option_U128Z_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_U128Z_Some_get_some(ptr);
 			org.ldk.util.UInt128 some_conv = new org.ldk.util.UInt128(some);
+			bindings.free_buffer(some);
 			this.some = some_conv;
 		}
 	}

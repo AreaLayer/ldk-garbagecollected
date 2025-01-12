@@ -77,14 +77,16 @@ namespace org { namespace ldk { namespace structs {
  * # let custom_message_handler = IgnoringMessageHandler {};
  * # let offers_message_handler = IgnoringMessageHandler {};
  * # let async_payments_message_handler = IgnoringMessageHandler {};
+ * # let dns_resolution_message_handler = IgnoringMessageHandler {};
  * Create the onion messenger. This must use the same `keys_manager` as is passed to your
  * ChannelManager.
  * let onion_messenger = OnionMessenger::new(
  * &keys_manager, &keys_manager, logger, &node_id_lookup, message_router,
- * &offers_message_handler, &async_payments_message_handler, &custom_message_handler
+ * &offers_message_handler, &async_payments_message_handler, &dns_resolution_message_handler,
+ * &custom_message_handler,
  * );
  * 
- * # #[derive(Debug, Clone)]
+ * # #[derive(Clone, Debug)]
  * # struct YourCustomMessage {}
  * impl Writeable for YourCustomMessage {
  * \tfn write<W: Writer>(&self, w: &mut W) -> Result<(), io::Error> {
@@ -134,8 +136,8 @@ public class OnionMessenger : CommonBase {
 	 * Constructs a new `OnionMessenger` to send, forward, and delegate received onion messages to
 	 * their respective handlers.
 	 */
-	public static OnionMessenger of(org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.Logger logger, org.ldk.structs.NodeIdLookUp node_id_lookup, org.ldk.structs.MessageRouter message_router, org.ldk.structs.OffersMessageHandler offers_handler, org.ldk.structs.AsyncPaymentsMessageHandler async_payments_handler, org.ldk.structs.CustomOnionMessageHandler custom_handler) {
-		long ret = bindings.OnionMessenger_new(entropy_source.ptr, node_signer.ptr, logger.ptr, node_id_lookup.ptr, message_router.ptr, offers_handler.ptr, async_payments_handler.ptr, custom_handler.ptr);
+	public static OnionMessenger of(org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.Logger logger, org.ldk.structs.NodeIdLookUp node_id_lookup, org.ldk.structs.MessageRouter message_router, org.ldk.structs.OffersMessageHandler offers_handler, org.ldk.structs.AsyncPaymentsMessageHandler async_payments_handler, org.ldk.structs.DNSResolverMessageHandler dns_resolver, org.ldk.structs.CustomOnionMessageHandler custom_handler) {
+		long ret = bindings.OnionMessenger_new(entropy_source.ptr, node_signer.ptr, logger.ptr, node_id_lookup.ptr, message_router.ptr, offers_handler.ptr, async_payments_handler.ptr, dns_resolver.ptr, custom_handler.ptr);
 		GC.KeepAlive(entropy_source);
 		GC.KeepAlive(node_signer);
 		GC.KeepAlive(logger);
@@ -143,6 +145,7 @@ public class OnionMessenger : CommonBase {
 		GC.KeepAlive(message_router);
 		GC.KeepAlive(offers_handler);
 		GC.KeepAlive(async_payments_handler);
+		GC.KeepAlive(dns_resolver);
 		GC.KeepAlive(custom_handler);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.OnionMessenger ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.OnionMessenger(null, ret); }
@@ -154,6 +157,7 @@ public class OnionMessenger : CommonBase {
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(message_router); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(offers_handler); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(async_payments_handler); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(dns_resolver); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(custom_handler); };
 		return ret_hu_conv;
 	}
@@ -181,8 +185,8 @@ public class OnionMessenger : CommonBase {
 	 * onion messages are persisted and only persist onion messages for relevant
 	 * peers.
 	 */
-	public static OnionMessenger new_with_offline_peer_interception(org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.Logger logger, org.ldk.structs.NodeIdLookUp node_id_lookup, org.ldk.structs.MessageRouter message_router, org.ldk.structs.OffersMessageHandler offers_handler, org.ldk.structs.AsyncPaymentsMessageHandler async_payments_handler, org.ldk.structs.CustomOnionMessageHandler custom_handler) {
-		long ret = bindings.OnionMessenger_new_with_offline_peer_interception(entropy_source.ptr, node_signer.ptr, logger.ptr, node_id_lookup.ptr, message_router.ptr, offers_handler.ptr, async_payments_handler.ptr, custom_handler.ptr);
+	public static OnionMessenger new_with_offline_peer_interception(org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.Logger logger, org.ldk.structs.NodeIdLookUp node_id_lookup, org.ldk.structs.MessageRouter message_router, org.ldk.structs.OffersMessageHandler offers_handler, org.ldk.structs.AsyncPaymentsMessageHandler async_payments_handler, org.ldk.structs.DNSResolverMessageHandler dns_resolver, org.ldk.structs.CustomOnionMessageHandler custom_handler) {
+		long ret = bindings.OnionMessenger_new_with_offline_peer_interception(entropy_source.ptr, node_signer.ptr, logger.ptr, node_id_lookup.ptr, message_router.ptr, offers_handler.ptr, async_payments_handler.ptr, dns_resolver.ptr, custom_handler.ptr);
 		GC.KeepAlive(entropy_source);
 		GC.KeepAlive(node_signer);
 		GC.KeepAlive(logger);
@@ -190,6 +194,7 @@ public class OnionMessenger : CommonBase {
 		GC.KeepAlive(message_router);
 		GC.KeepAlive(offers_handler);
 		GC.KeepAlive(async_payments_handler);
+		GC.KeepAlive(dns_resolver);
 		GC.KeepAlive(custom_handler);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.OnionMessenger ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.OnionMessenger(null, ret); }
@@ -201,6 +206,7 @@ public class OnionMessenger : CommonBase {
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(message_router); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(offers_handler); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(async_payments_handler); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(dns_resolver); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(custom_handler); };
 		return ret_hu_conv;
 	}

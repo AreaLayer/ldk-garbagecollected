@@ -7,7 +7,9 @@ namespace org { namespace ldk { namespace structs {
 
 
 /**
- * A tx_add_input message for adding an input during interactive transaction construction
+ * A [`tx_add_input`] message for adding an input during interactive transaction construction
+ * 
+ * [`tx_add_input`]: https://github.com/lightning/bolts/blob/master/02-peer-protocol.md#the-tx_add_input-message
  */
 public class TxAddInput : CommonBase {
 	internal TxAddInput(object _dummy, long ptr) : base(ptr) { }

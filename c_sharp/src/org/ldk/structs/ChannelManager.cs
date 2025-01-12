@@ -21,6 +21,7 @@ namespace org { namespace ldk { namespace structs {
  * - [`FeeEstimator`] to determine transaction fee rates needed to have a transaction mined in a
  * timely manner
  * - [`Router`] for finding payment paths when initiating and retrying payments
+ * - [`MessageRouter`] for finding message paths when initiating and retrying onion messages
  * - [`Logger`] for logging operational information of varying degrees
  * 
  * Additionally, it implements the following traits:
@@ -80,7 +81,8 @@ namespace org { namespace ldk { namespace structs {
  * #     fee_estimator: &dyn lightning::chain::chaininterface::FeeEstimator,
  * #     chain_monitor: &dyn lightning::chain::Watch<lightning::sign::InMemorySigner>,
  * #     tx_broadcaster: &dyn lightning::chain::chaininterface::BroadcasterInterface,
- * #     router: &lightning::routing::router::DefaultRouter<&NetworkGraph<&'a L>, &'a L, &ES, &S, SP, SL>,
+ * #     router: &lightning::routing::router::DefaultRouter<&NetworkGraph<&'a L>, &'a L, &ES, &S>,
+ * #     message_router: &lightning::onion_message::messenger::DefaultMessageRouter<&NetworkGraph<&'a L>, &'a L, &ES>,
  * #     logger: &L,
  * #     entropy_source: &ES,
  * #     node_signer: &dyn lightning::sign::NodeSigner,
@@ -96,18 +98,18 @@ namespace org { namespace ldk { namespace structs {
  * };
  * let default_config = UserConfig::default();
  * let channel_manager = ChannelManager::new(
- * fee_estimator, chain_monitor, tx_broadcaster, router, logger, entropy_source, node_signer,
- * signer_provider, default_config, params, current_timestamp
+ * fee_estimator, chain_monitor, tx_broadcaster, router, message_router, logger,
+ * entropy_source, node_signer, signer_provider, default_config, params, current_timestamp,
  * );
  * 
  * Restart from deserialized data
  * let mut channel_monitors = read_channel_monitors();
  * let args = ChannelManagerReadArgs::new(
  * entropy_source, node_signer, signer_provider, fee_estimator, chain_monitor, tx_broadcaster,
- * router, logger, default_config, channel_monitors.iter_mut().collect()
+ * router, message_router, logger, default_config, channel_monitors.iter().collect(),
  * );
  * let (block_hash, channel_manager) =
- * <(BlockHash, ChannelManager<_, _, _, _, _, _, _, _>)>::read(&mut reader, args)?;
+ * <(BlockHash, ChannelManager<_, _, _, _, _, _, _, _, _>)>::read(&mut reader, args)?;
  * 
  * Update the ChannelManager and ChannelMonitors with the latest chain data
  * ...
@@ -332,12 +334,12 @@ namespace org { namespace ldk { namespace structs {
  * 
  * ## BOLT 11 Invoices
  * 
- * The [`lightning-invoice`] crate is useful for creating BOLT 11 invoices. Specifically, use the
- * functions in its `utils` module for constructing invoices that are compatible with
- * [`ChannelManager`]. These functions serve as a convenience for building invoices with the
+ * The [`lightning-invoice`] crate is useful for creating BOLT 11 invoices. However, in order to
+ * construct a [`Bolt11Invoice`] that is compatible with [`ChannelManager`], use
+ * [`create_bolt11_invoice`]. This method serves as a convenience for building invoices with the
  * [`PaymentHash`] and [`PaymentSecret`] returned from [`create_inbound_payment`]. To provide your
- * own [`PaymentHash`], use [`create_inbound_payment_for_hash`] or the corresponding functions in
- * the [`lightning-invoice`] `utils` module.
+ * own [`PaymentHash`], override the appropriate [`Bolt11InvoiceParameters`], which is equivalent
+ * to using [`create_inbound_payment_for_hash`].
  * 
  * [`ChannelManager`] generates an [`Event::PaymentClaimable`] once the full payment has been
  * received. Call [`claim_funds`] to release the [`PaymentPreimage`], which in turn will result in
@@ -345,19 +347,21 @@ namespace org { namespace ldk { namespace structs {
  * 
  * ```
  * # use lightning::events::{Event, EventsProvider, PaymentPurpose};
- * # use lightning::ln::channelmanager::AChannelManager;
+ * # use lightning::ln::channelmanager::{AChannelManager, Bolt11InvoiceParameters};
  * #
  * # fn example<T: AChannelManager>(channel_manager: T) {
  * # let channel_manager = channel_manager.get_cm();
- * Or use utils::create_invoice_from_channelmanager
- * let known_payment_hash = match channel_manager.create_inbound_payment(
- * Some(10_000_000), 3600, None
- * ) {
- * Ok((payment_hash, _payment_secret)) => {
- * println!(\"Creating inbound payment {}\", payment_hash);
- * payment_hash
+ * let params = Bolt11InvoiceParameters {
+ * amount_msats: Some(10_000_000),
+ * invoice_expiry_delta_secs: Some(3600),
+ * ..Default::default()
+ * };
+ * let invoice = match channel_manager.create_bolt11_invoice(params) {
+ * Ok(invoice) => {
+ * println!(\"Creating invoice with payment hash {}\", invoice.payment_hash());
+ * invoice
  * },
- * Err(()) => panic!(\"Error creating inbound payment\"),
+ * Err(e) => panic!(\"Error creating invoice: {}\", e),
  * };
  * 
  * On the event processing thread
@@ -365,7 +369,7 @@ namespace org { namespace ldk { namespace structs {
  * match event {
  * Event::PaymentClaimable { payment_hash, purpose, .. } => match purpose {
  * PaymentPurpose::Bolt11InvoicePayment { payment_preimage: Some(payment_preimage), .. } => {
- * assert_eq!(payment_hash, known_payment_hash);
+ * assert_eq!(payment_hash.0, invoice.payment_hash().as_ref());
  * println!(\"Claiming payment {}\", payment_hash);
  * channel_manager.claim_funds(payment_preimage);
  * },
@@ -373,7 +377,7 @@ namespace org { namespace ldk { namespace structs {
  * println!(\"Unknown payment hash: {}\", payment_hash);
  * },
  * PaymentPurpose::SpontaneousPayment(payment_preimage) => {
- * assert_ne!(payment_hash, known_payment_hash);
+ * assert_ne!(payment_hash.0, invoice.payment_hash().as_ref());
  * println!(\"Claiming spontaneous payment {}\", payment_hash);
  * channel_manager.claim_funds(payment_preimage);
  * },
@@ -381,7 +385,7 @@ namespace org { namespace ldk { namespace structs {
  * #           _ => {},
  * },
  * Event::PaymentClaimed { payment_hash, amount_msat, .. } => {
- * assert_eq!(payment_hash, known_payment_hash);
+ * assert_eq!(payment_hash.0, invoice.payment_hash().as_ref());
  * println!(\"Claimed {} msats\", amount_msat);
  * },
  * ...
@@ -392,13 +396,14 @@ namespace org { namespace ldk { namespace structs {
  * # }
  * ```
  * 
- * For paying an invoice, [`lightning-invoice`] provides a `payment` module with convenience
- * functions for use with [`send_payment`].
+ * For paying an invoice, see the [`bolt11_payment`] module with convenience functions for use with
+ * [`send_payment`].
  * 
  * ```
  * # use lightning::events::{Event, EventsProvider};
- * # use lightning::ln::types::PaymentHash;
- * # use lightning::ln::channelmanager::{AChannelManager, PaymentId, RecentPaymentDetails, RecipientOnionFields, Retry};
+ * # use lightning::types::payment::PaymentHash;
+ * # use lightning::ln::channelmanager::{AChannelManager, PaymentId, RecentPaymentDetails};
+ * # use lightning::ln::outbound_payment::{RecipientOnionFields, Retry};
  * # use lightning::routing::router::RouteParameters;
  * #
  * # fn example<T: AChannelManager>(
@@ -501,7 +506,8 @@ namespace org { namespace ldk { namespace structs {
  * 
  * ```
  * # use lightning::events::{Event, EventsProvider};
- * # use lightning::ln::channelmanager::{AChannelManager, PaymentId, RecentPaymentDetails, Retry};
+ * # use lightning::ln::channelmanager::{AChannelManager, PaymentId, RecentPaymentDetails};
+ * # use lightning::ln::outbound_payment::Retry;
  * # use lightning::offers::offer::Offer;
  * #
  * # fn example<T: AChannelManager>(
@@ -557,7 +563,8 @@ namespace org { namespace ldk { namespace structs {
  * ```
  * # use core::time::Duration;
  * # use lightning::events::{Event, EventsProvider};
- * # use lightning::ln::channelmanager::{AChannelManager, PaymentId, RecentPaymentDetails, Retry};
+ * # use lightning::ln::channelmanager::{AChannelManager, PaymentId, RecentPaymentDetails};
+ * # use lightning::ln::outbound_payment::Retry;
  * # use lightning::offers::parse::Bolt12SemanticError;
  * #
  * # fn example<T: AChannelManager>(
@@ -727,8 +734,10 @@ namespace org { namespace ldk { namespace structs {
  * [`list_recent_payments`]: Self::list_recent_payments
  * [`abandon_payment`]: Self::abandon_payment
  * [`lightning-invoice`]: https://docs.rs/lightning_invoice/latest/lightning_invoice
+ * [`create_bolt11_invoice`]: Self::create_bolt11_invoice
  * [`create_inbound_payment`]: Self::create_inbound_payment
  * [`create_inbound_payment_for_hash`]: Self::create_inbound_payment_for_hash
+ * [`bolt11_payment`]: crate::ln::bolt11_payment
  * [`claim_funds`]: Self::claim_funds
  * [`send_payment`]: Self::send_payment
  * [`offers`]: crate::offers
@@ -770,12 +779,13 @@ public class ChannelManager : CommonBase {
 	 * [`block_disconnected`]: chain::Listen::block_disconnected
 	 * [`params.best_block.block_hash`]: chain::BestBlock::block_hash
 	 */
-	public static ChannelManager of(org.ldk.structs.FeeEstimator fee_est, org.ldk.structs.Watch chain_monitor, org.ldk.structs.BroadcasterInterface tx_broadcaster, org.ldk.structs.Router router, org.ldk.structs.Logger logger, org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.SignerProvider signer_provider, org.ldk.structs.UserConfig config, org.ldk.structs.ChainParameters _params, int current_timestamp) {
-		long ret = bindings.ChannelManager_new(fee_est.ptr, chain_monitor.ptr, tx_broadcaster.ptr, router.ptr, logger.ptr, entropy_source.ptr, node_signer.ptr, signer_provider.ptr, config.ptr, _params.ptr, current_timestamp);
+	public static ChannelManager of(org.ldk.structs.FeeEstimator fee_est, org.ldk.structs.Watch chain_monitor, org.ldk.structs.BroadcasterInterface tx_broadcaster, org.ldk.structs.Router router, org.ldk.structs.MessageRouter message_router, org.ldk.structs.Logger logger, org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.SignerProvider signer_provider, org.ldk.structs.UserConfig config, org.ldk.structs.ChainParameters _params, int current_timestamp) {
+		long ret = bindings.ChannelManager_new(fee_est.ptr, chain_monitor.ptr, tx_broadcaster.ptr, router.ptr, message_router.ptr, logger.ptr, entropy_source.ptr, node_signer.ptr, signer_provider.ptr, config.ptr, _params.ptr, current_timestamp);
 		GC.KeepAlive(fee_est);
 		GC.KeepAlive(chain_monitor);
 		GC.KeepAlive(tx_broadcaster);
 		GC.KeepAlive(router);
+		GC.KeepAlive(message_router);
 		GC.KeepAlive(logger);
 		GC.KeepAlive(entropy_source);
 		GC.KeepAlive(node_signer);
@@ -790,6 +800,7 @@ public class ChannelManager : CommonBase {
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(chain_monitor); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(tx_broadcaster); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(router); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(message_router); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(logger); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(entropy_source); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(node_signer); };
@@ -1105,14 +1116,8 @@ public class ChannelManager : CommonBase {
 	}
 
 	/**
-	 * Sends a payment along a given route.
-	 * 
-	 * This method is *DEPRECATED*, use [`Self::send_payment`] instead. If you wish to fix the
-	 * route for a payment, do so by matching the [`PaymentId`] passed to
-	 * [`Router::find_route_with_id`].
-	 * 
-	 * Value parameters are provided via the last hop in route, see documentation for [`RouteHop`]
-	 * fields for more info.
+	 * Sends a payment to the route found using the provided [`RouteParameters`], retrying failed
+	 * payment paths based on the provided `Retry`.
 	 * 
 	 * May generate [`UpdateHTLCs`] message(s) event on success, which should be relayed (e.g. via
 	 * [`PeerManager::process_events`]).
@@ -1120,9 +1125,9 @@ public class ChannelManager : CommonBase {
 	 * # Avoiding Duplicate Payments
 	 * 
 	 * If a pending payment is currently in-flight with the same [`PaymentId`] provided, this
-	 * method will error with an [`APIError::InvalidRoute`]. Note, however, that once a payment
-	 * is no longer pending (either via [`ChannelManager::abandon_payment`], or handling of an
-	 * [`Event::PaymentSent`] or [`Event::PaymentFailed`]) LDK will not stop you from sending a
+	 * method will error with [`RetryableSendFailure::DuplicatePayment`]. Note, however, that once a
+	 * payment is no longer pending (either via [`ChannelManager::abandon_payment`], or handling of
+	 * an [`Event::PaymentSent`] or [`Event::PaymentFailed`]) LDK will not stop you from sending a
 	 * second payment with the same [`PaymentId`].
 	 * 
 	 * Thus, in order to ensure duplicate payments are not sent, you should implement your own
@@ -1136,46 +1141,14 @@ public class ChannelManager : CommonBase {
 	 * using [`ChannelMonitorUpdateStatus::InProgress`]), the payment may be lost on restart. See
 	 * [`ChannelManager::list_recent_payments`] for more information.
 	 * 
-	 * # Possible Error States on [`PaymentSendFailure`]
+	 * Routes are automatically found using the [`Router] provided on startup. To fix a route for a
+	 * particular payment, match the [`PaymentId`] passed to [`Router::find_route_with_id`].
 	 * 
-	 * Each path may have a different return value, and [`PaymentSendFailure`] may return a `Vec` with
-	 * each entry matching the corresponding-index entry in the route paths, see
-	 * [`PaymentSendFailure`] for more info.
-	 * 
-	 * In general, a path may raise:
-	 * [`APIError::InvalidRoute`] when an invalid route or forwarding parameter (cltv_delta, fee,
-	 * node public key) is specified.
-	 * [`APIError::ChannelUnavailable`] if the next-hop channel is not available as it has been
-	 * closed, doesn't exist, or the peer is currently disconnected.
-	 * [`APIError::MonitorUpdateInProgress`] if a new monitor update failure prevented sending the
-	 * relevant updates.
-	 * 
-	 * Note that depending on the type of the [`PaymentSendFailure`] the HTLC may have been
-	 * irrevocably committed to on our end. In such a case, do NOT retry the payment with a
-	 * different route unless you intend to pay twice!
-	 * 
-	 * [`RouteHop`]: crate::routing::router::RouteHop
 	 * [`Event::PaymentSent`]: events::Event::PaymentSent
 	 * [`Event::PaymentFailed`]: events::Event::PaymentFailed
 	 * [`UpdateHTLCs`]: events::MessageSendEvent::UpdateHTLCs
 	 * [`PeerManager::process_events`]: crate::ln::peer_handler::PeerManager::process_events
 	 * [`ChannelMonitorUpdateStatus::InProgress`]: crate::chain::ChannelMonitorUpdateStatus::InProgress
-	 */
-	public Result_NonePaymentSendFailureZ send_payment_with_route(org.ldk.structs.Route route, byte[] payment_hash, org.ldk.structs.RecipientOnionFields recipient_onion, byte[] payment_id) {
-		long ret = bindings.ChannelManager_send_payment_with_route(this.ptr, route.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), recipient_onion.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
-		GC.KeepAlive(this);
-		GC.KeepAlive(route);
-		GC.KeepAlive(payment_hash);
-		GC.KeepAlive(recipient_onion);
-		GC.KeepAlive(payment_id);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_NonePaymentSendFailureZ ret_hu_conv = Result_NonePaymentSendFailureZ.constr_from_ptr(ret);
-		return ret_hu_conv;
-	}
-
-	/**
-	 * Similar to [`ChannelManager::send_payment_with_route`], but will automatically find a route based on
-	 * `route_params` and retry failed payment paths based on `retry_strategy`.
 	 */
 	public Result_NoneRetryableSendFailureZ send_payment(byte[] payment_hash, org.ldk.structs.RecipientOnionFields recipient_onion, byte[] payment_id, org.ldk.structs.RouteParameters route_params, org.ldk.structs.Retry retry_strategy) {
 		long ret = bindings.ChannelManager_send_payment(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), recipient_onion.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), route_params.ptr, retry_strategy.ptr);
@@ -1187,6 +1160,39 @@ public class ChannelManager : CommonBase {
 		GC.KeepAlive(retry_strategy);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneRetryableSendFailureZ ret_hu_conv = Result_NoneRetryableSendFailureZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Pays the [`Bolt12Invoice`] associated with the `payment_id` encoded in its `payer_metadata`.
+	 * 
+	 * The invoice's `payer_metadata` is used to authenticate that the invoice was indeed requested
+	 * before attempting a payment. [`Bolt12PaymentError::UnexpectedInvoice`] is returned if this
+	 * fails or if the encoded `payment_id` is not recognized. The latter may happen once the
+	 * payment is no longer tracked because the payment was attempted after:
+	 * - an invoice for the `payment_id` was already paid,
+	 * - one full [timer tick] has elapsed since initially requesting the invoice when paying an
+	 * offer, or
+	 * - the refund corresponding to the invoice has already expired.
+	 * 
+	 * To retry the payment, request another invoice using a new `payment_id`.
+	 * 
+	 * Attempting to pay the same invoice twice while the first payment is still pending will
+	 * result in a [`Bolt12PaymentError::DuplicateInvoice`].
+	 * 
+	 * Otherwise, either [`Event::PaymentSent`] or [`Event::PaymentFailed`] are used to indicate
+	 * whether or not the payment was successful.
+	 * 
+	 * [timer tick]: Self::timer_tick_occurred
+	 */
+	public Result_NoneBolt12PaymentErrorZ send_payment_for_bolt12_invoice(org.ldk.structs.Bolt12Invoice invoice, org.ldk.structs.Option_OffersContextZ context) {
+		long ret = bindings.ChannelManager_send_payment_for_bolt12_invoice(this.ptr, invoice.ptr, context.ptr);
+		GC.KeepAlive(this);
+		GC.KeepAlive(invoice);
+		GC.KeepAlive(context);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_NoneBolt12PaymentErrorZ ret_hu_conv = Result_NoneBolt12PaymentErrorZ.constr_from_ptr(ret);
+		if (this != null) { this.ptrs_to.AddLast(invoice); };
 		return ret_hu_conv;
 	}
 
@@ -1230,38 +1236,20 @@ public class ChannelManager : CommonBase {
 	 * would be able to guess -- otherwise, an intermediate node may claim the payment and it will
 	 * never reach the recipient.
 	 * 
-	 * See [`send_payment`] documentation for more details on the return value of this function
-	 * and idempotency guarantees provided by the [`PaymentId`] key.
-	 * 
 	 * Similar to regular payments, you MUST NOT reuse a `payment_preimage` value. See
 	 * [`send_payment`] for more information about the risks of duplicate preimage usage.
 	 * 
-	 * [`send_payment`]: Self::send_payment
-	 */
-	public Result_ThirtyTwoBytesPaymentSendFailureZ send_spontaneous_payment(org.ldk.structs.Route route, org.ldk.structs.Option_ThirtyTwoBytesZ payment_preimage, org.ldk.structs.RecipientOnionFields recipient_onion, byte[] payment_id) {
-		long ret = bindings.ChannelManager_send_spontaneous_payment(this.ptr, route.ptr, payment_preimage.ptr, recipient_onion.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
-		GC.KeepAlive(this);
-		GC.KeepAlive(route);
-		GC.KeepAlive(payment_preimage);
-		GC.KeepAlive(recipient_onion);
-		GC.KeepAlive(payment_id);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_ThirtyTwoBytesPaymentSendFailureZ ret_hu_conv = Result_ThirtyTwoBytesPaymentSendFailureZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.AddLast(route); };
-		return ret_hu_conv;
-	}
-
-	/**
-	 * Similar to [`ChannelManager::send_spontaneous_payment`], but will automatically find a route
-	 * based on `route_params` and retry failed payment paths based on `retry_strategy`.
+	 * See [`send_payment`] documentation for more details on the idempotency guarantees provided by
+	 * the [`PaymentId`] key.
 	 * 
 	 * See [`PaymentParameters::for_keysend`] for help in constructing `route_params` for spontaneous
 	 * payments.
 	 * 
+	 * [`send_payment`]: Self::send_payment
 	 * [`PaymentParameters::for_keysend`]: crate::routing::router::PaymentParameters::for_keysend
 	 */
-	public Result_ThirtyTwoBytesRetryableSendFailureZ send_spontaneous_payment_with_retry(org.ldk.structs.Option_ThirtyTwoBytesZ payment_preimage, org.ldk.structs.RecipientOnionFields recipient_onion, byte[] payment_id, org.ldk.structs.RouteParameters route_params, org.ldk.structs.Retry retry_strategy) {
-		long ret = bindings.ChannelManager_send_spontaneous_payment_with_retry(this.ptr, payment_preimage.ptr, recipient_onion.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), route_params.ptr, retry_strategy.ptr);
+	public Result_ThirtyTwoBytesRetryableSendFailureZ send_spontaneous_payment(org.ldk.structs.Option_ThirtyTwoBytesZ payment_preimage, org.ldk.structs.RecipientOnionFields recipient_onion, byte[] payment_id, org.ldk.structs.RouteParameters route_params, org.ldk.structs.Retry retry_strategy) {
+		long ret = bindings.ChannelManager_send_spontaneous_payment(this.ptr, payment_preimage.ptr, recipient_onion.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), route_params.ptr, retry_strategy.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(payment_preimage);
 		GC.KeepAlive(recipient_onion);
@@ -1278,12 +1266,12 @@ public class ChannelManager : CommonBase {
 	 * [`PaymentHash`] of probes based on a static secret and a random [`PaymentId`], which allows
 	 * us to easily discern them from real payments.
 	 */
-	public Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ send_probe(org.ldk.structs.Path path) {
+	public Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ send_probe(org.ldk.structs.Path path) {
 		long ret = bindings.ChannelManager_send_probe(this.ptr, path.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(path);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ ret_hu_conv = Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ.constr_from_ptr(ret);
+		Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ ret_hu_conv = Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ.constr_from_ptr(ret);
 		return ret_hu_conv;
 	}
 
@@ -1590,7 +1578,7 @@ public class ChannelManager : CommonBase {
 	 * Forgetting about stale outbound payments, either those that have already been fulfilled
 	 * or those awaiting an invoice that hasn't been delivered in the necessary amount of time.
 	 * The latter is determined using the system clock in `std` and the highest seen block time
-	 * minus two hours in `no-std`.
+	 * minus two hours in non-`std`.
 	 * 
 	 * Note that this may cause reentrancy through [`chain::Watch::update_channel`] calls or feerate
 	 * estimate fetches.
@@ -1712,6 +1700,10 @@ public class ChannelManager : CommonBase {
 	 * for zero confirmations. Instead, `accept_inbound_channel_from_trusted_peer_0conf` must be
 	 * used to accept such channels.
 	 * 
+	 * NOTE: LDK makes no attempt to prevent the counterparty from using non-standard inputs which
+	 * will prevent the funding transaction from being relayed on the bitcoin network and hence being
+	 * confirmed.
+	 * 
 	 * [`Event::OpenChannelRequest`]: events::Event::OpenChannelRequest
 	 * [`Event::ChannelClosed::user_channel_id`]: events::Event::ChannelClosed::user_channel_id
 	 */
@@ -1760,6 +1752,45 @@ public class ChannelManager : CommonBase {
 	}
 
 	/**
+	 * When a call to a [`ChannelSigner`] method returns an error, this indicates that the signer
+	 * is (temporarily) unavailable, and the operation should be retried later.
+	 * 
+	 * This method allows for that retry - either checking for any signer-pending messages to be
+	 * attempted in every channel, or in the specifically provided channel.
+	 * 
+	 * [`ChannelSigner`]: crate::sign::ChannelSigner
+	 */
+	public void signer_unblocked(org.ldk.structs.Option_C2Tuple_PublicKeyChannelIdZZ channel_opt) {
+		bindings.ChannelManager_signer_unblocked(this.ptr, channel_opt.ptr);
+		GC.KeepAlive(this);
+		GC.KeepAlive(channel_opt);
+	}
+
+	/**
+	 * Utility for creating a BOLT11 invoice that can be verified by [`ChannelManager`] without
+	 * storing any additional state. It achieves this by including a [`PaymentSecret`] in the
+	 * invoice which it uses to verify that the invoice has not expired and the payment amount is
+	 * sufficient, reproducing the [`PaymentPreimage`] if applicable.
+	 */
+	public Result_Bolt11InvoiceSignOrCreationErrorZ create_bolt11_invoice(Option_u64Z params_amount_msats_arg, Bolt11InvoiceDescription params_description_arg, Option_u32Z params_invoice_expiry_delta_secs_arg, Option_u16Z params_min_final_cltv_expiry_delta_arg, Option_ThirtyTwoBytesZ params_payment_hash_arg) {
+		long ret = bindings.ChannelManager_create_bolt11_invoice(this.ptr, bindings.Bolt11InvoiceParameters_new(params_amount_msats_arg.ptr, params_description_arg.ptr, params_invoice_expiry_delta_secs_arg.ptr, params_min_final_cltv_expiry_delta_arg.ptr, params_payment_hash_arg.ptr));
+		GC.KeepAlive(this);
+		GC.KeepAlive(params_amount_msats_arg);
+		GC.KeepAlive(params_description_arg);
+		GC.KeepAlive(params_invoice_expiry_delta_secs_arg);
+		GC.KeepAlive(params_min_final_cltv_expiry_delta_arg);
+		GC.KeepAlive(params_payment_hash_arg);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_Bolt11InvoiceSignOrCreationErrorZ ret_hu_conv = Result_Bolt11InvoiceSignOrCreationErrorZ.constr_from_ptr(ret);
+		;
+		;
+		;
+		;
+		;
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Creates an [`OfferBuilder`] such that the [`Offer`] it builds is recognized by the
 	 * [`ChannelManager`] when handling [`InvoiceRequest`] messages for the offer. The offer's
 	 * expiration will be `absolute_expiry` if `Some`, otherwise it will not expire.
@@ -1804,7 +1835,7 @@ public class ChannelManager : CommonBase {
 	 * See [Avoiding Duplicate Payments] for other requirements once the payment has been sent.
 	 * 
 	 * The builder will have the provided expiration set. Any changes to the expiration on the
-	 * returned builder will not be honored by [`ChannelManager`]. For `no-std`, the highest seen
+	 * returned builder will not be honored by [`ChannelManager`]. For non-`std`, the highest seen
 	 * block time minus two hours is used for the current time when determining if the refund has
 	 * expired.
 	 * 
@@ -1889,7 +1920,7 @@ public class ChannelManager : CommonBase {
 	 * # Limitations
 	 * 
 	 * Requires a direct connection to an introduction node in [`Offer::paths`] or to
-	 * [`Offer::signing_pubkey`], if empty. A similar restriction applies to the responding
+	 * [`Offer::issuer_signing_pubkey`], if empty. A similar restriction applies to the responding
 	 * [`Bolt12Invoice::payment_paths`].
 	 * 
 	 * # Errors
@@ -1936,9 +1967,9 @@ public class ChannelManager : CommonBase {
 	 * # Limitations
 	 * 
 	 * Requires a direct connection to an introduction node in [`Refund::paths`] or to
-	 * [`Refund::payer_id`], if empty. This request is best effort; an invoice will be sent to each
-	 * node meeting the aforementioned criteria, but there's no guarantee that they will be
-	 * received and no retries will be made.
+	 * [`Refund::payer_signing_pubkey`], if empty. This request is best effort; an invoice will be
+	 * sent to each node meeting the aforementioned criteria, but there's no guarantee that they
+	 * will be received and no retries will be made.
 	 * 
 	 * # Errors
 	 * 
@@ -1956,6 +1987,62 @@ public class ChannelManager : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_Bolt12InvoiceBolt12SemanticErrorZ ret_hu_conv = Result_Bolt12InvoiceBolt12SemanticErrorZ.constr_from_ptr(ret);
 		if (this != null) { this.ptrs_to.AddLast(refund); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Pays for an [`Offer`] looked up using [BIP 353] Human Readable Names resolved by the DNS
+	 * resolver(s) at `dns_resolvers` which resolve names according to bLIP 32.
+	 * 
+	 * If the wallet supports paying on-chain schemes, you should instead use
+	 * [`OMNameResolver::resolve_name`] and [`OMNameResolver::handle_dnssec_proof_for_uri`] (by
+	 * implementing [`DNSResolverMessageHandler`]) directly to look up a URI and then delegate to
+	 * your normal URI handling.
+	 * 
+	 * If `max_total_routing_fee_msat` is not specified, the default from
+	 * [`RouteParameters::from_payment_params_and_value`] is applied.
+	 * 
+	 * # Payment
+	 * 
+	 * The provided `payment_id` is used to ensure that only one invoice is paid for the request
+	 * when received. See [Avoiding Duplicate Payments] for other requirements once the payment has
+	 * been sent.
+	 * 
+	 * To revoke the request, use [`ChannelManager::abandon_payment`] prior to receiving the
+	 * invoice. If abandoned, or an invoice isn't received in a reasonable amount of time, the
+	 * payment will fail with an [`Event::InvoiceRequestFailed`].
+	 * 
+	 * # Privacy
+	 * 
+	 * For payer privacy, uses a derived payer id and uses [`MessageRouter::create_blinded_paths`]
+	 * to construct a [`BlindedPath`] for the reply path. For further privacy implications, see the
+	 * docs of the parameterized [`Router`], which implements [`MessageRouter`].
+	 * 
+	 * # Limitations
+	 * 
+	 * Requires a direct connection to the given [`Destination`] as well as an introduction node in
+	 * [`Offer::paths`] or to [`Offer::signing_pubkey`], if empty. A similar restriction applies to
+	 * the responding [`Bolt12Invoice::payment_paths`].
+	 * 
+	 * # Errors
+	 * 
+	 * Errors if:
+	 * - a duplicate `payment_id` is provided given the caveats in the aforementioned link,
+	 * 
+	 * [`Bolt12Invoice::payment_paths`]: crate::offers::invoice::Bolt12Invoice::payment_paths
+	 * [Avoiding Duplicate Payments]: #avoiding-duplicate-payments
+	 */
+	public Result_NoneNoneZ pay_for_offer_from_human_readable_name(org.ldk.structs.HumanReadableName name, long amount_msats, byte[] payment_id, org.ldk.structs.Retry retry_strategy, org.ldk.structs.Option_u64Z max_total_routing_fee_msat, Destination[] dns_resolvers) {
+		long ret = bindings.ChannelManager_pay_for_offer_from_human_readable_name(this.ptr, name.ptr, amount_msats, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), retry_strategy.ptr, max_total_routing_fee_msat.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(dns_resolvers, dns_resolvers_conv_13 => dns_resolvers_conv_13.ptr)));
+		GC.KeepAlive(this);
+		GC.KeepAlive(name);
+		GC.KeepAlive(amount_msats);
+		GC.KeepAlive(payment_id);
+		GC.KeepAlive(retry_strategy);
+		GC.KeepAlive(max_total_routing_fee_msat);
+		GC.KeepAlive(dns_resolvers);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_NoneNoneZ ret_hu_conv = Result_NoneNoneZ.constr_from_ptr(ret);
 		return ret_hu_conv;
 	}
 
@@ -2314,6 +2401,19 @@ public class ChannelManager : CommonBase {
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		AsyncPaymentsMessageHandler ret_hu_conv = new AsyncPaymentsMessageHandler(null, ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Constructs a new DNSResolverMessageHandler which calls the relevant methods on this_arg.
+	 * This copies the `inner` pointer in this_arg and thus the returned DNSResolverMessageHandler must be freed before this_arg is
+	 */
+	public DNSResolverMessageHandler as_DNSResolverMessageHandler() {
+		long ret = bindings.ChannelManager_as_DNSResolverMessageHandler(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		DNSResolverMessageHandler ret_hu_conv = new DNSResolverMessageHandler(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
 		return ret_hu_conv;
 	}

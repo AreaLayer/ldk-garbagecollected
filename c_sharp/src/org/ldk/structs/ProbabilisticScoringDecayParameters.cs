@@ -71,11 +71,11 @@ public class ProbabilisticScoringDecayParameters : CommonBase {
 	 * liquidity bounds are 200,000 sats and 600,000 sats, after this amount of time the upper
 	 * and lower liquidity bounds will be decayed to 100,000 and 800,000 sats.
 	 * 
-	 * Default value: 6 hours
+	 * Default value: 30 minutes
 	 * 
 	 * # Note
 	 * 
-	 * When built with the `no-std` feature, time will never elapse. Therefore, the channel
+	 * When not built with the `std` feature, time will never elapse. Therefore, the channel
 	 * liquidity knowledge will never decay except when the bounds cross.
 	 */
 	public long get_liquidity_offset_half_life() {
@@ -98,11 +98,11 @@ public class ProbabilisticScoringDecayParameters : CommonBase {
 	 * liquidity bounds are 200,000 sats and 600,000 sats, after this amount of time the upper
 	 * and lower liquidity bounds will be decayed to 100,000 and 800,000 sats.
 	 * 
-	 * Default value: 6 hours
+	 * Default value: 30 minutes
 	 * 
 	 * # Note
 	 * 
-	 * When built with the `no-std` feature, time will never elapse. Therefore, the channel
+	 * When not built with the `std` feature, time will never elapse. Therefore, the channel
 	 * liquidity knowledge will never decay except when the bounds cross.
 	 */
 	public void set_liquidity_offset_half_life(long val) {

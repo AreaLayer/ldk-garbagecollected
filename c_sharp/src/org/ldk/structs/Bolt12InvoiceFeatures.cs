@@ -265,5 +265,39 @@ public class Bolt12InvoiceFeatures : CommonBase {
 		return ret;
 	}
 
+	/**
+	 * Set this feature as optional.
+	 */
+	public void set_trampoline_routing_optional() {
+		bindings.Bolt12InvoiceFeatures_set_trampoline_routing_optional(this.ptr);
+		GC.KeepAlive(this);
+	}
+
+	/**
+	 * Set this feature as required.
+	 */
+	public void set_trampoline_routing_required() {
+		bindings.Bolt12InvoiceFeatures_set_trampoline_routing_required(this.ptr);
+		GC.KeepAlive(this);
+	}
+
+	/**
+	 * Checks if this feature is supported.
+	 */
+	public bool supports_trampoline_routing() {
+		bool ret = bindings.Bolt12InvoiceFeatures_supports_trampoline_routing(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Checks if this feature is required.
+	 */
+	public bool requires_trampoline_routing() {
+		bool ret = bindings.Bolt12InvoiceFeatures_requires_trampoline_routing(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
 }
 } } }

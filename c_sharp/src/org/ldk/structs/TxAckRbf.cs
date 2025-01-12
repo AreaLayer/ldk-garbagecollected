@@ -7,8 +7,10 @@ namespace org { namespace ldk { namespace structs {
 
 
 /**
- * A tx_ack_rbf message which acknowledges replacement of the transaction after it's been
+ * A [`tx_ack_rbf`] message which acknowledges replacement of the transaction after it's been
  * completed.
+ * 
+ * [`tx_ack_rbf`]: https://github.com/lightning/bolts/blob/master/02-peer-protocol.md#the-tx_ack_rbf-message
  */
 public class TxAckRbf : CommonBase {
 	internal TxAckRbf(object _dummy, long ptr) : base(ptr) { }

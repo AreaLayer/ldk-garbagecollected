@@ -22,7 +22,9 @@ public class MessageContext : CommonBase {
 		long raw_ty = bindings.LDKMessageContext_ty_from_ptr(ptr);
 		switch (raw_ty) {
 			case 0: return new MessageContext_Offers(ptr);
-			case 1: return new MessageContext_Custom(ptr);
+			case 1: return new MessageContext_AsyncPayments(ptr);
+			case 2: return new MessageContext_DNSResolver(ptr);
+			case 3: return new MessageContext_Custom(ptr);
 			default:
 				throw new ArgumentException("Impossible enum variant");
 		}
@@ -36,6 +38,26 @@ public class MessageContext : CommonBase {
 			org.ldk.structs.OffersContext offers_hu_conv = org.ldk.structs.OffersContext.constr_from_ptr(offers);
 			if (offers_hu_conv != null) { offers_hu_conv.ptrs_to.AddLast(this); };
 			this.offers = offers_hu_conv;
+		}
+	}
+	/** A MessageContext of type AsyncPayments */
+	public class MessageContext_AsyncPayments : MessageContext {
+		public AsyncPaymentsContext async_payments;
+		internal MessageContext_AsyncPayments(long ptr) : base(null, ptr) {
+			long async_payments = bindings.LDKMessageContext_AsyncPayments_get_async_payments(ptr);
+			org.ldk.structs.AsyncPaymentsContext async_payments_hu_conv = org.ldk.structs.AsyncPaymentsContext.constr_from_ptr(async_payments);
+			if (async_payments_hu_conv != null) { async_payments_hu_conv.ptrs_to.AddLast(this); };
+			this.async_payments = async_payments_hu_conv;
+		}
+	}
+	/** A MessageContext of type DNSResolver */
+	public class MessageContext_DNSResolver : MessageContext {
+		public DNSResolverContext dns_resolver;
+		internal MessageContext_DNSResolver(long ptr) : base(null, ptr) {
+			long dns_resolver = bindings.LDKMessageContext_DNSResolver_get_dns_resolver(ptr);
+			org.ldk.structs.DNSResolverContext dns_resolver_hu_conv = null; if (dns_resolver < 0 || dns_resolver > 4096) { dns_resolver_hu_conv = new org.ldk.structs.DNSResolverContext(null, dns_resolver); }
+			if (dns_resolver_hu_conv != null) { dns_resolver_hu_conv.ptrs_to.AddLast(this); };
+			this.dns_resolver = dns_resolver_hu_conv;
 		}
 	}
 	/** A MessageContext of type Custom */
@@ -70,6 +92,30 @@ public class MessageContext : CommonBase {
 	 */
 	public static MessageContext offers(org.ldk.structs.OffersContext a) {
 		long ret = bindings.MessageContext_offers(a.ptr);
+		GC.KeepAlive(a);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.MessageContext ret_hu_conv = org.ldk.structs.MessageContext.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new AsyncPayments-variant MessageContext
+	 */
+	public static MessageContext async_payments(org.ldk.structs.AsyncPaymentsContext a) {
+		long ret = bindings.MessageContext_async_payments(a.ptr);
+		GC.KeepAlive(a);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.MessageContext ret_hu_conv = org.ldk.structs.MessageContext.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new DNSResolver-variant MessageContext
+	 */
+	public static MessageContext dnsresolver(org.ldk.structs.DNSResolverContext a) {
+		long ret = bindings.MessageContext_dnsresolver(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageContext ret_hu_conv = org.ldk.structs.MessageContext.constr_from_ptr(ret);

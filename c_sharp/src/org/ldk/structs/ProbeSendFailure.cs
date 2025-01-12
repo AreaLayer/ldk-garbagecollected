@@ -21,7 +21,8 @@ public class ProbeSendFailure : CommonBase {
 		long raw_ty = bindings.LDKProbeSendFailure_ty_from_ptr(ptr);
 		switch (raw_ty) {
 			case 0: return new ProbeSendFailure_RouteNotFound(ptr);
-			case 1: return new ProbeSendFailure_SendingFailed(ptr);
+			case 1: return new ProbeSendFailure_ParameterError(ptr);
+			case 2: return new ProbeSendFailure_DuplicateProbe(ptr);
 			default:
 				throw new ArgumentException("Impossible enum variant");
 		}
@@ -32,14 +33,19 @@ public class ProbeSendFailure : CommonBase {
 		internal ProbeSendFailure_RouteNotFound(long ptr) : base(null, ptr) {
 		}
 	}
-	/** A ProbeSendFailure of type SendingFailed */
-	public class ProbeSendFailure_SendingFailed : ProbeSendFailure {
-		public PaymentSendFailure sending_failed;
-		internal ProbeSendFailure_SendingFailed(long ptr) : base(null, ptr) {
-			long sending_failed = bindings.LDKProbeSendFailure_SendingFailed_get_sending_failed(ptr);
-			org.ldk.structs.PaymentSendFailure sending_failed_hu_conv = org.ldk.structs.PaymentSendFailure.constr_from_ptr(sending_failed);
-			if (sending_failed_hu_conv != null) { sending_failed_hu_conv.ptrs_to.AddLast(this); };
-			this.sending_failed = sending_failed_hu_conv;
+	/** A ProbeSendFailure of type ParameterError */
+	public class ProbeSendFailure_ParameterError : ProbeSendFailure {
+		public APIError parameter_error;
+		internal ProbeSendFailure_ParameterError(long ptr) : base(null, ptr) {
+			long parameter_error = bindings.LDKProbeSendFailure_ParameterError_get_parameter_error(ptr);
+			org.ldk.structs.APIError parameter_error_hu_conv = org.ldk.structs.APIError.constr_from_ptr(parameter_error);
+			if (parameter_error_hu_conv != null) { parameter_error_hu_conv.ptrs_to.AddLast(this); };
+			this.parameter_error = parameter_error_hu_conv;
+		}
+	}
+	/** A ProbeSendFailure of type DuplicateProbe */
+	public class ProbeSendFailure_DuplicateProbe : ProbeSendFailure {
+		internal ProbeSendFailure_DuplicateProbe(long ptr) : base(null, ptr) {
 		}
 	}
 	internal long clone_ptr() {
@@ -72,11 +78,22 @@ public class ProbeSendFailure : CommonBase {
 	}
 
 	/**
-	 * Utility method to constructs a new SendingFailed-variant ProbeSendFailure
+	 * Utility method to constructs a new ParameterError-variant ProbeSendFailure
 	 */
-	public static ProbeSendFailure sending_failed(org.ldk.structs.PaymentSendFailure a) {
-		long ret = bindings.ProbeSendFailure_sending_failed(a.ptr);
+	public static ProbeSendFailure parameter_error(org.ldk.structs.APIError a) {
+		long ret = bindings.ProbeSendFailure_parameter_error(a.ptr);
 		GC.KeepAlive(a);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ProbeSendFailure ret_hu_conv = org.ldk.structs.ProbeSendFailure.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new DuplicateProbe-variant ProbeSendFailure
+	 */
+	public static ProbeSendFailure duplicate_probe() {
+		long ret = bindings.ProbeSendFailure_duplicate_probe();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ProbeSendFailure ret_hu_conv = org.ldk.structs.ProbeSendFailure.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };

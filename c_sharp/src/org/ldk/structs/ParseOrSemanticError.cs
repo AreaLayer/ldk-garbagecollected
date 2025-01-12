@@ -31,7 +31,7 @@ public class ParseOrSemanticError : CommonBase {
 		public Bolt11ParseError parse_error;
 		internal ParseOrSemanticError_ParseError(long ptr) : base(null, ptr) {
 			long parse_error = bindings.LDKParseOrSemanticError_ParseError_get_parse_error(ptr);
-			org.ldk.structs.Bolt11ParseError parse_error_hu_conv = org.ldk.structs.Bolt11ParseError.constr_from_ptr(parse_error);
+			org.ldk.structs.Bolt11ParseError parse_error_hu_conv = null; if (parse_error < 0 || parse_error > 4096) { parse_error_hu_conv = new org.ldk.structs.Bolt11ParseError(null, parse_error); }
 			if (parse_error_hu_conv != null) { parse_error_hu_conv.ptrs_to.AddLast(this); };
 			this.parse_error = parse_error_hu_conv;
 		}

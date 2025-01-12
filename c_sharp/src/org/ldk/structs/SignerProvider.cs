@@ -81,6 +81,7 @@ public class SignerProvider : CommonBase {
 		private LDKSignerProviderHolder impl_holder;
 		public long generate_channel_keys_id(bool _inbound, long _channel_value_satoshis, long _user_channel_id) {
 			org.ldk.util.UInt128 _user_channel_id_conv = new org.ldk.util.UInt128(_user_channel_id);
+			bindings.free_buffer(_user_channel_id);
 			byte[] ret = arg.generate_channel_keys_id(_inbound, _channel_value_satoshis, _user_channel_id_conv);
 				GC.KeepAlive(arg);
 			long result = InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(ret, 32));

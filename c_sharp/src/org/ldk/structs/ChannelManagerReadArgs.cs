@@ -19,9 +19,12 @@ namespace org { namespace ldk { namespace structs {
  * 3) If you are not fetching full blocks, register all relevant [`ChannelMonitor`] outpoints the
  * same way you would handle a [`chain::Filter`] call using
  * [`ChannelMonitor::get_outputs_to_watch`] and [`ChannelMonitor::get_funding_txo`].
- * 4) Reconnect blocks on your [`ChannelMonitor`]s.
- * 5) Disconnect/connect blocks on the [`ChannelManager`].
- * 6) Re-persist the [`ChannelMonitor`]s to ensure the latest state is on disk.
+ * 4) Disconnect/connect blocks on your [`ChannelMonitor`]s to get them in sync with the chain.
+ * 5) Disconnect/connect blocks on the [`ChannelManager`] to get it in sync with the chain.
+ * 6) Optionally re-persist the [`ChannelMonitor`]s to ensure the latest state is on disk.
+ * This is important if you have replayed a nontrivial number of blocks in step (4), allowing
+ * you to avoid having to replay the same blocks if you shut down quickly after startup. It is
+ * otherwise not required.
  * Note that if you're using a [`ChainMonitor`] for your [`chain::Watch`] implementation, you
  * will likely accomplish this as a side-effect of calling [`chain::Watch::watch_channel`] in
  * the next step.
@@ -227,6 +230,30 @@ public class ChannelManagerReadArgs : CommonBase {
 	}
 
 	/**
+	 * The [`MessageRouter`] used for constructing [`BlindedMessagePath`]s for [`Offer`]s,
+	 * [`Refund`]s, and any reply paths.
+	 */
+	public MessageRouter get_message_router() {
+		long ret = bindings.ChannelManagerReadArgs_get_message_router(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		MessageRouter ret_hu_conv = new MessageRouter(null, ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * The [`MessageRouter`] used for constructing [`BlindedMessagePath`]s for [`Offer`]s,
+	 * [`Refund`]s, and any reply paths.
+	 */
+	public void set_message_router(org.ldk.structs.MessageRouter val) {
+		bindings.ChannelManagerReadArgs_set_message_router(this.ptr, val.ptr);
+		GC.KeepAlive(this);
+		GC.KeepAlive(val);
+		if (this != null) { this.ptrs_to.AddLast(val); };
+	}
+
+	/**
 	 * The Logger for use in the ChannelManager and which may be used to log information during
 	 * deserialization.
 	 */
@@ -278,8 +305,8 @@ public class ChannelManagerReadArgs : CommonBase {
 	 * HashMap for you. This is primarily useful for C bindings where it is not practical to
 	 * populate a HashMap directly from C.
 	 */
-	public static ChannelManagerReadArgs of(org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.SignerProvider signer_provider, org.ldk.structs.FeeEstimator fee_estimator, org.ldk.structs.Watch chain_monitor, org.ldk.structs.BroadcasterInterface tx_broadcaster, org.ldk.structs.Router router, org.ldk.structs.Logger logger, org.ldk.structs.UserConfig default_config, ChannelMonitor[] channel_monitors) {
-		long ret = bindings.ChannelManagerReadArgs_new(entropy_source.ptr, node_signer.ptr, signer_provider.ptr, fee_estimator.ptr, chain_monitor.ptr, tx_broadcaster.ptr, router.ptr, logger.ptr, default_config.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(channel_monitors, channel_monitors_conv_16 => channel_monitors_conv_16.ptr)));
+	public static ChannelManagerReadArgs of(org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.SignerProvider signer_provider, org.ldk.structs.FeeEstimator fee_estimator, org.ldk.structs.Watch chain_monitor, org.ldk.structs.BroadcasterInterface tx_broadcaster, org.ldk.structs.Router router, org.ldk.structs.MessageRouter message_router, org.ldk.structs.Logger logger, org.ldk.structs.UserConfig default_config, ChannelMonitor[] channel_monitors) {
+		long ret = bindings.ChannelManagerReadArgs_new(entropy_source.ptr, node_signer.ptr, signer_provider.ptr, fee_estimator.ptr, chain_monitor.ptr, tx_broadcaster.ptr, router.ptr, message_router.ptr, logger.ptr, default_config.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(channel_monitors, channel_monitors_conv_16 => channel_monitors_conv_16.ptr)));
 		GC.KeepAlive(entropy_source);
 		GC.KeepAlive(node_signer);
 		GC.KeepAlive(signer_provider);
@@ -287,6 +314,7 @@ public class ChannelManagerReadArgs : CommonBase {
 		GC.KeepAlive(chain_monitor);
 		GC.KeepAlive(tx_broadcaster);
 		GC.KeepAlive(router);
+		GC.KeepAlive(message_router);
 		GC.KeepAlive(logger);
 		GC.KeepAlive(default_config);
 		GC.KeepAlive(channel_monitors);
@@ -300,6 +328,7 @@ public class ChannelManagerReadArgs : CommonBase {
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(chain_monitor); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(tx_broadcaster); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(router); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(message_router); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(logger); };
 		foreach (ChannelMonitor channel_monitors_conv_16 in channel_monitors) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(channel_monitors_conv_16); }; };
 		return ret_hu_conv;

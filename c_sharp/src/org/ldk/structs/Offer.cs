@@ -179,12 +179,22 @@ public class Offer : CommonBase {
 	}
 
 	/**
-	 * The public key used by the recipient to sign invoices.
+	 * The public key corresponding to the key used by the recipient to sign invoices.
+	 * - If [`Offer::paths`] is empty, MUST be `Some` and contain the recipient's node id for
+	 * sending an [`InvoiceRequest`].
+	 * - If [`Offer::paths`] is not empty, MAY be `Some` and contain a transient id.
+	 * - If `None`, the signing pubkey will be the final blinded node id from the
+	 * [`BlindedMessagePath`] in [`Offer::paths`] used to send the [`InvoiceRequest`].
+	 * 
+	 * See also [`Bolt12Invoice::signing_pubkey`].
+	 * 
+	 * [`InvoiceRequest`]: crate::offers::invoice_request::InvoiceRequest
+	 * [`Bolt12Invoice::signing_pubkey`]: crate::offers::invoice::Bolt12Invoice::signing_pubkey
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public byte[] signing_pubkey() {
-		long ret = bindings.Offer_signing_pubkey(this.ptr);
+	public byte[] issuer_signing_pubkey() {
+		long ret = bindings.Offer_issuer_signing_pubkey(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
@@ -254,78 +264,32 @@ public class Offer : CommonBase {
 	}
 
 	/**
-	 * Similar to [`Offer::request_invoice`] except it:
-	 * - derives the [`InvoiceRequest::payer_id`] such that a different key can be used for each
-	 * request,
-	 * - sets [`InvoiceRequest::payer_metadata`] when [`InvoiceRequestBuilder::build`] is called
-	 * such that it can be used by [`Bolt12Invoice::verify_using_metadata`] to determine if the
-	 * invoice was requested using a base [`ExpandedKey`] from which the payer id was derived,
-	 * and
+	 * Creates an [`InvoiceRequestBuilder`] for the offer, which
+	 * - derives the [`InvoiceRequest::payer_signing_pubkey`] such that a different key can be used
+	 * for each request in order to protect the sender's privacy,
+	 * - sets [`InvoiceRequest::payer_metadata`] when [`InvoiceRequestBuilder::build_and_sign`] is
+	 * called such that it can be used by [`Bolt12Invoice::verify_using_metadata`] to determine
+	 * if the invoice was requested using a base [`ExpandedKey`] from which the payer id was
+	 * derived, and
 	 * - includes the [`PaymentId`] encrypted in [`InvoiceRequest::payer_metadata`] so that it can
 	 * be used when sending the payment for the requested invoice.
 	 * 
-	 * Useful to protect the sender's privacy.
+	 * Errors if the offer contains unknown required features.
 	 * 
-	 * [`InvoiceRequest::payer_id`]: crate::offers::invoice_request::InvoiceRequest::payer_id
+	 * [`InvoiceRequest::payer_signing_pubkey`]: crate::offers::invoice_request::InvoiceRequest::payer_signing_pubkey
 	 * [`InvoiceRequest::payer_metadata`]: crate::offers::invoice_request::InvoiceRequest::payer_metadata
 	 * [`Bolt12Invoice::verify_using_metadata`]: crate::offers::invoice::Bolt12Invoice::verify_using_metadata
 	 * [`ExpandedKey`]: crate::ln::inbound_payment::ExpandedKey
 	 */
-	public Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ request_invoice_deriving_payer_id(org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.Nonce nonce, byte[] payment_id) {
-		long ret = bindings.Offer_request_invoice_deriving_payer_id(this.ptr, expanded_key.ptr, nonce.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
+	public Result_InvoiceRequestWithDerivedPayerSigningPubkeyBuilderBolt12SemanticErrorZ request_invoice(org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.Nonce nonce, byte[] payment_id) {
+		long ret = bindings.Offer_request_invoice(this.ptr, expanded_key.ptr, nonce.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(expanded_key);
 		GC.KeepAlive(nonce);
 		GC.KeepAlive(payment_id);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ ret_hu_conv = Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
+		Result_InvoiceRequestWithDerivedPayerSigningPubkeyBuilderBolt12SemanticErrorZ ret_hu_conv = Result_InvoiceRequestWithDerivedPayerSigningPubkeyBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
 		if (this != null) { this.ptrs_to.AddLast(expanded_key); };
-		return ret_hu_conv;
-	}
-
-	/**
-	 * Similar to [`Offer::request_invoice_deriving_payer_id`] except uses `payer_id` for the
-	 * [`InvoiceRequest::payer_id`] instead of deriving a different key for each request.
-	 * 
-	 * Useful for recurring payments using the same `payer_id` with different invoices.
-	 * 
-	 * [`InvoiceRequest::payer_id`]: crate::offers::invoice_request::InvoiceRequest::payer_id
-	 */
-	public Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ request_invoice_deriving_metadata(byte[] payer_id, org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.Nonce nonce, byte[] payment_id) {
-		long ret = bindings.Offer_request_invoice_deriving_metadata(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payer_id, 33)), expanded_key.ptr, nonce.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
-		GC.KeepAlive(this);
-		GC.KeepAlive(payer_id);
-		GC.KeepAlive(expanded_key);
-		GC.KeepAlive(nonce);
-		GC.KeepAlive(payment_id);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ ret_hu_conv = Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.AddLast(expanded_key); };
-		return ret_hu_conv;
-	}
-
-	/**
-	 * Creates an [`InvoiceRequestBuilder`] for the offer with the given `metadata` and `payer_id`,
-	 * which will be reflected in the `Bolt12Invoice` response.
-	 * 
-	 * The `metadata` is useful for including information about the derivation of `payer_id` such
-	 * that invoice response handling can be stateless. Also serves as payer-provided entropy while
-	 * hashing in the signature calculation.
-	 * 
-	 * This should not leak any information such as by using a simple BIP-32 derivation path.
-	 * Otherwise, payments may be correlated.
-	 * 
-	 * Errors if the offer contains unknown required features.
-	 * 
-	 * [`InvoiceRequest`]: crate::offers::invoice_request::InvoiceRequest
-	 */
-	public Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ request_invoice(byte[] metadata, byte[] payer_id) {
-		long ret = bindings.Offer_request_invoice(this.ptr, InternalUtils.encodeUint8Array(metadata), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payer_id, 33)));
-		GC.KeepAlive(this);
-		GC.KeepAlive(metadata);
-		GC.KeepAlive(payer_id);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ ret_hu_conv = Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
 		return ret_hu_conv;
 	}
 

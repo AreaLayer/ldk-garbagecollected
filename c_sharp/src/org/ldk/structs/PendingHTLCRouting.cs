@@ -179,6 +179,12 @@ public class PendingHTLCRouting : CommonBase {
 		 * Set if this HTLC is the final hop in a multi-hop blinded path.
 		 */
 		public bool requires_blinded_error;
+		/**
+		 * Set if we are receiving a keysend to a blinded path, meaning we created the
+		 * [`PaymentSecret`] and should verify it using our
+		 * [`NodeSigner::get_inbound_payment_key`].
+		 */
+		public bool has_recipient_created_payment_secret;
 		internal PendingHTLCRouting_ReceiveKeysend(long ptr) : base(null, ptr) {
 			long payment_data = bindings.LDKPendingHTLCRouting_ReceiveKeysend_get_payment_data(ptr);
 			org.ldk.structs.FinalOnionHopData payment_data_hu_conv = null; if (payment_data < 0 || payment_data > 4096) { payment_data_hu_conv = new org.ldk.structs.FinalOnionHopData(null, payment_data); }
@@ -204,6 +210,7 @@ public class PendingHTLCRouting : CommonBase {
 			bindings.free_buffer(custom_tlvs);
 			this.custom_tlvs = custom_tlvs_conv_23_arr;
 			this.requires_blinded_error = bindings.LDKPendingHTLCRouting_ReceiveKeysend_get_requires_blinded_error(ptr);
+			this.has_recipient_created_payment_secret = bindings.LDKPendingHTLCRouting_ReceiveKeysend_get_has_recipient_created_payment_secret(ptr);
 		}
 	}
 	internal long clone_ptr() {
@@ -259,14 +266,15 @@ public class PendingHTLCRouting : CommonBase {
 	/**
 	 * Utility method to constructs a new ReceiveKeysend-variant PendingHTLCRouting
 	 */
-	public static PendingHTLCRouting receive_keysend(org.ldk.structs.FinalOnionHopData payment_data, byte[] payment_preimage, org.ldk.structs.Option_CVec_u8ZZ payment_metadata, int incoming_cltv_expiry, TwoTuple_u64CVec_u8ZZ[] custom_tlvs, bool requires_blinded_error) {
-		long ret = bindings.PendingHTLCRouting_receive_keysend(payment_data.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_preimage, 32)), payment_metadata.ptr, incoming_cltv_expiry, InternalUtils.encodeUint64Array(InternalUtils.mapArray(custom_tlvs, custom_tlvs_conv_23 => custom_tlvs_conv_23.ptr)), requires_blinded_error);
+	public static PendingHTLCRouting receive_keysend(org.ldk.structs.FinalOnionHopData payment_data, byte[] payment_preimage, org.ldk.structs.Option_CVec_u8ZZ payment_metadata, int incoming_cltv_expiry, TwoTuple_u64CVec_u8ZZ[] custom_tlvs, bool requires_blinded_error, bool has_recipient_created_payment_secret) {
+		long ret = bindings.PendingHTLCRouting_receive_keysend(payment_data.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_preimage, 32)), payment_metadata.ptr, incoming_cltv_expiry, InternalUtils.encodeUint64Array(InternalUtils.mapArray(custom_tlvs, custom_tlvs_conv_23 => custom_tlvs_conv_23.ptr)), requires_blinded_error, has_recipient_created_payment_secret);
 		GC.KeepAlive(payment_data);
 		GC.KeepAlive(payment_preimage);
 		GC.KeepAlive(payment_metadata);
 		GC.KeepAlive(incoming_cltv_expiry);
 		GC.KeepAlive(custom_tlvs);
 		GC.KeepAlive(requires_blinded_error);
+		GC.KeepAlive(has_recipient_created_payment_secret);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PendingHTLCRouting ret_hu_conv = org.ldk.structs.PendingHTLCRouting.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };

@@ -7,8 +7,10 @@ namespace org { namespace ldk { namespace structs {
 
 
 /**
- * A tx_init_rbf message which initiates a replacement of the transaction after it's been
+ * A [`tx_init_rbf`] message which initiates a replacement of the transaction after it's been
  * completed.
+ * 
+ * [`tx_init_rbf`]: https://github.com/lightning/bolts/blob/master/02-peer-protocol.md#the-tx_init_rbf-message
  */
 public class TxInitRbf : CommonBase {
 	internal TxInitRbf(object _dummy, long ptr) : base(ptr) { }

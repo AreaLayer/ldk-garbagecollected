@@ -58,7 +58,7 @@ public class Router : CommonBase {
 			org.ldk.structs.RouteParameters _route_params_hu_conv = null; if (_route_params < 0 || _route_params > 4096) { _route_params_hu_conv = new org.ldk.structs.RouteParameters(null, _route_params); }
 			int _first_hops_conv_16_len = InternalUtils.getArrayLength(_first_hops);
 			ChannelDetails[] _first_hops_conv_16_arr = new ChannelDetails[_first_hops_conv_16_len];
-			if (_first_hops != null) {
+			if (_first_hops != 0) {
 				for (int q = 0; q < _first_hops_conv_16_len; q++) {
 					long _first_hops_conv_16 = InternalUtils.getU64ArrayElem(_first_hops, q);
 					org.ldk.structs.ChannelDetails _first_hops_conv_16_hu_conv = null; if (_first_hops_conv_16 < 0 || _first_hops_conv_16 > 4096) { _first_hops_conv_16_hu_conv = new org.ldk.structs.ChannelDetails(null, _first_hops_conv_16); }
@@ -79,7 +79,7 @@ public class Router : CommonBase {
 			org.ldk.structs.RouteParameters _route_params_hu_conv = null; if (_route_params < 0 || _route_params > 4096) { _route_params_hu_conv = new org.ldk.structs.RouteParameters(null, _route_params); }
 			int _first_hops_conv_16_len = InternalUtils.getArrayLength(_first_hops);
 			ChannelDetails[] _first_hops_conv_16_arr = new ChannelDetails[_first_hops_conv_16_len];
-			if (_first_hops != null) {
+			if (_first_hops != 0) {
 				for (int q = 0; q < _first_hops_conv_16_len; q++) {
 					long _first_hops_conv_16 = InternalUtils.getU64ArrayElem(_first_hops, q);
 					org.ldk.structs.ChannelDetails _first_hops_conv_16_hu_conv = null; if (_first_hops_conv_16 < 0 || _first_hops_conv_16 > 4096) { _first_hops_conv_16_hu_conv = new org.ldk.structs.ChannelDetails(null, _first_hops_conv_16); }
@@ -118,16 +118,14 @@ public class Router : CommonBase {
 	}
 
 	/** Creates a new instance of Router from a given implementation */
-	public static Router new_impl(RouterInterface arg, MessageRouterInterface messageRouter_impl) {
+	public static Router new_impl(RouterInterface arg) {
 		LDKRouterHolder impl_holder = new LDKRouterHolder();
 		LDKRouterImpl impl = new LDKRouterImpl(arg, impl_holder);
-		MessageRouter messageRouter = MessageRouter.new_impl(messageRouter_impl);
-		long[] ptr_idx = bindings.LDKRouter_new(impl, messageRouter.instance_idx);
+		long[] ptr_idx = bindings.LDKRouter_new(impl);
 
 		impl_holder.held = new Router(null, ptr_idx[0]);
 		impl_holder.held.instance_idx = ptr_idx[1];
 		impl_holder.held.bindings_instance = impl;
-		impl_holder.held.ptrs_to.AddLast(messageRouter);
 		return impl_holder.held;
 	}
 

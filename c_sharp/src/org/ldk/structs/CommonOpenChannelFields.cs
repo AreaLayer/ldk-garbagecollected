@@ -7,9 +7,10 @@ namespace org { namespace ldk { namespace structs {
 
 
 /**
- * Contains fields that are both common to [`open_channel`] and `open_channel2` messages.
+ * Contains fields that are both common to [`open_channel`] and [`open_channel2`] messages.
  * 
  * [`open_channel`]: https://github.com/lightning/bolts/blob/master/02-peer-protocol.md#the-open_channel-message
+ * [`open_channel2`]: https://github.com/lightning/bolts/blob/master/02-peer-protocol.md#the-open_channel2-message
  */
 public class CommonOpenChannelFields : CommonBase {
 	internal CommonOpenChannelFields(object _dummy, long ptr) : base(ptr) { }
