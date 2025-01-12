@@ -123,9 +123,29 @@ public class OffersContext extends CommonBase {
 		 * [`Bolt12Invoice::payment_hash`]: crate::offers::invoice::Bolt12Invoice::payment_hash
 		*/
 		public final byte[] payment_hash;
+		/**
+		 * A nonce used for authenticating that a received [`InvoiceError`] is for a valid
+		 * sent [`Bolt12Invoice`].
+		 * 
+		 * [`InvoiceError`]: crate::offers::invoice_error::InvoiceError
+		 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
+		*/
+		public final org.ldk.structs.Nonce nonce;
+		/**
+		 * Authentication code for the [`PaymentHash`], which should be checked when the context is
+		 * used to log the received [`InvoiceError`].
+		 * 
+		 * [`InvoiceError`]: crate::offers::invoice_error::InvoiceError
+		*/
+		public final byte[] hmac;
 		private InboundPayment(long ptr, bindings.LDKOffersContext.InboundPayment obj) {
 			super(null, ptr);
 			this.payment_hash = obj.payment_hash;
+			long nonce = obj.nonce;
+			org.ldk.structs.Nonce nonce_hu_conv = null; if (nonce < 0 || nonce > 4096) { nonce_hu_conv = new org.ldk.structs.Nonce(null, nonce); }
+			if (nonce_hu_conv != null) { nonce_hu_conv.ptrs_to.add(this); };
+			this.nonce = nonce_hu_conv;
+			this.hmac = obj.hmac;
 		}
 	}
 	long clone_ptr() {
@@ -175,9 +195,11 @@ public class OffersContext extends CommonBase {
 	/**
 	 * Utility method to constructs a new InboundPayment-variant OffersContext
 	 */
-	public static OffersContext inbound_payment(byte[] payment_hash) {
-		long ret = bindings.OffersContext_inbound_payment(InternalUtils.check_arr_len(payment_hash, 32));
+	public static OffersContext inbound_payment(byte[] payment_hash, org.ldk.structs.Nonce nonce, byte[] hmac) {
+		long ret = bindings.OffersContext_inbound_payment(InternalUtils.check_arr_len(payment_hash, 32), nonce.ptr, InternalUtils.check_arr_len(hmac, 32));
 		Reference.reachabilityFence(payment_hash);
+		Reference.reachabilityFence(nonce);
+		Reference.reachabilityFence(hmac);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.OffersContext ret_hu_conv = org.ldk.structs.OffersContext.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };

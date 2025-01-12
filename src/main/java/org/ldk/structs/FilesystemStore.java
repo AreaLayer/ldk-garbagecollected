@@ -54,4 +54,17 @@ public class FilesystemStore extends CommonBase {
 		return ret_hu_conv;
 	}
 
+	/**
+	 * Constructs a new MigratableKVStore which calls the relevant methods on this_arg.
+	 * This copies the `inner` pointer in this_arg and thus the returned MigratableKVStore must be freed before this_arg is
+	 */
+	public MigratableKVStore as_MigratableKVStore() {
+		long ret = bindings.FilesystemStore_as_MigratableKVStore(this.ptr);
+		Reference.reachabilityFence(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		MigratableKVStore ret_hu_conv = new MigratableKVStore(null, ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
+	}
+
 }

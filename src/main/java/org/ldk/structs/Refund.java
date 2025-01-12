@@ -127,9 +127,9 @@ public class Refund extends CommonBase {
 
 	/**
 	 * An unpredictable series of bytes, typically containing information about the derivation of
-	 * [`payer_id`].
+	 * [`payer_signing_pubkey`].
 	 * 
-	 * [`payer_id`]: Self::payer_id
+	 * [`payer_signing_pubkey`]: Self::payer_signing_pubkey
 	 */
 	public byte[] payer_metadata() {
 		byte[] ret = bindings.Refund_payer_metadata(this.ptr);
@@ -187,8 +187,8 @@ public class Refund extends CommonBase {
 	 * 
 	 * [`paths`]: Self::paths
 	 */
-	public byte[] payer_id() {
-		byte[] ret = bindings.Refund_payer_id(this.ptr);
+	public byte[] payer_signing_pubkey() {
+		byte[] ret = bindings.Refund_payer_signing_pubkey(this.ptr);
 		Reference.reachabilityFence(this);
 		return ret;
 	}

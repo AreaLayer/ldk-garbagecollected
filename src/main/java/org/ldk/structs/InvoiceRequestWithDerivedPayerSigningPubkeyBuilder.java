@@ -16,19 +16,19 @@ import javax.annotation.Nullable;
  * [module-level documentation]: self
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
-public class InvoiceRequestWithDerivedPayerIdBuilder extends CommonBase {
-	InvoiceRequestWithDerivedPayerIdBuilder(Object _dummy, long ptr) { super(ptr); }
+public class InvoiceRequestWithDerivedPayerSigningPubkeyBuilder extends CommonBase {
+	InvoiceRequestWithDerivedPayerSigningPubkeyBuilder(Object _dummy, long ptr) { super(ptr); }
 	@Override @SuppressWarnings("deprecation")
 	protected void finalize() throws Throwable {
 		super.finalize();
-		if (ptr != 0) { bindings.InvoiceRequestWithDerivedPayerIdBuilder_free(ptr); }
+		if (ptr != 0) { bindings.InvoiceRequestWithDerivedPayerSigningPubkeyBuilder_free(ptr); }
 	}
 
 	/**
 	 * Builds a signed [`InvoiceRequest`] after checking for valid semantics.
 	 */
 	public Result_InvoiceRequestBolt12SemanticErrorZ build_and_sign() {
-		long ret = bindings.InvoiceRequestWithDerivedPayerIdBuilder_build_and_sign(this.ptr);
+		long ret = bindings.InvoiceRequestWithDerivedPayerSigningPubkeyBuilder_build_and_sign(this.ptr);
 		Reference.reachabilityFence(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_InvoiceRequestBolt12SemanticErrorZ ret_hu_conv = Result_InvoiceRequestBolt12SemanticErrorZ.constr_from_ptr(ret);
@@ -52,7 +52,7 @@ public class InvoiceRequestWithDerivedPayerIdBuilder extends CommonBase {
 	 * Successive calls to this method will override the previous setting.
 	 */
 	public Result_NoneBolt12SemanticErrorZ chain(org.ldk.enums.Network network) {
-		long ret = bindings.InvoiceRequestWithDerivedPayerIdBuilder_chain(this.ptr, network);
+		long ret = bindings.InvoiceRequestWithDerivedPayerSigningPubkeyBuilder_chain(this.ptr, network);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(network);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -78,7 +78,7 @@ public class InvoiceRequestWithDerivedPayerIdBuilder extends CommonBase {
 	 * [`quantity`]: Self::quantity
 	 */
 	public Result_NoneBolt12SemanticErrorZ amount_msats(long amount_msats) {
-		long ret = bindings.InvoiceRequestWithDerivedPayerIdBuilder_amount_msats(this.ptr, amount_msats);
+		long ret = bindings.InvoiceRequestWithDerivedPayerSigningPubkeyBuilder_amount_msats(this.ptr, amount_msats);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(amount_msats);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -102,7 +102,7 @@ public class InvoiceRequestWithDerivedPayerIdBuilder extends CommonBase {
 	 * Successive calls to this method will override the previous setting.
 	 */
 	public Result_NoneBolt12SemanticErrorZ quantity(long quantity) {
-		long ret = bindings.InvoiceRequestWithDerivedPayerIdBuilder_quantity(this.ptr, quantity);
+		long ret = bindings.InvoiceRequestWithDerivedPayerSigningPubkeyBuilder_quantity(this.ptr, quantity);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(quantity);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -125,9 +125,29 @@ public class InvoiceRequestWithDerivedPayerIdBuilder extends CommonBase {
 	 * Successive calls to this method will override the previous setting.
 	 */
 	public void payer_note(java.lang.String payer_note) {
-		bindings.InvoiceRequestWithDerivedPayerIdBuilder_payer_note(this.ptr, payer_note);
+		bindings.InvoiceRequestWithDerivedPayerSigningPubkeyBuilder_payer_note(this.ptr, payer_note);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(payer_note);
+		if (this != null) { this.ptrs_to.add(this); };
+		// Due to rust's strict-ownership memory model, in some cases we need to "move"
+		// an object to pass exclusive ownership to the function being called.
+		// In most cases, we avoid this being visible in GC'd languages by cloning the object
+		// at the FFI layer, creating a new object which Rust can claim ownership of
+		// However, in some cases (eg here), there is no way to clone an object, and thus
+		// we actually have to pass full ownership to Rust.
+		// Thus, after this call, this is reset to null and is now a dummy object.
+		this.ptr = 0;;
+	}
+
+	/**
+	 * Sets the [`InvoiceRequest::offer_from_hrn`].
+	 * 
+	 * Successive calls to this method will override the previous setting.
+	 */
+	public void sourced_from_human_readable_name(org.ldk.structs.HumanReadableName hrn) {
+		bindings.InvoiceRequestWithDerivedPayerSigningPubkeyBuilder_sourced_from_human_readable_name(this.ptr, hrn.ptr);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(hrn);
 		if (this != null) { this.ptrs_to.add(this); };
 		// Due to rust's strict-ownership memory model, in some cases we need to "move"
 		// an object to pass exclusive ownership to the function being called.

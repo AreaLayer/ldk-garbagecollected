@@ -139,12 +139,41 @@ public class ProbabilisticScorer extends CommonBase {
 	 * with `scid` towards the given `target` node, based on the historical estimated liquidity
 	 * bounds.
 	 * 
+	 * Returns `None` if:
+	 * - the given channel is not in the network graph, the provided `target` is not a party to
+	 * the channel, or we don't have forwarding parameters for either direction in the channel.
+	 * - `allow_fallback_estimation` is *not* set and there is no (or insufficient) historical
+	 * data for the given channel.
+	 * 
 	 * These are the same bounds as returned by
 	 * [`Self::historical_estimated_channel_liquidity_probabilities`] (but not those returned by
 	 * [`Self::estimated_channel_liquidity_range`]).
 	 */
-	public Option_f64Z historical_estimated_payment_success_probability(long scid, org.ldk.structs.NodeId target, long amount_msat, org.ldk.structs.ProbabilisticScoringFeeParameters params) {
-		long ret = bindings.ProbabilisticScorer_historical_estimated_payment_success_probability(this.ptr, scid, target.ptr, amount_msat, params.ptr);
+	public Option_f64Z historical_estimated_payment_success_probability(long scid, org.ldk.structs.NodeId target, long amount_msat, org.ldk.structs.ProbabilisticScoringFeeParameters params, boolean allow_fallback_estimation) {
+		long ret = bindings.ProbabilisticScorer_historical_estimated_payment_success_probability(this.ptr, scid, target.ptr, amount_msat, params.ptr, allow_fallback_estimation);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(scid);
+		Reference.reachabilityFence(target);
+		Reference.reachabilityFence(amount_msat);
+		Reference.reachabilityFence(params);
+		Reference.reachabilityFence(allow_fallback_estimation);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Option_f64Z ret_hu_conv = org.ldk.structs.Option_f64Z.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		if (this != null) { this.ptrs_to.add(target); };
+		if (this != null) { this.ptrs_to.add(params); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Query the probability of payment success sending the given `amount_msat` over the channel
+	 * with `scid` towards the given `target` node, based on the live estimated liquidity bounds.
+	 * 
+	 * This will return `Some` for any channel which is present in the [`NetworkGraph`], including
+	 * if we have no bound information beside the channel's capacity.
+	 */
+	public Option_f64Z live_estimated_payment_success_probability(long scid, org.ldk.structs.NodeId target, long amount_msat, org.ldk.structs.ProbabilisticScoringFeeParameters params) {
+		long ret = bindings.ProbabilisticScorer_live_estimated_payment_success_probability(this.ptr, scid, target.ptr, amount_msat, params.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(scid);
 		Reference.reachabilityFence(target);

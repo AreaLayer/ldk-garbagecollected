@@ -95,7 +95,7 @@ public class DecodeError extends CommonBase {
 		}
 	}
 	/**
-	 * Error from [`std::io`].
+	 * Error from [`crate::io`].
 	 */
 	public final static class Io extends DecodeError {
 		public final org.ldk.enums.IOError io;

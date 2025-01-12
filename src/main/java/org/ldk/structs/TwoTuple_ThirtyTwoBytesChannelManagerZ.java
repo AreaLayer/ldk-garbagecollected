@@ -44,13 +44,14 @@ public class TwoTuple_ThirtyTwoBytesChannelManagerZ extends CommonBase {
 	/**
 	 * Creates a new C2Tuple_ThirtyTwoBytesChannelManagerZ from the contained elements.
 	 */
-	public static TwoTuple_ThirtyTwoBytesChannelManagerZ of(byte[] a, FeeEstimator b_fee_est, Watch b_chain_monitor, BroadcasterInterface b_tx_broadcaster, Router b_router, Logger b_logger, EntropySource b_entropy_source, NodeSigner b_node_signer, SignerProvider b_signer_provider, UserConfig b_config, ChainParameters b_params, int b_current_timestamp) {
-		long ret = bindings.C2Tuple_ThirtyTwoBytesChannelManagerZ_new(InternalUtils.check_arr_len(a, 32), bindings.ChannelManager_new(b_fee_est.ptr, b_chain_monitor.ptr, b_tx_broadcaster.ptr, b_router.ptr, b_logger.ptr, b_entropy_source.ptr, b_node_signer.ptr, b_signer_provider.ptr, b_config.ptr, b_params.ptr, b_current_timestamp));
+	public static TwoTuple_ThirtyTwoBytesChannelManagerZ of(byte[] a, FeeEstimator b_fee_est, Watch b_chain_monitor, BroadcasterInterface b_tx_broadcaster, Router b_router, MessageRouter b_message_router, Logger b_logger, EntropySource b_entropy_source, NodeSigner b_node_signer, SignerProvider b_signer_provider, UserConfig b_config, ChainParameters b_params, int b_current_timestamp) {
+		long ret = bindings.C2Tuple_ThirtyTwoBytesChannelManagerZ_new(InternalUtils.check_arr_len(a, 32), bindings.ChannelManager_new(b_fee_est.ptr, b_chain_monitor.ptr, b_tx_broadcaster.ptr, b_router.ptr, b_message_router.ptr, b_logger.ptr, b_entropy_source.ptr, b_node_signer.ptr, b_signer_provider.ptr, b_config.ptr, b_params.ptr, b_current_timestamp));
 		Reference.reachabilityFence(a);
 		Reference.reachabilityFence(b_fee_est);
 		Reference.reachabilityFence(b_chain_monitor);
 		Reference.reachabilityFence(b_tx_broadcaster);
 		Reference.reachabilityFence(b_router);
+		Reference.reachabilityFence(b_message_router);
 		Reference.reachabilityFence(b_logger);
 		Reference.reachabilityFence(b_entropy_source);
 		Reference.reachabilityFence(b_node_signer);
@@ -65,6 +66,7 @@ public class TwoTuple_ThirtyTwoBytesChannelManagerZ extends CommonBase {
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(b_chain_monitor); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(b_tx_broadcaster); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(b_router); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(b_message_router); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(b_logger); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(b_entropy_source); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(b_node_signer); };

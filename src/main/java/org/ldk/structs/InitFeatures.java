@@ -729,6 +729,40 @@ public class InitFeatures extends CommonBase {
 	/**
 	 * Set this feature as optional.
 	 */
+	public void set_dual_fund_optional() {
+		bindings.InitFeatures_set_dual_fund_optional(this.ptr);
+		Reference.reachabilityFence(this);
+	}
+
+	/**
+	 * Set this feature as required.
+	 */
+	public void set_dual_fund_required() {
+		bindings.InitFeatures_set_dual_fund_required(this.ptr);
+		Reference.reachabilityFence(this);
+	}
+
+	/**
+	 * Checks if this feature is supported.
+	 */
+	public boolean supports_dual_fund() {
+		boolean ret = bindings.InitFeatures_supports_dual_fund(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Checks if this feature is required.
+	 */
+	public boolean requires_dual_fund() {
+		boolean ret = bindings.InitFeatures_requires_dual_fund(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Set this feature as optional.
+	 */
 	public void set_taproot_optional() {
 		bindings.InitFeatures_set_taproot_optional(this.ptr);
 		Reference.reachabilityFence(this);

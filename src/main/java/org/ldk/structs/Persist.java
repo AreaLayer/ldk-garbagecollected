@@ -157,6 +157,13 @@ public class Persist extends CommonBase {
 		 * 
 		 * Archiving the data in a backup location (rather than deleting it fully) is useful for
 		 * hedging against data loss in case of unexpected failure.
+		 * 
+		 * Note that if a crash occurs during the archiving process, and its implementation is not
+		 * atomic, a state may emerge with the archival operation only being partially complete. In
+		 * that scenario, the monitor may still be loaded on startup pending successful completion of
+		 * the archive process. Additionally, because the archive operation could be retried on
+		 * restart, this method must in that case be idempotent, ensuring it can handle scenarios where
+		 * the monitor already exists in the archive.
 		 */
 		void archive_persisted_channel(OutPoint channel_funding_outpoint);
 	}
@@ -274,6 +281,13 @@ public class Persist extends CommonBase {
 	 * 
 	 * Archiving the data in a backup location (rather than deleting it fully) is useful for
 	 * hedging against data loss in case of unexpected failure.
+	 * 
+	 * Note that if a crash occurs during the archiving process, and its implementation is not
+	 * atomic, a state may emerge with the archival operation only being partially complete. In
+	 * that scenario, the monitor may still be loaded on startup pending successful completion of
+	 * the archive process. Additionally, because the archive operation could be retried on
+	 * restart, this method must in that case be idempotent, ensuring it can handle scenarios where
+	 * the monitor already exists in the archive.
 	 */
 	public void archive_persisted_channel(org.ldk.structs.OutPoint channel_funding_outpoint) {
 		bindings.Persist_archive_persisted_channel(this.ptr, channel_funding_outpoint.ptr);

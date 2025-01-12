@@ -21,31 +21,10 @@ public class ReleaseHeldHtlc extends CommonBase {
 	}
 
 	/**
-	 * Used to release the HTLC held upstream if it matches the corresponding
-	 * [`HeldHtlcAvailable::payment_release_secret`].
-	 */
-	public byte[] get_payment_release_secret() {
-		byte[] ret = bindings.ReleaseHeldHtlc_get_payment_release_secret(this.ptr);
-		Reference.reachabilityFence(this);
-		return ret;
-	}
-
-	/**
-	 * Used to release the HTLC held upstream if it matches the corresponding
-	 * [`HeldHtlcAvailable::payment_release_secret`].
-	 */
-	public void set_payment_release_secret(byte[] val) {
-		bindings.ReleaseHeldHtlc_set_payment_release_secret(this.ptr, InternalUtils.check_arr_len(val, 32));
-		Reference.reachabilityFence(this);
-		Reference.reachabilityFence(val);
-	}
-
-	/**
 	 * Constructs a new ReleaseHeldHtlc given each field
 	 */
-	public static ReleaseHeldHtlc of(byte[] payment_release_secret_arg) {
-		long ret = bindings.ReleaseHeldHtlc_new(InternalUtils.check_arr_len(payment_release_secret_arg, 32));
-		Reference.reachabilityFence(payment_release_secret_arg);
+	public static ReleaseHeldHtlc of() {
+		long ret = bindings.ReleaseHeldHtlc_new();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ReleaseHeldHtlc ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ReleaseHeldHtlc(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };

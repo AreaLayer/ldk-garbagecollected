@@ -28,6 +28,12 @@ public class MessageContext extends CommonBase {
 		if (raw_val.getClass() == bindings.LDKMessageContext.Offers.class) {
 			return new Offers(ptr, (bindings.LDKMessageContext.Offers)raw_val);
 		}
+		if (raw_val.getClass() == bindings.LDKMessageContext.AsyncPayments.class) {
+			return new AsyncPayments(ptr, (bindings.LDKMessageContext.AsyncPayments)raw_val);
+		}
+		if (raw_val.getClass() == bindings.LDKMessageContext.DNSResolver.class) {
+			return new DNSResolver(ptr, (bindings.LDKMessageContext.DNSResolver)raw_val);
+		}
 		if (raw_val.getClass() == bindings.LDKMessageContext.Custom.class) {
 			return new Custom(ptr, (bindings.LDKMessageContext.Custom)raw_val);
 		}
@@ -47,6 +53,37 @@ public class MessageContext extends CommonBase {
 			org.ldk.structs.OffersContext offers_hu_conv = org.ldk.structs.OffersContext.constr_from_ptr(offers);
 			if (offers_hu_conv != null) { offers_hu_conv.ptrs_to.add(this); };
 			this.offers = offers_hu_conv;
+		}
+	}
+	/**
+	 * Context specific to an [`AsyncPaymentsMessage`].
+	 * 
+	 * [`AsyncPaymentsMessage`]: crate::onion_message::async_payments::AsyncPaymentsMessage
+	 */
+	public final static class AsyncPayments extends MessageContext {
+		public final org.ldk.structs.AsyncPaymentsContext async_payments;
+		private AsyncPayments(long ptr, bindings.LDKMessageContext.AsyncPayments obj) {
+			super(null, ptr);
+			long async_payments = obj.async_payments;
+			org.ldk.structs.AsyncPaymentsContext async_payments_hu_conv = org.ldk.structs.AsyncPaymentsContext.constr_from_ptr(async_payments);
+			if (async_payments_hu_conv != null) { async_payments_hu_conv.ptrs_to.add(this); };
+			this.async_payments = async_payments_hu_conv;
+		}
+	}
+	/**
+	 * Represents a context for a blinded path used in a reply path when requesting a DNSSEC proof
+	 * in a [`DNSResolverMessage`].
+	 * 
+	 * [`DNSResolverMessage`]: crate::onion_message::dns_resolution::DNSResolverMessage
+	 */
+	public final static class DNSResolver extends MessageContext {
+		public final org.ldk.structs.DNSResolverContext dns_resolver;
+		private DNSResolver(long ptr, bindings.LDKMessageContext.DNSResolver obj) {
+			super(null, ptr);
+			long dns_resolver = obj.dns_resolver;
+			org.ldk.structs.DNSResolverContext dns_resolver_hu_conv = null; if (dns_resolver < 0 || dns_resolver > 4096) { dns_resolver_hu_conv = new org.ldk.structs.DNSResolverContext(null, dns_resolver); }
+			if (dns_resolver_hu_conv != null) { dns_resolver_hu_conv.ptrs_to.add(this); };
+			this.dns_resolver = dns_resolver_hu_conv;
 		}
 	}
 	/**
@@ -84,6 +121,30 @@ public class MessageContext extends CommonBase {
 	 */
 	public static MessageContext offers(org.ldk.structs.OffersContext a) {
 		long ret = bindings.MessageContext_offers(a.ptr);
+		Reference.reachabilityFence(a);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.MessageContext ret_hu_conv = org.ldk.structs.MessageContext.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new AsyncPayments-variant MessageContext
+	 */
+	public static MessageContext async_payments(org.ldk.structs.AsyncPaymentsContext a) {
+		long ret = bindings.MessageContext_async_payments(a.ptr);
+		Reference.reachabilityFence(a);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.MessageContext ret_hu_conv = org.ldk.structs.MessageContext.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new DNSResolver-variant MessageContext
+	 */
+	public static MessageContext dnsresolver(org.ldk.structs.DNSResolverContext a) {
+		long ret = bindings.MessageContext_dnsresolver(a.ptr);
 		Reference.reachabilityFence(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.MessageContext ret_hu_conv = org.ldk.structs.MessageContext.constr_from_ptr(ret);

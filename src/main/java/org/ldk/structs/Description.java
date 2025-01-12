@@ -85,6 +85,17 @@ public class Description extends CommonBase {
 	}
 
 	/**
+	 * Creates an empty `Description`.
+	 */
+	public static Description empty() {
+		long ret = bindings.Description_empty();
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Description ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Description(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Returns the underlying description [`UntrustedString`]
 	 */
 	public UntrustedString into_inner() {

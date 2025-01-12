@@ -197,6 +197,12 @@ public class PendingHTLCRouting extends CommonBase {
 		 * Set if this HTLC is the final hop in a multi-hop blinded path.
 		*/
 		public final boolean requires_blinded_error;
+		/**
+		 * Set if we are receiving a keysend to a blinded path, meaning we created the
+		 * [`PaymentSecret`] and should verify it using our
+		 * [`NodeSigner::get_inbound_payment_key`].
+		*/
+		public final boolean has_recipient_created_payment_secret;
 		private ReceiveKeysend(long ptr, bindings.LDKPendingHTLCRouting.ReceiveKeysend obj) {
 			super(null, ptr);
 			long payment_data = obj.payment_data;
@@ -220,6 +226,7 @@ public class PendingHTLCRouting extends CommonBase {
 			}
 			this.custom_tlvs = custom_tlvs_conv_23_arr;
 			this.requires_blinded_error = obj.requires_blinded_error;
+			this.has_recipient_created_payment_secret = obj.has_recipient_created_payment_secret;
 		}
 	}
 	long clone_ptr() {
@@ -275,14 +282,15 @@ public class PendingHTLCRouting extends CommonBase {
 	/**
 	 * Utility method to constructs a new ReceiveKeysend-variant PendingHTLCRouting
 	 */
-	public static PendingHTLCRouting receive_keysend(org.ldk.structs.FinalOnionHopData payment_data, byte[] payment_preimage, org.ldk.structs.Option_CVec_u8ZZ payment_metadata, int incoming_cltv_expiry, TwoTuple_u64CVec_u8ZZ[] custom_tlvs, boolean requires_blinded_error) {
-		long ret = bindings.PendingHTLCRouting_receive_keysend(payment_data.ptr, InternalUtils.check_arr_len(payment_preimage, 32), payment_metadata.ptr, incoming_cltv_expiry, custom_tlvs != null ? Arrays.stream(custom_tlvs).mapToLong(custom_tlvs_conv_23 -> custom_tlvs_conv_23.ptr).toArray() : null, requires_blinded_error);
+	public static PendingHTLCRouting receive_keysend(org.ldk.structs.FinalOnionHopData payment_data, byte[] payment_preimage, org.ldk.structs.Option_CVec_u8ZZ payment_metadata, int incoming_cltv_expiry, TwoTuple_u64CVec_u8ZZ[] custom_tlvs, boolean requires_blinded_error, boolean has_recipient_created_payment_secret) {
+		long ret = bindings.PendingHTLCRouting_receive_keysend(payment_data.ptr, InternalUtils.check_arr_len(payment_preimage, 32), payment_metadata.ptr, incoming_cltv_expiry, custom_tlvs != null ? Arrays.stream(custom_tlvs).mapToLong(custom_tlvs_conv_23 -> custom_tlvs_conv_23.ptr).toArray() : null, requires_blinded_error, has_recipient_created_payment_secret);
 		Reference.reachabilityFence(payment_data);
 		Reference.reachabilityFence(payment_preimage);
 		Reference.reachabilityFence(payment_metadata);
 		Reference.reachabilityFence(incoming_cltv_expiry);
 		Reference.reachabilityFence(custom_tlvs);
 		Reference.reachabilityFence(requires_blinded_error);
+		Reference.reachabilityFence(has_recipient_created_payment_secret);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PendingHTLCRouting ret_hu_conv = org.ldk.structs.PendingHTLCRouting.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };

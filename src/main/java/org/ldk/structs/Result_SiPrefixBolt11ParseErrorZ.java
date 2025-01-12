@@ -37,7 +37,7 @@ public class Result_SiPrefixBolt11ParseErrorZ extends CommonBase {
 		private Result_SiPrefixBolt11ParseErrorZ_Err(Object _dummy, long ptr) {
 			super(_dummy, ptr);
 			long err = bindings.CResult_SiPrefixBolt11ParseErrorZ_get_err(ptr);
-			org.ldk.structs.Bolt11ParseError err_hu_conv = org.ldk.structs.Bolt11ParseError.constr_from_ptr(err);
+			org.ldk.structs.Bolt11ParseError err_hu_conv = null; if (err < 0 || err > 4096) { err_hu_conv = new org.ldk.structs.Bolt11ParseError(null, err); }
 			if (err_hu_conv != null) { err_hu_conv.ptrs_to.add(this); };
 			this.err = err_hu_conv;
 		}

@@ -264,4 +264,38 @@ public class Bolt12InvoiceFeatures extends CommonBase {
 		return ret;
 	}
 
+	/**
+	 * Set this feature as optional.
+	 */
+	public void set_trampoline_routing_optional() {
+		bindings.Bolt12InvoiceFeatures_set_trampoline_routing_optional(this.ptr);
+		Reference.reachabilityFence(this);
+	}
+
+	/**
+	 * Set this feature as required.
+	 */
+	public void set_trampoline_routing_required() {
+		bindings.Bolt12InvoiceFeatures_set_trampoline_routing_required(this.ptr);
+		Reference.reachabilityFence(this);
+	}
+
+	/**
+	 * Checks if this feature is supported.
+	 */
+	public boolean supports_trampoline_routing() {
+		boolean ret = bindings.Bolt12InvoiceFeatures_supports_trampoline_routing(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Checks if this feature is required.
+	 */
+	public boolean requires_trampoline_routing() {
+		boolean ret = bindings.Bolt12InvoiceFeatures_requires_trampoline_routing(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
 }

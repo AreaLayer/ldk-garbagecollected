@@ -5,7 +5,7 @@ package org.ldk.enums;
  */
 public enum Bolt12SemanticError {
 	/**
-	 * The current [`std::time::SystemTime`] is past the offer or invoice's expiration.
+	 * The current system time is past the offer or invoice's expiration.
 	 */
 	LDKBolt12SemanticError_AlreadyExpired,
 	/**
@@ -21,7 +21,7 @@ public enum Bolt12SemanticError {
 	 */
 	LDKBolt12SemanticError_MissingAmount,
 	/**
-	 * The amount exceeded the total bitcoin supply.
+	 * The amount exceeded the total bitcoin supply or didn't match an expected amount.
 	 */
 	LDKBolt12SemanticError_InvalidAmount,
 	/**
@@ -49,17 +49,13 @@ public enum Bolt12SemanticError {
 	 */
 	LDKBolt12SemanticError_MissingDescription,
 	/**
-	 * A signing pubkey was not provided.
+	 * An issuer's signing pubkey was not provided.
 	 */
-	LDKBolt12SemanticError_MissingSigningPubkey,
+	LDKBolt12SemanticError_MissingIssuerSigningPubkey,
 	/**
-	 * A signing pubkey was provided but a different one was expected.
+	 * An issuer's signing pubkey was provided but was not expected.
 	 */
-	LDKBolt12SemanticError_InvalidSigningPubkey,
-	/**
-	 * A signing pubkey was provided but was not expected.
-	 */
-	LDKBolt12SemanticError_UnexpectedSigningPubkey,
+	LDKBolt12SemanticError_UnexpectedIssuerSigningPubkey,
 	/**
 	 * A quantity was expected but was missing.
 	 */
@@ -85,9 +81,9 @@ public enum Bolt12SemanticError {
 	 */
 	LDKBolt12SemanticError_MissingPayerMetadata,
 	/**
-	 * A payer id was expected but was missing.
+	 * A payer signing pubkey was expected but was missing.
 	 */
-	LDKBolt12SemanticError_MissingPayerId,
+	LDKBolt12SemanticError_MissingPayerSigningPubkey,
 	/**
 	 * The payment id for a refund or request is already in use.
 	 */
@@ -117,9 +113,24 @@ public enum Bolt12SemanticError {
 	 */
 	LDKBolt12SemanticError_UnexpectedPaymentHash,
 	/**
+	 * A signing pubkey was not provided.
+	 */
+	LDKBolt12SemanticError_MissingSigningPubkey,
+	/**
+	 * A signing pubkey was provided but a different one was expected.
+	 */
+	LDKBolt12SemanticError_InvalidSigningPubkey,
+	/**
 	 * A signature was expected but was missing.
 	 */
 	LDKBolt12SemanticError_MissingSignature,
+	/**
+	 * A Human Readable Name was provided but was not expected (i.e. was included in a
+	 * [`Refund`]).
+	 * 
+	 * [`Refund`]: super::refund::Refund
+	 */
+	LDKBolt12SemanticError_UnexpectedHumanReadableName,
 	; static native void init();
 	static { org.ldk.impl.bindings.run_statics(); init(); }
 }

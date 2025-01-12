@@ -9,7 +9,9 @@ import javax.annotation.Nullable;
 
 
 /**
- * A tx_abort message which signals the cancellation of an in-progress transaction negotiation.
+ * A [`tx_abort`] message which signals the cancellation of an in-progress transaction negotiation.
+ * 
+ * [`tx_abort`]: https://github.com/lightning/bolts/blob/master/02-peer-protocol.md#the-tx_abort-message
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class TxAbort extends CommonBase {

@@ -11,9 +11,12 @@ import javax.annotation.Nullable;
  * A trait to handle Lightning channel key material without concretizing the channel type or
  * the signature mechanism.
  * 
- * Several methods allow error types to be returned to support async signing. This feature
- * is not yet complete, and panics may occur in certain situations when returning errors
- * for these methods.
+ * Several methods allow errors to be returned to support async signing. In such cases, the
+ * signing operation can be replayed by calling [`ChannelManager::signer_unblocked`] once the
+ * result is ready, at which point the channel operation will resume. Methods which allow for
+ * async results are explicitly documented as such
+ * 
+ * [`ChannelManager::signer_unblocked`]: crate::ln::channelmanager::ChannelManager::signer_unblocked
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class ChannelSigner extends CommonBase {
@@ -47,9 +50,9 @@ public class ChannelSigner extends CommonBase {
 		 * 
 		 * Note that the commitment number starts at `(1 << 48) - 1` and counts backwards.
 		 * 
-		 * If the signer returns `Err`, then the user is responsible for either force-closing the channel
-		 * or calling `ChannelManager::signer_unblocked` (this method is only available when the
-		 * `async_signing` cfg flag is enabled) once the signature is ready.
+		 * This method is *not* asynchronous. This method is expected to always return `Ok`
+		 * immediately after we reconnect to peers, and returning an `Err` may lead to an immediate
+		 * `panic`. This method will be made asynchronous in a future release.
 		 */
 		Result_PublicKeyNoneZ get_per_commitment_point(long idx);
 		/**
@@ -61,6 +64,12 @@ public class ChannelSigner extends CommonBase {
 		 * May be called more than once for the same index.
 		 * 
 		 * Note that the commitment number starts at `(1 << 48) - 1` and counts backwards.
+		 * 
+		 * An `Err` can be returned to signal that the signer is unavailable/cannot produce a valid
+		 * signature and should be retried later. Once the signer is ready to provide a signature after
+		 * previously returning an `Err`, [`ChannelManager::signer_unblocked`] must be called.
+		 * 
+		 * [`ChannelManager::signer_unblocked`]: crate::ln::channelmanager::ChannelManager::signer_unblocked
 		 */
 		Result__u832NoneZ release_commitment_secret(long idx);
 		/**
@@ -77,6 +86,10 @@ public class ChannelSigner extends CommonBase {
 		 * 
 		 * Note that all the relevant preimages will be provided, but there may also be additional
 		 * irrelevant or duplicate preimages.
+		 * 
+		 * This method is *not* asynchronous. If an `Err` is returned, the channel will be immediately
+		 * closed. If you wish to make this operation asynchronous, you should instead return `Ok(())`
+		 * and pause future signing operations until this validation completes.
 		 */
 		Result_NoneNoneZ validate_holder_commitment(HolderCommitmentTransaction holder_tx, byte[][] outbound_htlc_preimages);
 		/**
@@ -84,12 +97,18 @@ public class ChannelSigner extends CommonBase {
 		 * 
 		 * This is required in order for the signer to make sure that the state has moved
 		 * forward and it is safe to sign the next counterparty commitment.
+		 * 
+		 * This method is *not* asynchronous. If an `Err` is returned, the channel will be immediately
+		 * closed. If you wish to make this operation asynchronous, you should instead return `Ok(())`
+		 * and pause future signing operations until this validation completes.
 		 */
 		Result_NoneNoneZ validate_counterparty_revocation(long idx, byte[] secret);
 		/**
 		 * Returns an arbitrary identifier describing the set of keys which are provided back to you in
 		 * some [`SpendableOutputDescriptor`] types. This should be sufficient to identify this
 		 * [`EcdsaChannelSigner`] object uniquely and lookup or re-derive its keys.
+		 * 
+		 * This method is *not* asynchronous. Instead, the value must be cached locally.
 		 */
 		byte[] channel_keys_id();
 		/**
@@ -153,9 +172,9 @@ public class ChannelSigner extends CommonBase {
 	 * 
 	 * Note that the commitment number starts at `(1 << 48) - 1` and counts backwards.
 	 * 
-	 * If the signer returns `Err`, then the user is responsible for either force-closing the channel
-	 * or calling `ChannelManager::signer_unblocked` (this method is only available when the
-	 * `async_signing` cfg flag is enabled) once the signature is ready.
+	 * This method is *not* asynchronous. This method is expected to always return `Ok`
+	 * immediately after we reconnect to peers, and returning an `Err` may lead to an immediate
+	 * `panic`. This method will be made asynchronous in a future release.
 	 */
 	public Result_PublicKeyNoneZ get_per_commitment_point(long idx) {
 		long ret = bindings.ChannelSigner_get_per_commitment_point(this.ptr, idx);
@@ -175,6 +194,12 @@ public class ChannelSigner extends CommonBase {
 	 * May be called more than once for the same index.
 	 * 
 	 * Note that the commitment number starts at `(1 << 48) - 1` and counts backwards.
+	 * 
+	 * An `Err` can be returned to signal that the signer is unavailable/cannot produce a valid
+	 * signature and should be retried later. Once the signer is ready to provide a signature after
+	 * previously returning an `Err`, [`ChannelManager::signer_unblocked`] must be called.
+	 * 
+	 * [`ChannelManager::signer_unblocked`]: crate::ln::channelmanager::ChannelManager::signer_unblocked
 	 */
 	public Result__u832NoneZ release_commitment_secret(long idx) {
 		long ret = bindings.ChannelSigner_release_commitment_secret(this.ptr, idx);
@@ -199,6 +224,10 @@ public class ChannelSigner extends CommonBase {
 	 * 
 	 * Note that all the relevant preimages will be provided, but there may also be additional
 	 * irrelevant or duplicate preimages.
+	 * 
+	 * This method is *not* asynchronous. If an `Err` is returned, the channel will be immediately
+	 * closed. If you wish to make this operation asynchronous, you should instead return `Ok(())`
+	 * and pause future signing operations until this validation completes.
 	 */
 	public Result_NoneNoneZ validate_holder_commitment(org.ldk.structs.HolderCommitmentTransaction holder_tx, byte[][] outbound_htlc_preimages) {
 		long ret = bindings.ChannelSigner_validate_holder_commitment(this.ptr, holder_tx.ptr, outbound_htlc_preimages != null ? Arrays.stream(outbound_htlc_preimages).map(outbound_htlc_preimages_conv_8 -> InternalUtils.check_arr_len(outbound_htlc_preimages_conv_8, 32)).toArray(byte[][]::new) : null);
@@ -216,6 +245,10 @@ public class ChannelSigner extends CommonBase {
 	 * 
 	 * This is required in order for the signer to make sure that the state has moved
 	 * forward and it is safe to sign the next counterparty commitment.
+	 * 
+	 * This method is *not* asynchronous. If an `Err` is returned, the channel will be immediately
+	 * closed. If you wish to make this operation asynchronous, you should instead return `Ok(())`
+	 * and pause future signing operations until this validation completes.
 	 */
 	public Result_NoneNoneZ validate_counterparty_revocation(long idx, byte[] secret) {
 		long ret = bindings.ChannelSigner_validate_counterparty_revocation(this.ptr, idx, InternalUtils.check_arr_len(secret, 32));
@@ -231,6 +264,8 @@ public class ChannelSigner extends CommonBase {
 	 * Returns an arbitrary identifier describing the set of keys which are provided back to you in
 	 * some [`SpendableOutputDescriptor`] types. This should be sufficient to identify this
 	 * [`EcdsaChannelSigner`] object uniquely and lookup or re-derive its keys.
+	 * 
+	 * This method is *not* asynchronous. Instead, the value must be cached locally.
 	 */
 	public byte[] channel_keys_id() {
 		byte[] ret = bindings.ChannelSigner_channel_keys_id(this.ptr);

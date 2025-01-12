@@ -11,6 +11,8 @@ import javax.annotation.Nullable;
 /**
  * Data to construct a [`BlindedHop`] for receiving a payment. This payload is custom to LDK and
  * may not be valid if received by another lightning implementation.
+ * 
+ * Can only be constructed by calling [`UnauthenticatedReceiveTlvs::authenticate`].
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class ReceiveTlvs extends CommonBase {
@@ -19,80 +21,6 @@ public class ReceiveTlvs extends CommonBase {
 	protected void finalize() throws Throwable {
 		super.finalize();
 		if (ptr != 0) { bindings.ReceiveTlvs_free(ptr); }
-	}
-
-	/**
-	 * Used to authenticate the sender of a payment to the receiver and tie MPP HTLCs together.
-	 */
-	public byte[] get_payment_secret() {
-		byte[] ret = bindings.ReceiveTlvs_get_payment_secret(this.ptr);
-		Reference.reachabilityFence(this);
-		return ret;
-	}
-
-	/**
-	 * Used to authenticate the sender of a payment to the receiver and tie MPP HTLCs together.
-	 */
-	public void set_payment_secret(byte[] val) {
-		bindings.ReceiveTlvs_set_payment_secret(this.ptr, InternalUtils.check_arr_len(val, 32));
-		Reference.reachabilityFence(this);
-		Reference.reachabilityFence(val);
-	}
-
-	/**
-	 * Constraints for the receiver of this payment.
-	 */
-	public PaymentConstraints get_payment_constraints() {
-		long ret = bindings.ReceiveTlvs_get_payment_constraints(this.ptr);
-		Reference.reachabilityFence(this);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.PaymentConstraints ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.PaymentConstraints(null, ret); }
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
-		return ret_hu_conv;
-	}
-
-	/**
-	 * Constraints for the receiver of this payment.
-	 */
-	public void set_payment_constraints(org.ldk.structs.PaymentConstraints val) {
-		bindings.ReceiveTlvs_set_payment_constraints(this.ptr, val.ptr);
-		Reference.reachabilityFence(this);
-		Reference.reachabilityFence(val);
-	}
-
-	/**
-	 * Context for the receiver of this payment.
-	 */
-	public PaymentContext get_payment_context() {
-		long ret = bindings.ReceiveTlvs_get_payment_context(this.ptr);
-		Reference.reachabilityFence(this);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.PaymentContext ret_hu_conv = org.ldk.structs.PaymentContext.constr_from_ptr(ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
-		return ret_hu_conv;
-	}
-
-	/**
-	 * Context for the receiver of this payment.
-	 */
-	public void set_payment_context(org.ldk.structs.PaymentContext val) {
-		bindings.ReceiveTlvs_set_payment_context(this.ptr, val.ptr);
-		Reference.reachabilityFence(this);
-		Reference.reachabilityFence(val);
-	}
-
-	/**
-	 * Constructs a new ReceiveTlvs given each field
-	 */
-	public static ReceiveTlvs of(byte[] payment_secret_arg, org.ldk.structs.PaymentConstraints payment_constraints_arg, org.ldk.structs.PaymentContext payment_context_arg) {
-		long ret = bindings.ReceiveTlvs_new(InternalUtils.check_arr_len(payment_secret_arg, 32), payment_constraints_arg.ptr, payment_context_arg.ptr);
-		Reference.reachabilityFence(payment_secret_arg);
-		Reference.reachabilityFence(payment_constraints_arg);
-		Reference.reachabilityFence(payment_context_arg);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.ReceiveTlvs ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ReceiveTlvs(null, ret); }
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
-		return ret_hu_conv;
 	}
 
 	long clone_ptr() {
@@ -109,6 +37,18 @@ public class ReceiveTlvs extends CommonBase {
 		Reference.reachabilityFence(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ReceiveTlvs ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ReceiveTlvs(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Returns the underlying TLVs.
+	 */
+	public UnauthenticatedReceiveTlvs tlvs() {
+		long ret = bindings.ReceiveTlvs_tlvs(this.ptr);
+		Reference.reachabilityFence(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.UnauthenticatedReceiveTlvs ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.UnauthenticatedReceiveTlvs(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
 		return ret_hu_conv;
 	}

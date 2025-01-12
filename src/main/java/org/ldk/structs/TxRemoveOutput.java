@@ -9,7 +9,9 @@ import javax.annotation.Nullable;
 
 
 /**
- * A tx_remove_output message for removing an output during interactive transaction construction.
+ * A [`tx_remove_output`] message for removing an output during interactive transaction construction.
+ * 
+ * [`tx_remove_output`]: https://github.com/lightning/bolts/blob/master/02-peer-protocol.md#the-tx_remove_input-and-tx_remove_output-messages
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class TxRemoveOutput extends CommonBase {

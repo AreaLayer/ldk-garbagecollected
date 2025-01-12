@@ -21,9 +21,12 @@ import javax.annotation.Nullable;
  * 3) If you are not fetching full blocks, register all relevant [`ChannelMonitor`] outpoints the
  * same way you would handle a [`chain::Filter`] call using
  * [`ChannelMonitor::get_outputs_to_watch`] and [`ChannelMonitor::get_funding_txo`].
- * 4) Reconnect blocks on your [`ChannelMonitor`]s.
- * 5) Disconnect/connect blocks on the [`ChannelManager`].
- * 6) Re-persist the [`ChannelMonitor`]s to ensure the latest state is on disk.
+ * 4) Disconnect/connect blocks on your [`ChannelMonitor`]s to get them in sync with the chain.
+ * 5) Disconnect/connect blocks on the [`ChannelManager`] to get it in sync with the chain.
+ * 6) Optionally re-persist the [`ChannelMonitor`]s to ensure the latest state is on disk.
+ * This is important if you have replayed a nontrivial number of blocks in step (4), allowing
+ * you to avoid having to replay the same blocks if you shut down quickly after startup. It is
+ * otherwise not required.
  * Note that if you're using a [`ChainMonitor`] for your [`chain::Watch`] implementation, you
  * will likely accomplish this as a side-effect of calling [`chain::Watch::watch_channel`] in
  * the next step.
@@ -232,6 +235,30 @@ public class ChannelManagerReadArgs extends CommonBase {
 	}
 
 	/**
+	 * The [`MessageRouter`] used for constructing [`BlindedMessagePath`]s for [`Offer`]s,
+	 * [`Refund`]s, and any reply paths.
+	 */
+	public MessageRouter get_message_router() {
+		long ret = bindings.ChannelManagerReadArgs_get_message_router(this.ptr);
+		Reference.reachabilityFence(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		MessageRouter ret_hu_conv = new MessageRouter(null, ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * The [`MessageRouter`] used for constructing [`BlindedMessagePath`]s for [`Offer`]s,
+	 * [`Refund`]s, and any reply paths.
+	 */
+	public void set_message_router(org.ldk.structs.MessageRouter val) {
+		bindings.ChannelManagerReadArgs_set_message_router(this.ptr, val.ptr);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
+		if (this != null) { this.ptrs_to.add(val); };
+	}
+
+	/**
 	 * The Logger for use in the ChannelManager and which may be used to log information during
 	 * deserialization.
 	 */
@@ -283,8 +310,8 @@ public class ChannelManagerReadArgs extends CommonBase {
 	 * HashMap for you. This is primarily useful for C bindings where it is not practical to
 	 * populate a HashMap directly from C.
 	 */
-	public static ChannelManagerReadArgs of(org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.SignerProvider signer_provider, org.ldk.structs.FeeEstimator fee_estimator, org.ldk.structs.Watch chain_monitor, org.ldk.structs.BroadcasterInterface tx_broadcaster, org.ldk.structs.Router router, org.ldk.structs.Logger logger, org.ldk.structs.UserConfig default_config, ChannelMonitor[] channel_monitors) {
-		long ret = bindings.ChannelManagerReadArgs_new(entropy_source.ptr, node_signer.ptr, signer_provider.ptr, fee_estimator.ptr, chain_monitor.ptr, tx_broadcaster.ptr, router.ptr, logger.ptr, default_config.ptr, channel_monitors != null ? Arrays.stream(channel_monitors).mapToLong(channel_monitors_conv_16 -> channel_monitors_conv_16.ptr).toArray() : null);
+	public static ChannelManagerReadArgs of(org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.SignerProvider signer_provider, org.ldk.structs.FeeEstimator fee_estimator, org.ldk.structs.Watch chain_monitor, org.ldk.structs.BroadcasterInterface tx_broadcaster, org.ldk.structs.Router router, org.ldk.structs.MessageRouter message_router, org.ldk.structs.Logger logger, org.ldk.structs.UserConfig default_config, ChannelMonitor[] channel_monitors) {
+		long ret = bindings.ChannelManagerReadArgs_new(entropy_source.ptr, node_signer.ptr, signer_provider.ptr, fee_estimator.ptr, chain_monitor.ptr, tx_broadcaster.ptr, router.ptr, message_router.ptr, logger.ptr, default_config.ptr, channel_monitors != null ? Arrays.stream(channel_monitors).mapToLong(channel_monitors_conv_16 -> channel_monitors_conv_16.ptr).toArray() : null);
 		Reference.reachabilityFence(entropy_source);
 		Reference.reachabilityFence(node_signer);
 		Reference.reachabilityFence(signer_provider);
@@ -292,6 +319,7 @@ public class ChannelManagerReadArgs extends CommonBase {
 		Reference.reachabilityFence(chain_monitor);
 		Reference.reachabilityFence(tx_broadcaster);
 		Reference.reachabilityFence(router);
+		Reference.reachabilityFence(message_router);
 		Reference.reachabilityFence(logger);
 		Reference.reachabilityFence(default_config);
 		Reference.reachabilityFence(channel_monitors);
@@ -305,6 +333,7 @@ public class ChannelManagerReadArgs extends CommonBase {
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(chain_monitor); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(tx_broadcaster); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(router); };
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(message_router); };
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(logger); };
 		for (ChannelMonitor channel_monitors_conv_16: channel_monitors) { if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(channel_monitors_conv_16); }; };
 		return ret_hu_conv;

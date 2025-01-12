@@ -9,9 +9,10 @@ import javax.annotation.Nullable;
 
 
 /**
- * Contains fields that are both common to [`accept_channel`] and `accept_channel2` messages.
+ * Contains fields that are both common to [`accept_channel`] and [`accept_channel2`] messages.
  * 
  * [`accept_channel`]: https://github.com/lightning/bolts/blob/master/02-peer-protocol.md#the-accept_channel-message
+ * [`accept_channel2`]: https://github.com/lightning/bolts/blob/master/02-peer-protocol.md#the-accept_channel2-message
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class CommonAcceptChannelFields extends CommonBase {

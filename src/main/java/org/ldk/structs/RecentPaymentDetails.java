@@ -42,8 +42,8 @@ public class RecentPaymentDetails extends CommonBase {
 	 */
 	public final static class AwaitingInvoice extends RecentPaymentDetails {
 		/**
-		 * A user-provided identifier in [`ChannelManager::send_payment`] used to uniquely identify
-		 * a payment and ensure idempotency in LDK.
+		 * A user-provided identifier in [`ChannelManager::pay_for_offer`] used to uniquely identify a
+		 * payment and ensure idempotency in LDK.
 		*/
 		public final byte[] payment_id;
 		private AwaitingInvoice(long ptr, bindings.LDKRecentPaymentDetails.AwaitingInvoice obj) {
@@ -56,8 +56,11 @@ public class RecentPaymentDetails extends CommonBase {
 	 */
 	public final static class Pending extends RecentPaymentDetails {
 		/**
-		 * A user-provided identifier in [`ChannelManager::send_payment`] used to uniquely identify
-		 * a payment and ensure idempotency in LDK.
+		 * A user-provided identifier in [`send_payment`] or [`pay_for_offer`] used to uniquely
+		 * identify a payment and ensure idempotency in LDK.
+		 * 
+		 * [`send_payment`]: crate::ln::channelmanager::ChannelManager::send_payment
+		 * [`pay_for_offer`]: crate::ln::channelmanager::ChannelManager::pay_for_offer
 		*/
 		public final byte[] payment_id;
 		/**
@@ -84,8 +87,11 @@ public class RecentPaymentDetails extends CommonBase {
 	 */
 	public final static class Fulfilled extends RecentPaymentDetails {
 		/**
-		 * A user-provided identifier in [`ChannelManager::send_payment`] used to uniquely identify
-		 * a payment and ensure idempotency in LDK.
+		 * A user-provided identifier in [`send_payment`] or [`pay_for_offer`] used to uniquely
+		 * identify a payment and ensure idempotency in LDK.
+		 * 
+		 * [`send_payment`]: crate::ln::channelmanager::ChannelManager::send_payment
+		 * [`pay_for_offer`]: crate::ln::channelmanager::ChannelManager::pay_for_offer
 		*/
 		public final byte[] payment_id;
 		/**
@@ -109,8 +115,11 @@ public class RecentPaymentDetails extends CommonBase {
 	 */
 	public final static class Abandoned extends RecentPaymentDetails {
 		/**
-		 * A user-provided identifier in [`ChannelManager::send_payment`] used to uniquely identify
-		 * a payment and ensure idempotency in LDK.
+		 * A user-provided identifier in [`send_payment`] or [`pay_for_offer`] used to uniquely
+		 * identify a payment and ensure idempotency in LDK.
+		 * 
+		 * [`send_payment`]: crate::ln::channelmanager::ChannelManager::send_payment
+		 * [`pay_for_offer`]: crate::ln::channelmanager::ChannelManager::pay_for_offer
 		*/
 		public final byte[] payment_id;
 		/**

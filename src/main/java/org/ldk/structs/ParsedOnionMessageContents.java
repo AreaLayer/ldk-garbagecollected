@@ -26,6 +26,9 @@ public class ParsedOnionMessageContents extends CommonBase {
 		if (raw_val.getClass() == bindings.LDKParsedOnionMessageContents.Offers.class) {
 			return new Offers(ptr, (bindings.LDKParsedOnionMessageContents.Offers)raw_val);
 		}
+		if (raw_val.getClass() == bindings.LDKParsedOnionMessageContents.DNSResolver.class) {
+			return new DNSResolver(ptr, (bindings.LDKParsedOnionMessageContents.DNSResolver)raw_val);
+		}
 		if (raw_val.getClass() == bindings.LDKParsedOnionMessageContents.Custom.class) {
 			return new Custom(ptr, (bindings.LDKParsedOnionMessageContents.Custom)raw_val);
 		}
@@ -43,6 +46,19 @@ public class ParsedOnionMessageContents extends CommonBase {
 			org.ldk.structs.OffersMessage offers_hu_conv = org.ldk.structs.OffersMessage.constr_from_ptr(offers);
 			if (offers_hu_conv != null) { offers_hu_conv.ptrs_to.add(this); };
 			this.offers = offers_hu_conv;
+		}
+	}
+	/**
+	 * A message requesting or providing a DNSSEC proof
+	 */
+	public final static class DNSResolver extends ParsedOnionMessageContents {
+		public final org.ldk.structs.DNSResolverMessage dns_resolver;
+		private DNSResolver(long ptr, bindings.LDKParsedOnionMessageContents.DNSResolver obj) {
+			super(null, ptr);
+			long dns_resolver = obj.dns_resolver;
+			org.ldk.structs.DNSResolverMessage dns_resolver_hu_conv = org.ldk.structs.DNSResolverMessage.constr_from_ptr(dns_resolver);
+			if (dns_resolver_hu_conv != null) { dns_resolver_hu_conv.ptrs_to.add(this); };
+			this.dns_resolver = dns_resolver_hu_conv;
 		}
 	}
 	/**
@@ -81,6 +97,18 @@ public class ParsedOnionMessageContents extends CommonBase {
 	 */
 	public static ParsedOnionMessageContents offers(org.ldk.structs.OffersMessage a) {
 		long ret = bindings.ParsedOnionMessageContents_offers(a.ptr);
+		Reference.reachabilityFence(a);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ParsedOnionMessageContents ret_hu_conv = org.ldk.structs.ParsedOnionMessageContents.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new DNSResolver-variant ParsedOnionMessageContents
+	 */
+	public static ParsedOnionMessageContents dnsresolver(org.ldk.structs.DNSResolverMessage a) {
+		long ret = bindings.ParsedOnionMessageContents_dnsresolver(a.ptr);
 		Reference.reachabilityFence(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ParsedOnionMessageContents ret_hu_conv = org.ldk.structs.ParsedOnionMessageContents.constr_from_ptr(ret);

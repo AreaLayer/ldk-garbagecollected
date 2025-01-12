@@ -27,8 +27,11 @@ public class ProbeSendFailure extends CommonBase {
 		if (raw_val.getClass() == bindings.LDKProbeSendFailure.RouteNotFound.class) {
 			return new RouteNotFound(ptr, (bindings.LDKProbeSendFailure.RouteNotFound)raw_val);
 		}
-		if (raw_val.getClass() == bindings.LDKProbeSendFailure.SendingFailed.class) {
-			return new SendingFailed(ptr, (bindings.LDKProbeSendFailure.SendingFailed)raw_val);
+		if (raw_val.getClass() == bindings.LDKProbeSendFailure.ParameterError.class) {
+			return new ParameterError(ptr, (bindings.LDKProbeSendFailure.ParameterError)raw_val);
+		}
+		if (raw_val.getClass() == bindings.LDKProbeSendFailure.DuplicateProbe.class) {
+			return new DuplicateProbe(ptr, (bindings.LDKProbeSendFailure.DuplicateProbe)raw_val);
 		}
 		assert false; return null; // Unreachable without extending the (internal) bindings interface
 	}
@@ -42,16 +45,38 @@ public class ProbeSendFailure extends CommonBase {
 		}
 	}
 	/**
-	 * We failed to send the payment probes.
+	 * A parameter which was passed to [`ChannelManager::send_probe`] was invalid, preventing us from
+	 * attempting to send the probe at all.
+	 * 
+	 * You can freely resend the probe (with the parameter error fixed).
+	 * 
+	 * Because the probe failed outright, no payment tracking is done and no
+	 * [`Event::ProbeFailed`] events will be generated.
+	 * 
+	 * [`ChannelManager::send_probe`]: crate::ln::channelmanager::ChannelManager::send_probe
+	 * [`Event::ProbeFailed`]: crate::events::Event::ProbeFailed
 	 */
-	public final static class SendingFailed extends ProbeSendFailure {
-		public final org.ldk.structs.PaymentSendFailure sending_failed;
-		private SendingFailed(long ptr, bindings.LDKProbeSendFailure.SendingFailed obj) {
+	public final static class ParameterError extends ProbeSendFailure {
+		public final org.ldk.structs.APIError parameter_error;
+		private ParameterError(long ptr, bindings.LDKProbeSendFailure.ParameterError obj) {
 			super(null, ptr);
-			long sending_failed = obj.sending_failed;
-			org.ldk.structs.PaymentSendFailure sending_failed_hu_conv = org.ldk.structs.PaymentSendFailure.constr_from_ptr(sending_failed);
-			if (sending_failed_hu_conv != null) { sending_failed_hu_conv.ptrs_to.add(this); };
-			this.sending_failed = sending_failed_hu_conv;
+			long parameter_error = obj.parameter_error;
+			org.ldk.structs.APIError parameter_error_hu_conv = org.ldk.structs.APIError.constr_from_ptr(parameter_error);
+			if (parameter_error_hu_conv != null) { parameter_error_hu_conv.ptrs_to.add(this); };
+			this.parameter_error = parameter_error_hu_conv;
+		}
+	}
+	/**
+	 * Indicates that a payment for the provided [`PaymentId`] is already in-flight and has not
+	 * yet completed (i.e. generated an [`Event::ProbeSuccessful`] or [`Event::ProbeFailed`]).
+	 * 
+	 * [`PaymentId`]: crate::ln::channelmanager::PaymentId
+	 * [`Event::ProbeSuccessful`]: crate::events::Event::ProbeSuccessful
+	 * [`Event::ProbeFailed`]: crate::events::Event::ProbeFailed
+	 */
+	public final static class DuplicateProbe extends ProbeSendFailure {
+		private DuplicateProbe(long ptr, bindings.LDKProbeSendFailure.DuplicateProbe obj) {
+			super(null, ptr);
 		}
 	}
 	long clone_ptr() {
@@ -84,11 +109,22 @@ public class ProbeSendFailure extends CommonBase {
 	}
 
 	/**
-	 * Utility method to constructs a new SendingFailed-variant ProbeSendFailure
+	 * Utility method to constructs a new ParameterError-variant ProbeSendFailure
 	 */
-	public static ProbeSendFailure sending_failed(org.ldk.structs.PaymentSendFailure a) {
-		long ret = bindings.ProbeSendFailure_sending_failed(a.ptr);
+	public static ProbeSendFailure parameter_error(org.ldk.structs.APIError a) {
+		long ret = bindings.ProbeSendFailure_parameter_error(a.ptr);
 		Reference.reachabilityFence(a);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ProbeSendFailure ret_hu_conv = org.ldk.structs.ProbeSendFailure.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new DuplicateProbe-variant ProbeSendFailure
+	 */
+	public static ProbeSendFailure duplicate_probe() {
+		long ret = bindings.ProbeSendFailure_duplicate_probe();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ProbeSendFailure ret_hu_conv = org.ldk.structs.ProbeSendFailure.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };

@@ -374,48 +374,10 @@ public class ChannelDetails extends CommonBase {
 	}
 
 	/**
-	 * Our total balance.  This is the amount we would get if we close the channel.
-	 * This value is not exact. Due to various in-flight changes and feerate changes, exactly this
-	 * amount is not likely to be recoverable on close.
-	 * 
-	 * This does not include any pending HTLCs which are not yet fully resolved (and, thus, whose
-	 * balance is not available for inclusion in new outbound HTLCs). This further does not include
-	 * any pending outgoing HTLCs which are awaiting some other resolution to be sent.
-	 * This does not consider any on-chain fees.
-	 * 
-	 * See also [`ChannelDetails::outbound_capacity_msat`]
-	 */
-	public long get_balance_msat() {
-		long ret = bindings.ChannelDetails_get_balance_msat(this.ptr);
-		Reference.reachabilityFence(this);
-		return ret;
-	}
-
-	/**
-	 * Our total balance.  This is the amount we would get if we close the channel.
-	 * This value is not exact. Due to various in-flight changes and feerate changes, exactly this
-	 * amount is not likely to be recoverable on close.
-	 * 
-	 * This does not include any pending HTLCs which are not yet fully resolved (and, thus, whose
-	 * balance is not available for inclusion in new outbound HTLCs). This further does not include
-	 * any pending outgoing HTLCs which are awaiting some other resolution to be sent.
-	 * This does not consider any on-chain fees.
-	 * 
-	 * See also [`ChannelDetails::outbound_capacity_msat`]
-	 */
-	public void set_balance_msat(long val) {
-		bindings.ChannelDetails_set_balance_msat(this.ptr, val);
-		Reference.reachabilityFence(this);
-		Reference.reachabilityFence(val);
-	}
-
-	/**
 	 * The available outbound capacity for sending HTLCs to the remote peer. This does not include
 	 * any pending HTLCs which are not yet fully resolved (and, thus, whose balance is not
 	 * available for inclusion in new outbound HTLCs). This further does not include any pending
 	 * outgoing HTLCs which are awaiting some other resolution to be sent.
-	 * 
-	 * See also [`ChannelDetails::balance_msat`]
 	 * 
 	 * This value is not exact. Due to various in-flight changes, feerate changes, and our
 	 * conflict-avoidance policy, exactly this amount is not likely to be spendable. However, we
@@ -433,8 +395,6 @@ public class ChannelDetails extends CommonBase {
 	 * available for inclusion in new outbound HTLCs). This further does not include any pending
 	 * outgoing HTLCs which are awaiting some other resolution to be sent.
 	 * 
-	 * See also [`ChannelDetails::balance_msat`]
-	 * 
 	 * This value is not exact. Due to various in-flight changes, feerate changes, and our
 	 * conflict-avoidance policy, exactly this amount is not likely to be spendable. However, we
 	 * should be able to spend nearly this amount.
@@ -451,8 +411,8 @@ public class ChannelDetails extends CommonBase {
 	 * the current state and per-HTLC limit(s). This is intended for use when routing, allowing us
 	 * to use a limit as close as possible to the HTLC limit we can currently send.
 	 * 
-	 * See also [`ChannelDetails::next_outbound_htlc_minimum_msat`],
-	 * [`ChannelDetails::balance_msat`], and [`ChannelDetails::outbound_capacity_msat`].
+	 * See also [`ChannelDetails::next_outbound_htlc_minimum_msat`] and
+	 * [`ChannelDetails::outbound_capacity_msat`].
 	 */
 	public long get_next_outbound_htlc_limit_msat() {
 		long ret = bindings.ChannelDetails_get_next_outbound_htlc_limit_msat(this.ptr);
@@ -466,8 +426,8 @@ public class ChannelDetails extends CommonBase {
 	 * the current state and per-HTLC limit(s). This is intended for use when routing, allowing us
 	 * to use a limit as close as possible to the HTLC limit we can currently send.
 	 * 
-	 * See also [`ChannelDetails::next_outbound_htlc_minimum_msat`],
-	 * [`ChannelDetails::balance_msat`], and [`ChannelDetails::outbound_capacity_msat`].
+	 * See also [`ChannelDetails::next_outbound_htlc_minimum_msat`] and
+	 * [`ChannelDetails::outbound_capacity_msat`].
 	 */
 	public void set_next_outbound_htlc_limit_msat(long val) {
 		bindings.ChannelDetails_set_next_outbound_htlc_limit_msat(this.ptr, val);
@@ -888,8 +848,8 @@ public class ChannelDetails extends CommonBase {
 	 * Note that channel_type_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 * Note that config_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static ChannelDetails of(org.ldk.structs.ChannelId channel_id_arg, org.ldk.structs.ChannelCounterparty counterparty_arg, @Nullable org.ldk.structs.OutPoint funding_txo_arg, @Nullable org.ldk.structs.ChannelTypeFeatures channel_type_arg, org.ldk.structs.Option_u64Z short_channel_id_arg, org.ldk.structs.Option_u64Z outbound_scid_alias_arg, org.ldk.structs.Option_u64Z inbound_scid_alias_arg, long channel_value_satoshis_arg, org.ldk.structs.Option_u64Z unspendable_punishment_reserve_arg, org.ldk.util.UInt128 user_channel_id_arg, org.ldk.structs.Option_u32Z feerate_sat_per_1000_weight_arg, long balance_msat_arg, long outbound_capacity_msat_arg, long next_outbound_htlc_limit_msat_arg, long next_outbound_htlc_minimum_msat_arg, long inbound_capacity_msat_arg, org.ldk.structs.Option_u32Z confirmations_required_arg, org.ldk.structs.Option_u32Z confirmations_arg, org.ldk.structs.Option_u16Z force_close_spend_delay_arg, boolean is_outbound_arg, boolean is_channel_ready_arg, org.ldk.structs.Option_ChannelShutdownStateZ channel_shutdown_state_arg, boolean is_usable_arg, boolean is_announced_arg, org.ldk.structs.Option_u64Z inbound_htlc_minimum_msat_arg, org.ldk.structs.Option_u64Z inbound_htlc_maximum_msat_arg, @Nullable org.ldk.structs.ChannelConfig config_arg, InboundHTLCDetails[] pending_inbound_htlcs_arg, OutboundHTLCDetails[] pending_outbound_htlcs_arg) {
-		long ret = bindings.ChannelDetails_new(channel_id_arg.ptr, counterparty_arg.ptr, funding_txo_arg == null ? 0 : funding_txo_arg.ptr, channel_type_arg == null ? 0 : channel_type_arg.ptr, short_channel_id_arg.ptr, outbound_scid_alias_arg.ptr, inbound_scid_alias_arg.ptr, channel_value_satoshis_arg, unspendable_punishment_reserve_arg.ptr, user_channel_id_arg.getLEBytes(), feerate_sat_per_1000_weight_arg.ptr, balance_msat_arg, outbound_capacity_msat_arg, next_outbound_htlc_limit_msat_arg, next_outbound_htlc_minimum_msat_arg, inbound_capacity_msat_arg, confirmations_required_arg.ptr, confirmations_arg.ptr, force_close_spend_delay_arg.ptr, is_outbound_arg, is_channel_ready_arg, channel_shutdown_state_arg.ptr, is_usable_arg, is_announced_arg, inbound_htlc_minimum_msat_arg.ptr, inbound_htlc_maximum_msat_arg.ptr, config_arg == null ? 0 : config_arg.ptr, pending_inbound_htlcs_arg != null ? Arrays.stream(pending_inbound_htlcs_arg).mapToLong(pending_inbound_htlcs_arg_conv_20 -> pending_inbound_htlcs_arg_conv_20.ptr).toArray() : null, pending_outbound_htlcs_arg != null ? Arrays.stream(pending_outbound_htlcs_arg).mapToLong(pending_outbound_htlcs_arg_conv_21 -> pending_outbound_htlcs_arg_conv_21.ptr).toArray() : null);
+	public static ChannelDetails of(org.ldk.structs.ChannelId channel_id_arg, org.ldk.structs.ChannelCounterparty counterparty_arg, @Nullable org.ldk.structs.OutPoint funding_txo_arg, @Nullable org.ldk.structs.ChannelTypeFeatures channel_type_arg, org.ldk.structs.Option_u64Z short_channel_id_arg, org.ldk.structs.Option_u64Z outbound_scid_alias_arg, org.ldk.structs.Option_u64Z inbound_scid_alias_arg, long channel_value_satoshis_arg, org.ldk.structs.Option_u64Z unspendable_punishment_reserve_arg, org.ldk.util.UInt128 user_channel_id_arg, org.ldk.structs.Option_u32Z feerate_sat_per_1000_weight_arg, long outbound_capacity_msat_arg, long next_outbound_htlc_limit_msat_arg, long next_outbound_htlc_minimum_msat_arg, long inbound_capacity_msat_arg, org.ldk.structs.Option_u32Z confirmations_required_arg, org.ldk.structs.Option_u32Z confirmations_arg, org.ldk.structs.Option_u16Z force_close_spend_delay_arg, boolean is_outbound_arg, boolean is_channel_ready_arg, org.ldk.structs.Option_ChannelShutdownStateZ channel_shutdown_state_arg, boolean is_usable_arg, boolean is_announced_arg, org.ldk.structs.Option_u64Z inbound_htlc_minimum_msat_arg, org.ldk.structs.Option_u64Z inbound_htlc_maximum_msat_arg, @Nullable org.ldk.structs.ChannelConfig config_arg, InboundHTLCDetails[] pending_inbound_htlcs_arg, OutboundHTLCDetails[] pending_outbound_htlcs_arg) {
+		long ret = bindings.ChannelDetails_new(channel_id_arg.ptr, counterparty_arg.ptr, funding_txo_arg == null ? 0 : funding_txo_arg.ptr, channel_type_arg == null ? 0 : channel_type_arg.ptr, short_channel_id_arg.ptr, outbound_scid_alias_arg.ptr, inbound_scid_alias_arg.ptr, channel_value_satoshis_arg, unspendable_punishment_reserve_arg.ptr, user_channel_id_arg.getLEBytes(), feerate_sat_per_1000_weight_arg.ptr, outbound_capacity_msat_arg, next_outbound_htlc_limit_msat_arg, next_outbound_htlc_minimum_msat_arg, inbound_capacity_msat_arg, confirmations_required_arg.ptr, confirmations_arg.ptr, force_close_spend_delay_arg.ptr, is_outbound_arg, is_channel_ready_arg, channel_shutdown_state_arg.ptr, is_usable_arg, is_announced_arg, inbound_htlc_minimum_msat_arg.ptr, inbound_htlc_maximum_msat_arg.ptr, config_arg == null ? 0 : config_arg.ptr, pending_inbound_htlcs_arg != null ? Arrays.stream(pending_inbound_htlcs_arg).mapToLong(pending_inbound_htlcs_arg_conv_20 -> pending_inbound_htlcs_arg_conv_20.ptr).toArray() : null, pending_outbound_htlcs_arg != null ? Arrays.stream(pending_outbound_htlcs_arg).mapToLong(pending_outbound_htlcs_arg_conv_21 -> pending_outbound_htlcs_arg_conv_21.ptr).toArray() : null);
 		Reference.reachabilityFence(channel_id_arg);
 		Reference.reachabilityFence(counterparty_arg);
 		Reference.reachabilityFence(funding_txo_arg);
@@ -901,7 +861,6 @@ public class ChannelDetails extends CommonBase {
 		Reference.reachabilityFence(unspendable_punishment_reserve_arg);
 		Reference.reachabilityFence(user_channel_id_arg);
 		Reference.reachabilityFence(feerate_sat_per_1000_weight_arg);
-		Reference.reachabilityFence(balance_msat_arg);
 		Reference.reachabilityFence(outbound_capacity_msat_arg);
 		Reference.reachabilityFence(next_outbound_htlc_limit_msat_arg);
 		Reference.reachabilityFence(next_outbound_htlc_minimum_msat_arg);

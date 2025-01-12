@@ -704,6 +704,40 @@ public class NodeFeatures extends CommonBase {
 	/**
 	 * Set this feature as optional.
 	 */
+	public void set_dual_fund_optional() {
+		bindings.NodeFeatures_set_dual_fund_optional(this.ptr);
+		Reference.reachabilityFence(this);
+	}
+
+	/**
+	 * Set this feature as required.
+	 */
+	public void set_dual_fund_required() {
+		bindings.NodeFeatures_set_dual_fund_required(this.ptr);
+		Reference.reachabilityFence(this);
+	}
+
+	/**
+	 * Checks if this feature is supported.
+	 */
+	public boolean supports_dual_fund() {
+		boolean ret = bindings.NodeFeatures_supports_dual_fund(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Checks if this feature is required.
+	 */
+	public boolean requires_dual_fund() {
+		boolean ret = bindings.NodeFeatures_requires_dual_fund(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Set this feature as optional.
+	 */
 	public void set_taproot_optional() {
 		bindings.NodeFeatures_set_taproot_optional(this.ptr);
 		Reference.reachabilityFence(this);
@@ -935,6 +969,40 @@ public class NodeFeatures extends CommonBase {
 	 */
 	public boolean requires_trampoline_routing() {
 		boolean ret = bindings.NodeFeatures_requires_trampoline_routing(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Set this feature as optional.
+	 */
+	public void set_dns_resolution_optional() {
+		bindings.NodeFeatures_set_dns_resolution_optional(this.ptr);
+		Reference.reachabilityFence(this);
+	}
+
+	/**
+	 * Set this feature as required.
+	 */
+	public void set_dns_resolution_required() {
+		bindings.NodeFeatures_set_dns_resolution_required(this.ptr);
+		Reference.reachabilityFence(this);
+	}
+
+	/**
+	 * Checks if this feature is supported.
+	 */
+	public boolean supports_dns_resolution() {
+		boolean ret = bindings.NodeFeatures_supports_dns_resolution(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
+	 * Checks if this feature is required.
+	 */
+	public boolean requires_dns_resolution() {
+		boolean ret = bindings.NodeFeatures_requires_dns_resolution(this.ptr);
 		Reference.reachabilityFence(this);
 		return ret;
 	}
