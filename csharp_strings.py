@@ -632,7 +632,7 @@ int CS_LDK_register_{fn_suffix}_invoker(invoker_{fn_suffix} invoker) {{
     def primitive_arr_to_hu(self, arr_ty, fixed_len, arr_name, conv_name):
         mapped_ty = arr_ty.subty
         if arr_ty.rust_obj == "LDKU128":
-            return "org.ldk.util.UInt128 " + conv_name + " = new org.ldk.util.UInt128(" + arr_name + ");"
+            return "org.ldk.util.UInt128 " + conv_name + " = new org.ldk.util.UInt128(" + arr_name + ");\nbindings.free_buffer(" + arr_name + ");"
         elif mapped_ty.c_ty == "uint8_t" or mapped_ty.c_ty == "int8_t":
             return "byte[] " + conv_name + " = InternalUtils.decodeUint8Array(" + arr_name + ");"
         elif mapped_ty.c_ty == "uint16_t" or mapped_ty.c_ty == "int16_t":
