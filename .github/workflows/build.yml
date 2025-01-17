@@ -159,13 +159,13 @@ jobs:
     # Ubuntu's version of clang doesn't support....anything that should work.
     # Ubuntu is an utter trash OS and should generally never be used for anything.
     # We also require dotnet so we use fedora
-    container: fedora:39
+    container: fedora:41
     strategy:
       fail-fast: false
     steps:
       - name: Install required dependencies
         run: |
-          dnf install -y mingw64-gcc git cargo dotnet clang llvm lld faketime rust-std-static-x86_64-pc-windows-gnu which diffutils rust-src
+          dnf install -y mingw64-gcc git cargo dotnet-sdk-9.0 clang llvm lld faketime rust-std-static-x86_64-pc-windows-gnu which diffutils rust-src
       - name: Checkout source code
         uses: actions/checkout@v2
         with:
