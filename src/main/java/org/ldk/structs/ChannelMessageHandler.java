@@ -194,6 +194,15 @@ public class ChannelMessageHandler extends CommonBase {
 		 * connecting to peers.
 		 */
 		Option_CVec_ThirtyTwoBytesZZ get_chain_hashes();
+		/**
+		 * Indicates that a message was received from any peer for any handler.
+		 * Called before the message is passed to the appropriate handler.
+		 * Useful for indicating that a network connection is active.
+		 * 
+		 * Note: Since this function is called frequently, it should be as
+		 * efficient as possible for its intended purpose.
+		 */
+		void message_received();
 	}
 	private static class LDKChannelMessageHandlerHolder { ChannelMessageHandler held; }
 	public static ChannelMessageHandler new_impl(ChannelMessageHandlerInterface arg, MessageSendEventsProvider.MessageSendEventsProviderInterface MessageSendEventsProvider_impl) {
@@ -377,6 +386,10 @@ public class ChannelMessageHandler extends CommonBase {
 				Reference.reachabilityFence(arg);
 				long result = ret.clone_ptr();
 				return result;
+			}
+			@Override public void message_received() {
+				arg.message_received();
+				Reference.reachabilityFence(arg);
 			}
 		}, MessageSendEventsProvider.new_impl(MessageSendEventsProvider_impl).bindings_instance);
 		return impl_holder.held;
@@ -793,6 +806,19 @@ public class ChannelMessageHandler extends CommonBase {
 		org.ldk.structs.Option_CVec_ThirtyTwoBytesZZ ret_hu_conv = org.ldk.structs.Option_CVec_ThirtyTwoBytesZZ.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
 		return ret_hu_conv;
+	}
+
+	/**
+	 * Indicates that a message was received from any peer for any handler.
+	 * Called before the message is passed to the appropriate handler.
+	 * Useful for indicating that a network connection is active.
+	 * 
+	 * Note: Since this function is called frequently, it should be as
+	 * efficient as possible for its intended purpose.
+	 */
+	public void message_received() {
+		bindings.ChannelMessageHandler_message_received(this.ptr);
+		Reference.reachabilityFence(this);
 	}
 
 }

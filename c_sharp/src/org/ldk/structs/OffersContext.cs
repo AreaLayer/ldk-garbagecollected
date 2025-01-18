@@ -92,10 +92,32 @@ public class OffersContext : CommonBase {
 		 * [`Bolt12Invoice::payment_hash`]: crate::offers::invoice::Bolt12Invoice::payment_hash
 		 */
 		public byte[] payment_hash;
+		/**
+		 * A nonce used for authenticating that a received [`InvoiceError`] is for a valid
+		 * sent [`Bolt12Invoice`].
+		 * 
+		 * [`InvoiceError`]: crate::offers::invoice_error::InvoiceError
+		 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
+		 */
+		public Nonce nonce;
+		/**
+		 * Authentication code for the [`PaymentHash`], which should be checked when the context is
+		 * used to log the received [`InvoiceError`].
+		 * 
+		 * [`InvoiceError`]: crate::offers::invoice_error::InvoiceError
+		 */
+		public byte[] hmac;
 		internal OffersContext_InboundPayment(long ptr) : base(null, ptr) {
 			long payment_hash = bindings.LDKOffersContext_InboundPayment_get_payment_hash(ptr);
 			byte[] payment_hash_conv = InternalUtils.decodeUint8Array(payment_hash);
 			this.payment_hash = payment_hash_conv;
+			long nonce = bindings.LDKOffersContext_InboundPayment_get_nonce(ptr);
+			org.ldk.structs.Nonce nonce_hu_conv = null; if (nonce < 0 || nonce > 4096) { nonce_hu_conv = new org.ldk.structs.Nonce(null, nonce); }
+			if (nonce_hu_conv != null) { nonce_hu_conv.ptrs_to.AddLast(this); };
+			this.nonce = nonce_hu_conv;
+			long hmac = bindings.LDKOffersContext_InboundPayment_get_hmac(ptr);
+			byte[] hmac_conv = InternalUtils.decodeUint8Array(hmac);
+			this.hmac = hmac_conv;
 		}
 	}
 	internal long clone_ptr() {
@@ -145,9 +167,11 @@ public class OffersContext : CommonBase {
 	/**
 	 * Utility method to constructs a new InboundPayment-variant OffersContext
 	 */
-	public static OffersContext inbound_payment(byte[] payment_hash) {
-		long ret = bindings.OffersContext_inbound_payment(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)));
+	public static OffersContext inbound_payment(byte[] payment_hash, org.ldk.structs.Nonce nonce, byte[] hmac) {
+		long ret = bindings.OffersContext_inbound_payment(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), nonce.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(hmac, 32)));
 		GC.KeepAlive(payment_hash);
+		GC.KeepAlive(nonce);
+		GC.KeepAlive(hmac);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.OffersContext ret_hu_conv = org.ldk.structs.OffersContext.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };

@@ -46,7 +46,7 @@ public class OfferWithDerivedMetadataBuilder extends CommonBase {
 	 * Similar to [`OfferBuilder::new`] except, if [`OfferBuilder::path`] is called, the signing
 	 * pubkey is derived from the given [`ExpandedKey`] and [`Nonce`]. This provides recipient
 	 * privacy by using a different signing pubkey for each offer. Otherwise, the provided
-	 * `node_id` is used for the signing pubkey.
+	 * `node_id` is used for [`Offer::issuer_signing_pubkey`].
 	 * 
 	 * Also, sets the metadata when [`OfferBuilder::build`] is called such that it can be used by
 	 * [`InvoiceRequest::verify_using_metadata`] to determine if the request was produced for the
@@ -98,8 +98,8 @@ public class OfferWithDerivedMetadataBuilder extends CommonBase {
 	}
 
 	/**
-	 * Sets the [`Offer::absolute_expiry`] as seconds since the Unix epoch. Any expiry that has
-	 * already passed is valid and can be checked for using [`Offer::is_expired`].
+	 * Sets the [`Offer::absolute_expiry`] as seconds since the Unix epoch.
+	 * Any expiry that has already passed is valid and can be checked for using [`Offer::is_expired`].
 	 * 
 	 * Successive calls to this method will override the previous setting.
 	 */
@@ -136,7 +136,7 @@ public class OfferWithDerivedMetadataBuilder extends CommonBase {
 
 	/**
 	 * Adds a blinded path to [`Offer::paths`]. Must include at least one path if only connected by
-	 * private channels or if [`Offer::signing_pubkey`] is not a public node id.
+	 * private channels or if [`Offer::issuer_signing_pubkey`] is not a public node id.
 	 * 
 	 * Successive calls to this method will add another blinded path. Caller is responsible for not
 	 * adding duplicate paths.

@@ -41,6 +41,30 @@ public class Bolt12Invoice : CommonBase {
 	}
 
 	/**
+	 * Paths to the recipient originating from publicly reachable nodes, including information
+	 * needed for routing payments across them.
+	 * 
+	 * Blinded paths provide recipient privacy by obfuscating its node id. Note, however, that this
+	 * privacy is lost if a public node id is used for
+	 * [`Bolt12Invoice::signing_pubkey`].
+	 */
+	public BlindedPaymentPath[] payment_paths() {
+		long ret = bindings.Bolt12Invoice_payment_paths(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		int ret_conv_20_len = InternalUtils.getArrayLength(ret);
+		BlindedPaymentPath[] ret_conv_20_arr = new BlindedPaymentPath[ret_conv_20_len];
+		for (int u = 0; u < ret_conv_20_len; u++) {
+			long ret_conv_20 = InternalUtils.getU64ArrayElem(ret, u);
+			org.ldk.structs.BlindedPaymentPath ret_conv_20_hu_conv = null; if (ret_conv_20 < 0 || ret_conv_20 > 4096) { ret_conv_20_hu_conv = new org.ldk.structs.BlindedPaymentPath(null, ret_conv_20); }
+			if (ret_conv_20_hu_conv != null) { ret_conv_20_hu_conv.ptrs_to.AddLast(this); };
+			ret_conv_20_arr[u] = ret_conv_20_hu_conv;
+		}
+		bindings.free_buffer(ret);
+		return ret_conv_20_arr;
+	}
+
+	/**
 	 * Duration since the Unix epoch when the invoice was created.
 	 */
 	public long created_at() {
@@ -101,7 +125,19 @@ public class Bolt12Invoice : CommonBase {
 	}
 
 	/**
-	 * The public key corresponding to the key used to sign the invoice.
+	 * A typically transient public key corresponding to the key used to sign the invoice.
+	 * 
+	 * If the invoices was created in response to an [`Offer`], then this will be:
+	 * - [`Offer::issuer_signing_pubkey`] if it's `Some`, otherwise
+	 * - the final blinded node id from a [`BlindedMessagePath`] in [`Offer::paths`] if `None`.
+	 * 
+	 * If the invoice was created in response to a [`Refund`], then it is a valid pubkey chosen by
+	 * the recipient.
+	 * 
+	 * [`Offer`]: crate::offers::offer::Offer
+	 * [`Offer::issuer_signing_pubkey`]: crate::offers::offer::Offer::issuer_signing_pubkey
+	 * [`Offer::paths`]: crate::offers::offer::Offer::paths
+	 * [`Refund`]: crate::offers::refund::Refund
 	 */
 	public byte[] signing_pubkey() {
 		long ret = bindings.Bolt12Invoice_signing_pubkey(this.ptr);
@@ -293,6 +329,24 @@ public class Bolt12Invoice : CommonBase {
 	}
 
 	/**
+	 * The public key used by the recipient to sign invoices.
+	 * 
+	 * From [`Offer::issuer_signing_pubkey`] and may be `None`; also `None` if the invoice was
+	 * created in response to a [`Refund`].
+	 * 
+	 * [`Offer::issuer_signing_pubkey`]: crate::offers::offer::Offer::issuer_signing_pubkey
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	public byte[] issuer_signing_pubkey() {
+		long ret = bindings.Bolt12Invoice_issuer_signing_pubkey(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
+		return ret_conv;
+	}
+
+	/**
 	 * An unpredictable series of bytes from the payer.
 	 * 
 	 * From [`InvoiceRequest::payer_metadata`] or [`Refund::payer_metadata`].
@@ -339,8 +393,8 @@ public class Bolt12Invoice : CommonBase {
 	 * 
 	 * [`message_paths`]: Self::message_paths
 	 */
-	public byte[] payer_id() {
-		long ret = bindings.Bolt12Invoice_payer_id(this.ptr);
+	public byte[] payer_signing_pubkey() {
+		long ret = bindings.Bolt12Invoice_payer_signing_pubkey(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);

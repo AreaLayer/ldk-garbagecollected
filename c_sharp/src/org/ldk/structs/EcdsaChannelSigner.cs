@@ -12,8 +12,6 @@ namespace org { namespace ldk { namespace structs {
 public interface EcdsaChannelSignerInterface {
 	/**Create a signature for a counterparty's commitment transaction and associated HTLC transactions.
 	 * 
-	 * Note that if signing fails or is rejected, the channel will be force-closed.
-	 * 
 	 * Policy checks should be implemented in this function, including checking the amount
 	 * sent to us and checking the HTLCs.
 	 * 
@@ -24,6 +22,12 @@ public interface EcdsaChannelSignerInterface {
 	 * 
 	 * Note that all the relevant preimages will be provided, but there may also be additional
 	 * irrelevant or duplicate preimages.
+	 * 
+	 * An `Err` can be returned to signal that the signer is unavailable/cannot produce a valid
+	 * signature and should be retried later. Once the signer is ready to provide a signature after
+	 * previously returning an `Err`, [`ChannelManager::signer_unblocked`] must be called.
+	 * 
+	 * [`ChannelManager::signer_unblocked`]: crate::ln::channelmanager::ChannelManager::signer_unblocked
 	 */
 	Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ sign_counterparty_commitment(CommitmentTransaction commitment_tx, byte[][] inbound_htlc_preimages, byte[][] outbound_htlc_preimages);
 	/**Creates a signature for a holder's commitment transaction.
@@ -39,9 +43,10 @@ public interface EcdsaChannelSignerInterface {
 	 * An `Err` can be returned to signal that the signer is unavailable/cannot produce a valid
 	 * signature and should be retried later. Once the signer is ready to provide a signature after
 	 * previously returning an `Err`, [`ChannelMonitor::signer_unblocked`] must be called on its
-	 * monitor.
+	 * monitor or [`ChainMonitor::signer_unblocked`] called to attempt unblocking all monitors.
 	 * 
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
+	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
 	Result_ECDSASignatureNoneZ sign_holder_commitment(HolderCommitmentTransaction commitment_tx);
 	/**Create a signature for the given input in a transaction spending an HTLC transaction output
@@ -62,9 +67,10 @@ public interface EcdsaChannelSignerInterface {
 	 * An `Err` can be returned to signal that the signer is unavailable/cannot produce a valid
 	 * signature and should be retried later. Once the signer is ready to provide a signature after
 	 * previously returning an `Err`, [`ChannelMonitor::signer_unblocked`] must be called on its
-	 * monitor.
+	 * monitor or [`ChainMonitor::signer_unblocked`] called to attempt unblocking all monitors.
 	 * 
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
+	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
 	Result_ECDSASignatureNoneZ sign_justice_revoked_output(byte[] justice_tx, long input, long amount, byte[] per_commitment_key);
 	/**Create a signature for the given input in a transaction spending a commitment transaction
@@ -89,9 +95,10 @@ public interface EcdsaChannelSignerInterface {
 	 * An `Err` can be returned to signal that the signer is unavailable/cannot produce a valid
 	 * signature and should be retried later. Once the signer is ready to provide a signature after
 	 * previously returning an `Err`, [`ChannelMonitor::signer_unblocked`] must be called on its
-	 * monitor.
+	 * monitor or [`ChainMonitor::signer_unblocked`] called to attempt unblocking all monitors.
 	 * 
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
+	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
 	Result_ECDSASignatureNoneZ sign_justice_revoked_htlc(byte[] justice_tx, long input, long amount, byte[] per_commitment_key, HTLCOutputInCommitment htlc);
 	/**Computes the signature for a commitment transaction's HTLC output used as an input within
@@ -105,11 +112,12 @@ public interface EcdsaChannelSignerInterface {
 	 * An `Err` can be returned to signal that the signer is unavailable/cannot produce a valid
 	 * signature and should be retried later. Once the signer is ready to provide a signature after
 	 * previously returning an `Err`, [`ChannelMonitor::signer_unblocked`] must be called on its
-	 * monitor.
+	 * monitor or [`ChainMonitor::signer_unblocked`] called to attempt unblocking all monitors.
 	 * 
 	 * [`EcdsaSighashType::All`]: bitcoin::sighash::EcdsaSighashType::All
 	 * [`ChannelMonitor`]: crate::chain::channelmonitor::ChannelMonitor
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
+	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
 	Result_ECDSASignatureNoneZ sign_holder_htlc_transaction(byte[] htlc_tx, long input, HTLCDescriptor htlc_descriptor);
 	/**Create a signature for a claiming transaction for a HTLC output on a counterparty's commitment
@@ -133,15 +141,22 @@ public interface EcdsaChannelSignerInterface {
 	 * An `Err` can be returned to signal that the signer is unavailable/cannot produce a valid
 	 * signature and should be retried later. Once the signer is ready to provide a signature after
 	 * previously returning an `Err`, [`ChannelMonitor::signer_unblocked`] must be called on its
-	 * monitor.
+	 * monitor or [`ChainMonitor::signer_unblocked`] called to attempt unblocking all monitors.
 	 * 
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
+	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
 	Result_ECDSASignatureNoneZ sign_counterparty_htlc_transaction(byte[] htlc_tx, long input, long amount, byte[] per_commitment_point, HTLCOutputInCommitment htlc);
 	/**Create a signature for a (proposed) closing transaction.
 	 * 
 	 * Note that, due to rounding, there may be one \"missing\" satoshi, and either party may have
 	 * chosen to forgo their output as dust.
+	 * 
+	 * An `Err` can be returned to signal that the signer is unavailable/cannot produce a valid
+	 * signature and should be retried later. Once the signer is ready to provide a signature after
+	 * previously returning an `Err`, [`ChannelManager::signer_unblocked`] must be called.
+	 * 
+	 * [`ChannelManager::signer_unblocked`]: crate::ln::channelmanager::ChannelManager::signer_unblocked
 	 */
 	Result_ECDSASignatureNoneZ sign_closing_transaction(ClosingTransaction closing_tx);
 	/**Computes the signature for a commitment transaction's anchor output used as an
@@ -150,9 +165,10 @@ public interface EcdsaChannelSignerInterface {
 	 * An `Err` can be returned to signal that the signer is unavailable/cannot produce a valid
 	 * signature and should be retried later. Once the signer is ready to provide a signature after
 	 * previously returning an `Err`, [`ChannelMonitor::signer_unblocked`] must be called on its
-	 * monitor.
+	 * monitor or [`ChainMonitor::signer_unblocked`] called to attempt unblocking all monitors.
 	 * 
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
+	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
 	Result_ECDSASignatureNoneZ sign_holder_anchor_input(byte[] anchor_tx, long input);
 	/**Signs a channel announcement message with our funding key proving it comes from one of the
@@ -161,13 +177,27 @@ public interface EcdsaChannelSignerInterface {
 	 * Channel announcements also require a signature from each node's network key. Our node
 	 * signature is computed through [`NodeSigner::sign_gossip_message`].
 	 * 
-	 * Note that if this fails or is rejected, the channel will not be publicly announced and
-	 * our counterparty may (though likely will not) close the channel on us for violating the
-	 * protocol.
+	 * This method is *not* asynchronous. If an `Err` is returned, the channel will not be
+	 * publicly announced and our counterparty may (though likely will not) close the channel on
+	 * us for violating the protocol.
 	 * 
 	 * [`NodeSigner::sign_gossip_message`]: crate::sign::NodeSigner::sign_gossip_message
 	 */
 	Result_ECDSASignatureNoneZ sign_channel_announcement_with_funding_key(UnsignedChannelAnnouncement msg);
+	/**Signs the input of a splicing funding transaction with our funding key.
+	 * 
+	 * In splicing, the previous funding transaction output is spent as the input of
+	 * the new funding transaction, and is a 2-of-2 multisig.
+	 * 
+	 * `input_index`: The index of the input within the new funding transaction `tx`,
+	 * spending the previous funding transaction's output
+	 * 
+	 * `input_value`: The value of the previous funding transaction output.
+	 * 
+	 * This method is *not* asynchronous. If an `Err` is returned, the channel will be immediately
+	 * closed.
+	 */
+	Result_ECDSASignatureNoneZ sign_splicing_funding_input(byte[] tx, long input_index, long input_value);
 }
 
 /**
@@ -178,6 +208,15 @@ public interface EcdsaChannelSignerInterface {
  * policies in order to be secure. Please refer to the [VLS Policy
  * Controls](https://gitlab.com/lightning-signer/validating-lightning-signer/-/blob/main/docs/policy-controls.md)
  * for an example of such policies.
+ * 
+ * Like [`ChannelSigner`], many of the methods allow errors to be returned to support async
+ * signing. In such cases, the signing operation can be replayed by calling
+ * [`ChannelManager::signer_unblocked`] or [`ChainMonitor::signer_unblocked`] (see individual
+ * method documentation for which method should be called) once the result is ready, at which
+ * point the channel operation will resume.
+ * 
+ * [`ChannelManager::signer_unblocked`]: crate::ln::channelmanager::ChannelManager::signer_unblocked
+ * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
  */
 public class EcdsaChannelSigner : CommonBase {
 	internal bindings.LDKEcdsaChannelSigner bindings_instance;
@@ -278,6 +317,13 @@ public class EcdsaChannelSigner : CommonBase {
 			long result = ret.clone_ptr();
 			return result;
 		}
+		public long sign_splicing_funding_input(long _tx, long _input_index, long _input_value) {
+			byte[] _tx_conv = InternalUtils.decodeUint8Array(_tx);
+			Result_ECDSASignatureNoneZ ret = arg.sign_splicing_funding_input(_tx_conv, _input_index, _input_value);
+				GC.KeepAlive(arg);
+			long result = ret.clone_ptr();
+			return result;
+		}
 	}
 
 	/** Creates a new instance of EcdsaChannelSigner from a given implementation */
@@ -297,8 +343,6 @@ public class EcdsaChannelSigner : CommonBase {
 	/**
 	 * Create a signature for a counterparty's commitment transaction and associated HTLC transactions.
 	 * 
-	 * Note that if signing fails or is rejected, the channel will be force-closed.
-	 * 
 	 * Policy checks should be implemented in this function, including checking the amount
 	 * sent to us and checking the HTLCs.
 	 * 
@@ -309,6 +353,12 @@ public class EcdsaChannelSigner : CommonBase {
 	 * 
 	 * Note that all the relevant preimages will be provided, but there may also be additional
 	 * irrelevant or duplicate preimages.
+	 * 
+	 * An `Err` can be returned to signal that the signer is unavailable/cannot produce a valid
+	 * signature and should be retried later. Once the signer is ready to provide a signature after
+	 * previously returning an `Err`, [`ChannelManager::signer_unblocked`] must be called.
+	 * 
+	 * [`ChannelManager::signer_unblocked`]: crate::ln::channelmanager::ChannelManager::signer_unblocked
 	 */
 	public Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ sign_counterparty_commitment(org.ldk.structs.CommitmentTransaction commitment_tx, byte[][] inbound_htlc_preimages, byte[][] outbound_htlc_preimages) {
 		long ret = bindings.EcdsaChannelSigner_sign_counterparty_commitment(this.ptr, commitment_tx.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(inbound_htlc_preimages, inbound_htlc_preimages_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(inbound_htlc_preimages_conv_8, 32)))), InternalUtils.encodeUint64Array(InternalUtils.mapArray(outbound_htlc_preimages, outbound_htlc_preimages_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(outbound_htlc_preimages_conv_8, 32)))));
@@ -336,9 +386,10 @@ public class EcdsaChannelSigner : CommonBase {
 	 * An `Err` can be returned to signal that the signer is unavailable/cannot produce a valid
 	 * signature and should be retried later. Once the signer is ready to provide a signature after
 	 * previously returning an `Err`, [`ChannelMonitor::signer_unblocked`] must be called on its
-	 * monitor.
+	 * monitor or [`ChainMonitor::signer_unblocked`] called to attempt unblocking all monitors.
 	 * 
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
+	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
 	public Result_ECDSASignatureNoneZ sign_holder_commitment(org.ldk.structs.HolderCommitmentTransaction commitment_tx) {
 		long ret = bindings.EcdsaChannelSigner_sign_holder_commitment(this.ptr, commitment_tx.ptr);
@@ -369,9 +420,10 @@ public class EcdsaChannelSigner : CommonBase {
 	 * An `Err` can be returned to signal that the signer is unavailable/cannot produce a valid
 	 * signature and should be retried later. Once the signer is ready to provide a signature after
 	 * previously returning an `Err`, [`ChannelMonitor::signer_unblocked`] must be called on its
-	 * monitor.
+	 * monitor or [`ChainMonitor::signer_unblocked`] called to attempt unblocking all monitors.
 	 * 
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
+	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
 	public Result_ECDSASignatureNoneZ sign_justice_revoked_output(byte[] justice_tx, long input, long amount, byte[] per_commitment_key) {
 		long ret = bindings.EcdsaChannelSigner_sign_justice_revoked_output(this.ptr, InternalUtils.encodeUint8Array(justice_tx), input, amount, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(per_commitment_key, 32)));
@@ -408,9 +460,10 @@ public class EcdsaChannelSigner : CommonBase {
 	 * An `Err` can be returned to signal that the signer is unavailable/cannot produce a valid
 	 * signature and should be retried later. Once the signer is ready to provide a signature after
 	 * previously returning an `Err`, [`ChannelMonitor::signer_unblocked`] must be called on its
-	 * monitor.
+	 * monitor or [`ChainMonitor::signer_unblocked`] called to attempt unblocking all monitors.
 	 * 
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
+	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
 	public Result_ECDSASignatureNoneZ sign_justice_revoked_htlc(byte[] justice_tx, long input, long amount, byte[] per_commitment_key, org.ldk.structs.HTLCOutputInCommitment htlc) {
 		long ret = bindings.EcdsaChannelSigner_sign_justice_revoked_htlc(this.ptr, InternalUtils.encodeUint8Array(justice_tx), input, amount, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(per_commitment_key, 32)), htlc.ptr);
@@ -438,11 +491,12 @@ public class EcdsaChannelSigner : CommonBase {
 	 * An `Err` can be returned to signal that the signer is unavailable/cannot produce a valid
 	 * signature and should be retried later. Once the signer is ready to provide a signature after
 	 * previously returning an `Err`, [`ChannelMonitor::signer_unblocked`] must be called on its
-	 * monitor.
+	 * monitor or [`ChainMonitor::signer_unblocked`] called to attempt unblocking all monitors.
 	 * 
 	 * [`EcdsaSighashType::All`]: bitcoin::sighash::EcdsaSighashType::All
 	 * [`ChannelMonitor`]: crate::chain::channelmonitor::ChannelMonitor
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
+	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
 	public Result_ECDSASignatureNoneZ sign_holder_htlc_transaction(byte[] htlc_tx, long input, org.ldk.structs.HTLCDescriptor htlc_descriptor) {
 		long ret = bindings.EcdsaChannelSigner_sign_holder_htlc_transaction(this.ptr, InternalUtils.encodeUint8Array(htlc_tx), input, htlc_descriptor.ptr);
@@ -478,9 +532,10 @@ public class EcdsaChannelSigner : CommonBase {
 	 * An `Err` can be returned to signal that the signer is unavailable/cannot produce a valid
 	 * signature and should be retried later. Once the signer is ready to provide a signature after
 	 * previously returning an `Err`, [`ChannelMonitor::signer_unblocked`] must be called on its
-	 * monitor.
+	 * monitor or [`ChainMonitor::signer_unblocked`] called to attempt unblocking all monitors.
 	 * 
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
+	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
 	public Result_ECDSASignatureNoneZ sign_counterparty_htlc_transaction(byte[] htlc_tx, long input, long amount, byte[] per_commitment_point, org.ldk.structs.HTLCOutputInCommitment htlc) {
 		long ret = bindings.EcdsaChannelSigner_sign_counterparty_htlc_transaction(this.ptr, InternalUtils.encodeUint8Array(htlc_tx), input, amount, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(per_commitment_point, 33)), htlc.ptr);
@@ -501,6 +556,12 @@ public class EcdsaChannelSigner : CommonBase {
 	 * 
 	 * Note that, due to rounding, there may be one \"missing\" satoshi, and either party may have
 	 * chosen to forgo their output as dust.
+	 * 
+	 * An `Err` can be returned to signal that the signer is unavailable/cannot produce a valid
+	 * signature and should be retried later. Once the signer is ready to provide a signature after
+	 * previously returning an `Err`, [`ChannelManager::signer_unblocked`] must be called.
+	 * 
+	 * [`ChannelManager::signer_unblocked`]: crate::ln::channelmanager::ChannelManager::signer_unblocked
 	 */
 	public Result_ECDSASignatureNoneZ sign_closing_transaction(org.ldk.structs.ClosingTransaction closing_tx) {
 		long ret = bindings.EcdsaChannelSigner_sign_closing_transaction(this.ptr, closing_tx.ptr);
@@ -519,9 +580,10 @@ public class EcdsaChannelSigner : CommonBase {
 	 * An `Err` can be returned to signal that the signer is unavailable/cannot produce a valid
 	 * signature and should be retried later. Once the signer is ready to provide a signature after
 	 * previously returning an `Err`, [`ChannelMonitor::signer_unblocked`] must be called on its
-	 * monitor.
+	 * monitor or [`ChainMonitor::signer_unblocked`] called to attempt unblocking all monitors.
 	 * 
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
+	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
 	public Result_ECDSASignatureNoneZ sign_holder_anchor_input(byte[] anchor_tx, long input) {
 		long ret = bindings.EcdsaChannelSigner_sign_holder_anchor_input(this.ptr, InternalUtils.encodeUint8Array(anchor_tx), input);
@@ -540,9 +602,9 @@ public class EcdsaChannelSigner : CommonBase {
 	 * Channel announcements also require a signature from each node's network key. Our node
 	 * signature is computed through [`NodeSigner::sign_gossip_message`].
 	 * 
-	 * Note that if this fails or is rejected, the channel will not be publicly announced and
-	 * our counterparty may (though likely will not) close the channel on us for violating the
-	 * protocol.
+	 * This method is *not* asynchronous. If an `Err` is returned, the channel will not be
+	 * publicly announced and our counterparty may (though likely will not) close the channel on
+	 * us for violating the protocol.
 	 * 
 	 * [`NodeSigner::sign_gossip_message`]: crate::sign::NodeSigner::sign_gossip_message
 	 */
@@ -553,6 +615,31 @@ public class EcdsaChannelSigner : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ECDSASignatureNoneZ ret_hu_conv = Result_ECDSASignatureNoneZ.constr_from_ptr(ret);
 		if (this != null) { this.ptrs_to.AddLast(msg); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Signs the input of a splicing funding transaction with our funding key.
+	 * 
+	 * In splicing, the previous funding transaction output is spent as the input of
+	 * the new funding transaction, and is a 2-of-2 multisig.
+	 * 
+	 * `input_index`: The index of the input within the new funding transaction `tx`,
+	 * spending the previous funding transaction's output
+	 * 
+	 * `input_value`: The value of the previous funding transaction output.
+	 * 
+	 * This method is *not* asynchronous. If an `Err` is returned, the channel will be immediately
+	 * closed.
+	 */
+	public Result_ECDSASignatureNoneZ sign_splicing_funding_input(byte[] tx, long input_index, long input_value) {
+		long ret = bindings.EcdsaChannelSigner_sign_splicing_funding_input(this.ptr, InternalUtils.encodeUint8Array(tx), input_index, input_value);
+		GC.KeepAlive(this);
+		GC.KeepAlive(tx);
+		GC.KeepAlive(input_index);
+		GC.KeepAlive(input_value);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_ECDSASignatureNoneZ ret_hu_conv = Result_ECDSASignatureNoneZ.constr_from_ptr(ret);
 		return ret_hu_conv;
 	}
 

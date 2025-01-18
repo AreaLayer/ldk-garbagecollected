@@ -9,8 +9,10 @@ import javax.annotation.Nullable;
 
 
 /**
- * A tx_init_rbf message which initiates a replacement of the transaction after it's been
+ * A [`tx_init_rbf`] message which initiates a replacement of the transaction after it's been
  * completed.
+ * 
+ * [`tx_init_rbf`]: https://github.com/lightning/bolts/blob/master/02-peer-protocol.md#the-tx_init_rbf-message
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class TxInitRbf extends CommonBase {

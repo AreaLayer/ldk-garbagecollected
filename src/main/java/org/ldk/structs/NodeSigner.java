@@ -38,7 +38,7 @@ public class NodeSigner extends CommonBase {
 	}
 	public static interface NodeSignerInterface {
 		/**
-		 * Get secret key material as bytes for use in encrypting and decrypting inbound payment data.
+		 * Get the [`ExpandedKey`] for use in encrypting and decrypting inbound payment data.
 		 * 
 		 * If the implementor of this trait supports [phantom node payments], then every node that is
 		 * intended to be included in the phantom invoice route hints must return the same value from
@@ -48,7 +48,7 @@ public class NodeSigner extends CommonBase {
 		 * 
 		 * [phantom node payments]: PhantomKeysManager
 		 */
-		byte[] get_inbound_payment_key_material();
+		ExpandedKey get_inbound_payment_key();
 		/**
 		 * Get node id based on the provided [`Recipient`].
 		 * 
@@ -84,24 +84,7 @@ public class NodeSigner extends CommonBase {
 		 */
 		Result_RecoverableSignatureNoneZ sign_invoice(RawBolt11Invoice invoice, Recipient recipient);
 		/**
-		 * Signs the [`TaggedHash`] of a BOLT 12 invoice request.
-		 * 
-		 * May be called by a function passed to [`UnsignedInvoiceRequest::sign`] where
-		 * `invoice_request` is the callee.
-		 * 
-		 * Implementors may check that the `invoice_request` is expected rather than blindly signing
-		 * the tagged hash. An `Ok` result should sign `invoice_request.tagged_hash().as_digest()` with
-		 * the node's signing key or an ephemeral key to preserve privacy, whichever is associated with
-		 * [`UnsignedInvoiceRequest::payer_id`].
-		 * 
-		 * [`TaggedHash`]: crate::offers::merkle::TaggedHash
-		 */
-		Result_SchnorrSignatureNoneZ sign_bolt12_invoice_request(UnsignedInvoiceRequest invoice_request);
-		/**
 		 * Signs the [`TaggedHash`] of a BOLT 12 invoice.
-		 * 
-		 * May be called by a function passed to [`UnsignedBolt12Invoice::sign`] where `invoice` is the
-		 * callee.
 		 * 
 		 * Implementors may check that the `invoice` is expected rather than blindly signing the tagged
 		 * hash. An `Ok` result should sign `invoice.tagged_hash().as_digest()` with the node's signing
@@ -125,10 +108,10 @@ public class NodeSigner extends CommonBase {
 	public static NodeSigner new_impl(NodeSignerInterface arg) {
 		final LDKNodeSignerHolder impl_holder = new LDKNodeSignerHolder();
 		impl_holder.held = new NodeSigner(new bindings.LDKNodeSigner() {
-			@Override public byte[] get_inbound_payment_key_material() {
-				byte[] ret = arg.get_inbound_payment_key_material();
+			@Override public long get_inbound_payment_key() {
+				ExpandedKey ret = arg.get_inbound_payment_key();
 				Reference.reachabilityFence(arg);
-				byte[] result = InternalUtils.check_arr_len(ret, 32);
+				long result = ret.clone_ptr();
 				return result;
 			}
 			@Override public long get_node_id(Recipient recipient) {
@@ -152,13 +135,6 @@ public class NodeSigner extends CommonBase {
 				long result = ret.clone_ptr();
 				return result;
 			}
-			@Override public long sign_bolt12_invoice_request(long invoice_request) {
-				org.ldk.structs.UnsignedInvoiceRequest invoice_request_hu_conv = null; if (invoice_request < 0 || invoice_request > 4096) { invoice_request_hu_conv = new org.ldk.structs.UnsignedInvoiceRequest(null, invoice_request); }
-				Result_SchnorrSignatureNoneZ ret = arg.sign_bolt12_invoice_request(invoice_request_hu_conv);
-				Reference.reachabilityFence(arg);
-				long result = ret.clone_ptr();
-				return result;
-			}
 			@Override public long sign_bolt12_invoice(long invoice) {
 				org.ldk.structs.UnsignedBolt12Invoice invoice_hu_conv = null; if (invoice < 0 || invoice > 4096) { invoice_hu_conv = new org.ldk.structs.UnsignedBolt12Invoice(null, invoice); }
 				Result_SchnorrSignatureNoneZ ret = arg.sign_bolt12_invoice(invoice_hu_conv);
@@ -178,7 +154,7 @@ public class NodeSigner extends CommonBase {
 		return impl_holder.held;
 	}
 	/**
-	 * Get secret key material as bytes for use in encrypting and decrypting inbound payment data.
+	 * Get the [`ExpandedKey`] for use in encrypting and decrypting inbound payment data.
 	 * 
 	 * If the implementor of this trait supports [phantom node payments], then every node that is
 	 * intended to be included in the phantom invoice route hints must return the same value from
@@ -188,10 +164,13 @@ public class NodeSigner extends CommonBase {
 	 * 
 	 * [phantom node payments]: PhantomKeysManager
 	 */
-	public byte[] get_inbound_payment_key_material() {
-		byte[] ret = bindings.NodeSigner_get_inbound_payment_key_material(this.ptr);
+	public ExpandedKey get_inbound_payment_key() {
+		long ret = bindings.NodeSigner_get_inbound_payment_key(this.ptr);
 		Reference.reachabilityFence(this);
-		return ret;
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ExpandedKey ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ExpandedKey(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
 	}
 
 	/**
@@ -257,33 +236,7 @@ public class NodeSigner extends CommonBase {
 	}
 
 	/**
-	 * Signs the [`TaggedHash`] of a BOLT 12 invoice request.
-	 * 
-	 * May be called by a function passed to [`UnsignedInvoiceRequest::sign`] where
-	 * `invoice_request` is the callee.
-	 * 
-	 * Implementors may check that the `invoice_request` is expected rather than blindly signing
-	 * the tagged hash. An `Ok` result should sign `invoice_request.tagged_hash().as_digest()` with
-	 * the node's signing key or an ephemeral key to preserve privacy, whichever is associated with
-	 * [`UnsignedInvoiceRequest::payer_id`].
-	 * 
-	 * [`TaggedHash`]: crate::offers::merkle::TaggedHash
-	 */
-	public Result_SchnorrSignatureNoneZ sign_bolt12_invoice_request(org.ldk.structs.UnsignedInvoiceRequest invoice_request) {
-		long ret = bindings.NodeSigner_sign_bolt12_invoice_request(this.ptr, invoice_request.ptr);
-		Reference.reachabilityFence(this);
-		Reference.reachabilityFence(invoice_request);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		Result_SchnorrSignatureNoneZ ret_hu_conv = Result_SchnorrSignatureNoneZ.constr_from_ptr(ret);
-		if (this != null) { this.ptrs_to.add(invoice_request); };
-		return ret_hu_conv;
-	}
-
-	/**
 	 * Signs the [`TaggedHash`] of a BOLT 12 invoice.
-	 * 
-	 * May be called by a function passed to [`UnsignedBolt12Invoice::sign`] where `invoice` is the
-	 * callee.
 	 * 
 	 * Implementors may check that the `invoice` is expected rather than blindly signing the tagged
 	 * hash. An `Ok` result should sign `invoice.tagged_hash().as_digest()` with the node's signing

@@ -45,12 +45,12 @@ public class AsyncPaymentsMessageHandler extends CommonBase {
 		 * 
 		 * Note that responder (or a relevant inner pointer) may be NULL or all-0s to represent None
 		 */
-		Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ held_htlc_available(HeldHtlcAvailable message, Responder responder);
+		Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ handle_held_htlc_available(HeldHtlcAvailable message, Responder responder);
 		/**
 		 * Handle a [`ReleaseHeldHtlc`] message. If authentication of the message succeeds, an HTLC
 		 * should be released to the corresponding payee.
 		 */
-		void release_held_htlc(ReleaseHeldHtlc message);
+		void handle_release_held_htlc(ReleaseHeldHtlc message, AsyncPaymentsContext context);
 		/**
 		 * Release any [`AsyncPaymentsMessage`]s that need to be sent.
 		 * 
@@ -63,20 +63,22 @@ public class AsyncPaymentsMessageHandler extends CommonBase {
 	public static AsyncPaymentsMessageHandler new_impl(AsyncPaymentsMessageHandlerInterface arg) {
 		final LDKAsyncPaymentsMessageHandlerHolder impl_holder = new LDKAsyncPaymentsMessageHandlerHolder();
 		impl_holder.held = new AsyncPaymentsMessageHandler(new bindings.LDKAsyncPaymentsMessageHandler() {
-			@Override public long held_htlc_available(long message, long responder) {
+			@Override public long handle_held_htlc_available(long message, long responder) {
 				org.ldk.structs.HeldHtlcAvailable message_hu_conv = null; if (message < 0 || message > 4096) { message_hu_conv = new org.ldk.structs.HeldHtlcAvailable(null, message); }
 				if (message_hu_conv != null) { message_hu_conv.ptrs_to.add(this); };
 				org.ldk.structs.Responder responder_hu_conv = null; if (responder < 0 || responder > 4096) { responder_hu_conv = new org.ldk.structs.Responder(null, responder); }
 				if (responder_hu_conv != null) { responder_hu_conv.ptrs_to.add(this); };
-				Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ ret = arg.held_htlc_available(message_hu_conv, responder_hu_conv);
+				Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ ret = arg.handle_held_htlc_available(message_hu_conv, responder_hu_conv);
 				Reference.reachabilityFence(arg);
 				long result = ret.clone_ptr();
 				return result;
 			}
-			@Override public void release_held_htlc(long message) {
+			@Override public void handle_release_held_htlc(long message, long context) {
 				org.ldk.structs.ReleaseHeldHtlc message_hu_conv = null; if (message < 0 || message > 4096) { message_hu_conv = new org.ldk.structs.ReleaseHeldHtlc(null, message); }
 				if (message_hu_conv != null) { message_hu_conv.ptrs_to.add(this); };
-				arg.release_held_htlc(message_hu_conv);
+				org.ldk.structs.AsyncPaymentsContext context_hu_conv = org.ldk.structs.AsyncPaymentsContext.constr_from_ptr(context);
+				if (context_hu_conv != null) { context_hu_conv.ptrs_to.add(this); };
+				arg.handle_release_held_htlc(message_hu_conv, context_hu_conv);
 				Reference.reachabilityFence(arg);
 			}
 			@Override public long[] release_pending_messages() {
@@ -94,8 +96,8 @@ public class AsyncPaymentsMessageHandler extends CommonBase {
 	 * 
 	 * Note that responder (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ held_htlc_available(org.ldk.structs.HeldHtlcAvailable message, @Nullable org.ldk.structs.Responder responder) {
-		long ret = bindings.AsyncPaymentsMessageHandler_held_htlc_available(this.ptr, message.ptr, responder == null ? 0 : responder.ptr);
+	public Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ handle_held_htlc_available(org.ldk.structs.HeldHtlcAvailable message, @Nullable org.ldk.structs.Responder responder) {
+		long ret = bindings.AsyncPaymentsMessageHandler_handle_held_htlc_available(this.ptr, message.ptr, responder == null ? 0 : responder.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(message);
 		Reference.reachabilityFence(responder);
@@ -109,10 +111,11 @@ public class AsyncPaymentsMessageHandler extends CommonBase {
 	 * Handle a [`ReleaseHeldHtlc`] message. If authentication of the message succeeds, an HTLC
 	 * should be released to the corresponding payee.
 	 */
-	public void release_held_htlc(org.ldk.structs.ReleaseHeldHtlc message) {
-		bindings.AsyncPaymentsMessageHandler_release_held_htlc(this.ptr, message.ptr);
+	public void handle_release_held_htlc(org.ldk.structs.ReleaseHeldHtlc message, org.ldk.structs.AsyncPaymentsContext context) {
+		bindings.AsyncPaymentsMessageHandler_handle_release_held_htlc(this.ptr, message.ptr, context.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(message);
+		Reference.reachabilityFence(context);
 	}
 
 	/**

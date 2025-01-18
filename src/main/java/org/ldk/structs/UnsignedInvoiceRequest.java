@@ -180,22 +180,32 @@ public class UnsignedInvoiceRequest extends CommonBase {
 	}
 
 	/**
-	 * The public key used by the recipient to sign invoices.
+	 * The public key corresponding to the key used by the recipient to sign invoices.
+	 * - If [`Offer::paths`] is empty, MUST be `Some` and contain the recipient's node id for
+	 * sending an [`InvoiceRequest`].
+	 * - If [`Offer::paths`] is not empty, MAY be `Some` and contain a transient id.
+	 * - If `None`, the signing pubkey will be the final blinded node id from the
+	 * [`BlindedMessagePath`] in [`Offer::paths`] used to send the [`InvoiceRequest`].
+	 * 
+	 * See also [`Bolt12Invoice::signing_pubkey`].
+	 * 
+	 * [`InvoiceRequest`]: crate::offers::invoice_request::InvoiceRequest
+	 * [`Bolt12Invoice::signing_pubkey`]: crate::offers::invoice::Bolt12Invoice::signing_pubkey
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	@Nullable
-	public byte[] signing_pubkey() {
-		byte[] ret = bindings.UnsignedInvoiceRequest_signing_pubkey(this.ptr);
+	public byte[] issuer_signing_pubkey() {
+		byte[] ret = bindings.UnsignedInvoiceRequest_issuer_signing_pubkey(this.ptr);
 		Reference.reachabilityFence(this);
 		return ret;
 	}
 
 	/**
 	 * An unpredictable series of bytes, typically containing information about the derivation of
-	 * [`payer_id`].
+	 * [`payer_signing_pubkey`].
 	 * 
-	 * [`payer_id`]: Self::payer_id
+	 * [`payer_signing_pubkey`]: Self::payer_signing_pubkey
 	 */
 	public byte[] payer_metadata() {
 		byte[] ret = bindings.UnsignedInvoiceRequest_payer_metadata(this.ptr);
@@ -228,6 +238,19 @@ public class UnsignedInvoiceRequest extends CommonBase {
 	}
 
 	/**
+	 * Returns whether an amount was set in the request; otherwise, if [`amount_msats`] is `Some`
+	 * then it was inferred from the [`Offer::amount`] and [`quantity`].
+	 * 
+	 * [`amount_msats`]: Self::amount_msats
+	 * [`quantity`]: Self::quantity
+	 */
+	public boolean has_amount_msats() {
+		boolean ret = bindings.UnsignedInvoiceRequest_has_amount_msats(this.ptr);
+		Reference.reachabilityFence(this);
+		return ret;
+	}
+
+	/**
 	 * Features pertaining to requesting an invoice.
 	 */
 	public InvoiceRequestFeatures invoice_request_features() {
@@ -254,8 +277,8 @@ public class UnsignedInvoiceRequest extends CommonBase {
 	/**
 	 * A possibly transient pubkey used to sign the invoice request.
 	 */
-	public byte[] payer_id() {
-		byte[] ret = bindings.UnsignedInvoiceRequest_payer_id(this.ptr);
+	public byte[] payer_signing_pubkey() {
+		byte[] ret = bindings.UnsignedInvoiceRequest_payer_signing_pubkey(this.ptr);
 		Reference.reachabilityFence(this);
 		return ret;
 	}
@@ -272,6 +295,22 @@ public class UnsignedInvoiceRequest extends CommonBase {
 		Reference.reachabilityFence(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PrintableString ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.PrintableString(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * If the [`Offer`] was sourced from a BIP 353 Human Readable Name, this should be set by the
+	 * builder to indicate the original [`HumanReadableName`] which was resolved.
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	@Nullable
+	public HumanReadableName offer_from_hrn() {
+		long ret = bindings.UnsignedInvoiceRequest_offer_from_hrn(this.ptr);
+		Reference.reachabilityFence(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.HumanReadableName ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.HumanReadableName(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
 		return ret_hu_conv;
 	}

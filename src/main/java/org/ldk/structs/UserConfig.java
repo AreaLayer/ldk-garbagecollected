@@ -235,42 +235,6 @@ public class UserConfig extends CommonBase {
 	}
 
 	/**
-	 * If this is set to `false`, when receiving a keysend payment we'll fail it if it has multiple
-	 * parts. If this is set to `true`, we'll accept the payment.
-	 * 
-	 * Setting this to `true` will break backwards compatibility upon downgrading to an LDK
-	 * version prior to 0.0.116 while receiving an MPP keysend. If we have already received an MPP
-	 * keysend, downgrading will cause us to fail to deserialize [`ChannelManager`].
-	 * 
-	 * Default value: `false`
-	 * 
-	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
-	 */
-	public boolean get_accept_mpp_keysend() {
-		boolean ret = bindings.UserConfig_get_accept_mpp_keysend(this.ptr);
-		Reference.reachabilityFence(this);
-		return ret;
-	}
-
-	/**
-	 * If this is set to `false`, when receiving a keysend payment we'll fail it if it has multiple
-	 * parts. If this is set to `true`, we'll accept the payment.
-	 * 
-	 * Setting this to `true` will break backwards compatibility upon downgrading to an LDK
-	 * version prior to 0.0.116 while receiving an MPP keysend. If we have already received an MPP
-	 * keysend, downgrading will cause us to fail to deserialize [`ChannelManager`].
-	 * 
-	 * Default value: `false`
-	 * 
-	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
-	 */
-	public void set_accept_mpp_keysend(boolean val) {
-		bindings.UserConfig_set_accept_mpp_keysend(this.ptr, val);
-		Reference.reachabilityFence(this);
-		Reference.reachabilityFence(val);
-	}
-
-	/**
 	 * If this is set to `true`, the user needs to manually pay [`Bolt12Invoice`]s when received.
 	 * 
 	 * When set to `true`, [`Event::InvoiceReceived`] will be generated for each received
@@ -315,8 +279,8 @@ public class UserConfig extends CommonBase {
 	/**
 	 * Constructs a new UserConfig given each field
 	 */
-	public static UserConfig of(org.ldk.structs.ChannelHandshakeConfig channel_handshake_config_arg, org.ldk.structs.ChannelHandshakeLimits channel_handshake_limits_arg, org.ldk.structs.ChannelConfig channel_config_arg, boolean accept_forwards_to_priv_channels_arg, boolean accept_inbound_channels_arg, boolean manually_accept_inbound_channels_arg, boolean accept_intercept_htlcs_arg, boolean accept_mpp_keysend_arg, boolean manually_handle_bolt12_invoices_arg) {
-		long ret = bindings.UserConfig_new(channel_handshake_config_arg.ptr, channel_handshake_limits_arg.ptr, channel_config_arg.ptr, accept_forwards_to_priv_channels_arg, accept_inbound_channels_arg, manually_accept_inbound_channels_arg, accept_intercept_htlcs_arg, accept_mpp_keysend_arg, manually_handle_bolt12_invoices_arg);
+	public static UserConfig of(org.ldk.structs.ChannelHandshakeConfig channel_handshake_config_arg, org.ldk.structs.ChannelHandshakeLimits channel_handshake_limits_arg, org.ldk.structs.ChannelConfig channel_config_arg, boolean accept_forwards_to_priv_channels_arg, boolean accept_inbound_channels_arg, boolean manually_accept_inbound_channels_arg, boolean accept_intercept_htlcs_arg, boolean manually_handle_bolt12_invoices_arg) {
+		long ret = bindings.UserConfig_new(channel_handshake_config_arg.ptr, channel_handshake_limits_arg.ptr, channel_config_arg.ptr, accept_forwards_to_priv_channels_arg, accept_inbound_channels_arg, manually_accept_inbound_channels_arg, accept_intercept_htlcs_arg, manually_handle_bolt12_invoices_arg);
 		Reference.reachabilityFence(channel_handshake_config_arg);
 		Reference.reachabilityFence(channel_handshake_limits_arg);
 		Reference.reachabilityFence(channel_config_arg);
@@ -324,7 +288,6 @@ public class UserConfig extends CommonBase {
 		Reference.reachabilityFence(accept_inbound_channels_arg);
 		Reference.reachabilityFence(manually_accept_inbound_channels_arg);
 		Reference.reachabilityFence(accept_intercept_htlcs_arg);
-		Reference.reachabilityFence(accept_mpp_keysend_arg);
 		Reference.reachabilityFence(manually_handle_bolt12_invoices_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.UserConfig ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.UserConfig(null, ret); }

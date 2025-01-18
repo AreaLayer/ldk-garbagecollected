@@ -56,16 +56,13 @@ class HumanObjectPeerTestInstance {
             NodeSigner underlying_ns = underlying_km.as_NodeSigner();
             must_free_objs.add(new WeakReference<>(underlying_ns));
             return NodeSigner.new_impl(new NodeSigner.NodeSignerInterface() {
-                @Override public byte[] get_inbound_payment_key_material() { return underlying_ns.get_inbound_payment_key_material(); }
+                @Override public ExpandedKey get_inbound_payment_key() { return underlying_ns.get_inbound_payment_key(); }
                 @Override public Result_PublicKeyNoneZ get_node_id(Recipient recipient) { return underlying_ns.get_node_id(recipient); }
                 @Override public Result_ThirtyTwoBytesNoneZ ecdh(Recipient recipient, byte[] other_key, Option_BigEndianScalarZ tweak) {
                     return underlying_ns.ecdh(recipient, other_key, tweak);
                 }
                 @Override public Result_RecoverableSignatureNoneZ sign_invoice(RawBolt11Invoice invoice, Recipient recipient) {
                     return underlying_ns.sign_invoice(invoice, recipient);
-                }
-                @Override public Result_SchnorrSignatureNoneZ sign_bolt12_invoice_request(UnsignedInvoiceRequest invoice_request) {
-                    return underlying_ns.sign_bolt12_invoice_request(invoice_request);
                 }
                 @Override public Result_SchnorrSignatureNoneZ sign_bolt12_invoice(UnsignedBolt12Invoice invoice) {
                     return underlying_ns.sign_bolt12_invoice(invoice);
@@ -138,6 +135,9 @@ class HumanObjectPeerTestInstance {
                             }
                             @Override public Result_ECDSASignatureNoneZ sign_channel_announcement_with_funding_key(UnsignedChannelAnnouncement msg) {
                                 return underlying_ecs.sign_channel_announcement_with_funding_key(msg);
+                            }
+                            @Override public Result_ECDSASignatureNoneZ sign_splicing_funding_input(byte[] tx, long input_index, long input_value) {
+                                return underlying_ecs.sign_splicing_funding_input(tx, input_index, input_value);
                             }
                         };
                         EcdsaChannelSigner resp = EcdsaChannelSigner.new_impl(ecsi, csi, underlying_cs.get_pubkeys());
@@ -475,7 +475,8 @@ class HumanObjectPeerTestInstance {
                                 ScoreLookUp.new_impl((candidate, usage, params1) -> candidate.source().as_slice()[1]),
                                 ProbabilisticScoringFeeParameters.with_default(), new byte[32]);
                     }
-                }, new MessageRouter.MessageRouterInterface() {
+                });
+                MessageRouter msg_router = MessageRouter.new_impl(new MessageRouter.MessageRouterInterface() {
                     @Override public Result_OnionMessagePathNoneZ find_path(byte[] sender, byte[][] peers, Destination destination) {
                         return Result_OnionMessagePathNoneZ.err();
                     }
@@ -487,9 +488,9 @@ class HumanObjectPeerTestInstance {
                     }
                 });
                 ChainParameters params = ChainParameters.of(Network.LDKNetwork_Bitcoin, BestBlock.of(new byte[32], 0));
-                this.chan_manager = ChannelManager.of(this.fee_estimator, chain_watch, tx_broadcaster, router, logger,
-                    this.entropy_source, this.node_signer, this.signer_provider, get_config(), params,
-                        (int)(System.currentTimeMillis() / 1000));
+                this.chan_manager = ChannelManager.of(this.fee_estimator, chain_watch, tx_broadcaster, router,
+                    msg_router, logger, this.entropy_source, this.node_signer, this.signer_provider, get_config(),
+                    params, (int)(System.currentTimeMillis() / 1000));
                 this.peer_manager = PeerManager.of(chan_manager.as_ChannelMessageHandler(), route_handler.as_RoutingMessageHandler(),
                         IgnoringMessageHandler.of().as_OnionMessageHandler(), this.custom_message_handler, 0xdeadbeef,
                         this.entropy_source.get_secure_random_bytes(), logger, this.node_signer);
@@ -596,7 +597,8 @@ class HumanObjectPeerTestInstance {
                                 ScoreLookUp.new_impl((candidate, usage, params1) -> candidate.source().as_slice()[0]),
                                 ProbabilisticScoringFeeParameters.with_default(), new byte[32]);
                     }
-                }, new MessageRouter.MessageRouterInterface() {
+                });
+                MessageRouter msg_router = MessageRouter.new_impl(new MessageRouter.MessageRouterInterface() {
                     @Override public Result_OnionMessagePathNoneZ find_path(byte[] sender, byte[][] peers, Destination destination) {
                         return Result_OnionMessagePathNoneZ.err();
                     }
@@ -622,7 +624,7 @@ class HumanObjectPeerTestInstance {
                 }
                 byte[] serialized = orig.chan_manager.write();
                 Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ read_res =
-                        UtilMethods.C2Tuple_ThirtyTwoBytesChannelManagerZ_read(serialized, this.entropy_source, this.node_signer, this.signer_provider, this.fee_estimator, this.chain_watch, this.tx_broadcaster, router, this.logger, get_config(), monitors);
+                        UtilMethods.C2Tuple_ThirtyTwoBytesChannelManagerZ_read(serialized, this.entropy_source, this.node_signer, this.signer_provider, this.fee_estimator, this.chain_watch, this.tx_broadcaster, router, msg_router, this.logger, get_config(), monitors);
                 assert read_res instanceof Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ.Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ_OK;
                 this.chan_manager = ((Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ.Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ_OK) read_res).res.get_b();
                 this.chain_watch.watch_channel(monitors[0].get_funding_txo().get_a(), monitors[0]);
@@ -719,7 +721,7 @@ class HumanObjectPeerTestInstance {
                             res.add(event);
                             return Result_NoneReplayEventZ.ok();
                         });
-                        mon.process_pending_events(handler);
+                        mon.process_pending_events(handler, logger);
                         assert res.size() == expected_len;
                         return res.toArray(new Event[0]);
                     }
@@ -988,7 +990,7 @@ class HumanObjectPeerTestInstance {
         } catch (Exception e) { assert false; }
         invoice_description = new String(string_bytes);
 
-        Result_Bolt11InvoiceSignOrCreationErrorZ invoice = UtilMethods.create_invoice_from_channelmanager(peer2.chan_manager, peer2.node_signer, peer2.logger, Currency.LDKCurrency_Bitcoin, Option_u64Z.some(10000000), invoice_description, 7200, Option_u16Z.none());
+        Result_Bolt11InvoiceSignOrCreationErrorZ invoice = UtilMethods.create_invoice_from_channelmanager(peer2.chan_manager, Option_u64Z.some(10000000), invoice_description, 7200, Option_u16Z.none());
         assert invoice instanceof Result_Bolt11InvoiceSignOrCreationErrorZ.Result_Bolt11InvoiceSignOrCreationErrorZ_OK;
         System.out.println("Got invoice: " + ((Result_Bolt11InvoiceSignOrCreationErrorZ.Result_Bolt11InvoiceSignOrCreationErrorZ_OK) invoice).res.to_str());
         mid_test_must_free_objs.add(new WeakReference<>(invoice));
@@ -1041,40 +1043,19 @@ class HumanObjectPeerTestInstance {
 
             Payee payee = Payee.clear(peer2.node_id, route_hints, invoice_features, 42);
             PaymentParameters pay_params = PaymentParameters.of(payee, Option_u64Z.none(), 6*24*14, (byte)5, (byte)10, (byte)2, new long[0], new long[0]);
-            RouteParameters route_params = RouteParameters.from_payment_params_and_value(pay_params, 10000000);
-            Result_RouteLightningErrorZ route_res = UtilMethods.find_route(
-                    peer1.chan_manager.get_our_node_id(), route_params, peer1.net_graph,
-                    peer1_chans, peer1.logger,
-                    ProbabilisticScorer.of(ProbabilisticScoringDecayParameters.with_default(), peer1.net_graph, peer1.logger).as_ScoreLookUp(),
-                    ProbabilisticScoringFeeParameters.with_default(), new byte[32]);
-            assert route_res instanceof Result_RouteLightningErrorZ.Result_RouteLightningErrorZ_OK;
-            Route route = ((Result_RouteLightningErrorZ.Result_RouteLightningErrorZ_OK) route_res).res;
+            RouteParameters route_params = RouteParameters.from_payment_params_and_value(pay_params, 10_000_000);
             mid_test_must_free_objs.add(new WeakReference<>(payee));
             mid_test_must_free_objs.add(new WeakReference<>(pay_params));
             mid_test_must_free_objs.add(new WeakReference<>(route_params));
-            mid_test_must_free_objs.add(new WeakReference<>(route));
-            assert route.get_paths().length == 1;
-            assert route.get_paths()[0].get_hops().length == 1;
-            assert route.get_paths()[0].final_value_msat() == 10000000;
 
             byte[] payment_id = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 };
-            Result_NonePaymentSendFailureZ payment_res = peer1.chan_manager.send_payment_with_route(route, payment_hash, RecipientOnionFields.secret_only(payment_secret), payment_id);
-            assert payment_res instanceof Result_NonePaymentSendFailureZ.Result_NonePaymentSendFailureZ_OK;
+            Result_NoneRetryableSendFailureZ payment_res = peer1.chan_manager.send_payment(payment_hash, RecipientOnionFields.secret_only(payment_secret), payment_id, route_params, Retry.attempts(0));
+            assert payment_res instanceof Result_NoneRetryableSendFailureZ.Result_NoneRetryableSendFailureZ_OK;
 
-            RouteHop[] hops = new RouteHop[1];
-            byte[] hop_pubkey = new byte[33];
-            hop_pubkey[0] = 3;
-            hop_pubkey[1] = 42;
-            NodeFeatures node_features = NodeFeatures.empty();
-            ChannelFeatures channel_features = ChannelFeatures.empty();
-            hops[0] = RouteHop.of(hop_pubkey, node_features, 42, channel_features, 100, 0, false);
-            Path[] paths = new Path[1];
-            paths[0] = Path.of(hops, null);
-            Route r2 = Route.of(paths, RouteParameters.from_payment_params_and_value(pay_params, 100));
-            mid_test_must_free_objs.add(new WeakReference<>(r2));
-            payment_res = peer1.chan_manager.send_payment_with_route(r2, payment_hash, RecipientOnionFields.secret_only(payment_secret), payment_id);
+            route_params.set_final_value_msat(1_000_000_000);
+            payment_res = peer1.chan_manager.send_payment(payment_hash, RecipientOnionFields.secret_only(payment_secret), payment_id, route_params, Retry.attempts(0));
             mid_test_must_free_objs.add(new WeakReference<>(payment_res));
-            assert payment_res instanceof Result_NonePaymentSendFailureZ.Result_NonePaymentSendFailureZ_Err;
+            assert payment_res instanceof Result_NoneRetryableSendFailureZ.Result_NoneRetryableSendFailureZ_Err;
         } else {
             Result_C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZNoneZ pay_params_res =
                 UtilMethods.payment_parameters_from_invoice(((Result_Bolt11InvoiceParseOrSemanticErrorZ.Result_Bolt11InvoiceParseOrSemanticErrorZ_OK) parsed_invoice).res);

@@ -97,6 +97,23 @@ public class FinalOnionHopData extends CommonBase {
 	}
 
 	/**
+	 * Checks if two FinalOnionHopDatas contain equal inner contents.
+	 * This ignores pointers and is_owned flags and looks at the values in fields.
+	 * Two objects with NULL inner values will be considered "equal" here.
+	 */
+	public boolean eq(org.ldk.structs.FinalOnionHopData b) {
+		boolean ret = bindings.FinalOnionHopData_eq(this.ptr, b.ptr);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(b);
+		if (this != null) { this.ptrs_to.add(b); };
+		return ret;
+	}
+
+	@Override public boolean equals(Object o) {
+		if (!(o instanceof FinalOnionHopData)) return false;
+		return this.eq((FinalOnionHopData)o);
+	}
+	/**
 	 * Serialize the FinalOnionHopData object into a byte array which can be read by FinalOnionHopData_read
 	 */
 	public byte[] write() {

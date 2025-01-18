@@ -11,11 +11,10 @@ import javax.annotation.Nullable;
  * A callback which is called when a [`Future`] completes.
  * 
  * Note that this MUST NOT call back into LDK directly, it must instead schedule actions to be
- * taken later. Rust users should use the [`std::future::Future`] implementation for [`Future`]
- * instead.
+ * taken later.
+ * Rust users should use the [`std::future::Future`] implementation for [`Future`] instead.
  * 
- * Note that the [`std::future::Future`] implementation may only work for runtimes which schedule
- * futures when they receive a wake, rather than immediately executing them.
+ * Note that the [`std::future::Future`] implementation may only work for runtimes which schedule futures when they receive a wake, rather than immediately executing them.
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class FutureCallback extends CommonBase {

@@ -7,9 +7,11 @@ namespace org { namespace ldk { namespace structs {
 
 
 /**
- * An open_channel2 message to be sent by or received from the channel initiator.
+ * An [`open_channel2`] message to be sent by or received from the channel initiator.
  * 
  * Used in V2 channel establishment
+ * 
+ * [`open_channel2`]: https://github.com/lightning/bolts/blob/master/02-peer-protocol.md#the-open_channel2-message
  */
 public class OpenChannelV2 : CommonBase {
 	internal OpenChannelV2(object _dummy, long ptr) : base(ptr) { }

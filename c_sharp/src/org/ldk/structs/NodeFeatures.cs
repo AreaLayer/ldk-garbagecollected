@@ -705,6 +705,40 @@ public class NodeFeatures : CommonBase {
 	/**
 	 * Set this feature as optional.
 	 */
+	public void set_dual_fund_optional() {
+		bindings.NodeFeatures_set_dual_fund_optional(this.ptr);
+		GC.KeepAlive(this);
+	}
+
+	/**
+	 * Set this feature as required.
+	 */
+	public void set_dual_fund_required() {
+		bindings.NodeFeatures_set_dual_fund_required(this.ptr);
+		GC.KeepAlive(this);
+	}
+
+	/**
+	 * Checks if this feature is supported.
+	 */
+	public bool supports_dual_fund() {
+		bool ret = bindings.NodeFeatures_supports_dual_fund(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Checks if this feature is required.
+	 */
+	public bool requires_dual_fund() {
+		bool ret = bindings.NodeFeatures_requires_dual_fund(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Set this feature as optional.
+	 */
 	public void set_taproot_optional() {
 		bindings.NodeFeatures_set_taproot_optional(this.ptr);
 		GC.KeepAlive(this);
@@ -936,6 +970,40 @@ public class NodeFeatures : CommonBase {
 	 */
 	public bool requires_trampoline_routing() {
 		bool ret = bindings.NodeFeatures_requires_trampoline_routing(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Set this feature as optional.
+	 */
+	public void set_dns_resolution_optional() {
+		bindings.NodeFeatures_set_dns_resolution_optional(this.ptr);
+		GC.KeepAlive(this);
+	}
+
+	/**
+	 * Set this feature as required.
+	 */
+	public void set_dns_resolution_required() {
+		bindings.NodeFeatures_set_dns_resolution_required(this.ptr);
+		GC.KeepAlive(this);
+	}
+
+	/**
+	 * Checks if this feature is supported.
+	 */
+	public bool supports_dns_resolution() {
+		bool ret = bindings.NodeFeatures_supports_dns_resolution(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Checks if this feature is required.
+	 */
+	public bool requires_dns_resolution() {
+		bool ret = bindings.NodeFeatures_requires_dns_resolution(this.ptr);
 		GC.KeepAlive(this);
 		return ret;
 	}

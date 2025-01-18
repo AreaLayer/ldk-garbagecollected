@@ -40,11 +40,11 @@ jobs:
           # Note this is a different endpoint, as we need one non-upstream commit!
           git clone https://github.com/lightningdevkit/rust-lightning
           cd rust-lightning
-          git checkout origin/0.0.125-bindings
+          git checkout origin/0.1-bindings
           cd ..
           git clone https://github.com/lightningdevkit/ldk-c-bindings
           cd ldk-c-bindings
-          git checkout 0.0.125
+          git checkout 0.1
       - name: Rebuild C bindings without STD
         run: |
           cd ldk-c-bindings
@@ -136,11 +136,11 @@ jobs:
           # Note this is a different endpoint, as we need one non-upstream commit!
           git clone https://github.com/lightningdevkit/rust-lightning
           cd rust-lightning
-          git checkout origin/0.0.125-bindings
+          git checkout origin/0.1-bindings
           cd ..
           git clone https://github.com/lightningdevkit/ldk-c-bindings
           cd ldk-c-bindings
-          git checkout 0.0.125
+          git checkout 0.1
       - name: Rebuild C bindings with STD
         run: |
           cd ldk-c-bindings
@@ -159,13 +159,13 @@ jobs:
     # Ubuntu's version of clang doesn't support....anything that should work.
     # Ubuntu is an utter trash OS and should generally never be used for anything.
     # We also require dotnet so we use fedora
-    container: fedora:39
+    container: fedora:41
     strategy:
       fail-fast: false
     steps:
       - name: Install required dependencies
         run: |
-          dnf install -y mingw64-gcc git cargo dotnet clang llvm lld faketime rust-std-static-x86_64-pc-windows-gnu which diffutils rust-src
+          dnf install -y mingw64-gcc git cargo dotnet-sdk-9.0 clang llvm lld faketime rust-std-static-x86_64-pc-windows-gnu which diffutils rust-src
       - name: Checkout source code
         uses: actions/checkout@v2
         with:
@@ -181,11 +181,11 @@ jobs:
           # Note this is a different endpoint, as we need one non-upstream commit!
           git clone https://github.com/lightningdevkit/rust-lightning
           cd rust-lightning
-          git checkout origin/0.0.125-bindings
+          git checkout origin/0.1-bindings
           cd ..
           git clone https://github.com/lightningdevkit/ldk-c-bindings
           cd ldk-c-bindings
-          git checkout 0.0.125
+          git checkout 0.1
       - name: Fetch MacOS SDK
         run: |
           curl -o Xcode-12.2-12B45b-extracted-SDK-with-libcxx-headers.tar.gz https://bitcoincore.org/depends-sources/sdks/Xcode-12.2-12B45b-extracted-SDK-with-libcxx-headers.tar.gz
@@ -336,11 +336,11 @@ jobs:
           # Note this is a different endpoint, as we need one non-upstream commit!
           git clone https://github.com/lightningdevkit/rust-lightning
           cd rust-lightning
-          git checkout origin/0.0.125-bindings
+          git checkout origin/0.1-bindings
           cd ..
           git clone https://github.com/lightningdevkit/ldk-c-bindings
           cd ldk-c-bindings
-          git checkout 0.0.125
+          git checkout 0.1
       - name: Pin proc-macro and quote to meet MSRV
         run: |
           cd ldk-c-bindings/c-bindings-gen
@@ -397,11 +397,11 @@ jobs:
           # Note this is a different endpoint, as we need one non-upstream commit!
           git clone https://github.com/lightningdevkit/rust-lightning
           cd rust-lightning
-          git checkout origin/0.0.125-bindings
+          git checkout origin/0.1-bindings
           cd ..
           git clone https://github.com/lightningdevkit/ldk-c-bindings
           cd ldk-c-bindings
-          git checkout 0.0.125
+          git checkout 0.1
       - name: Pin proc-macro and quote to meet MSRV
         run: |
           cd ldk-c-bindings/c-bindings-gen
@@ -524,11 +524,11 @@ jobs:
           # Note this is a different endpoint, as we need one non-upstream commit!
           git clone https://github.com/lightningdevkit/rust-lightning
           cd rust-lightning
-          git checkout origin/0.0.125-bindings
+          git checkout origin/0.1-bindings
           cd ..
           git clone https://github.com/lightningdevkit/ldk-c-bindings
           cd ldk-c-bindings
-          git checkout 0.0.125
+          git checkout 0.1
       - name: Fetch MacOS SDK
         run: |
           curl -o Xcode-12.2-12B45b-extracted-SDK-with-libcxx-headers.tar.gz https://bitcoincore.org/depends-sources/sdks/Xcode-12.2-12B45b-extracted-SDK-with-libcxx-headers.tar.gz
@@ -665,11 +665,11 @@ jobs:
           # Note this is a different endpoint, as we need one non-upstream commit!
           git clone https://github.com/lightningdevkit/rust-lightning
           cd rust-lightning
-          git checkout origin/0.0.125-bindings
+          git checkout origin/0.1-bindings
           cd ..
           git clone https://github.com/lightningdevkit/ldk-c-bindings
           cd ldk-c-bindings
-          git checkout 0.0.125
+          git checkout 0.1
       - name: Checkout Android AAR binaries and artifacts
         run: |
           # Gitweb only allows snapshots of folders by providing the object hash, which we have to extract:

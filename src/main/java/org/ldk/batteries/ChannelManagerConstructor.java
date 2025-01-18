@@ -81,6 +81,7 @@ public class ChannelManagerConstructor {
     private final EntropySource entropy_source;
     private final NodeSigner node_signer;
     private final Router router;
+    private final DefaultMessageRouter msg_router;
 
     /**
      * Exposes the `ProbabilisticScorer` wrapped inside a lock. Don't forget to `close` this lock when you're done with
@@ -176,24 +177,11 @@ public class ChannelManagerConstructor {
                 public Result_CVec_BlindedPaymentPathZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, ReceiveTlvs tlvs, long amount_msats) {
                     return default_router.as_Router().create_blinded_payment_paths(recipient, first_hops, tlvs, amount_msats);
                 }
-            }, new MessageRouter.MessageRouterInterface() {
-                @Override public Result_OnionMessagePathNoneZ find_path(byte[] sender, byte[][] peers, Destination destination) {
-                    return default_router.as_MessageRouter().find_path(sender, peers, destination);
-                }
-
-                @Override
-                public Result_CVec_BlindedMessagePathZNoneZ create_blinded_paths(byte[] recipient, MessageContext context, byte[][] peers) {
-                    return default_router.as_MessageRouter().create_blinded_paths(recipient, context, peers);
-                }
-
-                @Override
-                public Result_CVec_BlindedMessagePathZNoneZ create_compact_blinded_paths(byte[] recipient, MessageContext context, MessageForwardNode[] peers) {
-                    return default_router.as_MessageRouter().create_compact_blinded_paths(recipient, context, peers);
-                }
             });
         } else {
             router = default_router.as_Router();
         }
+        msg_router = DefaultMessageRouter.of(this.net_graph, entropy_source);
 
         final ChannelMonitor[] monitors = new ChannelMonitor[channel_monitors_serialized.length];
         this.channel_monitors = new TwoTuple_ThirtyTwoBytesChannelMonitorZ[monitors.length];
@@ -212,7 +200,7 @@ public class ChannelManagerConstructor {
         Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ res =
                 UtilMethods.C2Tuple_ThirtyTwoBytesChannelManagerZ_read(channel_manager_serialized, entropy_source,
                         node_signer, signer_provider, fee_estimator, chain_monitor.as_Watch(),
-                        tx_broadcaster, router, logger, config, monitors);
+                        tx_broadcaster, router, this.msg_router.as_MessageRouter(), logger, config, monitors);
         if (!res.is_ok()) {
             throw new InvalidSerializedDataException("Serialized ChannelManager was corrupt");
         }
@@ -261,31 +249,19 @@ public class ChannelManagerConstructor {
                 public Result_CVec_BlindedPaymentPathZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, ReceiveTlvs tlvs, long amount_msats) {
                     return default_router.as_Router().create_blinded_payment_paths(recipient, first_hops, tlvs, amount_msats);
                 }
-            }, new MessageRouter.MessageRouterInterface() {
-                @Override public Result_OnionMessagePathNoneZ find_path(byte[] sender, byte[][] peers, Destination destination) {
-                    return default_router.as_MessageRouter().find_path(sender, peers, destination);
-                }
-
-                @Override
-                public Result_CVec_BlindedMessagePathZNoneZ create_blinded_paths(byte[] recipient, MessageContext context, byte[][] peers) {
-                    return default_router.as_MessageRouter().create_blinded_paths(recipient, context, peers);
-                }
-
-                @Override
-                public Result_CVec_BlindedMessagePathZNoneZ create_compact_blinded_paths(byte[] recipient, MessageContext context, MessageForwardNode[] peers) {
-                    return default_router.as_MessageRouter().create_compact_blinded_paths(recipient, context, peers);
-                }
             });
         } else {
             router = default_router.as_Router();
         }
+        msg_router = DefaultMessageRouter.of(this.net_graph, entropy_source);
         channel_monitors = new TwoTuple_ThirtyTwoBytesChannelMonitorZ[0];
         channel_manager_latest_block_hash = null;
         this.chain_monitor = chain_monitor;
         BestBlock block = BestBlock.of(current_blockchain_tip_hash, current_blockchain_tip_height);
         ChainParameters params = ChainParameters.of(network, block);
-        channel_manager = ChannelManager.of(fee_estimator, chain_monitor.as_Watch(), tx_broadcaster, router, logger,
-            entropy_source, node_signer, signer_provider, config, params, (int) (System.currentTimeMillis() / 1000));
+        channel_manager = ChannelManager.of(fee_estimator, chain_monitor.as_Watch(), tx_broadcaster, router,
+            this.msg_router.as_MessageRouter(), logger, entropy_source, node_signer, signer_provider, config, params,
+            (int) (System.currentTimeMillis() / 1000));
         this.logger = logger;
     }
 
@@ -329,8 +305,9 @@ public class ChannelManagerConstructor {
         else
             routing_msg_handler = ignoring_handler.as_RoutingMessageHandler();
         OnionMessenger messenger = OnionMessenger.of(this.entropy_source, this.node_signer, this.logger,
-                this.channel_manager.as_NodeIdLookUp(), this.router.get_message_router(),
+                this.channel_manager.as_NodeIdLookUp(), this.msg_router.as_MessageRouter(),
                 channel_manager.as_OffersMessageHandler(), IgnoringMessageHandler.of().as_AsyncPaymentsMessageHandler(),
+                channel_manager.as_DNSResolverMessageHandler(),
                 IgnoringMessageHandler.of().as_CustomOnionMessageHandler());
         this.peer_manager = PeerManager.of(channel_manager.as_ChannelMessageHandler(),
                 routing_msg_handler, messenger.as_OnionMessageHandler(),

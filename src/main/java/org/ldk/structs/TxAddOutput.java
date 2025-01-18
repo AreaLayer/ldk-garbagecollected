@@ -9,7 +9,9 @@ import javax.annotation.Nullable;
 
 
 /**
- * A tx_add_output message for adding an output during interactive transaction construction.
+ * A [`tx_add_output`] message for adding an output during interactive transaction construction.
+ * 
+ * [`tx_add_output`]: https://github.com/lightning/bolts/blob/master/02-peer-protocol.md#the-tx_add_output-message
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class TxAddOutput extends CommonBase {

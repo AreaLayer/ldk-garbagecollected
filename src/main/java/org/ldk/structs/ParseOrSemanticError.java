@@ -40,7 +40,7 @@ public class ParseOrSemanticError extends CommonBase {
 		private ParseError(long ptr, bindings.LDKParseOrSemanticError.ParseError obj) {
 			super(null, ptr);
 			long parse_error = obj.parse_error;
-			org.ldk.structs.Bolt11ParseError parse_error_hu_conv = org.ldk.structs.Bolt11ParseError.constr_from_ptr(parse_error);
+			org.ldk.structs.Bolt11ParseError parse_error_hu_conv = null; if (parse_error < 0 || parse_error > 4096) { parse_error_hu_conv = new org.ldk.structs.Bolt11ParseError(null, parse_error); }
 			if (parse_error_hu_conv != null) { parse_error_hu_conv.ptrs_to.add(this); };
 			this.parse_error = parse_error_hu_conv;
 		}

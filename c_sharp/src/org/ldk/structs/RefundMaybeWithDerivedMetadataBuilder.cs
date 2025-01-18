@@ -38,8 +38,8 @@ public class RefundMaybeWithDerivedMetadataBuilder : CommonBase {
 	}
 
 	/**
-	 * Creates a new builder for a refund using the [`Refund::payer_id`] for the public node id to
-	 * send to if no [`Refund::paths`] are set. Otherwise, it may be a transient pubkey.
+	 * Creates a new builder for a refund using the `signing_pubkey` for the public node id to send
+	 * to if no [`Refund::paths`] are set. Otherwise, `signing_pubkey` may be a transient pubkey.
 	 * 
 	 * Additionally, sets the required (empty) [`Refund::description`], [`Refund::payer_metadata`],
 	 * and [`Refund::amount_msats`].
@@ -52,10 +52,10 @@ public class RefundMaybeWithDerivedMetadataBuilder : CommonBase {
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 * [`ChannelManager::create_refund_builder`]: crate::ln::channelmanager::ChannelManager::create_refund_builder
 	 */
-	public static Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ of(byte[] metadata, byte[] payer_id, long amount_msats) {
-		long ret = bindings.RefundMaybeWithDerivedMetadataBuilder_new(InternalUtils.encodeUint8Array(metadata), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payer_id, 33)), amount_msats);
+	public static Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ of(byte[] metadata, byte[] signing_pubkey, long amount_msats) {
+		long ret = bindings.RefundMaybeWithDerivedMetadataBuilder_new(InternalUtils.encodeUint8Array(metadata), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(signing_pubkey, 33)), amount_msats);
 		GC.KeepAlive(metadata);
-		GC.KeepAlive(payer_id);
+		GC.KeepAlive(signing_pubkey);
 		GC.KeepAlive(amount_msats);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ ret_hu_conv = Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ.constr_from_ptr(ret);
@@ -81,8 +81,8 @@ public class RefundMaybeWithDerivedMetadataBuilder : CommonBase {
 	 * [`Bolt12Invoice::verify_using_payer_data`]: crate::offers::invoice::Bolt12Invoice::verify_using_payer_data
 	 * [`ExpandedKey`]: crate::ln::inbound_payment::ExpandedKey
 	 */
-	public static Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ deriving_payer_id(byte[] node_id, org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.Nonce nonce, long amount_msats, byte[] payment_id) {
-		long ret = bindings.RefundMaybeWithDerivedMetadataBuilder_deriving_payer_id(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), expanded_key.ptr, nonce.ptr, amount_msats, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
+	public static Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ deriving_signing_pubkey(byte[] node_id, org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.Nonce nonce, long amount_msats, byte[] payment_id) {
+		long ret = bindings.RefundMaybeWithDerivedMetadataBuilder_deriving_signing_pubkey(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), expanded_key.ptr, nonce.ptr, amount_msats, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(expanded_key);
 		GC.KeepAlive(nonce);
@@ -107,8 +107,8 @@ public class RefundMaybeWithDerivedMetadataBuilder : CommonBase {
 	}
 
 	/**
-	 * Sets the [`Refund::absolute_expiry`] as seconds since the Unix epoch. Any expiry that has
-	 * already passed is valid and can be checked for using [`Refund::is_expired`].
+	 * Sets the [`Refund::absolute_expiry`] as seconds since the Unix epoch.
+	 * Any expiry that has already passed is valid and can be checked for using [`Refund::is_expired`].
 	 * 
 	 * Successive calls to this method will override the previous setting.
 	 */
@@ -133,7 +133,7 @@ public class RefundMaybeWithDerivedMetadataBuilder : CommonBase {
 
 	/**
 	 * Adds a blinded path to [`Refund::paths`]. Must include at least one path if only connected
-	 * by private channels or if [`Refund::payer_id`] is not a public node id.
+	 * by private channels or if [`Refund::payer_signing_pubkey`] is not a public node id.
 	 * 
 	 * Successive calls to this method will add another blinded path. Caller is responsible for not
 	 * adding duplicate paths.

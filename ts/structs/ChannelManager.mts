@@ -40,20 +40,44 @@ import { Bolt12ParseError } from '../structs/Bolt12ParseError.mjs';
 import { Result_RefundBolt12ParseErrorZ } from '../structs/Result_RefundBolt12ParseErrorZ.mjs';
 import { Retry } from '../structs/Retry.mjs';
 import { Result_RetryDecodeErrorZ } from '../structs/Result_RetryDecodeErrorZ.mjs';
-import { ShutdownScript } from '../structs/ShutdownScript.mjs';
-import { APIError } from '../structs/APIError.mjs';
-import { Result_NoneAPIErrorZ } from '../structs/Result_NoneAPIErrorZ.mjs';
 import { Option_ThirtyTwoBytesZ } from '../structs/Option_ThirtyTwoBytesZ.mjs';
 import { Option_CVec_u8ZZ } from '../structs/Option_CVec_u8ZZ.mjs';
 import { RecipientOnionFields } from '../structs/RecipientOnionFields.mjs';
 import { Result_RecipientOnionFieldsDecodeErrorZ } from '../structs/Result_RecipientOnionFieldsDecodeErrorZ.mjs';
 import { TwoTuple_u64CVec_u8ZZ } from '../structs/TwoTuple_u64CVec_u8ZZ.mjs';
 import { Result_RecipientOnionFieldsNoneZ } from '../structs/Result_RecipientOnionFieldsNoneZ.mjs';
+import { DNSSECQuery } from '../structs/DNSSECQuery.mjs';
+import { DNSSECProof } from '../structs/DNSSECProof.mjs';
+import { DNSResolverMessage } from '../structs/DNSResolverMessage.mjs';
+import { ResponseInstruction } from '../structs/ResponseInstruction.mjs';
+import { TwoTuple_DNSResolverMessageResponseInstructionZ } from '../structs/TwoTuple_DNSResolverMessageResponseInstructionZ.mjs';
+import { Option_C2Tuple_DNSResolverMessageResponseInstructionZZ } from '../structs/Option_C2Tuple_DNSResolverMessageResponseInstructionZZ.mjs';
+import { Destination } from '../structs/Destination.mjs';
+import { Nonce } from '../structs/Nonce.mjs';
+import { OffersContext } from '../structs/OffersContext.mjs';
+import { AsyncPaymentsContext } from '../structs/AsyncPaymentsContext.mjs';
+import { DNSResolverContext } from '../structs/DNSResolverContext.mjs';
+import { MessageContext } from '../structs/MessageContext.mjs';
+import { MessageSendInstructions } from '../structs/MessageSendInstructions.mjs';
+import { TwoTuple_DNSResolverMessageMessageSendInstructionsZ } from '../structs/TwoTuple_DNSResolverMessageMessageSendInstructionsZ.mjs';
+import { Result_DNSResolverMessageDecodeErrorZ } from '../structs/Result_DNSResolverMessageDecodeErrorZ.mjs';
+import { HumanReadableName } from '../structs/HumanReadableName.mjs';
+import { Result_HumanReadableNameNoneZ } from '../structs/Result_HumanReadableNameNoneZ.mjs';
+import { Result_HumanReadableNameDecodeErrorZ } from '../structs/Result_HumanReadableNameDecodeErrorZ.mjs';
+import { TwoTuple_DNSSECQueryDNSResolverContextZ } from '../structs/TwoTuple_DNSSECQueryDNSResolverContextZ.mjs';
+import { Result_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ } from '../structs/Result_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ.mjs';
+import { TwoTuple_HumanReadableNameThirtyTwoBytesZ } from '../structs/TwoTuple_HumanReadableNameThirtyTwoBytesZ.mjs';
+import { Offer } from '../structs/Offer.mjs';
+import { TwoTuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZOfferZ } from '../structs/TwoTuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZOfferZ.mjs';
+import { Option_C2Tuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZOfferZZ } from '../structs/Option_C2Tuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZOfferZZ.mjs';
+import { TwoTuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZStrZ } from '../structs/TwoTuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZStrZ.mjs';
+import { Option_C2Tuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZStrZZ } from '../structs/Option_C2Tuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZStrZZ.mjs';
 import { UnsignedBolt12Invoice } from '../structs/UnsignedBolt12Invoice.mjs';
 import { Result_UnsignedBolt12InvoiceBolt12SemanticErrorZ } from '../structs/Result_UnsignedBolt12InvoiceBolt12SemanticErrorZ.mjs';
 import { Bolt12Invoice } from '../structs/Bolt12Invoice.mjs';
 import { Result_Bolt12InvoiceBolt12SemanticErrorZ } from '../structs/Result_Bolt12InvoiceBolt12SemanticErrorZ.mjs';
 import { Result_SchnorrSignatureNoneZ } from '../structs/Result_SchnorrSignatureNoneZ.mjs';
+import { BlindedPaymentPath } from '../structs/BlindedPaymentPath.mjs';
 import { Option_CVec_ThirtyTwoBytesZZ } from '../structs/Option_CVec_ThirtyTwoBytesZZ.mjs';
 import { Amount } from '../structs/Amount.mjs';
 import { Option_AmountZ } from '../structs/Option_AmountZ.mjs';
@@ -95,6 +119,7 @@ import { ChannelSigner, ChannelSignerInterface } from '../structs/ChannelSigner.
 import { EcdsaChannelSigner, EcdsaChannelSignerInterface } from '../structs/EcdsaChannelSigner.mjs';
 import { Result_EcdsaChannelSignerDecodeErrorZ } from '../structs/Result_EcdsaChannelSignerDecodeErrorZ.mjs';
 import { Result_CVec_u8ZNoneZ } from '../structs/Result_CVec_u8ZNoneZ.mjs';
+import { ShutdownScript } from '../structs/ShutdownScript.mjs';
 import { Result_ShutdownScriptNoneZ } from '../structs/Result_ShutdownScriptNoneZ.mjs';
 import { Option_u16Z } from '../structs/Option_u16Z.mjs';
 import { Option_boolZ } from '../structs/Option_boolZ.mjs';
@@ -108,12 +133,7 @@ import { ChannelDetails } from '../structs/ChannelDetails.mjs';
 import { Route } from '../structs/Route.mjs';
 import { LightningError } from '../structs/LightningError.mjs';
 import { Result_RouteLightningErrorZ } from '../structs/Result_RouteLightningErrorZ.mjs';
-import { BlindedPaymentPath } from '../structs/BlindedPaymentPath.mjs';
 import { Result_CVec_BlindedPaymentPathZNoneZ } from '../structs/Result_CVec_BlindedPaymentPathZNoneZ.mjs';
-import { OnionMessagePath } from '../structs/OnionMessagePath.mjs';
-import { Result_OnionMessagePathNoneZ } from '../structs/Result_OnionMessagePathNoneZ.mjs';
-import { Result_CVec_BlindedMessagePathZNoneZ } from '../structs/Result_CVec_BlindedMessagePathZNoneZ.mjs';
-import { MessageForwardNode } from '../structs/MessageForwardNode.mjs';
 import { InFlightHtlcs } from '../structs/InFlightHtlcs.mjs';
 import { Result_InFlightHtlcsDecodeErrorZ } from '../structs/Result_InFlightHtlcsDecodeErrorZ.mjs';
 import { RouteHop } from '../structs/RouteHop.mjs';
@@ -155,29 +175,12 @@ import { ClosureReason } from '../structs/ClosureReason.mjs';
 import { ChannelId } from '../structs/ChannelId.mjs';
 import { MonitorEvent } from '../structs/MonitorEvent.mjs';
 import { FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ } from '../structs/FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ.mjs';
-import { InitFeatures } from '../structs/InitFeatures.mjs';
-import { Result_InitFeaturesDecodeErrorZ } from '../structs/Result_InitFeaturesDecodeErrorZ.mjs';
-import { ChannelFeatures } from '../structs/ChannelFeatures.mjs';
-import { Result_ChannelFeaturesDecodeErrorZ } from '../structs/Result_ChannelFeaturesDecodeErrorZ.mjs';
-import { NodeFeatures } from '../structs/NodeFeatures.mjs';
-import { Result_NodeFeaturesDecodeErrorZ } from '../structs/Result_NodeFeaturesDecodeErrorZ.mjs';
-import { Bolt11InvoiceFeatures } from '../structs/Bolt11InvoiceFeatures.mjs';
-import { Result_Bolt11InvoiceFeaturesDecodeErrorZ } from '../structs/Result_Bolt11InvoiceFeaturesDecodeErrorZ.mjs';
-import { Bolt12InvoiceFeatures } from '../structs/Bolt12InvoiceFeatures.mjs';
-import { Result_Bolt12InvoiceFeaturesDecodeErrorZ } from '../structs/Result_Bolt12InvoiceFeaturesDecodeErrorZ.mjs';
-import { BlindedHopFeatures } from '../structs/BlindedHopFeatures.mjs';
-import { Result_BlindedHopFeaturesDecodeErrorZ } from '../structs/Result_BlindedHopFeaturesDecodeErrorZ.mjs';
-import { ChannelTypeFeatures } from '../structs/ChannelTypeFeatures.mjs';
-import { Result_ChannelTypeFeaturesDecodeErrorZ } from '../structs/Result_ChannelTypeFeaturesDecodeErrorZ.mjs';
 import { OfferId } from '../structs/OfferId.mjs';
 import { Result_OfferIdDecodeErrorZ } from '../structs/Result_OfferIdDecodeErrorZ.mjs';
 import { Result_NoneBolt12SemanticErrorZ } from '../structs/Result_NoneBolt12SemanticErrorZ.mjs';
-import { Offer } from '../structs/Offer.mjs';
 import { Result_OfferBolt12SemanticErrorZ } from '../structs/Result_OfferBolt12SemanticErrorZ.mjs';
-import { InvoiceRequestWithDerivedPayerIdBuilder } from '../structs/InvoiceRequestWithDerivedPayerIdBuilder.mjs';
-import { Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ } from '../structs/Result_InvoiceRequestWithDerivedPayerIdBuilderBolt12SemanticErrorZ.mjs';
-import { InvoiceRequestWithExplicitPayerIdBuilder } from '../structs/InvoiceRequestWithExplicitPayerIdBuilder.mjs';
-import { Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ } from '../structs/Result_InvoiceRequestWithExplicitPayerIdBuilderBolt12SemanticErrorZ.mjs';
+import { InvoiceRequestWithDerivedPayerSigningPubkeyBuilder } from '../structs/InvoiceRequestWithDerivedPayerSigningPubkeyBuilder.mjs';
+import { Result_InvoiceRequestWithDerivedPayerSigningPubkeyBuilderBolt12SemanticErrorZ } from '../structs/Result_InvoiceRequestWithDerivedPayerSigningPubkeyBuilderBolt12SemanticErrorZ.mjs';
 import { Result_OfferDecodeErrorZ } from '../structs/Result_OfferDecodeErrorZ.mjs';
 import { Result_OfferBolt12ParseErrorZ } from '../structs/Result_OfferBolt12ParseErrorZ.mjs';
 import { Result_NodeIdDecodeErrorZ } from '../structs/Result_NodeIdDecodeErrorZ.mjs';
@@ -259,42 +262,41 @@ import { Input } from '../structs/Input.mjs';
 import { CoinSelection } from '../structs/CoinSelection.mjs';
 import { Result_CoinSelectionNoneZ } from '../structs/Result_CoinSelectionNoneZ.mjs';
 import { Result_CVec_UtxoZNoneZ } from '../structs/Result_CVec_UtxoZNoneZ.mjs';
-import { UnknownPaymentContext } from '../structs/UnknownPaymentContext.mjs';
 import { Bolt12OfferContext } from '../structs/Bolt12OfferContext.mjs';
 import { Bolt12RefundContext } from '../structs/Bolt12RefundContext.mjs';
 import { PaymentContext } from '../structs/PaymentContext.mjs';
 import { Option_PaymentContextZ } from '../structs/Option_PaymentContextZ.mjs';
 import { TwoTuple_u64u16Z } from '../structs/TwoTuple_u64u16Z.mjs';
 import { Option_C2Tuple_u64u16ZZ } from '../structs/Option_C2Tuple_u64u16ZZ.mjs';
+import { APIError } from '../structs/APIError.mjs';
 import { Result_ChannelIdAPIErrorZ } from '../structs/Result_ChannelIdAPIErrorZ.mjs';
 import { RecentPaymentDetails } from '../structs/RecentPaymentDetails.mjs';
-import { PaymentSendFailure } from '../structs/PaymentSendFailure.mjs';
-import { Result_NonePaymentSendFailureZ } from '../structs/Result_NonePaymentSendFailureZ.mjs';
+import { Result_NoneAPIErrorZ } from '../structs/Result_NoneAPIErrorZ.mjs';
 import { Result_NoneRetryableSendFailureZ } from '../structs/Result_NoneRetryableSendFailureZ.mjs';
-import { Result_ThirtyTwoBytesPaymentSendFailureZ } from '../structs/Result_ThirtyTwoBytesPaymentSendFailureZ.mjs';
+import { Option_OffersContextZ } from '../structs/Option_OffersContextZ.mjs';
+import { Bolt12PaymentError } from '../structs/Bolt12PaymentError.mjs';
+import { Result_NoneBolt12PaymentErrorZ } from '../structs/Result_NoneBolt12PaymentErrorZ.mjs';
 import { Result_ThirtyTwoBytesRetryableSendFailureZ } from '../structs/Result_ThirtyTwoBytesRetryableSendFailureZ.mjs';
 import { TwoTuple_ThirtyTwoBytesThirtyTwoBytesZ } from '../structs/TwoTuple_ThirtyTwoBytesThirtyTwoBytesZ.mjs';
-import { Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ } from '../structs/Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ.mjs';
 import { ProbeSendFailure } from '../structs/ProbeSendFailure.mjs';
+import { Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ } from '../structs/Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ.mjs';
 import { Result_CVec_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZZProbeSendFailureZ } from '../structs/Result_CVec_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZZProbeSendFailureZ.mjs';
 import { TwoTuple_ChannelIdPublicKeyZ } from '../structs/TwoTuple_ChannelIdPublicKeyZ.mjs';
+import { TwoTuple_PublicKeyChannelIdZ } from '../structs/TwoTuple_PublicKeyChannelIdZ.mjs';
+import { Option_C2Tuple_PublicKeyChannelIdZZ } from '../structs/Option_C2Tuple_PublicKeyChannelIdZZ.mjs';
+import { Bolt11Invoice } from '../structs/Bolt11Invoice.mjs';
+import { SignOrCreationError } from '../structs/SignOrCreationError.mjs';
+import { Result_Bolt11InvoiceSignOrCreationErrorZ } from '../structs/Result_Bolt11InvoiceSignOrCreationErrorZ.mjs';
 import { OfferWithDerivedMetadataBuilder } from '../structs/OfferWithDerivedMetadataBuilder.mjs';
 import { Result_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ } from '../structs/Result_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ.mjs';
 import { Option_StrZ } from '../structs/Option_StrZ.mjs';
 import { Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ } from '../structs/Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ.mjs';
 import { Result_ThirtyTwoBytesAPIErrorZ } from '../structs/Result_ThirtyTwoBytesAPIErrorZ.mjs';
-import { Nonce } from '../structs/Nonce.mjs';
-import { OffersContext } from '../structs/OffersContext.mjs';
-import { Option_OffersContextZ } from '../structs/Option_OffersContextZ.mjs';
 import { InvoiceRequest } from '../structs/InvoiceRequest.mjs';
 import { InvoiceError } from '../structs/InvoiceError.mjs';
 import { OffersMessage } from '../structs/OffersMessage.mjs';
-import { ResponseInstruction } from '../structs/ResponseInstruction.mjs';
 import { TwoTuple_OffersMessageResponseInstructionZ } from '../structs/TwoTuple_OffersMessageResponseInstructionZ.mjs';
 import { Option_C2Tuple_OffersMessageResponseInstructionZZ } from '../structs/Option_C2Tuple_OffersMessageResponseInstructionZZ.mjs';
-import { Destination } from '../structs/Destination.mjs';
-import { MessageContext } from '../structs/MessageContext.mjs';
-import { MessageSendInstructions } from '../structs/MessageSendInstructions.mjs';
 import { TwoTuple_OffersMessageMessageSendInstructionsZ } from '../structs/TwoTuple_OffersMessageMessageSendInstructionsZ.mjs';
 import { ReleaseHeldHtlc } from '../structs/ReleaseHeldHtlc.mjs';
 import { TwoTuple_ReleaseHeldHtlcResponseInstructionZ } from '../structs/TwoTuple_ReleaseHeldHtlcResponseInstructionZ.mjs';
@@ -317,8 +319,8 @@ import { ChannelMonitorUpdate } from '../structs/ChannelMonitorUpdate.mjs';
 import { Watch, WatchInterface } from '../structs/Watch.mjs';
 import { BroadcasterInterface, BroadcasterInterfaceInterface } from '../structs/BroadcasterInterface.mjs';
 import { EntropySource, EntropySourceInterface } from '../structs/EntropySource.mjs';
+import { ExpandedKey } from '../structs/ExpandedKey.mjs';
 import { RawBolt11Invoice } from '../structs/RawBolt11Invoice.mjs';
-import { UnsignedInvoiceRequest } from '../structs/UnsignedInvoiceRequest.mjs';
 import { UnsignedChannelUpdate } from '../structs/UnsignedChannelUpdate.mjs';
 import { UnsignedNodeAnnouncement } from '../structs/UnsignedNodeAnnouncement.mjs';
 import { UnsignedGossipMessage } from '../structs/UnsignedGossipMessage.mjs';
@@ -326,8 +328,12 @@ import { NodeSigner, NodeSignerInterface } from '../structs/NodeSigner.mjs';
 import { SignerProvider, SignerProviderInterface } from '../structs/SignerProvider.mjs';
 import { FeeEstimator, FeeEstimatorInterface } from '../structs/FeeEstimator.mjs';
 import { ReceiveTlvs } from '../structs/ReceiveTlvs.mjs';
-import { MessageRouter, MessageRouterInterface } from '../structs/MessageRouter.mjs';
 import { Router, RouterInterface } from '../structs/Router.mjs';
+import { OnionMessagePath } from '../structs/OnionMessagePath.mjs';
+import { Result_OnionMessagePathNoneZ } from '../structs/Result_OnionMessagePathNoneZ.mjs';
+import { Result_CVec_BlindedMessagePathZNoneZ } from '../structs/Result_CVec_BlindedMessagePathZNoneZ.mjs';
+import { MessageForwardNode } from '../structs/MessageForwardNode.mjs';
+import { MessageRouter, MessageRouterInterface } from '../structs/MessageRouter.mjs';
 import { TwoTuple_ThirtyTwoBytesChannelManagerZ } from '../structs/TwoTuple_ThirtyTwoBytesChannelManagerZ.mjs';
 import { Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ } from '../structs/Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ.mjs';
 import { MaxDustHTLCExposure } from '../structs/MaxDustHTLCExposure.mjs';
@@ -348,6 +354,7 @@ import { ReplayEvent } from '../structs/ReplayEvent.mjs';
 import { Result_NoneReplayEventZ } from '../structs/Result_NoneReplayEventZ.mjs';
 import { TwoTuple_u32TxOutZ } from '../structs/TwoTuple_u32TxOutZ.mjs';
 import { TwoTuple_ThirtyTwoBytesCVec_C2Tuple_u32TxOutZZZ } from '../structs/TwoTuple_ThirtyTwoBytesCVec_C2Tuple_u32TxOutZZZ.mjs';
+import { TwoTuple_boolboolZ } from '../structs/TwoTuple_boolboolZ.mjs';
 import { Balance } from '../structs/Balance.mjs';
 import { TwoTuple_ThirtyTwoBytesChannelMonitorZ } from '../structs/TwoTuple_ThirtyTwoBytesChannelMonitorZ.mjs';
 import { Result_C2Tuple_ThirtyTwoBytesChannelMonitorZDecodeErrorZ } from '../structs/Result_C2Tuple_ThirtyTwoBytesChannelMonitorZDecodeErrorZ.mjs';
@@ -372,9 +379,14 @@ import { Result_u32GraphSyncErrorZ } from '../structs/Result_u32GraphSyncErrorZ.
 import { Result_CVec_u8ZIOErrorZ } from '../structs/Result_CVec_u8ZIOErrorZ.mjs';
 import { Result_NoneIOErrorZ } from '../structs/Result_NoneIOErrorZ.mjs';
 import { Result_CVec_StrZIOErrorZ } from '../structs/Result_CVec_StrZIOErrorZ.mjs';
+import { ThreeTuple_StrStrStrZ } from '../structs/ThreeTuple_StrStrStrZ.mjs';
+import { Result_CVec_C3Tuple_StrStrStrZZIOErrorZ } from '../structs/Result_CVec_C3Tuple_StrStrStrZZIOErrorZ.mjs';
 import { Result_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ } from '../structs/Result_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ.mjs';
 import { Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ } from '../structs/Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ.mjs';
-import { Result_UnsignedInvoiceRequestBolt12SemanticErrorZ } from '../structs/Result_UnsignedInvoiceRequestBolt12SemanticErrorZ.mjs';
+import { MonitorName } from '../structs/MonitorName.mjs';
+import { Result_MonitorNameIOErrorZ } from '../structs/Result_MonitorNameIOErrorZ.mjs';
+import { UpdateName } from '../structs/UpdateName.mjs';
+import { Result_UpdateNameIOErrorZ } from '../structs/Result_UpdateNameIOErrorZ.mjs';
 import { Result_InvoiceRequestBolt12SemanticErrorZ } from '../structs/Result_InvoiceRequestBolt12SemanticErrorZ.mjs';
 import { InvoiceWithExplicitSigningPubkeyBuilder } from '../structs/InvoiceWithExplicitSigningPubkeyBuilder.mjs';
 import { Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ } from '../structs/Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ.mjs';
@@ -382,6 +394,7 @@ import { VerifiedInvoiceRequest } from '../structs/VerifiedInvoiceRequest.mjs';
 import { Result_VerifiedInvoiceRequestNoneZ } from '../structs/Result_VerifiedInvoiceRequestNoneZ.mjs';
 import { InvoiceWithDerivedSigningPubkeyBuilder } from '../structs/InvoiceWithDerivedSigningPubkeyBuilder.mjs';
 import { Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ } from '../structs/Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ.mjs';
+import { Result_InvoiceRequestDecodeErrorZ } from '../structs/Result_InvoiceRequestDecodeErrorZ.mjs';
 import { InvoiceRequestFields } from '../structs/InvoiceRequestFields.mjs';
 import { Result_InvoiceRequestFieldsDecodeErrorZ } from '../structs/Result_InvoiceRequestFieldsDecodeErrorZ.mjs';
 import { Option_ECDSASignatureZ } from '../structs/Option_ECDSASignatureZ.mjs';
@@ -513,6 +526,8 @@ import { Option_PaymentFailureReasonZ } from '../structs/Option_PaymentFailureRe
 import { Result_COption_PaymentFailureReasonZDecodeErrorZ } from '../structs/Result_COption_PaymentFailureReasonZDecodeErrorZ.mjs';
 import { Option_U128Z } from '../structs/Option_U128Z.mjs';
 import { Responder } from '../structs/Responder.mjs';
+import { ChannelTypeFeatures } from '../structs/ChannelTypeFeatures.mjs';
+import { InboundChannelFunds } from '../structs/InboundChannelFunds.mjs';
 import { ChannelParameters } from '../structs/ChannelParameters.mjs';
 import { AnchorDescriptor } from '../structs/AnchorDescriptor.mjs';
 import { BumpTransactionEvent } from '../structs/BumpTransactionEvent.mjs';
@@ -522,7 +537,6 @@ import { Result_COption_EventZDecodeErrorZ } from '../structs/Result_COption_Eve
 import { Result_NonceDecodeErrorZ } from '../structs/Result_NonceDecodeErrorZ.mjs';
 import { Bolt11ParseError } from '../structs/Bolt11ParseError.mjs';
 import { Result_SiPrefixBolt11ParseErrorZ } from '../structs/Result_SiPrefixBolt11ParseErrorZ.mjs';
-import { Bolt11Invoice } from '../structs/Bolt11Invoice.mjs';
 import { ParseOrSemanticError } from '../structs/ParseOrSemanticError.mjs';
 import { Result_Bolt11InvoiceParseOrSemanticErrorZ } from '../structs/Result_Bolt11InvoiceParseOrSemanticErrorZ.mjs';
 import { SignedRawBolt11Invoice } from '../structs/SignedRawBolt11Invoice.mjs';
@@ -548,6 +562,19 @@ import { TransactionU16LenLimited } from '../structs/TransactionU16LenLimited.mj
 import { Result_TransactionU16LenLimitedNoneZ } from '../structs/Result_TransactionU16LenLimitedNoneZ.mjs';
 import { Result_TransactionU16LenLimitedDecodeErrorZ } from '../structs/Result_TransactionU16LenLimitedDecodeErrorZ.mjs';
 import { Result_ChannelIdDecodeErrorZ } from '../structs/Result_ChannelIdDecodeErrorZ.mjs';
+import { InitFeatures } from '../structs/InitFeatures.mjs';
+import { Result_InitFeaturesDecodeErrorZ } from '../structs/Result_InitFeaturesDecodeErrorZ.mjs';
+import { ChannelFeatures } from '../structs/ChannelFeatures.mjs';
+import { Result_ChannelFeaturesDecodeErrorZ } from '../structs/Result_ChannelFeaturesDecodeErrorZ.mjs';
+import { NodeFeatures } from '../structs/NodeFeatures.mjs';
+import { Result_NodeFeaturesDecodeErrorZ } from '../structs/Result_NodeFeaturesDecodeErrorZ.mjs';
+import { Bolt11InvoiceFeatures } from '../structs/Bolt11InvoiceFeatures.mjs';
+import { Result_Bolt11InvoiceFeaturesDecodeErrorZ } from '../structs/Result_Bolt11InvoiceFeaturesDecodeErrorZ.mjs';
+import { Bolt12InvoiceFeatures } from '../structs/Bolt12InvoiceFeatures.mjs';
+import { Result_Bolt12InvoiceFeaturesDecodeErrorZ } from '../structs/Result_Bolt12InvoiceFeaturesDecodeErrorZ.mjs';
+import { BlindedHopFeatures } from '../structs/BlindedHopFeatures.mjs';
+import { Result_BlindedHopFeaturesDecodeErrorZ } from '../structs/Result_BlindedHopFeaturesDecodeErrorZ.mjs';
+import { Result_ChannelTypeFeaturesDecodeErrorZ } from '../structs/Result_ChannelTypeFeaturesDecodeErrorZ.mjs';
 import { TwoTuple__u832u16Z } from '../structs/TwoTuple__u832u16Z.mjs';
 import { BlindedPayInfo } from '../structs/BlindedPayInfo.mjs';
 import { Result_BlindedPayInfoDecodeErrorZ } from '../structs/Result_BlindedPayInfoDecodeErrorZ.mjs';
@@ -558,7 +585,6 @@ import { Result_PaymentRelayDecodeErrorZ } from '../structs/Result_PaymentRelayD
 import { PaymentConstraints } from '../structs/PaymentConstraints.mjs';
 import { Result_PaymentConstraintsDecodeErrorZ } from '../structs/Result_PaymentConstraintsDecodeErrorZ.mjs';
 import { Result_PaymentContextDecodeErrorZ } from '../structs/Result_PaymentContextDecodeErrorZ.mjs';
-import { Result_UnknownPaymentContextDecodeErrorZ } from '../structs/Result_UnknownPaymentContextDecodeErrorZ.mjs';
 import { Result_Bolt12OfferContextDecodeErrorZ } from '../structs/Result_Bolt12OfferContextDecodeErrorZ.mjs';
 import { Result_Bolt12RefundContextDecodeErrorZ } from '../structs/Result_Bolt12RefundContextDecodeErrorZ.mjs';
 import { Result_ResponderDecodeErrorZ } from '../structs/Result_ResponderDecodeErrorZ.mjs';
@@ -574,8 +600,6 @@ import { SendSuccess } from '../structs/SendSuccess.mjs';
 import { Result_SendSuccessSendErrorZ } from '../structs/Result_SendSuccessSendErrorZ.mjs';
 import { Result_NoneSendErrorZ } from '../structs/Result_NoneSendErrorZ.mjs';
 import { Result_BlindedHopDecodeErrorZ } from '../structs/Result_BlindedHopDecodeErrorZ.mjs';
-import { SignOrCreationError } from '../structs/SignOrCreationError.mjs';
-import { Result_Bolt11InvoiceSignOrCreationErrorZ } from '../structs/Result_Bolt11InvoiceSignOrCreationErrorZ.mjs';
 import { Result_InvoiceErrorDecodeErrorZ } from '../structs/Result_InvoiceErrorDecodeErrorZ.mjs';
 import { TrackedSpendableOutput } from '../structs/TrackedSpendableOutput.mjs';
 import { Result_TrackedSpendableOutputDecodeErrorZ } from '../structs/Result_TrackedSpendableOutputDecodeErrorZ.mjs';
@@ -611,6 +635,9 @@ import { Result_BlindedMessagePathDecodeErrorZ } from '../structs/Result_Blinded
 import { Result_BlindedMessagePathNoneZ } from '../structs/Result_BlindedMessagePathNoneZ.mjs';
 import { Result_MessageContextDecodeErrorZ } from '../structs/Result_MessageContextDecodeErrorZ.mjs';
 import { Result_OffersContextDecodeErrorZ } from '../structs/Result_OffersContextDecodeErrorZ.mjs';
+import { Result_AsyncPaymentsContextDecodeErrorZ } from '../structs/Result_AsyncPaymentsContextDecodeErrorZ.mjs';
+import { Result_DNSResolverContextDecodeErrorZ } from '../structs/Result_DNSResolverContextDecodeErrorZ.mjs';
+import { MigratableKVStore, MigratableKVStoreInterface } from '../structs/MigratableKVStore.mjs';
 import { FirstHopCandidate } from '../structs/FirstHopCandidate.mjs';
 import { PublicHopCandidate } from '../structs/PublicHopCandidate.mjs';
 import { PrivateHopCandidate } from '../structs/PrivateHopCandidate.mjs';
@@ -638,15 +665,20 @@ import { UserConfig } from '../structs/UserConfig.mjs';
 import { ChainMonitor } from '../structs/ChainMonitor.mjs';
 import { EventHandler, EventHandlerInterface } from '../structs/EventHandler.mjs';
 import { EventsProvider, EventsProviderInterface } from '../structs/EventsProvider.mjs';
+import { Verification, VerificationInterface } from '../structs/Verification.mjs';
+import { UnauthenticatedReceiveTlvs } from '../structs/UnauthenticatedReceiveTlvs.mjs';
 import { FailureCode } from '../structs/FailureCode.mjs';
 import { ChainParameters } from '../structs/ChainParameters.mjs';
+import { Bolt11InvoiceParameters } from '../structs/Bolt11InvoiceParameters.mjs';
+import { Sha256 } from '../structs/Sha256.mjs';
+import { Bolt11InvoiceDescription } from '../structs/Bolt11InvoiceDescription.mjs';
 import { MessageSendEventsProvider, MessageSendEventsProviderInterface } from '../structs/MessageSendEventsProvider.mjs';
 import { ChannelMessageHandler, ChannelMessageHandlerInterface } from '../structs/ChannelMessageHandler.mjs';
 import { OffersMessageHandler, OffersMessageHandlerInterface } from '../structs/OffersMessageHandler.mjs';
 import { AsyncPaymentsMessageHandler, AsyncPaymentsMessageHandlerInterface } from '../structs/AsyncPaymentsMessageHandler.mjs';
+import { DNSResolverMessageHandler, DNSResolverMessageHandlerInterface } from '../structs/DNSResolverMessageHandler.mjs';
 import { NodeIdLookUp, NodeIdLookUpInterface } from '../structs/NodeIdLookUp.mjs';
 import { ChannelManagerReadArgs } from '../structs/ChannelManagerReadArgs.mjs';
-import { ExpandedKey } from '../structs/ExpandedKey.mjs';
 import { CommonOpenChannelFields } from '../structs/CommonOpenChannelFields.mjs';
 import { CommonAcceptChannelFields } from '../structs/CommonAcceptChannelFields.mjs';
 import { Packet } from '../structs/Packet.mjs';
@@ -662,8 +694,6 @@ import { MessageHandler } from '../structs/MessageHandler.mjs';
 import { SocketDescriptor, SocketDescriptorInterface } from '../structs/SocketDescriptor.mjs';
 import { PeerManager } from '../structs/PeerManager.mjs';
 import { DirectedChannelTransactionParameters } from '../structs/DirectedChannelTransactionParameters.mjs';
-import { Sha256 } from '../structs/Sha256.mjs';
-import { Bolt12PaymentError } from '../structs/Bolt12PaymentError.mjs';
 import { OfferWithExplicitMetadataBuilder } from '../structs/OfferWithExplicitMetadataBuilder.mjs';
 import { PrintableString } from '../structs/PrintableString.mjs';
 import { OfferFeatures } from '../structs/OfferFeatures.mjs';
@@ -671,6 +701,7 @@ import { SignBolt12InvoiceFn, SignBolt12InvoiceFnInterface } from '../structs/Si
 import { TaggedHash } from '../structs/TaggedHash.mjs';
 import { InvoiceRequestFeatures } from '../structs/InvoiceRequestFeatures.mjs';
 import { ErroneousField } from '../structs/ErroneousField.mjs';
+import { UnsignedInvoiceRequest } from '../structs/UnsignedInvoiceRequest.mjs';
 import { SignInvoiceRequestFn, SignInvoiceRequestFnInterface } from '../structs/SignInvoiceRequestFn.mjs';
 import { SignError } from '../structs/SignError.mjs';
 import { P2PGossipSync } from '../structs/P2PGossipSync.mjs';
@@ -688,6 +719,7 @@ import { ProbabilisticScoringDecayParameters } from '../structs/ProbabilisticSco
 import { KeysManager } from '../structs/KeysManager.mjs';
 import { PhantomKeysManager } from '../structs/PhantomKeysManager.mjs';
 import { RandomBytes } from '../structs/RandomBytes.mjs';
+import { OMNameResolver } from '../structs/OMNameResolver.mjs';
 import { OnionMessenger } from '../structs/OnionMessenger.mjs';
 import { DefaultMessageRouter } from '../structs/DefaultMessageRouter.mjs';
 import { IntroductionNode } from '../structs/IntroductionNode.mjs';
@@ -723,6 +755,7 @@ import * as bindings from '../bindings.mjs'
  * - [`FeeEstimator`] to determine transaction fee rates needed to have a transaction mined in a
  * timely manner
  * - [`Router`] for finding payment paths when initiating and retrying payments
+ * - [`MessageRouter`] for finding message paths when initiating and retrying onion messages
  * - [`Logger`] for logging operational information of varying degrees
  * 
  * Additionally, it implements the following traits:
@@ -782,7 +815,8 @@ import * as bindings from '../bindings.mjs'
  * #     fee_estimator: &dyn lightning::chain::chaininterface::FeeEstimator,
  * #     chain_monitor: &dyn lightning::chain::Watch<lightning::sign::InMemorySigner>,
  * #     tx_broadcaster: &dyn lightning::chain::chaininterface::BroadcasterInterface,
- * #     router: &lightning::routing::router::DefaultRouter<&NetworkGraph<&'a L>, &'a L, &ES, &S, SP, SL>,
+ * #     router: &lightning::routing::router::DefaultRouter<&NetworkGraph<&'a L>, &'a L, &ES, &S>,
+ * #     message_router: &lightning::onion_message::messenger::DefaultMessageRouter<&NetworkGraph<&'a L>, &'a L, &ES>,
  * #     logger: &L,
  * #     entropy_source: &ES,
  * #     node_signer: &dyn lightning::sign::NodeSigner,
@@ -798,18 +832,18 @@ import * as bindings from '../bindings.mjs'
  * };
  * let default_config = UserConfig::default();
  * let channel_manager = ChannelManager::new(
- * fee_estimator, chain_monitor, tx_broadcaster, router, logger, entropy_source, node_signer,
- * signer_provider, default_config, params, current_timestamp
+ * fee_estimator, chain_monitor, tx_broadcaster, router, message_router, logger,
+ * entropy_source, node_signer, signer_provider, default_config, params, current_timestamp,
  * );
  * 
  * Restart from deserialized data
  * let mut channel_monitors = read_channel_monitors();
  * let args = ChannelManagerReadArgs::new(
  * entropy_source, node_signer, signer_provider, fee_estimator, chain_monitor, tx_broadcaster,
- * router, logger, default_config, channel_monitors.iter_mut().collect()
+ * router, message_router, logger, default_config, channel_monitors.iter().collect(),
  * );
  * let (block_hash, channel_manager) =
- * <(BlockHash, ChannelManager<_, _, _, _, _, _, _, _>)>::read(&mut reader, args)?;
+ * <(BlockHash, ChannelManager<_, _, _, _, _, _, _, _, _>)>::read(&mut reader, args)?;
  * 
  * Update the ChannelManager and ChannelMonitors with the latest chain data
  * ...
@@ -1034,12 +1068,12 @@ import * as bindings from '../bindings.mjs'
  * 
  * ## BOLT 11 Invoices
  * 
- * The [`lightning-invoice`] crate is useful for creating BOLT 11 invoices. Specifically, use the
- * functions in its `utils` module for constructing invoices that are compatible with
- * [`ChannelManager`]. These functions serve as a convenience for building invoices with the
+ * The [`lightning-invoice`] crate is useful for creating BOLT 11 invoices. However, in order to
+ * construct a [`Bolt11Invoice`] that is compatible with [`ChannelManager`], use
+ * [`create_bolt11_invoice`]. This method serves as a convenience for building invoices with the
  * [`PaymentHash`] and [`PaymentSecret`] returned from [`create_inbound_payment`]. To provide your
- * own [`PaymentHash`], use [`create_inbound_payment_for_hash`] or the corresponding functions in
- * the [`lightning-invoice`] `utils` module.
+ * own [`PaymentHash`], override the appropriate [`Bolt11InvoiceParameters`], which is equivalent
+ * to using [`create_inbound_payment_for_hash`].
  * 
  * [`ChannelManager`] generates an [`Event::PaymentClaimable`] once the full payment has been
  * received. Call [`claim_funds`] to release the [`PaymentPreimage`], which in turn will result in
@@ -1047,19 +1081,21 @@ import * as bindings from '../bindings.mjs'
  * 
  * ```
  * # use lightning::events::{Event, EventsProvider, PaymentPurpose};
- * # use lightning::ln::channelmanager::AChannelManager;
+ * # use lightning::ln::channelmanager::{AChannelManager, Bolt11InvoiceParameters};
  * #
  * # fn example<T: AChannelManager>(channel_manager: T) {
  * # let channel_manager = channel_manager.get_cm();
- * Or use utils::create_invoice_from_channelmanager
- * let known_payment_hash = match channel_manager.create_inbound_payment(
- * Some(10_000_000), 3600, None
- * ) {
- * Ok((payment_hash, _payment_secret)) => {
- * println!(\"Creating inbound payment {}\", payment_hash);
- * payment_hash
+ * let params = Bolt11InvoiceParameters {
+ * amount_msats: Some(10_000_000),
+ * invoice_expiry_delta_secs: Some(3600),
+ * ..Default::default()
+ * };
+ * let invoice = match channel_manager.create_bolt11_invoice(params) {
+ * Ok(invoice) => {
+ * println!(\"Creating invoice with payment hash {}\", invoice.payment_hash());
+ * invoice
  * },
- * Err(()) => panic!(\"Error creating inbound payment\"),
+ * Err(e) => panic!(\"Error creating invoice: {}\", e),
  * };
  * 
  * On the event processing thread
@@ -1067,7 +1103,7 @@ import * as bindings from '../bindings.mjs'
  * match event {
  * Event::PaymentClaimable { payment_hash, purpose, .. } => match purpose {
  * PaymentPurpose::Bolt11InvoicePayment { payment_preimage: Some(payment_preimage), .. } => {
- * assert_eq!(payment_hash, known_payment_hash);
+ * assert_eq!(payment_hash.0, invoice.payment_hash().as_ref());
  * println!(\"Claiming payment {}\", payment_hash);
  * channel_manager.claim_funds(payment_preimage);
  * },
@@ -1075,7 +1111,7 @@ import * as bindings from '../bindings.mjs'
  * println!(\"Unknown payment hash: {}\", payment_hash);
  * },
  * PaymentPurpose::SpontaneousPayment(payment_preimage) => {
- * assert_ne!(payment_hash, known_payment_hash);
+ * assert_ne!(payment_hash.0, invoice.payment_hash().as_ref());
  * println!(\"Claiming spontaneous payment {}\", payment_hash);
  * channel_manager.claim_funds(payment_preimage);
  * },
@@ -1083,7 +1119,7 @@ import * as bindings from '../bindings.mjs'
  * #           _ => {},
  * },
  * Event::PaymentClaimed { payment_hash, amount_msat, .. } => {
- * assert_eq!(payment_hash, known_payment_hash);
+ * assert_eq!(payment_hash.0, invoice.payment_hash().as_ref());
  * println!(\"Claimed {} msats\", amount_msat);
  * },
  * ...
@@ -1094,13 +1130,14 @@ import * as bindings from '../bindings.mjs'
  * # }
  * ```
  * 
- * For paying an invoice, [`lightning-invoice`] provides a `payment` module with convenience
- * functions for use with [`send_payment`].
+ * For paying an invoice, see the [`bolt11_payment`] module with convenience functions for use with
+ * [`send_payment`].
  * 
  * ```
  * # use lightning::events::{Event, EventsProvider};
- * # use lightning::ln::types::PaymentHash;
- * # use lightning::ln::channelmanager::{AChannelManager, PaymentId, RecentPaymentDetails, RecipientOnionFields, Retry};
+ * # use lightning::types::payment::PaymentHash;
+ * # use lightning::ln::channelmanager::{AChannelManager, PaymentId, RecentPaymentDetails};
+ * # use lightning::ln::outbound_payment::{RecipientOnionFields, Retry};
  * # use lightning::routing::router::RouteParameters;
  * #
  * # fn example<T: AChannelManager>(
@@ -1203,7 +1240,8 @@ import * as bindings from '../bindings.mjs'
  * 
  * ```
  * # use lightning::events::{Event, EventsProvider};
- * # use lightning::ln::channelmanager::{AChannelManager, PaymentId, RecentPaymentDetails, Retry};
+ * # use lightning::ln::channelmanager::{AChannelManager, PaymentId, RecentPaymentDetails};
+ * # use lightning::ln::outbound_payment::Retry;
  * # use lightning::offers::offer::Offer;
  * #
  * # fn example<T: AChannelManager>(
@@ -1259,7 +1297,8 @@ import * as bindings from '../bindings.mjs'
  * ```
  * # use core::time::Duration;
  * # use lightning::events::{Event, EventsProvider};
- * # use lightning::ln::channelmanager::{AChannelManager, PaymentId, RecentPaymentDetails, Retry};
+ * # use lightning::ln::channelmanager::{AChannelManager, PaymentId, RecentPaymentDetails};
+ * # use lightning::ln::outbound_payment::Retry;
  * # use lightning::offers::parse::Bolt12SemanticError;
  * #
  * # fn example<T: AChannelManager>(
@@ -1429,8 +1468,10 @@ import * as bindings from '../bindings.mjs'
  * [`list_recent_payments`]: Self::list_recent_payments
  * [`abandon_payment`]: Self::abandon_payment
  * [`lightning-invoice`]: https://docs.rs/lightning_invoice/latest/lightning_invoice
+ * [`create_bolt11_invoice`]: Self::create_bolt11_invoice
  * [`create_inbound_payment`]: Self::create_inbound_payment
  * [`create_inbound_payment_for_hash`]: Self::create_inbound_payment_for_hash
+ * [`bolt11_payment`]: crate::ln::bolt11_payment
  * [`claim_funds`]: Self::claim_funds
  * [`send_payment`]: Self::send_payment
  * [`offers`]: crate::offers
@@ -1472,14 +1513,15 @@ export class ChannelManager extends CommonBase {
 	 * [`block_disconnected`]: chain::Listen::block_disconnected
 	 * [`params.best_block.block_hash`]: chain::BestBlock::block_hash
 	 */
-	public static constructor_new(fee_est: FeeEstimator, chain_monitor: Watch, tx_broadcaster: BroadcasterInterface, router: Router, logger: Logger, entropy_source: EntropySource, node_signer: NodeSigner, signer_provider: SignerProvider, config: UserConfig, params: ChainParameters, current_timestamp: number): ChannelManager {
-		const ret: bigint = bindings.ChannelManager_new(CommonBase.get_ptr_of(fee_est), CommonBase.get_ptr_of(chain_monitor), CommonBase.get_ptr_of(tx_broadcaster), CommonBase.get_ptr_of(router), CommonBase.get_ptr_of(logger), CommonBase.get_ptr_of(entropy_source), CommonBase.get_ptr_of(node_signer), CommonBase.get_ptr_of(signer_provider), CommonBase.get_ptr_of(config), CommonBase.get_ptr_of(params), current_timestamp);
+	public static constructor_new(fee_est: FeeEstimator, chain_monitor: Watch, tx_broadcaster: BroadcasterInterface, router: Router, message_router: MessageRouter, logger: Logger, entropy_source: EntropySource, node_signer: NodeSigner, signer_provider: SignerProvider, config: UserConfig, params: ChainParameters, current_timestamp: number): ChannelManager {
+		const ret: bigint = bindings.ChannelManager_new(CommonBase.get_ptr_of(fee_est), CommonBase.get_ptr_of(chain_monitor), CommonBase.get_ptr_of(tx_broadcaster), CommonBase.get_ptr_of(router), CommonBase.get_ptr_of(message_router), CommonBase.get_ptr_of(logger), CommonBase.get_ptr_of(entropy_source), CommonBase.get_ptr_of(node_signer), CommonBase.get_ptr_of(signer_provider), CommonBase.get_ptr_of(config), CommonBase.get_ptr_of(params), current_timestamp);
 		const ret_hu_conv: ChannelManager = new ChannelManager(null, ret);
 		CommonBase.add_ref_from(ret_hu_conv, ret_hu_conv);
 		CommonBase.add_ref_from(ret_hu_conv, fee_est);
 		CommonBase.add_ref_from(ret_hu_conv, chain_monitor);
 		CommonBase.add_ref_from(ret_hu_conv, tx_broadcaster);
 		CommonBase.add_ref_from(ret_hu_conv, router);
+		CommonBase.add_ref_from(ret_hu_conv, message_router);
 		CommonBase.add_ref_from(ret_hu_conv, logger);
 		CommonBase.add_ref_from(ret_hu_conv, entropy_source);
 		CommonBase.add_ref_from(ret_hu_conv, node_signer);
@@ -1752,14 +1794,8 @@ export class ChannelManager extends CommonBase {
 	}
 
 	/**
-	 * Sends a payment along a given route.
-	 * 
-	 * This method is *DEPRECATED*, use [`Self::send_payment`] instead. If you wish to fix the
-	 * route for a payment, do so by matching the [`PaymentId`] passed to
-	 * [`Router::find_route_with_id`].
-	 * 
-	 * Value parameters are provided via the last hop in route, see documentation for [`RouteHop`]
-	 * fields for more info.
+	 * Sends a payment to the route found using the provided [`RouteParameters`], retrying failed
+	 * payment paths based on the provided `Retry`.
 	 * 
 	 * May generate [`UpdateHTLCs`] message(s) event on success, which should be relayed (e.g. via
 	 * [`PeerManager::process_events`]).
@@ -1767,9 +1803,9 @@ export class ChannelManager extends CommonBase {
 	 * # Avoiding Duplicate Payments
 	 * 
 	 * If a pending payment is currently in-flight with the same [`PaymentId`] provided, this
-	 * method will error with an [`APIError::InvalidRoute`]. Note, however, that once a payment
-	 * is no longer pending (either via [`ChannelManager::abandon_payment`], or handling of an
-	 * [`Event::PaymentSent`] or [`Event::PaymentFailed`]) LDK will not stop you from sending a
+	 * method will error with [`RetryableSendFailure::DuplicatePayment`]. Note, however, that once a
+	 * payment is no longer pending (either via [`ChannelManager::abandon_payment`], or handling of
+	 * an [`Event::PaymentSent`] or [`Event::PaymentFailed`]) LDK will not stop you from sending a
 	 * second payment with the same [`PaymentId`].
 	 * 
 	 * Thus, in order to ensure duplicate payments are not sent, you should implement your own
@@ -1783,44 +1819,47 @@ export class ChannelManager extends CommonBase {
 	 * using [`ChannelMonitorUpdateStatus::InProgress`]), the payment may be lost on restart. See
 	 * [`ChannelManager::list_recent_payments`] for more information.
 	 * 
-	 * # Possible Error States on [`PaymentSendFailure`]
+	 * Routes are automatically found using the [`Router] provided on startup. To fix a route for a
+	 * particular payment, match the [`PaymentId`] passed to [`Router::find_route_with_id`].
 	 * 
-	 * Each path may have a different return value, and [`PaymentSendFailure`] may return a `Vec` with
-	 * each entry matching the corresponding-index entry in the route paths, see
-	 * [`PaymentSendFailure`] for more info.
-	 * 
-	 * In general, a path may raise:
-	 * [`APIError::InvalidRoute`] when an invalid route or forwarding parameter (cltv_delta, fee,
-	 * node public key) is specified.
-	 * [`APIError::ChannelUnavailable`] if the next-hop channel is not available as it has been
-	 * closed, doesn't exist, or the peer is currently disconnected.
-	 * [`APIError::MonitorUpdateInProgress`] if a new monitor update failure prevented sending the
-	 * relevant updates.
-	 * 
-	 * Note that depending on the type of the [`PaymentSendFailure`] the HTLC may have been
-	 * irrevocably committed to on our end. In such a case, do NOT retry the payment with a
-	 * different route unless you intend to pay twice!
-	 * 
-	 * [`RouteHop`]: crate::routing::router::RouteHop
 	 * [`Event::PaymentSent`]: events::Event::PaymentSent
 	 * [`Event::PaymentFailed`]: events::Event::PaymentFailed
 	 * [`UpdateHTLCs`]: events::MessageSendEvent::UpdateHTLCs
 	 * [`PeerManager::process_events`]: crate::ln::peer_handler::PeerManager::process_events
 	 * [`ChannelMonitorUpdateStatus::InProgress`]: crate::chain::ChannelMonitorUpdateStatus::InProgress
 	 */
-	public send_payment_with_route(route: Route, payment_hash: Uint8Array, recipient_onion: RecipientOnionFields, payment_id: Uint8Array): Result_NonePaymentSendFailureZ {
-		const ret: bigint = bindings.ChannelManager_send_payment_with_route(this.ptr, CommonBase.get_ptr_of(route), bindings.encodeUint8Array(bindings.check_arr_len(payment_hash, 32)), CommonBase.get_ptr_of(recipient_onion), bindings.encodeUint8Array(bindings.check_arr_len(payment_id, 32)));
-		const ret_hu_conv: Result_NonePaymentSendFailureZ = Result_NonePaymentSendFailureZ.constr_from_ptr(ret);
+	public send_payment(payment_hash: Uint8Array, recipient_onion: RecipientOnionFields, payment_id: Uint8Array, route_params: RouteParameters, retry_strategy: Retry): Result_NoneRetryableSendFailureZ {
+		const ret: bigint = bindings.ChannelManager_send_payment(this.ptr, bindings.encodeUint8Array(bindings.check_arr_len(payment_hash, 32)), CommonBase.get_ptr_of(recipient_onion), bindings.encodeUint8Array(bindings.check_arr_len(payment_id, 32)), CommonBase.get_ptr_of(route_params), CommonBase.get_ptr_of(retry_strategy));
+		const ret_hu_conv: Result_NoneRetryableSendFailureZ = Result_NoneRetryableSendFailureZ.constr_from_ptr(ret);
 		return ret_hu_conv;
 	}
 
 	/**
-	 * Similar to [`ChannelManager::send_payment_with_route`], but will automatically find a route based on
-	 * `route_params` and retry failed payment paths based on `retry_strategy`.
+	 * Pays the [`Bolt12Invoice`] associated with the `payment_id` encoded in its `payer_metadata`.
+	 * 
+	 * The invoice's `payer_metadata` is used to authenticate that the invoice was indeed requested
+	 * before attempting a payment. [`Bolt12PaymentError::UnexpectedInvoice`] is returned if this
+	 * fails or if the encoded `payment_id` is not recognized. The latter may happen once the
+	 * payment is no longer tracked because the payment was attempted after:
+	 * - an invoice for the `payment_id` was already paid,
+	 * - one full [timer tick] has elapsed since initially requesting the invoice when paying an
+	 * offer, or
+	 * - the refund corresponding to the invoice has already expired.
+	 * 
+	 * To retry the payment, request another invoice using a new `payment_id`.
+	 * 
+	 * Attempting to pay the same invoice twice while the first payment is still pending will
+	 * result in a [`Bolt12PaymentError::DuplicateInvoice`].
+	 * 
+	 * Otherwise, either [`Event::PaymentSent`] or [`Event::PaymentFailed`] are used to indicate
+	 * whether or not the payment was successful.
+	 * 
+	 * [timer tick]: Self::timer_tick_occurred
 	 */
-	public send_payment(payment_hash: Uint8Array, recipient_onion: RecipientOnionFields, payment_id: Uint8Array, route_params: RouteParameters, retry_strategy: Retry): Result_NoneRetryableSendFailureZ {
-		const ret: bigint = bindings.ChannelManager_send_payment(this.ptr, bindings.encodeUint8Array(bindings.check_arr_len(payment_hash, 32)), CommonBase.get_ptr_of(recipient_onion), bindings.encodeUint8Array(bindings.check_arr_len(payment_id, 32)), CommonBase.get_ptr_of(route_params), CommonBase.get_ptr_of(retry_strategy));
-		const ret_hu_conv: Result_NoneRetryableSendFailureZ = Result_NoneRetryableSendFailureZ.constr_from_ptr(ret);
+	public send_payment_for_bolt12_invoice(invoice: Bolt12Invoice, context: Option_OffersContextZ): Result_NoneBolt12PaymentErrorZ {
+		const ret: bigint = bindings.ChannelManager_send_payment_for_bolt12_invoice(this.ptr, CommonBase.get_ptr_of(invoice), CommonBase.get_ptr_of(context));
+		const ret_hu_conv: Result_NoneBolt12PaymentErrorZ = Result_NoneBolt12PaymentErrorZ.constr_from_ptr(ret);
+		CommonBase.add_ref_from(this, invoice);
 		return ret_hu_conv;
 	}
 
@@ -1862,32 +1901,20 @@ export class ChannelManager extends CommonBase {
 	 * would be able to guess -- otherwise, an intermediate node may claim the payment and it will
 	 * never reach the recipient.
 	 * 
-	 * See [`send_payment`] documentation for more details on the return value of this function
-	 * and idempotency guarantees provided by the [`PaymentId`] key.
-	 * 
 	 * Similar to regular payments, you MUST NOT reuse a `payment_preimage` value. See
 	 * [`send_payment`] for more information about the risks of duplicate preimage usage.
 	 * 
-	 * [`send_payment`]: Self::send_payment
-	 */
-	public send_spontaneous_payment(route: Route, payment_preimage: Option_ThirtyTwoBytesZ, recipient_onion: RecipientOnionFields, payment_id: Uint8Array): Result_ThirtyTwoBytesPaymentSendFailureZ {
-		const ret: bigint = bindings.ChannelManager_send_spontaneous_payment(this.ptr, CommonBase.get_ptr_of(route), CommonBase.get_ptr_of(payment_preimage), CommonBase.get_ptr_of(recipient_onion), bindings.encodeUint8Array(bindings.check_arr_len(payment_id, 32)));
-		const ret_hu_conv: Result_ThirtyTwoBytesPaymentSendFailureZ = Result_ThirtyTwoBytesPaymentSendFailureZ.constr_from_ptr(ret);
-		CommonBase.add_ref_from(this, route);
-		return ret_hu_conv;
-	}
-
-	/**
-	 * Similar to [`ChannelManager::send_spontaneous_payment`], but will automatically find a route
-	 * based on `route_params` and retry failed payment paths based on `retry_strategy`.
+	 * See [`send_payment`] documentation for more details on the idempotency guarantees provided by
+	 * the [`PaymentId`] key.
 	 * 
 	 * See [`PaymentParameters::for_keysend`] for help in constructing `route_params` for spontaneous
 	 * payments.
 	 * 
+	 * [`send_payment`]: Self::send_payment
 	 * [`PaymentParameters::for_keysend`]: crate::routing::router::PaymentParameters::for_keysend
 	 */
-	public send_spontaneous_payment_with_retry(payment_preimage: Option_ThirtyTwoBytesZ, recipient_onion: RecipientOnionFields, payment_id: Uint8Array, route_params: RouteParameters, retry_strategy: Retry): Result_ThirtyTwoBytesRetryableSendFailureZ {
-		const ret: bigint = bindings.ChannelManager_send_spontaneous_payment_with_retry(this.ptr, CommonBase.get_ptr_of(payment_preimage), CommonBase.get_ptr_of(recipient_onion), bindings.encodeUint8Array(bindings.check_arr_len(payment_id, 32)), CommonBase.get_ptr_of(route_params), CommonBase.get_ptr_of(retry_strategy));
+	public send_spontaneous_payment(payment_preimage: Option_ThirtyTwoBytesZ, recipient_onion: RecipientOnionFields, payment_id: Uint8Array, route_params: RouteParameters, retry_strategy: Retry): Result_ThirtyTwoBytesRetryableSendFailureZ {
+		const ret: bigint = bindings.ChannelManager_send_spontaneous_payment(this.ptr, CommonBase.get_ptr_of(payment_preimage), CommonBase.get_ptr_of(recipient_onion), bindings.encodeUint8Array(bindings.check_arr_len(payment_id, 32)), CommonBase.get_ptr_of(route_params), CommonBase.get_ptr_of(retry_strategy));
 		const ret_hu_conv: Result_ThirtyTwoBytesRetryableSendFailureZ = Result_ThirtyTwoBytesRetryableSendFailureZ.constr_from_ptr(ret);
 		return ret_hu_conv;
 	}
@@ -1897,9 +1924,9 @@ export class ChannelManager extends CommonBase {
 	 * [`PaymentHash`] of probes based on a static secret and a random [`PaymentId`], which allows
 	 * us to easily discern them from real payments.
 	 */
-	public send_probe(path: Path): Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ {
+	public send_probe(path: Path): Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ {
 		const ret: bigint = bindings.ChannelManager_send_probe(this.ptr, CommonBase.get_ptr_of(path));
-		const ret_hu_conv: Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ = Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZPaymentSendFailureZ.constr_from_ptr(ret);
+		const ret_hu_conv: Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ = Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ.constr_from_ptr(ret);
 		return ret_hu_conv;
 	}
 
@@ -2162,7 +2189,7 @@ export class ChannelManager extends CommonBase {
 	 * Forgetting about stale outbound payments, either those that have already been fulfilled
 	 * or those awaiting an invoice that hasn't been delivered in the necessary amount of time.
 	 * The latter is determined using the system clock in `std` and the highest seen block time
-	 * minus two hours in `no-std`.
+	 * minus two hours in non-`std`.
 	 * 
 	 * Note that this may cause reentrancy through [`chain::Watch::update_channel`] calls or feerate
 	 * estimate fetches.
@@ -2272,6 +2299,10 @@ export class ChannelManager extends CommonBase {
 	 * for zero confirmations. Instead, `accept_inbound_channel_from_trusted_peer_0conf` must be
 	 * used to accept such channels.
 	 * 
+	 * NOTE: LDK makes no attempt to prevent the counterparty from using non-standard inputs which
+	 * will prevent the funding transaction from being relayed on the bitcoin network and hence being
+	 * confirmed.
+	 * 
 	 * [`Event::OpenChannelRequest`]: events::Event::OpenChannelRequest
 	 * [`Event::ChannelClosed::user_channel_id`]: events::Event::ChannelClosed::user_channel_id
 	 */
@@ -2306,6 +2337,36 @@ export class ChannelManager extends CommonBase {
 		const ret: bigint = bindings.ChannelManager_accept_inbound_channel_from_trusted_peer_0conf(this.ptr, CommonBase.get_ptr_of(temporary_channel_id), bindings.encodeUint8Array(bindings.check_arr_len(counterparty_node_id, 33)), bindings.encodeUint128(user_channel_id));
 		const ret_hu_conv: Result_NoneAPIErrorZ = Result_NoneAPIErrorZ.constr_from_ptr(ret);
 		CommonBase.add_ref_from(this, temporary_channel_id);
+		return ret_hu_conv;
+	}
+
+	/**
+	 * When a call to a [`ChannelSigner`] method returns an error, this indicates that the signer
+	 * is (temporarily) unavailable, and the operation should be retried later.
+	 * 
+	 * This method allows for that retry - either checking for any signer-pending messages to be
+	 * attempted in every channel, or in the specifically provided channel.
+	 * 
+	 * [`ChannelSigner`]: crate::sign::ChannelSigner
+	 */
+	public signer_unblocked(channel_opt: Option_C2Tuple_PublicKeyChannelIdZZ): void {
+		bindings.ChannelManager_signer_unblocked(this.ptr, CommonBase.get_ptr_of(channel_opt));
+	}
+
+	/**
+	 * Utility for creating a BOLT11 invoice that can be verified by [`ChannelManager`] without
+	 * storing any additional state. It achieves this by including a [`PaymentSecret`] in the
+	 * invoice which it uses to verify that the invoice has not expired and the payment amount is
+	 * sufficient, reproducing the [`PaymentPreimage`] if applicable.
+	 */
+	public create_bolt11_invoice(params_amount_msats_arg: Option_u64Z, params_description_arg: Bolt11InvoiceDescription, params_invoice_expiry_delta_secs_arg: Option_u32Z, params_min_final_cltv_expiry_delta_arg: Option_u16Z, params_payment_hash_arg: Option_ThirtyTwoBytesZ): Result_Bolt11InvoiceSignOrCreationErrorZ {
+		const ret: bigint = bindings.ChannelManager_create_bolt11_invoice(this.ptr, bindings.Bolt11InvoiceParameters_new(CommonBase.get_ptr_of(params_amount_msats_arg), CommonBase.get_ptr_of(params_description_arg), CommonBase.get_ptr_of(params_invoice_expiry_delta_secs_arg), CommonBase.get_ptr_of(params_min_final_cltv_expiry_delta_arg), CommonBase.get_ptr_of(params_payment_hash_arg)));
+		const ret_hu_conv: Result_Bolt11InvoiceSignOrCreationErrorZ = Result_Bolt11InvoiceSignOrCreationErrorZ.constr_from_ptr(ret);
+		;
+		;
+		;
+		;
+		;
 		return ret_hu_conv;
 	}
 
@@ -2351,7 +2412,7 @@ export class ChannelManager extends CommonBase {
 	 * See [Avoiding Duplicate Payments] for other requirements once the payment has been sent.
 	 * 
 	 * The builder will have the provided expiration set. Any changes to the expiration on the
-	 * returned builder will not be honored by [`ChannelManager`]. For `no-std`, the highest seen
+	 * returned builder will not be honored by [`ChannelManager`]. For non-`std`, the highest seen
 	 * block time minus two hours is used for the current time when determining if the refund has
 	 * expired.
 	 * 
@@ -2429,7 +2490,7 @@ export class ChannelManager extends CommonBase {
 	 * # Limitations
 	 * 
 	 * Requires a direct connection to an introduction node in [`Offer::paths`] or to
-	 * [`Offer::signing_pubkey`], if empty. A similar restriction applies to the responding
+	 * [`Offer::issuer_signing_pubkey`], if empty. A similar restriction applies to the responding
 	 * [`Bolt12Invoice::payment_paths`].
 	 * 
 	 * # Errors
@@ -2467,9 +2528,9 @@ export class ChannelManager extends CommonBase {
 	 * # Limitations
 	 * 
 	 * Requires a direct connection to an introduction node in [`Refund::paths`] or to
-	 * [`Refund::payer_id`], if empty. This request is best effort; an invoice will be sent to each
-	 * node meeting the aforementioned criteria, but there's no guarantee that they will be
-	 * received and no retries will be made.
+	 * [`Refund::payer_signing_pubkey`], if empty. This request is best effort; an invoice will be
+	 * sent to each node meeting the aforementioned criteria, but there's no guarantee that they
+	 * will be received and no retries will be made.
 	 * 
 	 * # Errors
 	 * 
@@ -2484,6 +2545,54 @@ export class ChannelManager extends CommonBase {
 		const ret: bigint = bindings.ChannelManager_request_refund_payment(this.ptr, CommonBase.get_ptr_of(refund));
 		const ret_hu_conv: Result_Bolt12InvoiceBolt12SemanticErrorZ = Result_Bolt12InvoiceBolt12SemanticErrorZ.constr_from_ptr(ret);
 		CommonBase.add_ref_from(this, refund);
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Pays for an [`Offer`] looked up using [BIP 353] Human Readable Names resolved by the DNS
+	 * resolver(s) at `dns_resolvers` which resolve names according to bLIP 32.
+	 * 
+	 * If the wallet supports paying on-chain schemes, you should instead use
+	 * [`OMNameResolver::resolve_name`] and [`OMNameResolver::handle_dnssec_proof_for_uri`] (by
+	 * implementing [`DNSResolverMessageHandler`]) directly to look up a URI and then delegate to
+	 * your normal URI handling.
+	 * 
+	 * If `max_total_routing_fee_msat` is not specified, the default from
+	 * [`RouteParameters::from_payment_params_and_value`] is applied.
+	 * 
+	 * # Payment
+	 * 
+	 * The provided `payment_id` is used to ensure that only one invoice is paid for the request
+	 * when received. See [Avoiding Duplicate Payments] for other requirements once the payment has
+	 * been sent.
+	 * 
+	 * To revoke the request, use [`ChannelManager::abandon_payment`] prior to receiving the
+	 * invoice. If abandoned, or an invoice isn't received in a reasonable amount of time, the
+	 * payment will fail with an [`Event::InvoiceRequestFailed`].
+	 * 
+	 * # Privacy
+	 * 
+	 * For payer privacy, uses a derived payer id and uses [`MessageRouter::create_blinded_paths`]
+	 * to construct a [`BlindedPath`] for the reply path. For further privacy implications, see the
+	 * docs of the parameterized [`Router`], which implements [`MessageRouter`].
+	 * 
+	 * # Limitations
+	 * 
+	 * Requires a direct connection to the given [`Destination`] as well as an introduction node in
+	 * [`Offer::paths`] or to [`Offer::signing_pubkey`], if empty. A similar restriction applies to
+	 * the responding [`Bolt12Invoice::payment_paths`].
+	 * 
+	 * # Errors
+	 * 
+	 * Errors if:
+	 * - a duplicate `payment_id` is provided given the caveats in the aforementioned link,
+	 * 
+	 * [`Bolt12Invoice::payment_paths`]: crate::offers::invoice::Bolt12Invoice::payment_paths
+	 * [Avoiding Duplicate Payments]: #avoiding-duplicate-payments
+	 */
+	public pay_for_offer_from_human_readable_name(name: HumanReadableName, amount_msats: bigint, payment_id: Uint8Array, retry_strategy: Retry, max_total_routing_fee_msat: Option_u64Z, dns_resolvers: Destination[]): Result_NoneNoneZ {
+		const ret: bigint = bindings.ChannelManager_pay_for_offer_from_human_readable_name(this.ptr, CommonBase.get_ptr_of(name), amount_msats, bindings.encodeUint8Array(bindings.check_arr_len(payment_id, 32)), CommonBase.get_ptr_of(retry_strategy), CommonBase.get_ptr_of(max_total_routing_fee_msat), bindings.encodeUint64Array(dns_resolvers.map(dns_resolvers_conv_13 => CommonBase.get_ptr_of(dns_resolvers_conv_13))));
+		const ret_hu_conv: Result_NoneNoneZ = Result_NoneNoneZ.constr_from_ptr(ret);
 		return ret_hu_conv;
 	}
 
@@ -2794,6 +2903,17 @@ export class ChannelManager extends CommonBase {
 	public as_AsyncPaymentsMessageHandler(): AsyncPaymentsMessageHandler {
 		const ret: bigint = bindings.ChannelManager_as_AsyncPaymentsMessageHandler(this.ptr);
 		const ret_hu_conv: AsyncPaymentsMessageHandler = new AsyncPaymentsMessageHandler(null, ret);
+		CommonBase.add_ref_from(ret_hu_conv, this);
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Constructs a new DNSResolverMessageHandler which calls the relevant methods on this_arg.
+	 * This copies the `inner` pointer in this_arg and thus the returned DNSResolverMessageHandler must be freed before this_arg is
+	 */
+	public as_DNSResolverMessageHandler(): DNSResolverMessageHandler {
+		const ret: bigint = bindings.ChannelManager_as_DNSResolverMessageHandler(this.ptr);
+		const ret_hu_conv: DNSResolverMessageHandler = new DNSResolverMessageHandler(null, ret);
 		CommonBase.add_ref_from(ret_hu_conv, this);
 		return ret_hu_conv;
 	}

@@ -14,10 +14,9 @@ import javax.annotation.Nullable;
 public class Router extends CommonBase {
 	final bindings.LDKRouter bindings_instance;
 	Router(Object _dummy, long ptr) { super(ptr); bindings_instance = null; }
-	private Router(bindings.LDKRouter arg, bindings.LDKMessageRouter MessageRouter) {
-		super(bindings.LDKRouter_new(arg, MessageRouter));
+	private Router(bindings.LDKRouter arg) {
+		super(bindings.LDKRouter_new(arg));
 		this.ptrs_to.add(arg);
-		this.ptrs_to.add(MessageRouter);
 		this.bindings_instance = arg;
 	}
 	@Override @SuppressWarnings("deprecation")
@@ -67,7 +66,7 @@ public class Router extends CommonBase {
 		Result_CVec_BlindedPaymentPathZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, ReceiveTlvs tlvs, long amount_msats);
 	}
 	private static class LDKRouterHolder { Router held; }
-	public static Router new_impl(RouterInterface arg, MessageRouter.MessageRouterInterface MessageRouter_impl) {
+	public static Router new_impl(RouterInterface arg) {
 		final LDKRouterHolder impl_holder = new LDKRouterHolder();
 		impl_holder.held = new Router(new bindings.LDKRouter() {
 			@Override public long find_route(byte[] payer, long route_params, long[] first_hops, long inflight_htlcs) {
@@ -124,19 +123,9 @@ public class Router extends CommonBase {
 				long result = ret.clone_ptr();
 				return result;
 			}
-		}, MessageRouter.new_impl(MessageRouter_impl).bindings_instance);
+		});
 		return impl_holder.held;
 	}
-
-	/**
-	 * Gets the underlying MessageRouter.
-	 */
-	public MessageRouter get_message_router() {
-		MessageRouter res = new MessageRouter(null, bindings.LDKRouter_get_MessageRouter(this.ptr));
-		res.ptrs_to.add(this);
-		return res;
-	}
-
 	/**
 	 * Finds a [`Route`] for a payment between the given `payer` and a payee.
 	 * 

@@ -123,9 +123,9 @@ public class Refund : CommonBase {
 
 	/**
 	 * An unpredictable series of bytes, typically containing information about the derivation of
-	 * [`payer_id`].
+	 * [`payer_signing_pubkey`].
 	 * 
-	 * [`payer_id`]: Self::payer_id
+	 * [`payer_signing_pubkey`]: Self::payer_signing_pubkey
 	 */
 	public byte[] payer_metadata() {
 		long ret = bindings.Refund_payer_metadata(this.ptr);
@@ -187,8 +187,8 @@ public class Refund : CommonBase {
 	 * 
 	 * [`paths`]: Self::paths
 	 */
-	public byte[] payer_id() {
-		long ret = bindings.Refund_payer_id(this.ptr);
+	public byte[] payer_signing_pubkey() {
+		long ret = bindings.Refund_payer_signing_pubkey(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);

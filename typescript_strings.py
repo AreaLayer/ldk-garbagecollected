@@ -858,6 +858,8 @@ import * as bindings from '../bindings.mjs'
             return "bindings.getU32ArrayElem(" + arr_name + ", " + idx + ")"
         else:
             assert False
+    def check_c_arr_null(self, arr_name):
+        return arr_name + " != 0"
     def constr_hu_array(self, ty_info, arr_len):
         return "new Array(" + arr_len + ").fill(null)"
     def cleanup_converted_native_array(self, ty_info, arr_name):

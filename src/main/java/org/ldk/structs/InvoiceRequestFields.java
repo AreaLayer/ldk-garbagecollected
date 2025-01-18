@@ -25,8 +25,8 @@ public class InvoiceRequestFields extends CommonBase {
 	/**
 	 * A possibly transient pubkey used to sign the invoice request.
 	 */
-	public byte[] get_payer_id() {
-		byte[] ret = bindings.InvoiceRequestFields_get_payer_id(this.ptr);
+	public byte[] get_payer_signing_pubkey() {
+		byte[] ret = bindings.InvoiceRequestFields_get_payer_signing_pubkey(this.ptr);
 		Reference.reachabilityFence(this);
 		return ret;
 	}
@@ -34,8 +34,8 @@ public class InvoiceRequestFields extends CommonBase {
 	/**
 	 * A possibly transient pubkey used to sign the invoice request.
 	 */
-	public void set_payer_id(byte[] val) {
-		bindings.InvoiceRequestFields_set_payer_id(this.ptr, InternalUtils.check_arr_len(val, 33));
+	public void set_payer_signing_pubkey(byte[] val) {
+		bindings.InvoiceRequestFields_set_payer_signing_pubkey(this.ptr, InternalUtils.check_arr_len(val, 33));
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(val);
 	}
@@ -90,15 +90,43 @@ public class InvoiceRequestFields extends CommonBase {
 	}
 
 	/**
+	 * The Human Readable Name which the sender indicated they were paying to.
+	 * 
+	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	@Nullable
+	public HumanReadableName get_human_readable_name() {
+		long ret = bindings.InvoiceRequestFields_get_human_readable_name(this.ptr);
+		Reference.reachabilityFence(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.HumanReadableName ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.HumanReadableName(null, ret); }
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * The Human Readable Name which the sender indicated they were paying to.
+	 * 
+	 * Note that val (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 */
+	public void set_human_readable_name(@Nullable org.ldk.structs.HumanReadableName val) {
+		bindings.InvoiceRequestFields_set_human_readable_name(this.ptr, val == null ? 0 : val.ptr);
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(val);
+	}
+
+	/**
 	 * Constructs a new InvoiceRequestFields given each field
 	 * 
 	 * Note that payer_note_truncated_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
+	 * Note that human_readable_name_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static InvoiceRequestFields of(byte[] payer_id_arg, org.ldk.structs.Option_u64Z quantity_arg, @Nullable org.ldk.structs.UntrustedString payer_note_truncated_arg) {
-		long ret = bindings.InvoiceRequestFields_new(InternalUtils.check_arr_len(payer_id_arg, 33), quantity_arg.ptr, payer_note_truncated_arg == null ? 0 : payer_note_truncated_arg.ptr);
-		Reference.reachabilityFence(payer_id_arg);
+	public static InvoiceRequestFields of(byte[] payer_signing_pubkey_arg, org.ldk.structs.Option_u64Z quantity_arg, @Nullable org.ldk.structs.UntrustedString payer_note_truncated_arg, @Nullable org.ldk.structs.HumanReadableName human_readable_name_arg) {
+		long ret = bindings.InvoiceRequestFields_new(InternalUtils.check_arr_len(payer_signing_pubkey_arg, 33), quantity_arg.ptr, payer_note_truncated_arg == null ? 0 : payer_note_truncated_arg.ptr, human_readable_name_arg == null ? 0 : human_readable_name_arg.ptr);
+		Reference.reachabilityFence(payer_signing_pubkey_arg);
 		Reference.reachabilityFence(quantity_arg);
 		Reference.reachabilityFence(payer_note_truncated_arg);
+		Reference.reachabilityFence(human_readable_name_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.InvoiceRequestFields ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.InvoiceRequestFields(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };

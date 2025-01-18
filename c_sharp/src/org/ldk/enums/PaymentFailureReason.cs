@@ -20,8 +20,8 @@ public enum PaymentFailureReason {
 	LDKPaymentFailureReason_UserAbandoned,
 	/**
 	 * We exhausted all of our retry attempts while trying to send the payment, or we
-	 * exhausted the [`Retry::Timeout`] if the user set one. If at any point a retry
-	 * attempt failed while being forwarded along the path, an [`Event::PaymentPathFailed`] will
+	 * exhausted the [`Retry::Timeout`] if the user set one.
+	 * If at any point a retry attempt failed while being forwarded along the path, an [`Event::PaymentPathFailed`] will
 	 * have come before this.
 	 * 
 	 * [`Retry::Timeout`]: crate::ln::channelmanager::Retry::Timeout
@@ -38,11 +38,15 @@ public enum PaymentFailureReason {
 	 */
 	LDKPaymentFailureReason_PaymentExpired,
 	/**
-	 * We failed to find a route while retrying the payment.
+	 * We failed to find a route while sending or retrying the payment.
 	 * 
 	 * Note that this generally indicates that we've exhausted the available set of possible
 	 * routes - we tried the payment over a few routes but were not able to find any further
 	 * candidate routes beyond those.
+	 * 
+	 * Also used for [`BlindedPathCreationFailed`] when downgrading to versions prior to 0.0.124.
+	 * 
+	 * [`BlindedPathCreationFailed`]: Self::BlindedPathCreationFailed
 	 */
 	LDKPaymentFailureReason_RouteNotFound,
 	/**
@@ -64,4 +68,12 @@ public enum PaymentFailureReason {
 	 * [`InvoiceRequest`]: crate::offers::invoice_request::InvoiceRequest
 	 */
 	LDKPaymentFailureReason_InvoiceRequestRejected,
+	/**
+	 * Failed to create a blinded path back to ourselves.
+	 * We attempted to initiate payment to a static invoice but failed to create a reply path for our
+	 * [`HeldHtlcAvailable`] message.
+	 * 
+	 * [`HeldHtlcAvailable`]: crate::onion_message::async_payments::HeldHtlcAvailable
+	 */
+	LDKPaymentFailureReason_BlindedPathCreationFailed,
 }} } }

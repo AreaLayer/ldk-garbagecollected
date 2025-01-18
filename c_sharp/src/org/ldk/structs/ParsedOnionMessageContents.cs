@@ -20,7 +20,8 @@ public class ParsedOnionMessageContents : CommonBase {
 		long raw_ty = bindings.LDKParsedOnionMessageContents_ty_from_ptr(ptr);
 		switch (raw_ty) {
 			case 0: return new ParsedOnionMessageContents_Offers(ptr);
-			case 1: return new ParsedOnionMessageContents_Custom(ptr);
+			case 1: return new ParsedOnionMessageContents_DNSResolver(ptr);
+			case 2: return new ParsedOnionMessageContents_Custom(ptr);
 			default:
 				throw new ArgumentException("Impossible enum variant");
 		}
@@ -34,6 +35,16 @@ public class ParsedOnionMessageContents : CommonBase {
 			org.ldk.structs.OffersMessage offers_hu_conv = org.ldk.structs.OffersMessage.constr_from_ptr(offers);
 			if (offers_hu_conv != null) { offers_hu_conv.ptrs_to.AddLast(this); };
 			this.offers = offers_hu_conv;
+		}
+	}
+	/** A ParsedOnionMessageContents of type DNSResolver */
+	public class ParsedOnionMessageContents_DNSResolver : ParsedOnionMessageContents {
+		public DNSResolverMessage dns_resolver;
+		internal ParsedOnionMessageContents_DNSResolver(long ptr) : base(null, ptr) {
+			long dns_resolver = bindings.LDKParsedOnionMessageContents_DNSResolver_get_dns_resolver(ptr);
+			org.ldk.structs.DNSResolverMessage dns_resolver_hu_conv = org.ldk.structs.DNSResolverMessage.constr_from_ptr(dns_resolver);
+			if (dns_resolver_hu_conv != null) { dns_resolver_hu_conv.ptrs_to.AddLast(this); };
+			this.dns_resolver = dns_resolver_hu_conv;
 		}
 	}
 	/** A ParsedOnionMessageContents of type Custom */
@@ -69,6 +80,18 @@ public class ParsedOnionMessageContents : CommonBase {
 	 */
 	public static ParsedOnionMessageContents offers(org.ldk.structs.OffersMessage a) {
 		long ret = bindings.ParsedOnionMessageContents_offers(a.ptr);
+		GC.KeepAlive(a);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.ParsedOnionMessageContents ret_hu_conv = org.ldk.structs.ParsedOnionMessageContents.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
+	/**
+	 * Utility method to constructs a new DNSResolver-variant ParsedOnionMessageContents
+	 */
+	public static ParsedOnionMessageContents dnsresolver(org.ldk.structs.DNSResolverMessage a) {
+		long ret = bindings.ParsedOnionMessageContents_dnsresolver(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ParsedOnionMessageContents ret_hu_conv = org.ldk.structs.ParsedOnionMessageContents.constr_from_ptr(ret);

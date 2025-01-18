@@ -9,8 +9,10 @@ import javax.annotation.Nullable;
 
 
 /**
- * A tx_signatures message containing the sender's signatures for a transaction constructed with
+ * A [`tx_signatures`] message containing the sender's signatures for a transaction constructed with
  * interactive transaction construction.
+ * 
+ * [`tx_signatures`]: https://github.com/lightning/bolts/blob/master/02-peer-protocol.md#the-tx_signatures-message
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class TxSignatures extends CommonBase {

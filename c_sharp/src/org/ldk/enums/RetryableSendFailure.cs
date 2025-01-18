@@ -8,8 +8,9 @@ namespace org { namespace ldk { namespace enums {/**
  */
 public enum RetryableSendFailure {
 	/**
-	 * The provided [`PaymentParameters::expiry_time`] indicated that the payment has expired. Note
-	 * that this error is *not* caused by [`Retry::Timeout`].
+	 * The provided [`PaymentParameters::expiry_time`] indicated that the payment has expired.
+	 * 
+	 * Note that this error is *not* caused by [`Retry::Timeout`].
 	 * 
 	 * [`PaymentParameters::expiry_time`]: crate::routing::router::PaymentParameters::expiry_time
 	 */

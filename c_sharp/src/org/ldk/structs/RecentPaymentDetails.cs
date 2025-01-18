@@ -30,8 +30,8 @@ public class RecentPaymentDetails : CommonBase {
 	/** A RecentPaymentDetails of type AwaitingInvoice */
 	public class RecentPaymentDetails_AwaitingInvoice : RecentPaymentDetails {
 		/**
-		 * A user-provided identifier in [`ChannelManager::send_payment`] used to uniquely identify
-		 * a payment and ensure idempotency in LDK.
+		 * A user-provided identifier in [`ChannelManager::pay_for_offer`] used to uniquely identify a
+		 * payment and ensure idempotency in LDK.
 		 */
 		public byte[] payment_id;
 		internal RecentPaymentDetails_AwaitingInvoice(long ptr) : base(null, ptr) {
@@ -43,8 +43,11 @@ public class RecentPaymentDetails : CommonBase {
 	/** A RecentPaymentDetails of type Pending */
 	public class RecentPaymentDetails_Pending : RecentPaymentDetails {
 		/**
-		 * A user-provided identifier in [`ChannelManager::send_payment`] used to uniquely identify
-		 * a payment and ensure idempotency in LDK.
+		 * A user-provided identifier in [`send_payment`] or [`pay_for_offer`] used to uniquely
+		 * identify a payment and ensure idempotency in LDK.
+		 * 
+		 * [`send_payment`]: crate::ln::channelmanager::ChannelManager::send_payment
+		 * [`pay_for_offer`]: crate::ln::channelmanager::ChannelManager::pay_for_offer
 		 */
 		public byte[] payment_id;
 		/**
@@ -70,8 +73,11 @@ public class RecentPaymentDetails : CommonBase {
 	/** A RecentPaymentDetails of type Fulfilled */
 	public class RecentPaymentDetails_Fulfilled : RecentPaymentDetails {
 		/**
-		 * A user-provided identifier in [`ChannelManager::send_payment`] used to uniquely identify
-		 * a payment and ensure idempotency in LDK.
+		 * A user-provided identifier in [`send_payment`] or [`pay_for_offer`] used to uniquely
+		 * identify a payment and ensure idempotency in LDK.
+		 * 
+		 * [`send_payment`]: crate::ln::channelmanager::ChannelManager::send_payment
+		 * [`pay_for_offer`]: crate::ln::channelmanager::ChannelManager::pay_for_offer
 		 */
 		public byte[] payment_id;
 		/**
@@ -92,8 +98,11 @@ public class RecentPaymentDetails : CommonBase {
 	/** A RecentPaymentDetails of type Abandoned */
 	public class RecentPaymentDetails_Abandoned : RecentPaymentDetails {
 		/**
-		 * A user-provided identifier in [`ChannelManager::send_payment`] used to uniquely identify
-		 * a payment and ensure idempotency in LDK.
+		 * A user-provided identifier in [`send_payment`] or [`pay_for_offer`] used to uniquely
+		 * identify a payment and ensure idempotency in LDK.
+		 * 
+		 * [`send_payment`]: crate::ln::channelmanager::ChannelManager::send_payment
+		 * [`pay_for_offer`]: crate::ln::channelmanager::ChannelManager::pay_for_offer
 		 */
 		public byte[] payment_id;
 		/**

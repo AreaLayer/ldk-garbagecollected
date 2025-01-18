@@ -45,7 +45,7 @@ public class Amount extends CommonBase {
 		}
 	}
 	/**
-	 * An amount of currency specified using ISO 4712.
+	 * An amount of currency specified using ISO 4217.
 	 */
 	public final static class Currency extends Amount {
 		/**

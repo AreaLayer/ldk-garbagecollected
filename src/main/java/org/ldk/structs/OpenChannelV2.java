@@ -9,9 +9,11 @@ import javax.annotation.Nullable;
 
 
 /**
- * An open_channel2 message to be sent by or received from the channel initiator.
+ * An [`open_channel2`] message to be sent by or received from the channel initiator.
  * 
  * Used in V2 channel establishment
+ * 
+ * [`open_channel2`]: https://github.com/lightning/bolts/blob/master/02-peer-protocol.md#the-open_channel2-message
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class OpenChannelV2 extends CommonBase {

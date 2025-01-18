@@ -24,9 +24,6 @@ public class PaymentContext extends CommonBase {
 	}
 	static PaymentContext constr_from_ptr(long ptr) {
 		bindings.LDKPaymentContext raw_val = bindings.LDKPaymentContext_ref_from_ptr(ptr);
-		if (raw_val.getClass() == bindings.LDKPaymentContext.Unknown.class) {
-			return new Unknown(ptr, (bindings.LDKPaymentContext.Unknown)raw_val);
-		}
 		if (raw_val.getClass() == bindings.LDKPaymentContext.Bolt12Offer.class) {
 			return new Bolt12Offer(ptr, (bindings.LDKPaymentContext.Bolt12Offer)raw_val);
 		}
@@ -36,19 +33,6 @@ public class PaymentContext extends CommonBase {
 		assert false; return null; // Unreachable without extending the (internal) bindings interface
 	}
 
-	/**
-	 * The payment context was unknown.
-	 */
-	public final static class Unknown extends PaymentContext {
-		public final org.ldk.structs.UnknownPaymentContext unknown;
-		private Unknown(long ptr, bindings.LDKPaymentContext.Unknown obj) {
-			super(null, ptr);
-			long unknown = obj.unknown;
-			org.ldk.structs.UnknownPaymentContext unknown_hu_conv = null; if (unknown < 0 || unknown > 4096) { unknown_hu_conv = new org.ldk.structs.UnknownPaymentContext(null, unknown); }
-			if (unknown_hu_conv != null) { unknown_hu_conv.ptrs_to.add(this); };
-			this.unknown = unknown_hu_conv;
-		}
-	}
 	/**
 	 * The payment was made for an invoice requested from a BOLT 12 [`Offer`].
 	 * 
@@ -94,18 +78,6 @@ public class PaymentContext extends CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PaymentContext ret_hu_conv = org.ldk.structs.PaymentContext.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
-		return ret_hu_conv;
-	}
-
-	/**
-	 * Utility method to constructs a new Unknown-variant PaymentContext
-	 */
-	public static PaymentContext unknown(org.ldk.structs.UnknownPaymentContext a) {
-		long ret = bindings.PaymentContext_unknown(a.ptr);
-		Reference.reachabilityFence(a);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.PaymentContext ret_hu_conv = org.ldk.structs.PaymentContext.constr_from_ptr(ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
 		return ret_hu_conv;
 	}
 

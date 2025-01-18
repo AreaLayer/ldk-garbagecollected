@@ -13,8 +13,10 @@ import javax.annotation.Nullable;
  * 
  * # Privacy
  * 
- * Implements [`MessageRouter`] by delegating to [`DefaultMessageRouter`]. See those docs for
- * privacy implications.
+ * Creating [`BlindedPaymentPath`]s may affect privacy since, if a suitable path cannot be found,
+ * it will create a one-hop path using the recipient as the introduction node if it is a announced
+ * node. Otherwise, there is no way to find a path to the introduction node in order to send a
+ * payment, and thus an `Err` is returned.
  */
 @SuppressWarnings("unchecked") // We correctly assign various generic arrays
 public class DefaultRouter extends CommonBase {
@@ -54,19 +56,6 @@ public class DefaultRouter extends CommonBase {
 		Reference.reachabilityFence(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Router ret_hu_conv = new Router(null, ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
-		return ret_hu_conv;
-	}
-
-	/**
-	 * Constructs a new MessageRouter which calls the relevant methods on this_arg.
-	 * This copies the `inner` pointer in this_arg and thus the returned MessageRouter must be freed before this_arg is
-	 */
-	public MessageRouter as_MessageRouter() {
-		long ret = bindings.DefaultRouter_as_MessageRouter(this.ptr);
-		Reference.reachabilityFence(this);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		MessageRouter ret_hu_conv = new MessageRouter(null, ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
 		return ret_hu_conv;
 	}

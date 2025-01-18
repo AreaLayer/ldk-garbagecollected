@@ -7,8 +7,10 @@ namespace org { namespace ldk { namespace structs {
 
 
 /**
- * A tx_complete message signalling the conclusion of a peer's transaction contributions during
+ * [`A tx_complete`] message signalling the conclusion of a peer's transaction contributions during
  * interactive transaction construction.
+ * 
+ * [`tx_complete`]: https://github.com/lightning/bolts/blob/master/02-peer-protocol.md#the-tx_complete-message
  */
 public class TxComplete : CommonBase {
 	internal TxComplete(object _dummy, long ptr) : base(ptr) { }

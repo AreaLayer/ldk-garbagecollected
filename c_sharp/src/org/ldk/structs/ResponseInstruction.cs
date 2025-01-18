@@ -33,5 +33,19 @@ public class ResponseInstruction : CommonBase {
 		return ret_hu_conv;
 	}
 
+	/**
+	 * Converts this [`ResponseInstruction`] into a [`MessageSendInstructions`] so that it can be
+	 * used to send the response via a normal message sending method.
+	 */
+	public MessageSendInstructions into_instructions() {
+		long ret = bindings.ResponseInstruction_into_instructions(this.ptr);
+		GC.KeepAlive(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.MessageSendInstructions ret_hu_conv = org.ldk.structs.MessageSendInstructions.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
+		;
+		return ret_hu_conv;
+	}
+
 }
 } } }

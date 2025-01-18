@@ -273,7 +273,7 @@ public class NetworkGraph extends CommonBase {
 	 * in the map for a while so that these can be resynced from gossip in the future.
 	 * 
 	 * This method is only available with the `std` feature. See
-	 * [`NetworkGraph::remove_stale_channels_and_tracking_with_time`] for `no-std` use.
+	 * [`NetworkGraph::remove_stale_channels_and_tracking_with_time`] for non-`std` use.
 	 */
 	public void remove_stale_channels_and_tracking() {
 		bindings.NetworkGraph_remove_stale_channels_and_tracking(this.ptr);
@@ -309,7 +309,7 @@ public class NetworkGraph extends CommonBase {
 	 * [`RoutingMessageHandler`] implementation to call it indirectly. This may be useful to accept
 	 * routing messages from a source using a protocol other than the lightning P2P protocol.
 	 * 
-	 * If built with `no-std`, any updates with a timestamp more than two weeks in the past or
+	 * If not built with `std`, any updates with a timestamp more than two weeks in the past or
 	 * materially in the future will be rejected.
 	 */
 	public Result_NoneLightningErrorZ update_channel(org.ldk.structs.ChannelUpdate msg) {
@@ -327,7 +327,7 @@ public class NetworkGraph extends CommonBase {
 	 * of the channel without verifying the associated signatures. Because we aren't given the
 	 * associated signatures here we cannot relay the channel update to any of our peers.
 	 * 
-	 * If built with `no-std`, any updates with a timestamp more than two weeks in the past or
+	 * If not built with `std`, any updates with a timestamp more than two weeks in the past or
 	 * materially in the future will be rejected.
 	 */
 	public Result_NoneLightningErrorZ update_channel_unsigned(org.ldk.structs.UnsignedChannelUpdate msg) {
@@ -345,7 +345,7 @@ public class NetworkGraph extends CommonBase {
 	 * 
 	 * This checks whether the update currently is applicable by [`Self::update_channel`].
 	 * 
-	 * If built with `no-std`, any updates with a timestamp more than two weeks in the past or
+	 * If not built with `std`, any updates with a timestamp more than two weeks in the past or
 	 * materially in the future will be rejected.
 	 */
 	public Result_NoneLightningErrorZ verify_channel_update(org.ldk.structs.ChannelUpdate msg) {

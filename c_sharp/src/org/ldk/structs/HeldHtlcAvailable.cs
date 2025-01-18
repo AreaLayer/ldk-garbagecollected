@@ -18,31 +18,10 @@ public class HeldHtlcAvailable : CommonBase {
 	}
 
 	/**
-	 * The secret that will be used by the recipient of this message to release the held HTLC.
-	 */
-	public byte[] get_payment_release_secret() {
-		long ret = bindings.HeldHtlcAvailable_get_payment_release_secret(this.ptr);
-		GC.KeepAlive(this);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		byte[] ret_conv = InternalUtils.decodeUint8Array(ret);
-		return ret_conv;
-	}
-
-	/**
-	 * The secret that will be used by the recipient of this message to release the held HTLC.
-	 */
-	public void set_payment_release_secret(byte[] val) {
-		bindings.HeldHtlcAvailable_set_payment_release_secret(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(val, 32)));
-		GC.KeepAlive(this);
-		GC.KeepAlive(val);
-	}
-
-	/**
 	 * Constructs a new HeldHtlcAvailable given each field
 	 */
-	public static HeldHtlcAvailable of(byte[] payment_release_secret_arg) {
-		long ret = bindings.HeldHtlcAvailable_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_release_secret_arg, 32)));
-		GC.KeepAlive(payment_release_secret_arg);
+	public static HeldHtlcAvailable of() {
+		long ret = bindings.HeldHtlcAvailable_new();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.HeldHtlcAvailable ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.HeldHtlcAvailable(null, ret); }
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };

@@ -98,6 +98,19 @@ public class IgnoringMessageHandler extends CommonBase {
 	}
 
 	/**
+	 * Constructs a new DNSResolverMessageHandler which calls the relevant methods on this_arg.
+	 * This copies the `inner` pointer in this_arg and thus the returned DNSResolverMessageHandler must be freed before this_arg is
+	 */
+	public DNSResolverMessageHandler as_DNSResolverMessageHandler() {
+		long ret = bindings.IgnoringMessageHandler_as_DNSResolverMessageHandler(this.ptr);
+		Reference.reachabilityFence(this);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		DNSResolverMessageHandler ret_hu_conv = new DNSResolverMessageHandler(null, ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Constructs a new CustomOnionMessageHandler which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned CustomOnionMessageHandler must be freed before this_arg is
 	 */

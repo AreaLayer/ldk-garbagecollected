@@ -82,6 +82,8 @@ public class ChannelMonitor extends CommonBase {
 	/**
 	 * Gets the update_id from the latest ChannelMonitorUpdate which was applied to this
 	 * ChannelMonitor.
+	 * 
+	 * Note that for channels closed prior to LDK 0.1, this may return [`u64::MAX`].
 	 */
 	public long get_latest_update_id() {
 		long ret = bindings.ChannelMonitor_get_latest_update_id(this.ptr);
@@ -180,13 +182,15 @@ public class ChannelMonitor extends CommonBase {
 	 * [`SpendableOutputs`]: crate::events::Event::SpendableOutputs
 	 * [`BumpTransaction`]: crate::events::Event::BumpTransaction
 	 */
-	public Result_NoneReplayEventZ process_pending_events(org.ldk.structs.EventHandler handler) {
-		long ret = bindings.ChannelMonitor_process_pending_events(this.ptr, handler.ptr);
+	public Result_NoneReplayEventZ process_pending_events(org.ldk.structs.EventHandler handler, org.ldk.structs.Logger logger) {
+		long ret = bindings.ChannelMonitor_process_pending_events(this.ptr, handler.ptr, logger.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(handler);
+		Reference.reachabilityFence(logger);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneReplayEventZ ret_hu_conv = Result_NoneReplayEventZ.constr_from_ptr(ret);
 		if (this != null) { this.ptrs_to.add(handler); };
+		if (this != null) { this.ptrs_to.add(logger); };
 		return ret_hu_conv;
 	}
 
@@ -568,17 +572,28 @@ public class ChannelMonitor extends CommonBase {
 
 	/**
 	 * Checks if the monitor is fully resolved. Resolved monitor is one that has claimed all of
-	 * its outputs and balances (i.e. [`Self::get_claimable_balances`] returns an empty set).
+	 * its outputs and balances (i.e. [`Self::get_claimable_balances`] returns an empty set) and
+	 * which does not have any payment preimages for HTLCs which are still pending on other
+	 * channels.
 	 * 
-	 * This function returns true only if [`Self::get_claimable_balances`] has been empty for at least
+	 * Additionally may update state to track when the balances set became empty.
+	 * 
+	 * This function returns a tuple of two booleans, the first indicating whether the monitor is
+	 * fully resolved, and the second whether the monitor needs persistence to ensure it is
+	 * reliably marked as resolved within 4032 blocks.
+	 * 
+	 * The first boolean is true only if [`Self::get_claimable_balances`] has been empty for at least
 	 * 4032 blocks as an additional protection against any bugs resulting in spuriously empty balance sets.
 	 */
-	public boolean is_fully_resolved(org.ldk.structs.Logger logger) {
-		boolean ret = bindings.ChannelMonitor_is_fully_resolved(this.ptr, logger.ptr);
+	public TwoTuple_boolboolZ check_and_update_full_resolution_status(org.ldk.structs.Logger logger) {
+		long ret = bindings.ChannelMonitor_check_and_update_full_resolution_status(this.ptr, logger.ptr);
 		Reference.reachabilityFence(this);
 		Reference.reachabilityFence(logger);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		TwoTuple_boolboolZ ret_hu_conv = new TwoTuple_boolboolZ(null, ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(this); };
 		if (this != null) { this.ptrs_to.add(logger); };
-		return ret;
+		return ret_hu_conv;
 	}
 
 	/**

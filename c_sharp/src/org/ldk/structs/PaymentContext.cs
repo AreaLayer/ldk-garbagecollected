@@ -20,24 +20,13 @@ public class PaymentContext : CommonBase {
 	internal static PaymentContext constr_from_ptr(long ptr) {
 		long raw_ty = bindings.LDKPaymentContext_ty_from_ptr(ptr);
 		switch (raw_ty) {
-			case 0: return new PaymentContext_Unknown(ptr);
-			case 1: return new PaymentContext_Bolt12Offer(ptr);
-			case 2: return new PaymentContext_Bolt12Refund(ptr);
+			case 0: return new PaymentContext_Bolt12Offer(ptr);
+			case 1: return new PaymentContext_Bolt12Refund(ptr);
 			default:
 				throw new ArgumentException("Impossible enum variant");
 		}
 	}
 
-	/** A PaymentContext of type Unknown */
-	public class PaymentContext_Unknown : PaymentContext {
-		public UnknownPaymentContext unknown;
-		internal PaymentContext_Unknown(long ptr) : base(null, ptr) {
-			long unknown = bindings.LDKPaymentContext_Unknown_get_unknown(ptr);
-			org.ldk.structs.UnknownPaymentContext unknown_hu_conv = null; if (unknown < 0 || unknown > 4096) { unknown_hu_conv = new org.ldk.structs.UnknownPaymentContext(null, unknown); }
-			if (unknown_hu_conv != null) { unknown_hu_conv.ptrs_to.AddLast(this); };
-			this.unknown = unknown_hu_conv;
-		}
-	}
 	/** A PaymentContext of type Bolt12Offer */
 	public class PaymentContext_Bolt12Offer : PaymentContext {
 		public Bolt12OfferContext bolt12_offer;
@@ -73,18 +62,6 @@ public class PaymentContext : CommonBase {
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PaymentContext ret_hu_conv = org.ldk.structs.PaymentContext.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(this); };
-		return ret_hu_conv;
-	}
-
-	/**
-	 * Utility method to constructs a new Unknown-variant PaymentContext
-	 */
-	public static PaymentContext unknown(org.ldk.structs.UnknownPaymentContext a) {
-		long ret = bindings.PaymentContext_unknown(a.ptr);
-		GC.KeepAlive(a);
-		if (ret >= 0 && ret <= 4096) { return null; }
-		org.ldk.structs.PaymentContext ret_hu_conv = org.ldk.structs.PaymentContext.constr_from_ptr(ret);
-		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
 		return ret_hu_conv;
 	}
 

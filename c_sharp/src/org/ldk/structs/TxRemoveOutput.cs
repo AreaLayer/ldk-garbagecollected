@@ -7,7 +7,9 @@ namespace org { namespace ldk { namespace structs {
 
 
 /**
- * A tx_remove_output message for removing an output during interactive transaction construction.
+ * A [`tx_remove_output`] message for removing an output during interactive transaction construction.
+ * 
+ * [`tx_remove_output`]: https://github.com/lightning/bolts/blob/master/02-peer-protocol.md#the-tx_remove_input-and-tx_remove_output-messages
  */
 public class TxRemoveOutput : CommonBase {
 	internal TxRemoveOutput(object _dummy, long ptr) : base(ptr) { }

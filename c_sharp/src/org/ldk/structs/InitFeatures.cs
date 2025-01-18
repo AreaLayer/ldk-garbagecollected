@@ -730,6 +730,40 @@ public class InitFeatures : CommonBase {
 	/**
 	 * Set this feature as optional.
 	 */
+	public void set_dual_fund_optional() {
+		bindings.InitFeatures_set_dual_fund_optional(this.ptr);
+		GC.KeepAlive(this);
+	}
+
+	/**
+	 * Set this feature as required.
+	 */
+	public void set_dual_fund_required() {
+		bindings.InitFeatures_set_dual_fund_required(this.ptr);
+		GC.KeepAlive(this);
+	}
+
+	/**
+	 * Checks if this feature is supported.
+	 */
+	public bool supports_dual_fund() {
+		bool ret = bindings.InitFeatures_supports_dual_fund(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Checks if this feature is required.
+	 */
+	public bool requires_dual_fund() {
+		bool ret = bindings.InitFeatures_requires_dual_fund(this.ptr);
+		GC.KeepAlive(this);
+		return ret;
+	}
+
+	/**
+	 * Set this feature as optional.
+	 */
 	public void set_taproot_optional() {
 		bindings.InitFeatures_set_taproot_optional(this.ptr);
 		GC.KeepAlive(this);

@@ -7,9 +7,11 @@ namespace org { namespace ldk { namespace structs {
 
 
 /**
- * An accept_channel2 message to be sent by or received from the channel accepter.
+ * An [`accept_channel2`] message to be sent by or received from the channel accepter.
  * 
  * Used in V2 channel establishment
+ * 
+ * [`accept_channel2`]: https://github.com/lightning/bolts/blob/master/02-peer-protocol.md#the-accept_channel2-message
  */
 public class AcceptChannelV2 : CommonBase {
 	internal AcceptChannelV2(object _dummy, long ptr) : base(ptr) { }

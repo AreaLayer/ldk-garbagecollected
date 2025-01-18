@@ -29,8 +29,7 @@ public class InvoiceWithExplicitSigningPubkeyBuilder extends CommonBase {
 	}
 
 	/**
-	 * Builds an unsigned [`Bolt12Invoice`] after checking for valid semantics. It can be signed by
-	 * [`UnsignedBolt12Invoice::sign`].
+	 * Builds an unsigned [`Bolt12Invoice`] after checking for valid semantics.
 	 */
 	public Result_UnsignedBolt12InvoiceBolt12SemanticErrorZ build() {
 		long ret = bindings.InvoiceWithExplicitSigningPubkeyBuilder_build(this.ptr);
