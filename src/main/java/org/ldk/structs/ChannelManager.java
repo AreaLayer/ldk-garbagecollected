@@ -1113,6 +1113,24 @@ public class ChannelManager extends CommonBase {
 	}
 
 	/**
+	 * Sends a payment along a given route. See [`Self::send_payment`] for more info.
+	 * 
+	 * LDK will not automatically retry this payment, though it may be manually re-sent after an
+	 * [`Event::PaymentFailed`] is generated.
+	 */
+	public Result_NoneRetryableSendFailureZ send_payment_with_route(org.ldk.structs.Route route, byte[] payment_hash, org.ldk.structs.RecipientOnionFields recipient_onion, byte[] payment_id) {
+		long ret = bindings.ChannelManager_send_payment_with_route(this.ptr, route.ptr, InternalUtils.check_arr_len(payment_hash, 32), recipient_onion.ptr, InternalUtils.check_arr_len(payment_id, 32));
+		Reference.reachabilityFence(this);
+		Reference.reachabilityFence(route);
+		Reference.reachabilityFence(payment_hash);
+		Reference.reachabilityFence(recipient_onion);
+		Reference.reachabilityFence(payment_id);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		Result_NoneRetryableSendFailureZ ret_hu_conv = Result_NoneRetryableSendFailureZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Sends a payment to the route found using the provided [`RouteParameters`], retrying failed
 	 * payment paths based on the provided `Retry`.
 	 * 
@@ -1139,7 +1157,8 @@ public class ChannelManager extends CommonBase {
 	 * [`ChannelManager::list_recent_payments`] for more information.
 	 * 
 	 * Routes are automatically found using the [`Router] provided on startup. To fix a route for a
-	 * particular payment, match the [`PaymentId`] passed to [`Router::find_route_with_id`].
+	 * particular payment, use [`Self::send_payment_with_route`] or match the [`PaymentId`] passed to
+	 * [`Router::find_route_with_id`].
 	 * 
 	 * [`Event::PaymentSent`]: events::Event::PaymentSent
 	 * [`Event::PaymentFailed`]: events::Event::PaymentFailed

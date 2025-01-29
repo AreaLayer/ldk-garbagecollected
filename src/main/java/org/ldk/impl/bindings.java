@@ -1814,7 +1814,8 @@ public class bindings {
 			public long onion_packet;
 			public long short_channel_id;
 			public long blinded;
-			Forward(long onion_packet, long short_channel_id, long blinded) { this.onion_packet = onion_packet; this.short_channel_id = short_channel_id; this.blinded = blinded; }
+			public long incoming_cltv_expiry;
+			Forward(long onion_packet, long short_channel_id, long blinded, long incoming_cltv_expiry) { this.onion_packet = onion_packet; this.short_channel_id = short_channel_id; this.blinded = blinded; this.incoming_cltv_expiry = incoming_cltv_expiry; }
 		}
 		public final static class Receive extends LDKPendingHTLCRouting {
 			public long payment_data;
@@ -9147,8 +9148,8 @@ public class bindings {
 	public static native long PendingHTLCRouting_clone_ptr(long arg);
 	// struct LDKPendingHTLCRouting PendingHTLCRouting_clone(const struct LDKPendingHTLCRouting *NONNULL_PTR orig);
 	public static native long PendingHTLCRouting_clone(long orig);
-	// struct LDKPendingHTLCRouting PendingHTLCRouting_forward(struct LDKOnionPacket onion_packet, uint64_t short_channel_id, struct LDKBlindedForward blinded);
-	public static native long PendingHTLCRouting_forward(long onion_packet, long short_channel_id, long blinded);
+	// struct LDKPendingHTLCRouting PendingHTLCRouting_forward(struct LDKOnionPacket onion_packet, uint64_t short_channel_id, struct LDKBlindedForward blinded, struct LDKCOption_u32Z incoming_cltv_expiry);
+	public static native long PendingHTLCRouting_forward(long onion_packet, long short_channel_id, long blinded, long incoming_cltv_expiry);
 	// struct LDKPendingHTLCRouting PendingHTLCRouting_receive(struct LDKFinalOnionHopData payment_data, struct LDKCOption_CVec_u8ZZ payment_metadata, struct LDKCOption_PaymentContextZ payment_context, uint32_t incoming_cltv_expiry, struct LDKThirtyTwoBytes phantom_shared_secret, struct LDKCVec_C2Tuple_u64CVec_u8ZZZ custom_tlvs, bool requires_blinded_error);
 	public static native long PendingHTLCRouting_receive(long payment_data, long payment_metadata, long payment_context, int incoming_cltv_expiry, byte[] phantom_shared_secret, long[] custom_tlvs, boolean requires_blinded_error);
 	// struct LDKPendingHTLCRouting PendingHTLCRouting_receive_keysend(struct LDKFinalOnionHopData payment_data, struct LDKThirtyTwoBytes payment_preimage, struct LDKCOption_CVec_u8ZZ payment_metadata, uint32_t incoming_cltv_expiry, struct LDKCVec_C2Tuple_u64CVec_u8ZZZ custom_tlvs, bool requires_blinded_error, bool has_recipient_created_payment_secret);
@@ -9319,6 +9320,8 @@ public class bindings {
 	public static native void ChannelManager_force_close_all_channels_broadcasting_latest_txn(long this_arg, String error_message);
 	// void ChannelManager_force_close_all_channels_without_broadcasting_txn(const struct LDKChannelManager *NONNULL_PTR this_arg, struct LDKStr error_message);
 	public static native void ChannelManager_force_close_all_channels_without_broadcasting_txn(long this_arg, String error_message);
+	// MUST_USE_RES struct LDKCResult_NoneRetryableSendFailureZ ChannelManager_send_payment_with_route(const struct LDKChannelManager *NONNULL_PTR this_arg, struct LDKRoute route, struct LDKThirtyTwoBytes payment_hash, struct LDKRecipientOnionFields recipient_onion, struct LDKThirtyTwoBytes payment_id);
+	public static native long ChannelManager_send_payment_with_route(long this_arg, long route, byte[] payment_hash, long recipient_onion, byte[] payment_id);
 	// MUST_USE_RES struct LDKCResult_NoneRetryableSendFailureZ ChannelManager_send_payment(const struct LDKChannelManager *NONNULL_PTR this_arg, struct LDKThirtyTwoBytes payment_hash, struct LDKRecipientOnionFields recipient_onion, struct LDKThirtyTwoBytes payment_id, struct LDKRouteParameters route_params, struct LDKRetry retry_strategy);
 	public static native long ChannelManager_send_payment(long this_arg, byte[] payment_hash, long recipient_onion, byte[] payment_id, long route_params, long retry_strategy);
 	// MUST_USE_RES struct LDKCResult_NoneBolt12PaymentErrorZ ChannelManager_send_payment_for_bolt12_invoice(const struct LDKChannelManager *NONNULL_PTR this_arg, const struct LDKBolt12Invoice *NONNULL_PTR invoice, struct LDKCOption_OffersContextZ context);
@@ -14329,6 +14332,8 @@ public class bindings {
 	public static native long SpendableOutputDescriptor_read(byte[] ser);
 	// MUST_USE_RES struct LDKCResult_C2Tuple_CVec_u8Zu64ZNoneZ SpendableOutputDescriptor_create_spendable_outputs_psbt(struct LDKCVec_SpendableOutputDescriptorZ descriptors, struct LDKCVec_TxOutZ outputs, struct LDKCVec_u8Z change_destination_script, uint32_t feerate_sat_per_1000_weight, struct LDKCOption_u32Z locktime);
 	public static native long SpendableOutputDescriptor_create_spendable_outputs_psbt(long[] descriptors, long[] outputs, byte[] change_destination_script, int feerate_sat_per_1000_weight, long locktime);
+	// MUST_USE_RES struct LDKOutPoint SpendableOutputDescriptor_spendable_outpoint(const struct LDKSpendableOutputDescriptor *NONNULL_PTR this_arg);
+	public static native long SpendableOutputDescriptor_spendable_outpoint(long this_arg);
 	// void ChannelDerivationParameters_free(struct LDKChannelDerivationParameters this_obj);
 	public static native void ChannelDerivationParameters_free(long this_obj);
 	// uint64_t ChannelDerivationParameters_get_value_satoshis(const struct LDKChannelDerivationParameters *NONNULL_PTR this_ptr);

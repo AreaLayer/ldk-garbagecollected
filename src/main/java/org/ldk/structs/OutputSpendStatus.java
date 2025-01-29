@@ -75,7 +75,11 @@ public class OutputSpendStatus extends CommonBase {
 	}
 	/**
 	 * A transaction spending the output has been confirmed on-chain but will be tracked until it
-	 * reaches [`ANTI_REORG_DELAY`] confirmations.
+	 * reaches at least [`PRUNE_DELAY_BLOCKS`] confirmations to ensure [`Event::SpendableOutputs`]
+	 * stemming from lingering [`ChannelMonitor`]s can safely be replayed.
+	 * 
+	 * [`Event::SpendableOutputs`]: crate::events::Event::SpendableOutputs
+	 * [`ChannelMonitor`]: crate::chain::channelmonitor::ChannelMonitor
 	 */
 	public final static class PendingThresholdConfirmations extends OutputSpendStatus {
 		/**
