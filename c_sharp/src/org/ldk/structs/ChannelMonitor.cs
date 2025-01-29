@@ -593,10 +593,11 @@ public class ChannelMonitor : CommonBase {
 	 * 
 	 * This function returns a tuple of two booleans, the first indicating whether the monitor is
 	 * fully resolved, and the second whether the monitor needs persistence to ensure it is
-	 * reliably marked as resolved within 4032 blocks.
+	 * reliably marked as resolved within [`ARCHIVAL_DELAY_BLOCKS`] blocks.
 	 * 
-	 * The first boolean is true only if [`Self::get_claimable_balances`] has been empty for at least
-	 * 4032 blocks as an additional protection against any bugs resulting in spuriously empty balance sets.
+	 * The first boolean is true only if [`Self::get_claimable_balances`] has been empty for at
+	 * least [`ARCHIVAL_DELAY_BLOCKS`] blocks as an additional protection against any bugs
+	 * resulting in spuriously empty balance sets.
 	 */
 	public TwoTuple_boolboolZ check_and_update_full_resolution_status(org.ldk.structs.Logger logger) {
 		long ret = bindings.ChannelMonitor_check_and_update_full_resolution_status(this.ptr, logger.ptr);
