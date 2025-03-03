@@ -774,8 +774,8 @@ export class PendingHTLCRouting extends CommonBase {
 	/**
 	 * Utility method to constructs a new Forward-variant PendingHTLCRouting
 	 */
-	public static constructor_forward(onion_packet: OnionPacket, short_channel_id: bigint, blinded: BlindedForward): PendingHTLCRouting {
-		const ret: bigint = bindings.PendingHTLCRouting_forward(CommonBase.get_ptr_of(onion_packet), short_channel_id, CommonBase.get_ptr_of(blinded));
+	public static constructor_forward(onion_packet: OnionPacket, short_channel_id: bigint, blinded: BlindedForward, incoming_cltv_expiry: Option_u32Z): PendingHTLCRouting {
+		const ret: bigint = bindings.PendingHTLCRouting_forward(CommonBase.get_ptr_of(onion_packet), short_channel_id, CommonBase.get_ptr_of(blinded), CommonBase.get_ptr_of(incoming_cltv_expiry));
 		const ret_hu_conv: PendingHTLCRouting = PendingHTLCRouting.constr_from_ptr(ret);
 		CommonBase.add_ref_from(ret_hu_conv, ret_hu_conv);
 		return ret_hu_conv;
@@ -841,6 +841,10 @@ export class PendingHTLCRouting_Forward extends PendingHTLCRouting {
 	 * Note that this (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
 	public blinded: BlindedForward;
+	/**
+	 * The absolute CLTV of the inbound HTLC
+	 */
+	public incoming_cltv_expiry: Option_u32Z;
 	/* @internal */
 	public constructor(ptr: bigint) {
 		super(null, ptr);
@@ -853,6 +857,10 @@ export class PendingHTLCRouting_Forward extends PendingHTLCRouting {
 		const blinded_hu_conv: BlindedForward = new BlindedForward(null, blinded);
 			CommonBase.add_ref_from(blinded_hu_conv, this);
 		this.blinded = blinded_hu_conv;
+		const incoming_cltv_expiry: bigint = bindings.LDKPendingHTLCRouting_Forward_get_incoming_cltv_expiry(ptr);
+		const incoming_cltv_expiry_hu_conv: Option_u32Z = Option_u32Z.constr_from_ptr(incoming_cltv_expiry);
+			CommonBase.add_ref_from(incoming_cltv_expiry_hu_conv, this);
+		this.incoming_cltv_expiry = incoming_cltv_expiry_hu_conv;
 	}
 }
 /** A PendingHTLCRouting of type Receive */

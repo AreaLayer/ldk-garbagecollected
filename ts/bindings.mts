@@ -5921,6 +5921,14 @@ export function LDKPendingHTLCRouting_Forward_get_blinded(ptr: bigint): bigint {
 	return nativeResponseValue;
 }
 /* @internal */
+export function LDKPendingHTLCRouting_Forward_get_incoming_cltv_expiry(ptr: bigint): bigint {
+	if(!isWasmInitialized) {
+		throw new Error("initializeWasm() must be awaited first!");
+	}
+	const nativeResponseValue = wasm.TS_LDKPendingHTLCRouting_Forward_get_incoming_cltv_expiry(ptr);
+	return nativeResponseValue;
+}
+/* @internal */
 export function LDKPendingHTLCRouting_Receive_get_payment_data(ptr: bigint): bigint {
 	if(!isWasmInitialized) {
 		throw new Error("initializeWasm() must be awaited first!");
@@ -36676,13 +36684,13 @@ export function PendingHTLCRouting_clone(orig: bigint): bigint {
 	const nativeResponseValue = wasm.TS_PendingHTLCRouting_clone(orig);
 	return nativeResponseValue;
 }
-	// struct LDKPendingHTLCRouting PendingHTLCRouting_forward(struct LDKOnionPacket onion_packet, uint64_t short_channel_id, struct LDKBlindedForward blinded);
+	// struct LDKPendingHTLCRouting PendingHTLCRouting_forward(struct LDKOnionPacket onion_packet, uint64_t short_channel_id, struct LDKBlindedForward blinded, struct LDKCOption_u32Z incoming_cltv_expiry);
 /* @internal */
-export function PendingHTLCRouting_forward(onion_packet: bigint, short_channel_id: bigint, blinded: bigint): bigint {
+export function PendingHTLCRouting_forward(onion_packet: bigint, short_channel_id: bigint, blinded: bigint, incoming_cltv_expiry: bigint): bigint {
 	if(!isWasmInitialized) {
 		throw new Error("initializeWasm() must be awaited first!");
 	}
-	const nativeResponseValue = wasm.TS_PendingHTLCRouting_forward(onion_packet, short_channel_id, blinded);
+	const nativeResponseValue = wasm.TS_PendingHTLCRouting_forward(onion_packet, short_channel_id, blinded, incoming_cltv_expiry);
 	return nativeResponseValue;
 }
 	// struct LDKPendingHTLCRouting PendingHTLCRouting_receive(struct LDKFinalOnionHopData payment_data, struct LDKCOption_CVec_u8ZZ payment_metadata, struct LDKCOption_PaymentContextZ payment_context, uint32_t incoming_cltv_expiry, struct LDKThirtyTwoBytes phantom_shared_secret, struct LDKCVec_C2Tuple_u64CVec_u8ZZZ custom_tlvs, bool requires_blinded_error);
@@ -37449,6 +37457,15 @@ export function ChannelManager_force_close_all_channels_without_broadcasting_txn
 	}
 	const nativeResponseValue = wasm.TS_ChannelManager_force_close_all_channels_without_broadcasting_txn(this_arg, error_message);
 	// debug statements here
+}
+	// MUST_USE_RES struct LDKCResult_NoneRetryableSendFailureZ ChannelManager_send_payment_with_route(const struct LDKChannelManager *NONNULL_PTR this_arg, struct LDKRoute route, struct LDKThirtyTwoBytes payment_hash, struct LDKRecipientOnionFields recipient_onion, struct LDKThirtyTwoBytes payment_id);
+/* @internal */
+export function ChannelManager_send_payment_with_route(this_arg: bigint, route: bigint, payment_hash: number, recipient_onion: bigint, payment_id: number): bigint {
+	if(!isWasmInitialized) {
+		throw new Error("initializeWasm() must be awaited first!");
+	}
+	const nativeResponseValue = wasm.TS_ChannelManager_send_payment_with_route(this_arg, route, payment_hash, recipient_onion, payment_id);
+	return nativeResponseValue;
 }
 	// MUST_USE_RES struct LDKCResult_NoneRetryableSendFailureZ ChannelManager_send_payment(const struct LDKChannelManager *NONNULL_PTR this_arg, struct LDKThirtyTwoBytes payment_hash, struct LDKRecipientOnionFields recipient_onion, struct LDKThirtyTwoBytes payment_id, struct LDKRouteParameters route_params, struct LDKRetry retry_strategy);
 /* @internal */
@@ -59903,6 +59920,15 @@ export function SpendableOutputDescriptor_create_spendable_outputs_psbt(descript
 		throw new Error("initializeWasm() must be awaited first!");
 	}
 	const nativeResponseValue = wasm.TS_SpendableOutputDescriptor_create_spendable_outputs_psbt(descriptors, outputs, change_destination_script, feerate_sat_per_1000_weight, locktime);
+	return nativeResponseValue;
+}
+	// MUST_USE_RES struct LDKOutPoint SpendableOutputDescriptor_spendable_outpoint(const struct LDKSpendableOutputDescriptor *NONNULL_PTR this_arg);
+/* @internal */
+export function SpendableOutputDescriptor_spendable_outpoint(this_arg: bigint): bigint {
+	if(!isWasmInitialized) {
+		throw new Error("initializeWasm() must be awaited first!");
+	}
+	const nativeResponseValue = wasm.TS_SpendableOutputDescriptor_spendable_outpoint(this_arg);
 	return nativeResponseValue;
 }
 	// void ChannelDerivationParameters_free(struct LDKChannelDerivationParameters this_obj);

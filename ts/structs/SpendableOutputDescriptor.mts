@@ -844,6 +844,16 @@ export class SpendableOutputDescriptor extends CommonBase {
 		return ret_hu_conv;
 	}
 
+	/**
+	 * Returns the outpoint of the spendable output.
+	 */
+	public spendable_outpoint(): OutPoint {
+		const ret: bigint = bindings.SpendableOutputDescriptor_spendable_outpoint(this.ptr);
+		const ret_hu_conv: OutPoint = new OutPoint(null, ret);
+		CommonBase.add_ref_from(ret_hu_conv, this);
+		return ret_hu_conv;
+	}
+
 }
 /** A SpendableOutputDescriptor of type StaticOutput */
 export class SpendableOutputDescriptor_StaticOutput extends SpendableOutputDescriptor {

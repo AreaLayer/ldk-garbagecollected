@@ -1794,6 +1794,18 @@ export class ChannelManager extends CommonBase {
 	}
 
 	/**
+	 * Sends a payment along a given route. See [`Self::send_payment`] for more info.
+	 * 
+	 * LDK will not automatically retry this payment, though it may be manually re-sent after an
+	 * [`Event::PaymentFailed`] is generated.
+	 */
+	public send_payment_with_route(route: Route, payment_hash: Uint8Array, recipient_onion: RecipientOnionFields, payment_id: Uint8Array): Result_NoneRetryableSendFailureZ {
+		const ret: bigint = bindings.ChannelManager_send_payment_with_route(this.ptr, CommonBase.get_ptr_of(route), bindings.encodeUint8Array(bindings.check_arr_len(payment_hash, 32)), CommonBase.get_ptr_of(recipient_onion), bindings.encodeUint8Array(bindings.check_arr_len(payment_id, 32)));
+		const ret_hu_conv: Result_NoneRetryableSendFailureZ = Result_NoneRetryableSendFailureZ.constr_from_ptr(ret);
+		return ret_hu_conv;
+	}
+
+	/**
 	 * Sends a payment to the route found using the provided [`RouteParameters`], retrying failed
 	 * payment paths based on the provided `Retry`.
 	 * 
@@ -1820,7 +1832,8 @@ export class ChannelManager extends CommonBase {
 	 * [`ChannelManager::list_recent_payments`] for more information.
 	 * 
 	 * Routes are automatically found using the [`Router] provided on startup. To fix a route for a
-	 * particular payment, match the [`PaymentId`] passed to [`Router::find_route_with_id`].
+	 * particular payment, use [`Self::send_payment_with_route`] or match the [`PaymentId`] passed to
+	 * [`Router::find_route_with_id`].
 	 * 
 	 * [`Event::PaymentSent`]: events::Event::PaymentSent
 	 * [`Event::PaymentFailed`]: events::Event::PaymentFailed
