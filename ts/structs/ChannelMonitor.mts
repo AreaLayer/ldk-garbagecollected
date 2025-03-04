@@ -1232,10 +1232,11 @@ export class ChannelMonitor extends CommonBase {
 	 * 
 	 * This function returns a tuple of two booleans, the first indicating whether the monitor is
 	 * fully resolved, and the second whether the monitor needs persistence to ensure it is
-	 * reliably marked as resolved within 4032 blocks.
+	 * reliably marked as resolved within [`ARCHIVAL_DELAY_BLOCKS`] blocks.
 	 * 
-	 * The first boolean is true only if [`Self::get_claimable_balances`] has been empty for at least
-	 * 4032 blocks as an additional protection against any bugs resulting in spuriously empty balance sets.
+	 * The first boolean is true only if [`Self::get_claimable_balances`] has been empty for at
+	 * least [`ARCHIVAL_DELAY_BLOCKS`] blocks as an additional protection against any bugs
+	 * resulting in spuriously empty balance sets.
 	 */
 	public check_and_update_full_resolution_status(logger: Logger): TwoTuple_boolboolZ {
 		const ret: bigint = bindings.ChannelMonitor_check_and_update_full_resolution_status(this.ptr, CommonBase.get_ptr_of(logger));

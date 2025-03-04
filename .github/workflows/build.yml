@@ -222,7 +222,7 @@ jobs:
         run: |
           cd c_sharp
           ./build-release-nupkg.sh
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: org.ldk.nupkg
           path: c_sharp/org.ldk.nupkg
@@ -456,11 +456,11 @@ jobs:
           ./genbindings.sh ./ldk-c-bindings/ "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/" false false
       - name: Build deterministic release jar
         run: ./build-release-jar.sh
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: ldk-java.jar
           path: ldk-java.jar
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: ldk-java-leaktracking.jar
           path: ldk-java-leaktracking.jar
@@ -702,7 +702,7 @@ jobs:
           export ANDROID_TOOLCHAIN="$(pwd)/android-ndk-r22b/toolchains/llvm/prebuilt/linux-x86_64"
           export PATH="$PATH:$ANDROID_TOOLCHAIN/bin"
           ./android-build.sh ./rust-lightning ./ldk-c-bindings/ ./ldk-java-bins/android-artifacts
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: LDK-release.aar
           path: LDK-release.aar

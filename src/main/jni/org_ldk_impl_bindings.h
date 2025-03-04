@@ -27634,10 +27634,10 @@ JNIEXPORT jlong JNICALL Java_org_ldk_impl_bindings_PendingHTLCRouting_1clone
 /*
  * Class:     org_ldk_impl_bindings
  * Method:    PendingHTLCRouting_forward
- * Signature: (JJJ)J
+ * Signature: (JJJJ)J
  */
 JNIEXPORT jlong JNICALL Java_org_ldk_impl_bindings_PendingHTLCRouting_1forward
-  (JNIEnv *, jclass, jlong, jlong, jlong);
+  (JNIEnv *, jclass, jlong, jlong, jlong, jlong);
 
 /*
  * Class:     org_ldk_impl_bindings
@@ -28318,6 +28318,14 @@ JNIEXPORT void JNICALL Java_org_ldk_impl_bindings_ChannelManager_1force_1close_1
  */
 JNIEXPORT void JNICALL Java_org_ldk_impl_bindings_ChannelManager_1force_1close_1all_1channels_1without_1broadcasting_1txn
   (JNIEnv *, jclass, jlong, jstring);
+
+/*
+ * Class:     org_ldk_impl_bindings
+ * Method:    ChannelManager_send_payment_with_route
+ * Signature: (JJ[BJ[B)J
+ */
+JNIEXPORT jlong JNICALL Java_org_ldk_impl_bindings_ChannelManager_1send_1payment_1with_1route
+  (JNIEnv *, jclass, jlong, jlong, jbyteArray, jlong, jbyteArray);
 
 /*
  * Class:     org_ldk_impl_bindings
@@ -48358,6 +48366,14 @@ JNIEXPORT jlong JNICALL Java_org_ldk_impl_bindings_SpendableOutputDescriptor_1re
  */
 JNIEXPORT jlong JNICALL Java_org_ldk_impl_bindings_SpendableOutputDescriptor_1create_1spendable_1outputs_1psbt
   (JNIEnv *, jclass, jlongArray, jlongArray, jbyteArray, jint, jlong);
+
+/*
+ * Class:     org_ldk_impl_bindings
+ * Method:    SpendableOutputDescriptor_spendable_outpoint
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_org_ldk_impl_bindings_SpendableOutputDescriptor_1spendable_1outpoint
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     org_ldk_impl_bindings

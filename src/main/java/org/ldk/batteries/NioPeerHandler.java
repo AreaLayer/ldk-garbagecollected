@@ -255,6 +255,10 @@ public class NioPeerHandler {
      * @throws IOException If connecting to the remote endpoint fails or internal java.nio errors occur.
      */
     public void connect(byte[] their_node_id, java.net.SocketAddress remote, int timeout_ms) throws IOException {
+        if (this.peer_manager.peer_by_node_id(their_node_id) != null) {
+            // The peer is already connected, no need to try to reconnect.
+            return;
+        }
         SocketChannel chan = SocketChannel.open();
         boolean connected;
         try {

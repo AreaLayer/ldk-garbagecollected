@@ -7153,6 +7153,12 @@ int64_t CS_LDK_LDKPendingHTLCRouting_Forward_get_blinded(int64_t ptr) {
 			blinded_ref = tag_ptr(blinded_var.inner, false);
 	return blinded_ref;
 }
+int64_t CS_LDK_LDKPendingHTLCRouting_Forward_get_incoming_cltv_expiry(int64_t ptr) {
+	LDKPendingHTLCRouting *obj = (LDKPendingHTLCRouting*)untag_ptr(ptr);
+	CHECK(obj->tag == LDKPendingHTLCRouting_Forward);
+	int64_t incoming_cltv_expiry_ref = tag_ptr(&obj->forward.incoming_cltv_expiry, false);
+	return incoming_cltv_expiry_ref;
+}
 int64_t CS_LDK_LDKPendingHTLCRouting_Receive_get_payment_data(int64_t ptr) {
 	LDKPendingHTLCRouting *obj = (LDKPendingHTLCRouting*)untag_ptr(ptr);
 	CHECK(obj->tag == LDKPendingHTLCRouting_Receive);
@@ -44632,7 +44638,7 @@ int64_t  CS_LDK_PendingHTLCRouting_clone(int64_t orig) {
 	return ret_ref;
 }
 
-int64_t  CS_LDK_PendingHTLCRouting_forward(int64_t onion_packet, int64_t short_channel_id, int64_t blinded) {
+int64_t  CS_LDK_PendingHTLCRouting_forward(int64_t onion_packet, int64_t short_channel_id, int64_t blinded, int64_t incoming_cltv_expiry) {
 	LDKOnionPacket onion_packet_conv;
 	onion_packet_conv.inner = untag_ptr(onion_packet);
 	onion_packet_conv.is_owned = ptr_is_owned(onion_packet);
@@ -44643,8 +44649,12 @@ int64_t  CS_LDK_PendingHTLCRouting_forward(int64_t onion_packet, int64_t short_c
 	blinded_conv.is_owned = ptr_is_owned(blinded);
 	CHECK_INNER_FIELD_ACCESS_OR_NULL(blinded_conv);
 	blinded_conv = BlindedForward_clone(&blinded_conv);
+	void* incoming_cltv_expiry_ptr = untag_ptr(incoming_cltv_expiry);
+	CHECK_ACCESS(incoming_cltv_expiry_ptr);
+	LDKCOption_u32Z incoming_cltv_expiry_conv = *(LDKCOption_u32Z*)(incoming_cltv_expiry_ptr);
+	incoming_cltv_expiry_conv = COption_u32Z_clone((LDKCOption_u32Z*)untag_ptr(incoming_cltv_expiry));
 	LDKPendingHTLCRouting *ret_copy = MALLOC(sizeof(LDKPendingHTLCRouting), "LDKPendingHTLCRouting");
-	*ret_copy = PendingHTLCRouting_forward(onion_packet_conv, short_channel_id, blinded_conv);
+	*ret_copy = PendingHTLCRouting_forward(onion_packet_conv, short_channel_id, blinded_conv, incoming_cltv_expiry_conv);
 	int64_t ret_ref = tag_ptr(ret_copy, true);
 	return ret_ref;
 }
@@ -45858,6 +45868,33 @@ void  CS_LDK_ChannelManager_force_close_all_channels_without_broadcasting_txn(in
 	this_arg_conv.is_owned = false;
 	LDKStr error_message_conv = str_ref_to_owned_c(error_message);
 	ChannelManager_force_close_all_channels_without_broadcasting_txn(&this_arg_conv, error_message_conv);
+}
+
+int64_t  CS_LDK_ChannelManager_send_payment_with_route(int64_t this_arg, int64_t route, int8_tArray payment_hash, int64_t recipient_onion, int8_tArray payment_id) {
+	LDKChannelManager this_arg_conv;
+	this_arg_conv.inner = untag_ptr(this_arg);
+	this_arg_conv.is_owned = ptr_is_owned(this_arg);
+	CHECK_INNER_FIELD_ACCESS_OR_NULL(this_arg_conv);
+	this_arg_conv.is_owned = false;
+	LDKRoute route_conv;
+	route_conv.inner = untag_ptr(route);
+	route_conv.is_owned = ptr_is_owned(route);
+	CHECK_INNER_FIELD_ACCESS_OR_NULL(route_conv);
+	route_conv = Route_clone(&route_conv);
+	LDKThirtyTwoBytes payment_hash_ref;
+	CHECK(payment_hash->arr_len == 32);
+	memcpy(payment_hash_ref.data, payment_hash->elems, 32); FREE(payment_hash);
+	LDKRecipientOnionFields recipient_onion_conv;
+	recipient_onion_conv.inner = untag_ptr(recipient_onion);
+	recipient_onion_conv.is_owned = ptr_is_owned(recipient_onion);
+	CHECK_INNER_FIELD_ACCESS_OR_NULL(recipient_onion_conv);
+	recipient_onion_conv = RecipientOnionFields_clone(&recipient_onion_conv);
+	LDKThirtyTwoBytes payment_id_ref;
+	CHECK(payment_id->arr_len == 32);
+	memcpy(payment_id_ref.data, payment_id->elems, 32); FREE(payment_id);
+	LDKCResult_NoneRetryableSendFailureZ* ret_conv = MALLOC(sizeof(LDKCResult_NoneRetryableSendFailureZ), "LDKCResult_NoneRetryableSendFailureZ");
+	*ret_conv = ChannelManager_send_payment_with_route(&this_arg_conv, route_conv, payment_hash_ref, recipient_onion_conv, payment_id_ref);
+	return tag_ptr(ret_conv, true);
 }
 
 int64_t  CS_LDK_ChannelManager_send_payment(int64_t this_arg, int8_tArray payment_hash, int64_t recipient_onion, int8_tArray payment_id, int64_t route_params, int64_t retry_strategy) {
@@ -77338,6 +77375,15 @@ int64_t  CS_LDK_SpendableOutputDescriptor_create_spendable_outputs_psbt(int64_tA
 	LDKCResult_C2Tuple_CVec_u8Zu64ZNoneZ* ret_conv = MALLOC(sizeof(LDKCResult_C2Tuple_CVec_u8Zu64ZNoneZ), "LDKCResult_C2Tuple_CVec_u8Zu64ZNoneZ");
 	*ret_conv = SpendableOutputDescriptor_create_spendable_outputs_psbt(descriptors_constr, outputs_constr, change_destination_script_ref, feerate_sat_per_1000_weight, locktime_conv);
 	return tag_ptr(ret_conv, true);
+}
+
+int64_t  CS_LDK_SpendableOutputDescriptor_spendable_outpoint(int64_t this_arg) {
+	LDKSpendableOutputDescriptor* this_arg_conv = (LDKSpendableOutputDescriptor*)untag_ptr(this_arg);
+	LDKOutPoint ret_var = SpendableOutputDescriptor_spendable_outpoint(this_arg_conv);
+	int64_t ret_ref = 0;
+	CHECK_INNER_FIELD_ACCESS_OR_NULL(ret_var);
+	ret_ref = tag_ptr(ret_var.inner, ret_var.is_owned);
+	return ret_ref;
 }
 
 void  CS_LDK_ChannelDerivationParameters_free(int64_t this_obj) {

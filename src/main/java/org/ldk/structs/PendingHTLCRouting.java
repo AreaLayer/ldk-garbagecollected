@@ -56,6 +56,10 @@ public class PendingHTLCRouting extends CommonBase {
 		 * Note that this (or a relevant inner pointer) may be NULL or all-0s to represent None
 		*/
 		@Nullable public final org.ldk.structs.BlindedForward blinded;
+		/**
+		 * The absolute CLTV of the inbound HTLC
+		*/
+		public final org.ldk.structs.Option_u32Z incoming_cltv_expiry;
 		private Forward(long ptr, bindings.LDKPendingHTLCRouting.Forward obj) {
 			super(null, ptr);
 			long onion_packet = obj.onion_packet;
@@ -67,6 +71,10 @@ public class PendingHTLCRouting extends CommonBase {
 			org.ldk.structs.BlindedForward blinded_hu_conv = null; if (blinded < 0 || blinded > 4096) { blinded_hu_conv = new org.ldk.structs.BlindedForward(null, blinded); }
 			if (blinded_hu_conv != null) { blinded_hu_conv.ptrs_to.add(this); };
 			this.blinded = blinded_hu_conv;
+			long incoming_cltv_expiry = obj.incoming_cltv_expiry;
+			org.ldk.structs.Option_u32Z incoming_cltv_expiry_hu_conv = org.ldk.structs.Option_u32Z.constr_from_ptr(incoming_cltv_expiry);
+			if (incoming_cltv_expiry_hu_conv != null) { incoming_cltv_expiry_hu_conv.ptrs_to.add(this); };
+			this.incoming_cltv_expiry = incoming_cltv_expiry_hu_conv;
 		}
 	}
 	/**
@@ -250,11 +258,12 @@ public class PendingHTLCRouting extends CommonBase {
 	/**
 	 * Utility method to constructs a new Forward-variant PendingHTLCRouting
 	 */
-	public static PendingHTLCRouting forward(org.ldk.structs.OnionPacket onion_packet, long short_channel_id, org.ldk.structs.BlindedForward blinded) {
-		long ret = bindings.PendingHTLCRouting_forward(onion_packet.ptr, short_channel_id, blinded.ptr);
+	public static PendingHTLCRouting forward(org.ldk.structs.OnionPacket onion_packet, long short_channel_id, org.ldk.structs.BlindedForward blinded, org.ldk.structs.Option_u32Z incoming_cltv_expiry) {
+		long ret = bindings.PendingHTLCRouting_forward(onion_packet.ptr, short_channel_id, blinded.ptr, incoming_cltv_expiry.ptr);
 		Reference.reachabilityFence(onion_packet);
 		Reference.reachabilityFence(short_channel_id);
 		Reference.reachabilityFence(blinded);
+		Reference.reachabilityFence(incoming_cltv_expiry);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PendingHTLCRouting ret_hu_conv = org.ldk.structs.PendingHTLCRouting.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };

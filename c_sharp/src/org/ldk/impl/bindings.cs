@@ -978,6 +978,7 @@ internal class bindings {
 	[DllImport ("ldkcsharp", EntryPoint="CS_LDK_LDKPendingHTLCRouting_Forward_get_onion_packet")] public static extern long LDKPendingHTLCRouting_Forward_get_onion_packet(long ptr);
 	[DllImport ("ldkcsharp", EntryPoint="CS_LDK_LDKPendingHTLCRouting_Forward_get_short_channel_id")] public static extern long LDKPendingHTLCRouting_Forward_get_short_channel_id(long ptr);
 	[DllImport ("ldkcsharp", EntryPoint="CS_LDK_LDKPendingHTLCRouting_Forward_get_blinded")] public static extern long LDKPendingHTLCRouting_Forward_get_blinded(long ptr);
+	[DllImport ("ldkcsharp", EntryPoint="CS_LDK_LDKPendingHTLCRouting_Forward_get_incoming_cltv_expiry")] public static extern long LDKPendingHTLCRouting_Forward_get_incoming_cltv_expiry(long ptr);
 	[DllImport ("ldkcsharp", EntryPoint="CS_LDK_LDKPendingHTLCRouting_Receive_get_payment_data")] public static extern long LDKPendingHTLCRouting_Receive_get_payment_data(long ptr);
 	[DllImport ("ldkcsharp", EntryPoint="CS_LDK_LDKPendingHTLCRouting_Receive_get_payment_metadata")] public static extern long LDKPendingHTLCRouting_Receive_get_payment_metadata(long ptr);
 	[DllImport ("ldkcsharp", EntryPoint="CS_LDK_LDKPendingHTLCRouting_Receive_get_payment_context")] public static extern long LDKPendingHTLCRouting_Receive_get_payment_context(long ptr);
@@ -8241,8 +8242,8 @@ internal class bindings {
 	[DllImport ("ldkcsharp", EntryPoint="CS_LDK_PendingHTLCRouting_clone_ptr")] public static extern long PendingHTLCRouting_clone_ptr(long _arg);
 	// struct LDKPendingHTLCRouting PendingHTLCRouting_clone(const struct LDKPendingHTLCRouting *NONNULL_PTR orig);
 	[DllImport ("ldkcsharp", EntryPoint="CS_LDK_PendingHTLCRouting_clone")] public static extern long PendingHTLCRouting_clone(long _orig);
-	// struct LDKPendingHTLCRouting PendingHTLCRouting_forward(struct LDKOnionPacket onion_packet, uint64_t short_channel_id, struct LDKBlindedForward blinded);
-	[DllImport ("ldkcsharp", EntryPoint="CS_LDK_PendingHTLCRouting_forward")] public static extern long PendingHTLCRouting_forward(long _onion_packet, long _short_channel_id, long _blinded);
+	// struct LDKPendingHTLCRouting PendingHTLCRouting_forward(struct LDKOnionPacket onion_packet, uint64_t short_channel_id, struct LDKBlindedForward blinded, struct LDKCOption_u32Z incoming_cltv_expiry);
+	[DllImport ("ldkcsharp", EntryPoint="CS_LDK_PendingHTLCRouting_forward")] public static extern long PendingHTLCRouting_forward(long _onion_packet, long _short_channel_id, long _blinded, long _incoming_cltv_expiry);
 	// struct LDKPendingHTLCRouting PendingHTLCRouting_receive(struct LDKFinalOnionHopData payment_data, struct LDKCOption_CVec_u8ZZ payment_metadata, struct LDKCOption_PaymentContextZ payment_context, uint32_t incoming_cltv_expiry, struct LDKThirtyTwoBytes phantom_shared_secret, struct LDKCVec_C2Tuple_u64CVec_u8ZZZ custom_tlvs, bool requires_blinded_error);
 	[DllImport ("ldkcsharp", EntryPoint="CS_LDK_PendingHTLCRouting_receive")] public static extern long PendingHTLCRouting_receive(long _payment_data, long _payment_metadata, long _payment_context, int _incoming_cltv_expiry, long _phantom_shared_secret, long _custom_tlvs, bool _requires_blinded_error);
 	// struct LDKPendingHTLCRouting PendingHTLCRouting_receive_keysend(struct LDKFinalOnionHopData payment_data, struct LDKThirtyTwoBytes payment_preimage, struct LDKCOption_CVec_u8ZZ payment_metadata, uint32_t incoming_cltv_expiry, struct LDKCVec_C2Tuple_u64CVec_u8ZZZ custom_tlvs, bool requires_blinded_error, bool has_recipient_created_payment_secret);
@@ -8413,6 +8414,8 @@ internal class bindings {
 	[DllImport ("ldkcsharp", EntryPoint="CS_LDK_ChannelManager_force_close_all_channels_broadcasting_latest_txn")] public static extern void ChannelManager_force_close_all_channels_broadcasting_latest_txn(long _this_arg, long _error_message);
 	// void ChannelManager_force_close_all_channels_without_broadcasting_txn(const struct LDKChannelManager *NONNULL_PTR this_arg, struct LDKStr error_message);
 	[DllImport ("ldkcsharp", EntryPoint="CS_LDK_ChannelManager_force_close_all_channels_without_broadcasting_txn")] public static extern void ChannelManager_force_close_all_channels_without_broadcasting_txn(long _this_arg, long _error_message);
+	// MUST_USE_RES struct LDKCResult_NoneRetryableSendFailureZ ChannelManager_send_payment_with_route(const struct LDKChannelManager *NONNULL_PTR this_arg, struct LDKRoute route, struct LDKThirtyTwoBytes payment_hash, struct LDKRecipientOnionFields recipient_onion, struct LDKThirtyTwoBytes payment_id);
+	[DllImport ("ldkcsharp", EntryPoint="CS_LDK_ChannelManager_send_payment_with_route")] public static extern long ChannelManager_send_payment_with_route(long _this_arg, long _route, long _payment_hash, long _recipient_onion, long _payment_id);
 	// MUST_USE_RES struct LDKCResult_NoneRetryableSendFailureZ ChannelManager_send_payment(const struct LDKChannelManager *NONNULL_PTR this_arg, struct LDKThirtyTwoBytes payment_hash, struct LDKRecipientOnionFields recipient_onion, struct LDKThirtyTwoBytes payment_id, struct LDKRouteParameters route_params, struct LDKRetry retry_strategy);
 	[DllImport ("ldkcsharp", EntryPoint="CS_LDK_ChannelManager_send_payment")] public static extern long ChannelManager_send_payment(long _this_arg, long _payment_hash, long _recipient_onion, long _payment_id, long _route_params, long _retry_strategy);
 	// MUST_USE_RES struct LDKCResult_NoneBolt12PaymentErrorZ ChannelManager_send_payment_for_bolt12_invoice(const struct LDKChannelManager *NONNULL_PTR this_arg, const struct LDKBolt12Invoice *NONNULL_PTR invoice, struct LDKCOption_OffersContextZ context);
@@ -13423,6 +13426,8 @@ internal class bindings {
 	[DllImport ("ldkcsharp", EntryPoint="CS_LDK_SpendableOutputDescriptor_read")] public static extern long SpendableOutputDescriptor_read(long _ser);
 	// MUST_USE_RES struct LDKCResult_C2Tuple_CVec_u8Zu64ZNoneZ SpendableOutputDescriptor_create_spendable_outputs_psbt(struct LDKCVec_SpendableOutputDescriptorZ descriptors, struct LDKCVec_TxOutZ outputs, struct LDKCVec_u8Z change_destination_script, uint32_t feerate_sat_per_1000_weight, struct LDKCOption_u32Z locktime);
 	[DllImport ("ldkcsharp", EntryPoint="CS_LDK_SpendableOutputDescriptor_create_spendable_outputs_psbt")] public static extern long SpendableOutputDescriptor_create_spendable_outputs_psbt(long _descriptors, long _outputs, long _change_destination_script, int _feerate_sat_per_1000_weight, long _locktime);
+	// MUST_USE_RES struct LDKOutPoint SpendableOutputDescriptor_spendable_outpoint(const struct LDKSpendableOutputDescriptor *NONNULL_PTR this_arg);
+	[DllImport ("ldkcsharp", EntryPoint="CS_LDK_SpendableOutputDescriptor_spendable_outpoint")] public static extern long SpendableOutputDescriptor_spendable_outpoint(long _this_arg);
 	// void ChannelDerivationParameters_free(struct LDKChannelDerivationParameters this_obj);
 	[DllImport ("ldkcsharp", EntryPoint="CS_LDK_ChannelDerivationParameters_free")] public static extern void ChannelDerivationParameters_free(long _this_obj);
 	// uint64_t ChannelDerivationParameters_get_value_satoshis(const struct LDKChannelDerivationParameters *NONNULL_PTR this_ptr);

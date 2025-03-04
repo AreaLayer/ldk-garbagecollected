@@ -46,6 +46,10 @@ public class PendingHTLCRouting : CommonBase {
 		 * Note that this (or a relevant inner pointer) may be NULL or all-0s to represent None
 		 */
 		public BlindedForward blinded;
+		/**
+		 * The absolute CLTV of the inbound HTLC
+		 */
+		public Option_u32Z incoming_cltv_expiry;
 		internal PendingHTLCRouting_Forward(long ptr) : base(null, ptr) {
 			long onion_packet = bindings.LDKPendingHTLCRouting_Forward_get_onion_packet(ptr);
 			org.ldk.structs.OnionPacket onion_packet_hu_conv = null; if (onion_packet < 0 || onion_packet > 4096) { onion_packet_hu_conv = new org.ldk.structs.OnionPacket(null, onion_packet); }
@@ -56,6 +60,10 @@ public class PendingHTLCRouting : CommonBase {
 			org.ldk.structs.BlindedForward blinded_hu_conv = null; if (blinded < 0 || blinded > 4096) { blinded_hu_conv = new org.ldk.structs.BlindedForward(null, blinded); }
 			if (blinded_hu_conv != null) { blinded_hu_conv.ptrs_to.AddLast(this); };
 			this.blinded = blinded_hu_conv;
+			long incoming_cltv_expiry = bindings.LDKPendingHTLCRouting_Forward_get_incoming_cltv_expiry(ptr);
+			org.ldk.structs.Option_u32Z incoming_cltv_expiry_hu_conv = org.ldk.structs.Option_u32Z.constr_from_ptr(incoming_cltv_expiry);
+			if (incoming_cltv_expiry_hu_conv != null) { incoming_cltv_expiry_hu_conv.ptrs_to.AddLast(this); };
+			this.incoming_cltv_expiry = incoming_cltv_expiry_hu_conv;
 		}
 	}
 	/** A PendingHTLCRouting of type Receive */
@@ -234,11 +242,12 @@ public class PendingHTLCRouting : CommonBase {
 	/**
 	 * Utility method to constructs a new Forward-variant PendingHTLCRouting
 	 */
-	public static PendingHTLCRouting forward(org.ldk.structs.OnionPacket onion_packet, long short_channel_id, org.ldk.structs.BlindedForward blinded) {
-		long ret = bindings.PendingHTLCRouting_forward(onion_packet.ptr, short_channel_id, blinded.ptr);
+	public static PendingHTLCRouting forward(org.ldk.structs.OnionPacket onion_packet, long short_channel_id, org.ldk.structs.BlindedForward blinded, org.ldk.structs.Option_u32Z incoming_cltv_expiry) {
+		long ret = bindings.PendingHTLCRouting_forward(onion_packet.ptr, short_channel_id, blinded.ptr, incoming_cltv_expiry.ptr);
 		GC.KeepAlive(onion_packet);
 		GC.KeepAlive(short_channel_id);
 		GC.KeepAlive(blinded);
+		GC.KeepAlive(incoming_cltv_expiry);
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PendingHTLCRouting ret_hu_conv = org.ldk.structs.PendingHTLCRouting.constr_from_ptr(ret);
 		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.AddLast(ret_hu_conv); };
