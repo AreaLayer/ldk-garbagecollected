@@ -166,7 +166,7 @@ if [ "$2" = "c_sharp" ]; then
 	[ "$IS_WIN" = "true" ] && COMPILE="$COMPILE -I/usr/x86_64-w64-mingw32/sys-root/mingw/include/ -I/usr/x86_64-w64-mingw32/include/"
 
 	if [ "$3" = "true" ]; then
-		$COMPILE $LINK -o libldkcsharp_debug$LDK_TARGET_SUFFIX.so -g -fsanitize=address -shared-libasan -rdynamic -I"$1"/lightning-c-bindings/include/ c_sharp/bindings.c "$1"/lightning-c-bindings/target/$LDK_TARGET/debug/libldk.a -lm
+		$COMPILE $LINK -o libldkcsharp_debug$LDK_TARGET_SUFFIX.so -g -fsanitize=address -shared-libasan -rdynamic -I"$1"/lightning-c-bindings/include/ $5 c_sharp/bindings.c "$1"/lightning-c-bindings/target/$LDK_TARGET/debug/libldk.a -lm
 	else
 		[ "$IS_APPLE_CLANG" = "false" ] && LINK="$LINK -flto -Wl,-O3 -fuse-ld=lld"
 		[ "$IS_APPLE_CLANG" = "false" ] && COMPILE="$COMPILE -flto"
@@ -179,8 +179,8 @@ if [ "$2" = "c_sharp" ]; then
 
 		# When building for Windows, a timestamp is included in the resulting dll,
 		# so we have to build with faketime.
-		faketime -f "2021-01-01 00:00:00" $COMPILE -o bindings.o -c -O3 -I"$1"/lightning-c-bindings/include/ c_sharp/bindings.c
-		faketime -f "2021-01-01 00:00:00" $COMPILE $LINK -o libldkcsharp_release$LDK_TARGET_SUFFIX.so -O3 bindings.o $LDK_LIB -lm
+		faketime -f "2021-01-01 00:00:00" $COMPILE -o bindings.o -c -O3 -I"$1"/lightning-c-bindings/include/ $5 c_sharp/bindings.c
+		faketime -f "2021-01-01 00:00:00" $COMPILE $LINK -o libldkcsharp_release$LDK_TARGET_SUFFIX.so -O3 $5 bindings.o $LDK_LIB -lm
 		$STRIP -R .llvmbc -R .llvmcmd libldkcsharp_release$LDK_TARGET_SUFFIX.so
 
 		if [ "$LDK_JAR_TARGET" = "true" ]; then
@@ -267,10 +267,10 @@ elif [ "$2" = "wasm" ]; then
 	[ "$3" != "false" ] && COMPILE="$COMPILE -Wl,-wrap,calloc -Wl,-wrap,realloc -Wl,-wrap,reallocarray -Wl,-wrap,malloc -Wl,-wrap,aligned_alloc -Wl,-wrap,free"
 	if [ "$3" = "true" ]; then
 		WASM_FILE=liblightningjs_debug.wasm
-		$COMPILE -o liblightningjs_debug.wasm -g -O1 -I"$1"/lightning-c-bindings/include/ ts/bindings.c "$1"/lightning-c-bindings/target/wasm32-wasi/debug/libldk.a $EXTRA_LINK
+		$COMPILE -o liblightningjs_debug.wasm -g -O1 -I"$1"/lightning-c-bindings/include/ $5 ts/bindings.c "$1"/lightning-c-bindings/target/wasm32-wasi/debug/libldk.a $EXTRA_LINK
 	else
 		WASM_FILE=liblightningjs_release.wasm
-		$COMPILE -o liblightningjs_release.wasm -s -Oz -I"$1"/lightning-c-bindings/include/ ts/bindings.c "$1"/lightning-c-bindings/target/wasm32-wasi/release/libldk.a $EXTRA_LINK
+		$COMPILE -o liblightningjs_release.wasm -s -Oz -I"$1"/lightning-c-bindings/include/ $5 ts/bindings.c "$1"/lightning-c-bindings/target/wasm32-wasi/release/libldk.a $EXTRA_LINK
 	fi
 
 	if [ -x "$(which tsc)" ]; then
