@@ -701,7 +701,7 @@ jobs:
           cp "ldk-java-bins/${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/ldk-java-classes.jar" ./
           export ANDROID_TOOLCHAIN="$(pwd)/android-ndk-r22b/toolchains/llvm/prebuilt/linux-x86_64"
           export PATH="$PATH:$ANDROID_TOOLCHAIN/bin"
-          ./android-build.sh ./rust-lightning ./ldk-c-bindings/ ./ldk-java-bins/android-artifacts
+          ./android-build.sh ./rust-lightning ./ldk-c-bindings/ java ./ldk-java-bins/android-artifacts
       - uses: actions/upload-artifact@v4
         with:
           name: LDK-release.aar

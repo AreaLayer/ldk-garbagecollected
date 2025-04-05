@@ -14,8 +14,13 @@ if [ "$2" = "" -o ! -d "$2/lightning-c-bindings" ]; then
 	exit 1
 fi
 
-if [ ! -d "$3" -o ! -f "$3/AndroidManifest.xml" ]; then
-	echo "Please set third argument to the path to ldk-java-bins/android-artifacts" > /dev/stderr
+if [ "$3" != "java" -a "$3" != "c_sharp" ]; then
+	echo "Please set third argument to java or c_sharp" > /dev/stderr
+	exit 1
+fi
+
+if [ "$3" = "java" -a [ ! -d "$4" -o ! -f "$4/AndroidManifest.xml" ] ]; then
+	echo "Please set fourth argument to the path to ldk-java-bins/android-artifacts" > /dev/stderr
 	exit 1
 fi
 
@@ -44,9 +49,15 @@ for IDX in ${!EXTRA_TARGETS[@]}; do
 	export CC="${EXTRA_TARGET_CCS[$IDX]}"
 	export LDK_TARGET="${EXTRA_TARGETS[$IDX]}"
 	export LDK_TARGET_CPU="${TARGET_CPUS[$IDX]}"
-	./genbindings.sh "$LDK_C_BINDINGS" java false true "-lm -llog -I$SYSROOT/usr/include/"
-	${STRIPS[$IDX]} liblightningjni_release_${LDK_TARGET}.so
+	./genbindings.sh "$LDK_C_BINDINGS" "$3" false true "-lm -llog -I$SYSROOT/usr/include/"
+	if [ "$3" = "java" ]; then
+		${STRIPS[$IDX]} liblightningjni_release_${LDK_TARGET}.so
+	else
+		${STRIPS[$IDX]} libldkcsharp_release_${LDK_TARGET}.so
+	fi
 done
+
+[ "$3" != "java" ] && exit 0
 
 export LC_ALL=C
 
@@ -55,7 +66,7 @@ ls ldk-java-classes.jar
 
 rm -rf aar
 mkdir aar
-cp -r "$3/"* ./aar/
+cp -r "$4/"* ./aar/
 mkdir -p ./aar/jni/{armeabi-v7a,arm64-v8a,x86_64}
 
 cp liblightningjni_release_aarch64-linux-android.so ./aar/jni/arm64-v8a/liblightningjni.so
