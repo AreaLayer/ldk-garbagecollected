@@ -553,6 +553,12 @@ static inline LDKStr java_to_owned_str(JNIEnv *env, jstring str) {
 	uint64_t str_len = (*env)->GetStringUTFLength(env, str);
 	// Java uses "Modified UTF-8" rather than UTF-8. This requires special
 	// handling for codepoints above 0xFFFF, which we implement below.
+
+	if (str_len == 0) {
+		LDKStr res = { .chars = NULL, .len = 0, .chars_is_owned = false };
+		return res;
+	}
+
 	unsigned char* newchars = MALLOC(str_len, "String chars");
 	unsigned char* next_newchar = newchars;
 	uint64_t utf8_len = 0;

@@ -440,15 +440,20 @@ static inline jstring str_ref_to_cs(const char* chars, size_t len) {
 	return arr;
 }
 static inline LDKStr str_ref_to_owned_c(const jstring str) {
-	char* newchars = MALLOC(str->arr_len + 1, "String chars");
-	memcpy(newchars, str->elems, str->arr_len);
-	newchars[str->arr_len] = 0;
-	LDKStr res = {
-		.chars = newchars,
-		.len = str->arr_len,
-		.chars_is_owned = true
-	};
-	return res;
+	if (str->arr_len == 0) {
+		LDKStr res = { .chars = NULL, .len = 0, .chars_is_owned = false };
+		return res;
+	} else {
+		char* newchars = MALLOC(str->arr_len + 1, "String chars");
+		memcpy(newchars, str->elems, str->arr_len);
+		newchars[str->arr_len] = 0;
+		LDKStr res = {
+			.chars = newchars,
+			.len = str->arr_len,
+			.chars_is_owned = true
+		};
+		return res;
+	}
 }
 
 // The C# Bool marshalling is defined as 4 bytes, but the size of bool is platform-dependent
