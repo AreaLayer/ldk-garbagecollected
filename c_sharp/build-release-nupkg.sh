@@ -7,6 +7,9 @@ set -x
 echo "Checking that required release native libraries are present..."
 ls packaging_artifacts/runtimes/win-x64/native/ldkcsharp.dll
 ls packaging_artifacts/runtimes/linux-x64/native/libldkcsharp.so
+ls packaging_artifacts/runtimes/android-arm64/native/libldkcsharp.so
+ls packaging_artifacts/runtimes/android-arm/native/libldkcsharp.so
+ls packaging_artifacts/runtimes/android-x64/native/libldkcsharp.so
 ls packaging_artifacts/lib/net6.0/csharpldk.dll
 
 cd packaging_artifacts
