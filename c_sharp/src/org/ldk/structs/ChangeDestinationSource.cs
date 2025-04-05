@@ -64,7 +64,7 @@ public class ChangeDestinationSource : CommonBase {
 	 * This method should return a different value each time it is called, to avoid linking
 	 * on-chain funds controlled to the same user.
 	 */
-	public Result_CVec_u8ZNoneZ get_change_destination_script() {
+	public org.ldk.structs.Result_CVec_u8ZNoneZ get_change_destination_script() {
 		long ret = bindings.ChangeDestinationSource_get_change_destination_script(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

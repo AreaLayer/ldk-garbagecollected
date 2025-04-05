@@ -53,7 +53,7 @@ public interface ChannelSignerInterface {
 	 * closed. If you wish to make this operation asynchronous, you should instead return `Ok(())`
 	 * and pause future signing operations until this validation completes.
 	 */
-	Result_NoneNoneZ validate_holder_commitment(HolderCommitmentTransaction holder_tx, byte[][] outbound_htlc_preimages);
+	Result_NoneNoneZ validate_holder_commitment(org.ldk.structs.HolderCommitmentTransaction holder_tx, byte[][] outbound_htlc_preimages);
 	/**Validate the counterparty's revocation.
 	 * 
 	 * This is required in order for the signer to make sure that the state has moved
@@ -81,7 +81,7 @@ public interface ChannelSignerInterface {
 	 * 
 	 * channel_parameters.is_populated() MUST be true.
 	 */
-	void provide_channel_parameters(ChannelTransactionParameters channel_parameters);
+	void provide_channel_parameters(org.ldk.structs.ChannelTransactionParameters channel_parameters);
 }
 
 /**
@@ -177,7 +177,7 @@ public class ChannelSigner : CommonBase {
 	 * immediately after we reconnect to peers, and returning an `Err` may lead to an immediate
 	 * `panic`. This method will be made asynchronous in a future release.
 	 */
-	public Result_PublicKeyNoneZ get_per_commitment_point(long idx) {
+	public org.ldk.structs.Result_PublicKeyNoneZ get_per_commitment_point(long idx) {
 		long ret = bindings.ChannelSigner_get_per_commitment_point(this.ptr, idx);
 		GC.KeepAlive(this);
 		GC.KeepAlive(idx);
@@ -202,7 +202,7 @@ public class ChannelSigner : CommonBase {
 	 * 
 	 * [`ChannelManager::signer_unblocked`]: crate::ln::channelmanager::ChannelManager::signer_unblocked
 	 */
-	public Result__u832NoneZ release_commitment_secret(long idx) {
+	public org.ldk.structs.Result__u832NoneZ release_commitment_secret(long idx) {
 		long ret = bindings.ChannelSigner_release_commitment_secret(this.ptr, idx);
 		GC.KeepAlive(this);
 		GC.KeepAlive(idx);
@@ -230,7 +230,7 @@ public class ChannelSigner : CommonBase {
 	 * closed. If you wish to make this operation asynchronous, you should instead return `Ok(())`
 	 * and pause future signing operations until this validation completes.
 	 */
-	public Result_NoneNoneZ validate_holder_commitment(org.ldk.structs.HolderCommitmentTransaction holder_tx, byte[][] outbound_htlc_preimages) {
+	public org.ldk.structs.Result_NoneNoneZ validate_holder_commitment(org.ldk.structs.HolderCommitmentTransaction holder_tx, byte[][] outbound_htlc_preimages) {
 		long ret = bindings.ChannelSigner_validate_holder_commitment(this.ptr, holder_tx.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(outbound_htlc_preimages, outbound_htlc_preimages_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(outbound_htlc_preimages_conv_8, 32)))));
 		GC.KeepAlive(this);
 		GC.KeepAlive(holder_tx);
@@ -251,7 +251,7 @@ public class ChannelSigner : CommonBase {
 	 * closed. If you wish to make this operation asynchronous, you should instead return `Ok(())`
 	 * and pause future signing operations until this validation completes.
 	 */
-	public Result_NoneNoneZ validate_counterparty_revocation(long idx, byte[] secret) {
+	public org.ldk.structs.Result_NoneNoneZ validate_counterparty_revocation(long idx, byte[] secret) {
 		long ret = bindings.ChannelSigner_validate_counterparty_revocation(this.ptr, idx, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(secret, 32)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(idx);
@@ -298,7 +298,7 @@ public class ChannelSigner : CommonBase {
 	 * Frees any resources associated with this object given its this_arg pointer.
 	 * Does not need to free the outer struct containing function pointers and may be NULL is no resources need to be freed.
 	 */
-	public ChannelPublicKeys get_pubkeys() {
+	public org.ldk.structs.ChannelPublicKeys get_pubkeys() {
 		long ret = bindings.ChannelSigner_get_pubkeys(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

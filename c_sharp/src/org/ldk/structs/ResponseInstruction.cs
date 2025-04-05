@@ -24,7 +24,7 @@ public class ResponseInstruction : CommonBase {
 	/**
 	 * Creates a copy of the ResponseInstruction
 	 */
-	public ResponseInstruction clone() {
+	public org.ldk.structs.ResponseInstruction clone() {
 		long ret = bindings.ResponseInstruction_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -37,7 +37,7 @@ public class ResponseInstruction : CommonBase {
 	 * Converts this [`ResponseInstruction`] into a [`MessageSendInstructions`] so that it can be
 	 * used to send the response via a normal message sending method.
 	 */
-	public MessageSendInstructions into_instructions() {
+	public org.ldk.structs.MessageSendInstructions into_instructions() {
 		long ret = bindings.ResponseInstruction_into_instructions(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

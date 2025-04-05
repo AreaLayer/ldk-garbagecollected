@@ -26,7 +26,7 @@ public class Option_SocketAddressZ : CommonBase {
 
 	/** A Option_SocketAddressZ of type Some */
 	public class Option_SocketAddressZ_Some : Option_SocketAddressZ {
-		public SocketAddress some;
+		public org.ldk.structs.SocketAddress some;
 		internal Option_SocketAddressZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_SocketAddressZ_Some_get_some(ptr);
 			org.ldk.structs.SocketAddress some_hu_conv = org.ldk.structs.SocketAddress.constr_from_ptr(some);
@@ -42,7 +42,7 @@ public class Option_SocketAddressZ : CommonBase {
 	/**
 	 * Constructs a new COption_SocketAddressZ containing a crate::lightning::ln::msgs::SocketAddress
 	 */
-	public static Option_SocketAddressZ some(org.ldk.structs.SocketAddress o) {
+	public static org.ldk.structs.Option_SocketAddressZ some(org.ldk.structs.SocketAddress o) {
 		long ret = bindings.COption_SocketAddressZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class Option_SocketAddressZ : CommonBase {
 	/**
 	 * Constructs a new COption_SocketAddressZ containing nothing
 	 */
-	public static Option_SocketAddressZ none() {
+	public static org.ldk.structs.Option_SocketAddressZ none() {
 		long ret = bindings.COption_SocketAddressZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_SocketAddressZ ret_hu_conv = org.ldk.structs.Option_SocketAddressZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Option_SocketAddressZ : CommonBase {
 	 * Creates a new COption_SocketAddressZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_SocketAddressZ clone() {
+	public org.ldk.structs.Option_SocketAddressZ clone() {
 		long ret = bindings.COption_SocketAddressZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

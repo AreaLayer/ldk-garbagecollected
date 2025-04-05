@@ -19,7 +19,7 @@ public class ErroringMessageHandler : CommonBase {
 	/**
 	 * Constructs a new ErroringMessageHandler
 	 */
-	public static ErroringMessageHandler of() {
+	public static org.ldk.structs.ErroringMessageHandler of() {
 		long ret = bindings.ErroringMessageHandler_new();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ErroringMessageHandler ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ErroringMessageHandler(null, ret); }
@@ -31,7 +31,7 @@ public class ErroringMessageHandler : CommonBase {
 	 * Constructs a new MessageSendEventsProvider which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned MessageSendEventsProvider must be freed before this_arg is
 	 */
-	public MessageSendEventsProvider as_MessageSendEventsProvider() {
+	public org.ldk.structs.MessageSendEventsProvider as_MessageSendEventsProvider() {
 		long ret = bindings.ErroringMessageHandler_as_MessageSendEventsProvider(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -44,7 +44,7 @@ public class ErroringMessageHandler : CommonBase {
 	 * Constructs a new ChannelMessageHandler which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned ChannelMessageHandler must be freed before this_arg is
 	 */
-	public ChannelMessageHandler as_ChannelMessageHandler() {
+	public org.ldk.structs.ChannelMessageHandler as_ChannelMessageHandler() {
 		long ret = bindings.ErroringMessageHandler_as_ChannelMessageHandler(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

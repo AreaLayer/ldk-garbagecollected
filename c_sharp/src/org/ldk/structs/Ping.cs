@@ -60,7 +60,7 @@ public class Ping : CommonBase {
 	/**
 	 * Constructs a new Ping given each field
 	 */
-	public static Ping of(short ponglen_arg, short byteslen_arg) {
+	public static org.ldk.structs.Ping of(short ponglen_arg, short byteslen_arg) {
 		long ret = bindings.Ping_new(ponglen_arg, byteslen_arg);
 		GC.KeepAlive(ponglen_arg);
 		GC.KeepAlive(byteslen_arg);
@@ -79,7 +79,7 @@ public class Ping : CommonBase {
 	/**
 	 * Creates a copy of the Ping
 	 */
-	public Ping clone() {
+	public org.ldk.structs.Ping clone() {
 		long ret = bindings.Ping_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -131,7 +131,7 @@ public class Ping : CommonBase {
 	/**
 	 * Read a Ping from a byte array, created by Ping_write
 	 */
-	public static Result_PingDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_PingDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.Ping_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -38,7 +38,7 @@ public class Result_PrivateRouteCreationErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_PrivateRouteCreationErrorZ in the success state.
 	 */
-	public static Result_PrivateRouteCreationErrorZ ok(org.ldk.structs.PrivateRoute o) {
+	public static org.ldk.structs.Result_PrivateRouteCreationErrorZ ok(org.ldk.structs.PrivateRoute o) {
 		long ret = bindings.CResult_PrivateRouteCreationErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -49,7 +49,7 @@ public class Result_PrivateRouteCreationErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_PrivateRouteCreationErrorZ in the error state.
 	 */
-	public static Result_PrivateRouteCreationErrorZ err(CreationError e) {
+	public static org.ldk.structs.Result_PrivateRouteCreationErrorZ err(CreationError e) {
 		long ret = bindings.CResult_PrivateRouteCreationErrorZ_err(e);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -76,7 +76,7 @@ public class Result_PrivateRouteCreationErrorZ : CommonBase {
 	 * Creates a new CResult_PrivateRouteCreationErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_PrivateRouteCreationErrorZ clone() {
+	public org.ldk.structs.Result_PrivateRouteCreationErrorZ clone() {
 		long ret = bindings.CResult_PrivateRouteCreationErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

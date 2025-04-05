@@ -32,7 +32,7 @@ public class CandidateRouteHop : CommonBase {
 
 	/** A CandidateRouteHop of type FirstHop */
 	public class CandidateRouteHop_FirstHop : CandidateRouteHop {
-		public FirstHopCandidate first_hop;
+		public org.ldk.structs.FirstHopCandidate first_hop;
 		internal CandidateRouteHop_FirstHop(long ptr) : base(null, ptr) {
 			long first_hop = bindings.LDKCandidateRouteHop_FirstHop_get_first_hop(ptr);
 			org.ldk.structs.FirstHopCandidate first_hop_hu_conv = null; if (first_hop < 0 || first_hop > 4096) { first_hop_hu_conv = new org.ldk.structs.FirstHopCandidate(null, first_hop); }
@@ -42,7 +42,7 @@ public class CandidateRouteHop : CommonBase {
 	}
 	/** A CandidateRouteHop of type PublicHop */
 	public class CandidateRouteHop_PublicHop : CandidateRouteHop {
-		public PublicHopCandidate public_hop;
+		public org.ldk.structs.PublicHopCandidate public_hop;
 		internal CandidateRouteHop_PublicHop(long ptr) : base(null, ptr) {
 			long public_hop = bindings.LDKCandidateRouteHop_PublicHop_get_public_hop(ptr);
 			org.ldk.structs.PublicHopCandidate public_hop_hu_conv = null; if (public_hop < 0 || public_hop > 4096) { public_hop_hu_conv = new org.ldk.structs.PublicHopCandidate(null, public_hop); }
@@ -52,7 +52,7 @@ public class CandidateRouteHop : CommonBase {
 	}
 	/** A CandidateRouteHop of type PrivateHop */
 	public class CandidateRouteHop_PrivateHop : CandidateRouteHop {
-		public PrivateHopCandidate private_hop;
+		public org.ldk.structs.PrivateHopCandidate private_hop;
 		internal CandidateRouteHop_PrivateHop(long ptr) : base(null, ptr) {
 			long private_hop = bindings.LDKCandidateRouteHop_PrivateHop_get_private_hop(ptr);
 			org.ldk.structs.PrivateHopCandidate private_hop_hu_conv = null; if (private_hop < 0 || private_hop > 4096) { private_hop_hu_conv = new org.ldk.structs.PrivateHopCandidate(null, private_hop); }
@@ -62,7 +62,7 @@ public class CandidateRouteHop : CommonBase {
 	}
 	/** A CandidateRouteHop of type Blinded */
 	public class CandidateRouteHop_Blinded : CandidateRouteHop {
-		public BlindedPathCandidate blinded;
+		public org.ldk.structs.BlindedPathCandidate blinded;
 		internal CandidateRouteHop_Blinded(long ptr) : base(null, ptr) {
 			long blinded = bindings.LDKCandidateRouteHop_Blinded_get_blinded(ptr);
 			org.ldk.structs.BlindedPathCandidate blinded_hu_conv = null; if (blinded < 0 || blinded > 4096) { blinded_hu_conv = new org.ldk.structs.BlindedPathCandidate(null, blinded); }
@@ -72,7 +72,7 @@ public class CandidateRouteHop : CommonBase {
 	}
 	/** A CandidateRouteHop of type OneHopBlinded */
 	public class CandidateRouteHop_OneHopBlinded : CandidateRouteHop {
-		public OneHopBlindedPathCandidate one_hop_blinded;
+		public org.ldk.structs.OneHopBlindedPathCandidate one_hop_blinded;
 		internal CandidateRouteHop_OneHopBlinded(long ptr) : base(null, ptr) {
 			long one_hop_blinded = bindings.LDKCandidateRouteHop_OneHopBlinded_get_one_hop_blinded(ptr);
 			org.ldk.structs.OneHopBlindedPathCandidate one_hop_blinded_hu_conv = null; if (one_hop_blinded < 0 || one_hop_blinded > 4096) { one_hop_blinded_hu_conv = new org.ldk.structs.OneHopBlindedPathCandidate(null, one_hop_blinded); }
@@ -89,7 +89,7 @@ public class CandidateRouteHop : CommonBase {
 	/**
 	 * Creates a copy of the CandidateRouteHop
 	 */
-	public CandidateRouteHop clone() {
+	public org.ldk.structs.CandidateRouteHop clone() {
 		long ret = bindings.CandidateRouteHop_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -101,7 +101,7 @@ public class CandidateRouteHop : CommonBase {
 	/**
 	 * Utility method to constructs a new FirstHop-variant CandidateRouteHop
 	 */
-	public static CandidateRouteHop first_hop(org.ldk.structs.FirstHopCandidate a) {
+	public static org.ldk.structs.CandidateRouteHop first_hop(org.ldk.structs.FirstHopCandidate a) {
 		long ret = bindings.CandidateRouteHop_first_hop(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -113,7 +113,7 @@ public class CandidateRouteHop : CommonBase {
 	/**
 	 * Utility method to constructs a new PublicHop-variant CandidateRouteHop
 	 */
-	public static CandidateRouteHop public_hop(org.ldk.structs.PublicHopCandidate a) {
+	public static org.ldk.structs.CandidateRouteHop public_hop(org.ldk.structs.PublicHopCandidate a) {
 		long ret = bindings.CandidateRouteHop_public_hop(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -125,7 +125,7 @@ public class CandidateRouteHop : CommonBase {
 	/**
 	 * Utility method to constructs a new PrivateHop-variant CandidateRouteHop
 	 */
-	public static CandidateRouteHop private_hop(org.ldk.structs.PrivateHopCandidate a) {
+	public static org.ldk.structs.CandidateRouteHop private_hop(org.ldk.structs.PrivateHopCandidate a) {
 		long ret = bindings.CandidateRouteHop_private_hop(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -137,7 +137,7 @@ public class CandidateRouteHop : CommonBase {
 	/**
 	 * Utility method to constructs a new Blinded-variant CandidateRouteHop
 	 */
-	public static CandidateRouteHop blinded(org.ldk.structs.BlindedPathCandidate a) {
+	public static org.ldk.structs.CandidateRouteHop blinded(org.ldk.structs.BlindedPathCandidate a) {
 		long ret = bindings.CandidateRouteHop_blinded(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -149,7 +149,7 @@ public class CandidateRouteHop : CommonBase {
 	/**
 	 * Utility method to constructs a new OneHopBlinded-variant CandidateRouteHop
 	 */
-	public static CandidateRouteHop one_hop_blinded(org.ldk.structs.OneHopBlindedPathCandidate a) {
+	public static org.ldk.structs.CandidateRouteHop one_hop_blinded(org.ldk.structs.OneHopBlindedPathCandidate a) {
 		long ret = bindings.CandidateRouteHop_one_hop_blinded(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -165,7 +165,7 @@ public class CandidateRouteHop : CommonBase {
 	 * from the public network graph), and thus the short channel ID we have for this channel is
 	 * globally unique and identifies this channel in a global namespace.
 	 */
-	public Option_u64Z globally_unique_short_channel_id() {
+	public org.ldk.structs.Option_u64Z globally_unique_short_channel_id() {
 		long ret = bindings.CandidateRouteHop_globally_unique_short_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -199,7 +199,7 @@ public class CandidateRouteHop : CommonBase {
 	/**
 	 * Returns the fees that must be paid to route an HTLC over this channel.
 	 */
-	public RoutingFees fees() {
+	public org.ldk.structs.RoutingFees fees() {
 		long ret = bindings.CandidateRouteHop_fees(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -215,7 +215,7 @@ public class CandidateRouteHop : CommonBase {
 	 * 
 	 * For [`Self::FirstHop`] we return payer's node id.
 	 */
-	public NodeId source() {
+	public org.ldk.structs.NodeId source() {
 		long ret = bindings.CandidateRouteHop_source(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -237,7 +237,7 @@ public class CandidateRouteHop : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public NodeId target() {
+	public org.ldk.structs.NodeId target() {
 		long ret = bindings.CandidateRouteHop_target(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

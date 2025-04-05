@@ -41,7 +41,7 @@ public class Result_COption_PathFailureZDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_COption_PathFailureZDecodeErrorZ in the success state.
 	 */
-	public static Result_COption_PathFailureZDecodeErrorZ ok(org.ldk.structs.Option_PathFailureZ o) {
+	public static org.ldk.structs.Result_COption_PathFailureZDecodeErrorZ ok(org.ldk.structs.Option_PathFailureZ o) {
 		long ret = bindings.CResult_COption_PathFailureZDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_COption_PathFailureZDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_COption_PathFailureZDecodeErrorZ in the error state.
 	 */
-	public static Result_COption_PathFailureZDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_COption_PathFailureZDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_COption_PathFailureZDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_COption_PathFailureZDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_COption_PathFailureZDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_COption_PathFailureZDecodeErrorZ clone() {
+	public org.ldk.structs.Result_COption_PathFailureZDecodeErrorZ clone() {
 		long ret = bindings.CResult_COption_PathFailureZDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -18,7 +18,7 @@ public class TwoTuple_HumanReadableNameThirtyTwoBytesZ : CommonBase {
 	/**
 	 * 
 	 */
-	public HumanReadableName get_a() {
+	public org.ldk.structs.HumanReadableName get_a() {
 		long ret = bindings.C2Tuple_HumanReadableNameThirtyTwoBytesZ_get_a(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -48,7 +48,7 @@ public class TwoTuple_HumanReadableNameThirtyTwoBytesZ : CommonBase {
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public TwoTuple_HumanReadableNameThirtyTwoBytesZ clone() {
+	public org.ldk.structs.TwoTuple_HumanReadableNameThirtyTwoBytesZ clone() {
 		long ret = bindings.C2Tuple_HumanReadableNameThirtyTwoBytesZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -60,7 +60,7 @@ public class TwoTuple_HumanReadableNameThirtyTwoBytesZ : CommonBase {
 	/**
 	 * Creates a new C2Tuple_HumanReadableNameThirtyTwoBytesZ from the contained elements.
 	 */
-	public static TwoTuple_HumanReadableNameThirtyTwoBytesZ of(org.ldk.structs.HumanReadableName a, byte[] b) {
+	public static org.ldk.structs.TwoTuple_HumanReadableNameThirtyTwoBytesZ of(org.ldk.structs.HumanReadableName a, byte[] b) {
 		long ret = bindings.C2Tuple_HumanReadableNameThirtyTwoBytesZ_new(a.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(b, 32)));
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

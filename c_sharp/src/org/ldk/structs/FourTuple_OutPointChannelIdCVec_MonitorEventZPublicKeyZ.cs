@@ -18,7 +18,7 @@ public class FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ : CommonBas
 	/**
 	 * 
 	 */
-	public OutPoint get_a() {
+	public org.ldk.structs.OutPoint get_a() {
 		long ret = bindings.C4Tuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ_get_a(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -30,7 +30,7 @@ public class FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ : CommonBas
 	/**
 	 * 
 	 */
-	public ChannelId get_b() {
+	public org.ldk.structs.ChannelId get_b() {
 		long ret = bindings.C4Tuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ_get_b(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ : CommonBas
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ clone() {
+	public org.ldk.structs.FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ clone() {
 		long ret = bindings.C4Tuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -91,7 +91,7 @@ public class FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ : CommonBas
 	/**
 	 * Creates a new C4Tuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ from the contained elements.
 	 */
-	public static FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ of(org.ldk.structs.OutPoint a, org.ldk.structs.ChannelId b, MonitorEvent[] c, byte[] d) {
+	public static org.ldk.structs.FourTuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ of(org.ldk.structs.OutPoint a, org.ldk.structs.ChannelId b, MonitorEvent[] c, byte[] d) {
 		long ret = bindings.C4Tuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ_new(a.ptr, b.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(c, c_conv_14 => c_conv_14.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(d, 33)));
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

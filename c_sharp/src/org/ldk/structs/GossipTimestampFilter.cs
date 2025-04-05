@@ -78,7 +78,7 @@ public class GossipTimestampFilter : CommonBase {
 	/**
 	 * Constructs a new GossipTimestampFilter given each field
 	 */
-	public static GossipTimestampFilter of(byte[] chain_hash_arg, int first_timestamp_arg, int timestamp_range_arg) {
+	public static org.ldk.structs.GossipTimestampFilter of(byte[] chain_hash_arg, int first_timestamp_arg, int timestamp_range_arg) {
 		long ret = bindings.GossipTimestampFilter_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(chain_hash_arg, 32)), first_timestamp_arg, timestamp_range_arg);
 		GC.KeepAlive(chain_hash_arg);
 		GC.KeepAlive(first_timestamp_arg);
@@ -98,7 +98,7 @@ public class GossipTimestampFilter : CommonBase {
 	/**
 	 * Creates a copy of the GossipTimestampFilter
 	 */
-	public GossipTimestampFilter clone() {
+	public org.ldk.structs.GossipTimestampFilter clone() {
 		long ret = bindings.GossipTimestampFilter_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -150,7 +150,7 @@ public class GossipTimestampFilter : CommonBase {
 	/**
 	 * Read a GossipTimestampFilter from a byte array, created by GossipTimestampFilter_write
 	 */
-	public static Result_GossipTimestampFilterDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_GossipTimestampFilterDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.GossipTimestampFilter_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

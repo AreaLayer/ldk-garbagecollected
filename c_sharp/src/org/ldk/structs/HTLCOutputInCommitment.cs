@@ -102,7 +102,7 @@ public class HTLCOutputInCommitment : CommonBase {
 	 * below the dust limit (in which case no output appears in the commitment transaction and the
 	 * value is spent to additional transaction fees).
 	 */
-	public Option_u32Z get_transaction_output_index() {
+	public org.ldk.structs.Option_u32Z get_transaction_output_index() {
 		long ret = bindings.HTLCOutputInCommitment_get_transaction_output_index(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -125,7 +125,7 @@ public class HTLCOutputInCommitment : CommonBase {
 	/**
 	 * Constructs a new HTLCOutputInCommitment given each field
 	 */
-	public static HTLCOutputInCommitment of(bool offered_arg, long amount_msat_arg, int cltv_expiry_arg, byte[] payment_hash_arg, org.ldk.structs.Option_u32Z transaction_output_index_arg) {
+	public static org.ldk.structs.HTLCOutputInCommitment of(bool offered_arg, long amount_msat_arg, int cltv_expiry_arg, byte[] payment_hash_arg, org.ldk.structs.Option_u32Z transaction_output_index_arg) {
 		long ret = bindings.HTLCOutputInCommitment_new(offered_arg, amount_msat_arg, cltv_expiry_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash_arg, 32)), transaction_output_index_arg.ptr);
 		GC.KeepAlive(offered_arg);
 		GC.KeepAlive(amount_msat_arg);
@@ -147,7 +147,7 @@ public class HTLCOutputInCommitment : CommonBase {
 	/**
 	 * Creates a copy of the HTLCOutputInCommitment
 	 */
-	public HTLCOutputInCommitment clone() {
+	public org.ldk.structs.HTLCOutputInCommitment clone() {
 		long ret = bindings.HTLCOutputInCommitment_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -198,7 +198,7 @@ public class HTLCOutputInCommitment : CommonBase {
 	/**
 	 * Read a HTLCOutputInCommitment from a byte array, created by HTLCOutputInCommitment_write
 	 */
-	public static Result_HTLCOutputInCommitmentDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_HTLCOutputInCommitmentDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.HTLCOutputInCommitment_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

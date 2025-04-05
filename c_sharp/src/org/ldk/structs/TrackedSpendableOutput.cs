@@ -18,7 +18,7 @@ public class TrackedSpendableOutput : CommonBase {
 	/**
 	 * The tracked output descriptor.
 	 */
-	public SpendableOutputDescriptor get_descriptor() {
+	public org.ldk.structs.SpendableOutputDescriptor get_descriptor() {
 		long ret = bindings.TrackedSpendableOutput_get_descriptor(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -43,7 +43,7 @@ public class TrackedSpendableOutput : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.TrackedSpendableOutput_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -68,7 +68,7 @@ public class TrackedSpendableOutput : CommonBase {
 	/**
 	 * The current status of the output spend.
 	 */
-	public OutputSpendStatus get_status() {
+	public org.ldk.structs.OutputSpendStatus get_status() {
 		long ret = bindings.TrackedSpendableOutput_get_status(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -91,7 +91,7 @@ public class TrackedSpendableOutput : CommonBase {
 	 * 
 	 * Note that channel_id_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static TrackedSpendableOutput of(org.ldk.structs.SpendableOutputDescriptor descriptor_arg, org.ldk.structs.ChannelId channel_id_arg, org.ldk.structs.OutputSpendStatus status_arg) {
+	public static org.ldk.structs.TrackedSpendableOutput of(org.ldk.structs.SpendableOutputDescriptor descriptor_arg, org.ldk.structs.ChannelId channel_id_arg, org.ldk.structs.OutputSpendStatus status_arg) {
 		long ret = bindings.TrackedSpendableOutput_new(descriptor_arg.ptr, channel_id_arg == null ? 0 : channel_id_arg.ptr, status_arg.ptr);
 		GC.KeepAlive(descriptor_arg);
 		GC.KeepAlive(channel_id_arg);
@@ -111,7 +111,7 @@ public class TrackedSpendableOutput : CommonBase {
 	/**
 	 * Creates a copy of the TrackedSpendableOutput
 	 */
-	public TrackedSpendableOutput clone() {
+	public org.ldk.structs.TrackedSpendableOutput clone() {
 		long ret = bindings.TrackedSpendableOutput_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -161,7 +161,7 @@ public class TrackedSpendableOutput : CommonBase {
 	/**
 	 * Read a TrackedSpendableOutput from a byte array, created by TrackedSpendableOutput_write
 	 */
-	public static Result_TrackedSpendableOutputDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_TrackedSpendableOutputDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.TrackedSpendableOutput_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

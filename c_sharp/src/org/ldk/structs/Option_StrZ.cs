@@ -41,7 +41,7 @@ public class Option_StrZ : CommonBase {
 	/**
 	 * Constructs a new COption_StrZ containing a crate::c_types::Str
 	 */
-	public static Option_StrZ some(string o) {
+	public static org.ldk.structs.Option_StrZ some(string o) {
 		long ret = bindings.COption_StrZ_some(InternalUtils.encodeString(o));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -53,7 +53,7 @@ public class Option_StrZ : CommonBase {
 	/**
 	 * Constructs a new COption_StrZ containing nothing
 	 */
-	public static Option_StrZ none() {
+	public static org.ldk.structs.Option_StrZ none() {
 		long ret = bindings.COption_StrZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_StrZ ret_hu_conv = org.ldk.structs.Option_StrZ.constr_from_ptr(ret);
@@ -71,7 +71,7 @@ public class Option_StrZ : CommonBase {
 	 * Creates a new COption_StrZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_StrZ clone() {
+	public org.ldk.structs.Option_StrZ clone() {
 		long ret = bindings.COption_StrZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

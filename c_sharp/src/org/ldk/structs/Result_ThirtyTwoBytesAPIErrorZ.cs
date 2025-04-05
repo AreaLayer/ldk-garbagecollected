@@ -40,7 +40,7 @@ public class Result_ThirtyTwoBytesAPIErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_ThirtyTwoBytesAPIErrorZ in the success state.
 	 */
-	public static Result_ThirtyTwoBytesAPIErrorZ ok(byte[] o) {
+	public static org.ldk.structs.Result_ThirtyTwoBytesAPIErrorZ ok(byte[] o) {
 		long ret = bindings.CResult_ThirtyTwoBytesAPIErrorZ_ok(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(o, 32)));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -51,7 +51,7 @@ public class Result_ThirtyTwoBytesAPIErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_ThirtyTwoBytesAPIErrorZ in the error state.
 	 */
-	public static Result_ThirtyTwoBytesAPIErrorZ err(org.ldk.structs.APIError e) {
+	public static org.ldk.structs.Result_ThirtyTwoBytesAPIErrorZ err(org.ldk.structs.APIError e) {
 		long ret = bindings.CResult_ThirtyTwoBytesAPIErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -78,7 +78,7 @@ public class Result_ThirtyTwoBytesAPIErrorZ : CommonBase {
 	 * Creates a new CResult_ThirtyTwoBytesAPIErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_ThirtyTwoBytesAPIErrorZ clone() {
+	public org.ldk.structs.Result_ThirtyTwoBytesAPIErrorZ clone() {
 		long ret = bindings.CResult_ThirtyTwoBytesAPIErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

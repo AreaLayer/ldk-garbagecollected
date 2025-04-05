@@ -26,7 +26,7 @@ public class NodeAnnouncementInfo : CommonBase {
 
 	/** A NodeAnnouncementInfo of type Relayed */
 	public class NodeAnnouncementInfo_Relayed : NodeAnnouncementInfo {
-		public NodeAnnouncement relayed;
+		public org.ldk.structs.NodeAnnouncement relayed;
 		internal NodeAnnouncementInfo_Relayed(long ptr) : base(null, ptr) {
 			long relayed = bindings.LDKNodeAnnouncementInfo_Relayed_get_relayed(ptr);
 			org.ldk.structs.NodeAnnouncement relayed_hu_conv = null; if (relayed < 0 || relayed > 4096) { relayed_hu_conv = new org.ldk.structs.NodeAnnouncement(null, relayed); }
@@ -36,7 +36,7 @@ public class NodeAnnouncementInfo : CommonBase {
 	}
 	/** A NodeAnnouncementInfo of type Local */
 	public class NodeAnnouncementInfo_Local : NodeAnnouncementInfo {
-		public NodeAnnouncementDetails local;
+		public org.ldk.structs.NodeAnnouncementDetails local;
 		internal NodeAnnouncementInfo_Local(long ptr) : base(null, ptr) {
 			long local = bindings.LDKNodeAnnouncementInfo_Local_get_local(ptr);
 			org.ldk.structs.NodeAnnouncementDetails local_hu_conv = null; if (local < 0 || local > 4096) { local_hu_conv = new org.ldk.structs.NodeAnnouncementDetails(null, local); }
@@ -53,7 +53,7 @@ public class NodeAnnouncementInfo : CommonBase {
 	/**
 	 * Creates a copy of the NodeAnnouncementInfo
 	 */
-	public NodeAnnouncementInfo clone() {
+	public org.ldk.structs.NodeAnnouncementInfo clone() {
 		long ret = bindings.NodeAnnouncementInfo_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -65,7 +65,7 @@ public class NodeAnnouncementInfo : CommonBase {
 	/**
 	 * Utility method to constructs a new Relayed-variant NodeAnnouncementInfo
 	 */
-	public static NodeAnnouncementInfo relayed(org.ldk.structs.NodeAnnouncement a) {
+	public static org.ldk.structs.NodeAnnouncementInfo relayed(org.ldk.structs.NodeAnnouncement a) {
 		long ret = bindings.NodeAnnouncementInfo_relayed(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -77,7 +77,7 @@ public class NodeAnnouncementInfo : CommonBase {
 	/**
 	 * Utility method to constructs a new Local-variant NodeAnnouncementInfo
 	 */
-	public static NodeAnnouncementInfo local(org.ldk.structs.NodeAnnouncementDetails a) {
+	public static org.ldk.structs.NodeAnnouncementInfo local(org.ldk.structs.NodeAnnouncementDetails a) {
 		long ret = bindings.NodeAnnouncementInfo_local(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -104,7 +104,7 @@ public class NodeAnnouncementInfo : CommonBase {
 	/**
 	 * Protocol features the node announced support for
 	 */
-	public NodeFeatures features() {
+	public org.ldk.structs.NodeFeatures features() {
 		long ret = bindings.NodeAnnouncementInfo_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -140,7 +140,7 @@ public class NodeAnnouncementInfo : CommonBase {
 	 * 
 	 * May be invalid or malicious (eg control chars), should not be exposed to the user.
 	 */
-	public NodeAlias alias() {
+	public org.ldk.structs.NodeAlias alias() {
 		long ret = bindings.NodeAnnouncementInfo_alias(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -175,7 +175,7 @@ public class NodeAnnouncementInfo : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public NodeAnnouncement announcement_message() {
+	public org.ldk.structs.NodeAnnouncement announcement_message() {
 		long ret = bindings.NodeAnnouncementInfo_announcement_message(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -198,7 +198,7 @@ public class NodeAnnouncementInfo : CommonBase {
 	/**
 	 * Read a NodeAnnouncementInfo from a byte array, created by NodeAnnouncementInfo_write
 	 */
-	public static Result_NodeAnnouncementInfoDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_NodeAnnouncementInfoDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.NodeAnnouncementInfo_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

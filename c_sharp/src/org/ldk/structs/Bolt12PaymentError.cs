@@ -57,7 +57,7 @@ public class Bolt12PaymentError : CommonBase {
 	/**
 	 * Creates a copy of the Bolt12PaymentError
 	 */
-	public Bolt12PaymentError clone() {
+	public org.ldk.structs.Bolt12PaymentError clone() {
 		long ret = bindings.Bolt12PaymentError_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -69,7 +69,7 @@ public class Bolt12PaymentError : CommonBase {
 	/**
 	 * Utility method to constructs a new UnexpectedInvoice-variant Bolt12PaymentError
 	 */
-	public static Bolt12PaymentError unexpected_invoice() {
+	public static org.ldk.structs.Bolt12PaymentError unexpected_invoice() {
 		long ret = bindings.Bolt12PaymentError_unexpected_invoice();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Bolt12PaymentError ret_hu_conv = org.ldk.structs.Bolt12PaymentError.constr_from_ptr(ret);
@@ -80,7 +80,7 @@ public class Bolt12PaymentError : CommonBase {
 	/**
 	 * Utility method to constructs a new DuplicateInvoice-variant Bolt12PaymentError
 	 */
-	public static Bolt12PaymentError duplicate_invoice() {
+	public static org.ldk.structs.Bolt12PaymentError duplicate_invoice() {
 		long ret = bindings.Bolt12PaymentError_duplicate_invoice();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Bolt12PaymentError ret_hu_conv = org.ldk.structs.Bolt12PaymentError.constr_from_ptr(ret);
@@ -91,7 +91,7 @@ public class Bolt12PaymentError : CommonBase {
 	/**
 	 * Utility method to constructs a new UnknownRequiredFeatures-variant Bolt12PaymentError
 	 */
-	public static Bolt12PaymentError unknown_required_features() {
+	public static org.ldk.structs.Bolt12PaymentError unknown_required_features() {
 		long ret = bindings.Bolt12PaymentError_unknown_required_features();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Bolt12PaymentError ret_hu_conv = org.ldk.structs.Bolt12PaymentError.constr_from_ptr(ret);
@@ -102,7 +102,7 @@ public class Bolt12PaymentError : CommonBase {
 	/**
 	 * Utility method to constructs a new SendingFailed-variant Bolt12PaymentError
 	 */
-	public static Bolt12PaymentError sending_failed(RetryableSendFailure a) {
+	public static org.ldk.structs.Bolt12PaymentError sending_failed(RetryableSendFailure a) {
 		long ret = bindings.Bolt12PaymentError_sending_failed(a);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -39,7 +39,7 @@ public class Option_ChannelShutdownStateZ : CommonBase {
 	/**
 	 * Constructs a new COption_ChannelShutdownStateZ containing a crate::lightning::ln::channel_state::ChannelShutdownState
 	 */
-	public static Option_ChannelShutdownStateZ some(ChannelShutdownState o) {
+	public static org.ldk.structs.Option_ChannelShutdownStateZ some(ChannelShutdownState o) {
 		long ret = bindings.COption_ChannelShutdownStateZ_some(o);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -51,7 +51,7 @@ public class Option_ChannelShutdownStateZ : CommonBase {
 	/**
 	 * Constructs a new COption_ChannelShutdownStateZ containing nothing
 	 */
-	public static Option_ChannelShutdownStateZ none() {
+	public static org.ldk.structs.Option_ChannelShutdownStateZ none() {
 		long ret = bindings.COption_ChannelShutdownStateZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_ChannelShutdownStateZ ret_hu_conv = org.ldk.structs.Option_ChannelShutdownStateZ.constr_from_ptr(ret);
@@ -69,7 +69,7 @@ public class Option_ChannelShutdownStateZ : CommonBase {
 	 * Creates a new COption_ChannelShutdownStateZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_ChannelShutdownStateZ clone() {
+	public org.ldk.structs.Option_ChannelShutdownStateZ clone() {
 		long ret = bindings.COption_ChannelShutdownStateZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

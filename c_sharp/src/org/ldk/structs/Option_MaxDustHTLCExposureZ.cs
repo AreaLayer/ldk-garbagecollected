@@ -26,7 +26,7 @@ public class Option_MaxDustHTLCExposureZ : CommonBase {
 
 	/** A Option_MaxDustHTLCExposureZ of type Some */
 	public class Option_MaxDustHTLCExposureZ_Some : Option_MaxDustHTLCExposureZ {
-		public MaxDustHTLCExposure some;
+		public org.ldk.structs.MaxDustHTLCExposure some;
 		internal Option_MaxDustHTLCExposureZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_MaxDustHTLCExposureZ_Some_get_some(ptr);
 			org.ldk.structs.MaxDustHTLCExposure some_hu_conv = org.ldk.structs.MaxDustHTLCExposure.constr_from_ptr(some);
@@ -42,7 +42,7 @@ public class Option_MaxDustHTLCExposureZ : CommonBase {
 	/**
 	 * Constructs a new COption_MaxDustHTLCExposureZ containing a crate::lightning::util::config::MaxDustHTLCExposure
 	 */
-	public static Option_MaxDustHTLCExposureZ some(org.ldk.structs.MaxDustHTLCExposure o) {
+	public static org.ldk.structs.Option_MaxDustHTLCExposureZ some(org.ldk.structs.MaxDustHTLCExposure o) {
 		long ret = bindings.COption_MaxDustHTLCExposureZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class Option_MaxDustHTLCExposureZ : CommonBase {
 	/**
 	 * Constructs a new COption_MaxDustHTLCExposureZ containing nothing
 	 */
-	public static Option_MaxDustHTLCExposureZ none() {
+	public static org.ldk.structs.Option_MaxDustHTLCExposureZ none() {
 		long ret = bindings.COption_MaxDustHTLCExposureZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_MaxDustHTLCExposureZ ret_hu_conv = org.ldk.structs.Option_MaxDustHTLCExposureZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Option_MaxDustHTLCExposureZ : CommonBase {
 	 * Creates a new COption_MaxDustHTLCExposureZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_MaxDustHTLCExposureZ clone() {
+	public org.ldk.structs.Option_MaxDustHTLCExposureZ clone() {
 		long ret = bindings.COption_MaxDustHTLCExposureZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

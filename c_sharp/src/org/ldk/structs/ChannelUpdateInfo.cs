@@ -54,7 +54,7 @@ public class ChannelUpdateInfo : CommonBase {
 	/**
 	 * Fees charged when the channel is used for routing
 	 */
-	public RoutingFees get_fees() {
+	public org.ldk.structs.RoutingFees get_fees() {
 		long ret = bindings.ChannelUpdateInfo_get_fees(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -136,7 +136,7 @@ public class ChannelUpdateInfo : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ChannelUpdate get_last_update_message() {
+	public org.ldk.structs.ChannelUpdate get_last_update_message() {
 		long ret = bindings.ChannelUpdateInfo_get_last_update_message(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -164,7 +164,7 @@ public class ChannelUpdateInfo : CommonBase {
 	 * 
 	 * Note that last_update_message_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static ChannelUpdateInfo of(long htlc_minimum_msat_arg, long htlc_maximum_msat_arg, org.ldk.structs.RoutingFees fees_arg, int last_update_arg, short cltv_expiry_delta_arg, bool enabled_arg, org.ldk.structs.ChannelUpdate last_update_message_arg) {
+	public static org.ldk.structs.ChannelUpdateInfo of(long htlc_minimum_msat_arg, long htlc_maximum_msat_arg, org.ldk.structs.RoutingFees fees_arg, int last_update_arg, short cltv_expiry_delta_arg, bool enabled_arg, org.ldk.structs.ChannelUpdate last_update_message_arg) {
 		long ret = bindings.ChannelUpdateInfo_new(htlc_minimum_msat_arg, htlc_maximum_msat_arg, fees_arg.ptr, last_update_arg, cltv_expiry_delta_arg, enabled_arg, last_update_message_arg == null ? 0 : last_update_message_arg.ptr);
 		GC.KeepAlive(htlc_minimum_msat_arg);
 		GC.KeepAlive(htlc_maximum_msat_arg);
@@ -188,7 +188,7 @@ public class ChannelUpdateInfo : CommonBase {
 	/**
 	 * Creates a copy of the ChannelUpdateInfo
 	 */
-	public ChannelUpdateInfo clone() {
+	public org.ldk.structs.ChannelUpdateInfo clone() {
 		long ret = bindings.ChannelUpdateInfo_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -239,7 +239,7 @@ public class ChannelUpdateInfo : CommonBase {
 	/**
 	 * Read a ChannelUpdateInfo from a byte array, created by ChannelUpdateInfo_write
 	 */
-	public static Result_ChannelUpdateInfoDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ChannelUpdateInfoDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.ChannelUpdateInfo_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -38,7 +38,7 @@ public class Result_SocketAddressSocketAddressParseErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_SocketAddressSocketAddressParseErrorZ in the success state.
 	 */
-	public static Result_SocketAddressSocketAddressParseErrorZ ok(org.ldk.structs.SocketAddress o) {
+	public static org.ldk.structs.Result_SocketAddressSocketAddressParseErrorZ ok(org.ldk.structs.SocketAddress o) {
 		long ret = bindings.CResult_SocketAddressSocketAddressParseErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -49,7 +49,7 @@ public class Result_SocketAddressSocketAddressParseErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_SocketAddressSocketAddressParseErrorZ in the error state.
 	 */
-	public static Result_SocketAddressSocketAddressParseErrorZ err(SocketAddressParseError e) {
+	public static org.ldk.structs.Result_SocketAddressSocketAddressParseErrorZ err(SocketAddressParseError e) {
 		long ret = bindings.CResult_SocketAddressSocketAddressParseErrorZ_err(e);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -76,7 +76,7 @@ public class Result_SocketAddressSocketAddressParseErrorZ : CommonBase {
 	 * Creates a new CResult_SocketAddressSocketAddressParseErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_SocketAddressSocketAddressParseErrorZ clone() {
+	public org.ldk.structs.Result_SocketAddressSocketAddressParseErrorZ clone() {
 		long ret = bindings.CResult_SocketAddressSocketAddressParseErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

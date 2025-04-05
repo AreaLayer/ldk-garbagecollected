@@ -33,7 +33,7 @@ public class RouteHintHop : CommonBase {
 	/**
 	 * Read a RouteHintHop from a byte array, created by RouteHintHop_write
 	 */
-	public static Result_RouteHintHopDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_RouteHintHopDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.RouteHintHop_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -82,7 +82,7 @@ public class RouteHintHop : CommonBase {
 	/**
 	 * The fees which must be paid to use this channel
 	 */
-	public RoutingFees get_fees() {
+	public org.ldk.structs.RoutingFees get_fees() {
 		long ret = bindings.RouteHintHop_get_fees(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -121,7 +121,7 @@ public class RouteHintHop : CommonBase {
 	/**
 	 * The minimum value, in msat, which must be relayed to the next hop.
 	 */
-	public Option_u64Z get_htlc_minimum_msat() {
+	public org.ldk.structs.Option_u64Z get_htlc_minimum_msat() {
 		long ret = bindings.RouteHintHop_get_htlc_minimum_msat(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -142,7 +142,7 @@ public class RouteHintHop : CommonBase {
 	/**
 	 * The maximum value in msat available for routing with a single HTLC.
 	 */
-	public Option_u64Z get_htlc_maximum_msat() {
+	public org.ldk.structs.Option_u64Z get_htlc_maximum_msat() {
 		long ret = bindings.RouteHintHop_get_htlc_maximum_msat(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -163,7 +163,7 @@ public class RouteHintHop : CommonBase {
 	/**
 	 * Constructs a new RouteHintHop given each field
 	 */
-	public static RouteHintHop of(byte[] src_node_id_arg, long short_channel_id_arg, org.ldk.structs.RoutingFees fees_arg, short cltv_expiry_delta_arg, org.ldk.structs.Option_u64Z htlc_minimum_msat_arg, org.ldk.structs.Option_u64Z htlc_maximum_msat_arg) {
+	public static org.ldk.structs.RouteHintHop of(byte[] src_node_id_arg, long short_channel_id_arg, org.ldk.structs.RoutingFees fees_arg, short cltv_expiry_delta_arg, org.ldk.structs.Option_u64Z htlc_minimum_msat_arg, org.ldk.structs.Option_u64Z htlc_maximum_msat_arg) {
 		long ret = bindings.RouteHintHop_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(src_node_id_arg, 33)), short_channel_id_arg, fees_arg.ptr, cltv_expiry_delta_arg, htlc_minimum_msat_arg.ptr, htlc_maximum_msat_arg.ptr);
 		GC.KeepAlive(src_node_id_arg);
 		GC.KeepAlive(short_channel_id_arg);
@@ -186,7 +186,7 @@ public class RouteHintHop : CommonBase {
 	/**
 	 * Creates a copy of the RouteHintHop
 	 */
-	public RouteHintHop clone() {
+	public org.ldk.structs.RouteHintHop clone() {
 		long ret = bindings.RouteHintHop_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

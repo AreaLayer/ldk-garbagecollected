@@ -71,7 +71,7 @@ public class ChannelMonitorUpdate : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.ChannelMonitorUpdate_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -103,7 +103,7 @@ public class ChannelMonitorUpdate : CommonBase {
 	/**
 	 * Creates a copy of the ChannelMonitorUpdate
 	 */
-	public ChannelMonitorUpdate clone() {
+	public org.ldk.structs.ChannelMonitorUpdate clone() {
 		long ret = bindings.ChannelMonitorUpdate_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -143,7 +143,7 @@ public class ChannelMonitorUpdate : CommonBase {
 	/**
 	 * Read a ChannelMonitorUpdate from a byte array, created by ChannelMonitorUpdate_write
 	 */
-	public static Result_ChannelMonitorUpdateDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ChannelMonitorUpdateDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.ChannelMonitorUpdate_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

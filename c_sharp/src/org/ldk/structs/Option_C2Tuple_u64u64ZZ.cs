@@ -26,7 +26,7 @@ public class Option_C2Tuple_u64u64ZZ : CommonBase {
 
 	/** A Option_C2Tuple_u64u64ZZ of type Some */
 	public class Option_C2Tuple_u64u64ZZ_Some : Option_C2Tuple_u64u64ZZ {
-		public TwoTuple_u64u64Z some;
+		public org.ldk.structs.TwoTuple_u64u64Z some;
 		internal Option_C2Tuple_u64u64ZZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_C2Tuple_u64u64ZZ_Some_get_some(ptr);
 			TwoTuple_u64u64Z some_hu_conv = new TwoTuple_u64u64Z(null, some);
@@ -42,7 +42,7 @@ public class Option_C2Tuple_u64u64ZZ : CommonBase {
 	/**
 	 * Constructs a new COption_C2Tuple_u64u64ZZ containing a crate::c_types::derived::C2Tuple_u64u64Z
 	 */
-	public static Option_C2Tuple_u64u64ZZ some(org.ldk.structs.TwoTuple_u64u64Z o) {
+	public static org.ldk.structs.Option_C2Tuple_u64u64ZZ some(org.ldk.structs.TwoTuple_u64u64Z o) {
 		long ret = bindings.COption_C2Tuple_u64u64ZZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class Option_C2Tuple_u64u64ZZ : CommonBase {
 	/**
 	 * Constructs a new COption_C2Tuple_u64u64ZZ containing nothing
 	 */
-	public static Option_C2Tuple_u64u64ZZ none() {
+	public static org.ldk.structs.Option_C2Tuple_u64u64ZZ none() {
 		long ret = bindings.COption_C2Tuple_u64u64ZZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_C2Tuple_u64u64ZZ ret_hu_conv = org.ldk.structs.Option_C2Tuple_u64u64ZZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Option_C2Tuple_u64u64ZZ : CommonBase {
 	 * Creates a new COption_C2Tuple_u64u64ZZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_C2Tuple_u64u64ZZ clone() {
+	public org.ldk.structs.Option_C2Tuple_u64u64ZZ clone() {
 		long ret = bindings.COption_C2Tuple_u64u64ZZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -38,7 +38,7 @@ public class Result_PayeePubKeySecp256k1ErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_PayeePubKeySecp256k1ErrorZ in the success state.
 	 */
-	public static Result_PayeePubKeySecp256k1ErrorZ ok(org.ldk.structs.PayeePubKey o) {
+	public static org.ldk.structs.Result_PayeePubKeySecp256k1ErrorZ ok(org.ldk.structs.PayeePubKey o) {
 		long ret = bindings.CResult_PayeePubKeySecp256k1ErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -49,7 +49,7 @@ public class Result_PayeePubKeySecp256k1ErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_PayeePubKeySecp256k1ErrorZ in the error state.
 	 */
-	public static Result_PayeePubKeySecp256k1ErrorZ err(Secp256k1Error e) {
+	public static org.ldk.structs.Result_PayeePubKeySecp256k1ErrorZ err(Secp256k1Error e) {
 		long ret = bindings.CResult_PayeePubKeySecp256k1ErrorZ_err(e);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -76,7 +76,7 @@ public class Result_PayeePubKeySecp256k1ErrorZ : CommonBase {
 	 * Creates a new CResult_PayeePubKeySecp256k1ErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_PayeePubKeySecp256k1ErrorZ clone() {
+	public org.ldk.structs.Result_PayeePubKeySecp256k1ErrorZ clone() {
 		long ret = bindings.CResult_PayeePubKeySecp256k1ErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -22,7 +22,7 @@ public class InvoiceRequestWithDerivedPayerSigningPubkeyBuilder : CommonBase {
 	/**
 	 * Builds a signed [`InvoiceRequest`] after checking for valid semantics.
 	 */
-	public Result_InvoiceRequestBolt12SemanticErrorZ build_and_sign() {
+	public org.ldk.structs.Result_InvoiceRequestBolt12SemanticErrorZ build_and_sign() {
 		long ret = bindings.InvoiceRequestWithDerivedPayerSigningPubkeyBuilder_build_and_sign(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -46,7 +46,7 @@ public class InvoiceRequestWithDerivedPayerSigningPubkeyBuilder : CommonBase {
 	 * 
 	 * Successive calls to this method will override the previous setting.
 	 */
-	public Result_NoneBolt12SemanticErrorZ chain(Network network) {
+	public org.ldk.structs.Result_NoneBolt12SemanticErrorZ chain(Network network) {
 		long ret = bindings.InvoiceRequestWithDerivedPayerSigningPubkeyBuilder_chain(this.ptr, network);
 		GC.KeepAlive(this);
 		GC.KeepAlive(network);
@@ -72,7 +72,7 @@ public class InvoiceRequestWithDerivedPayerSigningPubkeyBuilder : CommonBase {
 	 * 
 	 * [`quantity`]: Self::quantity
 	 */
-	public Result_NoneBolt12SemanticErrorZ amount_msats(long amount_msats) {
+	public org.ldk.structs.Result_NoneBolt12SemanticErrorZ amount_msats(long amount_msats) {
 		long ret = bindings.InvoiceRequestWithDerivedPayerSigningPubkeyBuilder_amount_msats(this.ptr, amount_msats);
 		GC.KeepAlive(this);
 		GC.KeepAlive(amount_msats);
@@ -96,7 +96,7 @@ public class InvoiceRequestWithDerivedPayerSigningPubkeyBuilder : CommonBase {
 	 * 
 	 * Successive calls to this method will override the previous setting.
 	 */
-	public Result_NoneBolt12SemanticErrorZ quantity(long quantity) {
+	public org.ldk.structs.Result_NoneBolt12SemanticErrorZ quantity(long quantity) {
 		long ret = bindings.InvoiceRequestWithDerivedPayerSigningPubkeyBuilder_quantity(this.ptr, quantity);
 		GC.KeepAlive(this);
 		GC.KeepAlive(quantity);

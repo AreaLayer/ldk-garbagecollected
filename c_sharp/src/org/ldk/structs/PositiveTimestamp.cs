@@ -46,7 +46,7 @@ public class PositiveTimestamp : CommonBase {
 	/**
 	 * Creates a copy of the PositiveTimestamp
 	 */
-	public PositiveTimestamp clone() {
+	public org.ldk.structs.PositiveTimestamp clone() {
 		long ret = bindings.PositiveTimestamp_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -72,7 +72,7 @@ public class PositiveTimestamp : CommonBase {
 	 * 
 	 * Otherwise, returns a [`CreationError::TimestampOutOfBounds`].
 	 */
-	public static Result_PositiveTimestampCreationErrorZ from_unix_timestamp(long unix_seconds) {
+	public static org.ldk.structs.Result_PositiveTimestampCreationErrorZ from_unix_timestamp(long unix_seconds) {
 		long ret = bindings.PositiveTimestamp_from_unix_timestamp(unix_seconds);
 		GC.KeepAlive(unix_seconds);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -88,7 +88,7 @@ public class PositiveTimestamp : CommonBase {
 	 * 
 	 * Otherwise, returns a [`CreationError::TimestampOutOfBounds`].
 	 */
-	public static Result_PositiveTimestampCreationErrorZ from_system_time(long time) {
+	public static org.ldk.structs.Result_PositiveTimestampCreationErrorZ from_system_time(long time) {
 		long ret = bindings.PositiveTimestamp_from_system_time(time);
 		GC.KeepAlive(time);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -104,7 +104,7 @@ public class PositiveTimestamp : CommonBase {
 	 * 
 	 * Otherwise, returns a [`CreationError::TimestampOutOfBounds`].
 	 */
-	public static Result_PositiveTimestampCreationErrorZ from_duration_since_epoch(long duration) {
+	public static org.ldk.structs.Result_PositiveTimestampCreationErrorZ from_duration_since_epoch(long duration) {
 		long ret = bindings.PositiveTimestamp_from_duration_since_epoch(duration);
 		GC.KeepAlive(duration);
 		if (ret >= 0 && ret <= 4096) { return null; }

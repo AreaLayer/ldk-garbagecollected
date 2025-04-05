@@ -18,7 +18,7 @@ public class TwoTuple_OutPointCVec_u64ZZ : CommonBase {
 	/**
 	 * 
 	 */
-	public OutPoint get_a() {
+	public org.ldk.structs.OutPoint get_a() {
 		long ret = bindings.C2Tuple_OutPointCVec_u64ZZ_get_a(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -48,7 +48,7 @@ public class TwoTuple_OutPointCVec_u64ZZ : CommonBase {
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public TwoTuple_OutPointCVec_u64ZZ clone() {
+	public org.ldk.structs.TwoTuple_OutPointCVec_u64ZZ clone() {
 		long ret = bindings.C2Tuple_OutPointCVec_u64ZZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -60,7 +60,7 @@ public class TwoTuple_OutPointCVec_u64ZZ : CommonBase {
 	/**
 	 * Creates a new C2Tuple_OutPointCVec_u64ZZ from the contained elements.
 	 */
-	public static TwoTuple_OutPointCVec_u64ZZ of(org.ldk.structs.OutPoint a, long[] b) {
+	public static org.ldk.structs.TwoTuple_OutPointCVec_u64ZZ of(org.ldk.structs.OutPoint a, long[] b) {
 		long ret = bindings.C2Tuple_OutPointCVec_u64ZZ_new(a.ptr, InternalUtils.encodeUint64Array(b));
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

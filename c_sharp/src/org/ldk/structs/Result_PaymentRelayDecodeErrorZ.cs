@@ -41,7 +41,7 @@ public class Result_PaymentRelayDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_PaymentRelayDecodeErrorZ in the success state.
 	 */
-	public static Result_PaymentRelayDecodeErrorZ ok(org.ldk.structs.PaymentRelay o) {
+	public static org.ldk.structs.Result_PaymentRelayDecodeErrorZ ok(org.ldk.structs.PaymentRelay o) {
 		long ret = bindings.CResult_PaymentRelayDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_PaymentRelayDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_PaymentRelayDecodeErrorZ in the error state.
 	 */
-	public static Result_PaymentRelayDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_PaymentRelayDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_PaymentRelayDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_PaymentRelayDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_PaymentRelayDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_PaymentRelayDecodeErrorZ clone() {
+	public org.ldk.structs.Result_PaymentRelayDecodeErrorZ clone() {
 		long ret = bindings.CResult_PaymentRelayDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

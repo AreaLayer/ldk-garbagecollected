@@ -31,7 +31,7 @@ public class WatchedOutput : CommonBase {
 	/**
 	 * First block where the transaction output may have been spent.
 	 */
-	public Option_ThirtyTwoBytesZ get_block_hash() {
+	public org.ldk.structs.Option_ThirtyTwoBytesZ get_block_hash() {
 		long ret = bindings.WatchedOutput_get_block_hash(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class WatchedOutput : CommonBase {
 	/**
 	 * Outpoint identifying the transaction output.
 	 */
-	public OutPoint get_outpoint() {
+	public org.ldk.structs.OutPoint get_outpoint() {
 		long ret = bindings.WatchedOutput_get_outpoint(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -93,7 +93,7 @@ public class WatchedOutput : CommonBase {
 	/**
 	 * Constructs a new WatchedOutput given each field
 	 */
-	public static WatchedOutput of(org.ldk.structs.Option_ThirtyTwoBytesZ block_hash_arg, org.ldk.structs.OutPoint outpoint_arg, byte[] script_pubkey_arg) {
+	public static org.ldk.structs.WatchedOutput of(org.ldk.structs.Option_ThirtyTwoBytesZ block_hash_arg, org.ldk.structs.OutPoint outpoint_arg, byte[] script_pubkey_arg) {
 		long ret = bindings.WatchedOutput_new(block_hash_arg.ptr, outpoint_arg.ptr, InternalUtils.encodeUint8Array(script_pubkey_arg));
 		GC.KeepAlive(block_hash_arg);
 		GC.KeepAlive(outpoint_arg);
@@ -113,7 +113,7 @@ public class WatchedOutput : CommonBase {
 	/**
 	 * Creates a copy of the WatchedOutput
 	 */
-	public WatchedOutput clone() {
+	public org.ldk.structs.WatchedOutput clone() {
 		long ret = bindings.WatchedOutput_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

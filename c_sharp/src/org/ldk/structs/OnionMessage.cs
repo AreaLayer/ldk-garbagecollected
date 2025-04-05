@@ -38,7 +38,7 @@ public class OnionMessage : CommonBase {
 	/**
 	 * The full onion packet including hop data, pubkey, and hmac
 	 */
-	public Packet get_onion_routing_packet() {
+	public org.ldk.structs.Packet get_onion_routing_packet() {
 		long ret = bindings.OnionMessage_get_onion_routing_packet(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -59,7 +59,7 @@ public class OnionMessage : CommonBase {
 	/**
 	 * Constructs a new OnionMessage given each field
 	 */
-	public static OnionMessage of(byte[] blinding_point_arg, org.ldk.structs.Packet onion_routing_packet_arg) {
+	public static org.ldk.structs.OnionMessage of(byte[] blinding_point_arg, org.ldk.structs.Packet onion_routing_packet_arg) {
 		long ret = bindings.OnionMessage_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(blinding_point_arg, 33)), onion_routing_packet_arg.ptr);
 		GC.KeepAlive(blinding_point_arg);
 		GC.KeepAlive(onion_routing_packet_arg);
@@ -78,7 +78,7 @@ public class OnionMessage : CommonBase {
 	/**
 	 * Creates a copy of the OnionMessage
 	 */
-	public OnionMessage clone() {
+	public org.ldk.structs.OnionMessage clone() {
 		long ret = bindings.OnionMessage_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -119,7 +119,7 @@ public class OnionMessage : CommonBase {
 	/**
 	 * Read a OnionMessage from a byte array, created by OnionMessage_write
 	 */
-	public static Result_OnionMessageDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_OnionMessageDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.OnionMessage_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

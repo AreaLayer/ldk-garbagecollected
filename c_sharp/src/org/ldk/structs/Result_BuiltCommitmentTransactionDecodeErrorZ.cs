@@ -41,7 +41,7 @@ public class Result_BuiltCommitmentTransactionDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_BuiltCommitmentTransactionDecodeErrorZ in the success state.
 	 */
-	public static Result_BuiltCommitmentTransactionDecodeErrorZ ok(org.ldk.structs.BuiltCommitmentTransaction o) {
+	public static org.ldk.structs.Result_BuiltCommitmentTransactionDecodeErrorZ ok(org.ldk.structs.BuiltCommitmentTransaction o) {
 		long ret = bindings.CResult_BuiltCommitmentTransactionDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_BuiltCommitmentTransactionDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_BuiltCommitmentTransactionDecodeErrorZ in the error state.
 	 */
-	public static Result_BuiltCommitmentTransactionDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_BuiltCommitmentTransactionDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_BuiltCommitmentTransactionDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_BuiltCommitmentTransactionDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_BuiltCommitmentTransactionDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_BuiltCommitmentTransactionDecodeErrorZ clone() {
+	public org.ldk.structs.Result_BuiltCommitmentTransactionDecodeErrorZ clone() {
 		long ret = bindings.CResult_BuiltCommitmentTransactionDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

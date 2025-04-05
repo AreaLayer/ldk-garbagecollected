@@ -18,7 +18,7 @@ public class TwoTuple_DNSSECQueryDNSResolverContextZ : CommonBase {
 	/**
 	 * 
 	 */
-	public DNSSECQuery get_a() {
+	public org.ldk.structs.DNSSECQuery get_a() {
 		long ret = bindings.C2Tuple_DNSSECQueryDNSResolverContextZ_get_a(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -30,7 +30,7 @@ public class TwoTuple_DNSSECQueryDNSResolverContextZ : CommonBase {
 	/**
 	 * 
 	 */
-	public DNSResolverContext get_b() {
+	public org.ldk.structs.DNSResolverContext get_b() {
 		long ret = bindings.C2Tuple_DNSSECQueryDNSResolverContextZ_get_b(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -49,7 +49,7 @@ public class TwoTuple_DNSSECQueryDNSResolverContextZ : CommonBase {
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public TwoTuple_DNSSECQueryDNSResolverContextZ clone() {
+	public org.ldk.structs.TwoTuple_DNSSECQueryDNSResolverContextZ clone() {
 		long ret = bindings.C2Tuple_DNSSECQueryDNSResolverContextZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -61,7 +61,7 @@ public class TwoTuple_DNSSECQueryDNSResolverContextZ : CommonBase {
 	/**
 	 * Creates a new C2Tuple_DNSSECQueryDNSResolverContextZ from the contained elements.
 	 */
-	public static TwoTuple_DNSSECQueryDNSResolverContextZ of(org.ldk.structs.DNSSECQuery a, org.ldk.structs.DNSResolverContext b) {
+	public static org.ldk.structs.TwoTuple_DNSSECQueryDNSResolverContextZ of(org.ldk.structs.DNSSECQuery a, org.ldk.structs.DNSResolverContext b) {
 		long ret = bindings.C2Tuple_DNSSECQueryDNSResolverContextZ_new(a.ptr, b.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

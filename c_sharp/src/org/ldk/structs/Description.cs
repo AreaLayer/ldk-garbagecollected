@@ -27,7 +27,7 @@ public class Description : CommonBase {
 	/**
 	 * Creates a copy of the Description
 	 */
-	public Description clone() {
+	public org.ldk.structs.Description clone() {
 		long ret = bindings.Description_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -71,7 +71,7 @@ public class Description : CommonBase {
 	 * 
 	 * Please note that single characters may use more than one byte due to UTF8 encoding.
 	 */
-	public static Result_DescriptionCreationErrorZ of(string description) {
+	public static org.ldk.structs.Result_DescriptionCreationErrorZ of(string description) {
 		long ret = bindings.Description_new(InternalUtils.encodeString(description));
 		GC.KeepAlive(description);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -82,7 +82,7 @@ public class Description : CommonBase {
 	/**
 	 * Creates an empty `Description`.
 	 */
-	public static Description empty() {
+	public static org.ldk.structs.Description empty() {
 		long ret = bindings.Description_empty();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Description ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Description(null, ret); }
@@ -93,7 +93,7 @@ public class Description : CommonBase {
 	/**
 	 * Returns the underlying description [`UntrustedString`]
 	 */
-	public UntrustedString into_inner() {
+	public org.ldk.structs.UntrustedString into_inner() {
 		long ret = bindings.Description_into_inner(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -106,7 +106,7 @@ public class Description : CommonBase {
 	/**
 	 * Get a reference to the underlying description [`UntrustedString`]
 	 */
-	public UntrustedString as_inner() {
+	public org.ldk.structs.UntrustedString as_inner() {
 		long ret = bindings.Description_as_inner(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

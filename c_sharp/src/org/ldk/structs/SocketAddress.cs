@@ -102,7 +102,7 @@ public class SocketAddress : CommonBase {
 		/**
 		 * The hostname on which the node is listening.
 		 */
-		public Hostname hostname;
+		public org.ldk.structs.Hostname hostname;
 		/**
 		 * The port on which the node is listening.
 		 */
@@ -124,7 +124,7 @@ public class SocketAddress : CommonBase {
 	/**
 	 * Creates a copy of the SocketAddress
 	 */
-	public SocketAddress clone() {
+	public org.ldk.structs.SocketAddress clone() {
 		long ret = bindings.SocketAddress_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -136,7 +136,7 @@ public class SocketAddress : CommonBase {
 	/**
 	 * Utility method to constructs a new TcpIpV4-variant SocketAddress
 	 */
-	public static SocketAddress tcp_ip_v4(byte[] addr, short port) {
+	public static org.ldk.structs.SocketAddress tcp_ip_v4(byte[] addr, short port) {
 		long ret = bindings.SocketAddress_tcp_ip_v4(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(addr, 4)), port);
 		GC.KeepAlive(addr);
 		GC.KeepAlive(port);
@@ -149,7 +149,7 @@ public class SocketAddress : CommonBase {
 	/**
 	 * Utility method to constructs a new TcpIpV6-variant SocketAddress
 	 */
-	public static SocketAddress tcp_ip_v6(byte[] addr, short port) {
+	public static org.ldk.structs.SocketAddress tcp_ip_v6(byte[] addr, short port) {
 		long ret = bindings.SocketAddress_tcp_ip_v6(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(addr, 16)), port);
 		GC.KeepAlive(addr);
 		GC.KeepAlive(port);
@@ -162,7 +162,7 @@ public class SocketAddress : CommonBase {
 	/**
 	 * Utility method to constructs a new OnionV2-variant SocketAddress
 	 */
-	public static SocketAddress onion_v2(byte[] a) {
+	public static org.ldk.structs.SocketAddress onion_v2(byte[] a) {
 		long ret = bindings.SocketAddress_onion_v2(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 12)));
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -174,7 +174,7 @@ public class SocketAddress : CommonBase {
 	/**
 	 * Utility method to constructs a new OnionV3-variant SocketAddress
 	 */
-	public static SocketAddress onion_v3(byte[] ed25519_pubkey, short checksum, byte version, short port) {
+	public static org.ldk.structs.SocketAddress onion_v3(byte[] ed25519_pubkey, short checksum, byte version, short port) {
 		long ret = bindings.SocketAddress_onion_v3(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(ed25519_pubkey, 32)), checksum, version, port);
 		GC.KeepAlive(ed25519_pubkey);
 		GC.KeepAlive(checksum);
@@ -189,7 +189,7 @@ public class SocketAddress : CommonBase {
 	/**
 	 * Utility method to constructs a new Hostname-variant SocketAddress
 	 */
-	public static SocketAddress hostname(org.ldk.structs.Hostname hostname, short port) {
+	public static org.ldk.structs.SocketAddress hostname(org.ldk.structs.Hostname hostname, short port) {
 		long ret = bindings.SocketAddress_hostname(hostname.ptr, port);
 		GC.KeepAlive(hostname);
 		GC.KeepAlive(port);
@@ -240,7 +240,7 @@ public class SocketAddress : CommonBase {
 	/**
 	 * Read a SocketAddress from a byte array, created by SocketAddress_write
 	 */
-	public static Result_SocketAddressDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_SocketAddressDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.SocketAddress_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -262,7 +262,7 @@ public class SocketAddress : CommonBase {
 	/**
 	 * Read a SocketAddress object from a string
 	 */
-	public static Result_SocketAddressSocketAddressParseErrorZ from_str(string s) {
+	public static org.ldk.structs.Result_SocketAddressSocketAddressParseErrorZ from_str(string s) {
 		long ret = bindings.SocketAddress_from_str(InternalUtils.encodeString(s));
 		GC.KeepAlive(s);
 		if (ret >= 0 && ret <= 4096) { return null; }

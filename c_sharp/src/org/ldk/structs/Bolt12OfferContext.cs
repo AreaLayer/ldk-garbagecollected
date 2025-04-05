@@ -22,7 +22,7 @@ public class Bolt12OfferContext : CommonBase {
 	 * 
 	 * [`Offer`]: crate::offers::offer::Offer
 	 */
-	public OfferId get_offer_id() {
+	public org.ldk.structs.OfferId get_offer_id() {
 		long ret = bindings.Bolt12OfferContext_get_offer_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -48,7 +48,7 @@ public class Bolt12OfferContext : CommonBase {
 	 * [`InvoiceRequest`]: crate::offers::invoice_request::InvoiceRequest
 	 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
 	 */
-	public InvoiceRequestFields get_invoice_request() {
+	public org.ldk.structs.InvoiceRequestFields get_invoice_request() {
 		long ret = bindings.Bolt12OfferContext_get_invoice_request(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -72,7 +72,7 @@ public class Bolt12OfferContext : CommonBase {
 	/**
 	 * Constructs a new Bolt12OfferContext given each field
 	 */
-	public static Bolt12OfferContext of(org.ldk.structs.OfferId offer_id_arg, org.ldk.structs.InvoiceRequestFields invoice_request_arg) {
+	public static org.ldk.structs.Bolt12OfferContext of(org.ldk.structs.OfferId offer_id_arg, org.ldk.structs.InvoiceRequestFields invoice_request_arg) {
 		long ret = bindings.Bolt12OfferContext_new(offer_id_arg.ptr, invoice_request_arg.ptr);
 		GC.KeepAlive(offer_id_arg);
 		GC.KeepAlive(invoice_request_arg);
@@ -91,7 +91,7 @@ public class Bolt12OfferContext : CommonBase {
 	/**
 	 * Creates a copy of the Bolt12OfferContext
 	 */
-	public Bolt12OfferContext clone() {
+	public org.ldk.structs.Bolt12OfferContext clone() {
 		long ret = bindings.Bolt12OfferContext_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -131,7 +131,7 @@ public class Bolt12OfferContext : CommonBase {
 	/**
 	 * Read a Bolt12OfferContext from a byte array, created by Bolt12OfferContext_write
 	 */
-	public static Result_Bolt12OfferContextDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_Bolt12OfferContextDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.Bolt12OfferContext_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

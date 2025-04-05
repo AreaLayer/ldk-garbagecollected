@@ -36,7 +36,7 @@ public class Offer : CommonBase {
 	/**
 	 * Creates a copy of the Offer
 	 */
-	public Offer clone() {
+	public org.ldk.structs.Offer clone() {
 		long ret = bindings.Offer_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -69,7 +69,7 @@ public class Offer : CommonBase {
 	 * Opaque bytes set by the originator. Useful for authentication and validating fields since it
 	 * is reflected in `invoice_request` messages along with all the other fields from the `offer`.
 	 */
-	public Option_CVec_u8ZZ metadata() {
+	public org.ldk.structs.Option_CVec_u8ZZ metadata() {
 		long ret = bindings.Offer_metadata(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -81,7 +81,7 @@ public class Offer : CommonBase {
 	/**
 	 * The minimum amount required for a successful payment of a single item.
 	 */
-	public Option_AmountZ amount() {
+	public org.ldk.structs.Option_AmountZ amount() {
 		long ret = bindings.Offer_amount(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -96,7 +96,7 @@ public class Offer : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public PrintableString description() {
+	public org.ldk.structs.PrintableString description() {
 		long ret = bindings.Offer_description(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -108,7 +108,7 @@ public class Offer : CommonBase {
 	/**
 	 * Features pertaining to the offer.
 	 */
-	public OfferFeatures offer_features() {
+	public org.ldk.structs.OfferFeatures offer_features() {
 		long ret = bindings.Offer_offer_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -122,7 +122,7 @@ public class Offer : CommonBase {
 	 * 
 	 * If `None`, the offer does not expire.
 	 */
-	public Option_u64Z absolute_expiry() {
+	public org.ldk.structs.Option_u64Z absolute_expiry() {
 		long ret = bindings.Offer_absolute_expiry(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -137,7 +137,7 @@ public class Offer : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public PrintableString issuer() {
+	public org.ldk.structs.PrintableString issuer() {
 		long ret = bindings.Offer_issuer(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -169,7 +169,7 @@ public class Offer : CommonBase {
 	/**
 	 * The quantity of items supported.
 	 */
-	public Quantity supported_quantity() {
+	public org.ldk.structs.Quantity supported_quantity() {
 		long ret = bindings.Offer_supported_quantity(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -204,7 +204,7 @@ public class Offer : CommonBase {
 	/**
 	 * Returns the id of the offer.
 	 */
-	public OfferId id() {
+	public org.ldk.structs.OfferId id() {
 		long ret = bindings.Offer_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -281,7 +281,7 @@ public class Offer : CommonBase {
 	 * [`Bolt12Invoice::verify_using_metadata`]: crate::offers::invoice::Bolt12Invoice::verify_using_metadata
 	 * [`ExpandedKey`]: crate::ln::inbound_payment::ExpandedKey
 	 */
-	public Result_InvoiceRequestWithDerivedPayerSigningPubkeyBuilderBolt12SemanticErrorZ request_invoice(org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.Nonce nonce, byte[] payment_id) {
+	public org.ldk.structs.Result_InvoiceRequestWithDerivedPayerSigningPubkeyBuilderBolt12SemanticErrorZ request_invoice(org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.Nonce nonce, byte[] payment_id) {
 		long ret = bindings.Offer_request_invoice(this.ptr, expanded_key.ptr, nonce.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(expanded_key);
@@ -308,7 +308,7 @@ public class Offer : CommonBase {
 	/**
 	 * Read a Offer from a byte array, created by Offer_write
 	 */
-	public static Result_OfferDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_OfferDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.Offer_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -330,7 +330,7 @@ public class Offer : CommonBase {
 	/**
 	 * Read a Offer object from a string
 	 */
-	public static Result_OfferBolt12ParseErrorZ from_str(string s) {
+	public static org.ldk.structs.Result_OfferBolt12ParseErrorZ from_str(string s) {
 		long ret = bindings.Offer_from_str(InternalUtils.encodeString(s));
 		GC.KeepAlive(s);
 		if (ret >= 0 && ret <= 4096) { return null; }

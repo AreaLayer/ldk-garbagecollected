@@ -43,7 +43,7 @@ public class ChannelPublicKeys : CommonBase {
 	 * counterparty to create a secret which the counterparty can reveal to revoke previous
 	 * states.
 	 */
-	public RevocationBasepoint get_revocation_basepoint() {
+	public org.ldk.structs.RevocationBasepoint get_revocation_basepoint() {
 		long ret = bindings.ChannelPublicKeys_get_revocation_basepoint(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -93,7 +93,7 @@ public class ChannelPublicKeys : CommonBase {
 	 * public key which receives non-HTLC-encumbered funds which are only available for spending
 	 * after some delay (or can be claimed via the revocation path).
 	 */
-	public DelayedPaymentBasepoint get_delayed_payment_basepoint() {
+	public org.ldk.structs.DelayedPaymentBasepoint get_delayed_payment_basepoint() {
 		long ret = bindings.ChannelPublicKeys_get_delayed_payment_basepoint(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -117,7 +117,7 @@ public class ChannelPublicKeys : CommonBase {
 	 * The base point which is used (with derive_public_key) to derive a per-commitment public key
 	 * which is used to encumber HTLC-in-flight outputs.
 	 */
-	public HtlcBasepoint get_htlc_basepoint() {
+	public org.ldk.structs.HtlcBasepoint get_htlc_basepoint() {
 		long ret = bindings.ChannelPublicKeys_get_htlc_basepoint(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -139,7 +139,7 @@ public class ChannelPublicKeys : CommonBase {
 	/**
 	 * Constructs a new ChannelPublicKeys given each field
 	 */
-	public static ChannelPublicKeys of(byte[] funding_pubkey_arg, org.ldk.structs.RevocationBasepoint revocation_basepoint_arg, byte[] payment_point_arg, org.ldk.structs.DelayedPaymentBasepoint delayed_payment_basepoint_arg, org.ldk.structs.HtlcBasepoint htlc_basepoint_arg) {
+	public static org.ldk.structs.ChannelPublicKeys of(byte[] funding_pubkey_arg, org.ldk.structs.RevocationBasepoint revocation_basepoint_arg, byte[] payment_point_arg, org.ldk.structs.DelayedPaymentBasepoint delayed_payment_basepoint_arg, org.ldk.structs.HtlcBasepoint htlc_basepoint_arg) {
 		long ret = bindings.ChannelPublicKeys_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(funding_pubkey_arg, 33)), revocation_basepoint_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_point_arg, 33)), delayed_payment_basepoint_arg.ptr, htlc_basepoint_arg.ptr);
 		GC.KeepAlive(funding_pubkey_arg);
 		GC.KeepAlive(revocation_basepoint_arg);
@@ -161,7 +161,7 @@ public class ChannelPublicKeys : CommonBase {
 	/**
 	 * Creates a copy of the ChannelPublicKeys
 	 */
-	public ChannelPublicKeys clone() {
+	public org.ldk.structs.ChannelPublicKeys clone() {
 		long ret = bindings.ChannelPublicKeys_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -213,7 +213,7 @@ public class ChannelPublicKeys : CommonBase {
 	/**
 	 * Read a ChannelPublicKeys from a byte array, created by ChannelPublicKeys_write
 	 */
-	public static Result_ChannelPublicKeysDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ChannelPublicKeysDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.ChannelPublicKeys_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

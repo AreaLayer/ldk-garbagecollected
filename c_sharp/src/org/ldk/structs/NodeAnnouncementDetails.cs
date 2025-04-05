@@ -18,7 +18,7 @@ public class NodeAnnouncementDetails : CommonBase {
 	/**
 	 * Protocol features the node announced support for
 	 */
-	public NodeFeatures get_features() {
+	public org.ldk.structs.NodeFeatures get_features() {
 		long ret = bindings.NodeAnnouncementDetails_get_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -81,7 +81,7 @@ public class NodeAnnouncementDetails : CommonBase {
 	 * May be invalid or malicious (eg control chars),
 	 * should not be exposed to the user.
 	 */
-	public NodeAlias get_alias() {
+	public org.ldk.structs.NodeAlias get_alias() {
 		long ret = bindings.NodeAnnouncementDetails_get_alias(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -134,7 +134,7 @@ public class NodeAnnouncementDetails : CommonBase {
 	/**
 	 * Constructs a new NodeAnnouncementDetails given each field
 	 */
-	public static NodeAnnouncementDetails of(org.ldk.structs.NodeFeatures features_arg, int last_update_arg, byte[] rgb_arg, org.ldk.structs.NodeAlias alias_arg, SocketAddress[] addresses_arg) {
+	public static org.ldk.structs.NodeAnnouncementDetails of(org.ldk.structs.NodeFeatures features_arg, int last_update_arg, byte[] rgb_arg, org.ldk.structs.NodeAlias alias_arg, SocketAddress[] addresses_arg) {
 		long ret = bindings.NodeAnnouncementDetails_new(features_arg.ptr, last_update_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(rgb_arg, 3)), alias_arg.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(addresses_arg, addresses_arg_conv_15 => addresses_arg_conv_15.ptr)));
 		GC.KeepAlive(features_arg);
 		GC.KeepAlive(last_update_arg);
@@ -156,7 +156,7 @@ public class NodeAnnouncementDetails : CommonBase {
 	/**
 	 * Creates a copy of the NodeAnnouncementDetails
 	 */
-	public NodeAnnouncementDetails clone() {
+	public org.ldk.structs.NodeAnnouncementDetails clone() {
 		long ret = bindings.NodeAnnouncementDetails_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -100,7 +100,7 @@ public class ChannelAnnouncement : CommonBase {
 	/**
 	 * The actual announcement
 	 */
-	public UnsignedChannelAnnouncement get_contents() {
+	public org.ldk.structs.UnsignedChannelAnnouncement get_contents() {
 		long ret = bindings.ChannelAnnouncement_get_contents(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -121,7 +121,7 @@ public class ChannelAnnouncement : CommonBase {
 	/**
 	 * Constructs a new ChannelAnnouncement given each field
 	 */
-	public static ChannelAnnouncement of(byte[] node_signature_1_arg, byte[] node_signature_2_arg, byte[] bitcoin_signature_1_arg, byte[] bitcoin_signature_2_arg, org.ldk.structs.UnsignedChannelAnnouncement contents_arg) {
+	public static org.ldk.structs.ChannelAnnouncement of(byte[] node_signature_1_arg, byte[] node_signature_2_arg, byte[] bitcoin_signature_1_arg, byte[] bitcoin_signature_2_arg, org.ldk.structs.UnsignedChannelAnnouncement contents_arg) {
 		long ret = bindings.ChannelAnnouncement_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_signature_1_arg, 64)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_signature_2_arg, 64)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(bitcoin_signature_1_arg, 64)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(bitcoin_signature_2_arg, 64)), contents_arg.ptr);
 		GC.KeepAlive(node_signature_1_arg);
 		GC.KeepAlive(node_signature_2_arg);
@@ -143,7 +143,7 @@ public class ChannelAnnouncement : CommonBase {
 	/**
 	 * Creates a copy of the ChannelAnnouncement
 	 */
-	public ChannelAnnouncement clone() {
+	public org.ldk.structs.ChannelAnnouncement clone() {
 		long ret = bindings.ChannelAnnouncement_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -195,7 +195,7 @@ public class ChannelAnnouncement : CommonBase {
 	/**
 	 * Read a ChannelAnnouncement from a byte array, created by ChannelAnnouncement_write
 	 */
-	public static Result_ChannelAnnouncementDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ChannelAnnouncementDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.ChannelAnnouncement_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

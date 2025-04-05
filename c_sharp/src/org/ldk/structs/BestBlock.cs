@@ -56,7 +56,7 @@ public class BestBlock : CommonBase {
 	/**
 	 * Constructs a new BestBlock given each field
 	 */
-	public static BestBlock of(byte[] block_hash_arg, int height_arg) {
+	public static org.ldk.structs.BestBlock of(byte[] block_hash_arg, int height_arg) {
 		long ret = bindings.BestBlock_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(block_hash_arg, 32)), height_arg);
 		GC.KeepAlive(block_hash_arg);
 		GC.KeepAlive(height_arg);
@@ -75,7 +75,7 @@ public class BestBlock : CommonBase {
 	/**
 	 * Creates a copy of the BestBlock
 	 */
-	public BestBlock clone() {
+	public org.ldk.structs.BestBlock clone() {
 		long ret = bindings.BestBlock_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -117,7 +117,7 @@ public class BestBlock : CommonBase {
 	 * Constructs a `BestBlock` that represents the genesis block at height 0 of the given
 	 * network.
 	 */
-	public static BestBlock from_network(Network network) {
+	public static org.ldk.structs.BestBlock from_network(Network network) {
 		long ret = bindings.BestBlock_from_network(network);
 		GC.KeepAlive(network);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -140,7 +140,7 @@ public class BestBlock : CommonBase {
 	/**
 	 * Read a BestBlock from a byte array, created by BestBlock_write
 	 */
-	public static Result_BestBlockDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_BestBlockDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.BestBlock_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

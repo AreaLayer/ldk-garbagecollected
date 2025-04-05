@@ -41,7 +41,7 @@ public class Option_CVec_u8ZZ : CommonBase {
 	/**
 	 * Constructs a new COption_CVec_u8ZZ containing a crate::c_types::derived::CVec_u8Z
 	 */
-	public static Option_CVec_u8ZZ some(byte[] o) {
+	public static org.ldk.structs.Option_CVec_u8ZZ some(byte[] o) {
 		long ret = bindings.COption_CVec_u8ZZ_some(InternalUtils.encodeUint8Array(o));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -53,7 +53,7 @@ public class Option_CVec_u8ZZ : CommonBase {
 	/**
 	 * Constructs a new COption_CVec_u8ZZ containing nothing
 	 */
-	public static Option_CVec_u8ZZ none() {
+	public static org.ldk.structs.Option_CVec_u8ZZ none() {
 		long ret = bindings.COption_CVec_u8ZZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_CVec_u8ZZ ret_hu_conv = org.ldk.structs.Option_CVec_u8ZZ.constr_from_ptr(ret);
@@ -71,7 +71,7 @@ public class Option_CVec_u8ZZ : CommonBase {
 	 * Creates a new COption_CVec_u8ZZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_CVec_u8ZZ clone() {
+	public org.ldk.structs.Option_CVec_u8ZZ clone() {
 		long ret = bindings.COption_CVec_u8ZZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

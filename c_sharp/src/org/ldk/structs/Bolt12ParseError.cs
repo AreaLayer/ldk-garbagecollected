@@ -24,7 +24,7 @@ public class Bolt12ParseError : CommonBase {
 	/**
 	 * Creates a copy of the Bolt12ParseError
 	 */
-	public Bolt12ParseError clone() {
+	public org.ldk.structs.Bolt12ParseError clone() {
 		long ret = bindings.Bolt12ParseError_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

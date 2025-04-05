@@ -25,7 +25,7 @@ public class ExpiryTime : CommonBase {
 	/**
 	 * Creates a copy of the ExpiryTime
 	 */
-	public ExpiryTime clone() {
+	public org.ldk.structs.ExpiryTime clone() {
 		long ret = bindings.ExpiryTime_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -66,7 +66,7 @@ public class ExpiryTime : CommonBase {
 	/**
 	 * Construct an `ExpiryTime` from seconds.
 	 */
-	public static ExpiryTime from_seconds(long seconds) {
+	public static org.ldk.structs.ExpiryTime from_seconds(long seconds) {
 		long ret = bindings.ExpiryTime_from_seconds(seconds);
 		GC.KeepAlive(seconds);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -78,7 +78,7 @@ public class ExpiryTime : CommonBase {
 	/**
 	 * Construct an `ExpiryTime` from a [`Duration`], dropping the sub-second part.
 	 */
-	public static ExpiryTime from_duration(long duration) {
+	public static org.ldk.structs.ExpiryTime from_duration(long duration) {
 		long ret = bindings.ExpiryTime_from_duration(duration);
 		GC.KeepAlive(duration);
 		if (ret >= 0 && ret <= 4096) { return null; }

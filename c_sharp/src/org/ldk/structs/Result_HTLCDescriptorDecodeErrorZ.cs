@@ -41,7 +41,7 @@ public class Result_HTLCDescriptorDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_HTLCDescriptorDecodeErrorZ in the success state.
 	 */
-	public static Result_HTLCDescriptorDecodeErrorZ ok(org.ldk.structs.HTLCDescriptor o) {
+	public static org.ldk.structs.Result_HTLCDescriptorDecodeErrorZ ok(org.ldk.structs.HTLCDescriptor o) {
 		long ret = bindings.CResult_HTLCDescriptorDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_HTLCDescriptorDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_HTLCDescriptorDecodeErrorZ in the error state.
 	 */
-	public static Result_HTLCDescriptorDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_HTLCDescriptorDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_HTLCDescriptorDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_HTLCDescriptorDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_HTLCDescriptorDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_HTLCDescriptorDecodeErrorZ clone() {
+	public org.ldk.structs.Result_HTLCDescriptorDecodeErrorZ clone() {
 		long ret = bindings.CResult_HTLCDescriptorDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

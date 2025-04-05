@@ -20,7 +20,7 @@ public class HeldHtlcAvailable : CommonBase {
 	/**
 	 * Constructs a new HeldHtlcAvailable given each field
 	 */
-	public static HeldHtlcAvailable of() {
+	public static org.ldk.structs.HeldHtlcAvailable of() {
 		long ret = bindings.HeldHtlcAvailable_new();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.HeldHtlcAvailable ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.HeldHtlcAvailable(null, ret); }
@@ -37,7 +37,7 @@ public class HeldHtlcAvailable : CommonBase {
 	/**
 	 * Creates a copy of the HeldHtlcAvailable
 	 */
-	public HeldHtlcAvailable clone() {
+	public org.ldk.structs.HeldHtlcAvailable clone() {
 		long ret = bindings.HeldHtlcAvailable_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -60,7 +60,7 @@ public class HeldHtlcAvailable : CommonBase {
 	/**
 	 * Read a HeldHtlcAvailable from a byte array, created by HeldHtlcAvailable_write
 	 */
-	public static Result_HeldHtlcAvailableDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_HeldHtlcAvailableDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.HeldHtlcAvailable_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

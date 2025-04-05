@@ -20,7 +20,7 @@ public class UpdateFailMalformedHTLC : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.UpdateFailMalformedHTLC_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -83,7 +83,7 @@ public class UpdateFailMalformedHTLC : CommonBase {
 	/**
 	 * Creates a copy of the UpdateFailMalformedHTLC
 	 */
-	public UpdateFailMalformedHTLC clone() {
+	public org.ldk.structs.UpdateFailMalformedHTLC clone() {
 		long ret = bindings.UpdateFailMalformedHTLC_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -135,7 +135,7 @@ public class UpdateFailMalformedHTLC : CommonBase {
 	/**
 	 * Read a UpdateFailMalformedHTLC from a byte array, created by UpdateFailMalformedHTLC_write
 	 */
-	public static Result_UpdateFailMalformedHTLCDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_UpdateFailMalformedHTLCDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.UpdateFailMalformedHTLC_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

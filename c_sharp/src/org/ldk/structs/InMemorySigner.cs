@@ -149,7 +149,7 @@ public class InMemorySigner : CommonBase {
 	/**
 	 * Creates a copy of the InMemorySigner
 	 */
-	public InMemorySigner clone() {
+	public org.ldk.structs.InMemorySigner clone() {
 		long ret = bindings.InMemorySigner_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -161,7 +161,7 @@ public class InMemorySigner : CommonBase {
 	/**
 	 * Creates a new [`InMemorySigner`].
 	 */
-	public static InMemorySigner of(byte[] funding_key, byte[] revocation_base_key, byte[] payment_key, byte[] delayed_payment_base_key, byte[] htlc_base_key, byte[] commitment_seed, long channel_value_satoshis, byte[] channel_keys_id, byte[] rand_bytes_unique_start) {
+	public static org.ldk.structs.InMemorySigner of(byte[] funding_key, byte[] revocation_base_key, byte[] payment_key, byte[] delayed_payment_base_key, byte[] htlc_base_key, byte[] commitment_seed, long channel_value_satoshis, byte[] channel_keys_id, byte[] rand_bytes_unique_start) {
 		long ret = bindings.InMemorySigner_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(funding_key, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(revocation_base_key, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_key, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(delayed_payment_base_key, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(htlc_base_key, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(commitment_seed, 32)), channel_value_satoshis, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(channel_keys_id, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(rand_bytes_unique_start, 32)));
 		GC.KeepAlive(funding_key);
 		GC.KeepAlive(revocation_base_key);
@@ -186,7 +186,7 @@ public class InMemorySigner : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ChannelPublicKeys counterparty_pubkeys() {
+	public org.ldk.structs.ChannelPublicKeys counterparty_pubkeys() {
 		long ret = bindings.InMemorySigner_counterparty_pubkeys(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -203,7 +203,7 @@ public class InMemorySigner : CommonBase {
 	 * Will return `None` if [`ChannelSigner::provide_channel_parameters`] has not been called.
 	 * In general, this is safe to `unwrap` only in [`ChannelSigner`] implementation.
 	 */
-	public Option_u16Z counterparty_selected_contest_delay() {
+	public org.ldk.structs.Option_u16Z counterparty_selected_contest_delay() {
 		long ret = bindings.InMemorySigner_counterparty_selected_contest_delay(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -220,7 +220,7 @@ public class InMemorySigner : CommonBase {
 	 * Will return `None` if [`ChannelSigner::provide_channel_parameters`] has not been called.
 	 * In general, this is safe to `unwrap` only in [`ChannelSigner`] implementation.
 	 */
-	public Option_u16Z holder_selected_contest_delay() {
+	public org.ldk.structs.Option_u16Z holder_selected_contest_delay() {
 		long ret = bindings.InMemorySigner_holder_selected_contest_delay(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -235,7 +235,7 @@ public class InMemorySigner : CommonBase {
 	 * Will return `None` if [`ChannelSigner::provide_channel_parameters`] has not been called.
 	 * In general, this is safe to `unwrap` only in [`ChannelSigner`] implementation.
 	 */
-	public Option_boolZ is_outbound() {
+	public org.ldk.structs.Option_boolZ is_outbound() {
 		long ret = bindings.InMemorySigner_is_outbound(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -252,7 +252,7 @@ public class InMemorySigner : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public OutPoint funding_outpoint() {
+	public org.ldk.structs.OutPoint funding_outpoint() {
 		long ret = bindings.InMemorySigner_funding_outpoint(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -270,7 +270,7 @@ public class InMemorySigner : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ChannelTransactionParameters get_channel_parameters() {
+	public org.ldk.structs.ChannelTransactionParameters get_channel_parameters() {
 		long ret = bindings.InMemorySigner_get_channel_parameters(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -288,7 +288,7 @@ public class InMemorySigner : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ChannelTypeFeatures channel_type_features() {
+	public org.ldk.structs.ChannelTypeFeatures channel_type_features() {
 		long ret = bindings.InMemorySigner_channel_type_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -307,7 +307,7 @@ public class InMemorySigner : CommonBase {
 	 * 
 	 * [`descriptor.outpoint`]: StaticPaymentOutputDescriptor::outpoint
 	 */
-	public Result_WitnessNoneZ sign_counterparty_payment_input(byte[] spend_tx, long input_idx, org.ldk.structs.StaticPaymentOutputDescriptor descriptor) {
+	public org.ldk.structs.Result_WitnessNoneZ sign_counterparty_payment_input(byte[] spend_tx, long input_idx, org.ldk.structs.StaticPaymentOutputDescriptor descriptor) {
 		long ret = bindings.InMemorySigner_sign_counterparty_payment_input(this.ptr, InternalUtils.encodeUint8Array(spend_tx), input_idx, descriptor.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(spend_tx);
@@ -331,7 +331,7 @@ public class InMemorySigner : CommonBase {
 	 * [`descriptor.outpoint`]: DelayedPaymentOutputDescriptor::outpoint
 	 * [`descriptor.to_self_delay`]: DelayedPaymentOutputDescriptor::to_self_delay
 	 */
-	public Result_WitnessNoneZ sign_dynamic_p2wsh_input(byte[] spend_tx, long input_idx, org.ldk.structs.DelayedPaymentOutputDescriptor descriptor) {
+	public org.ldk.structs.Result_WitnessNoneZ sign_dynamic_p2wsh_input(byte[] spend_tx, long input_idx, org.ldk.structs.DelayedPaymentOutputDescriptor descriptor) {
 		long ret = bindings.InMemorySigner_sign_dynamic_p2wsh_input(this.ptr, InternalUtils.encodeUint8Array(spend_tx), input_idx, descriptor.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(spend_tx);
@@ -347,7 +347,7 @@ public class InMemorySigner : CommonBase {
 	 * Constructs a new EntropySource which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned EntropySource must be freed before this_arg is
 	 */
-	public EntropySource as_EntropySource() {
+	public org.ldk.structs.EntropySource as_EntropySource() {
 		long ret = bindings.InMemorySigner_as_EntropySource(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -360,7 +360,7 @@ public class InMemorySigner : CommonBase {
 	 * Constructs a new ChannelSigner which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned ChannelSigner must be freed before this_arg is
 	 */
-	public ChannelSigner as_ChannelSigner() {
+	public org.ldk.structs.ChannelSigner as_ChannelSigner() {
 		long ret = bindings.InMemorySigner_as_ChannelSigner(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -373,7 +373,7 @@ public class InMemorySigner : CommonBase {
 	 * Constructs a new EcdsaChannelSigner which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned EcdsaChannelSigner must be freed before this_arg is
 	 */
-	public EcdsaChannelSigner as_EcdsaChannelSigner() {
+	public org.ldk.structs.EcdsaChannelSigner as_EcdsaChannelSigner() {
 		long ret = bindings.InMemorySigner_as_EcdsaChannelSigner(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -396,7 +396,7 @@ public class InMemorySigner : CommonBase {
 	/**
 	 * Read a InMemorySigner from a byte array, created by InMemorySigner_write
 	 */
-	public static Result_InMemorySignerDecodeErrorZ read(byte[] ser, org.ldk.structs.EntropySource arg) {
+	public static org.ldk.structs.Result_InMemorySignerDecodeErrorZ read(byte[] ser, org.ldk.structs.EntropySource arg) {
 		long ret = bindings.InMemorySigner_read(InternalUtils.encodeUint8Array(ser), arg.ptr);
 		GC.KeepAlive(ser);
 		GC.KeepAlive(arg);

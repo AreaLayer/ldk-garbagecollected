@@ -29,7 +29,7 @@ public interface FilterInterface {
 	 * This may be used, for example, to monitor for when a funding output is spent (by any
 	 * transaction).
 	 */
-	void register_output(WatchedOutput output);
+	void register_output(org.ldk.structs.WatchedOutput output);
 }
 
 /**

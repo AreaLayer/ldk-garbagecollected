@@ -26,7 +26,7 @@ public class Option_UtxoLookupZ : CommonBase {
 
 	/** A Option_UtxoLookupZ of type Some */
 	public class Option_UtxoLookupZ_Some : Option_UtxoLookupZ {
-		public UtxoLookup some;
+		public org.ldk.structs.UtxoLookup some;
 		internal Option_UtxoLookupZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_UtxoLookupZ_Some_get_some(ptr);
 			UtxoLookup ret_hu_conv = new UtxoLookup(null, some);
@@ -42,7 +42,7 @@ public class Option_UtxoLookupZ : CommonBase {
 	/**
 	 * Constructs a new COption_UtxoLookupZ containing a crate::lightning::routing::utxo::UtxoLookup
 	 */
-	public static Option_UtxoLookupZ some(org.ldk.structs.UtxoLookup o) {
+	public static org.ldk.structs.Option_UtxoLookupZ some(org.ldk.structs.UtxoLookup o) {
 		long ret = bindings.COption_UtxoLookupZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -55,7 +55,7 @@ public class Option_UtxoLookupZ : CommonBase {
 	/**
 	 * Constructs a new COption_UtxoLookupZ containing nothing
 	 */
-	public static Option_UtxoLookupZ none() {
+	public static org.ldk.structs.Option_UtxoLookupZ none() {
 		long ret = bindings.COption_UtxoLookupZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_UtxoLookupZ ret_hu_conv = org.ldk.structs.Option_UtxoLookupZ.constr_from_ptr(ret);

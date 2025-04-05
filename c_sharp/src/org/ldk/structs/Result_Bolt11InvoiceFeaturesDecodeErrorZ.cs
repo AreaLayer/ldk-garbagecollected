@@ -41,7 +41,7 @@ public class Result_Bolt11InvoiceFeaturesDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_Bolt11InvoiceFeaturesDecodeErrorZ in the success state.
 	 */
-	public static Result_Bolt11InvoiceFeaturesDecodeErrorZ ok(org.ldk.structs.Bolt11InvoiceFeatures o) {
+	public static org.ldk.structs.Result_Bolt11InvoiceFeaturesDecodeErrorZ ok(org.ldk.structs.Bolt11InvoiceFeatures o) {
 		long ret = bindings.CResult_Bolt11InvoiceFeaturesDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_Bolt11InvoiceFeaturesDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_Bolt11InvoiceFeaturesDecodeErrorZ in the error state.
 	 */
-	public static Result_Bolt11InvoiceFeaturesDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_Bolt11InvoiceFeaturesDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_Bolt11InvoiceFeaturesDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_Bolt11InvoiceFeaturesDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_Bolt11InvoiceFeaturesDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_Bolt11InvoiceFeaturesDecodeErrorZ clone() {
+	public org.ldk.structs.Result_Bolt11InvoiceFeaturesDecodeErrorZ clone() {
 		long ret = bindings.CResult_Bolt11InvoiceFeaturesDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -25,7 +25,7 @@ public class DefaultMessageRouter : CommonBase {
 	/**
 	 * Creates a [`DefaultMessageRouter`] using the given [`NetworkGraph`].
 	 */
-	public static DefaultMessageRouter of(org.ldk.structs.NetworkGraph network_graph, org.ldk.structs.EntropySource entropy_source) {
+	public static org.ldk.structs.DefaultMessageRouter of(org.ldk.structs.NetworkGraph network_graph, org.ldk.structs.EntropySource entropy_source) {
 		long ret = bindings.DefaultMessageRouter_new(network_graph.ptr, entropy_source.ptr);
 		GC.KeepAlive(network_graph);
 		GC.KeepAlive(entropy_source);
@@ -41,7 +41,7 @@ public class DefaultMessageRouter : CommonBase {
 	 * Constructs a new MessageRouter which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned MessageRouter must be freed before this_arg is
 	 */
-	public MessageRouter as_MessageRouter() {
+	public org.ldk.structs.MessageRouter as_MessageRouter() {
 		long ret = bindings.DefaultMessageRouter_as_MessageRouter(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

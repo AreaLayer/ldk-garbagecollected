@@ -133,7 +133,7 @@ public class CommitmentUpdate : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public UpdateFee get_update_fee() {
+	public org.ldk.structs.UpdateFee get_update_fee() {
 		long ret = bindings.CommitmentUpdate_get_update_fee(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -156,7 +156,7 @@ public class CommitmentUpdate : CommonBase {
 	/**
 	 * A `commitment_signed` message which should be sent
 	 */
-	public CommitmentSigned get_commitment_signed() {
+	public org.ldk.structs.CommitmentSigned get_commitment_signed() {
 		long ret = bindings.CommitmentUpdate_get_commitment_signed(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -179,7 +179,7 @@ public class CommitmentUpdate : CommonBase {
 	 * 
 	 * Note that update_fee_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static CommitmentUpdate of(UpdateAddHTLC[] update_add_htlcs_arg, UpdateFulfillHTLC[] update_fulfill_htlcs_arg, UpdateFailHTLC[] update_fail_htlcs_arg, UpdateFailMalformedHTLC[] update_fail_malformed_htlcs_arg, org.ldk.structs.UpdateFee update_fee_arg, org.ldk.structs.CommitmentSigned commitment_signed_arg) {
+	public static org.ldk.structs.CommitmentUpdate of(UpdateAddHTLC[] update_add_htlcs_arg, UpdateFulfillHTLC[] update_fulfill_htlcs_arg, UpdateFailHTLC[] update_fail_htlcs_arg, UpdateFailMalformedHTLC[] update_fail_malformed_htlcs_arg, org.ldk.structs.UpdateFee update_fee_arg, org.ldk.structs.CommitmentSigned commitment_signed_arg) {
 		long ret = bindings.CommitmentUpdate_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(update_add_htlcs_arg, update_add_htlcs_arg_conv_15 => update_add_htlcs_arg_conv_15.ptr)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(update_fulfill_htlcs_arg, update_fulfill_htlcs_arg_conv_19 => update_fulfill_htlcs_arg_conv_19.ptr)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(update_fail_htlcs_arg, update_fail_htlcs_arg_conv_16 => update_fail_htlcs_arg_conv_16.ptr)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(update_fail_malformed_htlcs_arg, update_fail_malformed_htlcs_arg_conv_25 => update_fail_malformed_htlcs_arg_conv_25.ptr)), update_fee_arg == null ? 0 : update_fee_arg.ptr, commitment_signed_arg.ptr);
 		GC.KeepAlive(update_add_htlcs_arg);
 		GC.KeepAlive(update_fulfill_htlcs_arg);
@@ -202,7 +202,7 @@ public class CommitmentUpdate : CommonBase {
 	/**
 	 * Creates a copy of the CommitmentUpdate
 	 */
-	public CommitmentUpdate clone() {
+	public org.ldk.structs.CommitmentUpdate clone() {
 		long ret = bindings.CommitmentUpdate_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

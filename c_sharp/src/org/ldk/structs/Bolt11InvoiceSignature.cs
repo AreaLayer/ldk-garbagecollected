@@ -32,7 +32,7 @@ public class Bolt11InvoiceSignature : CommonBase {
 	/**
 	 * Constructs a new Bolt11InvoiceSignature given each field
 	 */
-	public static Bolt11InvoiceSignature of(byte[] a_arg) {
+	public static org.ldk.structs.Bolt11InvoiceSignature of(byte[] a_arg) {
 		long ret = bindings.Bolt11InvoiceSignature_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a_arg, 68)));
 		GC.KeepAlive(a_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -50,7 +50,7 @@ public class Bolt11InvoiceSignature : CommonBase {
 	/**
 	 * Creates a copy of the Bolt11InvoiceSignature
 	 */
-	public Bolt11InvoiceSignature clone() {
+	public org.ldk.structs.Bolt11InvoiceSignature clone() {
 		long ret = bindings.Bolt11InvoiceSignature_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

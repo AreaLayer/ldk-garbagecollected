@@ -38,7 +38,7 @@ public class Result_boolPeerHandleErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_boolPeerHandleErrorZ in the success state.
 	 */
-	public static Result_boolPeerHandleErrorZ ok(bool o) {
+	public static org.ldk.structs.Result_boolPeerHandleErrorZ ok(bool o) {
 		long ret = bindings.CResult_boolPeerHandleErrorZ_ok(o);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -49,7 +49,7 @@ public class Result_boolPeerHandleErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_boolPeerHandleErrorZ in the error state.
 	 */
-	public static Result_boolPeerHandleErrorZ err(org.ldk.structs.PeerHandleError e) {
+	public static org.ldk.structs.Result_boolPeerHandleErrorZ err(org.ldk.structs.PeerHandleError e) {
 		long ret = bindings.CResult_boolPeerHandleErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -76,7 +76,7 @@ public class Result_boolPeerHandleErrorZ : CommonBase {
 	 * Creates a new CResult_boolPeerHandleErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_boolPeerHandleErrorZ clone() {
+	public org.ldk.structs.Result_boolPeerHandleErrorZ clone() {
 		long ret = bindings.CResult_boolPeerHandleErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

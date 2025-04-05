@@ -26,7 +26,7 @@ public class Option_OnionMessageContentsZ : CommonBase {
 
 	/** A Option_OnionMessageContentsZ of type Some */
 	public class Option_OnionMessageContentsZ_Some : Option_OnionMessageContentsZ {
-		public OnionMessageContents some;
+		public org.ldk.structs.OnionMessageContents some;
 		internal Option_OnionMessageContentsZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_OnionMessageContentsZ_Some_get_some(ptr);
 			OnionMessageContents ret_hu_conv = new OnionMessageContents(null, some);
@@ -42,7 +42,7 @@ public class Option_OnionMessageContentsZ : CommonBase {
 	/**
 	 * Constructs a new COption_OnionMessageContentsZ containing a crate::lightning::onion_message::packet::OnionMessageContents
 	 */
-	public static Option_OnionMessageContentsZ some(org.ldk.structs.OnionMessageContents o) {
+	public static org.ldk.structs.Option_OnionMessageContentsZ some(org.ldk.structs.OnionMessageContents o) {
 		long ret = bindings.COption_OnionMessageContentsZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -55,7 +55,7 @@ public class Option_OnionMessageContentsZ : CommonBase {
 	/**
 	 * Constructs a new COption_OnionMessageContentsZ containing nothing
 	 */
-	public static Option_OnionMessageContentsZ none() {
+	public static org.ldk.structs.Option_OnionMessageContentsZ none() {
 		long ret = bindings.COption_OnionMessageContentsZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_OnionMessageContentsZ ret_hu_conv = org.ldk.structs.Option_OnionMessageContentsZ.constr_from_ptr(ret);
@@ -73,7 +73,7 @@ public class Option_OnionMessageContentsZ : CommonBase {
 	 * Creates a new COption_OnionMessageContentsZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_OnionMessageContentsZ clone() {
+	public org.ldk.structs.Option_OnionMessageContentsZ clone() {
 		long ret = bindings.COption_OnionMessageContentsZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

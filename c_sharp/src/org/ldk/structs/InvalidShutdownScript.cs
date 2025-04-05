@@ -42,7 +42,7 @@ public class InvalidShutdownScript : CommonBase {
 	/**
 	 * Constructs a new InvalidShutdownScript given each field
 	 */
-	public static InvalidShutdownScript of(byte[] script_arg) {
+	public static org.ldk.structs.InvalidShutdownScript of(byte[] script_arg) {
 		long ret = bindings.InvalidShutdownScript_new(InternalUtils.encodeUint8Array(script_arg));
 		GC.KeepAlive(script_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -60,7 +60,7 @@ public class InvalidShutdownScript : CommonBase {
 	/**
 	 * Creates a copy of the InvalidShutdownScript
 	 */
-	public InvalidShutdownScript clone() {
+	public org.ldk.structs.InvalidShutdownScript clone() {
 		long ret = bindings.InvalidShutdownScript_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

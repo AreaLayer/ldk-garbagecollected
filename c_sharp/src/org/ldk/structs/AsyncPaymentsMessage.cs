@@ -28,7 +28,7 @@ public class AsyncPaymentsMessage : CommonBase {
 
 	/** A AsyncPaymentsMessage of type HeldHtlcAvailable */
 	public class AsyncPaymentsMessage_HeldHtlcAvailable : AsyncPaymentsMessage {
-		public HeldHtlcAvailable held_htlc_available;
+		public org.ldk.structs.HeldHtlcAvailable held_htlc_available;
 		internal AsyncPaymentsMessage_HeldHtlcAvailable(long ptr) : base(null, ptr) {
 			long held_htlc_available = bindings.LDKAsyncPaymentsMessage_HeldHtlcAvailable_get_held_htlc_available(ptr);
 			org.ldk.structs.HeldHtlcAvailable held_htlc_available_hu_conv = null; if (held_htlc_available < 0 || held_htlc_available > 4096) { held_htlc_available_hu_conv = new org.ldk.structs.HeldHtlcAvailable(null, held_htlc_available); }
@@ -38,7 +38,7 @@ public class AsyncPaymentsMessage : CommonBase {
 	}
 	/** A AsyncPaymentsMessage of type ReleaseHeldHtlc */
 	public class AsyncPaymentsMessage_ReleaseHeldHtlc : AsyncPaymentsMessage {
-		public ReleaseHeldHtlc release_held_htlc;
+		public org.ldk.structs.ReleaseHeldHtlc release_held_htlc;
 		internal AsyncPaymentsMessage_ReleaseHeldHtlc(long ptr) : base(null, ptr) {
 			long release_held_htlc = bindings.LDKAsyncPaymentsMessage_ReleaseHeldHtlc_get_release_held_htlc(ptr);
 			org.ldk.structs.ReleaseHeldHtlc release_held_htlc_hu_conv = null; if (release_held_htlc < 0 || release_held_htlc > 4096) { release_held_htlc_hu_conv = new org.ldk.structs.ReleaseHeldHtlc(null, release_held_htlc); }
@@ -55,7 +55,7 @@ public class AsyncPaymentsMessage : CommonBase {
 	/**
 	 * Creates a copy of the AsyncPaymentsMessage
 	 */
-	public AsyncPaymentsMessage clone() {
+	public org.ldk.structs.AsyncPaymentsMessage clone() {
 		long ret = bindings.AsyncPaymentsMessage_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -67,7 +67,7 @@ public class AsyncPaymentsMessage : CommonBase {
 	/**
 	 * Utility method to constructs a new HeldHtlcAvailable-variant AsyncPaymentsMessage
 	 */
-	public static AsyncPaymentsMessage held_htlc_available(org.ldk.structs.HeldHtlcAvailable a) {
+	public static org.ldk.structs.AsyncPaymentsMessage held_htlc_available(org.ldk.structs.HeldHtlcAvailable a) {
 		long ret = bindings.AsyncPaymentsMessage_held_htlc_available(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class AsyncPaymentsMessage : CommonBase {
 	/**
 	 * Utility method to constructs a new ReleaseHeldHtlc-variant AsyncPaymentsMessage
 	 */
-	public static AsyncPaymentsMessage release_held_htlc(org.ldk.structs.ReleaseHeldHtlc a) {
+	public static org.ldk.structs.AsyncPaymentsMessage release_held_htlc(org.ldk.structs.ReleaseHeldHtlc a) {
 		long ret = bindings.AsyncPaymentsMessage_release_held_htlc(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -92,7 +92,7 @@ public class AsyncPaymentsMessage : CommonBase {
 	 * Constructs a new OnionMessageContents which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned OnionMessageContents must be freed before this_arg is
 	 */
-	public OnionMessageContents as_OnionMessageContents() {
+	public org.ldk.structs.OnionMessageContents as_OnionMessageContents() {
 		long ret = bindings.AsyncPaymentsMessage_as_OnionMessageContents(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -115,7 +115,7 @@ public class AsyncPaymentsMessage : CommonBase {
 	/**
 	 * Read a AsyncPaymentsMessage from a byte array, created by AsyncPaymentsMessage_write
 	 */
-	public static Result_AsyncPaymentsMessageDecodeErrorZ read(byte[] ser, long arg) {
+	public static org.ldk.structs.Result_AsyncPaymentsMessageDecodeErrorZ read(byte[] ser, long arg) {
 		long ret = bindings.AsyncPaymentsMessage_read(InternalUtils.encodeUint8Array(ser), arg);
 		GC.KeepAlive(ser);
 		GC.KeepAlive(arg);

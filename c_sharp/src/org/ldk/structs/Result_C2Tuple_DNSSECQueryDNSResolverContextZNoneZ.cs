@@ -36,7 +36,7 @@ public class Result_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ in the success state.
 	 */
-	public static Result_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ ok(org.ldk.structs.TwoTuple_DNSSECQueryDNSResolverContextZ o) {
+	public static org.ldk.structs.Result_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ ok(org.ldk.structs.TwoTuple_DNSSECQueryDNSResolverContextZ o) {
 		long ret = bindings.CResult_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -47,7 +47,7 @@ public class Result_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ in the error state.
 	 */
-	public static Result_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ err() {
+	public static org.ldk.structs.Result_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ err() {
 		long ret = bindings.CResult_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ_err();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ ret_hu_conv = Result_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ.constr_from_ptr(ret);
@@ -73,7 +73,7 @@ public class Result_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ : CommonBase {
 	 * Creates a new CResult_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ clone() {
+	public org.ldk.structs.Result_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ clone() {
 		long ret = bindings.CResult_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

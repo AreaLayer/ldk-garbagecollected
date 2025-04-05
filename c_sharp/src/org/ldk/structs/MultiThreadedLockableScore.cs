@@ -19,7 +19,7 @@ public class MultiThreadedLockableScore : CommonBase {
 	 * Constructs a new LockableScore which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned LockableScore must be freed before this_arg is
 	 */
-	public LockableScore as_LockableScore() {
+	public org.ldk.structs.LockableScore as_LockableScore() {
 		long ret = bindings.MultiThreadedLockableScore_as_LockableScore(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -43,7 +43,7 @@ public class MultiThreadedLockableScore : CommonBase {
 	 * Constructs a new WriteableScore which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned WriteableScore must be freed before this_arg is
 	 */
-	public WriteableScore as_WriteableScore() {
+	public org.ldk.structs.WriteableScore as_WriteableScore() {
 		long ret = bindings.MultiThreadedLockableScore_as_WriteableScore(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -55,7 +55,7 @@ public class MultiThreadedLockableScore : CommonBase {
 	/**
 	 * Creates a new [`MultiThreadedLockableScore`] given an underlying [`Score`].
 	 */
-	public static MultiThreadedLockableScore of(org.ldk.structs.Score score) {
+	public static org.ldk.structs.MultiThreadedLockableScore of(org.ldk.structs.Score score) {
 		long ret = bindings.MultiThreadedLockableScore_new(score.ptr);
 		GC.KeepAlive(score);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -19,7 +19,7 @@ public class Utxo : CommonBase {
 	/**
 	 * The unique identifier of the output.
 	 */
-	public OutPoint get_outpoint() {
+	public org.ldk.structs.OutPoint get_outpoint() {
 		long ret = bindings.Utxo_get_outpoint(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -40,7 +40,7 @@ public class Utxo : CommonBase {
 	/**
 	 * The output to spend.
 	 */
-	public TxOut get_output() {
+	public org.ldk.structs.TxOut get_output() {
 		long ret = bindings.Utxo_get_output(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -82,7 +82,7 @@ public class Utxo : CommonBase {
 	/**
 	 * Constructs a new Utxo given each field
 	 */
-	public static Utxo of(org.ldk.structs.OutPoint outpoint_arg, org.ldk.structs.TxOut output_arg, long satisfaction_weight_arg) {
+	public static org.ldk.structs.Utxo of(org.ldk.structs.OutPoint outpoint_arg, org.ldk.structs.TxOut output_arg, long satisfaction_weight_arg) {
 		long ret = bindings.Utxo_new(outpoint_arg.ptr, output_arg.ptr, satisfaction_weight_arg);
 		GC.KeepAlive(outpoint_arg);
 		GC.KeepAlive(output_arg);
@@ -102,7 +102,7 @@ public class Utxo : CommonBase {
 	/**
 	 * Creates a copy of the Utxo
 	 */
-	public Utxo clone() {
+	public org.ldk.structs.Utxo clone() {
 		long ret = bindings.Utxo_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -143,7 +143,7 @@ public class Utxo : CommonBase {
 	/**
 	 * Returns a `Utxo` with the `satisfaction_weight` estimate for a legacy P2PKH output.
 	 */
-	public static Utxo new_p2pkh(org.ldk.structs.OutPoint outpoint, long value, byte[] pubkey_hash) {
+	public static org.ldk.structs.Utxo new_p2pkh(org.ldk.structs.OutPoint outpoint, long value, byte[] pubkey_hash) {
 		long ret = bindings.Utxo_new_p2pkh(outpoint.ptr, value, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(pubkey_hash, 20)));
 		GC.KeepAlive(outpoint);
 		GC.KeepAlive(value);

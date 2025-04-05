@@ -43,7 +43,7 @@ public class CommonOpenChannelFields : CommonBase {
 	 * For V2 channels: derived using a zeroed out value for the channel acceptor's revocation basepoint
 	 * For V1 channels: a temporary channel ID, until the funding outpoint is announced
 	 */
-	public ChannelId get_temporary_channel_id() {
+	public org.ldk.structs.ChannelId get_temporary_channel_id() {
 		long ret = bindings.CommonOpenChannelFields_get_temporary_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -341,7 +341,7 @@ public class CommonOpenChannelFields : CommonBase {
 	 * Optionally, a request to pre-set the to-channel-initiator output's scriptPubkey for when we
 	 * collaboratively close
 	 */
-	public Option_CVec_u8ZZ get_shutdown_scriptpubkey() {
+	public org.ldk.structs.Option_CVec_u8ZZ get_shutdown_scriptpubkey() {
 		long ret = bindings.CommonOpenChannelFields_get_shutdown_scriptpubkey(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -368,7 +368,7 @@ public class CommonOpenChannelFields : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ChannelTypeFeatures get_channel_type() {
+	public org.ldk.structs.ChannelTypeFeatures get_channel_type() {
 		long ret = bindings.CommonOpenChannelFields_get_channel_type(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -396,7 +396,7 @@ public class CommonOpenChannelFields : CommonBase {
 	 * 
 	 * Note that channel_type_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static CommonOpenChannelFields of(byte[] chain_hash_arg, org.ldk.structs.ChannelId temporary_channel_id_arg, long funding_satoshis_arg, long dust_limit_satoshis_arg, long max_htlc_value_in_flight_msat_arg, long htlc_minimum_msat_arg, int commitment_feerate_sat_per_1000_weight_arg, short to_self_delay_arg, short max_accepted_htlcs_arg, byte[] funding_pubkey_arg, byte[] revocation_basepoint_arg, byte[] payment_basepoint_arg, byte[] delayed_payment_basepoint_arg, byte[] htlc_basepoint_arg, byte[] first_per_commitment_point_arg, byte channel_flags_arg, org.ldk.structs.Option_CVec_u8ZZ shutdown_scriptpubkey_arg, org.ldk.structs.ChannelTypeFeatures channel_type_arg) {
+	public static org.ldk.structs.CommonOpenChannelFields of(byte[] chain_hash_arg, org.ldk.structs.ChannelId temporary_channel_id_arg, long funding_satoshis_arg, long dust_limit_satoshis_arg, long max_htlc_value_in_flight_msat_arg, long htlc_minimum_msat_arg, int commitment_feerate_sat_per_1000_weight_arg, short to_self_delay_arg, short max_accepted_htlcs_arg, byte[] funding_pubkey_arg, byte[] revocation_basepoint_arg, byte[] payment_basepoint_arg, byte[] delayed_payment_basepoint_arg, byte[] htlc_basepoint_arg, byte[] first_per_commitment_point_arg, byte channel_flags_arg, org.ldk.structs.Option_CVec_u8ZZ shutdown_scriptpubkey_arg, org.ldk.structs.ChannelTypeFeatures channel_type_arg) {
 		long ret = bindings.CommonOpenChannelFields_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(chain_hash_arg, 32)), temporary_channel_id_arg.ptr, funding_satoshis_arg, dust_limit_satoshis_arg, max_htlc_value_in_flight_msat_arg, htlc_minimum_msat_arg, commitment_feerate_sat_per_1000_weight_arg, to_self_delay_arg, max_accepted_htlcs_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(funding_pubkey_arg, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(revocation_basepoint_arg, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_basepoint_arg, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(delayed_payment_basepoint_arg, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(htlc_basepoint_arg, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(first_per_commitment_point_arg, 33)), channel_flags_arg, shutdown_scriptpubkey_arg.ptr, channel_type_arg == null ? 0 : channel_type_arg.ptr);
 		GC.KeepAlive(chain_hash_arg);
 		GC.KeepAlive(temporary_channel_id_arg);
@@ -431,7 +431,7 @@ public class CommonOpenChannelFields : CommonBase {
 	/**
 	 * Creates a copy of the CommonOpenChannelFields
 	 */
-	public CommonOpenChannelFields clone() {
+	public org.ldk.structs.CommonOpenChannelFields clone() {
 		long ret = bindings.CommonOpenChannelFields_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -472,7 +472,7 @@ public class CommonOpenChannelFields : CommonBase {
 	/**
 	 * The [`ChannelParameters`] for this channel.
 	 */
-	public ChannelParameters channel_parameters() {
+	public org.ldk.structs.ChannelParameters channel_parameters() {
 		long ret = bindings.CommonOpenChannelFields_channel_parameters(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

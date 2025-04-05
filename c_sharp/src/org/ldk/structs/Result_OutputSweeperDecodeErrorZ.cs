@@ -41,7 +41,7 @@ public class Result_OutputSweeperDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_OutputSweeperDecodeErrorZ in the success state.
 	 */
-	public static Result_OutputSweeperDecodeErrorZ ok(BestBlock o_best_block, BroadcasterInterface o_broadcaster, FeeEstimator o_fee_estimator, Option_FilterZ o_chain_data_source, OutputSpender o_output_spender, ChangeDestinationSource o_change_destination_source, KVStore o_kv_store, Logger o_logger) {
+	public static org.ldk.structs.Result_OutputSweeperDecodeErrorZ ok(BestBlock o_best_block, BroadcasterInterface o_broadcaster, FeeEstimator o_fee_estimator, Option_FilterZ o_chain_data_source, OutputSpender o_output_spender, ChangeDestinationSource o_change_destination_source, KVStore o_kv_store, Logger o_logger) {
 		long ret = bindings.CResult_OutputSweeperDecodeErrorZ_ok(bindings.OutputSweeper_new(o_best_block.ptr, o_broadcaster.ptr, o_fee_estimator.ptr, o_chain_data_source.ptr, o_output_spender.ptr, o_change_destination_source.ptr, o_kv_store.ptr, o_logger.ptr));
 		GC.KeepAlive(o_best_block);
 		GC.KeepAlive(o_broadcaster);
@@ -67,7 +67,7 @@ public class Result_OutputSweeperDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_OutputSweeperDecodeErrorZ in the error state.
 	 */
-	public static Result_OutputSweeperDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_OutputSweeperDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_OutputSweeperDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }

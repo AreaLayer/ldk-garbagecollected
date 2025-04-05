@@ -41,7 +41,7 @@ public class Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ : Com
 	/**
 	 * Creates a new CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ in the success state.
 	 */
-	public static Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ ok(org.ldk.structs.TwoTuple_ThirtyTwoBytesThirtyTwoBytesZ o) {
+	public static org.ldk.structs.Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ ok(org.ldk.structs.TwoTuple_ThirtyTwoBytesThirtyTwoBytesZ o) {
 		long ret = bindings.CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ : Com
 	/**
 	 * Creates a new CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ in the error state.
 	 */
-	public static Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ err(org.ldk.structs.ProbeSendFailure e) {
+	public static org.ldk.structs.Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ err(org.ldk.structs.ProbeSendFailure e) {
 		long ret = bindings.CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ : Com
 	 * Creates a new CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ clone() {
+	public org.ldk.structs.Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ clone() {
 		long ret = bindings.CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZProbeSendFailureZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

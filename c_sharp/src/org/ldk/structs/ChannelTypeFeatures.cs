@@ -38,7 +38,7 @@ public class ChannelTypeFeatures : CommonBase {
 	/**
 	 * Read a ChannelTypeFeatures from a byte array, created by ChannelTypeFeatures_write
 	 */
-	public static Result_ChannelTypeFeaturesDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ChannelTypeFeaturesDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.ChannelTypeFeatures_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -72,7 +72,7 @@ public class ChannelTypeFeatures : CommonBase {
 	/**
 	 * Creates a copy of the ChannelTypeFeatures
 	 */
-	public ChannelTypeFeatures clone() {
+	public org.ldk.structs.ChannelTypeFeatures clone() {
 		long ret = bindings.ChannelTypeFeatures_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -96,7 +96,7 @@ public class ChannelTypeFeatures : CommonBase {
 	/**
 	 * Constructs a ChannelTypeFeatures with only static_remotekey set
 	 */
-	public static ChannelTypeFeatures only_static_remote_key() {
+	public static org.ldk.structs.ChannelTypeFeatures only_static_remote_key() {
 		long ret = bindings.ChannelTypeFeatures_only_static_remote_key();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ChannelTypeFeatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelTypeFeatures(null, ret); }
@@ -107,7 +107,7 @@ public class ChannelTypeFeatures : CommonBase {
 	/**
 	 * Constructs a ChannelTypeFeatures with anchors support
 	 */
-	public static ChannelTypeFeatures anchors_zero_htlc_fee_and_dependencies() {
+	public static org.ldk.structs.ChannelTypeFeatures anchors_zero_htlc_fee_and_dependencies() {
 		long ret = bindings.ChannelTypeFeatures_anchors_zero_htlc_fee_and_dependencies();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ChannelTypeFeatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelTypeFeatures(null, ret); }
@@ -118,7 +118,7 @@ public class ChannelTypeFeatures : CommonBase {
 	/**
 	 * Create a blank Features with no features set
 	 */
-	public static ChannelTypeFeatures empty() {
+	public static org.ldk.structs.ChannelTypeFeatures empty() {
 		long ret = bindings.ChannelTypeFeatures_empty();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ChannelTypeFeatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelTypeFeatures(null, ret); }
@@ -199,7 +199,7 @@ public class ChannelTypeFeatures : CommonBase {
 	 * 
 	 * [BOLT 9]: https://github.com/lightning/bolts/blob/master/09-features.md
 	 */
-	public Result_NoneNoneZ set_required_feature_bit(long bit) {
+	public org.ldk.structs.Result_NoneNoneZ set_required_feature_bit(long bit) {
 		long ret = bindings.ChannelTypeFeatures_set_required_feature_bit(this.ptr, bit);
 		GC.KeepAlive(this);
 		GC.KeepAlive(bit);
@@ -217,7 +217,7 @@ public class ChannelTypeFeatures : CommonBase {
 	 * 
 	 * [BOLT 9]: https://github.com/lightning/bolts/blob/master/09-features.md
 	 */
-	public Result_NoneNoneZ set_optional_feature_bit(long bit) {
+	public org.ldk.structs.Result_NoneNoneZ set_optional_feature_bit(long bit) {
 		long ret = bindings.ChannelTypeFeatures_set_optional_feature_bit(this.ptr, bit);
 		GC.KeepAlive(this);
 		GC.KeepAlive(bit);
@@ -235,7 +235,7 @@ public class ChannelTypeFeatures : CommonBase {
 	 * 
 	 * [bLIP 2]: https://github.com/lightning/blips/blob/master/blip-0002.md#feature-bits
 	 */
-	public Result_NoneNoneZ set_required_custom_bit(long bit) {
+	public org.ldk.structs.Result_NoneNoneZ set_required_custom_bit(long bit) {
 		long ret = bindings.ChannelTypeFeatures_set_required_custom_bit(this.ptr, bit);
 		GC.KeepAlive(this);
 		GC.KeepAlive(bit);
@@ -253,7 +253,7 @@ public class ChannelTypeFeatures : CommonBase {
 	 * 
 	 * [bLIP 2]: https://github.com/lightning/blips/blob/master/blip-0002.md#feature-bits
 	 */
-	public Result_NoneNoneZ set_optional_custom_bit(long bit) {
+	public org.ldk.structs.Result_NoneNoneZ set_optional_custom_bit(long bit) {
 		long ret = bindings.ChannelTypeFeatures_set_optional_custom_bit(this.ptr, bit);
 		GC.KeepAlive(this);
 		GC.KeepAlive(bit);

@@ -37,7 +37,7 @@ public class Result_CVec_u8ZIOErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_CVec_u8ZIOErrorZ in the success state.
 	 */
-	public static Result_CVec_u8ZIOErrorZ ok(byte[] o) {
+	public static org.ldk.structs.Result_CVec_u8ZIOErrorZ ok(byte[] o) {
 		long ret = bindings.CResult_CVec_u8ZIOErrorZ_ok(InternalUtils.encodeUint8Array(o));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -48,7 +48,7 @@ public class Result_CVec_u8ZIOErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_CVec_u8ZIOErrorZ in the error state.
 	 */
-	public static Result_CVec_u8ZIOErrorZ err(IOError e) {
+	public static org.ldk.structs.Result_CVec_u8ZIOErrorZ err(IOError e) {
 		long ret = bindings.CResult_CVec_u8ZIOErrorZ_err(e);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -75,7 +75,7 @@ public class Result_CVec_u8ZIOErrorZ : CommonBase {
 	 * Creates a new CResult_CVec_u8ZIOErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_CVec_u8ZIOErrorZ clone() {
+	public org.ldk.structs.Result_CVec_u8ZIOErrorZ clone() {
 		long ret = bindings.CResult_CVec_u8ZIOErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

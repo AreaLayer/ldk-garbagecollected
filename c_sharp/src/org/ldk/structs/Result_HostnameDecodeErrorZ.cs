@@ -41,7 +41,7 @@ public class Result_HostnameDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_HostnameDecodeErrorZ in the success state.
 	 */
-	public static Result_HostnameDecodeErrorZ ok(org.ldk.structs.Hostname o) {
+	public static org.ldk.structs.Result_HostnameDecodeErrorZ ok(org.ldk.structs.Hostname o) {
 		long ret = bindings.CResult_HostnameDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_HostnameDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_HostnameDecodeErrorZ in the error state.
 	 */
-	public static Result_HostnameDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_HostnameDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_HostnameDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_HostnameDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_HostnameDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_HostnameDecodeErrorZ clone() {
+	public org.ldk.structs.Result_HostnameDecodeErrorZ clone() {
 		long ret = bindings.CResult_HostnameDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

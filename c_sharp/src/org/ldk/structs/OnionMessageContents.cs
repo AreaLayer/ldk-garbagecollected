@@ -129,7 +129,7 @@ public class OnionMessageContents : CommonBase {
 	/**
 	 * Creates a copy of a OnionMessageContents
 	 */
-	public OnionMessageContents clone() {
+	public org.ldk.structs.OnionMessageContents clone() {
 		long ret = bindings.OnionMessageContents_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

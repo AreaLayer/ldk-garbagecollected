@@ -50,7 +50,7 @@ public class DNSSECProof : CommonBase {
 	/**
 	 * Creates a copy of the DNSSECProof
 	 */
-	public DNSSECProof clone() {
+	public org.ldk.structs.DNSSECProof clone() {
 		long ret = bindings.DNSSECProof_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

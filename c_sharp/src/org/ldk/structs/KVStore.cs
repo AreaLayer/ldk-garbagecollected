@@ -147,7 +147,7 @@ public class KVStore : CommonBase {
 	 * 
 	 * [`ErrorKind::NotFound`]: io::ErrorKind::NotFound
 	 */
-	public Result_CVec_u8ZIOErrorZ read(string primary_namespace, string secondary_namespace, string key) {
+	public org.ldk.structs.Result_CVec_u8ZIOErrorZ read(string primary_namespace, string secondary_namespace, string key) {
 		long ret = bindings.KVStore_read(this.ptr, InternalUtils.encodeString(primary_namespace), InternalUtils.encodeString(secondary_namespace), InternalUtils.encodeString(key));
 		GC.KeepAlive(this);
 		GC.KeepAlive(primary_namespace);
@@ -164,7 +164,7 @@ public class KVStore : CommonBase {
 	 * Will create the given `primary_namespace` and `secondary_namespace` if not already present
 	 * in the store.
 	 */
-	public Result_NoneIOErrorZ write(string primary_namespace, string secondary_namespace, string key, byte[] buf) {
+	public org.ldk.structs.Result_NoneIOErrorZ write(string primary_namespace, string secondary_namespace, string key, byte[] buf) {
 		long ret = bindings.KVStore_write(this.ptr, InternalUtils.encodeString(primary_namespace), InternalUtils.encodeString(secondary_namespace), InternalUtils.encodeString(key), InternalUtils.encodeUint8Array(buf));
 		GC.KeepAlive(this);
 		GC.KeepAlive(primary_namespace);
@@ -193,7 +193,7 @@ public class KVStore : CommonBase {
 	 * `secondary_namespace`, and `key`, independently of whether it was present before its
 	 * invokation or not.
 	 */
-	public Result_NoneIOErrorZ remove(string primary_namespace, string secondary_namespace, string key, bool lazy) {
+	public org.ldk.structs.Result_NoneIOErrorZ remove(string primary_namespace, string secondary_namespace, string key, bool lazy) {
 		long ret = bindings.KVStore_remove(this.ptr, InternalUtils.encodeString(primary_namespace), InternalUtils.encodeString(secondary_namespace), InternalUtils.encodeString(key), lazy);
 		GC.KeepAlive(this);
 		GC.KeepAlive(primary_namespace);
@@ -212,7 +212,7 @@ public class KVStore : CommonBase {
 	 * Returns the keys in arbitrary order, so users requiring a particular order need to sort the
 	 * returned keys. Returns an empty list if `primary_namespace` or `secondary_namespace` is unknown.
 	 */
-	public Result_CVec_StrZIOErrorZ list(string primary_namespace, string secondary_namespace) {
+	public org.ldk.structs.Result_CVec_StrZIOErrorZ list(string primary_namespace, string secondary_namespace) {
 		long ret = bindings.KVStore_list(this.ptr, InternalUtils.encodeString(primary_namespace), InternalUtils.encodeString(secondary_namespace));
 		GC.KeepAlive(this);
 		GC.KeepAlive(primary_namespace);

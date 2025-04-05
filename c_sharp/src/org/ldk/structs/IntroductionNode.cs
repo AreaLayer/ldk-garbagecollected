@@ -51,7 +51,7 @@ public class IntroductionNode : CommonBase {
 	/**
 	 * Creates a copy of the IntroductionNode
 	 */
-	public IntroductionNode clone() {
+	public org.ldk.structs.IntroductionNode clone() {
 		long ret = bindings.IntroductionNode_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -63,7 +63,7 @@ public class IntroductionNode : CommonBase {
 	/**
 	 * Utility method to constructs a new NodeId-variant IntroductionNode
 	 */
-	public static IntroductionNode node_id(byte[] a) {
+	public static org.ldk.structs.IntroductionNode node_id(byte[] a) {
 		long ret = bindings.IntroductionNode_node_id(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 33)));
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -75,7 +75,7 @@ public class IntroductionNode : CommonBase {
 	/**
 	 * Utility method to constructs a new DirectedShortChannelId-variant IntroductionNode
 	 */
-	public static IntroductionNode directed_short_channel_id(Direction a, long b) {
+	public static org.ldk.structs.IntroductionNode directed_short_channel_id(Direction a, long b) {
 		long ret = bindings.IntroductionNode_directed_short_channel_id(a, b);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

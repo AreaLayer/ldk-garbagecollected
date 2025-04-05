@@ -36,7 +36,7 @@ public class Result_VerifiedInvoiceRequestNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_VerifiedInvoiceRequestNoneZ in the success state.
 	 */
-	public static Result_VerifiedInvoiceRequestNoneZ ok(org.ldk.structs.VerifiedInvoiceRequest o) {
+	public static org.ldk.structs.Result_VerifiedInvoiceRequestNoneZ ok(org.ldk.structs.VerifiedInvoiceRequest o) {
 		long ret = bindings.CResult_VerifiedInvoiceRequestNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -47,7 +47,7 @@ public class Result_VerifiedInvoiceRequestNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_VerifiedInvoiceRequestNoneZ in the error state.
 	 */
-	public static Result_VerifiedInvoiceRequestNoneZ err() {
+	public static org.ldk.structs.Result_VerifiedInvoiceRequestNoneZ err() {
 		long ret = bindings.CResult_VerifiedInvoiceRequestNoneZ_err();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_VerifiedInvoiceRequestNoneZ ret_hu_conv = Result_VerifiedInvoiceRequestNoneZ.constr_from_ptr(ret);
@@ -73,7 +73,7 @@ public class Result_VerifiedInvoiceRequestNoneZ : CommonBase {
 	 * Creates a new CResult_VerifiedInvoiceRequestNoneZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_VerifiedInvoiceRequestNoneZ clone() {
+	public org.ldk.structs.Result_VerifiedInvoiceRequestNoneZ clone() {
 		long ret = bindings.CResult_VerifiedInvoiceRequestNoneZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

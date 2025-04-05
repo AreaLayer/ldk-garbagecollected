@@ -35,7 +35,7 @@ public class Result_u64ShortChannelIdErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_u64ShortChannelIdErrorZ in the success state.
 	 */
-	public static Result_u64ShortChannelIdErrorZ ok(long o) {
+	public static org.ldk.structs.Result_u64ShortChannelIdErrorZ ok(long o) {
 		long ret = bindings.CResult_u64ShortChannelIdErrorZ_ok(o);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -46,7 +46,7 @@ public class Result_u64ShortChannelIdErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_u64ShortChannelIdErrorZ in the error state.
 	 */
-	public static Result_u64ShortChannelIdErrorZ err(ShortChannelIdError e) {
+	public static org.ldk.structs.Result_u64ShortChannelIdErrorZ err(ShortChannelIdError e) {
 		long ret = bindings.CResult_u64ShortChannelIdErrorZ_err(e);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }

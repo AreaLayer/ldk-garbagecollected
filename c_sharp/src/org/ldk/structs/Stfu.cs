@@ -18,7 +18,7 @@ public class Stfu : CommonBase {
 	/**
 	 * The channel ID where quiescence is intended
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.Stfu_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -57,7 +57,7 @@ public class Stfu : CommonBase {
 	/**
 	 * Constructs a new Stfu given each field
 	 */
-	public static Stfu of(org.ldk.structs.ChannelId channel_id_arg, byte initiator_arg) {
+	public static org.ldk.structs.Stfu of(org.ldk.structs.ChannelId channel_id_arg, byte initiator_arg) {
 		long ret = bindings.Stfu_new(channel_id_arg.ptr, initiator_arg);
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(initiator_arg);
@@ -76,7 +76,7 @@ public class Stfu : CommonBase {
 	/**
 	 * Creates a copy of the Stfu
 	 */
-	public Stfu clone() {
+	public org.ldk.structs.Stfu clone() {
 		long ret = bindings.Stfu_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -116,7 +116,7 @@ public class Stfu : CommonBase {
 	/**
 	 * Read a Stfu from a byte array, created by Stfu_write
 	 */
-	public static Result_StfuDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_StfuDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.Stfu_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

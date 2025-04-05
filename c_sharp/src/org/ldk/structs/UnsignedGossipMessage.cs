@@ -27,7 +27,7 @@ public class UnsignedGossipMessage : CommonBase {
 
 	/** A UnsignedGossipMessage of type ChannelAnnouncement */
 	public class UnsignedGossipMessage_ChannelAnnouncement : UnsignedGossipMessage {
-		public UnsignedChannelAnnouncement channel_announcement;
+		public org.ldk.structs.UnsignedChannelAnnouncement channel_announcement;
 		internal UnsignedGossipMessage_ChannelAnnouncement(long ptr) : base(null, ptr) {
 			long channel_announcement = bindings.LDKUnsignedGossipMessage_ChannelAnnouncement_get_channel_announcement(ptr);
 			org.ldk.structs.UnsignedChannelAnnouncement channel_announcement_hu_conv = null; if (channel_announcement < 0 || channel_announcement > 4096) { channel_announcement_hu_conv = new org.ldk.structs.UnsignedChannelAnnouncement(null, channel_announcement); }
@@ -37,7 +37,7 @@ public class UnsignedGossipMessage : CommonBase {
 	}
 	/** A UnsignedGossipMessage of type ChannelUpdate */
 	public class UnsignedGossipMessage_ChannelUpdate : UnsignedGossipMessage {
-		public UnsignedChannelUpdate channel_update;
+		public org.ldk.structs.UnsignedChannelUpdate channel_update;
 		internal UnsignedGossipMessage_ChannelUpdate(long ptr) : base(null, ptr) {
 			long channel_update = bindings.LDKUnsignedGossipMessage_ChannelUpdate_get_channel_update(ptr);
 			org.ldk.structs.UnsignedChannelUpdate channel_update_hu_conv = null; if (channel_update < 0 || channel_update > 4096) { channel_update_hu_conv = new org.ldk.structs.UnsignedChannelUpdate(null, channel_update); }
@@ -47,7 +47,7 @@ public class UnsignedGossipMessage : CommonBase {
 	}
 	/** A UnsignedGossipMessage of type NodeAnnouncement */
 	public class UnsignedGossipMessage_NodeAnnouncement : UnsignedGossipMessage {
-		public UnsignedNodeAnnouncement node_announcement;
+		public org.ldk.structs.UnsignedNodeAnnouncement node_announcement;
 		internal UnsignedGossipMessage_NodeAnnouncement(long ptr) : base(null, ptr) {
 			long node_announcement = bindings.LDKUnsignedGossipMessage_NodeAnnouncement_get_node_announcement(ptr);
 			org.ldk.structs.UnsignedNodeAnnouncement node_announcement_hu_conv = null; if (node_announcement < 0 || node_announcement > 4096) { node_announcement_hu_conv = new org.ldk.structs.UnsignedNodeAnnouncement(null, node_announcement); }
@@ -64,7 +64,7 @@ public class UnsignedGossipMessage : CommonBase {
 	/**
 	 * Creates a copy of the UnsignedGossipMessage
 	 */
-	public UnsignedGossipMessage clone() {
+	public org.ldk.structs.UnsignedGossipMessage clone() {
 		long ret = bindings.UnsignedGossipMessage_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -76,7 +76,7 @@ public class UnsignedGossipMessage : CommonBase {
 	/**
 	 * Utility method to constructs a new ChannelAnnouncement-variant UnsignedGossipMessage
 	 */
-	public static UnsignedGossipMessage channel_announcement(org.ldk.structs.UnsignedChannelAnnouncement a) {
+	public static org.ldk.structs.UnsignedGossipMessage channel_announcement(org.ldk.structs.UnsignedChannelAnnouncement a) {
 		long ret = bindings.UnsignedGossipMessage_channel_announcement(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -88,7 +88,7 @@ public class UnsignedGossipMessage : CommonBase {
 	/**
 	 * Utility method to constructs a new ChannelUpdate-variant UnsignedGossipMessage
 	 */
-	public static UnsignedGossipMessage channel_update(org.ldk.structs.UnsignedChannelUpdate a) {
+	public static org.ldk.structs.UnsignedGossipMessage channel_update(org.ldk.structs.UnsignedChannelUpdate a) {
 		long ret = bindings.UnsignedGossipMessage_channel_update(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -100,7 +100,7 @@ public class UnsignedGossipMessage : CommonBase {
 	/**
 	 * Utility method to constructs a new NodeAnnouncement-variant UnsignedGossipMessage
 	 */
-	public static UnsignedGossipMessage node_announcement(org.ldk.structs.UnsignedNodeAnnouncement a) {
+	public static org.ldk.structs.UnsignedGossipMessage node_announcement(org.ldk.structs.UnsignedNodeAnnouncement a) {
 		long ret = bindings.UnsignedGossipMessage_node_announcement(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }

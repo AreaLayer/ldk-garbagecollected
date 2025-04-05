@@ -18,7 +18,7 @@ public class SpliceAck : CommonBase {
 	/**
 	 * The channel ID where splicing is intended
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.SpliceAck_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -97,7 +97,7 @@ public class SpliceAck : CommonBase {
 	/**
 	 * Constructs a new SpliceAck given each field
 	 */
-	public static SpliceAck of(org.ldk.structs.ChannelId channel_id_arg, long funding_contribution_satoshis_arg, byte[] funding_pubkey_arg, COption_NoneZ require_confirmed_inputs_arg) {
+	public static org.ldk.structs.SpliceAck of(org.ldk.structs.ChannelId channel_id_arg, long funding_contribution_satoshis_arg, byte[] funding_pubkey_arg, COption_NoneZ require_confirmed_inputs_arg) {
 		long ret = bindings.SpliceAck_new(channel_id_arg.ptr, funding_contribution_satoshis_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(funding_pubkey_arg, 33)), require_confirmed_inputs_arg);
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(funding_contribution_satoshis_arg);
@@ -118,7 +118,7 @@ public class SpliceAck : CommonBase {
 	/**
 	 * Creates a copy of the SpliceAck
 	 */
-	public SpliceAck clone() {
+	public org.ldk.structs.SpliceAck clone() {
 		long ret = bindings.SpliceAck_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -158,7 +158,7 @@ public class SpliceAck : CommonBase {
 	/**
 	 * Read a SpliceAck from a byte array, created by SpliceAck_write
 	 */
-	public static Result_SpliceAckDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_SpliceAckDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.SpliceAck_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

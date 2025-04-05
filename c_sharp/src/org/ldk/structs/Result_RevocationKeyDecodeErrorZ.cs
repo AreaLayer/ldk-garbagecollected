@@ -41,7 +41,7 @@ public class Result_RevocationKeyDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_RevocationKeyDecodeErrorZ in the success state.
 	 */
-	public static Result_RevocationKeyDecodeErrorZ ok(org.ldk.structs.RevocationKey o) {
+	public static org.ldk.structs.Result_RevocationKeyDecodeErrorZ ok(org.ldk.structs.RevocationKey o) {
 		long ret = bindings.CResult_RevocationKeyDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_RevocationKeyDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_RevocationKeyDecodeErrorZ in the error state.
 	 */
-	public static Result_RevocationKeyDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_RevocationKeyDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_RevocationKeyDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_RevocationKeyDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_RevocationKeyDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_RevocationKeyDecodeErrorZ clone() {
+	public org.ldk.structs.Result_RevocationKeyDecodeErrorZ clone() {
 		long ret = bindings.CResult_RevocationKeyDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -36,7 +36,7 @@ public class Result_NoneReplayEventZ : CommonBase {
 	/**
 	 * Creates a new CResult_NoneReplayEventZ in the success state.
 	 */
-	public static Result_NoneReplayEventZ ok() {
+	public static org.ldk.structs.Result_NoneReplayEventZ ok() {
 		long ret = bindings.CResult_NoneReplayEventZ_ok();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneReplayEventZ ret_hu_conv = Result_NoneReplayEventZ.constr_from_ptr(ret);
@@ -46,7 +46,7 @@ public class Result_NoneReplayEventZ : CommonBase {
 	/**
 	 * Creates a new CResult_NoneReplayEventZ in the error state.
 	 */
-	public static Result_NoneReplayEventZ err(org.ldk.structs.ReplayEvent e) {
+	public static org.ldk.structs.Result_NoneReplayEventZ err(org.ldk.structs.ReplayEvent e) {
 		long ret = bindings.CResult_NoneReplayEventZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -73,7 +73,7 @@ public class Result_NoneReplayEventZ : CommonBase {
 	 * Creates a new CResult_NoneReplayEventZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_NoneReplayEventZ clone() {
+	public org.ldk.structs.Result_NoneReplayEventZ clone() {
 		long ret = bindings.CResult_NoneReplayEventZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

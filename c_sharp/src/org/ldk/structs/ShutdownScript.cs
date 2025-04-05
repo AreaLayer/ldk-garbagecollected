@@ -26,7 +26,7 @@ public class ShutdownScript : CommonBase {
 	/**
 	 * Creates a copy of the ShutdownScript
 	 */
-	public ShutdownScript clone() {
+	public org.ldk.structs.ShutdownScript clone() {
 		long ret = bindings.ShutdownScript_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -66,7 +66,7 @@ public class ShutdownScript : CommonBase {
 	/**
 	 * Read a ShutdownScript from a byte array, created by ShutdownScript_write
 	 */
-	public static Result_ShutdownScriptDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ShutdownScriptDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.ShutdownScript_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -77,7 +77,7 @@ public class ShutdownScript : CommonBase {
 	/**
 	 * Generates a P2WPKH script pubkey from the given [`WPubkeyHash`].
 	 */
-	public static ShutdownScript new_p2wpkh(byte[] pubkey_hash) {
+	public static org.ldk.structs.ShutdownScript new_p2wpkh(byte[] pubkey_hash) {
 		long ret = bindings.ShutdownScript_new_p2wpkh(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(pubkey_hash, 20)));
 		GC.KeepAlive(pubkey_hash);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -89,7 +89,7 @@ public class ShutdownScript : CommonBase {
 	/**
 	 * Generates a P2WSH script pubkey from the given [`WScriptHash`].
 	 */
-	public static ShutdownScript new_p2wsh(byte[] script_hash) {
+	public static org.ldk.structs.ShutdownScript new_p2wsh(byte[] script_hash) {
 		long ret = bindings.ShutdownScript_new_p2wsh(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(script_hash, 32)));
 		GC.KeepAlive(script_hash);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -108,7 +108,7 @@ public class ShutdownScript : CommonBase {
 	 * 
 	 * This function may return an error if `program` is invalid for the segwit `version`.
 	 */
-	public static Result_ShutdownScriptInvalidShutdownScriptZ new_witness_program(org.ldk.structs.WitnessProgram witness_program) {
+	public static org.ldk.structs.Result_ShutdownScriptInvalidShutdownScriptZ new_witness_program(org.ldk.structs.WitnessProgram witness_program) {
 		long ret = bindings.ShutdownScript_new_witness_program(witness_program.ptr);
 		GC.KeepAlive(witness_program);
 		if (ret >= 0 && ret <= 4096) { return null; }

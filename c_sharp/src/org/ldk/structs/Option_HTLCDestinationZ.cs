@@ -26,7 +26,7 @@ public class Option_HTLCDestinationZ : CommonBase {
 
 	/** A Option_HTLCDestinationZ of type Some */
 	public class Option_HTLCDestinationZ_Some : Option_HTLCDestinationZ {
-		public HTLCDestination some;
+		public org.ldk.structs.HTLCDestination some;
 		internal Option_HTLCDestinationZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_HTLCDestinationZ_Some_get_some(ptr);
 			org.ldk.structs.HTLCDestination some_hu_conv = org.ldk.structs.HTLCDestination.constr_from_ptr(some);
@@ -42,7 +42,7 @@ public class Option_HTLCDestinationZ : CommonBase {
 	/**
 	 * Constructs a new COption_HTLCDestinationZ containing a crate::lightning::events::HTLCDestination
 	 */
-	public static Option_HTLCDestinationZ some(org.ldk.structs.HTLCDestination o) {
+	public static org.ldk.structs.Option_HTLCDestinationZ some(org.ldk.structs.HTLCDestination o) {
 		long ret = bindings.COption_HTLCDestinationZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class Option_HTLCDestinationZ : CommonBase {
 	/**
 	 * Constructs a new COption_HTLCDestinationZ containing nothing
 	 */
-	public static Option_HTLCDestinationZ none() {
+	public static org.ldk.structs.Option_HTLCDestinationZ none() {
 		long ret = bindings.COption_HTLCDestinationZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_HTLCDestinationZ ret_hu_conv = org.ldk.structs.Option_HTLCDestinationZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Option_HTLCDestinationZ : CommonBase {
 	 * Creates a new COption_HTLCDestinationZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_HTLCDestinationZ clone() {
+	public org.ldk.structs.Option_HTLCDestinationZ clone() {
 		long ret = bindings.COption_HTLCDestinationZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

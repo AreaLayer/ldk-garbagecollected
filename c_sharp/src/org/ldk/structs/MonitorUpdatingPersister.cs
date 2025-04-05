@@ -115,7 +115,7 @@ public class MonitorUpdatingPersister : CommonBase {
 	 * - [`MonitorUpdatingPersister`] will potentially have more listing to do if you need to run
 	 * [`MonitorUpdatingPersister::cleanup_stale_updates`].
 	 */
-	public static MonitorUpdatingPersister of(org.ldk.structs.KVStore kv_store, org.ldk.structs.Logger logger, long maximum_pending_updates, org.ldk.structs.EntropySource entropy_source, org.ldk.structs.SignerProvider signer_provider, org.ldk.structs.BroadcasterInterface broadcaster, org.ldk.structs.FeeEstimator fee_estimator) {
+	public static org.ldk.structs.MonitorUpdatingPersister of(org.ldk.structs.KVStore kv_store, org.ldk.structs.Logger logger, long maximum_pending_updates, org.ldk.structs.EntropySource entropy_source, org.ldk.structs.SignerProvider signer_provider, org.ldk.structs.BroadcasterInterface broadcaster, org.ldk.structs.FeeEstimator fee_estimator) {
 		long ret = bindings.MonitorUpdatingPersister_new(kv_store.ptr, logger.ptr, maximum_pending_updates, entropy_source.ptr, signer_provider.ptr, broadcaster.ptr, fee_estimator.ptr);
 		GC.KeepAlive(kv_store);
 		GC.KeepAlive(logger);
@@ -143,7 +143,7 @@ public class MonitorUpdatingPersister : CommonBase {
 	 * [`io::ErrorKind::NotFound`] variant correctly. For more information, please see the
 	 * documentation for [`MonitorUpdatingPersister`].
 	 */
-	public Result_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ read_all_channel_monitors_with_updates() {
+	public org.ldk.structs.Result_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ read_all_channel_monitors_with_updates() {
 		long ret = bindings.MonitorUpdatingPersister_read_all_channel_monitors_with_updates(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -170,7 +170,7 @@ public class MonitorUpdatingPersister : CommonBase {
 	 * Loading a large number of monitors will be faster if done in parallel. You can use this
 	 * function to accomplish this. Take care to limit the number of parallel readers.
 	 */
-	public Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ read_channel_monitor_with_updates(string monitor_key) {
+	public org.ldk.structs.Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ read_channel_monitor_with_updates(string monitor_key) {
 		long ret = bindings.MonitorUpdatingPersister_read_channel_monitor_with_updates(this.ptr, InternalUtils.encodeString(monitor_key));
 		GC.KeepAlive(this);
 		GC.KeepAlive(monitor_key);
@@ -187,7 +187,7 @@ public class MonitorUpdatingPersister : CommonBase {
 	 * are deleted. The deletion can either be lazy or non-lazy based on the `lazy` flag; this will
 	 * be passed to [`KVStore::remove`].
 	 */
-	public Result_NoneIOErrorZ cleanup_stale_updates(bool lazy) {
+	public org.ldk.structs.Result_NoneIOErrorZ cleanup_stale_updates(bool lazy) {
 		long ret = bindings.MonitorUpdatingPersister_cleanup_stale_updates(this.ptr, lazy);
 		GC.KeepAlive(this);
 		GC.KeepAlive(lazy);
@@ -200,7 +200,7 @@ public class MonitorUpdatingPersister : CommonBase {
 	 * Constructs a new Persist which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned Persist must be freed before this_arg is
 	 */
-	public Persist as_Persist() {
+	public org.ldk.structs.Persist as_Persist() {
 		long ret = bindings.MonitorUpdatingPersister_as_Persist(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

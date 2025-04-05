@@ -26,7 +26,7 @@ public class GraphSyncError : CommonBase {
 
 	/** A GraphSyncError of type DecodeError */
 	public class GraphSyncError_DecodeError : GraphSyncError {
-		public DecodeError decode_error;
+		public org.ldk.structs.DecodeError decode_error;
 		internal GraphSyncError_DecodeError(long ptr) : base(null, ptr) {
 			long decode_error = bindings.LDKGraphSyncError_DecodeError_get_decode_error(ptr);
 			org.ldk.structs.DecodeError decode_error_hu_conv = org.ldk.structs.DecodeError.constr_from_ptr(decode_error);
@@ -36,7 +36,7 @@ public class GraphSyncError : CommonBase {
 	}
 	/** A GraphSyncError of type LightningError */
 	public class GraphSyncError_LightningError : GraphSyncError {
-		public LightningError lightning_error;
+		public org.ldk.structs.LightningError lightning_error;
 		internal GraphSyncError_LightningError(long ptr) : base(null, ptr) {
 			long lightning_error = bindings.LDKGraphSyncError_LightningError_get_lightning_error(ptr);
 			org.ldk.structs.LightningError lightning_error_hu_conv = null; if (lightning_error < 0 || lightning_error > 4096) { lightning_error_hu_conv = new org.ldk.structs.LightningError(null, lightning_error); }
@@ -53,7 +53,7 @@ public class GraphSyncError : CommonBase {
 	/**
 	 * Creates a copy of the GraphSyncError
 	 */
-	public GraphSyncError clone() {
+	public org.ldk.structs.GraphSyncError clone() {
 		long ret = bindings.GraphSyncError_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -65,7 +65,7 @@ public class GraphSyncError : CommonBase {
 	/**
 	 * Utility method to constructs a new DecodeError-variant GraphSyncError
 	 */
-	public static GraphSyncError decode_error(org.ldk.structs.DecodeError a) {
+	public static org.ldk.structs.GraphSyncError decode_error(org.ldk.structs.DecodeError a) {
 		long ret = bindings.GraphSyncError_decode_error(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -77,7 +77,7 @@ public class GraphSyncError : CommonBase {
 	/**
 	 * Utility method to constructs a new LightningError-variant GraphSyncError
 	 */
-	public static GraphSyncError lightning_error(org.ldk.structs.LightningError a) {
+	public static org.ldk.structs.GraphSyncError lightning_error(org.ldk.structs.LightningError a) {
 		long ret = bindings.GraphSyncError_lightning_error(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -81,7 +81,7 @@ public class WalletSource : CommonBase {
 	/**
 	 * Returns all UTXOs, with at least 1 confirmation each, that are available to spend.
 	 */
-	public Result_CVec_UtxoZNoneZ list_confirmed_utxos() {
+	public org.ldk.structs.Result_CVec_UtxoZNoneZ list_confirmed_utxos() {
 		long ret = bindings.WalletSource_list_confirmed_utxos(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -93,7 +93,7 @@ public class WalletSource : CommonBase {
 	 * Returns a script to use for change above dust resulting from a successful coin selection
 	 * attempt.
 	 */
-	public Result_CVec_u8ZNoneZ get_change_script() {
+	public org.ldk.structs.Result_CVec_u8ZNoneZ get_change_script() {
 		long ret = bindings.WalletSource_get_change_script(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -109,7 +109,7 @@ public class WalletSource : CommonBase {
 	 * If your wallet does not support signing PSBTs you can call `psbt.extract_tx()` to get the
 	 * unsigned transaction and then sign it with your wallet.
 	 */
-	public Result_TransactionNoneZ sign_psbt(byte[] psbt) {
+	public org.ldk.structs.Result_TransactionNoneZ sign_psbt(byte[] psbt) {
 		long ret = bindings.WalletSource_sign_psbt(this.ptr, InternalUtils.encodeUint8Array(psbt));
 		GC.KeepAlive(this);
 		GC.KeepAlive(psbt);

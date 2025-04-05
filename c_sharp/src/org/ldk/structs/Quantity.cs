@@ -51,7 +51,7 @@ public class Quantity : CommonBase {
 	/**
 	 * Creates a copy of the Quantity
 	 */
-	public Quantity clone() {
+	public org.ldk.structs.Quantity clone() {
 		long ret = bindings.Quantity_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -63,7 +63,7 @@ public class Quantity : CommonBase {
 	/**
 	 * Utility method to constructs a new Bounded-variant Quantity
 	 */
-	public static Quantity bounded(long a) {
+	public static org.ldk.structs.Quantity bounded(long a) {
 		long ret = bindings.Quantity_bounded(a);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -75,7 +75,7 @@ public class Quantity : CommonBase {
 	/**
 	 * Utility method to constructs a new Unbounded-variant Quantity
 	 */
-	public static Quantity unbounded() {
+	public static org.ldk.structs.Quantity unbounded() {
 		long ret = bindings.Quantity_unbounded();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Quantity ret_hu_conv = org.ldk.structs.Quantity.constr_from_ptr(ret);
@@ -86,7 +86,7 @@ public class Quantity : CommonBase {
 	/**
 	 * Utility method to constructs a new One-variant Quantity
 	 */
-	public static Quantity one() {
+	public static org.ldk.structs.Quantity one() {
 		long ret = bindings.Quantity_one();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Quantity ret_hu_conv = org.ldk.structs.Quantity.constr_from_ptr(ret);

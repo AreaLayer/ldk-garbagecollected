@@ -26,7 +26,7 @@ public class Option_APIErrorZ : CommonBase {
 
 	/** A Option_APIErrorZ of type Some */
 	public class Option_APIErrorZ_Some : Option_APIErrorZ {
-		public APIError some;
+		public org.ldk.structs.APIError some;
 		internal Option_APIErrorZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_APIErrorZ_Some_get_some(ptr);
 			org.ldk.structs.APIError some_hu_conv = org.ldk.structs.APIError.constr_from_ptr(some);
@@ -42,7 +42,7 @@ public class Option_APIErrorZ : CommonBase {
 	/**
 	 * Constructs a new COption_APIErrorZ containing a crate::lightning::util::errors::APIError
 	 */
-	public static Option_APIErrorZ some(org.ldk.structs.APIError o) {
+	public static org.ldk.structs.Option_APIErrorZ some(org.ldk.structs.APIError o) {
 		long ret = bindings.COption_APIErrorZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class Option_APIErrorZ : CommonBase {
 	/**
 	 * Constructs a new COption_APIErrorZ containing nothing
 	 */
-	public static Option_APIErrorZ none() {
+	public static org.ldk.structs.Option_APIErrorZ none() {
 		long ret = bindings.COption_APIErrorZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_APIErrorZ ret_hu_conv = org.ldk.structs.Option_APIErrorZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Option_APIErrorZ : CommonBase {
 	 * Creates a new COption_APIErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_APIErrorZ clone() {
+	public org.ldk.structs.Option_APIErrorZ clone() {
 		long ret = bindings.COption_APIErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

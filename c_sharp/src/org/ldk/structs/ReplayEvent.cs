@@ -22,7 +22,7 @@ public class ReplayEvent : CommonBase {
 	/**
 	 * Constructs a new ReplayEvent given each field
 	 */
-	public static ReplayEvent of() {
+	public static org.ldk.structs.ReplayEvent of() {
 		long ret = bindings.ReplayEvent_new();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ReplayEvent ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ReplayEvent(null, ret); }
@@ -39,7 +39,7 @@ public class ReplayEvent : CommonBase {
 	/**
 	 * Creates a copy of the ReplayEvent
 	 */
-	public ReplayEvent clone() {
+	public org.ldk.structs.ReplayEvent clone() {
 		long ret = bindings.ReplayEvent_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

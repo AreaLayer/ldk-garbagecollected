@@ -41,7 +41,7 @@ public class Result_CommitmentSignedBatchDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_CommitmentSignedBatchDecodeErrorZ in the success state.
 	 */
-	public static Result_CommitmentSignedBatchDecodeErrorZ ok(org.ldk.structs.CommitmentSignedBatch o) {
+	public static org.ldk.structs.Result_CommitmentSignedBatchDecodeErrorZ ok(org.ldk.structs.CommitmentSignedBatch o) {
 		long ret = bindings.CResult_CommitmentSignedBatchDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_CommitmentSignedBatchDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_CommitmentSignedBatchDecodeErrorZ in the error state.
 	 */
-	public static Result_CommitmentSignedBatchDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_CommitmentSignedBatchDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_CommitmentSignedBatchDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_CommitmentSignedBatchDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_CommitmentSignedBatchDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_CommitmentSignedBatchDecodeErrorZ clone() {
+	public org.ldk.structs.Result_CommitmentSignedBatchDecodeErrorZ clone() {
 		long ret = bindings.CResult_CommitmentSignedBatchDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

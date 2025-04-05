@@ -69,7 +69,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public AcceptChannel msg;
+		public org.ldk.structs.AcceptChannel msg;
 		internal MessageSendEvent_SendAcceptChannel(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendAcceptChannel_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -89,7 +89,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public AcceptChannelV2 msg;
+		public org.ldk.structs.AcceptChannelV2 msg;
 		internal MessageSendEvent_SendAcceptChannelV2(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendAcceptChannelV2_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -109,7 +109,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public OpenChannel msg;
+		public org.ldk.structs.OpenChannel msg;
 		internal MessageSendEvent_SendOpenChannel(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendOpenChannel_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -129,7 +129,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public OpenChannelV2 msg;
+		public org.ldk.structs.OpenChannelV2 msg;
 		internal MessageSendEvent_SendOpenChannelV2(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendOpenChannelV2_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -149,7 +149,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public FundingCreated msg;
+		public org.ldk.structs.FundingCreated msg;
 		internal MessageSendEvent_SendFundingCreated(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendFundingCreated_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -169,7 +169,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public FundingSigned msg;
+		public org.ldk.structs.FundingSigned msg;
 		internal MessageSendEvent_SendFundingSigned(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendFundingSigned_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -189,7 +189,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public Stfu msg;
+		public org.ldk.structs.Stfu msg;
 		internal MessageSendEvent_SendStfu(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendStfu_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -209,7 +209,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public SpliceInit msg;
+		public org.ldk.structs.SpliceInit msg;
 		internal MessageSendEvent_SendSpliceInit(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendSpliceInit_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -229,7 +229,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public SpliceAck msg;
+		public org.ldk.structs.SpliceAck msg;
 		internal MessageSendEvent_SendSpliceAck(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendSpliceAck_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -249,7 +249,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public SpliceLocked msg;
+		public org.ldk.structs.SpliceLocked msg;
 		internal MessageSendEvent_SendSpliceLocked(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendSpliceLocked_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -269,7 +269,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public TxAddInput msg;
+		public org.ldk.structs.TxAddInput msg;
 		internal MessageSendEvent_SendTxAddInput(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendTxAddInput_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -289,7 +289,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public TxAddOutput msg;
+		public org.ldk.structs.TxAddOutput msg;
 		internal MessageSendEvent_SendTxAddOutput(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendTxAddOutput_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -309,7 +309,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public TxRemoveInput msg;
+		public org.ldk.structs.TxRemoveInput msg;
 		internal MessageSendEvent_SendTxRemoveInput(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendTxRemoveInput_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -329,7 +329,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public TxRemoveOutput msg;
+		public org.ldk.structs.TxRemoveOutput msg;
 		internal MessageSendEvent_SendTxRemoveOutput(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendTxRemoveOutput_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -349,7 +349,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public TxComplete msg;
+		public org.ldk.structs.TxComplete msg;
 		internal MessageSendEvent_SendTxComplete(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendTxComplete_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -369,7 +369,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public TxSignatures msg;
+		public org.ldk.structs.TxSignatures msg;
 		internal MessageSendEvent_SendTxSignatures(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendTxSignatures_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -389,7 +389,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public TxInitRbf msg;
+		public org.ldk.structs.TxInitRbf msg;
 		internal MessageSendEvent_SendTxInitRbf(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendTxInitRbf_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -409,7 +409,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public TxAckRbf msg;
+		public org.ldk.structs.TxAckRbf msg;
 		internal MessageSendEvent_SendTxAckRbf(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendTxAckRbf_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -429,7 +429,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public TxAbort msg;
+		public org.ldk.structs.TxAbort msg;
 		internal MessageSendEvent_SendTxAbort(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendTxAbort_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -449,7 +449,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The channel_ready message which should be sent.
 		 */
-		public ChannelReady msg;
+		public org.ldk.structs.ChannelReady msg;
 		internal MessageSendEvent_SendChannelReady(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendChannelReady_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -469,7 +469,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The announcement_signatures message which should be sent.
 		 */
-		public AnnouncementSignatures msg;
+		public org.ldk.structs.AnnouncementSignatures msg;
 		internal MessageSendEvent_SendAnnouncementSignatures(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendAnnouncementSignatures_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -489,7 +489,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The update messages which should be sent. ALL messages in the struct should be sent!
 		 */
-		public CommitmentUpdate updates;
+		public org.ldk.structs.CommitmentUpdate updates;
 		internal MessageSendEvent_UpdateHTLCs(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_UpdateHTLCs_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -509,7 +509,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public RevokeAndACK msg;
+		public org.ldk.structs.RevokeAndACK msg;
 		internal MessageSendEvent_SendRevokeAndACK(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendRevokeAndACK_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -529,7 +529,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public ClosingSigned msg;
+		public org.ldk.structs.ClosingSigned msg;
 		internal MessageSendEvent_SendClosingSigned(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendClosingSigned_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -549,7 +549,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public Shutdown msg;
+		public org.ldk.structs.Shutdown msg;
 		internal MessageSendEvent_SendShutdown(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendShutdown_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -569,7 +569,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The message which should be sent.
 		 */
-		public ChannelReestablish msg;
+		public org.ldk.structs.ChannelReestablish msg;
 		internal MessageSendEvent_SendChannelReestablish(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendChannelReestablish_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -589,11 +589,11 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The channel_announcement which should be sent.
 		 */
-		public ChannelAnnouncement msg;
+		public org.ldk.structs.ChannelAnnouncement msg;
 		/**
 		 * The followup channel_update which should be sent.
 		 */
-		public ChannelUpdate update_msg;
+		public org.ldk.structs.ChannelUpdate update_msg;
 		internal MessageSendEvent_SendChannelAnnouncement(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendChannelAnnouncement_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -613,13 +613,13 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The channel_announcement which should be sent.
 		 */
-		public ChannelAnnouncement msg;
+		public org.ldk.structs.ChannelAnnouncement msg;
 		/**
 		 * The followup channel_update which should be sent.
 		 * 
 		 * Note that this (or a relevant inner pointer) may be NULL or all-0s to represent None
 		 */
-		public ChannelUpdate update_msg;
+		public org.ldk.structs.ChannelUpdate update_msg;
 		internal MessageSendEvent_BroadcastChannelAnnouncement(long ptr) : base(null, ptr) {
 			long msg = bindings.LDKMessageSendEvent_BroadcastChannelAnnouncement_get_msg(ptr);
 			org.ldk.structs.ChannelAnnouncement msg_hu_conv = null; if (msg < 0 || msg > 4096) { msg_hu_conv = new org.ldk.structs.ChannelAnnouncement(null, msg); }
@@ -636,7 +636,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The channel_update which should be sent.
 		 */
-		public ChannelUpdate msg;
+		public org.ldk.structs.ChannelUpdate msg;
 		internal MessageSendEvent_BroadcastChannelUpdate(long ptr) : base(null, ptr) {
 			long msg = bindings.LDKMessageSendEvent_BroadcastChannelUpdate_get_msg(ptr);
 			org.ldk.structs.ChannelUpdate msg_hu_conv = null; if (msg < 0 || msg > 4096) { msg_hu_conv = new org.ldk.structs.ChannelUpdate(null, msg); }
@@ -649,7 +649,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The node_announcement which should be sent.
 		 */
-		public NodeAnnouncement msg;
+		public org.ldk.structs.NodeAnnouncement msg;
 		internal MessageSendEvent_BroadcastNodeAnnouncement(long ptr) : base(null, ptr) {
 			long msg = bindings.LDKMessageSendEvent_BroadcastNodeAnnouncement_get_msg(ptr);
 			org.ldk.structs.NodeAnnouncement msg_hu_conv = null; if (msg < 0 || msg > 4096) { msg_hu_conv = new org.ldk.structs.NodeAnnouncement(null, msg); }
@@ -666,7 +666,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The channel_update which should be sent.
 		 */
-		public ChannelUpdate msg;
+		public org.ldk.structs.ChannelUpdate msg;
 		internal MessageSendEvent_SendChannelUpdate(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendChannelUpdate_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -686,7 +686,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The action which should be taken.
 		 */
-		public ErrorAction action;
+		public org.ldk.structs.ErrorAction action;
 		internal MessageSendEvent_HandleError(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_HandleError_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -706,7 +706,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The query_channel_range which should be sent.
 		 */
-		public QueryChannelRange msg;
+		public org.ldk.structs.QueryChannelRange msg;
 		internal MessageSendEvent_SendChannelRangeQuery(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendChannelRangeQuery_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -726,7 +726,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The query_short_channel_ids which should be sent.
 		 */
-		public QueryShortChannelIds msg;
+		public org.ldk.structs.QueryShortChannelIds msg;
 		internal MessageSendEvent_SendShortIdsQuery(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendShortIdsQuery_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -746,7 +746,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The reply_channel_range which should be sent.
 		 */
-		public ReplyChannelRange msg;
+		public org.ldk.structs.ReplyChannelRange msg;
 		internal MessageSendEvent_SendReplyChannelRange(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendReplyChannelRange_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -766,7 +766,7 @@ public class MessageSendEvent : CommonBase {
 		/**
 		 * The gossip_timestamp_filter which should be sent.
 		 */
-		public GossipTimestampFilter msg;
+		public org.ldk.structs.GossipTimestampFilter msg;
 		internal MessageSendEvent_SendGossipTimestampFilter(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKMessageSendEvent_SendGossipTimestampFilter_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -786,7 +786,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Creates a copy of the MessageSendEvent
 	 */
-	public MessageSendEvent clone() {
+	public org.ldk.structs.MessageSendEvent clone() {
 		long ret = bindings.MessageSendEvent_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -798,7 +798,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendAcceptChannel-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_accept_channel(byte[] node_id, org.ldk.structs.AcceptChannel msg) {
+	public static org.ldk.structs.MessageSendEvent send_accept_channel(byte[] node_id, org.ldk.structs.AcceptChannel msg) {
 		long ret = bindings.MessageSendEvent_send_accept_channel(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -811,7 +811,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendAcceptChannelV2-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_accept_channel_v2(byte[] node_id, org.ldk.structs.AcceptChannelV2 msg) {
+	public static org.ldk.structs.MessageSendEvent send_accept_channel_v2(byte[] node_id, org.ldk.structs.AcceptChannelV2 msg) {
 		long ret = bindings.MessageSendEvent_send_accept_channel_v2(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -824,7 +824,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendOpenChannel-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_open_channel(byte[] node_id, org.ldk.structs.OpenChannel msg) {
+	public static org.ldk.structs.MessageSendEvent send_open_channel(byte[] node_id, org.ldk.structs.OpenChannel msg) {
 		long ret = bindings.MessageSendEvent_send_open_channel(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -837,7 +837,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendOpenChannelV2-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_open_channel_v2(byte[] node_id, org.ldk.structs.OpenChannelV2 msg) {
+	public static org.ldk.structs.MessageSendEvent send_open_channel_v2(byte[] node_id, org.ldk.structs.OpenChannelV2 msg) {
 		long ret = bindings.MessageSendEvent_send_open_channel_v2(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -850,7 +850,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendFundingCreated-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_funding_created(byte[] node_id, org.ldk.structs.FundingCreated msg) {
+	public static org.ldk.structs.MessageSendEvent send_funding_created(byte[] node_id, org.ldk.structs.FundingCreated msg) {
 		long ret = bindings.MessageSendEvent_send_funding_created(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -863,7 +863,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendFundingSigned-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_funding_signed(byte[] node_id, org.ldk.structs.FundingSigned msg) {
+	public static org.ldk.structs.MessageSendEvent send_funding_signed(byte[] node_id, org.ldk.structs.FundingSigned msg) {
 		long ret = bindings.MessageSendEvent_send_funding_signed(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -876,7 +876,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendStfu-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_stfu(byte[] node_id, org.ldk.structs.Stfu msg) {
+	public static org.ldk.structs.MessageSendEvent send_stfu(byte[] node_id, org.ldk.structs.Stfu msg) {
 		long ret = bindings.MessageSendEvent_send_stfu(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -889,7 +889,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendSpliceInit-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_splice_init(byte[] node_id, org.ldk.structs.SpliceInit msg) {
+	public static org.ldk.structs.MessageSendEvent send_splice_init(byte[] node_id, org.ldk.structs.SpliceInit msg) {
 		long ret = bindings.MessageSendEvent_send_splice_init(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -902,7 +902,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendSpliceAck-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_splice_ack(byte[] node_id, org.ldk.structs.SpliceAck msg) {
+	public static org.ldk.structs.MessageSendEvent send_splice_ack(byte[] node_id, org.ldk.structs.SpliceAck msg) {
 		long ret = bindings.MessageSendEvent_send_splice_ack(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -915,7 +915,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendSpliceLocked-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_splice_locked(byte[] node_id, org.ldk.structs.SpliceLocked msg) {
+	public static org.ldk.structs.MessageSendEvent send_splice_locked(byte[] node_id, org.ldk.structs.SpliceLocked msg) {
 		long ret = bindings.MessageSendEvent_send_splice_locked(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -928,7 +928,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendTxAddInput-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_tx_add_input(byte[] node_id, org.ldk.structs.TxAddInput msg) {
+	public static org.ldk.structs.MessageSendEvent send_tx_add_input(byte[] node_id, org.ldk.structs.TxAddInput msg) {
 		long ret = bindings.MessageSendEvent_send_tx_add_input(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -941,7 +941,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendTxAddOutput-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_tx_add_output(byte[] node_id, org.ldk.structs.TxAddOutput msg) {
+	public static org.ldk.structs.MessageSendEvent send_tx_add_output(byte[] node_id, org.ldk.structs.TxAddOutput msg) {
 		long ret = bindings.MessageSendEvent_send_tx_add_output(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -954,7 +954,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendTxRemoveInput-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_tx_remove_input(byte[] node_id, org.ldk.structs.TxRemoveInput msg) {
+	public static org.ldk.structs.MessageSendEvent send_tx_remove_input(byte[] node_id, org.ldk.structs.TxRemoveInput msg) {
 		long ret = bindings.MessageSendEvent_send_tx_remove_input(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -967,7 +967,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendTxRemoveOutput-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_tx_remove_output(byte[] node_id, org.ldk.structs.TxRemoveOutput msg) {
+	public static org.ldk.structs.MessageSendEvent send_tx_remove_output(byte[] node_id, org.ldk.structs.TxRemoveOutput msg) {
 		long ret = bindings.MessageSendEvent_send_tx_remove_output(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -980,7 +980,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendTxComplete-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_tx_complete(byte[] node_id, org.ldk.structs.TxComplete msg) {
+	public static org.ldk.structs.MessageSendEvent send_tx_complete(byte[] node_id, org.ldk.structs.TxComplete msg) {
 		long ret = bindings.MessageSendEvent_send_tx_complete(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -993,7 +993,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendTxSignatures-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_tx_signatures(byte[] node_id, org.ldk.structs.TxSignatures msg) {
+	public static org.ldk.structs.MessageSendEvent send_tx_signatures(byte[] node_id, org.ldk.structs.TxSignatures msg) {
 		long ret = bindings.MessageSendEvent_send_tx_signatures(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -1006,7 +1006,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendTxInitRbf-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_tx_init_rbf(byte[] node_id, org.ldk.structs.TxInitRbf msg) {
+	public static org.ldk.structs.MessageSendEvent send_tx_init_rbf(byte[] node_id, org.ldk.structs.TxInitRbf msg) {
 		long ret = bindings.MessageSendEvent_send_tx_init_rbf(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -1019,7 +1019,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendTxAckRbf-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_tx_ack_rbf(byte[] node_id, org.ldk.structs.TxAckRbf msg) {
+	public static org.ldk.structs.MessageSendEvent send_tx_ack_rbf(byte[] node_id, org.ldk.structs.TxAckRbf msg) {
 		long ret = bindings.MessageSendEvent_send_tx_ack_rbf(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -1032,7 +1032,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendTxAbort-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_tx_abort(byte[] node_id, org.ldk.structs.TxAbort msg) {
+	public static org.ldk.structs.MessageSendEvent send_tx_abort(byte[] node_id, org.ldk.structs.TxAbort msg) {
 		long ret = bindings.MessageSendEvent_send_tx_abort(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -1045,7 +1045,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendChannelReady-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_channel_ready(byte[] node_id, org.ldk.structs.ChannelReady msg) {
+	public static org.ldk.structs.MessageSendEvent send_channel_ready(byte[] node_id, org.ldk.structs.ChannelReady msg) {
 		long ret = bindings.MessageSendEvent_send_channel_ready(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -1058,7 +1058,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendAnnouncementSignatures-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_announcement_signatures(byte[] node_id, org.ldk.structs.AnnouncementSignatures msg) {
+	public static org.ldk.structs.MessageSendEvent send_announcement_signatures(byte[] node_id, org.ldk.structs.AnnouncementSignatures msg) {
 		long ret = bindings.MessageSendEvent_send_announcement_signatures(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -1071,7 +1071,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new UpdateHTLCs-variant MessageSendEvent
 	 */
-	public static MessageSendEvent update_htlcs(byte[] node_id, org.ldk.structs.CommitmentUpdate updates) {
+	public static org.ldk.structs.MessageSendEvent update_htlcs(byte[] node_id, org.ldk.structs.CommitmentUpdate updates) {
 		long ret = bindings.MessageSendEvent_update_htlcs(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), updates.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(updates);
@@ -1084,7 +1084,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendRevokeAndACK-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_revoke_and_ack(byte[] node_id, org.ldk.structs.RevokeAndACK msg) {
+	public static org.ldk.structs.MessageSendEvent send_revoke_and_ack(byte[] node_id, org.ldk.structs.RevokeAndACK msg) {
 		long ret = bindings.MessageSendEvent_send_revoke_and_ack(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -1097,7 +1097,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendClosingSigned-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_closing_signed(byte[] node_id, org.ldk.structs.ClosingSigned msg) {
+	public static org.ldk.structs.MessageSendEvent send_closing_signed(byte[] node_id, org.ldk.structs.ClosingSigned msg) {
 		long ret = bindings.MessageSendEvent_send_closing_signed(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -1110,7 +1110,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendShutdown-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_shutdown(byte[] node_id, org.ldk.structs.Shutdown msg) {
+	public static org.ldk.structs.MessageSendEvent send_shutdown(byte[] node_id, org.ldk.structs.Shutdown msg) {
 		long ret = bindings.MessageSendEvent_send_shutdown(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -1123,7 +1123,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendChannelReestablish-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_channel_reestablish(byte[] node_id, org.ldk.structs.ChannelReestablish msg) {
+	public static org.ldk.structs.MessageSendEvent send_channel_reestablish(byte[] node_id, org.ldk.structs.ChannelReestablish msg) {
 		long ret = bindings.MessageSendEvent_send_channel_reestablish(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -1136,7 +1136,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendChannelAnnouncement-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_channel_announcement(byte[] node_id, org.ldk.structs.ChannelAnnouncement msg, org.ldk.structs.ChannelUpdate update_msg) {
+	public static org.ldk.structs.MessageSendEvent send_channel_announcement(byte[] node_id, org.ldk.structs.ChannelAnnouncement msg, org.ldk.structs.ChannelUpdate update_msg) {
 		long ret = bindings.MessageSendEvent_send_channel_announcement(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr, update_msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -1150,7 +1150,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new BroadcastChannelAnnouncement-variant MessageSendEvent
 	 */
-	public static MessageSendEvent broadcast_channel_announcement(org.ldk.structs.ChannelAnnouncement msg, org.ldk.structs.ChannelUpdate update_msg) {
+	public static org.ldk.structs.MessageSendEvent broadcast_channel_announcement(org.ldk.structs.ChannelAnnouncement msg, org.ldk.structs.ChannelUpdate update_msg) {
 		long ret = bindings.MessageSendEvent_broadcast_channel_announcement(msg.ptr, update_msg.ptr);
 		GC.KeepAlive(msg);
 		GC.KeepAlive(update_msg);
@@ -1163,7 +1163,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new BroadcastChannelUpdate-variant MessageSendEvent
 	 */
-	public static MessageSendEvent broadcast_channel_update(org.ldk.structs.ChannelUpdate msg) {
+	public static org.ldk.structs.MessageSendEvent broadcast_channel_update(org.ldk.structs.ChannelUpdate msg) {
 		long ret = bindings.MessageSendEvent_broadcast_channel_update(msg.ptr);
 		GC.KeepAlive(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -1175,7 +1175,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new BroadcastNodeAnnouncement-variant MessageSendEvent
 	 */
-	public static MessageSendEvent broadcast_node_announcement(org.ldk.structs.NodeAnnouncement msg) {
+	public static org.ldk.structs.MessageSendEvent broadcast_node_announcement(org.ldk.structs.NodeAnnouncement msg) {
 		long ret = bindings.MessageSendEvent_broadcast_node_announcement(msg.ptr);
 		GC.KeepAlive(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -1187,7 +1187,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendChannelUpdate-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_channel_update(byte[] node_id, org.ldk.structs.ChannelUpdate msg) {
+	public static org.ldk.structs.MessageSendEvent send_channel_update(byte[] node_id, org.ldk.structs.ChannelUpdate msg) {
 		long ret = bindings.MessageSendEvent_send_channel_update(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -1200,7 +1200,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new HandleError-variant MessageSendEvent
 	 */
-	public static MessageSendEvent handle_error(byte[] node_id, org.ldk.structs.ErrorAction action) {
+	public static org.ldk.structs.MessageSendEvent handle_error(byte[] node_id, org.ldk.structs.ErrorAction action) {
 		long ret = bindings.MessageSendEvent_handle_error(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), action.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(action);
@@ -1213,7 +1213,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendChannelRangeQuery-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_channel_range_query(byte[] node_id, org.ldk.structs.QueryChannelRange msg) {
+	public static org.ldk.structs.MessageSendEvent send_channel_range_query(byte[] node_id, org.ldk.structs.QueryChannelRange msg) {
 		long ret = bindings.MessageSendEvent_send_channel_range_query(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -1226,7 +1226,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendShortIdsQuery-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_short_ids_query(byte[] node_id, org.ldk.structs.QueryShortChannelIds msg) {
+	public static org.ldk.structs.MessageSendEvent send_short_ids_query(byte[] node_id, org.ldk.structs.QueryShortChannelIds msg) {
 		long ret = bindings.MessageSendEvent_send_short_ids_query(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -1239,7 +1239,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendReplyChannelRange-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_reply_channel_range(byte[] node_id, org.ldk.structs.ReplyChannelRange msg) {
+	public static org.ldk.structs.MessageSendEvent send_reply_channel_range(byte[] node_id, org.ldk.structs.ReplyChannelRange msg) {
 		long ret = bindings.MessageSendEvent_send_reply_channel_range(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);
@@ -1252,7 +1252,7 @@ public class MessageSendEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new SendGossipTimestampFilter-variant MessageSendEvent
 	 */
-	public static MessageSendEvent send_gossip_timestamp_filter(byte[] node_id, org.ldk.structs.GossipTimestampFilter msg) {
+	public static org.ldk.structs.MessageSendEvent send_gossip_timestamp_filter(byte[] node_id, org.ldk.structs.GossipTimestampFilter msg) {
 		long ret = bindings.MessageSendEvent_send_gossip_timestamp_filter(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), msg.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(msg);

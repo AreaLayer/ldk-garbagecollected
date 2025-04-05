@@ -63,7 +63,7 @@ public class ReplyShortChannelIdsEnd : CommonBase {
 	/**
 	 * Constructs a new ReplyShortChannelIdsEnd given each field
 	 */
-	public static ReplyShortChannelIdsEnd of(byte[] chain_hash_arg, bool full_information_arg) {
+	public static org.ldk.structs.ReplyShortChannelIdsEnd of(byte[] chain_hash_arg, bool full_information_arg) {
 		long ret = bindings.ReplyShortChannelIdsEnd_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(chain_hash_arg, 32)), full_information_arg);
 		GC.KeepAlive(chain_hash_arg);
 		GC.KeepAlive(full_information_arg);
@@ -82,7 +82,7 @@ public class ReplyShortChannelIdsEnd : CommonBase {
 	/**
 	 * Creates a copy of the ReplyShortChannelIdsEnd
 	 */
-	public ReplyShortChannelIdsEnd clone() {
+	public org.ldk.structs.ReplyShortChannelIdsEnd clone() {
 		long ret = bindings.ReplyShortChannelIdsEnd_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -134,7 +134,7 @@ public class ReplyShortChannelIdsEnd : CommonBase {
 	/**
 	 * Read a ReplyShortChannelIdsEnd from a byte array, created by ReplyShortChannelIdsEnd_write
 	 */
-	public static Result_ReplyShortChannelIdsEndDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ReplyShortChannelIdsEndDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.ReplyShortChannelIdsEnd_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -41,7 +41,7 @@ public class Result_QueryChannelRangeDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_QueryChannelRangeDecodeErrorZ in the success state.
 	 */
-	public static Result_QueryChannelRangeDecodeErrorZ ok(org.ldk.structs.QueryChannelRange o) {
+	public static org.ldk.structs.Result_QueryChannelRangeDecodeErrorZ ok(org.ldk.structs.QueryChannelRange o) {
 		long ret = bindings.CResult_QueryChannelRangeDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_QueryChannelRangeDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_QueryChannelRangeDecodeErrorZ in the error state.
 	 */
-	public static Result_QueryChannelRangeDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_QueryChannelRangeDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_QueryChannelRangeDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_QueryChannelRangeDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_QueryChannelRangeDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_QueryChannelRangeDecodeErrorZ clone() {
+	public org.ldk.structs.Result_QueryChannelRangeDecodeErrorZ clone() {
 		long ret = bindings.CResult_QueryChannelRangeDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

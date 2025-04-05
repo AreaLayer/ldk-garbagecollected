@@ -34,7 +34,7 @@ public class OutputSweeper : CommonBase {
 	 * If chain data is provided via the [`Confirm`] interface or via filtered blocks, users also
 	 * need to register their [`Filter`] implementation via the given `chain_data_source`.
 	 */
-	public static OutputSweeper of(org.ldk.structs.BestBlock best_block, org.ldk.structs.BroadcasterInterface broadcaster, org.ldk.structs.FeeEstimator fee_estimator, org.ldk.structs.Option_FilterZ chain_data_source, org.ldk.structs.OutputSpender output_spender, org.ldk.structs.ChangeDestinationSource change_destination_source, org.ldk.structs.KVStore kv_store, org.ldk.structs.Logger logger) {
+	public static org.ldk.structs.OutputSweeper of(org.ldk.structs.BestBlock best_block, org.ldk.structs.BroadcasterInterface broadcaster, org.ldk.structs.FeeEstimator fee_estimator, org.ldk.structs.Option_FilterZ chain_data_source, org.ldk.structs.OutputSpender output_spender, org.ldk.structs.ChangeDestinationSource change_destination_source, org.ldk.structs.KVStore kv_store, org.ldk.structs.Logger logger) {
 		long ret = bindings.OutputSweeper_new(best_block.ptr, broadcaster.ptr, fee_estimator.ptr, chain_data_source.ptr, output_spender.ptr, change_destination_source.ptr, kv_store.ptr, logger.ptr);
 		GC.KeepAlive(best_block);
 		GC.KeepAlive(broadcaster);
@@ -76,7 +76,7 @@ public class OutputSweeper : CommonBase {
 	 * 
 	 * Note that channel_id (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public Result_NoneNoneZ track_spendable_outputs(SpendableOutputDescriptor[] output_descriptors, org.ldk.structs.ChannelId channel_id, bool exclude_static_outputs, org.ldk.structs.Option_u32Z delay_until_height) {
+	public org.ldk.structs.Result_NoneNoneZ track_spendable_outputs(SpendableOutputDescriptor[] output_descriptors, org.ldk.structs.ChannelId channel_id, bool exclude_static_outputs, org.ldk.structs.Option_u32Z delay_until_height) {
 		long ret = bindings.OutputSweeper_track_spendable_outputs(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(output_descriptors, output_descriptors_conv_27 => output_descriptors_conv_27.ptr)), channel_id == null ? 0 : channel_id.ptr, exclude_static_outputs, delay_until_height.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(output_descriptors);
@@ -111,7 +111,7 @@ public class OutputSweeper : CommonBase {
 	 * Gets the latest best block which was connected either via the [`Listen`] or
 	 * [`Confirm`] interfaces.
 	 */
-	public BestBlock current_best_block() {
+	public org.ldk.structs.BestBlock current_best_block() {
 		long ret = bindings.OutputSweeper_current_best_block(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -124,7 +124,7 @@ public class OutputSweeper : CommonBase {
 	 * Constructs a new Listen which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned Listen must be freed before this_arg is
 	 */
-	public Listen as_Listen() {
+	public org.ldk.structs.Listen as_Listen() {
 		long ret = bindings.OutputSweeper_as_Listen(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -137,7 +137,7 @@ public class OutputSweeper : CommonBase {
 	 * Constructs a new Confirm which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned Confirm must be freed before this_arg is
 	 */
-	public Confirm as_Confirm() {
+	public org.ldk.structs.Confirm as_Confirm() {
 		long ret = bindings.OutputSweeper_as_Confirm(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -149,7 +149,7 @@ public class OutputSweeper : CommonBase {
 	/**
 	 * Read a OutputSweeper from a byte array, created by OutputSweeper_write
 	 */
-	public static Result_OutputSweeperDecodeErrorZ read(byte[] ser, org.ldk.structs.BroadcasterInterface arg_a, org.ldk.structs.FeeEstimator arg_b, org.ldk.structs.Option_FilterZ arg_c, org.ldk.structs.OutputSpender arg_d, org.ldk.structs.ChangeDestinationSource arg_e, org.ldk.structs.KVStore arg_f, org.ldk.structs.Logger arg_g) {
+	public static org.ldk.structs.Result_OutputSweeperDecodeErrorZ read(byte[] ser, org.ldk.structs.BroadcasterInterface arg_a, org.ldk.structs.FeeEstimator arg_b, org.ldk.structs.Option_FilterZ arg_c, org.ldk.structs.OutputSpender arg_d, org.ldk.structs.ChangeDestinationSource arg_e, org.ldk.structs.KVStore arg_f, org.ldk.structs.Logger arg_g) {
 		long ret = bindings.OutputSweeper_read(InternalUtils.encodeUint8Array(ser), arg_a.ptr, arg_b.ptr, arg_c.ptr, arg_d.ptr, arg_e.ptr, arg_f.ptr, arg_g.ptr);
 		GC.KeepAlive(ser);
 		GC.KeepAlive(arg_a);

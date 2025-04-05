@@ -28,7 +28,7 @@ public class RefundMaybeWithDerivedMetadataBuilder : CommonBase {
 	/**
 	 * Creates a copy of the RefundMaybeWithDerivedMetadataBuilder
 	 */
-	public RefundMaybeWithDerivedMetadataBuilder clone() {
+	public org.ldk.structs.RefundMaybeWithDerivedMetadataBuilder clone() {
 		long ret = bindings.RefundMaybeWithDerivedMetadataBuilder_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class RefundMaybeWithDerivedMetadataBuilder : CommonBase {
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 * [`ChannelManager::create_refund_builder`]: crate::ln::channelmanager::ChannelManager::create_refund_builder
 	 */
-	public static Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ of(byte[] metadata, byte[] signing_pubkey, long amount_msats) {
+	public static org.ldk.structs.Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ of(byte[] metadata, byte[] signing_pubkey, long amount_msats) {
 		long ret = bindings.RefundMaybeWithDerivedMetadataBuilder_new(InternalUtils.encodeUint8Array(metadata), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(signing_pubkey, 33)), amount_msats);
 		GC.KeepAlive(metadata);
 		GC.KeepAlive(signing_pubkey);
@@ -81,7 +81,7 @@ public class RefundMaybeWithDerivedMetadataBuilder : CommonBase {
 	 * [`Bolt12Invoice::verify_using_payer_data`]: crate::offers::invoice::Bolt12Invoice::verify_using_payer_data
 	 * [`ExpandedKey`]: crate::ln::inbound_payment::ExpandedKey
 	 */
-	public static Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ deriving_signing_pubkey(byte[] node_id, org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.Nonce nonce, long amount_msats, byte[] payment_id) {
+	public static org.ldk.structs.Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ deriving_signing_pubkey(byte[] node_id, org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.Nonce nonce, long amount_msats, byte[] payment_id) {
 		long ret = bindings.RefundMaybeWithDerivedMetadataBuilder_deriving_signing_pubkey(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), expanded_key.ptr, nonce.ptr, amount_msats, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(expanded_key);
@@ -191,7 +191,7 @@ public class RefundMaybeWithDerivedMetadataBuilder : CommonBase {
 	/**
 	 * Builds a [`Refund`] after checking for valid semantics.
 	 */
-	public Result_RefundBolt12SemanticErrorZ build() {
+	public org.ldk.structs.Result_RefundBolt12SemanticErrorZ build() {
 		long ret = bindings.RefundMaybeWithDerivedMetadataBuilder_build(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -76,7 +76,7 @@ public class PaymentRelay : CommonBase {
 	/**
 	 * Constructs a new PaymentRelay given each field
 	 */
-	public static PaymentRelay of(short cltv_expiry_delta_arg, int fee_proportional_millionths_arg, int fee_base_msat_arg) {
+	public static org.ldk.structs.PaymentRelay of(short cltv_expiry_delta_arg, int fee_proportional_millionths_arg, int fee_base_msat_arg) {
 		long ret = bindings.PaymentRelay_new(cltv_expiry_delta_arg, fee_proportional_millionths_arg, fee_base_msat_arg);
 		GC.KeepAlive(cltv_expiry_delta_arg);
 		GC.KeepAlive(fee_proportional_millionths_arg);
@@ -96,7 +96,7 @@ public class PaymentRelay : CommonBase {
 	/**
 	 * Creates a copy of the PaymentRelay
 	 */
-	public PaymentRelay clone() {
+	public org.ldk.structs.PaymentRelay clone() {
 		long ret = bindings.PaymentRelay_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -119,7 +119,7 @@ public class PaymentRelay : CommonBase {
 	/**
 	 * Read a PaymentRelay from a byte array, created by PaymentRelay_write
 	 */
-	public static Result_PaymentRelayDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_PaymentRelayDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.PaymentRelay_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

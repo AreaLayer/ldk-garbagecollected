@@ -41,7 +41,7 @@ public class Result_ShutdownDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_ShutdownDecodeErrorZ in the success state.
 	 */
-	public static Result_ShutdownDecodeErrorZ ok(org.ldk.structs.Shutdown o) {
+	public static org.ldk.structs.Result_ShutdownDecodeErrorZ ok(org.ldk.structs.Shutdown o) {
 		long ret = bindings.CResult_ShutdownDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_ShutdownDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_ShutdownDecodeErrorZ in the error state.
 	 */
-	public static Result_ShutdownDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_ShutdownDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_ShutdownDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_ShutdownDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_ShutdownDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_ShutdownDecodeErrorZ clone() {
+	public org.ldk.structs.Result_ShutdownDecodeErrorZ clone() {
 		long ret = bindings.CResult_ShutdownDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

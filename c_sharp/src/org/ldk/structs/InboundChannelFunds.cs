@@ -47,7 +47,7 @@ public class InboundChannelFunds : CommonBase {
 	/**
 	 * Creates a copy of the InboundChannelFunds
 	 */
-	public InboundChannelFunds clone() {
+	public org.ldk.structs.InboundChannelFunds clone() {
 		long ret = bindings.InboundChannelFunds_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -59,7 +59,7 @@ public class InboundChannelFunds : CommonBase {
 	/**
 	 * Utility method to constructs a new PushMsat-variant InboundChannelFunds
 	 */
-	public static InboundChannelFunds push_msat(long a) {
+	public static org.ldk.structs.InboundChannelFunds push_msat(long a) {
 		long ret = bindings.InboundChannelFunds_push_msat(a);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -71,7 +71,7 @@ public class InboundChannelFunds : CommonBase {
 	/**
 	 * Utility method to constructs a new DualFunded-variant InboundChannelFunds
 	 */
-	public static InboundChannelFunds dual_funded() {
+	public static org.ldk.structs.InboundChannelFunds dual_funded() {
 		long ret = bindings.InboundChannelFunds_dual_funded();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.InboundChannelFunds ret_hu_conv = org.ldk.structs.InboundChannelFunds.constr_from_ptr(ret);

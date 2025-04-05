@@ -28,7 +28,7 @@ public class MonitorEvent : CommonBase {
 
 	/** A MonitorEvent of type HTLCEvent */
 	public class MonitorEvent_HTLCEvent : MonitorEvent {
-		public HTLCUpdate htlc_event;
+		public org.ldk.structs.HTLCUpdate htlc_event;
 		internal MonitorEvent_HTLCEvent(long ptr) : base(null, ptr) {
 			long htlc_event = bindings.LDKMonitorEvent_HTLCEvent_get_htlc_event(ptr);
 			org.ldk.structs.HTLCUpdate htlc_event_hu_conv = null; if (htlc_event < 0 || htlc_event > 4096) { htlc_event_hu_conv = new org.ldk.structs.HTLCUpdate(null, htlc_event); }
@@ -41,15 +41,15 @@ public class MonitorEvent : CommonBase {
 		/**
 		 * The reason the channel was closed.
 		 */
-		public ClosureReason reason;
+		public org.ldk.structs.ClosureReason reason;
 		/**
 		 * The funding outpoint of the channel.
 		 */
-		public OutPoint outpoint;
+		public org.ldk.structs.OutPoint outpoint;
 		/**
 		 * The channel ID of the channel.
 		 */
-		public ChannelId channel_id;
+		public org.ldk.structs.ChannelId channel_id;
 		internal MonitorEvent_HolderForceClosedWithInfo(long ptr) : base(null, ptr) {
 			long reason = bindings.LDKMonitorEvent_HolderForceClosedWithInfo_get_reason(ptr);
 			org.ldk.structs.ClosureReason reason_hu_conv = org.ldk.structs.ClosureReason.constr_from_ptr(reason);
@@ -67,7 +67,7 @@ public class MonitorEvent : CommonBase {
 	}
 	/** A MonitorEvent of type HolderForceClosed */
 	public class MonitorEvent_HolderForceClosed : MonitorEvent {
-		public OutPoint holder_force_closed;
+		public org.ldk.structs.OutPoint holder_force_closed;
 		internal MonitorEvent_HolderForceClosed(long ptr) : base(null, ptr) {
 			long holder_force_closed = bindings.LDKMonitorEvent_HolderForceClosed_get_holder_force_closed(ptr);
 			org.ldk.structs.OutPoint holder_force_closed_hu_conv = null; if (holder_force_closed < 0 || holder_force_closed > 4096) { holder_force_closed_hu_conv = new org.ldk.structs.OutPoint(null, holder_force_closed); }
@@ -80,11 +80,11 @@ public class MonitorEvent : CommonBase {
 		/**
 		 * The funding outpoint of the [`ChannelMonitor`] that was updated
 		 */
-		public OutPoint funding_txo;
+		public org.ldk.structs.OutPoint funding_txo;
 		/**
 		 * The channel ID of the channel associated with the [`ChannelMonitor`]
 		 */
-		public ChannelId channel_id;
+		public org.ldk.structs.ChannelId channel_id;
 		/**
 		 * The Update ID from [`ChannelMonitorUpdate::update_id`] which was applied or
 		 * [`ChannelMonitor::get_latest_update_id`].
@@ -114,7 +114,7 @@ public class MonitorEvent : CommonBase {
 	/**
 	 * Creates a copy of the MonitorEvent
 	 */
-	public MonitorEvent clone() {
+	public org.ldk.structs.MonitorEvent clone() {
 		long ret = bindings.MonitorEvent_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -126,7 +126,7 @@ public class MonitorEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new HTLCEvent-variant MonitorEvent
 	 */
-	public static MonitorEvent htlcevent(org.ldk.structs.HTLCUpdate a) {
+	public static org.ldk.structs.MonitorEvent htlcevent(org.ldk.structs.HTLCUpdate a) {
 		long ret = bindings.MonitorEvent_htlcevent(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -138,7 +138,7 @@ public class MonitorEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new HolderForceClosedWithInfo-variant MonitorEvent
 	 */
-	public static MonitorEvent holder_force_closed_with_info(org.ldk.structs.ClosureReason reason, org.ldk.structs.OutPoint outpoint, org.ldk.structs.ChannelId channel_id) {
+	public static org.ldk.structs.MonitorEvent holder_force_closed_with_info(org.ldk.structs.ClosureReason reason, org.ldk.structs.OutPoint outpoint, org.ldk.structs.ChannelId channel_id) {
 		long ret = bindings.MonitorEvent_holder_force_closed_with_info(reason.ptr, outpoint.ptr, channel_id.ptr);
 		GC.KeepAlive(reason);
 		GC.KeepAlive(outpoint);
@@ -152,7 +152,7 @@ public class MonitorEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new HolderForceClosed-variant MonitorEvent
 	 */
-	public static MonitorEvent holder_force_closed(org.ldk.structs.OutPoint a) {
+	public static org.ldk.structs.MonitorEvent holder_force_closed(org.ldk.structs.OutPoint a) {
 		long ret = bindings.MonitorEvent_holder_force_closed(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -164,7 +164,7 @@ public class MonitorEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new Completed-variant MonitorEvent
 	 */
-	public static MonitorEvent completed(org.ldk.structs.OutPoint funding_txo, org.ldk.structs.ChannelId channel_id, long monitor_update_id) {
+	public static org.ldk.structs.MonitorEvent completed(org.ldk.structs.OutPoint funding_txo, org.ldk.structs.ChannelId channel_id, long monitor_update_id) {
 		long ret = bindings.MonitorEvent_completed(funding_txo.ptr, channel_id.ptr, monitor_update_id);
 		GC.KeepAlive(funding_txo);
 		GC.KeepAlive(channel_id);

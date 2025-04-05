@@ -20,7 +20,7 @@ public class StaticPaymentOutputDescriptor : CommonBase {
 	/**
 	 * The outpoint which is spendable.
 	 */
-	public OutPoint get_outpoint() {
+	public org.ldk.structs.OutPoint get_outpoint() {
 		long ret = bindings.StaticPaymentOutputDescriptor_get_outpoint(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -41,7 +41,7 @@ public class StaticPaymentOutputDescriptor : CommonBase {
 	/**
 	 * The output which is referenced by the given outpoint.
 	 */
-	public TxOut get_output() {
+	public org.ldk.structs.TxOut get_output() {
 		long ret = bindings.StaticPaymentOutputDescriptor_get_output(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -106,7 +106,7 @@ public class StaticPaymentOutputDescriptor : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ChannelTransactionParameters get_channel_transaction_parameters() {
+	public org.ldk.structs.ChannelTransactionParameters get_channel_transaction_parameters() {
 		long ret = bindings.StaticPaymentOutputDescriptor_get_channel_transaction_parameters(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -134,7 +134,7 @@ public class StaticPaymentOutputDescriptor : CommonBase {
 	 * 
 	 * Note that channel_transaction_parameters_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static StaticPaymentOutputDescriptor of(org.ldk.structs.OutPoint outpoint_arg, org.ldk.structs.TxOut output_arg, byte[] channel_keys_id_arg, long channel_value_satoshis_arg, org.ldk.structs.ChannelTransactionParameters channel_transaction_parameters_arg) {
+	public static org.ldk.structs.StaticPaymentOutputDescriptor of(org.ldk.structs.OutPoint outpoint_arg, org.ldk.structs.TxOut output_arg, byte[] channel_keys_id_arg, long channel_value_satoshis_arg, org.ldk.structs.ChannelTransactionParameters channel_transaction_parameters_arg) {
 		long ret = bindings.StaticPaymentOutputDescriptor_new(outpoint_arg.ptr, output_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(channel_keys_id_arg, 32)), channel_value_satoshis_arg, channel_transaction_parameters_arg == null ? 0 : channel_transaction_parameters_arg.ptr);
 		GC.KeepAlive(outpoint_arg);
 		GC.KeepAlive(output_arg);
@@ -156,7 +156,7 @@ public class StaticPaymentOutputDescriptor : CommonBase {
 	/**
 	 * Creates a copy of the StaticPaymentOutputDescriptor
 	 */
-	public StaticPaymentOutputDescriptor clone() {
+	public org.ldk.structs.StaticPaymentOutputDescriptor clone() {
 		long ret = bindings.StaticPaymentOutputDescriptor_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -200,7 +200,7 @@ public class StaticPaymentOutputDescriptor : CommonBase {
 	 * Note that this will only return `Some` for [`StaticPaymentOutputDescriptor`]s that
 	 * originated from an anchor outputs channel, as they take the form of a P2WSH script.
 	 */
-	public Option_CVec_u8ZZ witness_script() {
+	public org.ldk.structs.Option_CVec_u8ZZ witness_script() {
 		long ret = bindings.StaticPaymentOutputDescriptor_witness_script(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -234,7 +234,7 @@ public class StaticPaymentOutputDescriptor : CommonBase {
 	/**
 	 * Read a StaticPaymentOutputDescriptor from a byte array, created by StaticPaymentOutputDescriptor_write
 	 */
-	public static Result_StaticPaymentOutputDescriptorDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_StaticPaymentOutputDescriptorDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.StaticPaymentOutputDescriptor_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -41,7 +41,7 @@ public class Result_ErrorMessageDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_ErrorMessageDecodeErrorZ in the success state.
 	 */
-	public static Result_ErrorMessageDecodeErrorZ ok(org.ldk.structs.ErrorMessage o) {
+	public static org.ldk.structs.Result_ErrorMessageDecodeErrorZ ok(org.ldk.structs.ErrorMessage o) {
 		long ret = bindings.CResult_ErrorMessageDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_ErrorMessageDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_ErrorMessageDecodeErrorZ in the error state.
 	 */
-	public static Result_ErrorMessageDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_ErrorMessageDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_ErrorMessageDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_ErrorMessageDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_ErrorMessageDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_ErrorMessageDecodeErrorZ clone() {
+	public org.ldk.structs.Result_ErrorMessageDecodeErrorZ clone() {
 		long ret = bindings.CResult_ErrorMessageDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

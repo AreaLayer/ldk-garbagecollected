@@ -28,7 +28,7 @@ public class TaggedHash : CommonBase {
 	/**
 	 * Creates a copy of the TaggedHash
 	 */
-	public TaggedHash clone() {
+	public org.ldk.structs.TaggedHash clone() {
 		long ret = bindings.TaggedHash_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

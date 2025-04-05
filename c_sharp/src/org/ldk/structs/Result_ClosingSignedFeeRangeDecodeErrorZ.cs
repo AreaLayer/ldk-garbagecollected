@@ -41,7 +41,7 @@ public class Result_ClosingSignedFeeRangeDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_ClosingSignedFeeRangeDecodeErrorZ in the success state.
 	 */
-	public static Result_ClosingSignedFeeRangeDecodeErrorZ ok(org.ldk.structs.ClosingSignedFeeRange o) {
+	public static org.ldk.structs.Result_ClosingSignedFeeRangeDecodeErrorZ ok(org.ldk.structs.ClosingSignedFeeRange o) {
 		long ret = bindings.CResult_ClosingSignedFeeRangeDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_ClosingSignedFeeRangeDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_ClosingSignedFeeRangeDecodeErrorZ in the error state.
 	 */
-	public static Result_ClosingSignedFeeRangeDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_ClosingSignedFeeRangeDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_ClosingSignedFeeRangeDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_ClosingSignedFeeRangeDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_ClosingSignedFeeRangeDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_ClosingSignedFeeRangeDecodeErrorZ clone() {
+	public org.ldk.structs.Result_ClosingSignedFeeRangeDecodeErrorZ clone() {
 		long ret = bindings.CResult_ClosingSignedFeeRangeDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

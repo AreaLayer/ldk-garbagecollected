@@ -38,11 +38,11 @@ public class SpendableOutputDescriptor : CommonBase {
 		/**
 		 * The outpoint which is spendable.
 		 */
-		public OutPoint outpoint;
+		public org.ldk.structs.OutPoint outpoint;
 		/**
 		 * The output which is referenced by the given outpoint.
 		 */
-		public TxOut output;
+		public org.ldk.structs.TxOut output;
 		/**
 		 * The `channel_keys_id` for the channel which this output came from.
 		 * 
@@ -71,7 +71,7 @@ public class SpendableOutputDescriptor : CommonBase {
 	}
 	/** A SpendableOutputDescriptor of type DelayedPaymentOutput */
 	public class SpendableOutputDescriptor_DelayedPaymentOutput : SpendableOutputDescriptor {
-		public DelayedPaymentOutputDescriptor delayed_payment_output;
+		public org.ldk.structs.DelayedPaymentOutputDescriptor delayed_payment_output;
 		internal SpendableOutputDescriptor_DelayedPaymentOutput(long ptr) : base(null, ptr) {
 			long delayed_payment_output = bindings.LDKSpendableOutputDescriptor_DelayedPaymentOutput_get_delayed_payment_output(ptr);
 			org.ldk.structs.DelayedPaymentOutputDescriptor delayed_payment_output_hu_conv = null; if (delayed_payment_output < 0 || delayed_payment_output > 4096) { delayed_payment_output_hu_conv = new org.ldk.structs.DelayedPaymentOutputDescriptor(null, delayed_payment_output); }
@@ -81,7 +81,7 @@ public class SpendableOutputDescriptor : CommonBase {
 	}
 	/** A SpendableOutputDescriptor of type StaticPaymentOutput */
 	public class SpendableOutputDescriptor_StaticPaymentOutput : SpendableOutputDescriptor {
-		public StaticPaymentOutputDescriptor static_payment_output;
+		public org.ldk.structs.StaticPaymentOutputDescriptor static_payment_output;
 		internal SpendableOutputDescriptor_StaticPaymentOutput(long ptr) : base(null, ptr) {
 			long static_payment_output = bindings.LDKSpendableOutputDescriptor_StaticPaymentOutput_get_static_payment_output(ptr);
 			org.ldk.structs.StaticPaymentOutputDescriptor static_payment_output_hu_conv = null; if (static_payment_output < 0 || static_payment_output > 4096) { static_payment_output_hu_conv = new org.ldk.structs.StaticPaymentOutputDescriptor(null, static_payment_output); }
@@ -98,7 +98,7 @@ public class SpendableOutputDescriptor : CommonBase {
 	/**
 	 * Creates a copy of the SpendableOutputDescriptor
 	 */
-	public SpendableOutputDescriptor clone() {
+	public org.ldk.structs.SpendableOutputDescriptor clone() {
 		long ret = bindings.SpendableOutputDescriptor_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -110,7 +110,7 @@ public class SpendableOutputDescriptor : CommonBase {
 	/**
 	 * Utility method to constructs a new StaticOutput-variant SpendableOutputDescriptor
 	 */
-	public static SpendableOutputDescriptor static_output(org.ldk.structs.OutPoint outpoint, org.ldk.structs.TxOut output, byte[] channel_keys_id) {
+	public static org.ldk.structs.SpendableOutputDescriptor static_output(org.ldk.structs.OutPoint outpoint, org.ldk.structs.TxOut output, byte[] channel_keys_id) {
 		long ret = bindings.SpendableOutputDescriptor_static_output(outpoint.ptr, output.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(channel_keys_id, 32)));
 		GC.KeepAlive(outpoint);
 		GC.KeepAlive(output);
@@ -124,7 +124,7 @@ public class SpendableOutputDescriptor : CommonBase {
 	/**
 	 * Utility method to constructs a new DelayedPaymentOutput-variant SpendableOutputDescriptor
 	 */
-	public static SpendableOutputDescriptor delayed_payment_output(org.ldk.structs.DelayedPaymentOutputDescriptor a) {
+	public static org.ldk.structs.SpendableOutputDescriptor delayed_payment_output(org.ldk.structs.DelayedPaymentOutputDescriptor a) {
 		long ret = bindings.SpendableOutputDescriptor_delayed_payment_output(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -136,7 +136,7 @@ public class SpendableOutputDescriptor : CommonBase {
 	/**
 	 * Utility method to constructs a new StaticPaymentOutput-variant SpendableOutputDescriptor
 	 */
-	public static SpendableOutputDescriptor static_payment_output(org.ldk.structs.StaticPaymentOutputDescriptor a) {
+	public static org.ldk.structs.SpendableOutputDescriptor static_payment_output(org.ldk.structs.StaticPaymentOutputDescriptor a) {
 		long ret = bindings.SpendableOutputDescriptor_static_payment_output(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -186,7 +186,7 @@ public class SpendableOutputDescriptor : CommonBase {
 	/**
 	 * Read a SpendableOutputDescriptor from a byte array, created by SpendableOutputDescriptor_write
 	 */
-	public static Result_SpendableOutputDescriptorDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_SpendableOutputDescriptorDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.SpendableOutputDescriptor_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -197,7 +197,7 @@ public class SpendableOutputDescriptor : CommonBase {
 	/**
 	 * Returns the outpoint of the spendable output.
 	 */
-	public OutPoint spendable_outpoint() {
+	public org.ldk.structs.OutPoint spendable_outpoint() {
 		long ret = bindings.SpendableOutputDescriptor_spendable_outpoint(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

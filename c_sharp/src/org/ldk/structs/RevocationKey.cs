@@ -39,7 +39,7 @@ public class RevocationKey : CommonBase {
 	/**
 	 * Constructs a new RevocationKey given each field
 	 */
-	public static RevocationKey of(byte[] a_arg) {
+	public static org.ldk.structs.RevocationKey of(byte[] a_arg) {
 		long ret = bindings.RevocationKey_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a_arg, 33)));
 		GC.KeepAlive(a_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -74,7 +74,7 @@ public class RevocationKey : CommonBase {
 	/**
 	 * Creates a copy of the RevocationKey
 	 */
-	public RevocationKey clone() {
+	public org.ldk.structs.RevocationKey clone() {
 		long ret = bindings.RevocationKey_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -106,7 +106,7 @@ public class RevocationKey : CommonBase {
 	 * 
 	 * [`chan_utils::derive_private_revocation_key`]: crate::ln::chan_utils::derive_private_revocation_key
 	 */
-	public static RevocationKey from_basepoint(org.ldk.structs.RevocationBasepoint countersignatory_basepoint, byte[] per_commitment_point) {
+	public static org.ldk.structs.RevocationKey from_basepoint(org.ldk.structs.RevocationBasepoint countersignatory_basepoint, byte[] per_commitment_point) {
 		long ret = bindings.RevocationKey_from_basepoint(countersignatory_basepoint.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(per_commitment_point, 33)));
 		GC.KeepAlive(countersignatory_basepoint);
 		GC.KeepAlive(per_commitment_point);
@@ -142,7 +142,7 @@ public class RevocationKey : CommonBase {
 	/**
 	 * Read a RevocationKey from a byte array, created by RevocationKey_write
 	 */
-	public static Result_RevocationKeyDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_RevocationKeyDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.RevocationKey_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

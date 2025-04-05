@@ -17,12 +17,12 @@ public interface DNSResolverMessageHandlerInterface {
 	 * 
 	 * Note that responder (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	Option_C2Tuple_DNSResolverMessageResponseInstructionZZ handle_dnssec_query(DNSSECQuery message, Responder responder);
+	Option_C2Tuple_DNSResolverMessageResponseInstructionZZ handle_dnssec_query(org.ldk.structs.DNSSECQuery message, org.ldk.structs.Responder responder);
 	/**Handle a [`DNSSECProof`] message (in response to a [`DNSSECQuery`] we presumably sent).
 	 * 
 	 * With this, we should be able to validate the DNS record we requested.
 	 */
-	void handle_dnssec_proof(DNSSECProof message, DNSResolverContext context);
+	void handle_dnssec_proof(org.ldk.structs.DNSSECProof message, org.ldk.structs.DNSResolverContext context);
 	/**Gets the node feature flags which this handler itself supports. Useful for setting the
 	 * `dns_resolver` flag if this handler supports returning [`DNSSECProof`] messages in response
 	 * to [`DNSSECQuery`] messages.
@@ -104,7 +104,7 @@ public class DNSResolverMessageHandler : CommonBase {
 	 * 
 	 * Note that responder (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public Option_C2Tuple_DNSResolverMessageResponseInstructionZZ handle_dnssec_query(org.ldk.structs.DNSSECQuery message, org.ldk.structs.Responder responder) {
+	public org.ldk.structs.Option_C2Tuple_DNSResolverMessageResponseInstructionZZ handle_dnssec_query(org.ldk.structs.DNSSECQuery message, org.ldk.structs.Responder responder) {
 		long ret = bindings.DNSResolverMessageHandler_handle_dnssec_query(this.ptr, message.ptr, responder == null ? 0 : responder.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(message);
@@ -132,7 +132,7 @@ public class DNSResolverMessageHandler : CommonBase {
 	 * `dns_resolver` flag if this handler supports returning [`DNSSECProof`] messages in response
 	 * to [`DNSSECQuery`] messages.
 	 */
-	public NodeFeatures provided_node_features() {
+	public org.ldk.structs.NodeFeatures provided_node_features() {
 		long ret = bindings.DNSResolverMessageHandler_provided_node_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

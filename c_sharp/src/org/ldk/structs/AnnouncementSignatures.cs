@@ -20,7 +20,7 @@ public class AnnouncementSignatures : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.AnnouncementSignatures_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -99,7 +99,7 @@ public class AnnouncementSignatures : CommonBase {
 	/**
 	 * Constructs a new AnnouncementSignatures given each field
 	 */
-	public static AnnouncementSignatures of(org.ldk.structs.ChannelId channel_id_arg, long short_channel_id_arg, byte[] node_signature_arg, byte[] bitcoin_signature_arg) {
+	public static org.ldk.structs.AnnouncementSignatures of(org.ldk.structs.ChannelId channel_id_arg, long short_channel_id_arg, byte[] node_signature_arg, byte[] bitcoin_signature_arg) {
 		long ret = bindings.AnnouncementSignatures_new(channel_id_arg.ptr, short_channel_id_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_signature_arg, 64)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(bitcoin_signature_arg, 64)));
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(short_channel_id_arg);
@@ -120,7 +120,7 @@ public class AnnouncementSignatures : CommonBase {
 	/**
 	 * Creates a copy of the AnnouncementSignatures
 	 */
-	public AnnouncementSignatures clone() {
+	public org.ldk.structs.AnnouncementSignatures clone() {
 		long ret = bindings.AnnouncementSignatures_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -172,7 +172,7 @@ public class AnnouncementSignatures : CommonBase {
 	/**
 	 * Read a AnnouncementSignatures from a byte array, created by AnnouncementSignatures_write
 	 */
-	public static Result_AnnouncementSignaturesDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_AnnouncementSignaturesDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.AnnouncementSignatures_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

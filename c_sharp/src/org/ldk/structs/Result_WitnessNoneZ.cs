@@ -35,7 +35,7 @@ public class Result_WitnessNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_WitnessNoneZ in the success state.
 	 */
-	public static Result_WitnessNoneZ ok(byte[] o) {
+	public static org.ldk.structs.Result_WitnessNoneZ ok(byte[] o) {
 		long ret = bindings.CResult_WitnessNoneZ_ok(InternalUtils.encodeUint8Array(o));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -46,7 +46,7 @@ public class Result_WitnessNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_WitnessNoneZ in the error state.
 	 */
-	public static Result_WitnessNoneZ err() {
+	public static org.ldk.structs.Result_WitnessNoneZ err() {
 		long ret = bindings.CResult_WitnessNoneZ_err();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_WitnessNoneZ ret_hu_conv = Result_WitnessNoneZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Result_WitnessNoneZ : CommonBase {
 	 * Creates a new CResult_WitnessNoneZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_WitnessNoneZ clone() {
+	public org.ldk.structs.Result_WitnessNoneZ clone() {
 		long ret = bindings.CResult_WitnessNoneZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

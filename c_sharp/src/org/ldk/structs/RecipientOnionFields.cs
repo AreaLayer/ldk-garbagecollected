@@ -31,7 +31,7 @@ public class RecipientOnionFields : CommonBase {
 	 * want to provide a secret for a spontaneous payment if MPP is needed and you know your
 	 * recipient will not reject it.
 	 */
-	public Option_ThirtyTwoBytesZ get_payment_secret() {
+	public org.ldk.structs.Option_ThirtyTwoBytesZ get_payment_secret() {
 		long ret = bindings.RecipientOnionFields_get_payment_secret(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -75,7 +75,7 @@ public class RecipientOnionFields : CommonBase {
 	 * 
 	 * Returns a copy of the field.
 	 */
-	public Option_CVec_u8ZZ get_payment_metadata() {
+	public org.ldk.structs.Option_CVec_u8ZZ get_payment_metadata() {
 		long ret = bindings.RecipientOnionFields_get_payment_metadata(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -113,7 +113,7 @@ public class RecipientOnionFields : CommonBase {
 	/**
 	 * Creates a copy of the RecipientOnionFields
 	 */
-	public RecipientOnionFields clone() {
+	public org.ldk.structs.RecipientOnionFields clone() {
 		long ret = bindings.RecipientOnionFields_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -153,7 +153,7 @@ public class RecipientOnionFields : CommonBase {
 	/**
 	 * Read a RecipientOnionFields from a byte array, created by RecipientOnionFields_write
 	 */
-	public static Result_RecipientOnionFieldsDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_RecipientOnionFieldsDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.RecipientOnionFields_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -166,7 +166,7 @@ public class RecipientOnionFields : CommonBase {
 	 * set of onion fields for today's BOLT11 invoices - most nodes require a [`PaymentSecret`]
 	 * but do not require or provide any further data.
 	 */
-	public static RecipientOnionFields secret_only(byte[] payment_secret) {
+	public static org.ldk.structs.RecipientOnionFields secret_only(byte[] payment_secret) {
 		long ret = bindings.RecipientOnionFields_secret_only(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_secret, 32)));
 		GC.KeepAlive(payment_secret);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -185,7 +185,7 @@ public class RecipientOnionFields : CommonBase {
 	 * [`ChannelManager::send_spontaneous_payment`]: super::channelmanager::ChannelManager::send_spontaneous_payment
 	 * [`RecipientOnionFields::secret_only`]: RecipientOnionFields::secret_only
 	 */
-	public static RecipientOnionFields spontaneous_empty() {
+	public static org.ldk.structs.RecipientOnionFields spontaneous_empty() {
 		long ret = bindings.RecipientOnionFields_spontaneous_empty();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.RecipientOnionFields ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.RecipientOnionFields(null, ret); }
@@ -204,7 +204,7 @@ public class RecipientOnionFields : CommonBase {
 	 * 
 	 * See [`Self::custom_tlvs`] for more info.
 	 */
-	public Result_RecipientOnionFieldsNoneZ with_custom_tlvs(TwoTuple_u64CVec_u8ZZ[] custom_tlvs) {
+	public org.ldk.structs.Result_RecipientOnionFieldsNoneZ with_custom_tlvs(TwoTuple_u64CVec_u8ZZ[] custom_tlvs) {
 		long ret = bindings.RecipientOnionFields_with_custom_tlvs(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(custom_tlvs, custom_tlvs_conv_23 => custom_tlvs_conv_23.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(custom_tlvs);

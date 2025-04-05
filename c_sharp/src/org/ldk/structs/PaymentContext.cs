@@ -29,7 +29,7 @@ public class PaymentContext : CommonBase {
 
 	/** A PaymentContext of type Bolt12Offer */
 	public class PaymentContext_Bolt12Offer : PaymentContext {
-		public Bolt12OfferContext bolt12_offer;
+		public org.ldk.structs.Bolt12OfferContext bolt12_offer;
 		internal PaymentContext_Bolt12Offer(long ptr) : base(null, ptr) {
 			long bolt12_offer = bindings.LDKPaymentContext_Bolt12Offer_get_bolt12_offer(ptr);
 			org.ldk.structs.Bolt12OfferContext bolt12_offer_hu_conv = null; if (bolt12_offer < 0 || bolt12_offer > 4096) { bolt12_offer_hu_conv = new org.ldk.structs.Bolt12OfferContext(null, bolt12_offer); }
@@ -39,7 +39,7 @@ public class PaymentContext : CommonBase {
 	}
 	/** A PaymentContext of type Bolt12Refund */
 	public class PaymentContext_Bolt12Refund : PaymentContext {
-		public Bolt12RefundContext bolt12_refund;
+		public org.ldk.structs.Bolt12RefundContext bolt12_refund;
 		internal PaymentContext_Bolt12Refund(long ptr) : base(null, ptr) {
 			long bolt12_refund = bindings.LDKPaymentContext_Bolt12Refund_get_bolt12_refund(ptr);
 			org.ldk.structs.Bolt12RefundContext bolt12_refund_hu_conv = null; if (bolt12_refund < 0 || bolt12_refund > 4096) { bolt12_refund_hu_conv = new org.ldk.structs.Bolt12RefundContext(null, bolt12_refund); }
@@ -56,7 +56,7 @@ public class PaymentContext : CommonBase {
 	/**
 	 * Creates a copy of the PaymentContext
 	 */
-	public PaymentContext clone() {
+	public org.ldk.structs.PaymentContext clone() {
 		long ret = bindings.PaymentContext_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -68,7 +68,7 @@ public class PaymentContext : CommonBase {
 	/**
 	 * Utility method to constructs a new Bolt12Offer-variant PaymentContext
 	 */
-	public static PaymentContext bolt12_offer(org.ldk.structs.Bolt12OfferContext a) {
+	public static org.ldk.structs.PaymentContext bolt12_offer(org.ldk.structs.Bolt12OfferContext a) {
 		long ret = bindings.PaymentContext_bolt12_offer(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -80,7 +80,7 @@ public class PaymentContext : CommonBase {
 	/**
 	 * Utility method to constructs a new Bolt12Refund-variant PaymentContext
 	 */
-	public static PaymentContext bolt12_refund(org.ldk.structs.Bolt12RefundContext a) {
+	public static org.ldk.structs.PaymentContext bolt12_refund(org.ldk.structs.Bolt12RefundContext a) {
 		long ret = bindings.PaymentContext_bolt12_refund(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -118,7 +118,7 @@ public class PaymentContext : CommonBase {
 	/**
 	 * Read a PaymentContext from a byte array, created by PaymentContext_write
 	 */
-	public static Result_PaymentContextDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_PaymentContextDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.PaymentContext_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

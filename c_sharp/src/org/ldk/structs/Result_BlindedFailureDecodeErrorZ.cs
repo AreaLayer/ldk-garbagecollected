@@ -38,7 +38,7 @@ public class Result_BlindedFailureDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_BlindedFailureDecodeErrorZ in the success state.
 	 */
-	public static Result_BlindedFailureDecodeErrorZ ok(BlindedFailure o) {
+	public static org.ldk.structs.Result_BlindedFailureDecodeErrorZ ok(BlindedFailure o) {
 		long ret = bindings.CResult_BlindedFailureDecodeErrorZ_ok(o);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -49,7 +49,7 @@ public class Result_BlindedFailureDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_BlindedFailureDecodeErrorZ in the error state.
 	 */
-	public static Result_BlindedFailureDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_BlindedFailureDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_BlindedFailureDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -76,7 +76,7 @@ public class Result_BlindedFailureDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_BlindedFailureDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_BlindedFailureDecodeErrorZ clone() {
+	public org.ldk.structs.Result_BlindedFailureDecodeErrorZ clone() {
 		long ret = bindings.CResult_BlindedFailureDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

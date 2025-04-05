@@ -41,7 +41,7 @@ public class Result_EcdsaChannelSignerDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_EcdsaChannelSignerDecodeErrorZ in the success state.
 	 */
-	public static Result_EcdsaChannelSignerDecodeErrorZ ok(org.ldk.structs.EcdsaChannelSigner o) {
+	public static org.ldk.structs.Result_EcdsaChannelSignerDecodeErrorZ ok(org.ldk.structs.EcdsaChannelSigner o) {
 		long ret = bindings.CResult_EcdsaChannelSignerDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -53,7 +53,7 @@ public class Result_EcdsaChannelSignerDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_EcdsaChannelSignerDecodeErrorZ in the error state.
 	 */
-	public static Result_EcdsaChannelSignerDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_EcdsaChannelSignerDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_EcdsaChannelSignerDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -80,7 +80,7 @@ public class Result_EcdsaChannelSignerDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_EcdsaChannelSignerDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_EcdsaChannelSignerDecodeErrorZ clone() {
+	public org.ldk.structs.Result_EcdsaChannelSignerDecodeErrorZ clone() {
 		long ret = bindings.CResult_EcdsaChannelSignerDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

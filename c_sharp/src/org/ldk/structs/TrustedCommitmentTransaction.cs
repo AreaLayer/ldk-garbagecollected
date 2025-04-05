@@ -34,7 +34,7 @@ public class TrustedCommitmentTransaction : CommonBase {
 	/**
 	 * The pre-built Bitcoin commitment transaction
 	 */
-	public BuiltCommitmentTransaction built_transaction() {
+	public org.ldk.structs.BuiltCommitmentTransaction built_transaction() {
 		long ret = bindings.TrustedCommitmentTransaction_built_transaction(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -46,7 +46,7 @@ public class TrustedCommitmentTransaction : CommonBase {
 	/**
 	 * The pre-calculated transaction creation public keys.
 	 */
-	public TxCreationKeys keys() {
+	public org.ldk.structs.TxCreationKeys keys() {
 		long ret = bindings.TrustedCommitmentTransaction_keys(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -58,7 +58,7 @@ public class TrustedCommitmentTransaction : CommonBase {
 	/**
 	 * Should anchors be used.
 	 */
-	public ChannelTypeFeatures channel_type_features() {
+	public org.ldk.structs.ChannelTypeFeatures channel_type_features() {
 		long ret = bindings.TrustedCommitmentTransaction_channel_type_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -75,7 +75,7 @@ public class TrustedCommitmentTransaction : CommonBase {
 	 * 
 	 * This function is only valid in the holder commitment context, it always uses EcdsaSighashType::All.
 	 */
-	public Result_CVec_ECDSASignatureZNoneZ get_htlc_sigs(byte[] htlc_base_key, org.ldk.structs.DirectedChannelTransactionParameters channel_parameters, org.ldk.structs.EntropySource entropy_source) {
+	public org.ldk.structs.Result_CVec_ECDSASignatureZNoneZ get_htlc_sigs(byte[] htlc_base_key, org.ldk.structs.DirectedChannelTransactionParameters channel_parameters, org.ldk.structs.EntropySource entropy_source) {
 		long ret = bindings.TrustedCommitmentTransaction_get_htlc_sigs(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(htlc_base_key, 32)), channel_parameters.ptr, entropy_source.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(htlc_base_key);
@@ -99,7 +99,7 @@ public class TrustedCommitmentTransaction : CommonBase {
 	 * commitment transaction previously didn't contain enough information to locate the
 	 * revokeable output.
 	 */
-	public Option_usizeZ revokeable_output_index() {
+	public org.ldk.structs.Option_usizeZ revokeable_output_index() {
 		long ret = bindings.TrustedCommitmentTransaction_revokeable_output_index(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -121,7 +121,7 @@ public class TrustedCommitmentTransaction : CommonBase {
 	 * `feerate_per_kw` as an input such that multiple copies of a justice transaction at different
 	 * fee rates may be built.
 	 */
-	public Result_TransactionNoneZ build_to_local_justice_tx(long feerate_per_kw, byte[] destination_script) {
+	public org.ldk.structs.Result_TransactionNoneZ build_to_local_justice_tx(long feerate_per_kw, byte[] destination_script) {
 		long ret = bindings.TrustedCommitmentTransaction_build_to_local_justice_tx(this.ptr, feerate_per_kw, InternalUtils.encodeUint8Array(destination_script));
 		GC.KeepAlive(this);
 		GC.KeepAlive(feerate_per_kw);

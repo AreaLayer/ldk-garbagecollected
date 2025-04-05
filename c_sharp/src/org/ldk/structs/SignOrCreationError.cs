@@ -46,7 +46,7 @@ public class SignOrCreationError : CommonBase {
 	/**
 	 * Creates a copy of the SignOrCreationError
 	 */
-	public SignOrCreationError clone() {
+	public org.ldk.structs.SignOrCreationError clone() {
 		long ret = bindings.SignOrCreationError_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -58,7 +58,7 @@ public class SignOrCreationError : CommonBase {
 	/**
 	 * Utility method to constructs a new SignError-variant SignOrCreationError
 	 */
-	public static SignOrCreationError sign_error() {
+	public static org.ldk.structs.SignOrCreationError sign_error() {
 		long ret = bindings.SignOrCreationError_sign_error();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.SignOrCreationError ret_hu_conv = org.ldk.structs.SignOrCreationError.constr_from_ptr(ret);
@@ -69,7 +69,7 @@ public class SignOrCreationError : CommonBase {
 	/**
 	 * Utility method to constructs a new CreationError-variant SignOrCreationError
 	 */
-	public static SignOrCreationError creation_error(CreationError a) {
+	public static org.ldk.structs.SignOrCreationError creation_error(CreationError a) {
 		long ret = bindings.SignOrCreationError_creation_error(a);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }

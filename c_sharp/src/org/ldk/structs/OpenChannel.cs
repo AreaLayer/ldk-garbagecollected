@@ -22,7 +22,7 @@ public class OpenChannel : CommonBase {
 	/**
 	 * Common fields of `open_channel(2)`-like messages
 	 */
-	public CommonOpenChannelFields get_common_fields() {
+	public org.ldk.structs.CommonOpenChannelFields get_common_fields() {
 		long ret = bindings.OpenChannel_get_common_fields(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class OpenChannel : CommonBase {
 	/**
 	 * Constructs a new OpenChannel given each field
 	 */
-	public static OpenChannel of(org.ldk.structs.CommonOpenChannelFields common_fields_arg, long push_msat_arg, long channel_reserve_satoshis_arg) {
+	public static org.ldk.structs.OpenChannel of(org.ldk.structs.CommonOpenChannelFields common_fields_arg, long push_msat_arg, long channel_reserve_satoshis_arg) {
 		long ret = bindings.OpenChannel_new(common_fields_arg.ptr, push_msat_arg, channel_reserve_satoshis_arg);
 		GC.KeepAlive(common_fields_arg);
 		GC.KeepAlive(push_msat_arg);
@@ -99,7 +99,7 @@ public class OpenChannel : CommonBase {
 	/**
 	 * Creates a copy of the OpenChannel
 	 */
-	public OpenChannel clone() {
+	public org.ldk.structs.OpenChannel clone() {
 		long ret = bindings.OpenChannel_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -151,7 +151,7 @@ public class OpenChannel : CommonBase {
 	/**
 	 * Read a OpenChannel from a byte array, created by OpenChannel_write
 	 */
-	public static Result_OpenChannelDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_OpenChannelDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.OpenChannel_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

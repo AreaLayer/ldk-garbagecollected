@@ -64,7 +64,7 @@ public class BuiltCommitmentTransaction : CommonBase {
 	/**
 	 * Constructs a new BuiltCommitmentTransaction given each field
 	 */
-	public static BuiltCommitmentTransaction of(byte[] transaction_arg, byte[] txid_arg) {
+	public static org.ldk.structs.BuiltCommitmentTransaction of(byte[] transaction_arg, byte[] txid_arg) {
 		long ret = bindings.BuiltCommitmentTransaction_new(InternalUtils.encodeUint8Array(transaction_arg), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(txid_arg, 32)));
 		GC.KeepAlive(transaction_arg);
 		GC.KeepAlive(txid_arg);
@@ -83,7 +83,7 @@ public class BuiltCommitmentTransaction : CommonBase {
 	/**
 	 * Creates a copy of the BuiltCommitmentTransaction
 	 */
-	public BuiltCommitmentTransaction clone() {
+	public org.ldk.structs.BuiltCommitmentTransaction clone() {
 		long ret = bindings.BuiltCommitmentTransaction_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -106,7 +106,7 @@ public class BuiltCommitmentTransaction : CommonBase {
 	/**
 	 * Read a BuiltCommitmentTransaction from a byte array, created by BuiltCommitmentTransaction_write
 	 */
-	public static Result_BuiltCommitmentTransactionDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_BuiltCommitmentTransactionDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.BuiltCommitmentTransaction_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

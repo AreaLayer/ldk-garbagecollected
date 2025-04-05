@@ -26,7 +26,7 @@ public class Option_MessageContextZ : CommonBase {
 
 	/** A Option_MessageContextZ of type Some */
 	public class Option_MessageContextZ_Some : Option_MessageContextZ {
-		public MessageContext some;
+		public org.ldk.structs.MessageContext some;
 		internal Option_MessageContextZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_MessageContextZ_Some_get_some(ptr);
 			org.ldk.structs.MessageContext some_hu_conv = org.ldk.structs.MessageContext.constr_from_ptr(some);
@@ -42,7 +42,7 @@ public class Option_MessageContextZ : CommonBase {
 	/**
 	 * Constructs a new COption_MessageContextZ containing a crate::lightning::blinded_path::message::MessageContext
 	 */
-	public static Option_MessageContextZ some(org.ldk.structs.MessageContext o) {
+	public static org.ldk.structs.Option_MessageContextZ some(org.ldk.structs.MessageContext o) {
 		long ret = bindings.COption_MessageContextZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class Option_MessageContextZ : CommonBase {
 	/**
 	 * Constructs a new COption_MessageContextZ containing nothing
 	 */
-	public static Option_MessageContextZ none() {
+	public static org.ldk.structs.Option_MessageContextZ none() {
 		long ret = bindings.COption_MessageContextZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_MessageContextZ ret_hu_conv = org.ldk.structs.Option_MessageContextZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Option_MessageContextZ : CommonBase {
 	 * Creates a new COption_MessageContextZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_MessageContextZ clone() {
+	public org.ldk.structs.Option_MessageContextZ clone() {
 		long ret = bindings.COption_MessageContextZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

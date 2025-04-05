@@ -54,7 +54,7 @@ public class TwoTuple_ECDSASignatureCVec_ECDSASignatureZZ : CommonBase {
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public TwoTuple_ECDSASignatureCVec_ECDSASignatureZZ clone() {
+	public org.ldk.structs.TwoTuple_ECDSASignatureCVec_ECDSASignatureZZ clone() {
 		long ret = bindings.C2Tuple_ECDSASignatureCVec_ECDSASignatureZZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -66,7 +66,7 @@ public class TwoTuple_ECDSASignatureCVec_ECDSASignatureZZ : CommonBase {
 	/**
 	 * Creates a new C2Tuple_ECDSASignatureCVec_ECDSASignatureZZ from the contained elements.
 	 */
-	public static TwoTuple_ECDSASignatureCVec_ECDSASignatureZZ of(byte[] a, byte[][] b) {
+	public static org.ldk.structs.TwoTuple_ECDSASignatureCVec_ECDSASignatureZZ of(byte[] a, byte[][] b) {
 		long ret = bindings.C2Tuple_ECDSASignatureCVec_ECDSASignatureZZ_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 64)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(b, b_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(b_conv_8, 64)))));
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

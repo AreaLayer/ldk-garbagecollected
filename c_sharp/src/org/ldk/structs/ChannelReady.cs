@@ -20,7 +20,7 @@ public class ChannelReady : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.ChannelReady_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -64,7 +64,7 @@ public class ChannelReady : CommonBase {
 	 * The sender will accept payments to be forwarded over this SCID and forward them to this
 	 * messages' recipient.
 	 */
-	public Option_u64Z get_short_channel_id_alias() {
+	public org.ldk.structs.Option_u64Z get_short_channel_id_alias() {
 		long ret = bindings.ChannelReady_get_short_channel_id_alias(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -88,7 +88,7 @@ public class ChannelReady : CommonBase {
 	/**
 	 * Constructs a new ChannelReady given each field
 	 */
-	public static ChannelReady of(org.ldk.structs.ChannelId channel_id_arg, byte[] next_per_commitment_point_arg, org.ldk.structs.Option_u64Z short_channel_id_alias_arg) {
+	public static org.ldk.structs.ChannelReady of(org.ldk.structs.ChannelId channel_id_arg, byte[] next_per_commitment_point_arg, org.ldk.structs.Option_u64Z short_channel_id_alias_arg) {
 		long ret = bindings.ChannelReady_new(channel_id_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(next_per_commitment_point_arg, 33)), short_channel_id_alias_arg.ptr);
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(next_per_commitment_point_arg);
@@ -108,7 +108,7 @@ public class ChannelReady : CommonBase {
 	/**
 	 * Creates a copy of the ChannelReady
 	 */
-	public ChannelReady clone() {
+	public org.ldk.structs.ChannelReady clone() {
 		long ret = bindings.ChannelReady_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -160,7 +160,7 @@ public class ChannelReady : CommonBase {
 	/**
 	 * Read a ChannelReady from a byte array, created by ChannelReady_write
 	 */
-	public static Result_ChannelReadyDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ChannelReadyDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.ChannelReady_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

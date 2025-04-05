@@ -39,7 +39,7 @@ public class Option_i64Z : CommonBase {
 	/**
 	 * Constructs a new COption_i64Z containing a i64
 	 */
-	public static Option_i64Z some(long o) {
+	public static org.ldk.structs.Option_i64Z some(long o) {
 		long ret = bindings.COption_i64Z_some(o);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -51,7 +51,7 @@ public class Option_i64Z : CommonBase {
 	/**
 	 * Constructs a new COption_i64Z containing nothing
 	 */
-	public static Option_i64Z none() {
+	public static org.ldk.structs.Option_i64Z none() {
 		long ret = bindings.COption_i64Z_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_i64Z ret_hu_conv = org.ldk.structs.Option_i64Z.constr_from_ptr(ret);
@@ -69,7 +69,7 @@ public class Option_i64Z : CommonBase {
 	 * Creates a new COption_i64Z which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_i64Z clone() {
+	public org.ldk.structs.Option_i64Z clone() {
 		long ret = bindings.COption_i64Z_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

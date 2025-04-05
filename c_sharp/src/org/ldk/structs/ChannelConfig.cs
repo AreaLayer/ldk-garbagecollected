@@ -196,7 +196,7 @@ public class ChannelConfig : CommonBase {
 	 * 
 	 * [`ConfirmationTarget::MaximumFeeEstimate`]: crate::chain::chaininterface::ConfirmationTarget::MaximumFeeEstimate
 	 */
-	public MaxDustHTLCExposure get_max_dust_htlc_exposure() {
+	public org.ldk.structs.MaxDustHTLCExposure get_max_dust_htlc_exposure() {
 		long ret = bindings.ChannelConfig_get_max_dust_htlc_exposure(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -408,7 +408,7 @@ public class ChannelConfig : CommonBase {
 	/**
 	 * Constructs a new ChannelConfig given each field
 	 */
-	public static ChannelConfig of(int forwarding_fee_proportional_millionths_arg, int forwarding_fee_base_msat_arg, short cltv_expiry_delta_arg, org.ldk.structs.MaxDustHTLCExposure max_dust_htlc_exposure_arg, long force_close_avoidance_max_fee_satoshis_arg, bool accept_underpaying_htlcs_arg) {
+	public static org.ldk.structs.ChannelConfig of(int forwarding_fee_proportional_millionths_arg, int forwarding_fee_base_msat_arg, short cltv_expiry_delta_arg, org.ldk.structs.MaxDustHTLCExposure max_dust_htlc_exposure_arg, long force_close_avoidance_max_fee_satoshis_arg, bool accept_underpaying_htlcs_arg) {
 		long ret = bindings.ChannelConfig_new(forwarding_fee_proportional_millionths_arg, forwarding_fee_base_msat_arg, cltv_expiry_delta_arg, max_dust_htlc_exposure_arg.ptr, force_close_avoidance_max_fee_satoshis_arg, accept_underpaying_htlcs_arg);
 		GC.KeepAlive(forwarding_fee_proportional_millionths_arg);
 		GC.KeepAlive(forwarding_fee_base_msat_arg);
@@ -431,7 +431,7 @@ public class ChannelConfig : CommonBase {
 	/**
 	 * Creates a copy of the ChannelConfig
 	 */
-	public ChannelConfig clone() {
+	public org.ldk.structs.ChannelConfig clone() {
 		long ret = bindings.ChannelConfig_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -470,7 +470,7 @@ public class ChannelConfig : CommonBase {
 	/**
 	 * Creates a "default" ChannelConfig. See struct and individual field documentaiton for details on which values are used.
 	 */
-	public static ChannelConfig with_default() {
+	public static org.ldk.structs.ChannelConfig with_default() {
 		long ret = bindings.ChannelConfig_default();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ChannelConfig ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelConfig(null, ret); }
@@ -492,7 +492,7 @@ public class ChannelConfig : CommonBase {
 	/**
 	 * Read a ChannelConfig from a byte array, created by ChannelConfig_write
 	 */
-	public static Result_ChannelConfigDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ChannelConfigDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.ChannelConfig_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

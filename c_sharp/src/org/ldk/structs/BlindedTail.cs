@@ -107,7 +107,7 @@ public class BlindedTail : CommonBase {
 	/**
 	 * Constructs a new BlindedTail given each field
 	 */
-	public static BlindedTail of(BlindedHop[] hops_arg, byte[] blinding_point_arg, int excess_final_cltv_expiry_delta_arg, long final_value_msat_arg) {
+	public static org.ldk.structs.BlindedTail of(BlindedHop[] hops_arg, byte[] blinding_point_arg, int excess_final_cltv_expiry_delta_arg, long final_value_msat_arg) {
 		long ret = bindings.BlindedTail_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(hops_arg, hops_arg_conv_12 => hops_arg_conv_12.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(blinding_point_arg, 33)), excess_final_cltv_expiry_delta_arg, final_value_msat_arg);
 		GC.KeepAlive(hops_arg);
 		GC.KeepAlive(blinding_point_arg);
@@ -128,7 +128,7 @@ public class BlindedTail : CommonBase {
 	/**
 	 * Creates a copy of the BlindedTail
 	 */
-	public BlindedTail clone() {
+	public org.ldk.structs.BlindedTail clone() {
 		long ret = bindings.BlindedTail_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -180,7 +180,7 @@ public class BlindedTail : CommonBase {
 	/**
 	 * Read a BlindedTail from a byte array, created by BlindedTail_write
 	 */
-	public static Result_BlindedTailDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_BlindedTailDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.BlindedTail_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

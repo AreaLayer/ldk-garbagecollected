@@ -61,7 +61,7 @@ public class Amount : CommonBase {
 	/**
 	 * Creates a copy of the Amount
 	 */
-	public Amount clone() {
+	public org.ldk.structs.Amount clone() {
 		long ret = bindings.Amount_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -73,7 +73,7 @@ public class Amount : CommonBase {
 	/**
 	 * Utility method to constructs a new Bitcoin-variant Amount
 	 */
-	public static Amount bitcoin(long amount_msats) {
+	public static org.ldk.structs.Amount bitcoin(long amount_msats) {
 		long ret = bindings.Amount_bitcoin(amount_msats);
 		GC.KeepAlive(amount_msats);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -85,7 +85,7 @@ public class Amount : CommonBase {
 	/**
 	 * Utility method to constructs a new Currency-variant Amount
 	 */
-	public static Amount currency(byte[] iso4217_code, long amount) {
+	public static org.ldk.structs.Amount currency(byte[] iso4217_code, long amount) {
 		long ret = bindings.Amount_currency(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(iso4217_code, 3)), amount);
 		GC.KeepAlive(iso4217_code);
 		GC.KeepAlive(amount);

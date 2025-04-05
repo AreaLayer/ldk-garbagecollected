@@ -49,7 +49,7 @@ public class SendSuccess : CommonBase {
 	/**
 	 * Creates a copy of the SendSuccess
 	 */
-	public SendSuccess clone() {
+	public org.ldk.structs.SendSuccess clone() {
 		long ret = bindings.SendSuccess_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -61,7 +61,7 @@ public class SendSuccess : CommonBase {
 	/**
 	 * Utility method to constructs a new Buffered-variant SendSuccess
 	 */
-	public static SendSuccess buffered() {
+	public static org.ldk.structs.SendSuccess buffered() {
 		long ret = bindings.SendSuccess_buffered();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.SendSuccess ret_hu_conv = org.ldk.structs.SendSuccess.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class SendSuccess : CommonBase {
 	/**
 	 * Utility method to constructs a new BufferedAwaitingConnection-variant SendSuccess
 	 */
-	public static SendSuccess buffered_awaiting_connection(byte[] a) {
+	public static org.ldk.structs.SendSuccess buffered_awaiting_connection(byte[] a) {
 		long ret = bindings.SendSuccess_buffered_awaiting_connection(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 33)));
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }

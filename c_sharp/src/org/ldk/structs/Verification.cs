@@ -13,10 +13,10 @@ public interface VerificationInterface {
 	/**Constructs an HMAC to include in [`OffersContext`] for the data along with the given
 	 * [`Nonce`].
 	 */
-	byte[] hmac_for_offer_payment(Nonce nonce, ExpandedKey expanded_key);
+	byte[] hmac_for_offer_payment(org.ldk.structs.Nonce nonce, org.ldk.structs.ExpandedKey expanded_key);
 	/**Authenticates the data using an HMAC and a [`Nonce`] taken from an [`OffersContext`].
 	 */
-	Result_NoneNoneZ verify_for_offer_payment(byte[] hmac, Nonce nonce, ExpandedKey expanded_key);
+	Result_NoneNoneZ verify_for_offer_payment(byte[] hmac, org.ldk.structs.Nonce nonce, org.ldk.structs.ExpandedKey expanded_key);
 }
 
 /**
@@ -87,7 +87,7 @@ public class Verification : CommonBase {
 	/**
 	 * Authenticates the data using an HMAC and a [`Nonce`] taken from an [`OffersContext`].
 	 */
-	public Result_NoneNoneZ verify_for_offer_payment(byte[] hmac, org.ldk.structs.Nonce nonce, org.ldk.structs.ExpandedKey expanded_key) {
+	public org.ldk.structs.Result_NoneNoneZ verify_for_offer_payment(byte[] hmac, org.ldk.structs.Nonce nonce, org.ldk.structs.ExpandedKey expanded_key) {
 		long ret = bindings.Verification_verify_for_offer_payment(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(hmac, 32)), nonce.ptr, expanded_key.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(hmac);

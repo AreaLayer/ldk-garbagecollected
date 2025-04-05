@@ -41,7 +41,7 @@ public class Result_RetryDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_RetryDecodeErrorZ in the success state.
 	 */
-	public static Result_RetryDecodeErrorZ ok(org.ldk.structs.Retry o) {
+	public static org.ldk.structs.Result_RetryDecodeErrorZ ok(org.ldk.structs.Retry o) {
 		long ret = bindings.CResult_RetryDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_RetryDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_RetryDecodeErrorZ in the error state.
 	 */
-	public static Result_RetryDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_RetryDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_RetryDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_RetryDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_RetryDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_RetryDecodeErrorZ clone() {
+	public org.ldk.structs.Result_RetryDecodeErrorZ clone() {
 		long ret = bindings.CResult_RetryDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

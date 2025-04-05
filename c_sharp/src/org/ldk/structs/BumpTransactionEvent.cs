@@ -29,7 +29,7 @@ public class BumpTransactionEvent : CommonBase {
 		/**
 		 * The `channel_id` of the channel which has been closed.
 		 */
-		public ChannelId channel_id;
+		public org.ldk.structs.ChannelId channel_id;
 		/**
 		 * Counterparty in the closed channel.
 		 */
@@ -62,7 +62,7 @@ public class BumpTransactionEvent : CommonBase {
 		 * The descriptor to sign the anchor input of the anchor transaction constructed as a
 		 * result of consuming this event.
 		 */
-		public AnchorDescriptor anchor_descriptor;
+		public org.ldk.structs.AnchorDescriptor anchor_descriptor;
 		/**
 		 * The set of pending HTLCs on the commitment transaction that need to be resolved once the
 		 * commitment transaction confirms.
@@ -106,7 +106,7 @@ public class BumpTransactionEvent : CommonBase {
 		/**
 		 * The `channel_id` of the channel which has been closed.
 		 */
-		public ChannelId channel_id;
+		public org.ldk.structs.ChannelId channel_id;
 		/**
 		 * Counterparty in the closed channel.
 		 */
@@ -168,7 +168,7 @@ public class BumpTransactionEvent : CommonBase {
 	/**
 	 * Creates a copy of the BumpTransactionEvent
 	 */
-	public BumpTransactionEvent clone() {
+	public org.ldk.structs.BumpTransactionEvent clone() {
 		long ret = bindings.BumpTransactionEvent_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -180,7 +180,7 @@ public class BumpTransactionEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new ChannelClose-variant BumpTransactionEvent
 	 */
-	public static BumpTransactionEvent channel_close(org.ldk.structs.ChannelId channel_id, byte[] counterparty_node_id, byte[] claim_id, int package_target_feerate_sat_per_1000_weight, byte[] commitment_tx, long commitment_tx_fee_satoshis, org.ldk.structs.AnchorDescriptor anchor_descriptor, HTLCOutputInCommitment[] pending_htlcs) {
+	public static org.ldk.structs.BumpTransactionEvent channel_close(org.ldk.structs.ChannelId channel_id, byte[] counterparty_node_id, byte[] claim_id, int package_target_feerate_sat_per_1000_weight, byte[] commitment_tx, long commitment_tx_fee_satoshis, org.ldk.structs.AnchorDescriptor anchor_descriptor, HTLCOutputInCommitment[] pending_htlcs) {
 		long ret = bindings.BumpTransactionEvent_channel_close(channel_id.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(claim_id, 32)), package_target_feerate_sat_per_1000_weight, InternalUtils.encodeUint8Array(commitment_tx), commitment_tx_fee_satoshis, anchor_descriptor.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(pending_htlcs, pending_htlcs_conv_24 => pending_htlcs_conv_24.ptr)));
 		GC.KeepAlive(channel_id);
 		GC.KeepAlive(counterparty_node_id);
@@ -199,7 +199,7 @@ public class BumpTransactionEvent : CommonBase {
 	/**
 	 * Utility method to constructs a new HTLCResolution-variant BumpTransactionEvent
 	 */
-	public static BumpTransactionEvent htlcresolution(org.ldk.structs.ChannelId channel_id, byte[] counterparty_node_id, byte[] claim_id, int target_feerate_sat_per_1000_weight, HTLCDescriptor[] htlc_descriptors, int tx_lock_time) {
+	public static org.ldk.structs.BumpTransactionEvent htlcresolution(org.ldk.structs.ChannelId channel_id, byte[] counterparty_node_id, byte[] claim_id, int target_feerate_sat_per_1000_weight, HTLCDescriptor[] htlc_descriptors, int tx_lock_time) {
 		long ret = bindings.BumpTransactionEvent_htlcresolution(channel_id.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(claim_id, 32)), target_feerate_sat_per_1000_weight, InternalUtils.encodeUint64Array(InternalUtils.mapArray(htlc_descriptors, htlc_descriptors_conv_16 => htlc_descriptors_conv_16.ptr)), tx_lock_time);
 		GC.KeepAlive(channel_id);
 		GC.KeepAlive(counterparty_node_id);

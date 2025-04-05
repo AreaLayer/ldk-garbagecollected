@@ -26,7 +26,7 @@ public class HTLCUpdate : CommonBase {
 	/**
 	 * Creates a copy of the HTLCUpdate
 	 */
-	public HTLCUpdate clone() {
+	public org.ldk.structs.HTLCUpdate clone() {
 		long ret = bindings.HTLCUpdate_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -66,7 +66,7 @@ public class HTLCUpdate : CommonBase {
 	/**
 	 * Read a HTLCUpdate from a byte array, created by HTLCUpdate_write
 	 */
-	public static Result_HTLCUpdateDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_HTLCUpdateDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.HTLCUpdate_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

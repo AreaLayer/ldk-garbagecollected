@@ -28,7 +28,7 @@ public class OfferWithDerivedMetadataBuilder : CommonBase {
 	/**
 	 * Creates a copy of the OfferWithDerivedMetadataBuilder
 	 */
-	public OfferWithDerivedMetadataBuilder clone() {
+	public org.ldk.structs.OfferWithDerivedMetadataBuilder clone() {
 		long ret = bindings.OfferWithDerivedMetadataBuilder_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -53,7 +53,7 @@ public class OfferWithDerivedMetadataBuilder : CommonBase {
 	 * [`InvoiceRequest::verify_using_recipient_data`]: crate::offers::invoice_request::InvoiceRequest::verify_using_recipient_data
 	 * [`ExpandedKey`]: crate::ln::inbound_payment::ExpandedKey
 	 */
-	public static OfferWithDerivedMetadataBuilder deriving_signing_pubkey(byte[] node_id, org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.Nonce nonce) {
+	public static org.ldk.structs.OfferWithDerivedMetadataBuilder deriving_signing_pubkey(byte[] node_id, org.ldk.structs.ExpandedKey expanded_key, org.ldk.structs.Nonce nonce) {
 		long ret = bindings.OfferWithDerivedMetadataBuilder_deriving_signing_pubkey(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), expanded_key.ptr, nonce.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(expanded_key);
@@ -159,7 +159,7 @@ public class OfferWithDerivedMetadataBuilder : CommonBase {
 	/**
 	 * Builds an [`Offer`] from the builder's settings.
 	 */
-	public Result_OfferBolt12SemanticErrorZ build() {
+	public org.ldk.structs.Result_OfferBolt12SemanticErrorZ build() {
 		long ret = bindings.OfferWithDerivedMetadataBuilder_build(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

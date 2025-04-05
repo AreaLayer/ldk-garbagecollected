@@ -111,7 +111,7 @@ public class Type : CommonBase {
 	/**
 	 * Creates a copy of a Type
 	 */
-	public Type clone() {
+	public org.ldk.structs.Type clone() {
 		long ret = bindings.Type_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

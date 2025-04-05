@@ -41,7 +41,7 @@ public class Result_TransactionU16LenLimitedDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_TransactionU16LenLimitedDecodeErrorZ in the success state.
 	 */
-	public static Result_TransactionU16LenLimitedDecodeErrorZ ok(org.ldk.structs.TransactionU16LenLimited o) {
+	public static org.ldk.structs.Result_TransactionU16LenLimitedDecodeErrorZ ok(org.ldk.structs.TransactionU16LenLimited o) {
 		long ret = bindings.CResult_TransactionU16LenLimitedDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_TransactionU16LenLimitedDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_TransactionU16LenLimitedDecodeErrorZ in the error state.
 	 */
-	public static Result_TransactionU16LenLimitedDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_TransactionU16LenLimitedDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_TransactionU16LenLimitedDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_TransactionU16LenLimitedDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_TransactionU16LenLimitedDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_TransactionU16LenLimitedDecodeErrorZ clone() {
+	public org.ldk.structs.Result_TransactionU16LenLimitedDecodeErrorZ clone() {
 		long ret = bindings.CResult_TransactionU16LenLimitedDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

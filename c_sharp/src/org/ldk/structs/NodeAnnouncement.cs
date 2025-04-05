@@ -40,7 +40,7 @@ public class NodeAnnouncement : CommonBase {
 	/**
 	 * The actual content of the announcement
 	 */
-	public UnsignedNodeAnnouncement get_contents() {
+	public org.ldk.structs.UnsignedNodeAnnouncement get_contents() {
 		long ret = bindings.NodeAnnouncement_get_contents(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -61,7 +61,7 @@ public class NodeAnnouncement : CommonBase {
 	/**
 	 * Constructs a new NodeAnnouncement given each field
 	 */
-	public static NodeAnnouncement of(byte[] signature_arg, org.ldk.structs.UnsignedNodeAnnouncement contents_arg) {
+	public static org.ldk.structs.NodeAnnouncement of(byte[] signature_arg, org.ldk.structs.UnsignedNodeAnnouncement contents_arg) {
 		long ret = bindings.NodeAnnouncement_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(signature_arg, 64)), contents_arg.ptr);
 		GC.KeepAlive(signature_arg);
 		GC.KeepAlive(contents_arg);
@@ -80,7 +80,7 @@ public class NodeAnnouncement : CommonBase {
 	/**
 	 * Creates a copy of the NodeAnnouncement
 	 */
-	public NodeAnnouncement clone() {
+	public org.ldk.structs.NodeAnnouncement clone() {
 		long ret = bindings.NodeAnnouncement_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -132,7 +132,7 @@ public class NodeAnnouncement : CommonBase {
 	/**
 	 * Read a NodeAnnouncement from a byte array, created by NodeAnnouncement_write
 	 */
-	public static Result_NodeAnnouncementDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_NodeAnnouncementDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.NodeAnnouncement_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -31,7 +31,7 @@ public class Refund : CommonBase {
 	/**
 	 * Creates a copy of the Refund
 	 */
-	public Refund clone() {
+	public org.ldk.structs.Refund clone() {
 		long ret = bindings.Refund_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -44,7 +44,7 @@ public class Refund : CommonBase {
 	 * A complete description of the purpose of the refund. Intended to be displayed to the user
 	 * but with the caveat that it has not been verified in any way.
 	 */
-	public PrintableString description() {
+	public org.ldk.structs.PrintableString description() {
 		long ret = bindings.Refund_description(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -58,7 +58,7 @@ public class Refund : CommonBase {
 	 * 
 	 * If `None`, the refund does not expire.
 	 */
-	public Option_u64Z absolute_expiry() {
+	public org.ldk.structs.Option_u64Z absolute_expiry() {
 		long ret = bindings.Refund_absolute_expiry(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -92,7 +92,7 @@ public class Refund : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public PrintableString issuer() {
+	public org.ldk.structs.PrintableString issuer() {
 		long ret = bindings.Refund_issuer(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -160,7 +160,7 @@ public class Refund : CommonBase {
 	/**
 	 * Features pertaining to requesting an invoice.
 	 */
-	public InvoiceRequestFeatures features() {
+	public org.ldk.structs.InvoiceRequestFeatures features() {
 		long ret = bindings.Refund_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -172,7 +172,7 @@ public class Refund : CommonBase {
 	/**
 	 * The quantity of an item that refund is for.
 	 */
-	public Option_u64Z quantity() {
+	public org.ldk.structs.Option_u64Z quantity() {
 		long ret = bindings.Refund_quantity(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -200,7 +200,7 @@ public class Refund : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public PrintableString payer_note() {
+	public org.ldk.structs.PrintableString payer_note() {
 		long ret = bindings.Refund_payer_note(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -224,7 +224,7 @@ public class Refund : CommonBase {
 	/**
 	 * Read a Refund from a byte array, created by Refund_write
 	 */
-	public static Result_RefundDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_RefundDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.Refund_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -246,7 +246,7 @@ public class Refund : CommonBase {
 	/**
 	 * Read a Refund object from a string
 	 */
-	public static Result_RefundBolt12ParseErrorZ from_str(string s) {
+	public static org.ldk.structs.Result_RefundBolt12ParseErrorZ from_str(string s) {
 		long ret = bindings.Refund_from_str(InternalUtils.encodeString(s));
 		GC.KeepAlive(s);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -41,7 +41,7 @@ public class Result_DelayedPaymentBasepointDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_DelayedPaymentBasepointDecodeErrorZ in the success state.
 	 */
-	public static Result_DelayedPaymentBasepointDecodeErrorZ ok(org.ldk.structs.DelayedPaymentBasepoint o) {
+	public static org.ldk.structs.Result_DelayedPaymentBasepointDecodeErrorZ ok(org.ldk.structs.DelayedPaymentBasepoint o) {
 		long ret = bindings.CResult_DelayedPaymentBasepointDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_DelayedPaymentBasepointDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_DelayedPaymentBasepointDecodeErrorZ in the error state.
 	 */
-	public static Result_DelayedPaymentBasepointDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_DelayedPaymentBasepointDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_DelayedPaymentBasepointDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_DelayedPaymentBasepointDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_DelayedPaymentBasepointDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_DelayedPaymentBasepointDecodeErrorZ clone() {
+	public org.ldk.structs.Result_DelayedPaymentBasepointDecodeErrorZ clone() {
 		long ret = bindings.CResult_DelayedPaymentBasepointDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -57,7 +57,7 @@ public class Route : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public RouteParameters get_route_params() {
+	public org.ldk.structs.RouteParameters get_route_params() {
 		long ret = bindings.Route_get_route_params(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -86,7 +86,7 @@ public class Route : CommonBase {
 	 * 
 	 * Note that route_params_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static Route of(Path[] paths_arg, org.ldk.structs.RouteParameters route_params_arg) {
+	public static org.ldk.structs.Route of(Path[] paths_arg, org.ldk.structs.RouteParameters route_params_arg) {
 		long ret = bindings.Route_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(paths_arg, paths_arg_conv_6 => paths_arg_conv_6.ptr)), route_params_arg == null ? 0 : route_params_arg.ptr);
 		GC.KeepAlive(paths_arg);
 		GC.KeepAlive(route_params_arg);
@@ -105,7 +105,7 @@ public class Route : CommonBase {
 	/**
 	 * Creates a copy of the Route
 	 */
-	public Route clone() {
+	public org.ldk.structs.Route clone() {
 		long ret = bindings.Route_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -197,7 +197,7 @@ public class Route : CommonBase {
 	/**
 	 * Read a Route from a byte array, created by Route_write
 	 */
-	public static Result_RouteDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_RouteDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.Route_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

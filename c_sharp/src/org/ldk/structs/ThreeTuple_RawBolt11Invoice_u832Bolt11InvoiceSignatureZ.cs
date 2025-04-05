@@ -18,7 +18,7 @@ public class ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ : CommonBas
 	/**
 	 * 
 	 */
-	public RawBolt11Invoice get_a() {
+	public org.ldk.structs.RawBolt11Invoice get_a() {
 		long ret = bindings.C3Tuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ_get_a(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -41,7 +41,7 @@ public class ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ : CommonBas
 	/**
 	 * 
 	 */
-	public Bolt11InvoiceSignature get_c() {
+	public org.ldk.structs.Bolt11InvoiceSignature get_c() {
 		long ret = bindings.C3Tuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ_get_c(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -60,7 +60,7 @@ public class ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ : CommonBas
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ clone() {
+	public org.ldk.structs.ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ clone() {
 		long ret = bindings.C3Tuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -72,7 +72,7 @@ public class ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ : CommonBas
 	/**
 	 * Creates a new C3Tuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ from the contained elements.
 	 */
-	public static ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ of(org.ldk.structs.RawBolt11Invoice a, byte[] b, org.ldk.structs.Bolt11InvoiceSignature c) {
+	public static org.ldk.structs.ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ of(org.ldk.structs.RawBolt11Invoice a, byte[] b, org.ldk.structs.Bolt11InvoiceSignature c) {
 		long ret = bindings.C3Tuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ_new(a.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(b, 32)), c.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

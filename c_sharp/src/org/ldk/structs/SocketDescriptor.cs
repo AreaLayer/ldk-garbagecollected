@@ -37,7 +37,7 @@ public interface SocketDescriptorInterface {
 	void disconnect_socket();
 	/**Checks if two objects are equal given this object's this_arg pointer and another object.
 	 */
-	bool eq(SocketDescriptor other_arg);
+	bool eq(org.ldk.structs.SocketDescriptor other_arg);
 	/**Calculate a succinct non-cryptographic hash for an object given its this_arg pointer.
 	 * This is used, for example, for inclusion of this object in a hash map.
 	 */
@@ -168,7 +168,7 @@ public class SocketDescriptor : CommonBase {
 	/**
 	 * Creates a copy of a SocketDescriptor
 	 */
-	public SocketDescriptor clone() {
+	public org.ldk.structs.SocketDescriptor clone() {
 		long ret = bindings.SocketDescriptor_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -26,7 +26,7 @@ public class Option_C2Tuple_OffersMessageResponseInstructionZZ : CommonBase {
 
 	/** A Option_C2Tuple_OffersMessageResponseInstructionZZ of type Some */
 	public class Option_C2Tuple_OffersMessageResponseInstructionZZ_Some : Option_C2Tuple_OffersMessageResponseInstructionZZ {
-		public TwoTuple_OffersMessageResponseInstructionZ some;
+		public org.ldk.structs.TwoTuple_OffersMessageResponseInstructionZ some;
 		internal Option_C2Tuple_OffersMessageResponseInstructionZZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_C2Tuple_OffersMessageResponseInstructionZZ_Some_get_some(ptr);
 			TwoTuple_OffersMessageResponseInstructionZ some_hu_conv = new TwoTuple_OffersMessageResponseInstructionZ(null, some);
@@ -42,7 +42,7 @@ public class Option_C2Tuple_OffersMessageResponseInstructionZZ : CommonBase {
 	/**
 	 * Constructs a new COption_C2Tuple_OffersMessageResponseInstructionZZ containing a crate::c_types::derived::C2Tuple_OffersMessageResponseInstructionZ
 	 */
-	public static Option_C2Tuple_OffersMessageResponseInstructionZZ some(org.ldk.structs.TwoTuple_OffersMessageResponseInstructionZ o) {
+	public static org.ldk.structs.Option_C2Tuple_OffersMessageResponseInstructionZZ some(org.ldk.structs.TwoTuple_OffersMessageResponseInstructionZ o) {
 		long ret = bindings.COption_C2Tuple_OffersMessageResponseInstructionZZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class Option_C2Tuple_OffersMessageResponseInstructionZZ : CommonBase {
 	/**
 	 * Constructs a new COption_C2Tuple_OffersMessageResponseInstructionZZ containing nothing
 	 */
-	public static Option_C2Tuple_OffersMessageResponseInstructionZZ none() {
+	public static org.ldk.structs.Option_C2Tuple_OffersMessageResponseInstructionZZ none() {
 		long ret = bindings.COption_C2Tuple_OffersMessageResponseInstructionZZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_C2Tuple_OffersMessageResponseInstructionZZ ret_hu_conv = org.ldk.structs.Option_C2Tuple_OffersMessageResponseInstructionZZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Option_C2Tuple_OffersMessageResponseInstructionZZ : CommonBase {
 	 * Creates a new COption_C2Tuple_OffersMessageResponseInstructionZZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_C2Tuple_OffersMessageResponseInstructionZZ clone() {
+	public org.ldk.structs.Option_C2Tuple_OffersMessageResponseInstructionZZ clone() {
 		long ret = bindings.COption_C2Tuple_OffersMessageResponseInstructionZZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

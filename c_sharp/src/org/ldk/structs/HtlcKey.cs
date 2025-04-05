@@ -40,7 +40,7 @@ public class HtlcKey : CommonBase {
 	/**
 	 * Constructs a new HtlcKey given each field
 	 */
-	public static HtlcKey of(byte[] a_arg) {
+	public static org.ldk.structs.HtlcKey of(byte[] a_arg) {
 		long ret = bindings.HtlcKey_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a_arg, 33)));
 		GC.KeepAlive(a_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -75,7 +75,7 @@ public class HtlcKey : CommonBase {
 	/**
 	 * Creates a copy of the HtlcKey
 	 */
-	public HtlcKey clone() {
+	public org.ldk.structs.HtlcKey clone() {
 		long ret = bindings.HtlcKey_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -87,7 +87,7 @@ public class HtlcKey : CommonBase {
 	/**
 	 * Derive a public htlcpubkey using one node\'s `per_commitment_point` and its countersignatory\'s `basepoint`
 	 */
-	public static HtlcKey from_basepoint(org.ldk.structs.HtlcBasepoint countersignatory_basepoint, byte[] per_commitment_point) {
+	public static org.ldk.structs.HtlcKey from_basepoint(org.ldk.structs.HtlcBasepoint countersignatory_basepoint, byte[] per_commitment_point) {
 		long ret = bindings.HtlcKey_from_basepoint(countersignatory_basepoint.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(per_commitment_point, 33)));
 		GC.KeepAlive(countersignatory_basepoint);
 		GC.KeepAlive(per_commitment_point);
@@ -101,7 +101,7 @@ public class HtlcKey : CommonBase {
 	/**
 	 * Build a htlcpubkey directly from an already-derived private key
 	 */
-	public static HtlcKey from_secret_key(byte[] sk) {
+	public static org.ldk.structs.HtlcKey from_secret_key(byte[] sk) {
 		long ret = bindings.HtlcKey_from_secret_key(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(sk, 32)));
 		GC.KeepAlive(sk);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -135,7 +135,7 @@ public class HtlcKey : CommonBase {
 	/**
 	 * Read a HtlcKey from a byte array, created by HtlcKey_write
 	 */
-	public static Result_HtlcKeyDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_HtlcKeyDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.HtlcKey_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

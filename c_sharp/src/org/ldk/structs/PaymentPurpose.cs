@@ -38,7 +38,7 @@ public class PaymentPurpose : CommonBase {
 		 * [`ChannelManager::create_inbound_payment`]: crate::ln::channelmanager::ChannelManager::create_inbound_payment
 		 * [`ChannelManager::claim_funds`]: crate::ln::channelmanager::ChannelManager::claim_funds
 		 */
-		public Option_ThirtyTwoBytesZ payment_preimage;
+		public org.ldk.structs.Option_ThirtyTwoBytesZ payment_preimage;
 		/**
 		 * The \"payment secret\". This authenticates the sender to the recipient, preventing a
 		 * number of deanonymization attacks during the routing process.
@@ -71,7 +71,7 @@ public class PaymentPurpose : CommonBase {
 		 * 
 		 * [`ChannelManager::claim_funds`]: crate::ln::channelmanager::ChannelManager::claim_funds
 		 */
-		public Option_ThirtyTwoBytesZ payment_preimage;
+		public org.ldk.structs.Option_ThirtyTwoBytesZ payment_preimage;
 		/**
 		 * The secret used to authenticate the sender to the recipient, preventing a number of
 		 * de-anonymization attacks while routing a payment.
@@ -90,7 +90,7 @@ public class PaymentPurpose : CommonBase {
 		 * [`Offer`]: crate::offers::offer::Offer
 		 * [`InvoiceRequest`]: crate::offers::invoice_request::InvoiceRequest
 		 */
-		public Bolt12OfferContext payment_context;
+		public org.ldk.structs.Bolt12OfferContext payment_context;
 		internal PaymentPurpose_Bolt12OfferPayment(long ptr) : base(null, ptr) {
 			long payment_preimage = bindings.LDKPaymentPurpose_Bolt12OfferPayment_get_payment_preimage(ptr);
 			org.ldk.structs.Option_ThirtyTwoBytesZ payment_preimage_hu_conv = org.ldk.structs.Option_ThirtyTwoBytesZ.constr_from_ptr(payment_preimage);
@@ -114,7 +114,7 @@ public class PaymentPurpose : CommonBase {
 		 * 
 		 * [`ChannelManager::claim_funds`]: crate::ln::channelmanager::ChannelManager::claim_funds
 		 */
-		public Option_ThirtyTwoBytesZ payment_preimage;
+		public org.ldk.structs.Option_ThirtyTwoBytesZ payment_preimage;
 		/**
 		 * The secret used to authenticate the sender to the recipient, preventing a number of
 		 * de-anonymization attacks while routing a payment.
@@ -127,7 +127,7 @@ public class PaymentPurpose : CommonBase {
 		 * 
 		 * [`Refund`]: crate::offers::refund::Refund
 		 */
-		public Bolt12RefundContext payment_context;
+		public org.ldk.structs.Bolt12RefundContext payment_context;
 		internal PaymentPurpose_Bolt12RefundPayment(long ptr) : base(null, ptr) {
 			long payment_preimage = bindings.LDKPaymentPurpose_Bolt12RefundPayment_get_payment_preimage(ptr);
 			org.ldk.structs.Option_ThirtyTwoBytesZ payment_preimage_hu_conv = org.ldk.structs.Option_ThirtyTwoBytesZ.constr_from_ptr(payment_preimage);
@@ -160,7 +160,7 @@ public class PaymentPurpose : CommonBase {
 	/**
 	 * Creates a copy of the PaymentPurpose
 	 */
-	public PaymentPurpose clone() {
+	public org.ldk.structs.PaymentPurpose clone() {
 		long ret = bindings.PaymentPurpose_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -172,7 +172,7 @@ public class PaymentPurpose : CommonBase {
 	/**
 	 * Utility method to constructs a new Bolt11InvoicePayment-variant PaymentPurpose
 	 */
-	public static PaymentPurpose bolt11_invoice_payment(org.ldk.structs.Option_ThirtyTwoBytesZ payment_preimage, byte[] payment_secret) {
+	public static org.ldk.structs.PaymentPurpose bolt11_invoice_payment(org.ldk.structs.Option_ThirtyTwoBytesZ payment_preimage, byte[] payment_secret) {
 		long ret = bindings.PaymentPurpose_bolt11_invoice_payment(payment_preimage.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_secret, 32)));
 		GC.KeepAlive(payment_preimage);
 		GC.KeepAlive(payment_secret);
@@ -185,7 +185,7 @@ public class PaymentPurpose : CommonBase {
 	/**
 	 * Utility method to constructs a new Bolt12OfferPayment-variant PaymentPurpose
 	 */
-	public static PaymentPurpose bolt12_offer_payment(org.ldk.structs.Option_ThirtyTwoBytesZ payment_preimage, byte[] payment_secret, org.ldk.structs.Bolt12OfferContext payment_context) {
+	public static org.ldk.structs.PaymentPurpose bolt12_offer_payment(org.ldk.structs.Option_ThirtyTwoBytesZ payment_preimage, byte[] payment_secret, org.ldk.structs.Bolt12OfferContext payment_context) {
 		long ret = bindings.PaymentPurpose_bolt12_offer_payment(payment_preimage.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_secret, 32)), payment_context.ptr);
 		GC.KeepAlive(payment_preimage);
 		GC.KeepAlive(payment_secret);
@@ -199,7 +199,7 @@ public class PaymentPurpose : CommonBase {
 	/**
 	 * Utility method to constructs a new Bolt12RefundPayment-variant PaymentPurpose
 	 */
-	public static PaymentPurpose bolt12_refund_payment(org.ldk.structs.Option_ThirtyTwoBytesZ payment_preimage, byte[] payment_secret, org.ldk.structs.Bolt12RefundContext payment_context) {
+	public static org.ldk.structs.PaymentPurpose bolt12_refund_payment(org.ldk.structs.Option_ThirtyTwoBytesZ payment_preimage, byte[] payment_secret, org.ldk.structs.Bolt12RefundContext payment_context) {
 		long ret = bindings.PaymentPurpose_bolt12_refund_payment(payment_preimage.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_secret, 32)), payment_context.ptr);
 		GC.KeepAlive(payment_preimage);
 		GC.KeepAlive(payment_secret);
@@ -213,7 +213,7 @@ public class PaymentPurpose : CommonBase {
 	/**
 	 * Utility method to constructs a new SpontaneousPayment-variant PaymentPurpose
 	 */
-	public static PaymentPurpose spontaneous_payment(byte[] a) {
+	public static org.ldk.structs.PaymentPurpose spontaneous_payment(byte[] a) {
 		long ret = bindings.PaymentPurpose_spontaneous_payment(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 32)));
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -240,7 +240,7 @@ public class PaymentPurpose : CommonBase {
 	/**
 	 * Returns the preimage for this payment, if it is known.
 	 */
-	public Option_ThirtyTwoBytesZ preimage() {
+	public org.ldk.structs.Option_ThirtyTwoBytesZ preimage() {
 		long ret = bindings.PaymentPurpose_preimage(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -263,7 +263,7 @@ public class PaymentPurpose : CommonBase {
 	/**
 	 * Read a PaymentPurpose from a byte array, created by PaymentPurpose_write
 	 */
-	public static Result_PaymentPurposeDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_PaymentPurposeDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.PaymentPurpose_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -36,7 +36,7 @@ public class Result_NoneBolt12PaymentErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_NoneBolt12PaymentErrorZ in the success state.
 	 */
-	public static Result_NoneBolt12PaymentErrorZ ok() {
+	public static org.ldk.structs.Result_NoneBolt12PaymentErrorZ ok() {
 		long ret = bindings.CResult_NoneBolt12PaymentErrorZ_ok();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneBolt12PaymentErrorZ ret_hu_conv = Result_NoneBolt12PaymentErrorZ.constr_from_ptr(ret);
@@ -46,7 +46,7 @@ public class Result_NoneBolt12PaymentErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_NoneBolt12PaymentErrorZ in the error state.
 	 */
-	public static Result_NoneBolt12PaymentErrorZ err(org.ldk.structs.Bolt12PaymentError e) {
+	public static org.ldk.structs.Result_NoneBolt12PaymentErrorZ err(org.ldk.structs.Bolt12PaymentError e) {
 		long ret = bindings.CResult_NoneBolt12PaymentErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -73,7 +73,7 @@ public class Result_NoneBolt12PaymentErrorZ : CommonBase {
 	 * Creates a new CResult_NoneBolt12PaymentErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_NoneBolt12PaymentErrorZ clone() {
+	public org.ldk.structs.Result_NoneBolt12PaymentErrorZ clone() {
 		long ret = bindings.CResult_NoneBolt12PaymentErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -47,7 +47,7 @@ public class Retry : CommonBase {
 	/**
 	 * Creates a copy of the Retry
 	 */
-	public Retry clone() {
+	public org.ldk.structs.Retry clone() {
 		long ret = bindings.Retry_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -59,7 +59,7 @@ public class Retry : CommonBase {
 	/**
 	 * Utility method to constructs a new Attempts-variant Retry
 	 */
-	public static Retry attempts(int a) {
+	public static org.ldk.structs.Retry attempts(int a) {
 		long ret = bindings.Retry_attempts(a);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -71,7 +71,7 @@ public class Retry : CommonBase {
 	/**
 	 * Utility method to constructs a new Timeout-variant Retry
 	 */
-	public static Retry timeout(long a) {
+	public static org.ldk.structs.Retry timeout(long a) {
 		long ret = bindings.Retry_timeout(a);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -121,7 +121,7 @@ public class Retry : CommonBase {
 	/**
 	 * Read a Retry from a byte array, created by Retry_write
 	 */
-	public static Result_RetryDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_RetryDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.Retry_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

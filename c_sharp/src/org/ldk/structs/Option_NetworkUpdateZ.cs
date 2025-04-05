@@ -26,7 +26,7 @@ public class Option_NetworkUpdateZ : CommonBase {
 
 	/** A Option_NetworkUpdateZ of type Some */
 	public class Option_NetworkUpdateZ_Some : Option_NetworkUpdateZ {
-		public NetworkUpdate some;
+		public org.ldk.structs.NetworkUpdate some;
 		internal Option_NetworkUpdateZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_NetworkUpdateZ_Some_get_some(ptr);
 			org.ldk.structs.NetworkUpdate some_hu_conv = org.ldk.structs.NetworkUpdate.constr_from_ptr(some);
@@ -42,7 +42,7 @@ public class Option_NetworkUpdateZ : CommonBase {
 	/**
 	 * Constructs a new COption_NetworkUpdateZ containing a crate::lightning::routing::gossip::NetworkUpdate
 	 */
-	public static Option_NetworkUpdateZ some(org.ldk.structs.NetworkUpdate o) {
+	public static org.ldk.structs.Option_NetworkUpdateZ some(org.ldk.structs.NetworkUpdate o) {
 		long ret = bindings.COption_NetworkUpdateZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class Option_NetworkUpdateZ : CommonBase {
 	/**
 	 * Constructs a new COption_NetworkUpdateZ containing nothing
 	 */
-	public static Option_NetworkUpdateZ none() {
+	public static org.ldk.structs.Option_NetworkUpdateZ none() {
 		long ret = bindings.COption_NetworkUpdateZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_NetworkUpdateZ ret_hu_conv = org.ldk.structs.Option_NetworkUpdateZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Option_NetworkUpdateZ : CommonBase {
 	 * Creates a new COption_NetworkUpdateZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_NetworkUpdateZ clone() {
+	public org.ldk.structs.Option_NetworkUpdateZ clone() {
 		long ret = bindings.COption_NetworkUpdateZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

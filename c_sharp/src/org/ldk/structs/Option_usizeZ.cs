@@ -39,7 +39,7 @@ public class Option_usizeZ : CommonBase {
 	/**
 	 * Constructs a new COption_usizeZ containing a usize
 	 */
-	public static Option_usizeZ some(long o) {
+	public static org.ldk.structs.Option_usizeZ some(long o) {
 		long ret = bindings.COption_usizeZ_some(o);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -51,7 +51,7 @@ public class Option_usizeZ : CommonBase {
 	/**
 	 * Constructs a new COption_usizeZ containing nothing
 	 */
-	public static Option_usizeZ none() {
+	public static org.ldk.structs.Option_usizeZ none() {
 		long ret = bindings.COption_usizeZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_usizeZ ret_hu_conv = org.ldk.structs.Option_usizeZ.constr_from_ptr(ret);
@@ -69,7 +69,7 @@ public class Option_usizeZ : CommonBase {
 	 * Creates a new COption_usizeZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_usizeZ clone() {
+	public org.ldk.structs.Option_usizeZ clone() {
 		long ret = bindings.COption_usizeZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

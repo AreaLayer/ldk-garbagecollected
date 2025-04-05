@@ -14,13 +14,13 @@ public interface PersisterInterface {
 	 * 
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 */
-	Result_NoneIOErrorZ persist_manager(ChannelManager channel_manager);
+	Result_NoneIOErrorZ persist_manager(org.ldk.structs.ChannelManager channel_manager);
 	/**Persist the given [`NetworkGraph`] to disk, returning an error if persistence failed.
 	 */
-	Result_NoneIOErrorZ persist_graph(NetworkGraph network_graph);
+	Result_NoneIOErrorZ persist_graph(org.ldk.structs.NetworkGraph network_graph);
 	/**Persist the given [`WriteableScore`] to disk, returning an error if persistence failed.
 	 */
-	Result_NoneIOErrorZ persist_scorer(WriteableScore scorer);
+	Result_NoneIOErrorZ persist_scorer(org.ldk.structs.WriteableScore scorer);
 }
 
 /**
@@ -83,7 +83,7 @@ public class Persister : CommonBase {
 	 * 
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 */
-	public Result_NoneIOErrorZ persist_manager(org.ldk.structs.ChannelManager channel_manager) {
+	public org.ldk.structs.Result_NoneIOErrorZ persist_manager(org.ldk.structs.ChannelManager channel_manager) {
 		long ret = bindings.Persister_persist_manager(this.ptr, channel_manager.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(channel_manager);
@@ -96,7 +96,7 @@ public class Persister : CommonBase {
 	/**
 	 * Persist the given [`NetworkGraph`] to disk, returning an error if persistence failed.
 	 */
-	public Result_NoneIOErrorZ persist_graph(org.ldk.structs.NetworkGraph network_graph) {
+	public org.ldk.structs.Result_NoneIOErrorZ persist_graph(org.ldk.structs.NetworkGraph network_graph) {
 		long ret = bindings.Persister_persist_graph(this.ptr, network_graph.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(network_graph);
@@ -109,7 +109,7 @@ public class Persister : CommonBase {
 	/**
 	 * Persist the given [`WriteableScore`] to disk, returning an error if persistence failed.
 	 */
-	public Result_NoneIOErrorZ persist_scorer(org.ldk.structs.WriteableScore scorer) {
+	public org.ldk.structs.Result_NoneIOErrorZ persist_scorer(org.ldk.structs.WriteableScore scorer) {
 		long ret = bindings.Persister_persist_scorer(this.ptr, scorer.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(scorer);

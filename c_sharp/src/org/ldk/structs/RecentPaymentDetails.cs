@@ -84,7 +84,7 @@ public class RecentPaymentDetails : CommonBase {
 		 * Hash of the payment that was claimed. `None` for serializations of [`ChannelManager`]
 		 * made before LDK version 0.0.104.
 		 */
-		public Option_ThirtyTwoBytesZ payment_hash;
+		public org.ldk.structs.Option_ThirtyTwoBytesZ payment_hash;
 		internal RecentPaymentDetails_Fulfilled(long ptr) : base(null, ptr) {
 			long payment_id = bindings.LDKRecentPaymentDetails_Fulfilled_get_payment_id(ptr);
 			byte[] payment_id_conv = InternalUtils.decodeUint8Array(payment_id);
@@ -127,7 +127,7 @@ public class RecentPaymentDetails : CommonBase {
 	/**
 	 * Creates a copy of the RecentPaymentDetails
 	 */
-	public RecentPaymentDetails clone() {
+	public org.ldk.structs.RecentPaymentDetails clone() {
 		long ret = bindings.RecentPaymentDetails_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -139,7 +139,7 @@ public class RecentPaymentDetails : CommonBase {
 	/**
 	 * Utility method to constructs a new AwaitingInvoice-variant RecentPaymentDetails
 	 */
-	public static RecentPaymentDetails awaiting_invoice(byte[] payment_id) {
+	public static org.ldk.structs.RecentPaymentDetails awaiting_invoice(byte[] payment_id) {
 		long ret = bindings.RecentPaymentDetails_awaiting_invoice(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)));
 		GC.KeepAlive(payment_id);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -151,7 +151,7 @@ public class RecentPaymentDetails : CommonBase {
 	/**
 	 * Utility method to constructs a new Pending-variant RecentPaymentDetails
 	 */
-	public static RecentPaymentDetails pending(byte[] payment_id, byte[] payment_hash, long total_msat) {
+	public static org.ldk.structs.RecentPaymentDetails pending(byte[] payment_id, byte[] payment_hash, long total_msat) {
 		long ret = bindings.RecentPaymentDetails_pending(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), total_msat);
 		GC.KeepAlive(payment_id);
 		GC.KeepAlive(payment_hash);
@@ -165,7 +165,7 @@ public class RecentPaymentDetails : CommonBase {
 	/**
 	 * Utility method to constructs a new Fulfilled-variant RecentPaymentDetails
 	 */
-	public static RecentPaymentDetails fulfilled(byte[] payment_id, org.ldk.structs.Option_ThirtyTwoBytesZ payment_hash) {
+	public static org.ldk.structs.RecentPaymentDetails fulfilled(byte[] payment_id, org.ldk.structs.Option_ThirtyTwoBytesZ payment_hash) {
 		long ret = bindings.RecentPaymentDetails_fulfilled(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), payment_hash.ptr);
 		GC.KeepAlive(payment_id);
 		GC.KeepAlive(payment_hash);
@@ -178,7 +178,7 @@ public class RecentPaymentDetails : CommonBase {
 	/**
 	 * Utility method to constructs a new Abandoned-variant RecentPaymentDetails
 	 */
-	public static RecentPaymentDetails abandoned(byte[] payment_id, byte[] payment_hash) {
+	public static org.ldk.structs.RecentPaymentDetails abandoned(byte[] payment_id, byte[] payment_hash) {
 		long ret = bindings.RecentPaymentDetails_abandoned(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)));
 		GC.KeepAlive(payment_id);
 		GC.KeepAlive(payment_hash);

@@ -27,7 +27,7 @@ public class Fallback : CommonBase {
 
 	/** A Fallback of type SegWitProgram */
 	public class Fallback_SegWitProgram : Fallback {
-		public WitnessVersion version;
+		public org.ldk.util.WitnessVersion version;
 		public byte[] program;
 		internal Fallback_SegWitProgram(long ptr) : base(null, ptr) {
 			byte version = bindings.LDKFallback_SegWitProgram_get_version(ptr);
@@ -65,7 +65,7 @@ public class Fallback : CommonBase {
 	/**
 	 * Creates a copy of the Fallback
 	 */
-	public Fallback clone() {
+	public org.ldk.structs.Fallback clone() {
 		long ret = bindings.Fallback_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -77,7 +77,7 @@ public class Fallback : CommonBase {
 	/**
 	 * Utility method to constructs a new SegWitProgram-variant Fallback
 	 */
-	public static Fallback seg_wit_program(org.ldk.util.WitnessVersion version, byte[] program) {
+	public static org.ldk.structs.Fallback seg_wit_program(org.ldk.util.WitnessVersion version, byte[] program) {
 		long ret = bindings.Fallback_seg_wit_program(version.getVal(), InternalUtils.encodeUint8Array(program));
 		GC.KeepAlive(version);
 		GC.KeepAlive(program);
@@ -90,7 +90,7 @@ public class Fallback : CommonBase {
 	/**
 	 * Utility method to constructs a new PubKeyHash-variant Fallback
 	 */
-	public static Fallback pub_key_hash(byte[] a) {
+	public static org.ldk.structs.Fallback pub_key_hash(byte[] a) {
 		long ret = bindings.Fallback_pub_key_hash(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 20)));
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -102,7 +102,7 @@ public class Fallback : CommonBase {
 	/**
 	 * Utility method to constructs a new ScriptHash-variant Fallback
 	 */
-	public static Fallback script_hash(byte[] a) {
+	public static org.ldk.structs.Fallback script_hash(byte[] a) {
 		long ret = bindings.Fallback_script_hash(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 20)));
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }

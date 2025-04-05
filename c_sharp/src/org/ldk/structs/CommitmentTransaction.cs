@@ -29,7 +29,7 @@ public class CommitmentTransaction : CommonBase {
 	/**
 	 * Creates a copy of the CommitmentTransaction
 	 */
-	public CommitmentTransaction clone() {
+	public org.ldk.structs.CommitmentTransaction clone() {
 		long ret = bindings.CommitmentTransaction_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class CommitmentTransaction : CommonBase {
 	/**
 	 * Read a CommitmentTransaction from a byte array, created by CommitmentTransaction_write
 	 */
-	public static Result_CommitmentTransactionDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_CommitmentTransactionDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.CommitmentTransaction_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -115,7 +115,7 @@ public class CommitmentTransaction : CommonBase {
 	 * This should only be used if you fully trust the builder of this object.  It should not
 	 * be used by an external signer - instead use the verify function.
 	 */
-	public TrustedCommitmentTransaction trust() {
+	public org.ldk.structs.TrustedCommitmentTransaction trust() {
 		long ret = bindings.CommitmentTransaction_trust(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -132,7 +132,7 @@ public class CommitmentTransaction : CommonBase {
 	 * An external validating signer must call this method before signing
 	 * or using the built transaction.
 	 */
-	public Result_TrustedCommitmentTransactionNoneZ verify(org.ldk.structs.DirectedChannelTransactionParameters channel_parameters, org.ldk.structs.ChannelPublicKeys broadcaster_keys, org.ldk.structs.ChannelPublicKeys countersignatory_keys) {
+	public org.ldk.structs.Result_TrustedCommitmentTransactionNoneZ verify(org.ldk.structs.DirectedChannelTransactionParameters channel_parameters, org.ldk.structs.ChannelPublicKeys broadcaster_keys, org.ldk.structs.ChannelPublicKeys countersignatory_keys) {
 		long ret = bindings.CommitmentTransaction_verify(this.ptr, channel_parameters.ptr, broadcaster_keys.ptr, countersignatory_keys.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(channel_parameters);

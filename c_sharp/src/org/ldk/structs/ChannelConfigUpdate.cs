@@ -15,7 +15,7 @@ public class ChannelConfigUpdate : CommonBase {
 		if (ptr != 0) { bindings.ChannelConfigUpdate_free(ptr); }
 	}
 
-	public Option_u32Z get_forwarding_fee_proportional_millionths() {
+	public org.ldk.structs.Option_u32Z get_forwarding_fee_proportional_millionths() {
 		long ret = bindings.ChannelConfigUpdate_get_forwarding_fee_proportional_millionths(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -30,7 +30,7 @@ public class ChannelConfigUpdate : CommonBase {
 		GC.KeepAlive(val);
 	}
 
-	public Option_u32Z get_forwarding_fee_base_msat() {
+	public org.ldk.structs.Option_u32Z get_forwarding_fee_base_msat() {
 		long ret = bindings.ChannelConfigUpdate_get_forwarding_fee_base_msat(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -45,7 +45,7 @@ public class ChannelConfigUpdate : CommonBase {
 		GC.KeepAlive(val);
 	}
 
-	public Option_u16Z get_cltv_expiry_delta() {
+	public org.ldk.structs.Option_u16Z get_cltv_expiry_delta() {
 		long ret = bindings.ChannelConfigUpdate_get_cltv_expiry_delta(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -63,7 +63,7 @@ public class ChannelConfigUpdate : CommonBase {
 	/**
 	 * Returns a copy of the field.
 	 */
-	public Option_MaxDustHTLCExposureZ get_max_dust_htlc_exposure_msat() {
+	public org.ldk.structs.Option_MaxDustHTLCExposureZ get_max_dust_htlc_exposure_msat() {
 		long ret = bindings.ChannelConfigUpdate_get_max_dust_htlc_exposure_msat(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -78,7 +78,7 @@ public class ChannelConfigUpdate : CommonBase {
 		GC.KeepAlive(val);
 	}
 
-	public Option_u64Z get_force_close_avoidance_max_fee_satoshis() {
+	public org.ldk.structs.Option_u64Z get_force_close_avoidance_max_fee_satoshis() {
 		long ret = bindings.ChannelConfigUpdate_get_force_close_avoidance_max_fee_satoshis(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -96,7 +96,7 @@ public class ChannelConfigUpdate : CommonBase {
 	/**
 	 * Constructs a new ChannelConfigUpdate given each field
 	 */
-	public static ChannelConfigUpdate of(org.ldk.structs.Option_u32Z forwarding_fee_proportional_millionths_arg, org.ldk.structs.Option_u32Z forwarding_fee_base_msat_arg, org.ldk.structs.Option_u16Z cltv_expiry_delta_arg, org.ldk.structs.Option_MaxDustHTLCExposureZ max_dust_htlc_exposure_msat_arg, org.ldk.structs.Option_u64Z force_close_avoidance_max_fee_satoshis_arg) {
+	public static org.ldk.structs.ChannelConfigUpdate of(org.ldk.structs.Option_u32Z forwarding_fee_proportional_millionths_arg, org.ldk.structs.Option_u32Z forwarding_fee_base_msat_arg, org.ldk.structs.Option_u16Z cltv_expiry_delta_arg, org.ldk.structs.Option_MaxDustHTLCExposureZ max_dust_htlc_exposure_msat_arg, org.ldk.structs.Option_u64Z force_close_avoidance_max_fee_satoshis_arg) {
 		long ret = bindings.ChannelConfigUpdate_new(forwarding_fee_proportional_millionths_arg.ptr, forwarding_fee_base_msat_arg.ptr, cltv_expiry_delta_arg.ptr, max_dust_htlc_exposure_msat_arg.ptr, force_close_avoidance_max_fee_satoshis_arg.ptr);
 		GC.KeepAlive(forwarding_fee_proportional_millionths_arg);
 		GC.KeepAlive(forwarding_fee_base_msat_arg);

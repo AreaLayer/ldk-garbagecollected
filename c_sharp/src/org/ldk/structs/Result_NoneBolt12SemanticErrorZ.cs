@@ -33,7 +33,7 @@ public class Result_NoneBolt12SemanticErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_NoneBolt12SemanticErrorZ in the success state.
 	 */
-	public static Result_NoneBolt12SemanticErrorZ ok() {
+	public static org.ldk.structs.Result_NoneBolt12SemanticErrorZ ok() {
 		long ret = bindings.CResult_NoneBolt12SemanticErrorZ_ok();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneBolt12SemanticErrorZ ret_hu_conv = Result_NoneBolt12SemanticErrorZ.constr_from_ptr(ret);
@@ -43,7 +43,7 @@ public class Result_NoneBolt12SemanticErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_NoneBolt12SemanticErrorZ in the error state.
 	 */
-	public static Result_NoneBolt12SemanticErrorZ err(Bolt12SemanticError e) {
+	public static org.ldk.structs.Result_NoneBolt12SemanticErrorZ err(Bolt12SemanticError e) {
 		long ret = bindings.CResult_NoneBolt12SemanticErrorZ_err(e);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -70,7 +70,7 @@ public class Result_NoneBolt12SemanticErrorZ : CommonBase {
 	 * Creates a new CResult_NoneBolt12SemanticErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_NoneBolt12SemanticErrorZ clone() {
+	public org.ldk.structs.Result_NoneBolt12SemanticErrorZ clone() {
 		long ret = bindings.CResult_NoneBolt12SemanticErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

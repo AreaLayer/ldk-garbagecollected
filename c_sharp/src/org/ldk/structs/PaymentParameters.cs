@@ -18,7 +18,7 @@ public class PaymentParameters : CommonBase {
 	/**
 	 * Information about the payee, such as their features and route hints for their channels.
 	 */
-	public Payee get_payee() {
+	public org.ldk.structs.Payee get_payee() {
 		long ret = bindings.PaymentParameters_get_payee(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -39,7 +39,7 @@ public class PaymentParameters : CommonBase {
 	/**
 	 * Expiration of a payment to the payee, in seconds relative to the UNIX epoch.
 	 */
-	public Option_u64Z get_expiry_time() {
+	public org.ldk.structs.Option_u64Z get_expiry_time() {
 		long ret = bindings.PaymentParameters_get_expiry_time(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -214,7 +214,7 @@ public class PaymentParameters : CommonBase {
 	/**
 	 * Constructs a new PaymentParameters given each field
 	 */
-	public static PaymentParameters of(org.ldk.structs.Payee payee_arg, org.ldk.structs.Option_u64Z expiry_time_arg, int max_total_cltv_expiry_delta_arg, byte max_path_count_arg, byte max_path_length_arg, byte max_channel_saturation_power_of_half_arg, long[] previously_failed_channels_arg, long[] previously_failed_blinded_path_idxs_arg) {
+	public static org.ldk.structs.PaymentParameters of(org.ldk.structs.Payee payee_arg, org.ldk.structs.Option_u64Z expiry_time_arg, int max_total_cltv_expiry_delta_arg, byte max_path_count_arg, byte max_path_length_arg, byte max_channel_saturation_power_of_half_arg, long[] previously_failed_channels_arg, long[] previously_failed_blinded_path_idxs_arg) {
 		long ret = bindings.PaymentParameters_new(payee_arg.ptr, expiry_time_arg.ptr, max_total_cltv_expiry_delta_arg, max_path_count_arg, max_path_length_arg, max_channel_saturation_power_of_half_arg, InternalUtils.encodeUint64Array(previously_failed_channels_arg), InternalUtils.encodeUint64Array(previously_failed_blinded_path_idxs_arg));
 		GC.KeepAlive(payee_arg);
 		GC.KeepAlive(expiry_time_arg);
@@ -239,7 +239,7 @@ public class PaymentParameters : CommonBase {
 	/**
 	 * Creates a copy of the PaymentParameters
 	 */
-	public PaymentParameters clone() {
+	public org.ldk.structs.PaymentParameters clone() {
 		long ret = bindings.PaymentParameters_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -291,7 +291,7 @@ public class PaymentParameters : CommonBase {
 	/**
 	 * Read a PaymentParameters from a byte array, created by PaymentParameters_write
 	 */
-	public static Result_PaymentParametersDecodeErrorZ read(byte[] ser, int arg) {
+	public static org.ldk.structs.Result_PaymentParametersDecodeErrorZ read(byte[] ser, int arg) {
 		long ret = bindings.PaymentParameters_read(InternalUtils.encodeUint8Array(ser), arg);
 		GC.KeepAlive(ser);
 		GC.KeepAlive(arg);
@@ -306,7 +306,7 @@ public class PaymentParameters : CommonBase {
 	 * The `final_cltv_expiry_delta` should match the expected final CLTV delta the recipient has
 	 * provided.
 	 */
-	public static PaymentParameters from_node_id(byte[] payee_pubkey, int final_cltv_expiry_delta) {
+	public static org.ldk.structs.PaymentParameters from_node_id(byte[] payee_pubkey, int final_cltv_expiry_delta) {
 		long ret = bindings.PaymentParameters_from_node_id(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payee_pubkey, 33)), final_cltv_expiry_delta);
 		GC.KeepAlive(payee_pubkey);
 		GC.KeepAlive(final_cltv_expiry_delta);
@@ -329,7 +329,7 @@ public class PaymentParameters : CommonBase {
 	 * 
 	 * [`RecipientOnionFields::secret_only`]: crate::ln::channelmanager::RecipientOnionFields::secret_only
 	 */
-	public static PaymentParameters for_keysend(byte[] payee_pubkey, int final_cltv_expiry_delta, bool allow_mpp) {
+	public static org.ldk.structs.PaymentParameters for_keysend(byte[] payee_pubkey, int final_cltv_expiry_delta, bool allow_mpp) {
 		long ret = bindings.PaymentParameters_for_keysend(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payee_pubkey, 33)), final_cltv_expiry_delta, allow_mpp);
 		GC.KeepAlive(payee_pubkey);
 		GC.KeepAlive(final_cltv_expiry_delta);
@@ -345,7 +345,7 @@ public class PaymentParameters : CommonBase {
 	 * [`Payee::Blinded::route_hints`], [`Payee::Blinded::features`], and
 	 * [`PaymentParameters::expiry_time`].
 	 */
-	public static PaymentParameters from_bolt12_invoice(org.ldk.structs.Bolt12Invoice invoice) {
+	public static org.ldk.structs.PaymentParameters from_bolt12_invoice(org.ldk.structs.Bolt12Invoice invoice) {
 		long ret = bindings.PaymentParameters_from_bolt12_invoice(invoice.ptr);
 		GC.KeepAlive(invoice);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -358,7 +358,7 @@ public class PaymentParameters : CommonBase {
 	/**
 	 * Creates parameters for paying to a blinded payee from the provided blinded route hints.
 	 */
-	public static PaymentParameters blinded(BlindedPaymentPath[] blinded_route_hints) {
+	public static org.ldk.structs.PaymentParameters blinded(BlindedPaymentPath[] blinded_route_hints) {
 		long ret = bindings.PaymentParameters_blinded(InternalUtils.encodeUint64Array(InternalUtils.mapArray(blinded_route_hints, blinded_route_hints_conv_20 => blinded_route_hints_conv_20.ptr)));
 		GC.KeepAlive(blinded_route_hints);
 		if (ret >= 0 && ret <= 4096) { return null; }

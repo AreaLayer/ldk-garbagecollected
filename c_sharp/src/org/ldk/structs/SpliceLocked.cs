@@ -18,7 +18,7 @@ public class SpliceLocked : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.SpliceLocked_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -59,7 +59,7 @@ public class SpliceLocked : CommonBase {
 	/**
 	 * Constructs a new SpliceLocked given each field
 	 */
-	public static SpliceLocked of(org.ldk.structs.ChannelId channel_id_arg, byte[] splice_txid_arg) {
+	public static org.ldk.structs.SpliceLocked of(org.ldk.structs.ChannelId channel_id_arg, byte[] splice_txid_arg) {
 		long ret = bindings.SpliceLocked_new(channel_id_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(splice_txid_arg, 32)));
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(splice_txid_arg);
@@ -78,7 +78,7 @@ public class SpliceLocked : CommonBase {
 	/**
 	 * Creates a copy of the SpliceLocked
 	 */
-	public SpliceLocked clone() {
+	public org.ldk.structs.SpliceLocked clone() {
 		long ret = bindings.SpliceLocked_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -118,7 +118,7 @@ public class SpliceLocked : CommonBase {
 	/**
 	 * Read a SpliceLocked from a byte array, created by SpliceLocked_write
 	 */
-	public static Result_SpliceLockedDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_SpliceLockedDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.SpliceLocked_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

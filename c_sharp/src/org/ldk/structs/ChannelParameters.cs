@@ -133,7 +133,7 @@ public class ChannelParameters : CommonBase {
 	/**
 	 * Constructs a new ChannelParameters given each field
 	 */
-	public static ChannelParameters of(long dust_limit_satoshis_arg, long max_htlc_value_in_flight_msat_arg, long htlc_minimum_msat_arg, int commitment_feerate_sat_per_1000_weight_arg, short to_self_delay_arg, short max_accepted_htlcs_arg) {
+	public static org.ldk.structs.ChannelParameters of(long dust_limit_satoshis_arg, long max_htlc_value_in_flight_msat_arg, long htlc_minimum_msat_arg, int commitment_feerate_sat_per_1000_weight_arg, short to_self_delay_arg, short max_accepted_htlcs_arg) {
 		long ret = bindings.ChannelParameters_new(dust_limit_satoshis_arg, max_htlc_value_in_flight_msat_arg, htlc_minimum_msat_arg, commitment_feerate_sat_per_1000_weight_arg, to_self_delay_arg, max_accepted_htlcs_arg);
 		GC.KeepAlive(dust_limit_satoshis_arg);
 		GC.KeepAlive(max_htlc_value_in_flight_msat_arg);
@@ -156,7 +156,7 @@ public class ChannelParameters : CommonBase {
 	/**
 	 * Creates a copy of the ChannelParameters
 	 */
-	public ChannelParameters clone() {
+	public org.ldk.structs.ChannelParameters clone() {
 		long ret = bindings.ChannelParameters_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

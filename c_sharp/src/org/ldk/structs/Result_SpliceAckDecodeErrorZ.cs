@@ -41,7 +41,7 @@ public class Result_SpliceAckDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_SpliceAckDecodeErrorZ in the success state.
 	 */
-	public static Result_SpliceAckDecodeErrorZ ok(org.ldk.structs.SpliceAck o) {
+	public static org.ldk.structs.Result_SpliceAckDecodeErrorZ ok(org.ldk.structs.SpliceAck o) {
 		long ret = bindings.CResult_SpliceAckDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_SpliceAckDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_SpliceAckDecodeErrorZ in the error state.
 	 */
-	public static Result_SpliceAckDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_SpliceAckDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_SpliceAckDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_SpliceAckDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_SpliceAckDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_SpliceAckDecodeErrorZ clone() {
+	public org.ldk.structs.Result_SpliceAckDecodeErrorZ clone() {
 		long ret = bindings.CResult_SpliceAckDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

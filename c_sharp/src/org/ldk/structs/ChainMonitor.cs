@@ -39,7 +39,7 @@ public class ChainMonitor : CommonBase {
 	 * always need to fetch full blocks absent another means for determining which blocks contain
 	 * transactions relevant to the watched channels.
 	 */
-	public static ChainMonitor of(org.ldk.structs.Option_FilterZ chain_source, org.ldk.structs.BroadcasterInterface broadcaster, org.ldk.structs.Logger logger, org.ldk.structs.FeeEstimator feeest, org.ldk.structs.Persist persister) {
+	public static org.ldk.structs.ChainMonitor of(org.ldk.structs.Option_FilterZ chain_source, org.ldk.structs.BroadcasterInterface broadcaster, org.ldk.structs.Logger logger, org.ldk.structs.FeeEstimator feeest, org.ldk.structs.Persist persister) {
 		long ret = bindings.ChainMonitor_new(chain_source.ptr, broadcaster.ptr, logger.ptr, feeest.ptr, persister.ptr);
 		GC.KeepAlive(chain_source);
 		GC.KeepAlive(broadcaster);
@@ -91,7 +91,7 @@ public class ChainMonitor : CommonBase {
 	 * Note that the result holds a mutex over our monitor set, and should not be held
 	 * indefinitely.
 	 */
-	public Result_LockedChannelMonitorNoneZ get_monitor(org.ldk.structs.OutPoint funding_txo) {
+	public org.ldk.structs.Result_LockedChannelMonitorNoneZ get_monitor(org.ldk.structs.OutPoint funding_txo) {
 		long ret = bindings.ChainMonitor_get_monitor(this.ptr, funding_txo.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(funding_txo);
@@ -166,7 +166,7 @@ public class ChainMonitor : CommonBase {
 	 * Returns an [`APIError::APIMisuseError`] if `funding_txo` does not match any currently
 	 * registered [`ChannelMonitor`]s.
 	 */
-	public Result_NoneAPIErrorZ channel_monitor_updated(org.ldk.structs.OutPoint funding_txo, long completed_update_id) {
+	public org.ldk.structs.Result_NoneAPIErrorZ channel_monitor_updated(org.ldk.structs.OutPoint funding_txo, long completed_update_id) {
 		long ret = bindings.ChainMonitor_channel_monitor_updated(this.ptr, funding_txo.ptr, completed_update_id);
 		GC.KeepAlive(this);
 		GC.KeepAlive(funding_txo);
@@ -186,7 +186,7 @@ public class ChainMonitor : CommonBase {
 	 * 
 	 * [`EventsProvider::process_pending_events`]: crate::events::EventsProvider::process_pending_events
 	 */
-	public Future get_update_future() {
+	public org.ldk.structs.Future get_update_future() {
 		long ret = bindings.ChainMonitor_get_update_future(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -241,7 +241,7 @@ public class ChainMonitor : CommonBase {
 	 * Constructs a new Listen which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned Listen must be freed before this_arg is
 	 */
-	public Listen as_Listen() {
+	public org.ldk.structs.Listen as_Listen() {
 		long ret = bindings.ChainMonitor_as_Listen(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -254,7 +254,7 @@ public class ChainMonitor : CommonBase {
 	 * Constructs a new Confirm which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned Confirm must be freed before this_arg is
 	 */
-	public Confirm as_Confirm() {
+	public org.ldk.structs.Confirm as_Confirm() {
 		long ret = bindings.ChainMonitor_as_Confirm(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -267,7 +267,7 @@ public class ChainMonitor : CommonBase {
 	 * Constructs a new Watch which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned Watch must be freed before this_arg is
 	 */
-	public Watch as_Watch() {
+	public org.ldk.structs.Watch as_Watch() {
 		long ret = bindings.ChainMonitor_as_Watch(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -280,7 +280,7 @@ public class ChainMonitor : CommonBase {
 	 * Constructs a new EventsProvider which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned EventsProvider must be freed before this_arg is
 	 */
-	public EventsProvider as_EventsProvider() {
+	public org.ldk.structs.EventsProvider as_EventsProvider() {
 		long ret = bindings.ChainMonitor_as_EventsProvider(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

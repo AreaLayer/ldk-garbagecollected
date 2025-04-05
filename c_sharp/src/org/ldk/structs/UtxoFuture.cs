@@ -26,7 +26,7 @@ public class UtxoFuture : CommonBase {
 	/**
 	 * Creates a copy of the UtxoFuture
 	 */
-	public UtxoFuture clone() {
+	public org.ldk.structs.UtxoFuture clone() {
 		long ret = bindings.UtxoFuture_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -38,7 +38,7 @@ public class UtxoFuture : CommonBase {
 	/**
 	 * Builds a new future for later resolution.
 	 */
-	public static UtxoFuture of() {
+	public static org.ldk.structs.UtxoFuture of() {
 		long ret = bindings.UtxoFuture_new();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.UtxoFuture ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.UtxoFuture(null, ret); }

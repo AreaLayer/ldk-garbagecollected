@@ -41,7 +41,7 @@ public class Result_HTLCOutputInCommitmentDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_HTLCOutputInCommitmentDecodeErrorZ in the success state.
 	 */
-	public static Result_HTLCOutputInCommitmentDecodeErrorZ ok(org.ldk.structs.HTLCOutputInCommitment o) {
+	public static org.ldk.structs.Result_HTLCOutputInCommitmentDecodeErrorZ ok(org.ldk.structs.HTLCOutputInCommitment o) {
 		long ret = bindings.CResult_HTLCOutputInCommitmentDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_HTLCOutputInCommitmentDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_HTLCOutputInCommitmentDecodeErrorZ in the error state.
 	 */
-	public static Result_HTLCOutputInCommitmentDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_HTLCOutputInCommitmentDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_HTLCOutputInCommitmentDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_HTLCOutputInCommitmentDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_HTLCOutputInCommitmentDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_HTLCOutputInCommitmentDecodeErrorZ clone() {
+	public org.ldk.structs.Result_HTLCOutputInCommitmentDecodeErrorZ clone() {
 		long ret = bindings.CResult_HTLCOutputInCommitmentDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

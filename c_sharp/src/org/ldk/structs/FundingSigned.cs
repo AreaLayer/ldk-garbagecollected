@@ -22,7 +22,7 @@ public class FundingSigned : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.FundingSigned_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -63,7 +63,7 @@ public class FundingSigned : CommonBase {
 	/**
 	 * Constructs a new FundingSigned given each field
 	 */
-	public static FundingSigned of(org.ldk.structs.ChannelId channel_id_arg, byte[] signature_arg) {
+	public static org.ldk.structs.FundingSigned of(org.ldk.structs.ChannelId channel_id_arg, byte[] signature_arg) {
 		long ret = bindings.FundingSigned_new(channel_id_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(signature_arg, 64)));
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(signature_arg);
@@ -82,7 +82,7 @@ public class FundingSigned : CommonBase {
 	/**
 	 * Creates a copy of the FundingSigned
 	 */
-	public FundingSigned clone() {
+	public org.ldk.structs.FundingSigned clone() {
 		long ret = bindings.FundingSigned_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -134,7 +134,7 @@ public class FundingSigned : CommonBase {
 	/**
 	 * Read a FundingSigned from a byte array, created by FundingSigned_write
 	 */
-	public static Result_FundingSignedDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_FundingSignedDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.FundingSigned_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

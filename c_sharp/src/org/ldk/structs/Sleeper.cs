@@ -19,7 +19,7 @@ public class Sleeper : CommonBase {
 	/**
 	 * Constructs a new sleeper from one future, allowing blocking on it.
 	 */
-	public static Sleeper from_single_future(org.ldk.structs.Future future) {
+	public static org.ldk.structs.Sleeper from_single_future(org.ldk.structs.Future future) {
 		long ret = bindings.Sleeper_from_single_future(future.ptr);
 		GC.KeepAlive(future);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -32,7 +32,7 @@ public class Sleeper : CommonBase {
 	/**
 	 * Constructs a new sleeper from two futures, allowing blocking on both at once.
 	 */
-	public static Sleeper from_two_futures(org.ldk.structs.Future fut_a, org.ldk.structs.Future fut_b) {
+	public static org.ldk.structs.Sleeper from_two_futures(org.ldk.structs.Future fut_a, org.ldk.structs.Future fut_b) {
 		long ret = bindings.Sleeper_from_two_futures(fut_a.ptr, fut_b.ptr);
 		GC.KeepAlive(fut_a);
 		GC.KeepAlive(fut_b);
@@ -47,7 +47,7 @@ public class Sleeper : CommonBase {
 	/**
 	 * Constructs a new sleeper from three futures, allowing blocking on all three at once.
 	 */
-	public static Sleeper from_three_futures(org.ldk.structs.Future fut_a, org.ldk.structs.Future fut_b, org.ldk.structs.Future fut_c) {
+	public static org.ldk.structs.Sleeper from_three_futures(org.ldk.structs.Future fut_a, org.ldk.structs.Future fut_b, org.ldk.structs.Future fut_c) {
 		long ret = bindings.Sleeper_from_three_futures(fut_a.ptr, fut_b.ptr, fut_c.ptr);
 		GC.KeepAlive(fut_a);
 		GC.KeepAlive(fut_b);
@@ -64,7 +64,7 @@ public class Sleeper : CommonBase {
 	/**
 	 * Constructs a new sleeper on many futures, allowing blocking on all at once.
 	 */
-	public static Sleeper of(Future[] futures) {
+	public static org.ldk.structs.Sleeper of(Future[] futures) {
 		long ret = bindings.Sleeper_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(futures, futures_conv_8 => futures_conv_8.ptr)));
 		GC.KeepAlive(futures);
 		if (ret >= 0 && ret <= 4096) { return null; }

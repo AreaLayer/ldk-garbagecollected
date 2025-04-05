@@ -41,7 +41,7 @@ public class Result_RevokeAndACKDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_RevokeAndACKDecodeErrorZ in the success state.
 	 */
-	public static Result_RevokeAndACKDecodeErrorZ ok(org.ldk.structs.RevokeAndACK o) {
+	public static org.ldk.structs.Result_RevokeAndACKDecodeErrorZ ok(org.ldk.structs.RevokeAndACK o) {
 		long ret = bindings.CResult_RevokeAndACKDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_RevokeAndACKDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_RevokeAndACKDecodeErrorZ in the error state.
 	 */
-	public static Result_RevokeAndACKDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_RevokeAndACKDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_RevokeAndACKDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_RevokeAndACKDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_RevokeAndACKDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_RevokeAndACKDecodeErrorZ clone() {
+	public org.ldk.structs.Result_RevokeAndACKDecodeErrorZ clone() {
 		long ret = bindings.CResult_RevokeAndACKDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -45,7 +45,7 @@ public class SignedRawBolt11Invoice : CommonBase {
 	/**
 	 * Creates a copy of the SignedRawBolt11Invoice
 	 */
-	public SignedRawBolt11Invoice clone() {
+	public org.ldk.structs.SignedRawBolt11Invoice clone() {
 		long ret = bindings.SignedRawBolt11Invoice_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -72,7 +72,7 @@ public class SignedRawBolt11Invoice : CommonBase {
 	 * 2. hash of the raw invoice
 	 * 3. signature
 	 */
-	public ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ into_parts() {
+	public org.ldk.structs.ThreeTuple_RawBolt11Invoice_u832Bolt11InvoiceSignatureZ into_parts() {
 		long ret = bindings.SignedRawBolt11Invoice_into_parts(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -85,7 +85,7 @@ public class SignedRawBolt11Invoice : CommonBase {
 	/**
 	 * The [`RawBolt11Invoice`] which was signed.
 	 */
-	public RawBolt11Invoice raw_invoice() {
+	public org.ldk.structs.RawBolt11Invoice raw_invoice() {
 		long ret = bindings.SignedRawBolt11Invoice_raw_invoice(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -108,7 +108,7 @@ public class SignedRawBolt11Invoice : CommonBase {
 	/**
 	 * Signature for the invoice.
 	 */
-	public Bolt11InvoiceSignature signature() {
+	public org.ldk.structs.Bolt11InvoiceSignature signature() {
 		long ret = bindings.SignedRawBolt11Invoice_signature(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -120,7 +120,7 @@ public class SignedRawBolt11Invoice : CommonBase {
 	/**
 	 * Recovers the public key used for signing the invoice from the recoverable signature.
 	 */
-	public Result_PayeePubKeySecp256k1ErrorZ recover_payee_pub_key() {
+	public org.ldk.structs.Result_PayeePubKeySecp256k1ErrorZ recover_payee_pub_key() {
 		long ret = bindings.SignedRawBolt11Invoice_recover_payee_pub_key(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -141,7 +141,7 @@ public class SignedRawBolt11Invoice : CommonBase {
 	/**
 	 * Read a SignedRawBolt11Invoice object from a string
 	 */
-	public static Result_SignedRawBolt11InvoiceBolt11ParseErrorZ from_str(string s) {
+	public static org.ldk.structs.Result_SignedRawBolt11InvoiceBolt11ParseErrorZ from_str(string s) {
 		long ret = bindings.SignedRawBolt11Invoice_from_str(InternalUtils.encodeString(s));
 		GC.KeepAlive(s);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -12,7 +12,7 @@ namespace org { namespace ldk { namespace structs {
 public interface SignInvoiceRequestFnInterface {
 	/**Signs a [`TaggedHash`] computed over the merkle root of `message`'s TLV stream.
 	 */
-	Result_SchnorrSignatureNoneZ sign_invoice_request(UnsignedInvoiceRequest message);
+	Result_SchnorrSignatureNoneZ sign_invoice_request(org.ldk.structs.UnsignedInvoiceRequest message);
 }
 
 /**
@@ -56,7 +56,7 @@ public class SignInvoiceRequestFn : CommonBase {
 	/**
 	 * Signs a [`TaggedHash`] computed over the merkle root of `message`'s TLV stream.
 	 */
-	public Result_SchnorrSignatureNoneZ sign_invoice_request(org.ldk.structs.UnsignedInvoiceRequest message) {
+	public org.ldk.structs.Result_SchnorrSignatureNoneZ sign_invoice_request(org.ldk.structs.UnsignedInvoiceRequest message) {
 		long ret = bindings.SignInvoiceRequestFn_sign_invoice_request(this.ptr, message.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(message);

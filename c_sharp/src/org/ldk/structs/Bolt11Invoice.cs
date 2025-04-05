@@ -48,7 +48,7 @@ public class Bolt11Invoice : CommonBase {
 	/**
 	 * Creates a copy of the Bolt11Invoice
 	 */
-	public Bolt11Invoice clone() {
+	public org.ldk.structs.Bolt11Invoice clone() {
 		long ret = bindings.Bolt11Invoice_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -83,7 +83,7 @@ public class Bolt11Invoice : CommonBase {
 	/**
 	 * Transform the `Bolt11Invoice` into its unchecked version.
 	 */
-	public SignedRawBolt11Invoice into_signed_raw() {
+	public org.ldk.structs.SignedRawBolt11Invoice into_signed_raw() {
 		long ret = bindings.Bolt11Invoice_into_signed_raw(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -96,7 +96,7 @@ public class Bolt11Invoice : CommonBase {
 	/**
 	 * Check that the invoice is signed correctly and that key recovery works
 	 */
-	public Result_NoneBolt11SemanticErrorZ check_signature() {
+	public org.ldk.structs.Result_NoneBolt11SemanticErrorZ check_signature() {
 		long ret = bindings.Bolt11Invoice_check_signature(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -126,7 +126,7 @@ public class Bolt11Invoice : CommonBase {
 	 * assert!(Bolt11Invoice::from_signed(signed).is_ok());
 	 * ```
 	 */
-	public static Result_Bolt11InvoiceBolt11SemanticErrorZ from_signed(org.ldk.structs.SignedRawBolt11Invoice signed_invoice) {
+	public static org.ldk.structs.Result_Bolt11InvoiceBolt11SemanticErrorZ from_signed(org.ldk.structs.SignedRawBolt11Invoice signed_invoice) {
 		long ret = bindings.Bolt11Invoice_from_signed(signed_invoice.ptr);
 		GC.KeepAlive(signed_invoice);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -190,7 +190,7 @@ public class Bolt11Invoice : CommonBase {
 	/**
 	 * Get the payment metadata blob if one was included in the invoice
 	 */
-	public Option_CVec_u8ZZ payment_metadata() {
+	public org.ldk.structs.Option_CVec_u8ZZ payment_metadata() {
 		long ret = bindings.Bolt11Invoice_payment_metadata(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -204,7 +204,7 @@ public class Bolt11Invoice : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public Bolt11InvoiceFeatures features() {
+	public org.ldk.structs.Bolt11InvoiceFeatures features() {
 		long ret = bindings.Bolt11Invoice_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -240,7 +240,7 @@ public class Bolt11Invoice : CommonBase {
 	 * Returns the Duration since the Unix epoch at which the invoice expires.
 	 * Returning None if overflow occurred.
 	 */
-	public Option_u64Z expires_at() {
+	public org.ldk.structs.Option_u64Z expires_at() {
 		long ret = bindings.Bolt11Invoice_expires_at(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -311,19 +311,19 @@ public class Bolt11Invoice : CommonBase {
 	/**
 	 * Returns a list of all fallback addresses as [`Address`]es
 	 */
-	public string[] fallback_addresses() {
+	public Address[] fallback_addresses() {
 		long ret = bindings.Bolt11Invoice_fallback_addresses(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
-		int ret_conv_8_len = InternalUtils.getArrayLength(ret);
-		string[] ret_conv_8_arr = new string[ret_conv_8_len];
-		for (int i = 0; i < ret_conv_8_len; i++) {
-			long ret_conv_8 = InternalUtils.getU64ArrayElem(ret, i);
-			string ret_conv_8_conv = InternalUtils.decodeString(ret_conv_8);
-			ret_conv_8_arr[i] = ret_conv_8_conv;
+		int ret_conv_9_len = InternalUtils.getArrayLength(ret);
+		Address[] ret_conv_9_arr = new Address[ret_conv_9_len];
+		for (int j = 0; j < ret_conv_9_len; j++) {
+			long ret_conv_9 = InternalUtils.getU64ArrayElem(ret, j);
+			Address ret_conv_9_conv = new Address(null, ret_conv_9);
+			ret_conv_9_arr[j] = ret_conv_9_conv;
 		}
 		bindings.free_buffer(ret);
-		return ret_conv_8_arr;
+		return ret_conv_9_arr;
 	}
 
 	/**
@@ -376,7 +376,7 @@ public class Bolt11Invoice : CommonBase {
 	/**
 	 * Returns the amount if specified in the invoice as millisatoshis.
 	 */
-	public Option_u64Z amount_milli_satoshis() {
+	public org.ldk.structs.Option_u64Z amount_milli_satoshis() {
 		long ret = bindings.Bolt11Invoice_amount_milli_satoshis(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -388,7 +388,7 @@ public class Bolt11Invoice : CommonBase {
 	/**
 	 * Read a Bolt11Invoice object from a string
 	 */
-	public static Result_Bolt11InvoiceParseOrSemanticErrorZ from_str(string s) {
+	public static org.ldk.structs.Result_Bolt11InvoiceParseOrSemanticErrorZ from_str(string s) {
 		long ret = bindings.Bolt11Invoice_from_str(InternalUtils.encodeString(s));
 		GC.KeepAlive(s);
 		if (ret >= 0 && ret <= 4096) { return null; }

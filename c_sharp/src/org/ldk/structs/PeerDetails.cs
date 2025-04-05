@@ -49,7 +49,7 @@ public class PeerDetails : CommonBase {
 	 * 
 	 * Returns a copy of the field.
 	 */
-	public Option_SocketAddressZ get_socket_address() {
+	public org.ldk.structs.Option_SocketAddressZ get_socket_address() {
 		long ret = bindings.PeerDetails_get_socket_address(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -73,7 +73,7 @@ public class PeerDetails : CommonBase {
 	/**
 	 * The features the peer provided in the initial handshake.
 	 */
-	public InitFeatures get_init_features() {
+	public org.ldk.structs.InitFeatures get_init_features() {
 		long ret = bindings.PeerDetails_get_init_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -116,7 +116,7 @@ public class PeerDetails : CommonBase {
 	/**
 	 * Constructs a new PeerDetails given each field
 	 */
-	public static PeerDetails of(byte[] counterparty_node_id_arg, org.ldk.structs.Option_SocketAddressZ socket_address_arg, org.ldk.structs.InitFeatures init_features_arg, bool is_inbound_connection_arg) {
+	public static org.ldk.structs.PeerDetails of(byte[] counterparty_node_id_arg, org.ldk.structs.Option_SocketAddressZ socket_address_arg, org.ldk.structs.InitFeatures init_features_arg, bool is_inbound_connection_arg) {
 		long ret = bindings.PeerDetails_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_node_id_arg, 33)), socket_address_arg.ptr, init_features_arg.ptr, is_inbound_connection_arg);
 		GC.KeepAlive(counterparty_node_id_arg);
 		GC.KeepAlive(socket_address_arg);

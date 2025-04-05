@@ -23,7 +23,7 @@ public class ErrorMessage : CommonBase {
 	 * All-0s indicates a general error unrelated to a specific channel, after which all channels
 	 * with the sending peer should be closed.
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.ErrorMessage_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -75,7 +75,7 @@ public class ErrorMessage : CommonBase {
 	/**
 	 * Constructs a new ErrorMessage given each field
 	 */
-	public static ErrorMessage of(org.ldk.structs.ChannelId channel_id_arg, string data_arg) {
+	public static org.ldk.structs.ErrorMessage of(org.ldk.structs.ChannelId channel_id_arg, string data_arg) {
 		long ret = bindings.ErrorMessage_new(channel_id_arg.ptr, InternalUtils.encodeString(data_arg));
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(data_arg);
@@ -94,7 +94,7 @@ public class ErrorMessage : CommonBase {
 	/**
 	 * Creates a copy of the ErrorMessage
 	 */
-	public ErrorMessage clone() {
+	public org.ldk.structs.ErrorMessage clone() {
 		long ret = bindings.ErrorMessage_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -146,7 +146,7 @@ public class ErrorMessage : CommonBase {
 	/**
 	 * Read a ErrorMessage from a byte array, created by ErrorMessage_write
 	 */
-	public static Result_ErrorMessageDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ErrorMessageDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.ErrorMessage_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

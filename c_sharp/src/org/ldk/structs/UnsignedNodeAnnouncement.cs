@@ -20,7 +20,7 @@ public class UnsignedNodeAnnouncement : CommonBase {
 	/**
 	 * The advertised features
 	 */
-	public NodeFeatures get_features() {
+	public org.ldk.structs.NodeFeatures get_features() {
 		long ret = bindings.UnsignedNodeAnnouncement_get_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -60,7 +60,7 @@ public class UnsignedNodeAnnouncement : CommonBase {
 	 * The `node_id` this announcement originated from (don't rebroadcast the `node_announcement` back
 	 * to this node).
 	 */
-	public NodeId get_node_id() {
+	public org.ldk.structs.NodeId get_node_id() {
 		long ret = bindings.UnsignedNodeAnnouncement_get_node_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -104,7 +104,7 @@ public class UnsignedNodeAnnouncement : CommonBase {
 	 * 
 	 * This should be sanitized before use. There is no guarantee of uniqueness.
 	 */
-	public NodeAlias get_alias() {
+	public org.ldk.structs.NodeAlias get_alias() {
 		long ret = bindings.UnsignedNodeAnnouncement_get_alias(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -213,7 +213,7 @@ public class UnsignedNodeAnnouncement : CommonBase {
 	/**
 	 * Constructs a new UnsignedNodeAnnouncement given each field
 	 */
-	public static UnsignedNodeAnnouncement of(org.ldk.structs.NodeFeatures features_arg, int timestamp_arg, org.ldk.structs.NodeId node_id_arg, byte[] rgb_arg, org.ldk.structs.NodeAlias alias_arg, SocketAddress[] addresses_arg, byte[] excess_address_data_arg, byte[] excess_data_arg) {
+	public static org.ldk.structs.UnsignedNodeAnnouncement of(org.ldk.structs.NodeFeatures features_arg, int timestamp_arg, org.ldk.structs.NodeId node_id_arg, byte[] rgb_arg, org.ldk.structs.NodeAlias alias_arg, SocketAddress[] addresses_arg, byte[] excess_address_data_arg, byte[] excess_data_arg) {
 		long ret = bindings.UnsignedNodeAnnouncement_new(features_arg.ptr, timestamp_arg, node_id_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(rgb_arg, 3)), alias_arg.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(addresses_arg, addresses_arg_conv_15 => addresses_arg_conv_15.ptr)), InternalUtils.encodeUint8Array(excess_address_data_arg), InternalUtils.encodeUint8Array(excess_data_arg));
 		GC.KeepAlive(features_arg);
 		GC.KeepAlive(timestamp_arg);
@@ -238,7 +238,7 @@ public class UnsignedNodeAnnouncement : CommonBase {
 	/**
 	 * Creates a copy of the UnsignedNodeAnnouncement
 	 */
-	public UnsignedNodeAnnouncement clone() {
+	public org.ldk.structs.UnsignedNodeAnnouncement clone() {
 		long ret = bindings.UnsignedNodeAnnouncement_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -290,7 +290,7 @@ public class UnsignedNodeAnnouncement : CommonBase {
 	/**
 	 * Read a UnsignedNodeAnnouncement from a byte array, created by UnsignedNodeAnnouncement_write
 	 */
-	public static Result_UnsignedNodeAnnouncementDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_UnsignedNodeAnnouncementDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.UnsignedNodeAnnouncement_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

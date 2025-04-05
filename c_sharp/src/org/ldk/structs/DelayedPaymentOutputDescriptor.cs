@@ -20,7 +20,7 @@ public class DelayedPaymentOutputDescriptor : CommonBase {
 	/**
 	 * The outpoint which is spendable.
 	 */
-	public OutPoint get_outpoint() {
+	public org.ldk.structs.OutPoint get_outpoint() {
 		long ret = bindings.DelayedPaymentOutputDescriptor_get_outpoint(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -81,7 +81,7 @@ public class DelayedPaymentOutputDescriptor : CommonBase {
 	/**
 	 * The output which is referenced by the given outpoint.
 	 */
-	public TxOut get_output() {
+	public org.ldk.structs.TxOut get_output() {
 		long ret = bindings.DelayedPaymentOutputDescriptor_get_output(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -102,7 +102,7 @@ public class DelayedPaymentOutputDescriptor : CommonBase {
 	 * The revocation point specific to the commitment transaction which was broadcast. Used to
 	 * derive the witnessScript for this output.
 	 */
-	public RevocationKey get_revocation_pubkey() {
+	public org.ldk.structs.RevocationKey get_revocation_pubkey() {
 		long ret = bindings.DelayedPaymentOutputDescriptor_get_revocation_pubkey(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -169,7 +169,7 @@ public class DelayedPaymentOutputDescriptor : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ChannelTransactionParameters get_channel_transaction_parameters() {
+	public org.ldk.structs.ChannelTransactionParameters get_channel_transaction_parameters() {
 		long ret = bindings.DelayedPaymentOutputDescriptor_get_channel_transaction_parameters(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -197,7 +197,7 @@ public class DelayedPaymentOutputDescriptor : CommonBase {
 	 * 
 	 * Note that channel_transaction_parameters_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static DelayedPaymentOutputDescriptor of(org.ldk.structs.OutPoint outpoint_arg, byte[] per_commitment_point_arg, short to_self_delay_arg, org.ldk.structs.TxOut output_arg, org.ldk.structs.RevocationKey revocation_pubkey_arg, byte[] channel_keys_id_arg, long channel_value_satoshis_arg, org.ldk.structs.ChannelTransactionParameters channel_transaction_parameters_arg) {
+	public static org.ldk.structs.DelayedPaymentOutputDescriptor of(org.ldk.structs.OutPoint outpoint_arg, byte[] per_commitment_point_arg, short to_self_delay_arg, org.ldk.structs.TxOut output_arg, org.ldk.structs.RevocationKey revocation_pubkey_arg, byte[] channel_keys_id_arg, long channel_value_satoshis_arg, org.ldk.structs.ChannelTransactionParameters channel_transaction_parameters_arg) {
 		long ret = bindings.DelayedPaymentOutputDescriptor_new(outpoint_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(per_commitment_point_arg, 33)), to_self_delay_arg, output_arg.ptr, revocation_pubkey_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(channel_keys_id_arg, 32)), channel_value_satoshis_arg, channel_transaction_parameters_arg == null ? 0 : channel_transaction_parameters_arg.ptr);
 		GC.KeepAlive(outpoint_arg);
 		GC.KeepAlive(per_commitment_point_arg);
@@ -222,7 +222,7 @@ public class DelayedPaymentOutputDescriptor : CommonBase {
 	/**
 	 * Creates a copy of the DelayedPaymentOutputDescriptor
 	 */
-	public DelayedPaymentOutputDescriptor clone() {
+	public org.ldk.structs.DelayedPaymentOutputDescriptor clone() {
 		long ret = bindings.DelayedPaymentOutputDescriptor_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -274,7 +274,7 @@ public class DelayedPaymentOutputDescriptor : CommonBase {
 	/**
 	 * Read a DelayedPaymentOutputDescriptor from a byte array, created by DelayedPaymentOutputDescriptor_write
 	 */
-	public static Result_DelayedPaymentOutputDescriptorDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_DelayedPaymentOutputDescriptorDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.DelayedPaymentOutputDescriptor_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

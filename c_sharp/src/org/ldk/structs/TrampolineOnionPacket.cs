@@ -98,7 +98,7 @@ public class TrampolineOnionPacket : CommonBase {
 	/**
 	 * Constructs a new TrampolineOnionPacket given each field
 	 */
-	public static TrampolineOnionPacket of(byte version_arg, byte[] public_key_arg, byte[] hop_data_arg, byte[] hmac_arg) {
+	public static org.ldk.structs.TrampolineOnionPacket of(byte version_arg, byte[] public_key_arg, byte[] hop_data_arg, byte[] hmac_arg) {
 		long ret = bindings.TrampolineOnionPacket_new(version_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(public_key_arg, 33)), InternalUtils.encodeUint8Array(hop_data_arg), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(hmac_arg, 32)));
 		GC.KeepAlive(version_arg);
 		GC.KeepAlive(public_key_arg);
@@ -119,7 +119,7 @@ public class TrampolineOnionPacket : CommonBase {
 	/**
 	 * Creates a copy of the TrampolineOnionPacket
 	 */
-	public TrampolineOnionPacket clone() {
+	public org.ldk.structs.TrampolineOnionPacket clone() {
 		long ret = bindings.TrampolineOnionPacket_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

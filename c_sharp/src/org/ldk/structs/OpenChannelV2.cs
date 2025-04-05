@@ -22,7 +22,7 @@ public class OpenChannelV2 : CommonBase {
 	/**
 	 * Common fields of `open_channel(2)`-like messages
 	 */
-	public CommonOpenChannelFields get_common_fields() {
+	public org.ldk.structs.CommonOpenChannelFields get_common_fields() {
 		long ret = bindings.OpenChannelV2_get_common_fields(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -117,7 +117,7 @@ public class OpenChannelV2 : CommonBase {
 	/**
 	 * Constructs a new OpenChannelV2 given each field
 	 */
-	public static OpenChannelV2 of(org.ldk.structs.CommonOpenChannelFields common_fields_arg, int funding_feerate_sat_per_1000_weight_arg, int locktime_arg, byte[] second_per_commitment_point_arg, COption_NoneZ require_confirmed_inputs_arg) {
+	public static org.ldk.structs.OpenChannelV2 of(org.ldk.structs.CommonOpenChannelFields common_fields_arg, int funding_feerate_sat_per_1000_weight_arg, int locktime_arg, byte[] second_per_commitment_point_arg, COption_NoneZ require_confirmed_inputs_arg) {
 		long ret = bindings.OpenChannelV2_new(common_fields_arg.ptr, funding_feerate_sat_per_1000_weight_arg, locktime_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(second_per_commitment_point_arg, 33)), require_confirmed_inputs_arg);
 		GC.KeepAlive(common_fields_arg);
 		GC.KeepAlive(funding_feerate_sat_per_1000_weight_arg);
@@ -139,7 +139,7 @@ public class OpenChannelV2 : CommonBase {
 	/**
 	 * Creates a copy of the OpenChannelV2
 	 */
-	public OpenChannelV2 clone() {
+	public org.ldk.structs.OpenChannelV2 clone() {
 		long ret = bindings.OpenChannelV2_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -191,7 +191,7 @@ public class OpenChannelV2 : CommonBase {
 	/**
 	 * Read a OpenChannelV2 from a byte array, created by OpenChannelV2_write
 	 */
-	public static Result_OpenChannelV2DecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_OpenChannelV2DecodeErrorZ read(byte[] ser) {
 		long ret = bindings.OpenChannelV2_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

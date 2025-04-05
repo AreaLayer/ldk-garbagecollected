@@ -41,7 +41,7 @@ public class Result_PaymentParametersDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_PaymentParametersDecodeErrorZ in the success state.
 	 */
-	public static Result_PaymentParametersDecodeErrorZ ok(org.ldk.structs.PaymentParameters o) {
+	public static org.ldk.structs.Result_PaymentParametersDecodeErrorZ ok(org.ldk.structs.PaymentParameters o) {
 		long ret = bindings.CResult_PaymentParametersDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_PaymentParametersDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_PaymentParametersDecodeErrorZ in the error state.
 	 */
-	public static Result_PaymentParametersDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_PaymentParametersDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_PaymentParametersDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_PaymentParametersDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_PaymentParametersDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_PaymentParametersDecodeErrorZ clone() {
+	public org.ldk.structs.Result_PaymentParametersDecodeErrorZ clone() {
 		long ret = bindings.CResult_PaymentParametersDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

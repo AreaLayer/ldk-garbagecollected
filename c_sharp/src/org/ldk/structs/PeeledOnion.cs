@@ -27,8 +27,8 @@ public class PeeledOnion : CommonBase {
 
 	/** A PeeledOnion of type Forward */
 	public class PeeledOnion_Forward : PeeledOnion {
-		public NextMessageHop _0;
-		public OnionMessage _1;
+		public org.ldk.structs.NextMessageHop _0;
+		public org.ldk.structs.OnionMessage _1;
 		internal PeeledOnion_Forward(long ptr) : base(null, ptr) {
 			long _0 = bindings.LDKPeeledOnion_Forward_get__0(ptr);
 			org.ldk.structs.NextMessageHop _0_hu_conv = org.ldk.structs.NextMessageHop.constr_from_ptr(_0);
@@ -42,12 +42,12 @@ public class PeeledOnion : CommonBase {
 	}
 	/** A PeeledOnion of type Receive */
 	public class PeeledOnion_Receive : PeeledOnion {
-		public ParsedOnionMessageContents _0;
-		public Option_MessageContextZ _1;
+		public org.ldk.structs.ParsedOnionMessageContents _0;
+		public org.ldk.structs.Option_MessageContextZ _1;
 		/**
 		 * Note that this (or a relevant inner pointer) may be NULL or all-0s to represent None
 		 */
-		public BlindedMessagePath _2;
+		public org.ldk.structs.BlindedMessagePath _2;
 		internal PeeledOnion_Receive(long ptr) : base(null, ptr) {
 			long _0 = bindings.LDKPeeledOnion_Receive_get__0(ptr);
 			org.ldk.structs.ParsedOnionMessageContents _0_hu_conv = org.ldk.structs.ParsedOnionMessageContents.constr_from_ptr(_0);
@@ -72,7 +72,7 @@ public class PeeledOnion : CommonBase {
 	/**
 	 * Creates a copy of the PeeledOnion
 	 */
-	public PeeledOnion clone() {
+	public org.ldk.structs.PeeledOnion clone() {
 		long ret = bindings.PeeledOnion_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -84,7 +84,7 @@ public class PeeledOnion : CommonBase {
 	/**
 	 * Utility method to constructs a new Forward-variant PeeledOnion
 	 */
-	public static PeeledOnion forward(org.ldk.structs.NextMessageHop a, org.ldk.structs.OnionMessage b) {
+	public static org.ldk.structs.PeeledOnion forward(org.ldk.structs.NextMessageHop a, org.ldk.structs.OnionMessage b) {
 		long ret = bindings.PeeledOnion_forward(a.ptr, b.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);
@@ -97,7 +97,7 @@ public class PeeledOnion : CommonBase {
 	/**
 	 * Utility method to constructs a new Receive-variant PeeledOnion
 	 */
-	public static PeeledOnion receive(org.ldk.structs.ParsedOnionMessageContents a, org.ldk.structs.Option_MessageContextZ b, org.ldk.structs.BlindedMessagePath c) {
+	public static org.ldk.structs.PeeledOnion receive(org.ldk.structs.ParsedOnionMessageContents a, org.ldk.structs.Option_MessageContextZ b, org.ldk.structs.BlindedMessagePath c) {
 		long ret = bindings.PeeledOnion_receive(a.ptr, b.ptr, c.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

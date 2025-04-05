@@ -32,7 +32,7 @@ public class HumanReadableName : CommonBase {
 	/**
 	 * Creates a copy of the HumanReadableName
 	 */
-	public HumanReadableName clone() {
+	public org.ldk.structs.HumanReadableName clone() {
 		long ret = bindings.HumanReadableName_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -74,7 +74,7 @@ public class HumanReadableName : CommonBase {
 	 * Constructs a new [`HumanReadableName`] from the `user` and `domain` parts. See the
 	 * struct-level documentation for more on the requirements on each.
 	 */
-	public static Result_HumanReadableNameNoneZ of(string user, string domain) {
+	public static org.ldk.structs.Result_HumanReadableNameNoneZ of(string user, string domain) {
 		long ret = bindings.HumanReadableName_new(InternalUtils.encodeString(user), InternalUtils.encodeString(domain));
 		GC.KeepAlive(user);
 		GC.KeepAlive(domain);
@@ -89,7 +89,7 @@ public class HumanReadableName : CommonBase {
 	 * If `user` includes the standard BIP 353 ₿ prefix it is automatically removed as required by
 	 * BIP 353.
 	 */
-	public static Result_HumanReadableNameNoneZ from_encoded(string encoded) {
+	public static org.ldk.structs.Result_HumanReadableNameNoneZ from_encoded(string encoded) {
 		long ret = bindings.HumanReadableName_from_encoded(InternalUtils.encodeString(encoded));
 		GC.KeepAlive(encoded);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -133,7 +133,7 @@ public class HumanReadableName : CommonBase {
 	/**
 	 * Read a HumanReadableName from a byte array, created by HumanReadableName_write
 	 */
-	public static Result_HumanReadableNameDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_HumanReadableNameDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.HumanReadableName_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

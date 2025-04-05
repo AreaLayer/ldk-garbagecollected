@@ -24,7 +24,7 @@ public class FixedPenaltyScorer : CommonBase {
 	/**
 	 * Creates a copy of the FixedPenaltyScorer
 	 */
-	public FixedPenaltyScorer clone() {
+	public org.ldk.structs.FixedPenaltyScorer clone() {
 		long ret = bindings.FixedPenaltyScorer_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -36,7 +36,7 @@ public class FixedPenaltyScorer : CommonBase {
 	/**
 	 * Creates a new scorer using `penalty_msat`.
 	 */
-	public static FixedPenaltyScorer with_penalty(long penalty_msat) {
+	public static org.ldk.structs.FixedPenaltyScorer with_penalty(long penalty_msat) {
 		long ret = bindings.FixedPenaltyScorer_with_penalty(penalty_msat);
 		GC.KeepAlive(penalty_msat);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -49,7 +49,7 @@ public class FixedPenaltyScorer : CommonBase {
 	 * Constructs a new ScoreLookUp which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned ScoreLookUp must be freed before this_arg is
 	 */
-	public ScoreLookUp as_ScoreLookUp() {
+	public org.ldk.structs.ScoreLookUp as_ScoreLookUp() {
 		long ret = bindings.FixedPenaltyScorer_as_ScoreLookUp(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -62,7 +62,7 @@ public class FixedPenaltyScorer : CommonBase {
 	 * Constructs a new ScoreUpdate which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned ScoreUpdate must be freed before this_arg is
 	 */
-	public ScoreUpdate as_ScoreUpdate() {
+	public org.ldk.structs.ScoreUpdate as_ScoreUpdate() {
 		long ret = bindings.FixedPenaltyScorer_as_ScoreUpdate(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -85,7 +85,7 @@ public class FixedPenaltyScorer : CommonBase {
 	/**
 	 * Read a FixedPenaltyScorer from a byte array, created by FixedPenaltyScorer_write
 	 */
-	public static Result_FixedPenaltyScorerDecodeErrorZ read(byte[] ser, long arg) {
+	public static org.ldk.structs.Result_FixedPenaltyScorerDecodeErrorZ read(byte[] ser, long arg) {
 		long ret = bindings.FixedPenaltyScorer_read(InternalUtils.encodeUint8Array(ser), arg);
 		GC.KeepAlive(ser);
 		GC.KeepAlive(arg);

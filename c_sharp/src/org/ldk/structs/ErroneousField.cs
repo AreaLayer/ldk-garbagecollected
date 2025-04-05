@@ -41,7 +41,7 @@ public class ErroneousField : CommonBase {
 	 * 
 	 * Returns a copy of the field.
 	 */
-	public Option_CVec_u8ZZ get_suggested_value() {
+	public org.ldk.structs.Option_CVec_u8ZZ get_suggested_value() {
 		long ret = bindings.ErroneousField_get_suggested_value(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -62,7 +62,7 @@ public class ErroneousField : CommonBase {
 	/**
 	 * Constructs a new ErroneousField given each field
 	 */
-	public static ErroneousField of(long tlv_fieldnum_arg, org.ldk.structs.Option_CVec_u8ZZ suggested_value_arg) {
+	public static org.ldk.structs.ErroneousField of(long tlv_fieldnum_arg, org.ldk.structs.Option_CVec_u8ZZ suggested_value_arg) {
 		long ret = bindings.ErroneousField_new(tlv_fieldnum_arg, suggested_value_arg.ptr);
 		GC.KeepAlive(tlv_fieldnum_arg);
 		GC.KeepAlive(suggested_value_arg);
@@ -81,7 +81,7 @@ public class ErroneousField : CommonBase {
 	/**
 	 * Creates a copy of the ErroneousField
 	 */
-	public ErroneousField clone() {
+	public org.ldk.structs.ErroneousField clone() {
 		long ret = bindings.ErroneousField_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -72,7 +72,7 @@ public class Record : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.Record_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -177,7 +177,7 @@ public class Record : CommonBase {
 	 * Note that this is only filled in for logs pertaining to a specific payment, and will be
 	 * `None` for logs which are not directly related to a payment.
 	 */
-	public Option_ThirtyTwoBytesZ get_payment_hash() {
+	public org.ldk.structs.Option_ThirtyTwoBytesZ get_payment_hash() {
 		long ret = bindings.Record_get_payment_hash(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -204,7 +204,7 @@ public class Record : CommonBase {
 	 * Note that peer_id_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 * Note that channel_id_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static Record of(Level level_arg, byte[] peer_id_arg, org.ldk.structs.ChannelId channel_id_arg, string args_arg, string module_path_arg, string file_arg, int line_arg, org.ldk.structs.Option_ThirtyTwoBytesZ payment_hash_arg) {
+	public static org.ldk.structs.Record of(Level level_arg, byte[] peer_id_arg, org.ldk.structs.ChannelId channel_id_arg, string args_arg, string module_path_arg, string file_arg, int line_arg, org.ldk.structs.Option_ThirtyTwoBytesZ payment_hash_arg) {
 		long ret = bindings.Record_new(level_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(peer_id_arg, 33)), channel_id_arg == null ? 0 : channel_id_arg.ptr, InternalUtils.encodeString(args_arg), InternalUtils.encodeString(module_path_arg), InternalUtils.encodeString(file_arg), line_arg, payment_hash_arg.ptr);
 		GC.KeepAlive(level_arg);
 		GC.KeepAlive(peer_id_arg);
@@ -229,7 +229,7 @@ public class Record : CommonBase {
 	/**
 	 * Creates a copy of the Record
 	 */
-	public Record clone() {
+	public org.ldk.structs.Record clone() {
 		long ret = bindings.Record_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

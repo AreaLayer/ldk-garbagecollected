@@ -20,7 +20,7 @@ public class TxAddOutput : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.TxAddOutput_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -99,7 +99,7 @@ public class TxAddOutput : CommonBase {
 	/**
 	 * Constructs a new TxAddOutput given each field
 	 */
-	public static TxAddOutput of(org.ldk.structs.ChannelId channel_id_arg, long serial_id_arg, long sats_arg, byte[] script_arg) {
+	public static org.ldk.structs.TxAddOutput of(org.ldk.structs.ChannelId channel_id_arg, long serial_id_arg, long sats_arg, byte[] script_arg) {
 		long ret = bindings.TxAddOutput_new(channel_id_arg.ptr, serial_id_arg, sats_arg, InternalUtils.encodeUint8Array(script_arg));
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(serial_id_arg);
@@ -120,7 +120,7 @@ public class TxAddOutput : CommonBase {
 	/**
 	 * Creates a copy of the TxAddOutput
 	 */
-	public TxAddOutput clone() {
+	public org.ldk.structs.TxAddOutput clone() {
 		long ret = bindings.TxAddOutput_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -172,7 +172,7 @@ public class TxAddOutput : CommonBase {
 	/**
 	 * Read a TxAddOutput from a byte array, created by TxAddOutput_write
 	 */
-	public static Result_TxAddOutputDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_TxAddOutputDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.TxAddOutput_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

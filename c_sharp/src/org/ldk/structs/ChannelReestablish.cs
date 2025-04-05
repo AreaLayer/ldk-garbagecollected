@@ -20,7 +20,7 @@ public class ChannelReestablish : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.ChannelReestablish_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -119,7 +119,7 @@ public class ChannelReestablish : CommonBase {
 	/**
 	 * The next funding transaction ID
 	 */
-	public Option_ThirtyTwoBytesZ get_next_funding_txid() {
+	public org.ldk.structs.Option_ThirtyTwoBytesZ get_next_funding_txid() {
 		long ret = bindings.ChannelReestablish_get_next_funding_txid(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -140,7 +140,7 @@ public class ChannelReestablish : CommonBase {
 	/**
 	 * Constructs a new ChannelReestablish given each field
 	 */
-	public static ChannelReestablish of(org.ldk.structs.ChannelId channel_id_arg, long next_local_commitment_number_arg, long next_remote_commitment_number_arg, byte[] your_last_per_commitment_secret_arg, byte[] my_current_per_commitment_point_arg, org.ldk.structs.Option_ThirtyTwoBytesZ next_funding_txid_arg) {
+	public static org.ldk.structs.ChannelReestablish of(org.ldk.structs.ChannelId channel_id_arg, long next_local_commitment_number_arg, long next_remote_commitment_number_arg, byte[] your_last_per_commitment_secret_arg, byte[] my_current_per_commitment_point_arg, org.ldk.structs.Option_ThirtyTwoBytesZ next_funding_txid_arg) {
 		long ret = bindings.ChannelReestablish_new(channel_id_arg.ptr, next_local_commitment_number_arg, next_remote_commitment_number_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(your_last_per_commitment_secret_arg, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(my_current_per_commitment_point_arg, 33)), next_funding_txid_arg.ptr);
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(next_local_commitment_number_arg);
@@ -163,7 +163,7 @@ public class ChannelReestablish : CommonBase {
 	/**
 	 * Creates a copy of the ChannelReestablish
 	 */
-	public ChannelReestablish clone() {
+	public org.ldk.structs.ChannelReestablish clone() {
 		long ret = bindings.ChannelReestablish_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -215,7 +215,7 @@ public class ChannelReestablish : CommonBase {
 	/**
 	 * Read a ChannelReestablish from a byte array, created by ChannelReestablish_write
 	 */
-	public static Result_ChannelReestablishDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ChannelReestablishDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.ChannelReestablish_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

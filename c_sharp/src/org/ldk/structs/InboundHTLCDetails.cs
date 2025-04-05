@@ -106,7 +106,7 @@ public class InboundHTLCDetails : CommonBase {
 	 * LDK will always fill this field in, but when downgrading to prior versions of LDK, new
 	 * states may result in `None` here.
 	 */
-	public Option_InboundHTLCStateDetailsZ get_state() {
+	public org.ldk.structs.Option_InboundHTLCStateDetailsZ get_state() {
 		long ret = bindings.InboundHTLCDetails_get_state(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -173,7 +173,7 @@ public class InboundHTLCDetails : CommonBase {
 	/**
 	 * Constructs a new InboundHTLCDetails given each field
 	 */
-	public static InboundHTLCDetails of(long htlc_id_arg, long amount_msat_arg, int cltv_expiry_arg, byte[] payment_hash_arg, org.ldk.structs.Option_InboundHTLCStateDetailsZ state_arg, bool is_dust_arg) {
+	public static org.ldk.structs.InboundHTLCDetails of(long htlc_id_arg, long amount_msat_arg, int cltv_expiry_arg, byte[] payment_hash_arg, org.ldk.structs.Option_InboundHTLCStateDetailsZ state_arg, bool is_dust_arg) {
 		long ret = bindings.InboundHTLCDetails_new(htlc_id_arg, amount_msat_arg, cltv_expiry_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash_arg, 32)), state_arg.ptr, is_dust_arg);
 		GC.KeepAlive(htlc_id_arg);
 		GC.KeepAlive(amount_msat_arg);
@@ -196,7 +196,7 @@ public class InboundHTLCDetails : CommonBase {
 	/**
 	 * Creates a copy of the InboundHTLCDetails
 	 */
-	public InboundHTLCDetails clone() {
+	public org.ldk.structs.InboundHTLCDetails clone() {
 		long ret = bindings.InboundHTLCDetails_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -219,7 +219,7 @@ public class InboundHTLCDetails : CommonBase {
 	/**
 	 * Read a InboundHTLCDetails from a byte array, created by InboundHTLCDetails_write
 	 */
-	public static Result_InboundHTLCDetailsDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_InboundHTLCDetailsDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.InboundHTLCDetails_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

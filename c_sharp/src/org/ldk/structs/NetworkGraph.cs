@@ -51,7 +51,7 @@ public class NetworkGraph : CommonBase {
 	/**
 	 * Read a NetworkGraph from a byte array, created by NetworkGraph_write
 	 */
-	public static Result_NetworkGraphDecodeErrorZ read(byte[] ser, org.ldk.structs.Logger arg) {
+	public static org.ldk.structs.Result_NetworkGraphDecodeErrorZ read(byte[] ser, org.ldk.structs.Logger arg) {
 		long ret = bindings.NetworkGraph_read(InternalUtils.encodeUint8Array(ser), arg.ptr);
 		GC.KeepAlive(ser);
 		GC.KeepAlive(arg);
@@ -75,7 +75,7 @@ public class NetworkGraph : CommonBase {
 	/**
 	 * Creates a new, empty, network graph.
 	 */
-	public static NetworkGraph of(Network network, org.ldk.structs.Logger logger) {
+	public static org.ldk.structs.NetworkGraph of(Network network, org.ldk.structs.Logger logger) {
 		long ret = bindings.NetworkGraph_new(network, logger.ptr);
 		GC.KeepAlive(network);
 		GC.KeepAlive(logger);
@@ -89,7 +89,7 @@ public class NetworkGraph : CommonBase {
 	/**
 	 * Returns a read-only view of the network graph.
 	 */
-	public ReadOnlyNetworkGraph read_only() {
+	public org.ldk.structs.ReadOnlyNetworkGraph read_only() {
 		long ret = bindings.NetworkGraph_read_only(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -102,7 +102,7 @@ public class NetworkGraph : CommonBase {
 	 * The unix timestamp provided by the most recent rapid gossip sync.
 	 * It will be set by the rapid sync process after every sync completion.
 	 */
-	public Option_u32Z get_last_rapid_gossip_sync_timestamp() {
+	public org.ldk.structs.Option_u32Z get_last_rapid_gossip_sync_timestamp() {
 		long ret = bindings.NetworkGraph_get_last_rapid_gossip_sync_timestamp(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -129,7 +129,7 @@ public class NetworkGraph : CommonBase {
 	 * RoutingMessageHandler implementation to call it indirectly. This may be useful to accept
 	 * routing messages from a source using a protocol other than the lightning P2P protocol.
 	 */
-	public Result_NoneLightningErrorZ update_node_from_announcement(org.ldk.structs.NodeAnnouncement msg) {
+	public org.ldk.structs.Result_NoneLightningErrorZ update_node_from_announcement(org.ldk.structs.NodeAnnouncement msg) {
 		long ret = bindings.NetworkGraph_update_node_from_announcement(this.ptr, msg.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(msg);
@@ -145,7 +145,7 @@ public class NetworkGraph : CommonBase {
 	 * given the associated signatures here we cannot relay the node announcement to any of our
 	 * peers.
 	 */
-	public Result_NoneLightningErrorZ update_node_from_unsigned_announcement(org.ldk.structs.UnsignedNodeAnnouncement msg) {
+	public org.ldk.structs.Result_NoneLightningErrorZ update_node_from_unsigned_announcement(org.ldk.structs.UnsignedNodeAnnouncement msg) {
 		long ret = bindings.NetworkGraph_update_node_from_unsigned_announcement(this.ptr, msg.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(msg);
@@ -165,7 +165,7 @@ public class NetworkGraph : CommonBase {
 	 * If a [`UtxoLookup`] object is provided via `utxo_lookup`, it will be called to verify
 	 * the corresponding UTXO exists on chain and is correctly-formatted.
 	 */
-	public Result_NoneLightningErrorZ update_channel_from_announcement(org.ldk.structs.ChannelAnnouncement msg, org.ldk.structs.Option_UtxoLookupZ utxo_lookup) {
+	public org.ldk.structs.Result_NoneLightningErrorZ update_channel_from_announcement(org.ldk.structs.ChannelAnnouncement msg, org.ldk.structs.Option_UtxoLookupZ utxo_lookup) {
 		long ret = bindings.NetworkGraph_update_channel_from_announcement(this.ptr, msg.ptr, utxo_lookup.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(msg);
@@ -186,7 +186,7 @@ public class NetworkGraph : CommonBase {
 	 * 
 	 * This will skip verification of if the channel is actually on-chain.
 	 */
-	public Result_NoneLightningErrorZ update_channel_from_announcement_no_lookup(org.ldk.structs.ChannelAnnouncement msg) {
+	public org.ldk.structs.Result_NoneLightningErrorZ update_channel_from_announcement_no_lookup(org.ldk.structs.ChannelAnnouncement msg) {
 		long ret = bindings.NetworkGraph_update_channel_from_announcement_no_lookup(this.ptr, msg.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(msg);
@@ -204,7 +204,7 @@ public class NetworkGraph : CommonBase {
 	 * If a [`UtxoLookup`] object is provided via `utxo_lookup`, it will be called to verify
 	 * the corresponding UTXO exists on chain and is correctly-formatted.
 	 */
-	public Result_NoneLightningErrorZ update_channel_from_unsigned_announcement(org.ldk.structs.UnsignedChannelAnnouncement msg, org.ldk.structs.Option_UtxoLookupZ utxo_lookup) {
+	public org.ldk.structs.Result_NoneLightningErrorZ update_channel_from_unsigned_announcement(org.ldk.structs.UnsignedChannelAnnouncement msg, org.ldk.structs.Option_UtxoLookupZ utxo_lookup) {
 		long ret = bindings.NetworkGraph_update_channel_from_unsigned_announcement(this.ptr, msg.ptr, utxo_lookup.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(msg);
@@ -224,7 +224,7 @@ public class NetworkGraph : CommonBase {
 	 * 
 	 * All other parameters as used in [`msgs::UnsignedChannelAnnouncement`] fields.
 	 */
-	public Result_NoneLightningErrorZ add_channel_from_partial_announcement(long short_channel_id, long timestamp, org.ldk.structs.ChannelFeatures features, byte[] node_id_1, byte[] node_id_2) {
+	public org.ldk.structs.Result_NoneLightningErrorZ add_channel_from_partial_announcement(long short_channel_id, long timestamp, org.ldk.structs.ChannelFeatures features, byte[] node_id_1, byte[] node_id_2) {
 		long ret = bindings.NetworkGraph_add_channel_from_partial_announcement(this.ptr, short_channel_id, timestamp, features.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id_1, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id_2, 33)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(short_channel_id);
@@ -313,7 +313,7 @@ public class NetworkGraph : CommonBase {
 	 * If not built with `std`, any updates with a timestamp more than two weeks in the past or
 	 * materially in the future will be rejected.
 	 */
-	public Result_NoneLightningErrorZ update_channel(org.ldk.structs.ChannelUpdate msg) {
+	public org.ldk.structs.Result_NoneLightningErrorZ update_channel(org.ldk.structs.ChannelUpdate msg) {
 		long ret = bindings.NetworkGraph_update_channel(this.ptr, msg.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(msg);
@@ -331,7 +331,7 @@ public class NetworkGraph : CommonBase {
 	 * If not built with `std`, any updates with a timestamp more than two weeks in the past or
 	 * materially in the future will be rejected.
 	 */
-	public Result_NoneLightningErrorZ update_channel_unsigned(org.ldk.structs.UnsignedChannelUpdate msg) {
+	public org.ldk.structs.Result_NoneLightningErrorZ update_channel_unsigned(org.ldk.structs.UnsignedChannelUpdate msg) {
 		long ret = bindings.NetworkGraph_update_channel_unsigned(this.ptr, msg.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(msg);
@@ -349,7 +349,7 @@ public class NetworkGraph : CommonBase {
 	 * If not built with `std`, any updates with a timestamp more than two weeks in the past or
 	 * materially in the future will be rejected.
 	 */
-	public Result_NoneLightningErrorZ verify_channel_update(org.ldk.structs.ChannelUpdate msg) {
+	public org.ldk.structs.Result_NoneLightningErrorZ verify_channel_update(org.ldk.structs.ChannelUpdate msg) {
 		long ret = bindings.NetworkGraph_verify_channel_update(this.ptr, msg.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(msg);

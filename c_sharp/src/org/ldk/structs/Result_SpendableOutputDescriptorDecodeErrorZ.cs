@@ -41,7 +41,7 @@ public class Result_SpendableOutputDescriptorDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_SpendableOutputDescriptorDecodeErrorZ in the success state.
 	 */
-	public static Result_SpendableOutputDescriptorDecodeErrorZ ok(org.ldk.structs.SpendableOutputDescriptor o) {
+	public static org.ldk.structs.Result_SpendableOutputDescriptorDecodeErrorZ ok(org.ldk.structs.SpendableOutputDescriptor o) {
 		long ret = bindings.CResult_SpendableOutputDescriptorDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_SpendableOutputDescriptorDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_SpendableOutputDescriptorDecodeErrorZ in the error state.
 	 */
-	public static Result_SpendableOutputDescriptorDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_SpendableOutputDescriptorDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_SpendableOutputDescriptorDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_SpendableOutputDescriptorDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_SpendableOutputDescriptorDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_SpendableOutputDescriptorDecodeErrorZ clone() {
+	public org.ldk.structs.Result_SpendableOutputDescriptorDecodeErrorZ clone() {
 		long ret = bindings.CResult_SpendableOutputDescriptorDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

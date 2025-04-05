@@ -21,7 +21,7 @@ public class CommonAcceptChannelFields : CommonBase {
 	/**
 	 * The same `temporary_channel_id` received from the initiator's `open_channel2` or `open_channel` message.
 	 */
-	public ChannelId get_temporary_channel_id() {
+	public org.ldk.structs.ChannelId get_temporary_channel_id() {
 		long ret = bindings.CommonAcceptChannelFields_get_temporary_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -277,7 +277,7 @@ public class CommonAcceptChannelFields : CommonBase {
 	 * Optionally, a request to pre-set the to-channel-acceptor output's scriptPubkey for when we
 	 * collaboratively close
 	 */
-	public Option_CVec_u8ZZ get_shutdown_scriptpubkey() {
+	public org.ldk.structs.Option_CVec_u8ZZ get_shutdown_scriptpubkey() {
 		long ret = bindings.CommonAcceptChannelFields_get_shutdown_scriptpubkey(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -306,7 +306,7 @@ public class CommonAcceptChannelFields : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ChannelTypeFeatures get_channel_type() {
+	public org.ldk.structs.ChannelTypeFeatures get_channel_type() {
 		long ret = bindings.CommonAcceptChannelFields_get_channel_type(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -336,7 +336,7 @@ public class CommonAcceptChannelFields : CommonBase {
 	 * 
 	 * Note that channel_type_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static CommonAcceptChannelFields of(org.ldk.structs.ChannelId temporary_channel_id_arg, long dust_limit_satoshis_arg, long max_htlc_value_in_flight_msat_arg, long htlc_minimum_msat_arg, int minimum_depth_arg, short to_self_delay_arg, short max_accepted_htlcs_arg, byte[] funding_pubkey_arg, byte[] revocation_basepoint_arg, byte[] payment_basepoint_arg, byte[] delayed_payment_basepoint_arg, byte[] htlc_basepoint_arg, byte[] first_per_commitment_point_arg, org.ldk.structs.Option_CVec_u8ZZ shutdown_scriptpubkey_arg, org.ldk.structs.ChannelTypeFeatures channel_type_arg) {
+	public static org.ldk.structs.CommonAcceptChannelFields of(org.ldk.structs.ChannelId temporary_channel_id_arg, long dust_limit_satoshis_arg, long max_htlc_value_in_flight_msat_arg, long htlc_minimum_msat_arg, int minimum_depth_arg, short to_self_delay_arg, short max_accepted_htlcs_arg, byte[] funding_pubkey_arg, byte[] revocation_basepoint_arg, byte[] payment_basepoint_arg, byte[] delayed_payment_basepoint_arg, byte[] htlc_basepoint_arg, byte[] first_per_commitment_point_arg, org.ldk.structs.Option_CVec_u8ZZ shutdown_scriptpubkey_arg, org.ldk.structs.ChannelTypeFeatures channel_type_arg) {
 		long ret = bindings.CommonAcceptChannelFields_new(temporary_channel_id_arg.ptr, dust_limit_satoshis_arg, max_htlc_value_in_flight_msat_arg, htlc_minimum_msat_arg, minimum_depth_arg, to_self_delay_arg, max_accepted_htlcs_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(funding_pubkey_arg, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(revocation_basepoint_arg, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_basepoint_arg, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(delayed_payment_basepoint_arg, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(htlc_basepoint_arg, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(first_per_commitment_point_arg, 33)), shutdown_scriptpubkey_arg.ptr, channel_type_arg == null ? 0 : channel_type_arg.ptr);
 		GC.KeepAlive(temporary_channel_id_arg);
 		GC.KeepAlive(dust_limit_satoshis_arg);
@@ -368,7 +368,7 @@ public class CommonAcceptChannelFields : CommonBase {
 	/**
 	 * Creates a copy of the CommonAcceptChannelFields
 	 */
-	public CommonAcceptChannelFields clone() {
+	public org.ldk.structs.CommonAcceptChannelFields clone() {
 		long ret = bindings.CommonAcceptChannelFields_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

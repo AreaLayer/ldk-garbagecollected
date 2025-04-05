@@ -36,7 +36,7 @@ public class Result_BlindedMessagePathNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_BlindedMessagePathNoneZ in the success state.
 	 */
-	public static Result_BlindedMessagePathNoneZ ok(org.ldk.structs.BlindedMessagePath o) {
+	public static org.ldk.structs.Result_BlindedMessagePathNoneZ ok(org.ldk.structs.BlindedMessagePath o) {
 		long ret = bindings.CResult_BlindedMessagePathNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -47,7 +47,7 @@ public class Result_BlindedMessagePathNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_BlindedMessagePathNoneZ in the error state.
 	 */
-	public static Result_BlindedMessagePathNoneZ err() {
+	public static org.ldk.structs.Result_BlindedMessagePathNoneZ err() {
 		long ret = bindings.CResult_BlindedMessagePathNoneZ_err();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_BlindedMessagePathNoneZ ret_hu_conv = Result_BlindedMessagePathNoneZ.constr_from_ptr(ret);
@@ -73,7 +73,7 @@ public class Result_BlindedMessagePathNoneZ : CommonBase {
 	 * Creates a new CResult_BlindedMessagePathNoneZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_BlindedMessagePathNoneZ clone() {
+	public org.ldk.structs.Result_BlindedMessagePathNoneZ clone() {
 		long ret = bindings.CResult_BlindedMessagePathNoneZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -28,7 +28,7 @@ public class OfferWithExplicitMetadataBuilder : CommonBase {
 	/**
 	 * Creates a copy of the OfferWithExplicitMetadataBuilder
 	 */
-	public OfferWithExplicitMetadataBuilder clone() {
+	public org.ldk.structs.OfferWithExplicitMetadataBuilder clone() {
 		long ret = bindings.OfferWithExplicitMetadataBuilder_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -51,7 +51,7 @@ public class OfferWithExplicitMetadataBuilder : CommonBase {
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 * [`ChannelManager::create_offer_builder`]: crate::ln::channelmanager::ChannelManager::create_offer_builder
 	 */
-	public static OfferWithExplicitMetadataBuilder of(byte[] signing_pubkey) {
+	public static org.ldk.structs.OfferWithExplicitMetadataBuilder of(byte[] signing_pubkey) {
 		long ret = bindings.OfferWithExplicitMetadataBuilder_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(signing_pubkey, 33)));
 		GC.KeepAlive(signing_pubkey);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -65,7 +65,7 @@ public class OfferWithExplicitMetadataBuilder : CommonBase {
 	 * 
 	 * Successive calls to this method will override the previous setting.
 	 */
-	public Result_NoneBolt12SemanticErrorZ metadata(byte[] metadata) {
+	public org.ldk.structs.Result_NoneBolt12SemanticErrorZ metadata(byte[] metadata) {
 		long ret = bindings.OfferWithExplicitMetadataBuilder_metadata(this.ptr, InternalUtils.encodeUint8Array(metadata));
 		GC.KeepAlive(this);
 		GC.KeepAlive(metadata);
@@ -169,7 +169,7 @@ public class OfferWithExplicitMetadataBuilder : CommonBase {
 	/**
 	 * Builds an [`Offer`] from the builder's settings.
 	 */
-	public Result_OfferBolt12SemanticErrorZ build() {
+	public org.ldk.structs.Result_OfferBolt12SemanticErrorZ build() {
 		long ret = bindings.OfferWithExplicitMetadataBuilder_build(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

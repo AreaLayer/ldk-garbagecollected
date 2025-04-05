@@ -12,11 +12,11 @@ namespace org { namespace ldk { namespace structs {
 public interface MessageRouterInterface {
 	/**Returns a route for sending an [`OnionMessage`] to the given [`Destination`].
 	 */
-	Result_OnionMessagePathNoneZ find_path(byte[] sender, byte[][] peers, Destination destination);
+	Result_OnionMessagePathNoneZ find_path(byte[] sender, byte[][] peers, org.ldk.structs.Destination destination);
 	/**Creates [`BlindedMessagePath`]s to the `recipient` node. The nodes in `peers` are assumed to
 	 * be direct peers with the `recipient`.
 	 */
-	Result_CVec_BlindedMessagePathZNoneZ create_blinded_paths(byte[] recipient, MessageContext context, byte[][] peers);
+	Result_CVec_BlindedMessagePathZNoneZ create_blinded_paths(byte[] recipient, org.ldk.structs.MessageContext context, byte[][] peers);
 	/**Creates compact [`BlindedMessagePath`]s to the `recipient` node. The nodes in `peers` are
 	 * assumed to be direct peers with the `recipient`.
 	 * 
@@ -31,7 +31,7 @@ public interface MessageRouterInterface {
 	 * The provided implementation simply delegates to [`MessageRouter::create_blinded_paths`],
 	 * ignoring the short channel ids.
 	 */
-	Result_CVec_BlindedMessagePathZNoneZ create_compact_blinded_paths(byte[] recipient, MessageContext context, MessageForwardNode[] peers);
+	Result_CVec_BlindedMessagePathZNoneZ create_compact_blinded_paths(byte[] recipient, org.ldk.structs.MessageContext context, MessageForwardNode[] peers);
 }
 
 /**
@@ -120,7 +120,7 @@ public class MessageRouter : CommonBase {
 	/**
 	 * Returns a route for sending an [`OnionMessage`] to the given [`Destination`].
 	 */
-	public Result_OnionMessagePathNoneZ find_path(byte[] sender, byte[][] peers, org.ldk.structs.Destination destination) {
+	public org.ldk.structs.Result_OnionMessagePathNoneZ find_path(byte[] sender, byte[][] peers, org.ldk.structs.Destination destination) {
 		long ret = bindings.MessageRouter_find_path(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(sender, 33)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(peers, peers_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(peers_conv_8, 33)))), destination.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(sender);
@@ -135,7 +135,7 @@ public class MessageRouter : CommonBase {
 	 * Creates [`BlindedMessagePath`]s to the `recipient` node. The nodes in `peers` are assumed to
 	 * be direct peers with the `recipient`.
 	 */
-	public Result_CVec_BlindedMessagePathZNoneZ create_blinded_paths(byte[] recipient, org.ldk.structs.MessageContext context, byte[][] peers) {
+	public org.ldk.structs.Result_CVec_BlindedMessagePathZNoneZ create_blinded_paths(byte[] recipient, org.ldk.structs.MessageContext context, byte[][] peers) {
 		long ret = bindings.MessageRouter_create_blinded_paths(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(recipient, 33)), context.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(peers, peers_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(peers_conv_8, 33)))));
 		GC.KeepAlive(this);
 		GC.KeepAlive(recipient);
@@ -161,7 +161,7 @@ public class MessageRouter : CommonBase {
 	 * The provided implementation simply delegates to [`MessageRouter::create_blinded_paths`],
 	 * ignoring the short channel ids.
 	 */
-	public Result_CVec_BlindedMessagePathZNoneZ create_compact_blinded_paths(byte[] recipient, org.ldk.structs.MessageContext context, MessageForwardNode[] peers) {
+	public org.ldk.structs.Result_CVec_BlindedMessagePathZNoneZ create_compact_blinded_paths(byte[] recipient, org.ldk.structs.MessageContext context, MessageForwardNode[] peers) {
 		long ret = bindings.MessageRouter_create_compact_blinded_paths(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(recipient, 33)), context.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(peers, peers_conv_20 => peers_conv_20.ptr)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(recipient);

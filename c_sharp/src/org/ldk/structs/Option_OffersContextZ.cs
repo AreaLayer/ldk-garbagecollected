@@ -26,7 +26,7 @@ public class Option_OffersContextZ : CommonBase {
 
 	/** A Option_OffersContextZ of type Some */
 	public class Option_OffersContextZ_Some : Option_OffersContextZ {
-		public OffersContext some;
+		public org.ldk.structs.OffersContext some;
 		internal Option_OffersContextZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_OffersContextZ_Some_get_some(ptr);
 			org.ldk.structs.OffersContext some_hu_conv = org.ldk.structs.OffersContext.constr_from_ptr(some);
@@ -42,7 +42,7 @@ public class Option_OffersContextZ : CommonBase {
 	/**
 	 * Constructs a new COption_OffersContextZ containing a crate::lightning::blinded_path::message::OffersContext
 	 */
-	public static Option_OffersContextZ some(org.ldk.structs.OffersContext o) {
+	public static org.ldk.structs.Option_OffersContextZ some(org.ldk.structs.OffersContext o) {
 		long ret = bindings.COption_OffersContextZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class Option_OffersContextZ : CommonBase {
 	/**
 	 * Constructs a new COption_OffersContextZ containing nothing
 	 */
-	public static Option_OffersContextZ none() {
+	public static org.ldk.structs.Option_OffersContextZ none() {
 		long ret = bindings.COption_OffersContextZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_OffersContextZ ret_hu_conv = org.ldk.structs.Option_OffersContextZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Option_OffersContextZ : CommonBase {
 	 * Creates a new COption_OffersContextZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_OffersContextZ clone() {
+	public org.ldk.structs.Option_OffersContextZ clone() {
 		long ret = bindings.COption_OffersContextZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

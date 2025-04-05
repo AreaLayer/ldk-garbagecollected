@@ -26,7 +26,7 @@ public class Option_PathFailureZ : CommonBase {
 
 	/** A Option_PathFailureZ of type Some */
 	public class Option_PathFailureZ_Some : Option_PathFailureZ {
-		public PathFailure some;
+		public org.ldk.structs.PathFailure some;
 		internal Option_PathFailureZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_PathFailureZ_Some_get_some(ptr);
 			org.ldk.structs.PathFailure some_hu_conv = org.ldk.structs.PathFailure.constr_from_ptr(some);
@@ -42,7 +42,7 @@ public class Option_PathFailureZ : CommonBase {
 	/**
 	 * Constructs a new COption_PathFailureZ containing a crate::lightning::events::PathFailure
 	 */
-	public static Option_PathFailureZ some(org.ldk.structs.PathFailure o) {
+	public static org.ldk.structs.Option_PathFailureZ some(org.ldk.structs.PathFailure o) {
 		long ret = bindings.COption_PathFailureZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class Option_PathFailureZ : CommonBase {
 	/**
 	 * Constructs a new COption_PathFailureZ containing nothing
 	 */
-	public static Option_PathFailureZ none() {
+	public static org.ldk.structs.Option_PathFailureZ none() {
 		long ret = bindings.COption_PathFailureZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_PathFailureZ ret_hu_conv = org.ldk.structs.Option_PathFailureZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Option_PathFailureZ : CommonBase {
 	 * Creates a new COption_PathFailureZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_PathFailureZ clone() {
+	public org.ldk.structs.Option_PathFailureZ clone() {
 		long ret = bindings.COption_PathFailureZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

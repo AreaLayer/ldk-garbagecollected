@@ -21,7 +21,7 @@ public class TxSignatures : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.TxSignatures_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -91,7 +91,7 @@ public class TxSignatures : CommonBase {
 	/**
 	 * Optional signature for the shared input -- the previous funding outpoint -- signed by both peers
 	 */
-	public Option_ECDSASignatureZ get_shared_input_signature() {
+	public org.ldk.structs.Option_ECDSASignatureZ get_shared_input_signature() {
 		long ret = bindings.TxSignatures_get_shared_input_signature(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -112,7 +112,7 @@ public class TxSignatures : CommonBase {
 	/**
 	 * Constructs a new TxSignatures given each field
 	 */
-	public static TxSignatures of(org.ldk.structs.ChannelId channel_id_arg, byte[] tx_hash_arg, byte[][] witnesses_arg, org.ldk.structs.Option_ECDSASignatureZ shared_input_signature_arg) {
+	public static org.ldk.structs.TxSignatures of(org.ldk.structs.ChannelId channel_id_arg, byte[] tx_hash_arg, byte[][] witnesses_arg, org.ldk.structs.Option_ECDSASignatureZ shared_input_signature_arg) {
 		long ret = bindings.TxSignatures_new(channel_id_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(tx_hash_arg, 32)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(witnesses_arg, witnesses_arg_conv_8 => InternalUtils.encodeUint8Array(witnesses_arg_conv_8))), shared_input_signature_arg.ptr);
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(tx_hash_arg);
@@ -133,7 +133,7 @@ public class TxSignatures : CommonBase {
 	/**
 	 * Creates a copy of the TxSignatures
 	 */
-	public TxSignatures clone() {
+	public org.ldk.structs.TxSignatures clone() {
 		long ret = bindings.TxSignatures_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -185,7 +185,7 @@ public class TxSignatures : CommonBase {
 	/**
 	 * Read a TxSignatures from a byte array, created by TxSignatures_write
 	 */
-	public static Result_TxSignaturesDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_TxSignaturesDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.TxSignatures_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

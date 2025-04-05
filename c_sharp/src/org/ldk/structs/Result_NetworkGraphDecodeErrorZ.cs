@@ -41,7 +41,7 @@ public class Result_NetworkGraphDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_NetworkGraphDecodeErrorZ in the success state.
 	 */
-	public static Result_NetworkGraphDecodeErrorZ ok(Network o_network, Logger o_logger) {
+	public static org.ldk.structs.Result_NetworkGraphDecodeErrorZ ok(Network o_network, Logger o_logger) {
 		long ret = bindings.CResult_NetworkGraphDecodeErrorZ_ok(bindings.NetworkGraph_new(o_network, o_logger.ptr));
 		GC.KeepAlive(o_network);
 		GC.KeepAlive(o_logger);
@@ -54,7 +54,7 @@ public class Result_NetworkGraphDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_NetworkGraphDecodeErrorZ in the error state.
 	 */
-	public static Result_NetworkGraphDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_NetworkGraphDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_NetworkGraphDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }

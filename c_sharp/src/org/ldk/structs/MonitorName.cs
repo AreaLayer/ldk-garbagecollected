@@ -52,7 +52,7 @@ public class MonitorName : CommonBase {
 	 * This method is useful if you have a String and you want to verify that
 	 * it's a valid storage key for a channel monitor.
 	 */
-	public static Result_MonitorNameIOErrorZ of(string name) {
+	public static org.ldk.structs.Result_MonitorNameIOErrorZ of(string name) {
 		long ret = bindings.MonitorName_new(InternalUtils.encodeString(name));
 		GC.KeepAlive(name);
 		if (ret >= 0 && ret <= 4096) { return null; }

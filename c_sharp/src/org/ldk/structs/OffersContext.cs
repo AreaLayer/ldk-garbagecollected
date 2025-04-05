@@ -36,7 +36,7 @@ public class OffersContext : CommonBase {
 		 * [`InvoiceRequest`]: crate::offers::invoice_request::InvoiceRequest
 		 * [`Offer`]: crate::offers::offer::Offer
 		 */
-		public Nonce nonce;
+		public org.ldk.structs.Nonce nonce;
 		internal OffersContext_InvoiceRequest(long ptr) : base(null, ptr) {
 			long nonce = bindings.LDKOffersContext_InvoiceRequest_get_nonce(ptr);
 			org.ldk.structs.Nonce nonce_hu_conv = null; if (nonce < 0 || nonce > 4096) { nonce_hu_conv = new org.ldk.structs.Nonce(null, nonce); }
@@ -61,7 +61,7 @@ public class OffersContext : CommonBase {
 		 * [`Refund`]: crate::offers::refund::Refund
 		 * [`InvoiceRequest`]: crate::offers::invoice_request::InvoiceRequest
 		 */
-		public Nonce nonce;
+		public org.ldk.structs.Nonce nonce;
 		/**
 		 * Authentication code for the [`PaymentId`], which should be checked when the context is
 		 * used with an [`InvoiceError`].
@@ -99,7 +99,7 @@ public class OffersContext : CommonBase {
 		 * [`InvoiceError`]: crate::offers::invoice_error::InvoiceError
 		 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
 		 */
-		public Nonce nonce;
+		public org.ldk.structs.Nonce nonce;
 		/**
 		 * Authentication code for the [`PaymentHash`], which should be checked when the context is
 		 * used to log the received [`InvoiceError`].
@@ -129,7 +129,7 @@ public class OffersContext : CommonBase {
 	/**
 	 * Creates a copy of the OffersContext
 	 */
-	public OffersContext clone() {
+	public org.ldk.structs.OffersContext clone() {
 		long ret = bindings.OffersContext_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -141,7 +141,7 @@ public class OffersContext : CommonBase {
 	/**
 	 * Utility method to constructs a new InvoiceRequest-variant OffersContext
 	 */
-	public static OffersContext invoice_request(org.ldk.structs.Nonce nonce) {
+	public static org.ldk.structs.OffersContext invoice_request(org.ldk.structs.Nonce nonce) {
 		long ret = bindings.OffersContext_invoice_request(nonce.ptr);
 		GC.KeepAlive(nonce);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -153,7 +153,7 @@ public class OffersContext : CommonBase {
 	/**
 	 * Utility method to constructs a new OutboundPayment-variant OffersContext
 	 */
-	public static OffersContext outbound_payment(byte[] payment_id, org.ldk.structs.Nonce nonce, byte[] hmac) {
+	public static org.ldk.structs.OffersContext outbound_payment(byte[] payment_id, org.ldk.structs.Nonce nonce, byte[] hmac) {
 		long ret = bindings.OffersContext_outbound_payment(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), nonce.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(hmac, 32)));
 		GC.KeepAlive(payment_id);
 		GC.KeepAlive(nonce);
@@ -167,7 +167,7 @@ public class OffersContext : CommonBase {
 	/**
 	 * Utility method to constructs a new InboundPayment-variant OffersContext
 	 */
-	public static OffersContext inbound_payment(byte[] payment_hash, org.ldk.structs.Nonce nonce, byte[] hmac) {
+	public static org.ldk.structs.OffersContext inbound_payment(byte[] payment_hash, org.ldk.structs.Nonce nonce, byte[] hmac) {
 		long ret = bindings.OffersContext_inbound_payment(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), nonce.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(hmac, 32)));
 		GC.KeepAlive(payment_hash);
 		GC.KeepAlive(nonce);
@@ -207,7 +207,7 @@ public class OffersContext : CommonBase {
 	/**
 	 * Read a OffersContext from a byte array, created by OffersContext_write
 	 */
-	public static Result_OffersContextDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_OffersContextDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.OffersContext_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

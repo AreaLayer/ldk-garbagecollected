@@ -26,7 +26,7 @@ public class InvoiceWithExplicitSigningPubkeyBuilder : CommonBase {
 	/**
 	 * Builds an unsigned [`Bolt12Invoice`] after checking for valid semantics.
 	 */
-	public Result_UnsignedBolt12InvoiceBolt12SemanticErrorZ build() {
+	public org.ldk.structs.Result_UnsignedBolt12InvoiceBolt12SemanticErrorZ build() {
 		long ret = bindings.InvoiceWithExplicitSigningPubkeyBuilder_build(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -29,7 +29,7 @@ public class Bolt11InvoiceFeatures : CommonBase {
 	/**
 	 * Read a Bolt11InvoiceFeatures from a byte array, created by Bolt11InvoiceFeatures_write
 	 */
-	public static Result_Bolt11InvoiceFeaturesDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_Bolt11InvoiceFeaturesDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.Bolt11InvoiceFeatures_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -63,7 +63,7 @@ public class Bolt11InvoiceFeatures : CommonBase {
 	/**
 	 * Creates a copy of the Bolt11InvoiceFeatures
 	 */
-	public Bolt11InvoiceFeatures clone() {
+	public org.ldk.structs.Bolt11InvoiceFeatures clone() {
 		long ret = bindings.Bolt11InvoiceFeatures_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -93,7 +93,7 @@ public class Bolt11InvoiceFeatures : CommonBase {
 	 * MPP keysend is not widely supported yet, so we parameterize support to allow the user to
 	 * choose whether their router should find multi-part routes.
 	 */
-	public static Bolt11InvoiceFeatures for_keysend(bool allow_mpp) {
+	public static org.ldk.structs.Bolt11InvoiceFeatures for_keysend(bool allow_mpp) {
 		long ret = bindings.Bolt11InvoiceFeatures_for_keysend(allow_mpp);
 		GC.KeepAlive(allow_mpp);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -105,7 +105,7 @@ public class Bolt11InvoiceFeatures : CommonBase {
 	/**
 	 * Create a blank Features with no features set
 	 */
-	public static Bolt11InvoiceFeatures empty() {
+	public static org.ldk.structs.Bolt11InvoiceFeatures empty() {
 		long ret = bindings.Bolt11InvoiceFeatures_empty();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Bolt11InvoiceFeatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Bolt11InvoiceFeatures(null, ret); }
@@ -186,7 +186,7 @@ public class Bolt11InvoiceFeatures : CommonBase {
 	 * 
 	 * [BOLT 9]: https://github.com/lightning/bolts/blob/master/09-features.md
 	 */
-	public Result_NoneNoneZ set_required_feature_bit(long bit) {
+	public org.ldk.structs.Result_NoneNoneZ set_required_feature_bit(long bit) {
 		long ret = bindings.Bolt11InvoiceFeatures_set_required_feature_bit(this.ptr, bit);
 		GC.KeepAlive(this);
 		GC.KeepAlive(bit);
@@ -204,7 +204,7 @@ public class Bolt11InvoiceFeatures : CommonBase {
 	 * 
 	 * [BOLT 9]: https://github.com/lightning/bolts/blob/master/09-features.md
 	 */
-	public Result_NoneNoneZ set_optional_feature_bit(long bit) {
+	public org.ldk.structs.Result_NoneNoneZ set_optional_feature_bit(long bit) {
 		long ret = bindings.Bolt11InvoiceFeatures_set_optional_feature_bit(this.ptr, bit);
 		GC.KeepAlive(this);
 		GC.KeepAlive(bit);
@@ -222,7 +222,7 @@ public class Bolt11InvoiceFeatures : CommonBase {
 	 * 
 	 * [bLIP 2]: https://github.com/lightning/blips/blob/master/blip-0002.md#feature-bits
 	 */
-	public Result_NoneNoneZ set_required_custom_bit(long bit) {
+	public org.ldk.structs.Result_NoneNoneZ set_required_custom_bit(long bit) {
 		long ret = bindings.Bolt11InvoiceFeatures_set_required_custom_bit(this.ptr, bit);
 		GC.KeepAlive(this);
 		GC.KeepAlive(bit);
@@ -240,7 +240,7 @@ public class Bolt11InvoiceFeatures : CommonBase {
 	 * 
 	 * [bLIP 2]: https://github.com/lightning/blips/blob/master/blip-0002.md#feature-bits
 	 */
-	public Result_NoneNoneZ set_optional_custom_bit(long bit) {
+	public org.ldk.structs.Result_NoneNoneZ set_optional_custom_bit(long bit) {
 		long ret = bindings.Bolt11InvoiceFeatures_set_optional_custom_bit(this.ptr, bit);
 		GC.KeepAlive(this);
 		GC.KeepAlive(bit);

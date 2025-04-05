@@ -30,7 +30,7 @@ public class ChannelDetails : CommonBase {
 	 * Note that this means this value is *not* persistent - it can change once during the
 	 * lifetime of the channel.
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.ChannelDetails_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class ChannelDetails : CommonBase {
 	/**
 	 * Parameters which apply to our counterparty. See individual fields for more information.
 	 */
-	public ChannelCounterparty get_counterparty() {
+	public org.ldk.structs.ChannelCounterparty get_counterparty() {
 		long ret = bindings.ChannelDetails_get_counterparty(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -78,7 +78,7 @@ public class ChannelDetails : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public OutPoint get_funding_txo() {
+	public org.ldk.structs.OutPoint get_funding_txo() {
 		long ret = bindings.ChannelDetails_get_funding_txo(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -106,7 +106,7 @@ public class ChannelDetails : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ChannelTypeFeatures get_channel_type() {
+	public org.ldk.structs.ChannelTypeFeatures get_channel_type() {
 		long ret = bindings.ChannelDetails_get_channel_type(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -144,7 +144,7 @@ public class ChannelDetails : CommonBase {
 	 * [`get_outbound_payment_scid`]: Self::get_outbound_payment_scid
 	 * [`confirmations_required`]: Self::confirmations_required
 	 */
-	public Option_u64Z get_short_channel_id() {
+	public org.ldk.structs.Option_u64Z get_short_channel_id() {
 		long ret = bindings.ChannelDetails_get_short_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -186,7 +186,7 @@ public class ChannelDetails : CommonBase {
 	 * [`short_channel_id`]: Self::short_channel_id
 	 * [`confirmations_required`]: Self::confirmations_required
 	 */
-	public Option_u64Z get_outbound_scid_alias() {
+	public org.ldk.structs.Option_u64Z get_outbound_scid_alias() {
 		long ret = bindings.ChannelDetails_get_outbound_scid_alias(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -223,7 +223,7 @@ public class ChannelDetails : CommonBase {
 	 * 
 	 * [`short_channel_id`]: Self::short_channel_id
 	 */
-	public Option_u64Z get_inbound_scid_alias() {
+	public org.ldk.structs.Option_u64Z get_inbound_scid_alias() {
 		long ret = bindings.ChannelDetails_get_inbound_scid_alias(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -278,7 +278,7 @@ public class ChannelDetails : CommonBase {
 	 * 
 	 * [`outbound_capacity_msat`]: ChannelDetails::outbound_capacity_msat
 	 */
-	public Option_u64Z get_unspendable_punishment_reserve() {
+	public org.ldk.structs.Option_u64Z get_unspendable_punishment_reserve() {
 		long ret = bindings.ChannelDetails_get_unspendable_punishment_reserve(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -315,7 +315,7 @@ public class ChannelDetails : CommonBase {
 	 * [`ChannelManager::accept_inbound_channel`]: crate::ln::channelmanager::ChannelManager::accept_inbound_channel
 	 * [`UserConfig::manually_accept_inbound_channels`]: crate::util::config::UserConfig::manually_accept_inbound_channels
 	 */
-	public UInt128 get_user_channel_id() {
+	public org.ldk.util.UInt128 get_user_channel_id() {
 		long ret = bindings.ChannelDetails_get_user_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -347,7 +347,7 @@ public class ChannelDetails : CommonBase {
 	 * 
 	 * This value will be `None` for objects serialized with LDK versions prior to 0.0.115.
 	 */
-	public Option_u32Z get_feerate_sat_per_1000_weight() {
+	public org.ldk.structs.Option_u32Z get_feerate_sat_per_1000_weight() {
 		long ret = bindings.ChannelDetails_get_feerate_sat_per_1000_weight(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -501,7 +501,7 @@ public class ChannelDetails : CommonBase {
 	 * [`ChannelHandshakeConfig::minimum_depth`]: crate::util::config::ChannelHandshakeConfig::minimum_depth
 	 * [`ChannelHandshakeLimits::max_minimum_depth`]: crate::util::config::ChannelHandshakeLimits::max_minimum_depth
 	 */
-	public Option_u32Z get_confirmations_required() {
+	public org.ldk.structs.Option_u32Z get_confirmations_required() {
 		long ret = bindings.ChannelDetails_get_confirmations_required(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -534,7 +534,7 @@ public class ChannelDetails : CommonBase {
 	 * 
 	 * This value will be `None` for objects serialized with LDK versions prior to 0.0.113.
 	 */
-	public Option_u32Z get_confirmations() {
+	public org.ldk.structs.Option_u32Z get_confirmations() {
 		long ret = bindings.ChannelDetails_get_confirmations(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -563,7 +563,7 @@ public class ChannelDetails : CommonBase {
 	 * 
 	 * This value will be `None` for outbound channels until the counterparty accepts the channel.
 	 */
-	public Option_u16Z get_force_close_spend_delay() {
+	public org.ldk.structs.Option_u16Z get_force_close_spend_delay() {
 		long ret = bindings.ChannelDetails_get_force_close_spend_delay(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -641,7 +641,7 @@ public class ChannelDetails : CommonBase {
 	 * 
 	 * Returns a copy of the field.
 	 */
-	public Option_ChannelShutdownStateZ get_channel_shutdown_state() {
+	public org.ldk.structs.Option_ChannelShutdownStateZ get_channel_shutdown_state() {
 		long ret = bindings.ChannelDetails_get_channel_shutdown_state(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -706,7 +706,7 @@ public class ChannelDetails : CommonBase {
 	 * The smallest value HTLC (in msat) we will accept, for this channel. This field
 	 * is only `None` for `ChannelDetails` objects serialized prior to LDK 0.0.107
 	 */
-	public Option_u64Z get_inbound_htlc_minimum_msat() {
+	public org.ldk.structs.Option_u64Z get_inbound_htlc_minimum_msat() {
 		long ret = bindings.ChannelDetails_get_inbound_htlc_minimum_msat(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -728,7 +728,7 @@ public class ChannelDetails : CommonBase {
 	/**
 	 * The largest value HTLC (in msat) we currently will accept, for this channel.
 	 */
-	public Option_u64Z get_inbound_htlc_maximum_msat() {
+	public org.ldk.structs.Option_u64Z get_inbound_htlc_maximum_msat() {
 		long ret = bindings.ChannelDetails_get_inbound_htlc_maximum_msat(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -753,7 +753,7 @@ public class ChannelDetails : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ChannelConfig get_config() {
+	public org.ldk.structs.ChannelConfig get_config() {
 		long ret = bindings.ChannelDetails_get_config(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -846,7 +846,7 @@ public class ChannelDetails : CommonBase {
 	 * Note that channel_type_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 * Note that config_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static ChannelDetails of(org.ldk.structs.ChannelId channel_id_arg, org.ldk.structs.ChannelCounterparty counterparty_arg, org.ldk.structs.OutPoint funding_txo_arg, org.ldk.structs.ChannelTypeFeatures channel_type_arg, org.ldk.structs.Option_u64Z short_channel_id_arg, org.ldk.structs.Option_u64Z outbound_scid_alias_arg, org.ldk.structs.Option_u64Z inbound_scid_alias_arg, long channel_value_satoshis_arg, org.ldk.structs.Option_u64Z unspendable_punishment_reserve_arg, org.ldk.util.UInt128 user_channel_id_arg, org.ldk.structs.Option_u32Z feerate_sat_per_1000_weight_arg, long outbound_capacity_msat_arg, long next_outbound_htlc_limit_msat_arg, long next_outbound_htlc_minimum_msat_arg, long inbound_capacity_msat_arg, org.ldk.structs.Option_u32Z confirmations_required_arg, org.ldk.structs.Option_u32Z confirmations_arg, org.ldk.structs.Option_u16Z force_close_spend_delay_arg, bool is_outbound_arg, bool is_channel_ready_arg, org.ldk.structs.Option_ChannelShutdownStateZ channel_shutdown_state_arg, bool is_usable_arg, bool is_announced_arg, org.ldk.structs.Option_u64Z inbound_htlc_minimum_msat_arg, org.ldk.structs.Option_u64Z inbound_htlc_maximum_msat_arg, org.ldk.structs.ChannelConfig config_arg, InboundHTLCDetails[] pending_inbound_htlcs_arg, OutboundHTLCDetails[] pending_outbound_htlcs_arg) {
+	public static org.ldk.structs.ChannelDetails of(org.ldk.structs.ChannelId channel_id_arg, org.ldk.structs.ChannelCounterparty counterparty_arg, org.ldk.structs.OutPoint funding_txo_arg, org.ldk.structs.ChannelTypeFeatures channel_type_arg, org.ldk.structs.Option_u64Z short_channel_id_arg, org.ldk.structs.Option_u64Z outbound_scid_alias_arg, org.ldk.structs.Option_u64Z inbound_scid_alias_arg, long channel_value_satoshis_arg, org.ldk.structs.Option_u64Z unspendable_punishment_reserve_arg, org.ldk.util.UInt128 user_channel_id_arg, org.ldk.structs.Option_u32Z feerate_sat_per_1000_weight_arg, long outbound_capacity_msat_arg, long next_outbound_htlc_limit_msat_arg, long next_outbound_htlc_minimum_msat_arg, long inbound_capacity_msat_arg, org.ldk.structs.Option_u32Z confirmations_required_arg, org.ldk.structs.Option_u32Z confirmations_arg, org.ldk.structs.Option_u16Z force_close_spend_delay_arg, bool is_outbound_arg, bool is_channel_ready_arg, org.ldk.structs.Option_ChannelShutdownStateZ channel_shutdown_state_arg, bool is_usable_arg, bool is_announced_arg, org.ldk.structs.Option_u64Z inbound_htlc_minimum_msat_arg, org.ldk.structs.Option_u64Z inbound_htlc_maximum_msat_arg, org.ldk.structs.ChannelConfig config_arg, InboundHTLCDetails[] pending_inbound_htlcs_arg, OutboundHTLCDetails[] pending_outbound_htlcs_arg) {
 		long ret = bindings.ChannelDetails_new(channel_id_arg.ptr, counterparty_arg.ptr, funding_txo_arg == null ? 0 : funding_txo_arg.ptr, channel_type_arg == null ? 0 : channel_type_arg.ptr, short_channel_id_arg.ptr, outbound_scid_alias_arg.ptr, inbound_scid_alias_arg.ptr, channel_value_satoshis_arg, unspendable_punishment_reserve_arg.ptr, InternalUtils.encodeUint8Array(user_channel_id_arg.getLEBytes()), feerate_sat_per_1000_weight_arg.ptr, outbound_capacity_msat_arg, next_outbound_htlc_limit_msat_arg, next_outbound_htlc_minimum_msat_arg, inbound_capacity_msat_arg, confirmations_required_arg.ptr, confirmations_arg.ptr, force_close_spend_delay_arg.ptr, is_outbound_arg, is_channel_ready_arg, channel_shutdown_state_arg.ptr, is_usable_arg, is_announced_arg, inbound_htlc_minimum_msat_arg.ptr, inbound_htlc_maximum_msat_arg.ptr, config_arg == null ? 0 : config_arg.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(pending_inbound_htlcs_arg, pending_inbound_htlcs_arg_conv_20 => pending_inbound_htlcs_arg_conv_20.ptr)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(pending_outbound_htlcs_arg, pending_outbound_htlcs_arg_conv_21 => pending_outbound_htlcs_arg_conv_21.ptr)));
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(counterparty_arg);
@@ -891,7 +891,7 @@ public class ChannelDetails : CommonBase {
 	/**
 	 * Creates a copy of the ChannelDetails
 	 */
-	public ChannelDetails clone() {
+	public org.ldk.structs.ChannelDetails clone() {
 		long ret = bindings.ChannelDetails_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -908,7 +908,7 @@ public class ChannelDetails : CommonBase {
 	 * This is either the [`ChannelDetails::inbound_scid_alias`], if set, or the
 	 * [`ChannelDetails::short_channel_id`]. See those for more information.
 	 */
-	public Option_u64Z get_inbound_payment_scid() {
+	public org.ldk.structs.Option_u64Z get_inbound_payment_scid() {
 		long ret = bindings.ChannelDetails_get_inbound_payment_scid(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -927,7 +927,7 @@ public class ChannelDetails : CommonBase {
 	 * 
 	 * [`Route`]: crate::routing::router::Route
 	 */
-	public Option_u64Z get_outbound_payment_scid() {
+	public org.ldk.structs.Option_u64Z get_outbound_payment_scid() {
 		long ret = bindings.ChannelDetails_get_outbound_payment_scid(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -950,7 +950,7 @@ public class ChannelDetails : CommonBase {
 	/**
 	 * Read a ChannelDetails from a byte array, created by ChannelDetails_write
 	 */
-	public static Result_ChannelDetailsDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ChannelDetailsDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.ChannelDetails_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

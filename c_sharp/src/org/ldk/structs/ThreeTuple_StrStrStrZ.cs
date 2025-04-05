@@ -58,7 +58,7 @@ public class ThreeTuple_StrStrStrZ : CommonBase {
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public ThreeTuple_StrStrStrZ clone() {
+	public org.ldk.structs.ThreeTuple_StrStrStrZ clone() {
 		long ret = bindings.C3Tuple_StrStrStrZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -70,7 +70,7 @@ public class ThreeTuple_StrStrStrZ : CommonBase {
 	/**
 	 * Creates a new C3Tuple_StrStrStrZ from the contained elements.
 	 */
-	public static ThreeTuple_StrStrStrZ of(string a, string b, string c) {
+	public static org.ldk.structs.ThreeTuple_StrStrStrZ of(string a, string b, string c) {
 		long ret = bindings.C3Tuple_StrStrStrZ_new(InternalUtils.encodeString(a), InternalUtils.encodeString(b), InternalUtils.encodeString(c));
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

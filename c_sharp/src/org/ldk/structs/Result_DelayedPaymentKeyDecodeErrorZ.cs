@@ -41,7 +41,7 @@ public class Result_DelayedPaymentKeyDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_DelayedPaymentKeyDecodeErrorZ in the success state.
 	 */
-	public static Result_DelayedPaymentKeyDecodeErrorZ ok(org.ldk.structs.DelayedPaymentKey o) {
+	public static org.ldk.structs.Result_DelayedPaymentKeyDecodeErrorZ ok(org.ldk.structs.DelayedPaymentKey o) {
 		long ret = bindings.CResult_DelayedPaymentKeyDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_DelayedPaymentKeyDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_DelayedPaymentKeyDecodeErrorZ in the error state.
 	 */
-	public static Result_DelayedPaymentKeyDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_DelayedPaymentKeyDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_DelayedPaymentKeyDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_DelayedPaymentKeyDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_DelayedPaymentKeyDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_DelayedPaymentKeyDecodeErrorZ clone() {
+	public org.ldk.structs.Result_DelayedPaymentKeyDecodeErrorZ clone() {
 		long ret = bindings.CResult_DelayedPaymentKeyDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

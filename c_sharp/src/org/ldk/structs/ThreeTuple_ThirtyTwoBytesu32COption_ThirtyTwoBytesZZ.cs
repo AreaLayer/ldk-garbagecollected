@@ -38,7 +38,7 @@ public class ThreeTuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ : CommonBase {
 	/**
 	 * 
 	 */
-	public Option_ThirtyTwoBytesZ get_c() {
+	public org.ldk.structs.Option_ThirtyTwoBytesZ get_c() {
 		long ret = bindings.C3Tuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ_get_c(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -57,7 +57,7 @@ public class ThreeTuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ : CommonBase {
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public ThreeTuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ clone() {
+	public org.ldk.structs.ThreeTuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ clone() {
 		long ret = bindings.C3Tuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -69,7 +69,7 @@ public class ThreeTuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ : CommonBase {
 	/**
 	 * Creates a new C3Tuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ from the contained elements.
 	 */
-	public static ThreeTuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ of(byte[] a, int b, org.ldk.structs.Option_ThirtyTwoBytesZ c) {
+	public static org.ldk.structs.ThreeTuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ of(byte[] a, int b, org.ldk.structs.Option_ThirtyTwoBytesZ c) {
 		long ret = bindings.C3Tuple_ThirtyTwoBytesu32COption_ThirtyTwoBytesZZ_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 32)), b, c.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

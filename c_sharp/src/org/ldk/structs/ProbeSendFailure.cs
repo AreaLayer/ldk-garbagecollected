@@ -35,7 +35,7 @@ public class ProbeSendFailure : CommonBase {
 	}
 	/** A ProbeSendFailure of type ParameterError */
 	public class ProbeSendFailure_ParameterError : ProbeSendFailure {
-		public APIError parameter_error;
+		public org.ldk.structs.APIError parameter_error;
 		internal ProbeSendFailure_ParameterError(long ptr) : base(null, ptr) {
 			long parameter_error = bindings.LDKProbeSendFailure_ParameterError_get_parameter_error(ptr);
 			org.ldk.structs.APIError parameter_error_hu_conv = org.ldk.structs.APIError.constr_from_ptr(parameter_error);
@@ -57,7 +57,7 @@ public class ProbeSendFailure : CommonBase {
 	/**
 	 * Creates a copy of the ProbeSendFailure
 	 */
-	public ProbeSendFailure clone() {
+	public org.ldk.structs.ProbeSendFailure clone() {
 		long ret = bindings.ProbeSendFailure_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -69,7 +69,7 @@ public class ProbeSendFailure : CommonBase {
 	/**
 	 * Utility method to constructs a new RouteNotFound-variant ProbeSendFailure
 	 */
-	public static ProbeSendFailure route_not_found() {
+	public static org.ldk.structs.ProbeSendFailure route_not_found() {
 		long ret = bindings.ProbeSendFailure_route_not_found();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ProbeSendFailure ret_hu_conv = org.ldk.structs.ProbeSendFailure.constr_from_ptr(ret);
@@ -80,7 +80,7 @@ public class ProbeSendFailure : CommonBase {
 	/**
 	 * Utility method to constructs a new ParameterError-variant ProbeSendFailure
 	 */
-	public static ProbeSendFailure parameter_error(org.ldk.structs.APIError a) {
+	public static org.ldk.structs.ProbeSendFailure parameter_error(org.ldk.structs.APIError a) {
 		long ret = bindings.ProbeSendFailure_parameter_error(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -92,7 +92,7 @@ public class ProbeSendFailure : CommonBase {
 	/**
 	 * Utility method to constructs a new DuplicateProbe-variant ProbeSendFailure
 	 */
-	public static ProbeSendFailure duplicate_probe() {
+	public static org.ldk.structs.ProbeSendFailure duplicate_probe() {
 		long ret = bindings.ProbeSendFailure_duplicate_probe();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ProbeSendFailure ret_hu_conv = org.ldk.structs.ProbeSendFailure.constr_from_ptr(ret);

@@ -26,7 +26,7 @@ public class Option_C2Tuple_OnionMessageContentsResponseInstructionZZ : CommonBa
 
 	/** A Option_C2Tuple_OnionMessageContentsResponseInstructionZZ of type Some */
 	public class Option_C2Tuple_OnionMessageContentsResponseInstructionZZ_Some : Option_C2Tuple_OnionMessageContentsResponseInstructionZZ {
-		public TwoTuple_OnionMessageContentsResponseInstructionZ some;
+		public org.ldk.structs.TwoTuple_OnionMessageContentsResponseInstructionZ some;
 		internal Option_C2Tuple_OnionMessageContentsResponseInstructionZZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_C2Tuple_OnionMessageContentsResponseInstructionZZ_Some_get_some(ptr);
 			TwoTuple_OnionMessageContentsResponseInstructionZ some_hu_conv = new TwoTuple_OnionMessageContentsResponseInstructionZ(null, some);
@@ -42,7 +42,7 @@ public class Option_C2Tuple_OnionMessageContentsResponseInstructionZZ : CommonBa
 	/**
 	 * Constructs a new COption_C2Tuple_OnionMessageContentsResponseInstructionZZ containing a crate::c_types::derived::C2Tuple_OnionMessageContentsResponseInstructionZ
 	 */
-	public static Option_C2Tuple_OnionMessageContentsResponseInstructionZZ some(org.ldk.structs.TwoTuple_OnionMessageContentsResponseInstructionZ o) {
+	public static org.ldk.structs.Option_C2Tuple_OnionMessageContentsResponseInstructionZZ some(org.ldk.structs.TwoTuple_OnionMessageContentsResponseInstructionZ o) {
 		long ret = bindings.COption_C2Tuple_OnionMessageContentsResponseInstructionZZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class Option_C2Tuple_OnionMessageContentsResponseInstructionZZ : CommonBa
 	/**
 	 * Constructs a new COption_C2Tuple_OnionMessageContentsResponseInstructionZZ containing nothing
 	 */
-	public static Option_C2Tuple_OnionMessageContentsResponseInstructionZZ none() {
+	public static org.ldk.structs.Option_C2Tuple_OnionMessageContentsResponseInstructionZZ none() {
 		long ret = bindings.COption_C2Tuple_OnionMessageContentsResponseInstructionZZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_C2Tuple_OnionMessageContentsResponseInstructionZZ ret_hu_conv = org.ldk.structs.Option_C2Tuple_OnionMessageContentsResponseInstructionZZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Option_C2Tuple_OnionMessageContentsResponseInstructionZZ : CommonBa
 	 * Creates a new COption_C2Tuple_OnionMessageContentsResponseInstructionZZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_C2Tuple_OnionMessageContentsResponseInstructionZZ clone() {
+	public org.ldk.structs.Option_C2Tuple_OnionMessageContentsResponseInstructionZZ clone() {
 		long ret = bindings.COption_C2Tuple_OnionMessageContentsResponseInstructionZZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

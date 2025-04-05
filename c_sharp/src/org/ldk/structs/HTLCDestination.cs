@@ -40,7 +40,7 @@ public class HTLCDestination : CommonBase {
 		/**
 		 * The outgoing `channel_id` between us and the next node.
 		 */
-		public ChannelId channel_id;
+		public org.ldk.structs.ChannelId channel_id;
 		internal HTLCDestination_NextHopChannel(long ptr) : base(null, ptr) {
 			long node_id = bindings.LDKHTLCDestination_NextHopChannel_get_node_id(ptr);
 			byte[] node_id_conv = InternalUtils.decodeUint8Array(node_id);
@@ -97,7 +97,7 @@ public class HTLCDestination : CommonBase {
 	/**
 	 * Creates a copy of the HTLCDestination
 	 */
-	public HTLCDestination clone() {
+	public org.ldk.structs.HTLCDestination clone() {
 		long ret = bindings.HTLCDestination_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -109,7 +109,7 @@ public class HTLCDestination : CommonBase {
 	/**
 	 * Utility method to constructs a new NextHopChannel-variant HTLCDestination
 	 */
-	public static HTLCDestination next_hop_channel(byte[] node_id, org.ldk.structs.ChannelId channel_id) {
+	public static org.ldk.structs.HTLCDestination next_hop_channel(byte[] node_id, org.ldk.structs.ChannelId channel_id) {
 		long ret = bindings.HTLCDestination_next_hop_channel(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), channel_id.ptr);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(channel_id);
@@ -122,7 +122,7 @@ public class HTLCDestination : CommonBase {
 	/**
 	 * Utility method to constructs a new UnknownNextHop-variant HTLCDestination
 	 */
-	public static HTLCDestination unknown_next_hop(long requested_forward_scid) {
+	public static org.ldk.structs.HTLCDestination unknown_next_hop(long requested_forward_scid) {
 		long ret = bindings.HTLCDestination_unknown_next_hop(requested_forward_scid);
 		GC.KeepAlive(requested_forward_scid);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -134,7 +134,7 @@ public class HTLCDestination : CommonBase {
 	/**
 	 * Utility method to constructs a new InvalidForward-variant HTLCDestination
 	 */
-	public static HTLCDestination invalid_forward(long requested_forward_scid) {
+	public static org.ldk.structs.HTLCDestination invalid_forward(long requested_forward_scid) {
 		long ret = bindings.HTLCDestination_invalid_forward(requested_forward_scid);
 		GC.KeepAlive(requested_forward_scid);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -146,7 +146,7 @@ public class HTLCDestination : CommonBase {
 	/**
 	 * Utility method to constructs a new InvalidOnion-variant HTLCDestination
 	 */
-	public static HTLCDestination invalid_onion() {
+	public static org.ldk.structs.HTLCDestination invalid_onion() {
 		long ret = bindings.HTLCDestination_invalid_onion();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.HTLCDestination ret_hu_conv = org.ldk.structs.HTLCDestination.constr_from_ptr(ret);
@@ -157,7 +157,7 @@ public class HTLCDestination : CommonBase {
 	/**
 	 * Utility method to constructs a new FailedPayment-variant HTLCDestination
 	 */
-	public static HTLCDestination failed_payment(byte[] payment_hash) {
+	public static org.ldk.structs.HTLCDestination failed_payment(byte[] payment_hash) {
 		long ret = bindings.HTLCDestination_failed_payment(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)));
 		GC.KeepAlive(payment_hash);
 		if (ret >= 0 && ret <= 4096) { return null; }

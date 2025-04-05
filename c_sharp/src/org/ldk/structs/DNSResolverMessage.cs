@@ -27,7 +27,7 @@ public class DNSResolverMessage : CommonBase {
 
 	/** A DNSResolverMessage of type DNSSECQuery */
 	public class DNSResolverMessage_DNSSECQuery : DNSResolverMessage {
-		public DNSSECQuery dnssec_query;
+		public org.ldk.structs.DNSSECQuery dnssec_query;
 		internal DNSResolverMessage_DNSSECQuery(long ptr) : base(null, ptr) {
 			long dnssec_query = bindings.LDKDNSResolverMessage_DNSSECQuery_get_dnssec_query(ptr);
 			org.ldk.structs.DNSSECQuery dnssec_query_hu_conv = null; if (dnssec_query < 0 || dnssec_query > 4096) { dnssec_query_hu_conv = new org.ldk.structs.DNSSECQuery(null, dnssec_query); }
@@ -37,7 +37,7 @@ public class DNSResolverMessage : CommonBase {
 	}
 	/** A DNSResolverMessage of type DNSSECProof */
 	public class DNSResolverMessage_DNSSECProof : DNSResolverMessage {
-		public DNSSECProof dnssec_proof;
+		public org.ldk.structs.DNSSECProof dnssec_proof;
 		internal DNSResolverMessage_DNSSECProof(long ptr) : base(null, ptr) {
 			long dnssec_proof = bindings.LDKDNSResolverMessage_DNSSECProof_get_dnssec_proof(ptr);
 			org.ldk.structs.DNSSECProof dnssec_proof_hu_conv = null; if (dnssec_proof < 0 || dnssec_proof > 4096) { dnssec_proof_hu_conv = new org.ldk.structs.DNSSECProof(null, dnssec_proof); }
@@ -54,7 +54,7 @@ public class DNSResolverMessage : CommonBase {
 	/**
 	 * Creates a copy of the DNSResolverMessage
 	 */
-	public DNSResolverMessage clone() {
+	public org.ldk.structs.DNSResolverMessage clone() {
 		long ret = bindings.DNSResolverMessage_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -66,7 +66,7 @@ public class DNSResolverMessage : CommonBase {
 	/**
 	 * Utility method to constructs a new DNSSECQuery-variant DNSResolverMessage
 	 */
-	public static DNSResolverMessage dnssecquery(org.ldk.structs.DNSSECQuery a) {
+	public static org.ldk.structs.DNSResolverMessage dnssecquery(org.ldk.structs.DNSSECQuery a) {
 		long ret = bindings.DNSResolverMessage_dnssecquery(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -78,7 +78,7 @@ public class DNSResolverMessage : CommonBase {
 	/**
 	 * Utility method to constructs a new DNSSECProof-variant DNSResolverMessage
 	 */
-	public static DNSResolverMessage dnssecproof(org.ldk.structs.DNSSECProof a) {
+	public static org.ldk.structs.DNSResolverMessage dnssecproof(org.ldk.structs.DNSSECProof a) {
 		long ret = bindings.DNSResolverMessage_dnssecproof(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -128,7 +128,7 @@ public class DNSResolverMessage : CommonBase {
 	/**
 	 * Read a DNSResolverMessage from a byte array, created by DNSResolverMessage_write
 	 */
-	public static Result_DNSResolverMessageDecodeErrorZ read(byte[] ser, long arg) {
+	public static org.ldk.structs.Result_DNSResolverMessageDecodeErrorZ read(byte[] ser, long arg) {
 		long ret = bindings.DNSResolverMessage_read(InternalUtils.encodeUint8Array(ser), arg);
 		GC.KeepAlive(ser);
 		GC.KeepAlive(arg);
@@ -141,7 +141,7 @@ public class DNSResolverMessage : CommonBase {
 	 * Constructs a new OnionMessageContents which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned OnionMessageContents must be freed before this_arg is
 	 */
-	public OnionMessageContents as_OnionMessageContents() {
+	public org.ldk.structs.OnionMessageContents as_OnionMessageContents() {
 		long ret = bindings.DNSResolverMessage_as_OnionMessageContents(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

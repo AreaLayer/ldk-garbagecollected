@@ -98,7 +98,7 @@ public class Packet : CommonBase {
 	/**
 	 * Constructs a new Packet given each field
 	 */
-	public static Packet of(byte version_arg, byte[] public_key_arg, byte[] hop_data_arg, byte[] hmac_arg) {
+	public static org.ldk.structs.Packet of(byte version_arg, byte[] public_key_arg, byte[] hop_data_arg, byte[] hmac_arg) {
 		long ret = bindings.Packet_new(version_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(public_key_arg, 33)), InternalUtils.encodeUint8Array(hop_data_arg), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(hmac_arg, 32)));
 		GC.KeepAlive(version_arg);
 		GC.KeepAlive(public_key_arg);
@@ -119,7 +119,7 @@ public class Packet : CommonBase {
 	/**
 	 * Creates a copy of the Packet
 	 */
-	public Packet clone() {
+	public org.ldk.structs.Packet clone() {
 		long ret = bindings.Packet_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

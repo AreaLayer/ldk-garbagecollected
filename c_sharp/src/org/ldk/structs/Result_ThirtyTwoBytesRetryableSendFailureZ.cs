@@ -37,7 +37,7 @@ public class Result_ThirtyTwoBytesRetryableSendFailureZ : CommonBase {
 	/**
 	 * Creates a new CResult_ThirtyTwoBytesRetryableSendFailureZ in the success state.
 	 */
-	public static Result_ThirtyTwoBytesRetryableSendFailureZ ok(byte[] o) {
+	public static org.ldk.structs.Result_ThirtyTwoBytesRetryableSendFailureZ ok(byte[] o) {
 		long ret = bindings.CResult_ThirtyTwoBytesRetryableSendFailureZ_ok(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(o, 32)));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -48,7 +48,7 @@ public class Result_ThirtyTwoBytesRetryableSendFailureZ : CommonBase {
 	/**
 	 * Creates a new CResult_ThirtyTwoBytesRetryableSendFailureZ in the error state.
 	 */
-	public static Result_ThirtyTwoBytesRetryableSendFailureZ err(RetryableSendFailure e) {
+	public static org.ldk.structs.Result_ThirtyTwoBytesRetryableSendFailureZ err(RetryableSendFailure e) {
 		long ret = bindings.CResult_ThirtyTwoBytesRetryableSendFailureZ_err(e);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -75,7 +75,7 @@ public class Result_ThirtyTwoBytesRetryableSendFailureZ : CommonBase {
 	 * Creates a new CResult_ThirtyTwoBytesRetryableSendFailureZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_ThirtyTwoBytesRetryableSendFailureZ clone() {
+	public org.ldk.structs.Result_ThirtyTwoBytesRetryableSendFailureZ clone() {
 		long ret = bindings.CResult_ThirtyTwoBytesRetryableSendFailureZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

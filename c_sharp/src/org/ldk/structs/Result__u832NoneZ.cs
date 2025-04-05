@@ -35,7 +35,7 @@ public class Result__u832NoneZ : CommonBase {
 	/**
 	 * Creates a new CResult__u832NoneZ in the success state.
 	 */
-	public static Result__u832NoneZ ok(byte[] o) {
+	public static org.ldk.structs.Result__u832NoneZ ok(byte[] o) {
 		long ret = bindings.CResult__u832NoneZ_ok(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(o, 32)));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -46,7 +46,7 @@ public class Result__u832NoneZ : CommonBase {
 	/**
 	 * Creates a new CResult__u832NoneZ in the error state.
 	 */
-	public static Result__u832NoneZ err() {
+	public static org.ldk.structs.Result__u832NoneZ err() {
 		long ret = bindings.CResult__u832NoneZ_err();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result__u832NoneZ ret_hu_conv = Result__u832NoneZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Result__u832NoneZ : CommonBase {
 	 * Creates a new CResult__u832NoneZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result__u832NoneZ clone() {
+	public org.ldk.structs.Result__u832NoneZ clone() {
 		long ret = bindings.CResult__u832NoneZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -41,7 +41,7 @@ public class Result_FixedPenaltyScorerDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_FixedPenaltyScorerDecodeErrorZ in the success state.
 	 */
-	public static Result_FixedPenaltyScorerDecodeErrorZ ok(org.ldk.structs.FixedPenaltyScorer o) {
+	public static org.ldk.structs.Result_FixedPenaltyScorerDecodeErrorZ ok(org.ldk.structs.FixedPenaltyScorer o) {
 		long ret = bindings.CResult_FixedPenaltyScorerDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_FixedPenaltyScorerDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_FixedPenaltyScorerDecodeErrorZ in the error state.
 	 */
-	public static Result_FixedPenaltyScorerDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_FixedPenaltyScorerDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_FixedPenaltyScorerDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_FixedPenaltyScorerDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_FixedPenaltyScorerDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_FixedPenaltyScorerDecodeErrorZ clone() {
+	public org.ldk.structs.Result_FixedPenaltyScorerDecodeErrorZ clone() {
 		long ret = bindings.CResult_FixedPenaltyScorerDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

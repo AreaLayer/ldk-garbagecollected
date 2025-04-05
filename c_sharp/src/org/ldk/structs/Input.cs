@@ -20,7 +20,7 @@ public class Input : CommonBase {
 	/**
 	 * The unique identifier of the input.
 	 */
-	public OutPoint get_outpoint() {
+	public org.ldk.structs.OutPoint get_outpoint() {
 		long ret = bindings.Input_get_outpoint(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -41,7 +41,7 @@ public class Input : CommonBase {
 	/**
 	 * The UTXO being spent by the input.
 	 */
-	public TxOut get_previous_utxo() {
+	public org.ldk.structs.TxOut get_previous_utxo() {
 		long ret = bindings.Input_get_previous_utxo(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -83,7 +83,7 @@ public class Input : CommonBase {
 	/**
 	 * Constructs a new Input given each field
 	 */
-	public static Input of(org.ldk.structs.OutPoint outpoint_arg, org.ldk.structs.TxOut previous_utxo_arg, long satisfaction_weight_arg) {
+	public static org.ldk.structs.Input of(org.ldk.structs.OutPoint outpoint_arg, org.ldk.structs.TxOut previous_utxo_arg, long satisfaction_weight_arg) {
 		long ret = bindings.Input_new(outpoint_arg.ptr, previous_utxo_arg.ptr, satisfaction_weight_arg);
 		GC.KeepAlive(outpoint_arg);
 		GC.KeepAlive(previous_utxo_arg);
@@ -103,7 +103,7 @@ public class Input : CommonBase {
 	/**
 	 * Creates a copy of the Input
 	 */
-	public Input clone() {
+	public org.ldk.structs.Input clone() {
 		long ret = bindings.Input_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

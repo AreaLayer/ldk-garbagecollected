@@ -29,7 +29,7 @@ public class ThreeTuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ : Com
 	/**
 	 * 
 	 */
-	public RecipientOnionFields get_b() {
+	public org.ldk.structs.RecipientOnionFields get_b() {
 		long ret = bindings.C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ_get_b(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -41,7 +41,7 @@ public class ThreeTuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ : Com
 	/**
 	 * 
 	 */
-	public RouteParameters get_c() {
+	public org.ldk.structs.RouteParameters get_c() {
 		long ret = bindings.C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ_get_c(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -60,7 +60,7 @@ public class ThreeTuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ : Com
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public ThreeTuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ clone() {
+	public org.ldk.structs.ThreeTuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ clone() {
 		long ret = bindings.C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -72,7 +72,7 @@ public class ThreeTuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ : Com
 	/**
 	 * Creates a new C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ from the contained elements.
 	 */
-	public static ThreeTuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ of(byte[] a, org.ldk.structs.RecipientOnionFields b, org.ldk.structs.RouteParameters c) {
+	public static org.ldk.structs.ThreeTuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ of(byte[] a, org.ldk.structs.RecipientOnionFields b, org.ldk.structs.RouteParameters c) {
 		long ret = bindings.C3Tuple_ThirtyTwoBytesRecipientOnionFieldsRouteParametersZ_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 32)), b.ptr, c.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

@@ -25,7 +25,7 @@ public class P2PGossipSync : CommonBase {
 	 * UTXO lookup is used to make sure announced channels exist on-chain, channel data is
 	 * correct, and the announcement is signed with channel owners' keys.
 	 */
-	public static P2PGossipSync of(org.ldk.structs.NetworkGraph network_graph, org.ldk.structs.Option_UtxoLookupZ utxo_lookup, org.ldk.structs.Logger logger) {
+	public static org.ldk.structs.P2PGossipSync of(org.ldk.structs.NetworkGraph network_graph, org.ldk.structs.Option_UtxoLookupZ utxo_lookup, org.ldk.structs.Logger logger) {
 		long ret = bindings.P2PGossipSync_new(network_graph.ptr, utxo_lookup.ptr, logger.ptr);
 		GC.KeepAlive(network_graph);
 		GC.KeepAlive(utxo_lookup);
@@ -55,7 +55,7 @@ public class P2PGossipSync : CommonBase {
 	 * Constructs a new RoutingMessageHandler which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned RoutingMessageHandler must be freed before this_arg is
 	 */
-	public RoutingMessageHandler as_RoutingMessageHandler() {
+	public org.ldk.structs.RoutingMessageHandler as_RoutingMessageHandler() {
 		long ret = bindings.P2PGossipSync_as_RoutingMessageHandler(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -68,7 +68,7 @@ public class P2PGossipSync : CommonBase {
 	 * Constructs a new MessageSendEventsProvider which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned MessageSendEventsProvider must be freed before this_arg is
 	 */
-	public MessageSendEventsProvider as_MessageSendEventsProvider() {
+	public org.ldk.structs.MessageSendEventsProvider as_MessageSendEventsProvider() {
 		long ret = bindings.P2PGossipSync_as_MessageSendEventsProvider(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

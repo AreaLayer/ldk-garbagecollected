@@ -121,7 +121,7 @@ public class BlindedPayInfo : CommonBase {
 	 * Features set in `encrypted_data_tlv` for the `encrypted_recipient_data` TLV record in an
 	 * onion payload.
 	 */
-	public BlindedHopFeatures get_features() {
+	public org.ldk.structs.BlindedHopFeatures get_features() {
 		long ret = bindings.BlindedPayInfo_get_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -143,7 +143,7 @@ public class BlindedPayInfo : CommonBase {
 	/**
 	 * Constructs a new BlindedPayInfo given each field
 	 */
-	public static BlindedPayInfo of(int fee_base_msat_arg, int fee_proportional_millionths_arg, short cltv_expiry_delta_arg, long htlc_minimum_msat_arg, long htlc_maximum_msat_arg, org.ldk.structs.BlindedHopFeatures features_arg) {
+	public static org.ldk.structs.BlindedPayInfo of(int fee_base_msat_arg, int fee_proportional_millionths_arg, short cltv_expiry_delta_arg, long htlc_minimum_msat_arg, long htlc_maximum_msat_arg, org.ldk.structs.BlindedHopFeatures features_arg) {
 		long ret = bindings.BlindedPayInfo_new(fee_base_msat_arg, fee_proportional_millionths_arg, cltv_expiry_delta_arg, htlc_minimum_msat_arg, htlc_maximum_msat_arg, features_arg.ptr);
 		GC.KeepAlive(fee_base_msat_arg);
 		GC.KeepAlive(fee_proportional_millionths_arg);
@@ -166,7 +166,7 @@ public class BlindedPayInfo : CommonBase {
 	/**
 	 * Creates a copy of the BlindedPayInfo
 	 */
-	public BlindedPayInfo clone() {
+	public org.ldk.structs.BlindedPayInfo clone() {
 		long ret = bindings.BlindedPayInfo_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -218,7 +218,7 @@ public class BlindedPayInfo : CommonBase {
 	/**
 	 * Read a BlindedPayInfo from a byte array, created by BlindedPayInfo_write
 	 */
-	public static Result_BlindedPayInfoDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_BlindedPayInfoDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.BlindedPayInfo_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }
