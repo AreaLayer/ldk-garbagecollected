@@ -351,7 +351,7 @@ jobs:
           cd ldk-c-bindings
           ./genbindings.sh ../rust-lightning true
       - name: Build Java Debug Bindings
-        run: ./genbindings.sh ./ldk-c-bindings/ "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/" true false
+        run: ./genbindings.sh ./ldk-c-bindings/ java true false "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/"
       - name: Run Java Tests against Debug Bindings
         run: |
           mv liblightningjni_debug_Linux-amd64.so liblightningjni.so
@@ -359,7 +359,7 @@ jobs:
           LD_PRELOAD=/usr/lib/llvm-14/lib/clang/14.0.6/lib/linux/libclang_rt.asan-x86_64.so LD_LIBRARY_PATH=. mvn test
       - name: Build Java Release Bindings
         run: |
-          ./genbindings.sh ./ldk-c-bindings/ "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/" false false
+          ./genbindings.sh ./ldk-c-bindings/ java false false "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/"
       - name: Check latest headers are in git
         run: |
           git checkout pom.xml
@@ -434,7 +434,7 @@ jobs:
       - name: Build Leaktracking Java Release Bindings
         run: |
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
-          ./genbindings.sh ./ldk-c-bindings/ "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/" leaks false
+          ./genbindings.sh ./ldk-c-bindings/ java leaks false "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/"
       - name: Build deterministic release jar
         run: |
           ./build-release-jar.sh
@@ -447,13 +447,13 @@ jobs:
       - name: Build Java leaktracking Bindings
         run: |
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
-          ./genbindings.sh ./ldk-c-bindings/ "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/" leaks false
+          ./genbindings.sh ./ldk-c-bindings/ java leaks false "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/"
           mkdir ldk-java-bins/new/
           cp src/main/resources/liblightningjni_Linux-amd64.nativelib ldk-java-bins/new/liblightningjni_Linux-amd64-leaktracking.nativelib
       - name: Build Java Release Bindings
         run: |
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
-          ./genbindings.sh ./ldk-c-bindings/ "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/" false false
+          ./genbindings.sh ./ldk-c-bindings/ java false false "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/"
       - name: Build deterministic release jar
         run: ./build-release-jar.sh
       - uses: actions/upload-artifact@v4
@@ -566,27 +566,27 @@ jobs:
           MACOS_SDK="$PWD/Xcode-12.2-12B45b-extracted-SDK-with-libcxx-headers"
           JAVA_HOME=jdk-aarch64/jdk-18.0.1.1.jdk/Contents/Home
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
-          CC=clang LDK_TARGET=aarch64-apple-darwin LDK_TARGET_CPU=apple-a14 ./genbindings.sh ./ldk-c-bindings/ "-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin -isysroot$MACOS_SDK" leaks false
+          CC=clang LDK_TARGET=aarch64-apple-darwin LDK_TARGET_CPU=apple-a14 ./genbindings.sh ./ldk-c-bindings/ java leaks false "-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin -isysroot$MACOS_SDK"
           mv src/main/resources/liblightningjni_MacOSX-aarch64.nativelib src/main/resources/liblightningjni_MacOSX-aarch64-leaktracking.nativelib
       - name: Build MacOS x86_64 Java leaktracking Release Bindings
         run: |
           MACOS_SDK="$PWD/Xcode-12.2-12B45b-extracted-SDK-with-libcxx-headers"
           JAVA_HOME=jdk-x86_64/jdk-18.0.1.1.jdk/Contents/Home
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
-          CC=clang LDK_TARGET=x86_64-apple-darwin LDK_TARGET_CPU=sandybridge ./genbindings.sh ./ldk-c-bindings/ "-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin -isysroot$MACOS_SDK" leaks false
+          CC=clang LDK_TARGET=x86_64-apple-darwin LDK_TARGET_CPU=sandybridge ./genbindings.sh ./ldk-c-bindings/ java leaks false "-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin -isysroot$MACOS_SDK"
           mv src/main/resources/liblightningjni_MacOSX-x86_64.nativelib src/main/resources/liblightningjni_MacOSX-x86_64-leaktracking.nativelib
       - name: Build MacOS aarch64 Java Release Bindings
         run: |
           MACOS_SDK="$PWD/Xcode-12.2-12B45b-extracted-SDK-with-libcxx-headers"
           JAVA_HOME=jdk-aarch64/jdk-18.0.1.1.jdk/Contents/Home
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
-          CC=clang LDK_TARGET=aarch64-apple-darwin LDK_TARGET_CPU=apple-a14 ./genbindings.sh ./ldk-c-bindings/ "-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin -isysroot$MACOS_SDK" false false
+          CC=clang LDK_TARGET=aarch64-apple-darwin LDK_TARGET_CPU=apple-a14 ./genbindings.sh ./ldk-c-bindings/ java false false "-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin -isysroot$MACOS_SDK"
       - name: Build MacOS x86_64 Java Release Bindings
         run: |
           MACOS_SDK="$PWD/Xcode-12.2-12B45b-extracted-SDK-with-libcxx-headers"
           JAVA_HOME=jdk-x86_64/jdk-18.0.1.1.jdk/Contents/Home
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
-          CC=clang LDK_TARGET=x86_64-apple-darwin LDK_TARGET_CPU=sandybridge ./genbindings.sh ./ldk-c-bindings/ "-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin -isysroot$MACOS_SDK" false false
+          CC=clang LDK_TARGET=x86_64-apple-darwin LDK_TARGET_CPU=sandybridge ./genbindings.sh ./ldk-c-bindings/ java false false "-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin -isysroot$MACOS_SDK"
       - name: Checkout latest binaries
         run: |
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"

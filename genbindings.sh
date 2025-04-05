@@ -1,6 +1,6 @@
 #!/bin/bash
 usage() {
-	echo "USAGE: path/to/ldk-c-bindings [wasm|\"JNI_CFLAGS\"] debug android_web"
+	echo "USAGE: path/to/ldk-c-bindings [wasm|java|c_sharp] debug android_web [\"CFLAGS\"]"
 	echo "For JNI_CFLAGS you probably want -I/usr/lib/jvm/java-11-openjdk-amd64/include/ -I/usr/lib/jvm/java-11-openjdk-amd64/include/linux/"
 	echo "If JNI_CFLAGS is instead set to wasm, we build for wasm/TypeScript instead of Java"
 	echo "debug should either be true, false, or leaks"
@@ -10,6 +10,7 @@ usage() {
 	exit 1
 }
 [ "$1" = "" ] && usage
+[ "$2" != "wasm" -a "$2" != "java" -a "$2" != "c_sharp" ] && usage
 [ "$3" != "true" -a "$3" != "false" -a "$3" != "leaks" ] && usage
 [ "$4" != "true" -a "$4" != "false" ] && usage
 
@@ -295,7 +296,8 @@ elif [ "$2" = "wasm" ]; then
 			fi
 		fi
 	fi
-else
+elif [ "$2" = "java" ]; then
+	echo "Creating Java bindings..."
 	if is_gnu_sed; then
 		sed -i "s/^    <version>.*<\/version>/    <version>${LDK_GARBAGECOLLECTED_GIT_OVERRIDE:1:100}<\/version>/g" pom.xml
 	else
@@ -336,7 +338,7 @@ else
 	[ "$IS_MAC" = "true" -a "$IS_APPLE_CLANG" = "false" ] && echo "WARNING: Need at least upstream clang 13!"
 	[ "$IS_MAC" = "false" -a "$3" != "false" ] && LINK="$LINK -Wl,-wrap,calloc -Wl,-wrap,realloc -Wl,-wrap,malloc -Wl,-wrap,free"
 	if [ "$3" = "true" ]; then
-		$COMPILE $LINK -o liblightningjni_debug$LDK_TARGET_SUFFIX.so -g -fsanitize=address -shared-libasan -rdynamic -I"$1"/lightning-c-bindings/include/ $2 src/main/jni/bindings.c "$1"/lightning-c-bindings/target/$LDK_TARGET/debug/libldk.a -lm
+		$COMPILE $LINK -o liblightningjni_debug$LDK_TARGET_SUFFIX.so -g -fsanitize=address -shared-libasan -rdynamic -I"$1"/lightning-c-bindings/include/ $5 src/main/jni/bindings.c "$1"/lightning-c-bindings/target/$LDK_TARGET/debug/libldk.a -lm
 	else
 		[ "$IS_APPLE_CLANG" = "false" ] && LINK="$LINK -flto -Wl,-O3 -fuse-ld=lld"
 		[ "$IS_APPLE_CLANG" = "false" ] && COMPILE="$COMPILE -flto"
@@ -348,8 +350,8 @@ else
 			LINK="$LINK -Wl,--version-script=libcode.version"
 		fi
 
-		$COMPILE -o bindings.o -c -O3 -I"$1"/lightning-c-bindings/include/ $2 src/main/jni/bindings.c
-		$COMPILE $LINK -o liblightningjni_release$LDK_TARGET_SUFFIX.so -O3 $2 bindings.o $LDK_LIB -lm
+		$COMPILE -o bindings.o -c -O3 -I"$1"/lightning-c-bindings/include/ $5 src/main/jni/bindings.c
+		$COMPILE $LINK -o liblightningjni_release$LDK_TARGET_SUFFIX.so -O3 $5 bindings.o $LDK_LIB -lm
 		$STRIP -R .llvmbc -R .llvmcmd liblightningjni_release$LDK_TARGET_SUFFIX.so
 
 		if [ "$IS_MAC" = "false" -a "$4" = "false" ]; then

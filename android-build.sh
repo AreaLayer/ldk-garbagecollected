@@ -44,8 +44,7 @@ for IDX in ${!EXTRA_TARGETS[@]}; do
 	export CC="${EXTRA_TARGET_CCS[$IDX]}"
 	export LDK_TARGET="${EXTRA_TARGETS[$IDX]}"
 	export LDK_TARGET_CPU="${TARGET_CPUS[$IDX]}"
-	# Note that we expect to often fail here if we don't have wasm32 bins in the C bindings dir
-	./genbindings.sh "$LDK_C_BINDINGS" "-lm -llog -I$SYSROOT/usr/include/" false true || echo
+	./genbindings.sh "$LDK_C_BINDINGS" java false true "-lm -llog -I$SYSROOT/usr/include/"
 	${STRIPS[$IDX]} liblightningjni_release_${LDK_TARGET}.so
 done
 
