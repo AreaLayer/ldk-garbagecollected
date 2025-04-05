@@ -427,6 +427,16 @@ namespace tests {
 			Assert(inv_res.is_ok(), 200);
 		}
 
+		static void SimpleAddressTest() {
+			// Test parsing Address
+			String valid_addr = "bc1qprzyshqx2qlyrur5pyx9s3tg6y4m5lfwkcls38";
+			Assert(Address.from_string(valid_addr).address == valid_addr, 300);
+			try {
+				Address.from_string("");
+				Assert(false, 301);
+			} catch (ArgumentException e) {}
+		}
+
 		static void GCLoop() {
 			while (Thread.CurrentThread.IsAlive) {
 				System.GC.Collect();
@@ -451,6 +461,7 @@ namespace tests {
 			SimpleTraitTest();
 			NodeTest();
 			Bolt12ParseTest();
+			SimpleAddressTest();
 
 			if (!RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) {
 				gc_thread.Interrupt();
