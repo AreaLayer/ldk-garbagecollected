@@ -251,6 +251,10 @@ def java_c_types(fn_arg, ret_arr_len):
         assert tyn[0].endswith("Z")
         if tyn[0] == "u64Z":
             new_arg = "uint64_t"
+        elif tyn[0] == "u32Z":
+            new_arg = "uint32_t"
+        elif tyn[0] == "u16Z":
+            new_arg = "uint16_t"
         else:
             new_arg = "LDK" + tyn[0][:-1]
         for a in tyn[1:]:
