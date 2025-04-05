@@ -905,6 +905,14 @@ class HumanObjectPeerTestInstance {
         assert pre_funding_chan.get_funding_txo() == null;
         mid_test_must_free_objs.add(new WeakReference<>(pre_funding_chan));
 
+        // Test Address construction
+        String valid_addr = "bc1qprzyshqx2qlyrur5pyx9s3tg6y4m5lfwkcls38";
+        assert Address.from_string(valid_addr).address.equals(valid_addr);
+        try {
+            Address.from_string("");
+            assert false;
+        } catch (IllegalArgumentException e) {}
+
         Event[] events = peer1.get_manager_events(1, peer1, peer2);
         assert events[0] instanceof Event.FundingGenerationReady;
         mid_test_must_free_objs.add(new WeakReference<>(events[0]));
