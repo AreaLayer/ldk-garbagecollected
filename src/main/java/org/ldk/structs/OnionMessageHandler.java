@@ -54,6 +54,8 @@ public class OnionMessageHandler extends CommonBase {
 		 * May return an `Err(())` if the features the peer supports are not sufficient to communicate
 		 * with us. Implementors should be somewhat conservative about doing so, however, as other
 		 * message handlers may still wish to communicate with this peer.
+		 * 
+		 * [`Self::peer_disconnected`] will not be called if `Err(())` is returned.
 		 */
 		Result_NoneNoneZ peer_connected(byte[] their_node_id, Init init, boolean inbound);
 		/**
@@ -160,6 +162,8 @@ public class OnionMessageHandler extends CommonBase {
 	 * May return an `Err(())` if the features the peer supports are not sufficient to communicate
 	 * with us. Implementors should be somewhat conservative about doing so, however, as other
 	 * message handlers may still wish to communicate with this peer.
+	 * 
+	 * [`Self::peer_disconnected`] will not be called if `Err(())` is returned.
 	 */
 	public Result_NoneNoneZ peer_connected(byte[] their_node_id, org.ldk.structs.Init init, boolean inbound) {
 		long ret = bindings.OnionMessageHandler_peer_connected(this.ptr, InternalUtils.check_arr_len(their_node_id, 33), init.ptr, inbound);

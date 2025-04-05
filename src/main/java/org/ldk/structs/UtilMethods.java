@@ -1183,4 +1183,41 @@ public class UtilMethods {
 		return ret_hu_conv;
 	}
 
+	/**
+	 * Determines if the given parameters are valid given the secret used to generate the promise.
+	 */
+	public static boolean is_valid_opening_fee_params(org.ldk.structs.LSPS2OpeningFeeParams fee_params, byte[] promise_secret) {
+		boolean ret = bindings.is_valid_opening_fee_params(fee_params.ptr, InternalUtils.check_arr_len(promise_secret, 32));
+		Reference.reachabilityFence(fee_params);
+		Reference.reachabilityFence(promise_secret);
+		return ret;
+	}
+
+	/**
+	 * Determines if the given parameters are expired, or still valid.
+	 */
+	public static boolean is_expired_opening_fee_params(org.ldk.structs.LSPS2OpeningFeeParams fee_params) {
+		boolean ret = bindings.is_expired_opening_fee_params(fee_params.ptr);
+		Reference.reachabilityFence(fee_params);
+		return ret;
+	}
+
+	/**
+	 * Computes the opening fee given a payment size and the fee parameters.
+	 * 
+	 * Returns [`Option::None`] when the computation overflows.
+	 * 
+	 * See the [`specification`](https://github.com/lightning/blips/blob/master/blip-0052.md#computing-the-opening_fee) for more details.
+	 */
+	public static Option_u64Z compute_opening_fee(long payment_size_msat, long opening_fee_min_fee_msat, long opening_fee_proportional) {
+		long ret = bindings.compute_opening_fee(payment_size_msat, opening_fee_min_fee_msat, opening_fee_proportional);
+		Reference.reachabilityFence(payment_size_msat);
+		Reference.reachabilityFence(opening_fee_min_fee_msat);
+		Reference.reachabilityFence(opening_fee_proportional);
+		if (ret >= 0 && ret <= 4096) { return null; }
+		org.ldk.structs.Option_u64Z ret_hu_conv = org.ldk.structs.Option_u64Z.constr_from_ptr(ret);
+		if (ret_hu_conv != null) { ret_hu_conv.ptrs_to.add(ret_hu_conv); };
+		return ret_hu_conv;
+	}
+
 }
