@@ -402,6 +402,18 @@ export class UnqualifiedError {
 }"""
         self.obj_defined(["TxOut"], "structs")
 
+        self.address_defn = """export class Address extends CommonBase {
+	/** The address in string form */
+	public address: String;
+
+	/* @internal */
+	public constructor(_dummy: null, ptr: bigint) {
+		super(ptr, bindings.Address_free);
+		this.script_pubkey = bindings.decodeString(bindings.Address_to_string(ptr));
+	}
+}"""
+        self.obj_defined(["Address"], "structs")
+
         self.scalar_defn = """export class BigEndianScalar extends CommonBase {
 	/** The bytes of the scalar value, in big endian */
 	public scalar_bytes: Uint8Array;

@@ -133,6 +133,32 @@ class CommonBase {
 	}
 }"""
 
+        self.address_defn = """public class Address extends CommonBase {
+	/** The address in string form */
+	public final String address;
+
+	Address(java.lang.Object _dummy, long ptr) {
+		super(ptr);
+		this.address = bindings.Address_to_string(ptr);
+	}
+	public static Address from_string(String address) throws IllegalArgumentException {
+		long ptr = bindings.Address_new(address);
+		Option_AddressZ res = Option_AddressZ.constr_from_ptr(ptr);
+		if (res instanceof Option_AddressZ.Some) {
+			long addr_ptr = ((Option_AddressZ.Some) res).some.ptr;
+			return new Address(null, bindings.Address_clone(addr_ptr));
+		} else {
+			throw new IllegalArgumentException("Invalid address");
+		}
+	}
+
+	@Override @SuppressWarnings(\"deprecation\")
+	protected void finalize() throws Throwable {
+		super.finalize();
+		if (ptr != 0) { bindings.Address_free(ptr); }
+	}
+}"""
+
         self.txin_defn = """public class TxIn extends CommonBase {
 	/** The witness in this input, in serialized form */
 	public final byte[] witness;

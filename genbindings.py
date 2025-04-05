@@ -369,17 +369,14 @@ def java_c_types(fn_arg, ret_arr_len):
         arr_ty = "LDKStr"
         fn_ty_arg = "Ljava/lang/String;"
         fn_arg = fn_arg[6:].strip()
-    elif fn_arg.startswith("LDKStr") or fn_arg.startswith("LDKAddress"):
+    elif fn_arg.startswith("LDKStr"):
         rust_obj = "LDKStr"
         arr_ty = "LDKStr"
         java_ty = consts.java_type_map["String"]
         java_hu_ty = consts.java_hu_type_map["String"]
         c_ty = "jstring"
         fn_ty_arg = "Ljava/lang/String;"
-        if fn_arg.startswith("LDKAddress"):
-            fn_arg = fn_arg[10:].strip()
-        else:
-            fn_arg = fn_arg[6:].strip()
+        fn_arg = fn_arg[6:].strip()
         arr_access = "chars"
         arr_len = "len"
     elif fn_arg.startswith("LDKError ") or fn_arg == "LDKError":
@@ -676,6 +673,7 @@ with open(sys.argv[1]) as in_h, open(f"{sys.argv[2]}/bindings{consts.file_ext}",
         impl_on_utils = not impl_on_struct and (not is_free and not method_name.endswith("_clone") and
             not method_name.startswith("TxOut") and not method_name.startswith("TxIn") and
             not method_name.startswith("BigEndianScalar") and not method_name.startswith("WitnessProgram") and
+            not method_name.startswith("Address") and
             not method_name.startswith("_") and
             method_name != "check_platform" and method_name != "Result_read" and
             not expected_struct in unitary_enums and
@@ -1115,6 +1113,11 @@ with open(sys.argv[1]) as in_h, open(f"{sys.argv[2]}/bindings{consts.file_ext}",
                     last_block_comment = None
                 elif len(trait_fn_lines) > 0:
                     map_trait(struct_name, field_var_lines, trait_fn_lines, last_block_comment)
+                elif struct_name == "LDKAddress":
+                    with open(f"{sys.argv[3]}/structs/Address{consts.file_ext}", "w") as out_java_struct:
+                        out_java_struct.write(consts.hu_struct_file_prefix)
+                        out_java_struct.write(consts.address_defn)
+                        out_java_struct.write(consts.hu_struct_file_suffix)
                 elif struct_name == "LDKTxOut":
                     with open(f"{sys.argv[3]}/structs/TxOut{consts.file_ext}", "w") as out_java_struct:
                         out_java_struct.write(consts.hu_struct_file_prefix)
