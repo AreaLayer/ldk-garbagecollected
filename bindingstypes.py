@@ -33,9 +33,9 @@ class TypeInfo:
                 return (ret, "")
             assert self.c_ty.endswith("Array")
             if self.is_const:
-                return ("const u" + self.c_ty[:-5] + " (*", ")[" + self.arr_len + "]")
+                return ("const " + self.c_ty[:-5] + " (*", ")[" + self.arr_len + "]")
             else:
-                return ("u" + self.c_ty[:-5] + " (*", ")[" + self.arr_len + "]")
+                return (self.c_ty[:-5] + " (*", ")[" + self.arr_len + "]")
         if self.rust_obj is None:
             if self.c_ty.startswith("int"):
                 # Ironically the entire API uses no signed integers. We really should handle this better, but for now just always add a u

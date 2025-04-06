@@ -457,7 +457,9 @@ _Static_assert(sizeof(int8_t) == 1, "stdints must be correct");
 DECL_ARR_TYPE(int64_t, int64_t);
 DECL_ARR_TYPE(uint64_t, uint64_t);
 DECL_ARR_TYPE(int8_t, int8_t);
+DECL_ARR_TYPE(uint8_t, uint8_t);
 DECL_ARR_TYPE(int16_t, int16_t);
+DECL_ARR_TYPE(uint16_t, uint16_t);
 DECL_ARR_TYPE(uint32_t, uint32_t);
 DECL_ARR_TYPE(void*, ptr);
 DECL_ARR_TYPE(char, char);
@@ -548,17 +550,17 @@ namespace org { namespace ldk { namespace structs {
             assert ty_info.rust_obj == "LDKCVec_U5Z" or (ty_info.subty is not None and (ty_info.subty.c_ty.endswith("Array") or ty_info.subty.rust_obj == "LDKStr"))
         return "init_" + ty_info.c_ty + "(" + arr_len + ", __LINE__)"
     def set_native_arr_contents(self, arr_name, arr_len, ty_info):
-        if ty_info.c_ty == "int8_tArray":
+        if ty_info.c_ty == "uint8_tArray":
             return ("memcpy(" + arr_name + "->elems, ", ", " + arr_len + ")")
-        elif ty_info.c_ty == "int16_tArray":
+        elif ty_info.c_ty == "uint16_tArray":
             return ("memcpy(" + arr_name + "->elems, ", ", " + arr_len + " * 2)")
         else:
             assert False
     def get_native_arr_contents(self, arr_name, dest_name, arr_len, ty_info, copy):
-        if ty_info.c_ty == "int8_tArray" or ty_info.c_ty == "int16_tArray":
+        if ty_info.c_ty == "uint8_tArray" or ty_info.c_ty == "uint16_tArray":
             if copy:
                 byte_len = arr_len
-                if ty_info.c_ty == "int16_tArray":
+                if ty_info.c_ty == "uint16_tArray":
                     byte_len = arr_len + " * 2"
                 return "memcpy(" + dest_name + ", " + arr_name + "->elems, " + byte_len + "); FREE(" + arr_name + ")"
         assert not copy
@@ -575,7 +577,7 @@ namespace org { namespace ldk { namespace structs {
     def get_native_arr_entry_call(self, ty_info, arr_name, idxc, entry_access):
         return None
     def cleanup_native_arr_ref_contents(self, arr_name, dest_name, arr_len, ty_info):
-        if ty_info.c_ty == "int8_tArray":
+        if ty_info.c_ty == "uint8_tArray":
             return "FREE(" + arr_name + ");"
         else:
             return "FREE(" + arr_name + ")"

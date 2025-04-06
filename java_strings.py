@@ -243,7 +243,6 @@ class CommonBase {
         self.c_file_pfx = """#include <jni.h>
 // On OSX jlong (ie long long) is not equivalent to int64_t, so we override here
 #define int64_t jlong
-#include \"org_ldk_impl_bindings.h\"
 #include <lightning.h>
 #include <string.h>
 #include <stdatomic.h>
@@ -515,8 +514,11 @@ _Static_assert(sizeof(jbyte) == sizeof(char), "We assume that j-types are the sa
 _Static_assert(sizeof(void*) <= 8, "Pointers must fit into 64 bits");
 
 typedef jlongArray int64_tArray;
+typedef jlongArray uint64_tArray;
 typedef jbyteArray int8_tArray;
+typedef jbyteArray uint8_tArray;
 typedef jshortArray int16_tArray;
+typedef jshortArray uint16_tArray;
 
 static inline jstring str_ref_to_java(JNIEnv *env, const unsigned char* chars, size_t len) {
 	// Java uses "Modified UTF-8" rather than UTF-8. This requires special
@@ -719,7 +721,7 @@ import javax.annotation.Nullable;
             return "(*env)->ReleasePrimitiveArrayCritical(env, " + arr_var + ", " + arr_ptr_var + ", 0)"
         return None
     def create_native_arr_call(self, arr_len, ty_info):
-        if ty_info.c_ty == "int8_tArray":
+        if ty_info.c_ty == "uint8_tArray":
             return "(*env)->NewByteArray(env, " + arr_len + ")"
         elif ty_info.subty.c_ty.endswith("Array"):
             clz_var = ty_info.java_fn_ty_arg[1:].replace("[", "arr_of_")
@@ -730,17 +732,17 @@ import javax.annotation.Nullable;
         else:
             return "(*env)->New" + ty_info.java_ty.strip("[]").title() + "Array(env, " + arr_len + ")"
     def set_native_arr_contents(self, arr_name, arr_len, ty_info):
-        if ty_info.c_ty == "int8_tArray":
+        if ty_info.c_ty == "uint8_tArray":
             return ("(*env)->SetByteArrayRegion(env, " + arr_name + ", 0, " + arr_len + ", ", ")")
-        elif ty_info.c_ty == "int16_tArray":
+        elif ty_info.c_ty == "uint16_tArray":
             return ("(*env)->SetShortArrayRegion(env, " + arr_name + ", 0, " + arr_len + ", ", ")")
         else:
             assert False
     def get_native_arr_contents(self, arr_name, dest_name, arr_len, ty_info, copy):
         if "String" in ty_info.java_ty:
             return None
-        if ty_info.c_ty == "int8_tArray" or ty_info.c_ty == "int16_tArray":
-            fn_ty = "Byte" if ty_info.c_ty == "int8_tArray" else "Short"
+        if ty_info.c_ty == "uint8_tArray" or ty_info.c_ty == "uint16_tArray":
+            fn_ty = "Byte" if ty_info.c_ty == "uint8_tArray" else "Short"
             if copy:
                 return "(*env)->Get" + fn_ty + "ArrayRegion(env, " + arr_name + ", 0, " + arr_len + ", " + dest_name + ")"
             else:
@@ -763,7 +765,7 @@ import javax.annotation.Nullable;
             return None
         return "(*env)->SetObjectArrayElement(env, " + arr_name + ", " + idxc + ", " + entry_access + ")"
     def cleanup_native_arr_ref_contents(self, arr_name, dest_name, arr_len, ty_info):
-        if ty_info.c_ty == "int8_tArray":
+        if ty_info.c_ty == "uint8_tArray":
             return "(*env)->ReleaseByteArrayElements(env, " + arr_name + ", (int8_t*)" + dest_name + ", 0);"
         else:
             return "(*env)->Release" + ty_info.java_ty.strip("[]").title() + "ArrayElements(env, " + arr_name + ", " + dest_name + ", 0)"

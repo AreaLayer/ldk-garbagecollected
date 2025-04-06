@@ -268,7 +268,11 @@ def java_c_types(fn_arg, ret_arr_len):
         java_ty = consts.java_arr_ty_str(res.java_ty)
         is_trait = res.rust_obj in trait_structs
         if res.is_native_primitive or res.passed_as_ptr:
-            return TypeInfo(rust_obj=fn_arg.split(" ")[0], java_ty=java_ty, java_hu_ty=res.java_hu_ty + "[]",
+            java_hu_ty = res.java_hu_ty + "[]"
+            if res.is_native_primitive and res.c_ty in consts.c_type_map:
+                if len(consts.c_type_map[res.c_ty]) > 2:
+                    java_hu_ty = consts.c_type_map[res.c_ty][2]
+            return TypeInfo(rust_obj=fn_arg.split(" ")[0], java_ty=java_ty, java_hu_ty=java_hu_ty,
                 java_fn_ty_arg="[" + res.java_fn_ty_arg, c_ty=res.c_ty + "Array", passed_as_ptr=False, is_ptr=is_ptr,
                 nonnull_ptr=nonnull_ptr, is_const=is_const, is_trait = is_trait,
                 var_name=res.var_name, arr_len="datalen", arr_access="data", subty=res, is_native_primitive=False)
@@ -300,7 +304,7 @@ def java_c_types(fn_arg, ret_arr_len):
     elif fn_arg.startswith("uint8_t"):
         mapped_type = consts.c_type_map['uint8_t']
         java_ty = mapped_type[0]
-        c_ty = "int8_t"
+        c_ty = "uint8_t"
         fn_ty_arg = "B"
         arr_ty = "uint8_t"
         fn_arg = fn_arg[7:].strip()
@@ -315,13 +319,13 @@ def java_c_types(fn_arg, ret_arr_len):
             java_hu_ty = "WitnessVersion"
             rust_obj = "LDKWitnessVersion"
             fn_arg = fn_arg[18:].strip()
-        c_ty = "int8_t"
+        c_ty = "uint8_t"
         arr_ty = "uint8_t"
         fn_ty_arg = "B"
     elif fn_arg.startswith("uint16_t"):
         mapped_type = consts.c_type_map['uint16_t']
         java_ty = mapped_type[0]
-        c_ty = "int16_t"
+        c_ty = "uint16_t"
         arr_ty = "uint16_t"
         fn_ty_arg = "S"
         fn_arg = fn_arg[8:].strip()
@@ -329,7 +333,7 @@ def java_c_types(fn_arg, ret_arr_len):
     elif fn_arg.startswith("uint32_t"):
         mapped_type = consts.c_type_map['uint32_t']
         java_ty = mapped_type[0]
-        c_ty = "int32_t"
+        c_ty = "uint32_t"
         arr_ty = "uint32_t"
         fn_ty_arg = "I"
         fn_arg = fn_arg[8:].strip()
@@ -356,7 +360,7 @@ def java_c_types(fn_arg, ret_arr_len):
         java_ty = mapped_type[0]
         fn_ty_arg = "J"
         if fn_arg.startswith("uint64_t"):
-            c_ty = "int64_t"
+            c_ty = "uint64_t"
             arr_ty = "uint64_t"
             fn_arg = fn_arg[8:].strip()
         else:
@@ -387,7 +391,7 @@ def java_c_types(fn_arg, ret_arr_len):
         java_ty = consts.c_type_map['uint32_t'][0]
         java_hu_ty = "UnqualifiedError"
         rust_obj = "LDKError"
-        c_ty = "int32_t"
+        c_ty = "uint32_t"
         arr_ty = "uint32_t"
         fn_ty_arg = "I"
         fn_arg = fn_arg[8:].strip()

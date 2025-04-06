@@ -43,7 +43,7 @@ class TypeMappingGenerator:
             else:
                 arr_name = "ret"
                 arr_len = ret_arr_len
-            if ty_info.c_ty == "int8_tArray" or ty_info.c_ty == "int16_tArray":
+            if ty_info.c_ty == "uint8_tArray" or ty_info.c_ty == "uint16_tArray":
                 (set_pfx, set_sfx) = self.consts.set_native_arr_contents(arr_name + "_arr", arr_len, ty_info)
                 ret_conv = (ty_info.c_ty + " " + arr_name + "_arr = " + self.consts.create_native_arr_call(arr_len, ty_info) + ";\n" + set_pfx, "")
                 arg_conv_cleanup = None
@@ -53,7 +53,7 @@ class TypeMappingGenerator:
                     if (not ty_info.is_ptr or not holds_ref) and (ty_info.rust_obj != "LDKu8slice" and ty_info.rust_obj != "LDKu16slice"):
                         arg_conv += "if (" + arr_name + "_ref." + arr_len + " > 0) {\n"
                         elem_len = 1
-                        if ty_info.c_ty == "int16_tArray":
+                        if ty_info.c_ty == "uint16_tArray":
                             elem_len = 2
                         arg_conv += "\t" + arr_name + "_ref." + ty_info.arr_access + " = MALLOC(" + arr_name + "_ref." + arr_len + " * " + str(elem_len) + ", \"" + ty_info.rust_obj + " Bytes\");\n"
                         arg_conv += "} else {\n"
@@ -82,11 +82,10 @@ class TypeMappingGenerator:
                     from_hu_conv = self.consts.primitive_arr_from_hu(ty_info, arr_len, arr_name)
                     to_hu_conv = self.consts.primitive_arr_to_hu(ty_info, None, arr_name, arr_name + "_conv")
                 else:
-                    # Note that we just blindly assume we should be using unsigned integers here.
-                    arg_conv = "u" + ty_info.subty.c_ty + " " + arr_name + "_arr[" + arr_len + "];\n"
+                    arg_conv = ty_info.subty.c_ty + " " + arr_name + "_arr[" + arr_len + "];\n"
                     arg_conv = arg_conv + "CHECK(" + self.consts.get_native_arr_len_call[0] + arr_name + self.consts.get_native_arr_len_call[1] + " == " + arr_len + ");\n"
                     arg_conv = arg_conv + self.consts.get_native_arr_contents(arr_name, arr_name + "_arr", arr_len, ty_info, True) + ";\n"
-                    arg_conv = arg_conv + "u" + ty_info.subty.c_ty + " (*" + arr_name + "_ref)[" + arr_len + "] = &" + arr_name + "_arr;"
+                    arg_conv = arg_conv + ty_info.subty.c_ty + " (*" + arr_name + "_ref)[" + arr_len + "] = &" + arr_name + "_arr;"
                     ret_conv = (ret_conv[0] + "*", set_sfx + ";")
                     from_hu_conv = self.consts.primitive_arr_from_hu(ty_info, arr_len, arr_name)
                     to_hu_conv = self.consts.primitive_arr_to_hu(ty_info, None, arr_name, arr_name + "_conv")
@@ -100,7 +99,6 @@ class TypeMappingGenerator:
                     from_hu_conv = from_hu_conv)
             else:
                 assert not arr_len.isdigit() # fixed length arrays not implemented
-                assert ty_info.java_hu_ty[len(ty_info.java_hu_ty) - 2:] == "[]"
                 if arr_name == "":
                     arr_name = "ret"
                 conv_name = arr_name + "_conv_" + str(len(ty_info.java_hu_ty))
