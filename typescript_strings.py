@@ -1464,7 +1464,7 @@ export class {struct_name.replace("LDK","")} extends CommonBase {{
                 out_java += self.fn_call_body(fn_name, field_map.c_ty, field_map.java_ty, "ptr: bigint", "ptr")
         out_java_enum += java_hu_class
         self.struct_file_suffixes[java_hu_type] = java_hu_subclasses
-        self.obj_defined([java_hu_type], "structs")
+        self.obj_defined([java_hu_type] + [java_hu_type + "_" + var.var_name for var in variant_list], "structs")
         return (out_java, out_java_enum, out_c)
 
     def map_opaque_struct(self, struct_name, struct_doc_comment):
