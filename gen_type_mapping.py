@@ -52,7 +52,10 @@ class TypeMappingGenerator:
                     arg_conv = arg_conv + arr_name + "_ref." + arr_len + " = " +  self.consts.get_native_arr_len_call[0] + arr_name + self.consts.get_native_arr_len_call[1] + ";\n"
                     if (not ty_info.is_ptr or not holds_ref) and (ty_info.rust_obj != "LDKu8slice" and ty_info.rust_obj != "LDKu16slice"):
                         arg_conv += "if (" + arr_name + "_ref." + arr_len + " > 0) {\n"
-                        arg_conv += "\t" + arr_name + "_ref." + ty_info.arr_access + " = MALLOC(" + arr_name + "_ref." + arr_len + ", \"" + ty_info.rust_obj + " Bytes\");\n"
+                        elem_len = 1
+                        if ty_info.c_ty == "int16_tArray":
+                            elem_len = 2
+                        arg_conv += "\t" + arr_name + "_ref." + ty_info.arr_access + " = MALLOC(" + arr_name + "_ref." + arr_len + " * " + str(elem_len) + ", \"" + ty_info.rust_obj + " Bytes\");\n"
                         arg_conv += "} else {\n"
                         arg_conv += "\t" + arr_name + "_ref." + ty_info.arr_access + " = NULL;\n"
                         arg_conv += "}\n"
