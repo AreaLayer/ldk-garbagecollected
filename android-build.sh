@@ -44,16 +44,15 @@ rm -fr src/main/resources
 EXTRA_TARGETS=( $LDK_C_BINDINGS_EXTRA_TARGETS )
 EXTRA_TARGET_CCS=( $LDK_C_BINDINGS_EXTRA_TARGET_CCS )
 TARGET_CPUS=( "sandybridge" "generic" "generic" )
-STRIPS=( "x86_64-linux-android-strip" "arm-linux-androideabi-strip" "aarch64-linux-android-strip" )
 for IDX in ${!EXTRA_TARGETS[@]}; do
 	export CC="${EXTRA_TARGET_CCS[$IDX]}"
 	export LDK_TARGET="${EXTRA_TARGETS[$IDX]}"
 	export LDK_TARGET_CPU="${TARGET_CPUS[$IDX]}"
 	./genbindings.sh "$LDK_C_BINDINGS" "$3" false true "-lm -llog -I$SYSROOT/usr/include/"
 	if [ "$3" = "java" ]; then
-		${STRIPS[$IDX]} liblightningjni_release_${LDK_TARGET}.so
+		llvm-strip liblightningjni_release_${LDK_TARGET}.so
 	else
-		${STRIPS[$IDX]} libldkcsharp_release_${LDK_TARGET}.so
+		llvm-strip libldkcsharp_release_${LDK_TARGET}.so
 	fi
 done
 
