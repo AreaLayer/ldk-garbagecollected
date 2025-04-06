@@ -657,12 +657,12 @@ jobs:
       - name: Install android NDK compilers
         run: |
           git config --global safe.directory '*'
-          curl https://dl.google.com/android/repository/android-ndk-r22b-linux-x86_64.zip > android-ndk-r22b-linux-x86_64.zip
-          if [ "$(sha256sum android-ndk-r22b-linux-x86_64.zip | awk '{ print $1 }')" != "ac3a0421e76f71dd330d0cd55f9d99b9ac864c4c034fc67e0d671d022d4e806b" ]; then
+          curl https://dl.google.com/android/repository/android-ndk-r27c-linux.zip > android-ndk-r27c-linux.zip
+          if [ "$(sha256sum android-ndk-r27c-linux.zip | awk '{ print $1 }')" != "59c2f6dc96743b5daf5d1626684640b20a6bd2b1d85b13156b90333741bad5cc" ]; then
             echo "Bad hash"
             exit 1
           fi
-          unzip android-ndk-r22b-linux-x86_64.zip
+          unzip android-ndk-r27c-linux.zip
       - name: Install cbindgen
         run: |
           git clone https://github.com/eqrion/cbindgen
@@ -713,7 +713,7 @@ jobs:
           touch /usr/lib/rustlib/src/rust/Cargo.lock
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
           cp "ldk-java-bins/${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/ldk-java-classes.jar" ./
-          export ANDROID_TOOLCHAIN="$(pwd)/android-ndk-r22b/toolchains/llvm/prebuilt/linux-x86_64"
+          export ANDROID_TOOLCHAIN="$(pwd)/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64"
           export PATH="$PATH:$ANDROID_TOOLCHAIN/bin"
           ./android-build.sh ./rust-lightning ./ldk-c-bindings/ java ./ldk-java-bins/android-artifacts
       - uses: actions/upload-artifact@v4
