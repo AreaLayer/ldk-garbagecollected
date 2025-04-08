@@ -250,6 +250,15 @@ jobs:
         with:
           name: org.ldk.nupkg
           path: c_sharp/org.ldk.nupkg
+      - name: Run test against C# release library
+        shell: bash
+        run: |
+          cd c_sharp
+          sed 's/net.\.0/net9.0/' -i tests.csproj
+          ln -s ./packaging_artifacts/runtimes/linux-x64/native/libldkcsharp.so ./
+          LD_LIBRARY_PATH=. dotnet run --project tests.csproj
+          LD_LIBRARY_PATH=. dotnet run --project tests.csproj --configuration Release
+          git checkout tests.csproj
       - name: Check latest auto-generated code is in git
         run: |
           # Checkout files that get updated with version information
@@ -275,16 +284,9 @@ jobs:
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
           if ! diff ldk-java-bins/"${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/"org.ldk.nupkg c_sharp/org.ldk.nupkg; then
             dnf -y install diffoscope mono-devel
-            diffoscope ldk-java-bins/"${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/"org.ldk.nupkg c_sharp/org.ldk.nupkg || echo
+            diffoscope --max-diff-input-lines 0 ldk-java-bins/"${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/"org.ldk.nupkg c_sharp/org.ldk.nupkg || echo
             exit 1
           fi
-      - name: Run test against C# release library
-        shell: bash
-        run: |
-          cd c_sharp
-          ln -s ./packaging_artifacts/runtimes/linux-x64/native/libldkcsharp.so ./
-          LD_LIBRARY_PATH=. dotnet run --project tests.csproj
-          LD_LIBRARY_PATH=. dotnet run --project tests.csproj --configuration Release
 
   osx_c_sharp:
     strategy:
@@ -628,15 +630,18 @@ jobs:
         shell: bash
         run: |
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
+          SOME_DIFF=0
           for F in liblightningjni_MacOSX-{x86_64,aarch64}{,-leaktracking}.nativelib; do
             if ! diff "ldk-java-bins/${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/$F" "src/main/resources/$F"; then
               apt-get -y install diffoscope
               # Sadly these binaries are still non-deterministic, but only due
               # to a few-byte tag, thus we use diffoscope to ensure there
-              # aren't any "real" differences and move on.
+              # aren't any "real" differences but still fail the job.
               diffoscope "ldk-java-bins/${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/$F" "src/main/resources/$F" || echo
+              SOME_DIFF=1
             fi
           done
+          exit $SOME_DIFF
 
   android:
     runs-on: ubuntu-latest
