@@ -873,7 +873,7 @@ int CS_LDK_register_{fn_suffix}_invoker(invoker_{fn_suffix} invoker) {{
                 for idx, arg_conv_info in enumerate(fn_line.args_ty):
                     if idx >= 1:
                         out_java_interface += ", "
-                    out_java_interface += f"{arg_conv_info.java_hu_ty} {safe_arg_name(arg_conv_info.arg_name)}"
+                    out_java_interface += f"{self.fully_qualified_hu_ty_path(arg_conv_info)} {safe_arg_name(arg_conv_info.arg_name)}"
                     java_method_descriptor += arg_conv_info.java_fn_ty_arg
                 out_java_interface += f");\n"
                 java_method_descriptor += ")" + fn_line.ret_ty_info.java_fn_ty_arg
@@ -1184,7 +1184,7 @@ public class {struct_name.replace("LDK","")} : CommonBase {{
                 arg_name = safe_arg_name(field_ty.arg_name)
                 if field_docs is not None:
                     java_hu_subclasses += "\t\t/**\n\t\t * " + field_docs.replace("\n", "\n\t\t * ") + "\n\t\t */\n"
-                java_hu_subclasses += f"\t\tpublic {field_ty.java_hu_ty} {arg_name};\n"
+                java_hu_subclasses += f"\t\tpublic {self.fully_qualified_hu_ty_path(field_ty)} {arg_name};\n"
                 if field_ty.to_hu_conv is not None:
                     hu_conv_body += f"\t\t\t{field_ty.java_ty} {arg_name} = bindings.{struct_name}_{var.var_name}_get_{field_ty.arg_name}(ptr);\n"
                     hu_conv_body += f"\t\t\t" + arg_name_repl(field_ty.to_hu_conv.replace("\n", "\n\t\t\t"), field_ty.arg_name) + "\n"
@@ -1323,7 +1323,7 @@ public class {struct_name.replace("LDK","")} : CommonBase {{
         else:
             if doc_comment is not None:
                 out_java_struct += "\t/**\n\t * " + doc_comment.replace("\n", "\n\t * ") + "\n\t */\n"
-            hu_ret_ty = return_type_info.java_hu_ty
+            hu_ret_ty = self.fully_qualified_hu_ty_path(return_type_info)
             if return_type_info.nullable:
                 #hu_ret_ty += "?" - apparently mono doesn't support the nullable stuff
                 pass
