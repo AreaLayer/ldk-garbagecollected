@@ -430,8 +430,8 @@ namespace tests {
 		static void GCLoop() {
 			while (Thread.CurrentThread.IsAlive) {
 				System.GC.Collect();
-				GC.WaitForPendingFinalizers();
 				try {
+					GC.WaitForPendingFinalizers();
 					Thread.Sleep(new TimeSpan(1));
 				} catch (ThreadInterruptedException _) {
 					break;
