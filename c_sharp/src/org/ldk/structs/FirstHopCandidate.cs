@@ -24,7 +24,7 @@ public class FirstHopCandidate : CommonBase {
 	/**
 	 * Creates a copy of the FirstHopCandidate
 	 */
-	public FirstHopCandidate clone() {
+	public org.ldk.structs.FirstHopCandidate clone() {
 		long ret = bindings.FirstHopCandidate_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

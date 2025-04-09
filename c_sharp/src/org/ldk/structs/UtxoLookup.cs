@@ -64,7 +64,7 @@ public class UtxoLookup : CommonBase {
 	 * 
 	 * [`short_channel_id`]: https://github.com/lightning/bolts/blob/master/07-routing-gossip.md#definition-of-short_channel_id
 	 */
-	public UtxoResult get_utxo(byte[] chain_hash, long short_channel_id) {
+	public org.ldk.structs.UtxoResult get_utxo(byte[] chain_hash, long short_channel_id) {
 		long ret = bindings.UtxoLookup_get_utxo(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(chain_hash, 32)), short_channel_id);
 		GC.KeepAlive(this);
 		GC.KeepAlive(chain_hash);

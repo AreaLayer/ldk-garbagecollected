@@ -41,7 +41,7 @@ public class Result_HtlcBasepointDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_HtlcBasepointDecodeErrorZ in the success state.
 	 */
-	public static Result_HtlcBasepointDecodeErrorZ ok(org.ldk.structs.HtlcBasepoint o) {
+	public static org.ldk.structs.Result_HtlcBasepointDecodeErrorZ ok(org.ldk.structs.HtlcBasepoint o) {
 		long ret = bindings.CResult_HtlcBasepointDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_HtlcBasepointDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_HtlcBasepointDecodeErrorZ in the error state.
 	 */
-	public static Result_HtlcBasepointDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_HtlcBasepointDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_HtlcBasepointDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_HtlcBasepointDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_HtlcBasepointDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_HtlcBasepointDecodeErrorZ clone() {
+	public org.ldk.structs.Result_HtlcBasepointDecodeErrorZ clone() {
 		long ret = bindings.CResult_HtlcBasepointDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

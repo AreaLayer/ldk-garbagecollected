@@ -26,7 +26,7 @@ public class Option_WriteableScoreZ : CommonBase {
 
 	/** A Option_WriteableScoreZ of type Some */
 	public class Option_WriteableScoreZ_Some : Option_WriteableScoreZ {
-		public WriteableScore some;
+		public org.ldk.structs.WriteableScore some;
 		internal Option_WriteableScoreZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_WriteableScoreZ_Some_get_some(ptr);
 			WriteableScore ret_hu_conv = new WriteableScore(null, some);
@@ -42,7 +42,7 @@ public class Option_WriteableScoreZ : CommonBase {
 	/**
 	 * Constructs a new COption_WriteableScoreZ containing a crate::lightning::routing::scoring::WriteableScore
 	 */
-	public static Option_WriteableScoreZ some(org.ldk.structs.WriteableScore o) {
+	public static org.ldk.structs.Option_WriteableScoreZ some(org.ldk.structs.WriteableScore o) {
 		long ret = bindings.COption_WriteableScoreZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -55,7 +55,7 @@ public class Option_WriteableScoreZ : CommonBase {
 	/**
 	 * Constructs a new COption_WriteableScoreZ containing nothing
 	 */
-	public static Option_WriteableScoreZ none() {
+	public static org.ldk.structs.Option_WriteableScoreZ none() {
 		long ret = bindings.COption_WriteableScoreZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_WriteableScoreZ ret_hu_conv = org.ldk.structs.Option_WriteableScoreZ.constr_from_ptr(ret);

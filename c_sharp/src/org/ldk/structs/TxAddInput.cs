@@ -20,7 +20,7 @@ public class TxAddInput : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.TxAddInput_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -62,7 +62,7 @@ public class TxAddInput : CommonBase {
 	 * Serialized transaction that contains the output this input spends to verify that it is non
 	 * malleable.
 	 */
-	public TransactionU16LenLimited get_prevtx() {
+	public org.ldk.structs.TransactionU16LenLimited get_prevtx() {
 		long ret = bindings.TxAddInput_get_prevtx(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -120,7 +120,7 @@ public class TxAddInput : CommonBase {
 	/**
 	 * The ID of the previous funding transaction, when it is being added as an input during splicing
 	 */
-	public Option_ThirtyTwoBytesZ get_shared_input_txid() {
+	public org.ldk.structs.Option_ThirtyTwoBytesZ get_shared_input_txid() {
 		long ret = bindings.TxAddInput_get_shared_input_txid(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -141,7 +141,7 @@ public class TxAddInput : CommonBase {
 	/**
 	 * Constructs a new TxAddInput given each field
 	 */
-	public static TxAddInput of(org.ldk.structs.ChannelId channel_id_arg, long serial_id_arg, org.ldk.structs.TransactionU16LenLimited prevtx_arg, int prevtx_out_arg, int sequence_arg, org.ldk.structs.Option_ThirtyTwoBytesZ shared_input_txid_arg) {
+	public static org.ldk.structs.TxAddInput of(org.ldk.structs.ChannelId channel_id_arg, long serial_id_arg, org.ldk.structs.TransactionU16LenLimited prevtx_arg, int prevtx_out_arg, int sequence_arg, org.ldk.structs.Option_ThirtyTwoBytesZ shared_input_txid_arg) {
 		long ret = bindings.TxAddInput_new(channel_id_arg.ptr, serial_id_arg, prevtx_arg.ptr, prevtx_out_arg, sequence_arg, shared_input_txid_arg.ptr);
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(serial_id_arg);
@@ -164,7 +164,7 @@ public class TxAddInput : CommonBase {
 	/**
 	 * Creates a copy of the TxAddInput
 	 */
-	public TxAddInput clone() {
+	public org.ldk.structs.TxAddInput clone() {
 		long ret = bindings.TxAddInput_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -216,7 +216,7 @@ public class TxAddInput : CommonBase {
 	/**
 	 * Read a TxAddInput from a byte array, created by TxAddInput_write
 	 */
-	public static Result_TxAddInputDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_TxAddInputDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.TxAddInput_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

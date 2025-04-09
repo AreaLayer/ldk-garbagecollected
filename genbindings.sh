@@ -1,6 +1,6 @@
 #!/bin/bash
 usage() {
-	echo "USAGE: path/to/ldk-c-bindings [wasm|\"JNI_CFLAGS\"] debug android_web"
+	echo "USAGE: path/to/ldk-c-bindings [wasm|java|c_sharp] debug android_web [\"CFLAGS\"]"
 	echo "For JNI_CFLAGS you probably want -I/usr/lib/jvm/java-11-openjdk-amd64/include/ -I/usr/lib/jvm/java-11-openjdk-amd64/include/linux/"
 	echo "If JNI_CFLAGS is instead set to wasm, we build for wasm/TypeScript instead of Java"
 	echo "debug should either be true, false, or leaks"
@@ -10,6 +10,7 @@ usage() {
 	exit 1
 }
 [ "$1" = "" ] && usage
+[ "$2" != "wasm" -a "$2" != "java" -a "$2" != "c_sharp" ] && usage
 [ "$3" != "true" -a "$3" != "false" -a "$3" != "leaks" ] && usage
 [ "$4" != "true" -a "$4" != "false" ] && usage
 
@@ -165,7 +166,7 @@ if [ "$2" = "c_sharp" ]; then
 	[ "$IS_WIN" = "true" ] && COMPILE="$COMPILE -I/usr/x86_64-w64-mingw32/sys-root/mingw/include/ -I/usr/x86_64-w64-mingw32/include/"
 
 	if [ "$3" = "true" ]; then
-		$COMPILE $LINK -o libldkcsharp_debug$LDK_TARGET_SUFFIX.so -g -fsanitize=address -shared-libasan -rdynamic -I"$1"/lightning-c-bindings/include/ c_sharp/bindings.c "$1"/lightning-c-bindings/target/$LDK_TARGET/debug/libldk.a -lm
+		$COMPILE $LINK -o libldkcsharp_debug$LDK_TARGET_SUFFIX.so -g -fsanitize=address -shared-libasan -rdynamic -I"$1"/lightning-c-bindings/include/ $5 c_sharp/bindings.c "$1"/lightning-c-bindings/target/$LDK_TARGET/debug/libldk.a -lm
 	else
 		[ "$IS_APPLE_CLANG" = "false" ] && LINK="$LINK -flto -Wl,-O3 -fuse-ld=lld"
 		[ "$IS_APPLE_CLANG" = "false" ] && COMPILE="$COMPILE -flto"
@@ -178,8 +179,8 @@ if [ "$2" = "c_sharp" ]; then
 
 		# When building for Windows, a timestamp is included in the resulting dll,
 		# so we have to build with faketime.
-		faketime -f "2021-01-01 00:00:00" $COMPILE -o bindings.o -c -O3 -I"$1"/lightning-c-bindings/include/ c_sharp/bindings.c
-		faketime -f "2021-01-01 00:00:00" $COMPILE $LINK -o libldkcsharp_release$LDK_TARGET_SUFFIX.so -O3 bindings.o $LDK_LIB -lm
+		faketime -f "2021-01-01 00:00:00" $COMPILE -o bindings.o -c -O3 -I"$1"/lightning-c-bindings/include/ $5 c_sharp/bindings.c
+		faketime -f "2021-01-01 00:00:00" $COMPILE $LINK -o libldkcsharp_release$LDK_TARGET_SUFFIX.so -O3 $5 bindings.o $LDK_LIB -lm
 		$STRIP -R .llvmbc -R .llvmcmd libldkcsharp_release$LDK_TARGET_SUFFIX.so
 
 		if [ "$LDK_JAR_TARGET" = "true" ]; then
@@ -260,16 +261,16 @@ elif [ "$2" = "wasm" ]; then
 	cat ts/bindings.c.body >> ts/bindings.c
 
 	echo "Building TS bindings..."
-	COMPILE="$COMMON_COMPILE $COMMON_CC -flto -Wl,--no-entry -nostdlib --target=wasm32-wasi -Wl,-z -Wl,stack-size=$((8*1024*1024)) -Wl,--initial-memory=$((16*1024*1024)) -Wl,--max-memory=$((1024*1024*1024)) -Wl,--global-base=4096"
+	COMPILE="$COMMON_COMPILE $COMMON_CC -flto -Wl,--no-entry -nostdlib --target=wasm32-wasi -Wl,-z -Wl,stack-size=$((8*1024*1024)) -Wl,--initial-memory=$((16*1024*1024)) -Wl,--global-base=4096"
 	# We only need malloc and assert/abort, but for now just use WASI for those:
 	EXTRA_LINK=/usr/lib/wasm32-wasi/libc.a
 	[ "$3" != "false" ] && COMPILE="$COMPILE -Wl,-wrap,calloc -Wl,-wrap,realloc -Wl,-wrap,reallocarray -Wl,-wrap,malloc -Wl,-wrap,aligned_alloc -Wl,-wrap,free"
 	if [ "$3" = "true" ]; then
 		WASM_FILE=liblightningjs_debug.wasm
-		$COMPILE -o liblightningjs_debug.wasm -g -O1 -I"$1"/lightning-c-bindings/include/ ts/bindings.c "$1"/lightning-c-bindings/target/wasm32-wasi/debug/libldk.a $EXTRA_LINK
+		$COMPILE -o liblightningjs_debug.wasm -g -O1 -I"$1"/lightning-c-bindings/include/ $5 ts/bindings.c "$1"/lightning-c-bindings/target/wasm32-wasi/debug/libldk.a $EXTRA_LINK
 	else
 		WASM_FILE=liblightningjs_release.wasm
-		$COMPILE -o liblightningjs_release.wasm -s -Oz -I"$1"/lightning-c-bindings/include/ ts/bindings.c "$1"/lightning-c-bindings/target/wasm32-wasi/release/libldk.a $EXTRA_LINK
+		$COMPILE -o liblightningjs_release.wasm -s -Oz -I"$1"/lightning-c-bindings/include/ $5 ts/bindings.c "$1"/lightning-c-bindings/target/wasm32-wasi/release/libldk.a $EXTRA_LINK
 	fi
 
 	if [ -x "$(which tsc)" ]; then
@@ -295,7 +296,8 @@ elif [ "$2" = "wasm" ]; then
 			fi
 		fi
 	fi
-else
+elif [ "$2" = "java" ]; then
+	echo "Creating Java bindings..."
 	if is_gnu_sed; then
 		sed -i "s/^    <version>.*<\/version>/    <version>${LDK_GARBAGECOLLECTED_GIT_OVERRIDE:1:100}<\/version>/g" pom.xml
 	else
@@ -336,7 +338,7 @@ else
 	[ "$IS_MAC" = "true" -a "$IS_APPLE_CLANG" = "false" ] && echo "WARNING: Need at least upstream clang 13!"
 	[ "$IS_MAC" = "false" -a "$3" != "false" ] && LINK="$LINK -Wl,-wrap,calloc -Wl,-wrap,realloc -Wl,-wrap,malloc -Wl,-wrap,free"
 	if [ "$3" = "true" ]; then
-		$COMPILE $LINK -o liblightningjni_debug$LDK_TARGET_SUFFIX.so -g -fsanitize=address -shared-libasan -rdynamic -I"$1"/lightning-c-bindings/include/ $2 src/main/jni/bindings.c "$1"/lightning-c-bindings/target/$LDK_TARGET/debug/libldk.a -lm
+		$COMPILE $LINK -o liblightningjni_debug$LDK_TARGET_SUFFIX.so -g -fsanitize=address -shared-libasan -rdynamic -I"$1"/lightning-c-bindings/include/ $5 src/main/jni/bindings.c "$1"/lightning-c-bindings/target/$LDK_TARGET/debug/libldk.a -lm
 	else
 		[ "$IS_APPLE_CLANG" = "false" ] && LINK="$LINK -flto -Wl,-O3 -fuse-ld=lld"
 		[ "$IS_APPLE_CLANG" = "false" ] && COMPILE="$COMPILE -flto"
@@ -348,8 +350,8 @@ else
 			LINK="$LINK -Wl,--version-script=libcode.version"
 		fi
 
-		$COMPILE -o bindings.o -c -O3 -I"$1"/lightning-c-bindings/include/ $2 src/main/jni/bindings.c
-		$COMPILE $LINK -o liblightningjni_release$LDK_TARGET_SUFFIX.so -O3 $2 bindings.o $LDK_LIB -lm
+		$COMPILE -o bindings.o -c -O3 -I"$1"/lightning-c-bindings/include/ $5 src/main/jni/bindings.c
+		$COMPILE $LINK -o liblightningjni_release$LDK_TARGET_SUFFIX.so -O3 $5 bindings.o $LDK_LIB -lm
 		$STRIP -R .llvmbc -R .llvmcmd liblightningjni_release$LDK_TARGET_SUFFIX.so
 
 		if [ "$IS_MAC" = "false" -a "$4" = "false" ]; then

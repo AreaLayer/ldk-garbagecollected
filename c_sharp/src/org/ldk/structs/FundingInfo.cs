@@ -48,7 +48,7 @@ public class FundingInfo : CommonBase {
 		/**
 		 * The outpoint of the funding
 		 */
-		public OutPoint outpoint;
+		public org.ldk.structs.OutPoint outpoint;
 		internal FundingInfo_OutPoint(long ptr) : base(null, ptr) {
 			long outpoint = bindings.LDKFundingInfo_OutPoint_get_outpoint(ptr);
 			org.ldk.structs.OutPoint outpoint_hu_conv = null; if (outpoint < 0 || outpoint > 4096) { outpoint_hu_conv = new org.ldk.structs.OutPoint(null, outpoint); }
@@ -65,7 +65,7 @@ public class FundingInfo : CommonBase {
 	/**
 	 * Creates a copy of the FundingInfo
 	 */
-	public FundingInfo clone() {
+	public org.ldk.structs.FundingInfo clone() {
 		long ret = bindings.FundingInfo_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -77,7 +77,7 @@ public class FundingInfo : CommonBase {
 	/**
 	 * Utility method to constructs a new Tx-variant FundingInfo
 	 */
-	public static FundingInfo tx(byte[] transaction) {
+	public static org.ldk.structs.FundingInfo tx(byte[] transaction) {
 		long ret = bindings.FundingInfo_tx(InternalUtils.encodeUint8Array(transaction));
 		GC.KeepAlive(transaction);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -89,7 +89,7 @@ public class FundingInfo : CommonBase {
 	/**
 	 * Utility method to constructs a new OutPoint-variant FundingInfo
 	 */
-	public static FundingInfo out_point(org.ldk.structs.OutPoint outpoint) {
+	public static org.ldk.structs.FundingInfo out_point(org.ldk.structs.OutPoint outpoint) {
 		long ret = bindings.FundingInfo_out_point(outpoint.ptr);
 		GC.KeepAlive(outpoint);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -127,7 +127,7 @@ public class FundingInfo : CommonBase {
 	/**
 	 * Read a FundingInfo from a byte array, created by FundingInfo_write
 	 */
-	public static Result_FundingInfoDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_FundingInfoDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.FundingInfo_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

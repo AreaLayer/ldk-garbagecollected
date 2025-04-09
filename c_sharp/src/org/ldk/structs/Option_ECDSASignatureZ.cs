@@ -41,7 +41,7 @@ public class Option_ECDSASignatureZ : CommonBase {
 	/**
 	 * Constructs a new COption_ECDSASignatureZ containing a crate::c_types::ECDSASignature
 	 */
-	public static Option_ECDSASignatureZ some(byte[] o) {
+	public static org.ldk.structs.Option_ECDSASignatureZ some(byte[] o) {
 		long ret = bindings.COption_ECDSASignatureZ_some(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(o, 64)));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -53,7 +53,7 @@ public class Option_ECDSASignatureZ : CommonBase {
 	/**
 	 * Constructs a new COption_ECDSASignatureZ containing nothing
 	 */
-	public static Option_ECDSASignatureZ none() {
+	public static org.ldk.structs.Option_ECDSASignatureZ none() {
 		long ret = bindings.COption_ECDSASignatureZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_ECDSASignatureZ ret_hu_conv = org.ldk.structs.Option_ECDSASignatureZ.constr_from_ptr(ret);
@@ -71,7 +71,7 @@ public class Option_ECDSASignatureZ : CommonBase {
 	 * Creates a new COption_ECDSASignatureZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_ECDSASignatureZ clone() {
+	public org.ldk.structs.Option_ECDSASignatureZ clone() {
 		long ret = bindings.COption_ECDSASignatureZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

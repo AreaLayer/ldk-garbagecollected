@@ -41,7 +41,7 @@ public class Result_RevocationBasepointDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_RevocationBasepointDecodeErrorZ in the success state.
 	 */
-	public static Result_RevocationBasepointDecodeErrorZ ok(org.ldk.structs.RevocationBasepoint o) {
+	public static org.ldk.structs.Result_RevocationBasepointDecodeErrorZ ok(org.ldk.structs.RevocationBasepoint o) {
 		long ret = bindings.CResult_RevocationBasepointDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_RevocationBasepointDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_RevocationBasepointDecodeErrorZ in the error state.
 	 */
-	public static Result_RevocationBasepointDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_RevocationBasepointDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_RevocationBasepointDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_RevocationBasepointDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_RevocationBasepointDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_RevocationBasepointDecodeErrorZ clone() {
+	public org.ldk.structs.Result_RevocationBasepointDecodeErrorZ clone() {
 		long ret = bindings.CResult_RevocationBasepointDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

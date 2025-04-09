@@ -44,7 +44,7 @@ public class NodeInfo : CommonBase {
 	 * 
 	 * Returns a copy of the field.
 	 */
-	public Option_NodeAnnouncementInfoZ get_announcement_info() {
+	public org.ldk.structs.Option_NodeAnnouncementInfoZ get_announcement_info() {
 		long ret = bindings.NodeInfo_get_announcement_info(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -73,7 +73,7 @@ public class NodeInfo : CommonBase {
 	/**
 	 * Creates a copy of the NodeInfo
 	 */
-	public NodeInfo clone() {
+	public org.ldk.structs.NodeInfo clone() {
 		long ret = bindings.NodeInfo_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -133,7 +133,7 @@ public class NodeInfo : CommonBase {
 	/**
 	 * Read a NodeInfo from a byte array, created by NodeInfo_write
 	 */
-	public static Result_NodeInfoDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_NodeInfoDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.NodeInfo_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

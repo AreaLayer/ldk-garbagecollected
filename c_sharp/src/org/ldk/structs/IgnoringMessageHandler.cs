@@ -19,7 +19,7 @@ public class IgnoringMessageHandler : CommonBase {
 	/**
 	 * Constructs a new IgnoringMessageHandler given each field
 	 */
-	public static IgnoringMessageHandler of() {
+	public static org.ldk.structs.IgnoringMessageHandler of() {
 		long ret = bindings.IgnoringMessageHandler_new();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.IgnoringMessageHandler ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.IgnoringMessageHandler(null, ret); }
@@ -31,7 +31,7 @@ public class IgnoringMessageHandler : CommonBase {
 	 * Constructs a new MessageSendEventsProvider which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned MessageSendEventsProvider must be freed before this_arg is
 	 */
-	public MessageSendEventsProvider as_MessageSendEventsProvider() {
+	public org.ldk.structs.MessageSendEventsProvider as_MessageSendEventsProvider() {
 		long ret = bindings.IgnoringMessageHandler_as_MessageSendEventsProvider(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -44,7 +44,7 @@ public class IgnoringMessageHandler : CommonBase {
 	 * Constructs a new RoutingMessageHandler which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned RoutingMessageHandler must be freed before this_arg is
 	 */
-	public RoutingMessageHandler as_RoutingMessageHandler() {
+	public org.ldk.structs.RoutingMessageHandler as_RoutingMessageHandler() {
 		long ret = bindings.IgnoringMessageHandler_as_RoutingMessageHandler(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -57,7 +57,7 @@ public class IgnoringMessageHandler : CommonBase {
 	 * Constructs a new OnionMessageHandler which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned OnionMessageHandler must be freed before this_arg is
 	 */
-	public OnionMessageHandler as_OnionMessageHandler() {
+	public org.ldk.structs.OnionMessageHandler as_OnionMessageHandler() {
 		long ret = bindings.IgnoringMessageHandler_as_OnionMessageHandler(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -70,7 +70,7 @@ public class IgnoringMessageHandler : CommonBase {
 	 * Constructs a new OffersMessageHandler which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned OffersMessageHandler must be freed before this_arg is
 	 */
-	public OffersMessageHandler as_OffersMessageHandler() {
+	public org.ldk.structs.OffersMessageHandler as_OffersMessageHandler() {
 		long ret = bindings.IgnoringMessageHandler_as_OffersMessageHandler(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -83,7 +83,7 @@ public class IgnoringMessageHandler : CommonBase {
 	 * Constructs a new AsyncPaymentsMessageHandler which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned AsyncPaymentsMessageHandler must be freed before this_arg is
 	 */
-	public AsyncPaymentsMessageHandler as_AsyncPaymentsMessageHandler() {
+	public org.ldk.structs.AsyncPaymentsMessageHandler as_AsyncPaymentsMessageHandler() {
 		long ret = bindings.IgnoringMessageHandler_as_AsyncPaymentsMessageHandler(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -96,7 +96,7 @@ public class IgnoringMessageHandler : CommonBase {
 	 * Constructs a new DNSResolverMessageHandler which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned DNSResolverMessageHandler must be freed before this_arg is
 	 */
-	public DNSResolverMessageHandler as_DNSResolverMessageHandler() {
+	public org.ldk.structs.DNSResolverMessageHandler as_DNSResolverMessageHandler() {
 		long ret = bindings.IgnoringMessageHandler_as_DNSResolverMessageHandler(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -109,7 +109,7 @@ public class IgnoringMessageHandler : CommonBase {
 	 * Constructs a new CustomOnionMessageHandler which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned CustomOnionMessageHandler must be freed before this_arg is
 	 */
-	public CustomOnionMessageHandler as_CustomOnionMessageHandler() {
+	public org.ldk.structs.CustomOnionMessageHandler as_CustomOnionMessageHandler() {
 		long ret = bindings.IgnoringMessageHandler_as_CustomOnionMessageHandler(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -122,7 +122,7 @@ public class IgnoringMessageHandler : CommonBase {
 	 * Constructs a new CustomMessageReader which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned CustomMessageReader must be freed before this_arg is
 	 */
-	public CustomMessageReader as_CustomMessageReader() {
+	public org.ldk.structs.CustomMessageReader as_CustomMessageReader() {
 		long ret = bindings.IgnoringMessageHandler_as_CustomMessageReader(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -135,7 +135,7 @@ public class IgnoringMessageHandler : CommonBase {
 	 * Constructs a new CustomMessageHandler which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned CustomMessageHandler must be freed before this_arg is
 	 */
-	public CustomMessageHandler as_CustomMessageHandler() {
+	public org.ldk.structs.CustomMessageHandler as_CustomMessageHandler() {
 		long ret = bindings.IgnoringMessageHandler_as_CustomMessageHandler(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

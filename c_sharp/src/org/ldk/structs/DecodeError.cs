@@ -81,7 +81,7 @@ public class DecodeError : CommonBase {
 	/**
 	 * Creates a copy of the DecodeError
 	 */
-	public DecodeError clone() {
+	public org.ldk.structs.DecodeError clone() {
 		long ret = bindings.DecodeError_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -93,7 +93,7 @@ public class DecodeError : CommonBase {
 	/**
 	 * Utility method to constructs a new UnknownVersion-variant DecodeError
 	 */
-	public static DecodeError unknown_version() {
+	public static org.ldk.structs.DecodeError unknown_version() {
 		long ret = bindings.DecodeError_unknown_version();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.DecodeError ret_hu_conv = org.ldk.structs.DecodeError.constr_from_ptr(ret);
@@ -104,7 +104,7 @@ public class DecodeError : CommonBase {
 	/**
 	 * Utility method to constructs a new UnknownRequiredFeature-variant DecodeError
 	 */
-	public static DecodeError unknown_required_feature() {
+	public static org.ldk.structs.DecodeError unknown_required_feature() {
 		long ret = bindings.DecodeError_unknown_required_feature();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.DecodeError ret_hu_conv = org.ldk.structs.DecodeError.constr_from_ptr(ret);
@@ -115,7 +115,7 @@ public class DecodeError : CommonBase {
 	/**
 	 * Utility method to constructs a new InvalidValue-variant DecodeError
 	 */
-	public static DecodeError invalid_value() {
+	public static org.ldk.structs.DecodeError invalid_value() {
 		long ret = bindings.DecodeError_invalid_value();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.DecodeError ret_hu_conv = org.ldk.structs.DecodeError.constr_from_ptr(ret);
@@ -126,7 +126,7 @@ public class DecodeError : CommonBase {
 	/**
 	 * Utility method to constructs a new ShortRead-variant DecodeError
 	 */
-	public static DecodeError short_read() {
+	public static org.ldk.structs.DecodeError short_read() {
 		long ret = bindings.DecodeError_short_read();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.DecodeError ret_hu_conv = org.ldk.structs.DecodeError.constr_from_ptr(ret);
@@ -137,7 +137,7 @@ public class DecodeError : CommonBase {
 	/**
 	 * Utility method to constructs a new BadLengthDescriptor-variant DecodeError
 	 */
-	public static DecodeError bad_length_descriptor() {
+	public static org.ldk.structs.DecodeError bad_length_descriptor() {
 		long ret = bindings.DecodeError_bad_length_descriptor();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.DecodeError ret_hu_conv = org.ldk.structs.DecodeError.constr_from_ptr(ret);
@@ -148,7 +148,7 @@ public class DecodeError : CommonBase {
 	/**
 	 * Utility method to constructs a new Io-variant DecodeError
 	 */
-	public static DecodeError io(IOError a) {
+	public static org.ldk.structs.DecodeError io(IOError a) {
 		long ret = bindings.DecodeError_io(a);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -160,7 +160,7 @@ public class DecodeError : CommonBase {
 	/**
 	 * Utility method to constructs a new UnsupportedCompression-variant DecodeError
 	 */
-	public static DecodeError unsupported_compression() {
+	public static org.ldk.structs.DecodeError unsupported_compression() {
 		long ret = bindings.DecodeError_unsupported_compression();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.DecodeError ret_hu_conv = org.ldk.structs.DecodeError.constr_from_ptr(ret);
@@ -171,7 +171,7 @@ public class DecodeError : CommonBase {
 	/**
 	 * Utility method to constructs a new DangerousValue-variant DecodeError
 	 */
-	public static DecodeError dangerous_value() {
+	public static org.ldk.structs.DecodeError dangerous_value() {
 		long ret = bindings.DecodeError_dangerous_value();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.DecodeError ret_hu_conv = org.ldk.structs.DecodeError.constr_from_ptr(ret);

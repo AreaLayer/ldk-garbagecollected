@@ -36,7 +36,7 @@ public class Result_CoinSelectionNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_CoinSelectionNoneZ in the success state.
 	 */
-	public static Result_CoinSelectionNoneZ ok(org.ldk.structs.CoinSelection o) {
+	public static org.ldk.structs.Result_CoinSelectionNoneZ ok(org.ldk.structs.CoinSelection o) {
 		long ret = bindings.CResult_CoinSelectionNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -47,7 +47,7 @@ public class Result_CoinSelectionNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_CoinSelectionNoneZ in the error state.
 	 */
-	public static Result_CoinSelectionNoneZ err() {
+	public static org.ldk.structs.Result_CoinSelectionNoneZ err() {
 		long ret = bindings.CResult_CoinSelectionNoneZ_err();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CoinSelectionNoneZ ret_hu_conv = Result_CoinSelectionNoneZ.constr_from_ptr(ret);
@@ -73,7 +73,7 @@ public class Result_CoinSelectionNoneZ : CommonBase {
 	 * Creates a new CResult_CoinSelectionNoneZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_CoinSelectionNoneZ clone() {
+	public org.ldk.structs.Result_CoinSelectionNoneZ clone() {
 		long ret = bindings.CResult_CoinSelectionNoneZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

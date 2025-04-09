@@ -41,7 +41,7 @@ public class Result_FundingCreatedDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_FundingCreatedDecodeErrorZ in the success state.
 	 */
-	public static Result_FundingCreatedDecodeErrorZ ok(org.ldk.structs.FundingCreated o) {
+	public static org.ldk.structs.Result_FundingCreatedDecodeErrorZ ok(org.ldk.structs.FundingCreated o) {
 		long ret = bindings.CResult_FundingCreatedDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_FundingCreatedDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_FundingCreatedDecodeErrorZ in the error state.
 	 */
-	public static Result_FundingCreatedDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_FundingCreatedDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_FundingCreatedDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_FundingCreatedDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_FundingCreatedDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_FundingCreatedDecodeErrorZ clone() {
+	public org.ldk.structs.Result_FundingCreatedDecodeErrorZ clone() {
 		long ret = bindings.CResult_FundingCreatedDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

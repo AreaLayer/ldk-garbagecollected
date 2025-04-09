@@ -41,7 +41,7 @@ public class Result_CounterpartyChannelTransactionParametersDecodeErrorZ : Commo
 	/**
 	 * Creates a new CResult_CounterpartyChannelTransactionParametersDecodeErrorZ in the success state.
 	 */
-	public static Result_CounterpartyChannelTransactionParametersDecodeErrorZ ok(org.ldk.structs.CounterpartyChannelTransactionParameters o) {
+	public static org.ldk.structs.Result_CounterpartyChannelTransactionParametersDecodeErrorZ ok(org.ldk.structs.CounterpartyChannelTransactionParameters o) {
 		long ret = bindings.CResult_CounterpartyChannelTransactionParametersDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_CounterpartyChannelTransactionParametersDecodeErrorZ : Commo
 	/**
 	 * Creates a new CResult_CounterpartyChannelTransactionParametersDecodeErrorZ in the error state.
 	 */
-	public static Result_CounterpartyChannelTransactionParametersDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_CounterpartyChannelTransactionParametersDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_CounterpartyChannelTransactionParametersDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_CounterpartyChannelTransactionParametersDecodeErrorZ : Commo
 	 * Creates a new CResult_CounterpartyChannelTransactionParametersDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_CounterpartyChannelTransactionParametersDecodeErrorZ clone() {
+	public org.ldk.structs.Result_CounterpartyChannelTransactionParametersDecodeErrorZ clone() {
 		long ret = bindings.CResult_CounterpartyChannelTransactionParametersDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

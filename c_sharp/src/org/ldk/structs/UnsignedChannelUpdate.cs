@@ -250,7 +250,7 @@ public class UnsignedChannelUpdate : CommonBase {
 	/**
 	 * Constructs a new UnsignedChannelUpdate given each field
 	 */
-	public static UnsignedChannelUpdate of(byte[] chain_hash_arg, long short_channel_id_arg, int timestamp_arg, byte message_flags_arg, byte channel_flags_arg, short cltv_expiry_delta_arg, long htlc_minimum_msat_arg, long htlc_maximum_msat_arg, int fee_base_msat_arg, int fee_proportional_millionths_arg, byte[] excess_data_arg) {
+	public static org.ldk.structs.UnsignedChannelUpdate of(byte[] chain_hash_arg, long short_channel_id_arg, int timestamp_arg, byte message_flags_arg, byte channel_flags_arg, short cltv_expiry_delta_arg, long htlc_minimum_msat_arg, long htlc_maximum_msat_arg, int fee_base_msat_arg, int fee_proportional_millionths_arg, byte[] excess_data_arg) {
 		long ret = bindings.UnsignedChannelUpdate_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(chain_hash_arg, 32)), short_channel_id_arg, timestamp_arg, message_flags_arg, channel_flags_arg, cltv_expiry_delta_arg, htlc_minimum_msat_arg, htlc_maximum_msat_arg, fee_base_msat_arg, fee_proportional_millionths_arg, InternalUtils.encodeUint8Array(excess_data_arg));
 		GC.KeepAlive(chain_hash_arg);
 		GC.KeepAlive(short_channel_id_arg);
@@ -278,7 +278,7 @@ public class UnsignedChannelUpdate : CommonBase {
 	/**
 	 * Creates a copy of the UnsignedChannelUpdate
 	 */
-	public UnsignedChannelUpdate clone() {
+	public org.ldk.structs.UnsignedChannelUpdate clone() {
 		long ret = bindings.UnsignedChannelUpdate_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -330,7 +330,7 @@ public class UnsignedChannelUpdate : CommonBase {
 	/**
 	 * Read a UnsignedChannelUpdate from a byte array, created by UnsignedChannelUpdate_write
 	 */
-	public static Result_UnsignedChannelUpdateDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_UnsignedChannelUpdateDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.UnsignedChannelUpdate_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

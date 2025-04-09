@@ -41,7 +41,7 @@ public class Result_BestBlockDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_BestBlockDecodeErrorZ in the success state.
 	 */
-	public static Result_BestBlockDecodeErrorZ ok(org.ldk.structs.BestBlock o) {
+	public static org.ldk.structs.Result_BestBlockDecodeErrorZ ok(org.ldk.structs.BestBlock o) {
 		long ret = bindings.CResult_BestBlockDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_BestBlockDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_BestBlockDecodeErrorZ in the error state.
 	 */
-	public static Result_BestBlockDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_BestBlockDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_BestBlockDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_BestBlockDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_BestBlockDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_BestBlockDecodeErrorZ clone() {
+	public org.ldk.structs.Result_BestBlockDecodeErrorZ clone() {
 		long ret = bindings.CResult_BestBlockDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

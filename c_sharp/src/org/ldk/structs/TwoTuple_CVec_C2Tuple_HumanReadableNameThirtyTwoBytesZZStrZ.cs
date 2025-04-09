@@ -55,7 +55,7 @@ public class TwoTuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZStrZ : Commo
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public TwoTuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZStrZ clone() {
+	public org.ldk.structs.TwoTuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZStrZ clone() {
 		long ret = bindings.C2Tuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZStrZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -67,7 +67,7 @@ public class TwoTuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZStrZ : Commo
 	/**
 	 * Creates a new C2Tuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZStrZ from the contained elements.
 	 */
-	public static TwoTuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZStrZ of(TwoTuple_HumanReadableNameThirtyTwoBytesZ[] a, string b) {
+	public static org.ldk.structs.TwoTuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZStrZ of(TwoTuple_HumanReadableNameThirtyTwoBytesZ[] a, string b) {
 		long ret = bindings.C2Tuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZStrZ_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(a, a_conv_43 => a_conv_43.ptr)), InternalUtils.encodeString(b));
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

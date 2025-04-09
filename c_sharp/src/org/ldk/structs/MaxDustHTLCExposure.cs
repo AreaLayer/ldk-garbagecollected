@@ -48,7 +48,7 @@ public class MaxDustHTLCExposure : CommonBase {
 	/**
 	 * Creates a copy of the MaxDustHTLCExposure
 	 */
-	public MaxDustHTLCExposure clone() {
+	public org.ldk.structs.MaxDustHTLCExposure clone() {
 		long ret = bindings.MaxDustHTLCExposure_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -60,7 +60,7 @@ public class MaxDustHTLCExposure : CommonBase {
 	/**
 	 * Utility method to constructs a new FixedLimitMsat-variant MaxDustHTLCExposure
 	 */
-	public static MaxDustHTLCExposure fixed_limit_msat(long a) {
+	public static org.ldk.structs.MaxDustHTLCExposure fixed_limit_msat(long a) {
 		long ret = bindings.MaxDustHTLCExposure_fixed_limit_msat(a);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -72,7 +72,7 @@ public class MaxDustHTLCExposure : CommonBase {
 	/**
 	 * Utility method to constructs a new FeeRateMultiplier-variant MaxDustHTLCExposure
 	 */
-	public static MaxDustHTLCExposure fee_rate_multiplier(long a) {
+	public static org.ldk.structs.MaxDustHTLCExposure fee_rate_multiplier(long a) {
 		long ret = bindings.MaxDustHTLCExposure_fee_rate_multiplier(a);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -110,7 +110,7 @@ public class MaxDustHTLCExposure : CommonBase {
 	/**
 	 * Read a MaxDustHTLCExposure from a byte array, created by MaxDustHTLCExposure_write
 	 */
-	public static Result_MaxDustHTLCExposureDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_MaxDustHTLCExposureDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.MaxDustHTLCExposure_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

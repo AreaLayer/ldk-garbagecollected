@@ -29,7 +29,7 @@ public class TwoTuple_PublicKeyChannelIdZ : CommonBase {
 	/**
 	 * 
 	 */
-	public ChannelId get_b() {
+	public org.ldk.structs.ChannelId get_b() {
 		long ret = bindings.C2Tuple_PublicKeyChannelIdZ_get_b(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -48,7 +48,7 @@ public class TwoTuple_PublicKeyChannelIdZ : CommonBase {
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public TwoTuple_PublicKeyChannelIdZ clone() {
+	public org.ldk.structs.TwoTuple_PublicKeyChannelIdZ clone() {
 		long ret = bindings.C2Tuple_PublicKeyChannelIdZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -60,7 +60,7 @@ public class TwoTuple_PublicKeyChannelIdZ : CommonBase {
 	/**
 	 * Creates a new C2Tuple_PublicKeyChannelIdZ from the contained elements.
 	 */
-	public static TwoTuple_PublicKeyChannelIdZ of(byte[] a, org.ldk.structs.ChannelId b) {
+	public static org.ldk.structs.TwoTuple_PublicKeyChannelIdZ of(byte[] a, org.ldk.structs.ChannelId b) {
 		long ret = bindings.C2Tuple_PublicKeyChannelIdZ_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 33)), b.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

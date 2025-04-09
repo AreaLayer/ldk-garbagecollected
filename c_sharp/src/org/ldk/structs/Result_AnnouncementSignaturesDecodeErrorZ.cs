@@ -41,7 +41,7 @@ public class Result_AnnouncementSignaturesDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_AnnouncementSignaturesDecodeErrorZ in the success state.
 	 */
-	public static Result_AnnouncementSignaturesDecodeErrorZ ok(org.ldk.structs.AnnouncementSignatures o) {
+	public static org.ldk.structs.Result_AnnouncementSignaturesDecodeErrorZ ok(org.ldk.structs.AnnouncementSignatures o) {
 		long ret = bindings.CResult_AnnouncementSignaturesDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_AnnouncementSignaturesDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_AnnouncementSignaturesDecodeErrorZ in the error state.
 	 */
-	public static Result_AnnouncementSignaturesDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_AnnouncementSignaturesDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_AnnouncementSignaturesDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_AnnouncementSignaturesDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_AnnouncementSignaturesDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_AnnouncementSignaturesDecodeErrorZ clone() {
+	public org.ldk.structs.Result_AnnouncementSignaturesDecodeErrorZ clone() {
 		long ret = bindings.CResult_AnnouncementSignaturesDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

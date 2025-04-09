@@ -41,7 +41,7 @@ public class Result_UpdateFailHTLCDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_UpdateFailHTLCDecodeErrorZ in the success state.
 	 */
-	public static Result_UpdateFailHTLCDecodeErrorZ ok(org.ldk.structs.UpdateFailHTLC o) {
+	public static org.ldk.structs.Result_UpdateFailHTLCDecodeErrorZ ok(org.ldk.structs.UpdateFailHTLC o) {
 		long ret = bindings.CResult_UpdateFailHTLCDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_UpdateFailHTLCDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_UpdateFailHTLCDecodeErrorZ in the error state.
 	 */
-	public static Result_UpdateFailHTLCDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_UpdateFailHTLCDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_UpdateFailHTLCDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_UpdateFailHTLCDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_UpdateFailHTLCDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_UpdateFailHTLCDecodeErrorZ clone() {
+	public org.ldk.structs.Result_UpdateFailHTLCDecodeErrorZ clone() {
 		long ret = bindings.CResult_UpdateFailHTLCDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -251,6 +251,10 @@ def java_c_types(fn_arg, ret_arr_len):
         assert tyn[0].endswith("Z")
         if tyn[0] == "u64Z":
             new_arg = "uint64_t"
+        elif tyn[0] == "u32Z":
+            new_arg = "uint32_t"
+        elif tyn[0] == "u16Z":
+            new_arg = "uint16_t"
         else:
             new_arg = "LDK" + tyn[0][:-1]
         for a in tyn[1:]:
@@ -264,7 +268,11 @@ def java_c_types(fn_arg, ret_arr_len):
         java_ty = consts.java_arr_ty_str(res.java_ty)
         is_trait = res.rust_obj in trait_structs
         if res.is_native_primitive or res.passed_as_ptr:
-            return TypeInfo(rust_obj=fn_arg.split(" ")[0], java_ty=java_ty, java_hu_ty=res.java_hu_ty + "[]",
+            java_hu_ty = res.java_hu_ty + "[]"
+            if res.is_native_primitive and res.c_ty in consts.c_type_map:
+                if len(consts.c_type_map[res.c_ty]) > 2:
+                    java_hu_ty = consts.c_type_map[res.c_ty][2]
+            return TypeInfo(rust_obj=fn_arg.split(" ")[0], java_ty=java_ty, java_hu_ty=java_hu_ty,
                 java_fn_ty_arg="[" + res.java_fn_ty_arg, c_ty=res.c_ty + "Array", passed_as_ptr=False, is_ptr=is_ptr,
                 nonnull_ptr=nonnull_ptr, is_const=is_const, is_trait = is_trait,
                 var_name=res.var_name, arr_len="datalen", arr_access="data", subty=res, is_native_primitive=False)
@@ -296,7 +304,7 @@ def java_c_types(fn_arg, ret_arr_len):
     elif fn_arg.startswith("uint8_t"):
         mapped_type = consts.c_type_map['uint8_t']
         java_ty = mapped_type[0]
-        c_ty = "int8_t"
+        c_ty = "uint8_t"
         fn_ty_arg = "B"
         arr_ty = "uint8_t"
         fn_arg = fn_arg[7:].strip()
@@ -311,13 +319,13 @@ def java_c_types(fn_arg, ret_arr_len):
             java_hu_ty = "WitnessVersion"
             rust_obj = "LDKWitnessVersion"
             fn_arg = fn_arg[18:].strip()
-        c_ty = "int8_t"
+        c_ty = "uint8_t"
         arr_ty = "uint8_t"
         fn_ty_arg = "B"
     elif fn_arg.startswith("uint16_t"):
         mapped_type = consts.c_type_map['uint16_t']
         java_ty = mapped_type[0]
-        c_ty = "int16_t"
+        c_ty = "uint16_t"
         arr_ty = "uint16_t"
         fn_ty_arg = "S"
         fn_arg = fn_arg[8:].strip()
@@ -325,7 +333,7 @@ def java_c_types(fn_arg, ret_arr_len):
     elif fn_arg.startswith("uint32_t"):
         mapped_type = consts.c_type_map['uint32_t']
         java_ty = mapped_type[0]
-        c_ty = "int32_t"
+        c_ty = "uint32_t"
         arr_ty = "uint32_t"
         fn_ty_arg = "I"
         fn_arg = fn_arg[8:].strip()
@@ -352,7 +360,7 @@ def java_c_types(fn_arg, ret_arr_len):
         java_ty = mapped_type[0]
         fn_ty_arg = "J"
         if fn_arg.startswith("uint64_t"):
-            c_ty = "int64_t"
+            c_ty = "uint64_t"
             arr_ty = "uint64_t"
             fn_arg = fn_arg[8:].strip()
         else:
@@ -369,24 +377,21 @@ def java_c_types(fn_arg, ret_arr_len):
         arr_ty = "LDKStr"
         fn_ty_arg = "Ljava/lang/String;"
         fn_arg = fn_arg[6:].strip()
-    elif fn_arg.startswith("LDKStr") or fn_arg.startswith("LDKAddress"):
+    elif fn_arg.startswith("LDKStr"):
         rust_obj = "LDKStr"
         arr_ty = "LDKStr"
         java_ty = consts.java_type_map["String"]
         java_hu_ty = consts.java_hu_type_map["String"]
         c_ty = "jstring"
         fn_ty_arg = "Ljava/lang/String;"
-        if fn_arg.startswith("LDKAddress"):
-            fn_arg = fn_arg[10:].strip()
-        else:
-            fn_arg = fn_arg[6:].strip()
+        fn_arg = fn_arg[6:].strip()
         arr_access = "chars"
         arr_len = "len"
     elif fn_arg.startswith("LDKError ") or fn_arg == "LDKError":
         java_ty = consts.c_type_map['uint32_t'][0]
         java_hu_ty = "UnqualifiedError"
         rust_obj = "LDKError"
-        c_ty = "int32_t"
+        c_ty = "uint32_t"
         arr_ty = "uint32_t"
         fn_ty_arg = "I"
         fn_arg = fn_arg[8:].strip()
@@ -676,6 +681,7 @@ with open(sys.argv[1]) as in_h, open(f"{sys.argv[2]}/bindings{consts.file_ext}",
         impl_on_utils = not impl_on_struct and (not is_free and not method_name.endswith("_clone") and
             not method_name.startswith("TxOut") and not method_name.startswith("TxIn") and
             not method_name.startswith("BigEndianScalar") and not method_name.startswith("WitnessProgram") and
+            not method_name.startswith("Address") and
             not method_name.startswith("_") and
             method_name != "check_platform" and method_name != "Result_read" and
             not expected_struct in unitary_enums and
@@ -1115,6 +1121,11 @@ with open(sys.argv[1]) as in_h, open(f"{sys.argv[2]}/bindings{consts.file_ext}",
                     last_block_comment = None
                 elif len(trait_fn_lines) > 0:
                     map_trait(struct_name, field_var_lines, trait_fn_lines, last_block_comment)
+                elif struct_name == "LDKAddress":
+                    with open(f"{sys.argv[3]}/structs/Address{consts.file_ext}", "w") as out_java_struct:
+                        out_java_struct.write(consts.hu_struct_file_prefix)
+                        out_java_struct.write(consts.address_defn)
+                        out_java_struct.write(consts.hu_struct_file_suffix)
                 elif struct_name == "LDKTxOut":
                     with open(f"{sys.argv[3]}/structs/TxOut{consts.file_ext}", "w") as out_java_struct:
                         out_java_struct.write(consts.hu_struct_file_prefix)

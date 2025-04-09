@@ -27,7 +27,7 @@ public class Bolt11InvoiceDescription : CommonBase {
 
 	/** A Bolt11InvoiceDescription of type Direct */
 	public class Bolt11InvoiceDescription_Direct : Bolt11InvoiceDescription {
-		public Description direct;
+		public org.ldk.structs.Description direct;
 		internal Bolt11InvoiceDescription_Direct(long ptr) : base(null, ptr) {
 			long direct = bindings.LDKBolt11InvoiceDescription_Direct_get_direct(ptr);
 			org.ldk.structs.Description direct_hu_conv = null; if (direct < 0 || direct > 4096) { direct_hu_conv = new org.ldk.structs.Description(null, direct); }
@@ -37,7 +37,7 @@ public class Bolt11InvoiceDescription : CommonBase {
 	}
 	/** A Bolt11InvoiceDescription of type Hash */
 	public class Bolt11InvoiceDescription_Hash : Bolt11InvoiceDescription {
-		public Sha256 hash;
+		public org.ldk.structs.Sha256 hash;
 		internal Bolt11InvoiceDescription_Hash(long ptr) : base(null, ptr) {
 			long hash = bindings.LDKBolt11InvoiceDescription_Hash_get_hash(ptr);
 			org.ldk.structs.Sha256 hash_hu_conv = null; if (hash < 0 || hash > 4096) { hash_hu_conv = new org.ldk.structs.Sha256(null, hash); }
@@ -54,7 +54,7 @@ public class Bolt11InvoiceDescription : CommonBase {
 	/**
 	 * Creates a copy of the Bolt11InvoiceDescription
 	 */
-	public Bolt11InvoiceDescription clone() {
+	public org.ldk.structs.Bolt11InvoiceDescription clone() {
 		long ret = bindings.Bolt11InvoiceDescription_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -66,7 +66,7 @@ public class Bolt11InvoiceDescription : CommonBase {
 	/**
 	 * Utility method to constructs a new Direct-variant Bolt11InvoiceDescription
 	 */
-	public static Bolt11InvoiceDescription direct(org.ldk.structs.Description a) {
+	public static org.ldk.structs.Bolt11InvoiceDescription direct(org.ldk.structs.Description a) {
 		long ret = bindings.Bolt11InvoiceDescription_direct(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -78,7 +78,7 @@ public class Bolt11InvoiceDescription : CommonBase {
 	/**
 	 * Utility method to constructs a new Hash-variant Bolt11InvoiceDescription
 	 */
-	public static Bolt11InvoiceDescription hash(org.ldk.structs.Sha256 a) {
+	public static org.ldk.structs.Bolt11InvoiceDescription hash(org.ldk.structs.Sha256 a) {
 		long ret = bindings.Bolt11InvoiceDescription_hash(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }

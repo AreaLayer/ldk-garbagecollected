@@ -38,7 +38,7 @@ public class Result_DescriptionCreationErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_DescriptionCreationErrorZ in the success state.
 	 */
-	public static Result_DescriptionCreationErrorZ ok(org.ldk.structs.Description o) {
+	public static org.ldk.structs.Result_DescriptionCreationErrorZ ok(org.ldk.structs.Description o) {
 		long ret = bindings.CResult_DescriptionCreationErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -49,7 +49,7 @@ public class Result_DescriptionCreationErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_DescriptionCreationErrorZ in the error state.
 	 */
-	public static Result_DescriptionCreationErrorZ err(CreationError e) {
+	public static org.ldk.structs.Result_DescriptionCreationErrorZ err(CreationError e) {
 		long ret = bindings.CResult_DescriptionCreationErrorZ_err(e);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -76,7 +76,7 @@ public class Result_DescriptionCreationErrorZ : CommonBase {
 	 * Creates a new CResult_DescriptionCreationErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_DescriptionCreationErrorZ clone() {
+	public org.ldk.structs.Result_DescriptionCreationErrorZ clone() {
 		long ret = bindings.CResult_DescriptionCreationErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

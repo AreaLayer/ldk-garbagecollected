@@ -18,7 +18,7 @@ public class HTLCDescriptor : CommonBase {
 	/**
 	 * The parameters required to derive the signer for the HTLC input.
 	 */
-	public ChannelDerivationParameters get_channel_derivation_parameters() {
+	public org.ldk.structs.ChannelDerivationParameters get_channel_derivation_parameters() {
 		long ret = bindings.HTLCDescriptor_get_channel_derivation_parameters(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -127,7 +127,7 @@ public class HTLCDescriptor : CommonBase {
 	/**
 	 * The details of the HTLC as it appears in the commitment transaction.
 	 */
-	public HTLCOutputInCommitment get_htlc() {
+	public org.ldk.structs.HTLCOutputInCommitment get_htlc() {
 		long ret = bindings.HTLCDescriptor_get_htlc(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -149,7 +149,7 @@ public class HTLCDescriptor : CommonBase {
 	 * The preimage, if `Some`, to claim the HTLC output with. If `None`, the timeout path must be
 	 * taken.
 	 */
-	public Option_ThirtyTwoBytesZ get_preimage() {
+	public org.ldk.structs.Option_ThirtyTwoBytesZ get_preimage() {
 		long ret = bindings.HTLCDescriptor_get_preimage(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -191,7 +191,7 @@ public class HTLCDescriptor : CommonBase {
 	/**
 	 * Constructs a new HTLCDescriptor given each field
 	 */
-	public static HTLCDescriptor of(org.ldk.structs.ChannelDerivationParameters channel_derivation_parameters_arg, byte[] commitment_txid_arg, long per_commitment_number_arg, byte[] per_commitment_point_arg, int feerate_per_kw_arg, org.ldk.structs.HTLCOutputInCommitment htlc_arg, org.ldk.structs.Option_ThirtyTwoBytesZ preimage_arg, byte[] counterparty_sig_arg) {
+	public static org.ldk.structs.HTLCDescriptor of(org.ldk.structs.ChannelDerivationParameters channel_derivation_parameters_arg, byte[] commitment_txid_arg, long per_commitment_number_arg, byte[] per_commitment_point_arg, int feerate_per_kw_arg, org.ldk.structs.HTLCOutputInCommitment htlc_arg, org.ldk.structs.Option_ThirtyTwoBytesZ preimage_arg, byte[] counterparty_sig_arg) {
 		long ret = bindings.HTLCDescriptor_new(channel_derivation_parameters_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(commitment_txid_arg, 32)), per_commitment_number_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(per_commitment_point_arg, 33)), feerate_per_kw_arg, htlc_arg.ptr, preimage_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_sig_arg, 64)));
 		GC.KeepAlive(channel_derivation_parameters_arg);
 		GC.KeepAlive(commitment_txid_arg);
@@ -216,7 +216,7 @@ public class HTLCDescriptor : CommonBase {
 	/**
 	 * Creates a copy of the HTLCDescriptor
 	 */
-	public HTLCDescriptor clone() {
+	public org.ldk.structs.HTLCDescriptor clone() {
 		long ret = bindings.HTLCDescriptor_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -256,7 +256,7 @@ public class HTLCDescriptor : CommonBase {
 	/**
 	 * Read a HTLCDescriptor from a byte array, created by HTLCDescriptor_write
 	 */
-	public static Result_HTLCDescriptorDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_HTLCDescriptorDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.HTLCDescriptor_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -268,7 +268,7 @@ public class HTLCDescriptor : CommonBase {
 	 * Returns the outpoint of the HTLC output in the commitment transaction. This is the outpoint
 	 * being spent by the HTLC input in the HTLC transaction.
 	 */
-	public OutPoint outpoint() {
+	public org.ldk.structs.OutPoint outpoint() {
 		long ret = bindings.HTLCDescriptor_outpoint(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -281,7 +281,7 @@ public class HTLCDescriptor : CommonBase {
 	 * Returns the UTXO to be spent by the HTLC input, which can be obtained via
 	 * [`Self::unsigned_tx_input`].
 	 */
-	public TxOut previous_utxo() {
+	public org.ldk.structs.TxOut previous_utxo() {
 		long ret = bindings.HTLCDescriptor_previous_utxo(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -293,7 +293,7 @@ public class HTLCDescriptor : CommonBase {
 	 * Returns the unsigned transaction input spending the HTLC output in the commitment
 	 * transaction.
 	 */
-	public TxIn unsigned_tx_input() {
+	public org.ldk.structs.TxIn unsigned_tx_input() {
 		long ret = bindings.HTLCDescriptor_unsigned_tx_input(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -305,7 +305,7 @@ public class HTLCDescriptor : CommonBase {
 	 * Returns the delayed output created as a result of spending the HTLC output in the commitment
 	 * transaction.
 	 */
-	public TxOut tx_output() {
+	public org.ldk.structs.TxOut tx_output() {
 		long ret = bindings.HTLCDescriptor_tx_output(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -341,7 +341,7 @@ public class HTLCDescriptor : CommonBase {
 	/**
 	 * Derives the channel signer required to sign the HTLC input.
 	 */
-	public EcdsaChannelSigner derive_channel_signer(org.ldk.structs.SignerProvider signer_provider) {
+	public org.ldk.structs.EcdsaChannelSigner derive_channel_signer(org.ldk.structs.SignerProvider signer_provider) {
 		long ret = bindings.HTLCDescriptor_derive_channel_signer(this.ptr, signer_provider.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(signer_provider);

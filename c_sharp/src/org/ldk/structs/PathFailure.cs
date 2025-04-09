@@ -33,7 +33,7 @@ public class PathFailure : CommonBase {
 		/**
 		 * The error surfaced from initial send.
 		 */
-		public APIError err;
+		public org.ldk.structs.APIError err;
 		internal PathFailure_InitialSend(long ptr) : base(null, ptr) {
 			long err = bindings.LDKPathFailure_InitialSend_get_err(ptr);
 			org.ldk.structs.APIError err_hu_conv = org.ldk.structs.APIError.constr_from_ptr(err);
@@ -50,7 +50,7 @@ public class PathFailure : CommonBase {
 		 * [`NetworkUpdate`]: crate::routing::gossip::NetworkUpdate
 		 * [`NetworkGraph`]: crate::routing::gossip::NetworkGraph
 		 */
-		public Option_NetworkUpdateZ network_update;
+		public org.ldk.structs.Option_NetworkUpdateZ network_update;
 		internal PathFailure_OnPath(long ptr) : base(null, ptr) {
 			long network_update = bindings.LDKPathFailure_OnPath_get_network_update(ptr);
 			org.ldk.structs.Option_NetworkUpdateZ network_update_hu_conv = org.ldk.structs.Option_NetworkUpdateZ.constr_from_ptr(network_update);
@@ -67,7 +67,7 @@ public class PathFailure : CommonBase {
 	/**
 	 * Creates a copy of the PathFailure
 	 */
-	public PathFailure clone() {
+	public org.ldk.structs.PathFailure clone() {
 		long ret = bindings.PathFailure_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class PathFailure : CommonBase {
 	/**
 	 * Utility method to constructs a new InitialSend-variant PathFailure
 	 */
-	public static PathFailure initial_send(org.ldk.structs.APIError err) {
+	public static org.ldk.structs.PathFailure initial_send(org.ldk.structs.APIError err) {
 		long ret = bindings.PathFailure_initial_send(err.ptr);
 		GC.KeepAlive(err);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -91,7 +91,7 @@ public class PathFailure : CommonBase {
 	/**
 	 * Utility method to constructs a new OnPath-variant PathFailure
 	 */
-	public static PathFailure on_path(org.ldk.structs.Option_NetworkUpdateZ network_update) {
+	public static org.ldk.structs.PathFailure on_path(org.ldk.structs.Option_NetworkUpdateZ network_update) {
 		long ret = bindings.PathFailure_on_path(network_update.ptr);
 		GC.KeepAlive(network_update);
 		if (ret >= 0 && ret <= 4096) { return null; }

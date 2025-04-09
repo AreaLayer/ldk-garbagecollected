@@ -18,7 +18,7 @@ public class ThreeTuple_ChannelAnnouncementChannelUpdateChannelUpdateZ : CommonB
 	/**
 	 * 
 	 */
-	public ChannelAnnouncement get_a() {
+	public org.ldk.structs.ChannelAnnouncement get_a() {
 		long ret = bindings.C3Tuple_ChannelAnnouncementChannelUpdateChannelUpdateZ_get_a(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -30,7 +30,7 @@ public class ThreeTuple_ChannelAnnouncementChannelUpdateChannelUpdateZ : CommonB
 	/**
 	 * 
 	 */
-	public ChannelUpdate get_b() {
+	public org.ldk.structs.ChannelUpdate get_b() {
 		long ret = bindings.C3Tuple_ChannelAnnouncementChannelUpdateChannelUpdateZ_get_b(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -42,7 +42,7 @@ public class ThreeTuple_ChannelAnnouncementChannelUpdateChannelUpdateZ : CommonB
 	/**
 	 * 
 	 */
-	public ChannelUpdate get_c() {
+	public org.ldk.structs.ChannelUpdate get_c() {
 		long ret = bindings.C3Tuple_ChannelAnnouncementChannelUpdateChannelUpdateZ_get_c(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -61,7 +61,7 @@ public class ThreeTuple_ChannelAnnouncementChannelUpdateChannelUpdateZ : CommonB
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public ThreeTuple_ChannelAnnouncementChannelUpdateChannelUpdateZ clone() {
+	public org.ldk.structs.ThreeTuple_ChannelAnnouncementChannelUpdateChannelUpdateZ clone() {
 		long ret = bindings.C3Tuple_ChannelAnnouncementChannelUpdateChannelUpdateZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -73,7 +73,7 @@ public class ThreeTuple_ChannelAnnouncementChannelUpdateChannelUpdateZ : CommonB
 	/**
 	 * Creates a new C3Tuple_ChannelAnnouncementChannelUpdateChannelUpdateZ from the contained elements.
 	 */
-	public static ThreeTuple_ChannelAnnouncementChannelUpdateChannelUpdateZ of(org.ldk.structs.ChannelAnnouncement a, org.ldk.structs.ChannelUpdate b, org.ldk.structs.ChannelUpdate c) {
+	public static org.ldk.structs.ThreeTuple_ChannelAnnouncementChannelUpdateChannelUpdateZ of(org.ldk.structs.ChannelAnnouncement a, org.ldk.structs.ChannelUpdate b, org.ldk.structs.ChannelUpdate c) {
 		long ret = bindings.C3Tuple_ChannelAnnouncementChannelUpdateChannelUpdateZ_new(a.ptr, b.ptr, c.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

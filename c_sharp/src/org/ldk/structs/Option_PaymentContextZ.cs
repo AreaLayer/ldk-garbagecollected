@@ -26,7 +26,7 @@ public class Option_PaymentContextZ : CommonBase {
 
 	/** A Option_PaymentContextZ of type Some */
 	public class Option_PaymentContextZ_Some : Option_PaymentContextZ {
-		public PaymentContext some;
+		public org.ldk.structs.PaymentContext some;
 		internal Option_PaymentContextZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_PaymentContextZ_Some_get_some(ptr);
 			org.ldk.structs.PaymentContext some_hu_conv = org.ldk.structs.PaymentContext.constr_from_ptr(some);
@@ -42,7 +42,7 @@ public class Option_PaymentContextZ : CommonBase {
 	/**
 	 * Constructs a new COption_PaymentContextZ containing a crate::lightning::blinded_path::payment::PaymentContext
 	 */
-	public static Option_PaymentContextZ some(org.ldk.structs.PaymentContext o) {
+	public static org.ldk.structs.Option_PaymentContextZ some(org.ldk.structs.PaymentContext o) {
 		long ret = bindings.COption_PaymentContextZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class Option_PaymentContextZ : CommonBase {
 	/**
 	 * Constructs a new COption_PaymentContextZ containing nothing
 	 */
-	public static Option_PaymentContextZ none() {
+	public static org.ldk.structs.Option_PaymentContextZ none() {
 		long ret = bindings.COption_PaymentContextZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_PaymentContextZ ret_hu_conv = org.ldk.structs.Option_PaymentContextZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Option_PaymentContextZ : CommonBase {
 	 * Creates a new COption_PaymentContextZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_PaymentContextZ clone() {
+	public org.ldk.structs.Option_PaymentContextZ clone() {
 		long ret = bindings.COption_PaymentContextZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

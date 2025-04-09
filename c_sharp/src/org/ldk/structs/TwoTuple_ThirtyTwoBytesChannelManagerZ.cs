@@ -29,7 +29,7 @@ public class TwoTuple_ThirtyTwoBytesChannelManagerZ : CommonBase {
 	/**
 	 * 
 	 */
-	public ChannelManager get_b() {
+	public org.ldk.structs.ChannelManager get_b() {
 		long ret = bindings.C2Tuple_ThirtyTwoBytesChannelManagerZ_get_b(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -41,7 +41,7 @@ public class TwoTuple_ThirtyTwoBytesChannelManagerZ : CommonBase {
 	/**
 	 * Creates a new C2Tuple_ThirtyTwoBytesChannelManagerZ from the contained elements.
 	 */
-	public static TwoTuple_ThirtyTwoBytesChannelManagerZ of(byte[] a, FeeEstimator b_fee_est, Watch b_chain_monitor, BroadcasterInterface b_tx_broadcaster, Router b_router, MessageRouter b_message_router, Logger b_logger, EntropySource b_entropy_source, NodeSigner b_node_signer, SignerProvider b_signer_provider, UserConfig b_config, ChainParameters b_params, int b_current_timestamp) {
+	public static org.ldk.structs.TwoTuple_ThirtyTwoBytesChannelManagerZ of(byte[] a, FeeEstimator b_fee_est, Watch b_chain_monitor, BroadcasterInterface b_tx_broadcaster, Router b_router, MessageRouter b_message_router, Logger b_logger, EntropySource b_entropy_source, NodeSigner b_node_signer, SignerProvider b_signer_provider, UserConfig b_config, ChainParameters b_params, int b_current_timestamp) {
 		long ret = bindings.C2Tuple_ThirtyTwoBytesChannelManagerZ_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 32)), bindings.ChannelManager_new(b_fee_est.ptr, b_chain_monitor.ptr, b_tx_broadcaster.ptr, b_router.ptr, b_message_router.ptr, b_logger.ptr, b_entropy_source.ptr, b_node_signer.ptr, b_signer_provider.ptr, b_config.ptr, b_params.ptr, b_current_timestamp));
 		GC.KeepAlive(a);
 		GC.KeepAlive(b_fee_est);

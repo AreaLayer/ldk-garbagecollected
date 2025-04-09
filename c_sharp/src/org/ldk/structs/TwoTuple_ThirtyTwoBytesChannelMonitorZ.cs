@@ -29,7 +29,7 @@ public class TwoTuple_ThirtyTwoBytesChannelMonitorZ : CommonBase {
 	/**
 	 * 
 	 */
-	public ChannelMonitor get_b() {
+	public org.ldk.structs.ChannelMonitor get_b() {
 		long ret = bindings.C2Tuple_ThirtyTwoBytesChannelMonitorZ_get_b(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -48,7 +48,7 @@ public class TwoTuple_ThirtyTwoBytesChannelMonitorZ : CommonBase {
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public TwoTuple_ThirtyTwoBytesChannelMonitorZ clone() {
+	public org.ldk.structs.TwoTuple_ThirtyTwoBytesChannelMonitorZ clone() {
 		long ret = bindings.C2Tuple_ThirtyTwoBytesChannelMonitorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -60,7 +60,7 @@ public class TwoTuple_ThirtyTwoBytesChannelMonitorZ : CommonBase {
 	/**
 	 * Creates a new C2Tuple_ThirtyTwoBytesChannelMonitorZ from the contained elements.
 	 */
-	public static TwoTuple_ThirtyTwoBytesChannelMonitorZ of(byte[] a, org.ldk.structs.ChannelMonitor b) {
+	public static org.ldk.structs.TwoTuple_ThirtyTwoBytesChannelMonitorZ of(byte[] a, org.ldk.structs.ChannelMonitor b) {
 		long ret = bindings.C2Tuple_ThirtyTwoBytesChannelMonitorZ_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 32)), b.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

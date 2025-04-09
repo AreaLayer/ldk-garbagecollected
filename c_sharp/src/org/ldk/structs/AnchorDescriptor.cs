@@ -18,7 +18,7 @@ public class AnchorDescriptor : CommonBase {
 	/**
 	 * The parameters required to derive the signer for the anchor input.
 	 */
-	public ChannelDerivationParameters get_channel_derivation_parameters() {
+	public org.ldk.structs.ChannelDerivationParameters get_channel_derivation_parameters() {
 		long ret = bindings.AnchorDescriptor_get_channel_derivation_parameters(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -40,7 +40,7 @@ public class AnchorDescriptor : CommonBase {
 	 * The transaction input's outpoint corresponding to the commitment transaction's anchor
 	 * output.
 	 */
-	public OutPoint get_outpoint() {
+	public org.ldk.structs.OutPoint get_outpoint() {
 		long ret = bindings.AnchorDescriptor_get_outpoint(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -62,7 +62,7 @@ public class AnchorDescriptor : CommonBase {
 	/**
 	 * Constructs a new AnchorDescriptor given each field
 	 */
-	public static AnchorDescriptor of(org.ldk.structs.ChannelDerivationParameters channel_derivation_parameters_arg, org.ldk.structs.OutPoint outpoint_arg) {
+	public static org.ldk.structs.AnchorDescriptor of(org.ldk.structs.ChannelDerivationParameters channel_derivation_parameters_arg, org.ldk.structs.OutPoint outpoint_arg) {
 		long ret = bindings.AnchorDescriptor_new(channel_derivation_parameters_arg.ptr, outpoint_arg.ptr);
 		GC.KeepAlive(channel_derivation_parameters_arg);
 		GC.KeepAlive(outpoint_arg);
@@ -81,7 +81,7 @@ public class AnchorDescriptor : CommonBase {
 	/**
 	 * Creates a copy of the AnchorDescriptor
 	 */
-	public AnchorDescriptor clone() {
+	public org.ldk.structs.AnchorDescriptor clone() {
 		long ret = bindings.AnchorDescriptor_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -111,7 +111,7 @@ public class AnchorDescriptor : CommonBase {
 	 * Returns the UTXO to be spent by the anchor input, which can be obtained via
 	 * [`Self::unsigned_tx_input`].
 	 */
-	public TxOut previous_utxo() {
+	public org.ldk.structs.TxOut previous_utxo() {
 		long ret = bindings.AnchorDescriptor_previous_utxo(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -123,7 +123,7 @@ public class AnchorDescriptor : CommonBase {
 	 * Returns the unsigned transaction input spending the anchor output in the commitment
 	 * transaction.
 	 */
-	public TxIn unsigned_tx_input() {
+	public org.ldk.structs.TxIn unsigned_tx_input() {
 		long ret = bindings.AnchorDescriptor_unsigned_tx_input(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -158,7 +158,7 @@ public class AnchorDescriptor : CommonBase {
 	/**
 	 * Derives the channel signer required to sign the anchor input.
 	 */
-	public EcdsaChannelSigner derive_channel_signer(org.ldk.structs.SignerProvider signer_provider) {
+	public org.ldk.structs.EcdsaChannelSigner derive_channel_signer(org.ldk.structs.SignerProvider signer_provider) {
 		long ret = bindings.AnchorDescriptor_derive_channel_signer(this.ptr, signer_provider.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(signer_provider);

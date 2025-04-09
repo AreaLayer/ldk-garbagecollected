@@ -63,7 +63,7 @@ public class UpdateName : CommonBase {
 	 * Constructs an [`UpdateName`], after verifying that an update sequence ID
 	 * can be derived from the given `name`.
 	 */
-	public static Result_UpdateNameIOErrorZ of(string name) {
+	public static org.ldk.structs.Result_UpdateNameIOErrorZ of(string name) {
 		long ret = bindings.UpdateName_new(InternalUtils.encodeString(name));
 		GC.KeepAlive(name);
 		if (ret >= 0 && ret <= 4096) { return null; }

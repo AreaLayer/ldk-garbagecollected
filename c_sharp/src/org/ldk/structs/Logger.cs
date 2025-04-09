@@ -12,7 +12,7 @@ namespace org { namespace ldk { namespace structs {
 public interface LoggerInterface {
 	/**Logs the [`Record`].
 	 */
-	void log(Record record);
+	void log(org.ldk.structs.Record record);
 }
 
 /**

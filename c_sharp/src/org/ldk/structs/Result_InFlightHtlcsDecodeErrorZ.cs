@@ -41,7 +41,7 @@ public class Result_InFlightHtlcsDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_InFlightHtlcsDecodeErrorZ in the success state.
 	 */
-	public static Result_InFlightHtlcsDecodeErrorZ ok(org.ldk.structs.InFlightHtlcs o) {
+	public static org.ldk.structs.Result_InFlightHtlcsDecodeErrorZ ok(org.ldk.structs.InFlightHtlcs o) {
 		long ret = bindings.CResult_InFlightHtlcsDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_InFlightHtlcsDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_InFlightHtlcsDecodeErrorZ in the error state.
 	 */
-	public static Result_InFlightHtlcsDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_InFlightHtlcsDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_InFlightHtlcsDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_InFlightHtlcsDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_InFlightHtlcsDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_InFlightHtlcsDecodeErrorZ clone() {
+	public org.ldk.structs.Result_InFlightHtlcsDecodeErrorZ clone() {
 		long ret = bindings.CResult_InFlightHtlcsDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

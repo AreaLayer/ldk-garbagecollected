@@ -24,7 +24,7 @@ public class BlindedPathCandidate : CommonBase {
 	/**
 	 * Creates a copy of the BlindedPathCandidate
 	 */
-	public BlindedPathCandidate clone() {
+	public org.ldk.structs.BlindedPathCandidate clone() {
 		long ret = bindings.BlindedPathCandidate_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

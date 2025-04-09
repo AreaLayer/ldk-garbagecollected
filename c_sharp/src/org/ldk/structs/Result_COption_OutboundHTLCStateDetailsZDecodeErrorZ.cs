@@ -41,7 +41,7 @@ public class Result_COption_OutboundHTLCStateDetailsZDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_COption_OutboundHTLCStateDetailsZDecodeErrorZ in the success state.
 	 */
-	public static Result_COption_OutboundHTLCStateDetailsZDecodeErrorZ ok(org.ldk.structs.Option_OutboundHTLCStateDetailsZ o) {
+	public static org.ldk.structs.Result_COption_OutboundHTLCStateDetailsZDecodeErrorZ ok(org.ldk.structs.Option_OutboundHTLCStateDetailsZ o) {
 		long ret = bindings.CResult_COption_OutboundHTLCStateDetailsZDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_COption_OutboundHTLCStateDetailsZDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_COption_OutboundHTLCStateDetailsZDecodeErrorZ in the error state.
 	 */
-	public static Result_COption_OutboundHTLCStateDetailsZDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_COption_OutboundHTLCStateDetailsZDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_COption_OutboundHTLCStateDetailsZDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_COption_OutboundHTLCStateDetailsZDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_COption_OutboundHTLCStateDetailsZDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_COption_OutboundHTLCStateDetailsZDecodeErrorZ clone() {
+	public org.ldk.structs.Result_COption_OutboundHTLCStateDetailsZDecodeErrorZ clone() {
 		long ret = bindings.CResult_COption_OutboundHTLCStateDetailsZDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

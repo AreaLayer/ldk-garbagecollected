@@ -31,7 +31,7 @@ public class PendingHTLCRouting : CommonBase {
 		 * The onion which should be included in the forwarded HTLC, telling the next hop what to
 		 * do with the HTLC.
 		 */
-		public OnionPacket onion_packet;
+		public org.ldk.structs.OnionPacket onion_packet;
 		/**
 		 * The short channel ID of the channel which we were instructed to forward this HTLC to.
 		 * 
@@ -45,11 +45,11 @@ public class PendingHTLCRouting : CommonBase {
 		 * 
 		 * Note that this (or a relevant inner pointer) may be NULL or all-0s to represent None
 		 */
-		public BlindedForward blinded;
+		public org.ldk.structs.BlindedForward blinded;
 		/**
 		 * The absolute CLTV of the inbound HTLC
 		 */
-		public Option_u32Z incoming_cltv_expiry;
+		public org.ldk.structs.Option_u32Z incoming_cltv_expiry;
 		internal PendingHTLCRouting_Forward(long ptr) : base(null, ptr) {
 			long onion_packet = bindings.LDKPendingHTLCRouting_Forward_get_onion_packet(ptr);
 			org.ldk.structs.OnionPacket onion_packet_hu_conv = null; if (onion_packet < 0 || onion_packet > 4096) { onion_packet_hu_conv = new org.ldk.structs.OnionPacket(null, onion_packet); }
@@ -73,7 +73,7 @@ public class PendingHTLCRouting : CommonBase {
 		 * is a payment for an invoice we generated. This proof of payment is is also used for
 		 * linking MPP parts of a larger payment.
 		 */
-		public FinalOnionHopData payment_data;
+		public org.ldk.structs.FinalOnionHopData payment_data;
 		/**
 		 * Additional data which we (allegedly) instructed the sender to include in the onion.
 		 * 
@@ -81,14 +81,14 @@ public class PendingHTLCRouting : CommonBase {
 		 * [`Event::PaymentClaimable::onion_fields`] as
 		 * [`RecipientOnionFields::payment_metadata`].
 		 */
-		public Option_CVec_u8ZZ payment_metadata;
+		public org.ldk.structs.Option_CVec_u8ZZ payment_metadata;
 		/**
 		 * The context of the payment included by the recipient in a blinded path, or `None` if a
 		 * blinded path was not used.
 		 * 
 		 * Used in part to determine the [`events::PaymentPurpose`].
 		 */
-		public Option_PaymentContextZ payment_context;
+		public org.ldk.structs.Option_PaymentContextZ payment_context;
 		/**
 		 * CLTV expiry of the received HTLC.
 		 * 
@@ -157,7 +157,7 @@ public class PendingHTLCRouting : CommonBase {
 		 * 
 		 * Note that this (or a relevant inner pointer) may be NULL or all-0s to represent None
 		 */
-		public FinalOnionHopData payment_data;
+		public org.ldk.structs.FinalOnionHopData payment_data;
 		/**
 		 * Preimage for this onion payment. This preimage is provided by the sender and will be
 		 * used to settle the spontaneous payment.
@@ -169,7 +169,7 @@ public class PendingHTLCRouting : CommonBase {
 		 * For HTLCs received by LDK, this will ultimately bubble back up as
 		 * [`RecipientOnionFields::payment_metadata`].
 		 */
-		public Option_CVec_u8ZZ payment_metadata;
+		public org.ldk.structs.Option_CVec_u8ZZ payment_metadata;
 		/**
 		 * CLTV expiry of the received HTLC.
 		 * 
@@ -230,7 +230,7 @@ public class PendingHTLCRouting : CommonBase {
 	/**
 	 * Creates a copy of the PendingHTLCRouting
 	 */
-	public PendingHTLCRouting clone() {
+	public org.ldk.structs.PendingHTLCRouting clone() {
 		long ret = bindings.PendingHTLCRouting_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -242,7 +242,7 @@ public class PendingHTLCRouting : CommonBase {
 	/**
 	 * Utility method to constructs a new Forward-variant PendingHTLCRouting
 	 */
-	public static PendingHTLCRouting forward(org.ldk.structs.OnionPacket onion_packet, long short_channel_id, org.ldk.structs.BlindedForward blinded, org.ldk.structs.Option_u32Z incoming_cltv_expiry) {
+	public static org.ldk.structs.PendingHTLCRouting forward(org.ldk.structs.OnionPacket onion_packet, long short_channel_id, org.ldk.structs.BlindedForward blinded, org.ldk.structs.Option_u32Z incoming_cltv_expiry) {
 		long ret = bindings.PendingHTLCRouting_forward(onion_packet.ptr, short_channel_id, blinded.ptr, incoming_cltv_expiry.ptr);
 		GC.KeepAlive(onion_packet);
 		GC.KeepAlive(short_channel_id);
@@ -257,7 +257,7 @@ public class PendingHTLCRouting : CommonBase {
 	/**
 	 * Utility method to constructs a new Receive-variant PendingHTLCRouting
 	 */
-	public static PendingHTLCRouting receive(org.ldk.structs.FinalOnionHopData payment_data, org.ldk.structs.Option_CVec_u8ZZ payment_metadata, org.ldk.structs.Option_PaymentContextZ payment_context, int incoming_cltv_expiry, byte[] phantom_shared_secret, TwoTuple_u64CVec_u8ZZ[] custom_tlvs, bool requires_blinded_error) {
+	public static org.ldk.structs.PendingHTLCRouting receive(org.ldk.structs.FinalOnionHopData payment_data, org.ldk.structs.Option_CVec_u8ZZ payment_metadata, org.ldk.structs.Option_PaymentContextZ payment_context, int incoming_cltv_expiry, byte[] phantom_shared_secret, TwoTuple_u64CVec_u8ZZ[] custom_tlvs, bool requires_blinded_error) {
 		long ret = bindings.PendingHTLCRouting_receive(payment_data.ptr, payment_metadata.ptr, payment_context.ptr, incoming_cltv_expiry, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(phantom_shared_secret, 32)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(custom_tlvs, custom_tlvs_conv_23 => custom_tlvs_conv_23.ptr)), requires_blinded_error);
 		GC.KeepAlive(payment_data);
 		GC.KeepAlive(payment_metadata);
@@ -275,7 +275,7 @@ public class PendingHTLCRouting : CommonBase {
 	/**
 	 * Utility method to constructs a new ReceiveKeysend-variant PendingHTLCRouting
 	 */
-	public static PendingHTLCRouting receive_keysend(org.ldk.structs.FinalOnionHopData payment_data, byte[] payment_preimage, org.ldk.structs.Option_CVec_u8ZZ payment_metadata, int incoming_cltv_expiry, TwoTuple_u64CVec_u8ZZ[] custom_tlvs, bool requires_blinded_error, bool has_recipient_created_payment_secret) {
+	public static org.ldk.structs.PendingHTLCRouting receive_keysend(org.ldk.structs.FinalOnionHopData payment_data, byte[] payment_preimage, org.ldk.structs.Option_CVec_u8ZZ payment_metadata, int incoming_cltv_expiry, TwoTuple_u64CVec_u8ZZ[] custom_tlvs, bool requires_blinded_error, bool has_recipient_created_payment_secret) {
 		long ret = bindings.PendingHTLCRouting_receive_keysend(payment_data.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_preimage, 32)), payment_metadata.ptr, incoming_cltv_expiry, InternalUtils.encodeUint64Array(InternalUtils.mapArray(custom_tlvs, custom_tlvs_conv_23 => custom_tlvs_conv_23.ptr)), requires_blinded_error, has_recipient_created_payment_secret);
 		GC.KeepAlive(payment_data);
 		GC.KeepAlive(payment_preimage);
@@ -304,7 +304,7 @@ public class PendingHTLCRouting : CommonBase {
 	/**
 	 * Read a PendingHTLCRouting from a byte array, created by PendingHTLCRouting_write
 	 */
-	public static Result_PendingHTLCRoutingDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_PendingHTLCRoutingDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.PendingHTLCRouting_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

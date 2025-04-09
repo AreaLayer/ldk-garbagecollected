@@ -41,7 +41,7 @@ public class InvoiceRequestFeatures : CommonBase {
 	/**
 	 * Creates a copy of the InvoiceRequestFeatures
 	 */
-	public InvoiceRequestFeatures clone() {
+	public org.ldk.structs.InvoiceRequestFeatures clone() {
 		long ret = bindings.InvoiceRequestFeatures_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -65,7 +65,7 @@ public class InvoiceRequestFeatures : CommonBase {
 	/**
 	 * Create a blank Features with no features set
 	 */
-	public static InvoiceRequestFeatures empty() {
+	public static org.ldk.structs.InvoiceRequestFeatures empty() {
 		long ret = bindings.InvoiceRequestFeatures_empty();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.InvoiceRequestFeatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.InvoiceRequestFeatures(null, ret); }
@@ -146,7 +146,7 @@ public class InvoiceRequestFeatures : CommonBase {
 	 * 
 	 * [BOLT 9]: https://github.com/lightning/bolts/blob/master/09-features.md
 	 */
-	public Result_NoneNoneZ set_required_feature_bit(long bit) {
+	public org.ldk.structs.Result_NoneNoneZ set_required_feature_bit(long bit) {
 		long ret = bindings.InvoiceRequestFeatures_set_required_feature_bit(this.ptr, bit);
 		GC.KeepAlive(this);
 		GC.KeepAlive(bit);
@@ -164,7 +164,7 @@ public class InvoiceRequestFeatures : CommonBase {
 	 * 
 	 * [BOLT 9]: https://github.com/lightning/bolts/blob/master/09-features.md
 	 */
-	public Result_NoneNoneZ set_optional_feature_bit(long bit) {
+	public org.ldk.structs.Result_NoneNoneZ set_optional_feature_bit(long bit) {
 		long ret = bindings.InvoiceRequestFeatures_set_optional_feature_bit(this.ptr, bit);
 		GC.KeepAlive(this);
 		GC.KeepAlive(bit);
@@ -182,7 +182,7 @@ public class InvoiceRequestFeatures : CommonBase {
 	 * 
 	 * [bLIP 2]: https://github.com/lightning/blips/blob/master/blip-0002.md#feature-bits
 	 */
-	public Result_NoneNoneZ set_required_custom_bit(long bit) {
+	public org.ldk.structs.Result_NoneNoneZ set_required_custom_bit(long bit) {
 		long ret = bindings.InvoiceRequestFeatures_set_required_custom_bit(this.ptr, bit);
 		GC.KeepAlive(this);
 		GC.KeepAlive(bit);
@@ -200,7 +200,7 @@ public class InvoiceRequestFeatures : CommonBase {
 	 * 
 	 * [bLIP 2]: https://github.com/lightning/blips/blob/master/blip-0002.md#feature-bits
 	 */
-	public Result_NoneNoneZ set_optional_custom_bit(long bit) {
+	public org.ldk.structs.Result_NoneNoneZ set_optional_custom_bit(long bit) {
 		long ret = bindings.InvoiceRequestFeatures_set_optional_custom_bit(this.ptr, bit);
 		GC.KeepAlive(this);
 		GC.KeepAlive(bit);

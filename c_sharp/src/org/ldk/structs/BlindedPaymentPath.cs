@@ -19,7 +19,7 @@ public class BlindedPaymentPath : CommonBase {
 	/**
 	 * The [`BlindedPayInfo`] used to pay this blinded path.
 	 */
-	public BlindedPayInfo get_payinfo() {
+	public org.ldk.structs.BlindedPayInfo get_payinfo() {
 		long ret = bindings.BlindedPaymentPath_get_payinfo(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -46,7 +46,7 @@ public class BlindedPaymentPath : CommonBase {
 	/**
 	 * Creates a copy of the BlindedPaymentPath
 	 */
-	public BlindedPaymentPath clone() {
+	public org.ldk.structs.BlindedPaymentPath clone() {
 		long ret = bindings.BlindedPaymentPath_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -87,7 +87,7 @@ public class BlindedPaymentPath : CommonBase {
 	/**
 	 * Create a one-hop blinded path for a payment.
 	 */
-	public static Result_BlindedPaymentPathNoneZ one_hop(byte[] payee_node_id, org.ldk.structs.ReceiveTlvs payee_tlvs, short min_final_cltv_expiry_delta, org.ldk.structs.EntropySource entropy_source) {
+	public static org.ldk.structs.Result_BlindedPaymentPathNoneZ one_hop(byte[] payee_node_id, org.ldk.structs.ReceiveTlvs payee_tlvs, short min_final_cltv_expiry_delta, org.ldk.structs.EntropySource entropy_source) {
 		long ret = bindings.BlindedPaymentPath_one_hop(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payee_node_id, 33)), payee_tlvs.ptr, min_final_cltv_expiry_delta, entropy_source.ptr);
 		GC.KeepAlive(payee_node_id);
 		GC.KeepAlive(payee_tlvs);
@@ -107,7 +107,7 @@ public class BlindedPaymentPath : CommonBase {
 	 * [`BlindedPayInfo`] calculation results in an integer overflow
 	 * any unknown features are required in the provided [`ForwardTlvs`]
 	 */
-	public static Result_BlindedPaymentPathNoneZ of(PaymentForwardNode[] intermediate_nodes, byte[] payee_node_id, org.ldk.structs.ReceiveTlvs payee_tlvs, long htlc_maximum_msat, short min_final_cltv_expiry_delta, org.ldk.structs.EntropySource entropy_source) {
+	public static org.ldk.structs.Result_BlindedPaymentPathNoneZ of(PaymentForwardNode[] intermediate_nodes, byte[] payee_node_id, org.ldk.structs.ReceiveTlvs payee_tlvs, long htlc_maximum_msat, short min_final_cltv_expiry_delta, org.ldk.structs.EntropySource entropy_source) {
 		long ret = bindings.BlindedPaymentPath_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(intermediate_nodes, intermediate_nodes_conv_20 => intermediate_nodes_conv_20.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payee_node_id, 33)), payee_tlvs.ptr, htlc_maximum_msat, min_final_cltv_expiry_delta, entropy_source.ptr);
 		GC.KeepAlive(intermediate_nodes);
 		GC.KeepAlive(payee_node_id);
@@ -127,7 +127,7 @@ public class BlindedPaymentPath : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public NodeId public_introduction_node_id(org.ldk.structs.ReadOnlyNetworkGraph network_graph) {
+	public org.ldk.structs.NodeId public_introduction_node_id(org.ldk.structs.ReadOnlyNetworkGraph network_graph) {
 		long ret = bindings.BlindedPaymentPath_public_introduction_node_id(this.ptr, network_graph.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(network_graph);
@@ -141,7 +141,7 @@ public class BlindedPaymentPath : CommonBase {
 	/**
 	 * The [`IntroductionNode`] of the blinded path.
 	 */
-	public IntroductionNode introduction_node() {
+	public org.ldk.structs.IntroductionNode introduction_node() {
 		long ret = bindings.BlindedPaymentPath_introduction_node(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -188,7 +188,7 @@ public class BlindedPaymentPath : CommonBase {
 	 * 
 	 * Will only modify `self` when returning `Ok`.
 	 */
-	public Result_NoneNoneZ advance_path_by_one(org.ldk.structs.NodeSigner node_signer, org.ldk.structs.NodeIdLookUp node_id_lookup) {
+	public org.ldk.structs.Result_NoneNoneZ advance_path_by_one(org.ldk.structs.NodeSigner node_signer, org.ldk.structs.NodeIdLookUp node_id_lookup) {
 		long ret = bindings.BlindedPaymentPath_advance_path_by_one(this.ptr, node_signer.ptr, node_id_lookup.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(node_signer);

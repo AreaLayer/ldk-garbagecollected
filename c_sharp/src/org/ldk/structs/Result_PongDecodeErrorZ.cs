@@ -41,7 +41,7 @@ public class Result_PongDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_PongDecodeErrorZ in the success state.
 	 */
-	public static Result_PongDecodeErrorZ ok(org.ldk.structs.Pong o) {
+	public static org.ldk.structs.Result_PongDecodeErrorZ ok(org.ldk.structs.Pong o) {
 		long ret = bindings.CResult_PongDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_PongDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_PongDecodeErrorZ in the error state.
 	 */
-	public static Result_PongDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_PongDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_PongDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_PongDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_PongDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_PongDecodeErrorZ clone() {
+	public org.ldk.structs.Result_PongDecodeErrorZ clone() {
 		long ret = bindings.CResult_PongDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -17,7 +17,7 @@ public interface SignerProviderInterface {
 	 * 
 	 * This method must return a different value each time it is called.
 	 */
-	byte[] generate_channel_keys_id(bool inbound, long channel_value_satoshis, UInt128 user_channel_id);
+	byte[] generate_channel_keys_id(bool inbound, long channel_value_satoshis, org.ldk.util.UInt128 user_channel_id);
 	/**Derives the private key material backing a `Signer`.
 	 * 
 	 * To derive a new `Signer`, a fresh `channel_keys_id` should be obtained through
@@ -156,7 +156,7 @@ public class SignerProvider : CommonBase {
 	 * re-derived from its `channel_keys_id`, which can be obtained through its trait method
 	 * [`ChannelSigner::channel_keys_id`].
 	 */
-	public EcdsaChannelSigner derive_channel_signer(long channel_value_satoshis, byte[] channel_keys_id) {
+	public org.ldk.structs.EcdsaChannelSigner derive_channel_signer(long channel_value_satoshis, byte[] channel_keys_id) {
 		long ret = bindings.SignerProvider_derive_channel_signer(this.ptr, channel_value_satoshis, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(channel_keys_id, 32)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(channel_value_satoshis);
@@ -182,7 +182,7 @@ public class SignerProvider : CommonBase {
 	 * [`ChannelMonitor`]: crate::chain::channelmonitor::ChannelMonitor
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 */
-	public Result_EcdsaChannelSignerDecodeErrorZ read_chan_signer(byte[] reader) {
+	public org.ldk.structs.Result_EcdsaChannelSignerDecodeErrorZ read_chan_signer(byte[] reader) {
 		long ret = bindings.SignerProvider_read_chan_signer(this.ptr, InternalUtils.encodeUint8Array(reader));
 		GC.KeepAlive(this);
 		GC.KeepAlive(reader);
@@ -200,7 +200,7 @@ public class SignerProvider : CommonBase {
 	 * on-chain funds across channels as controlled to the same user. `channel_keys_id` may be
 	 * used to derive a unique value for each channel.
 	 */
-	public Result_CVec_u8ZNoneZ get_destination_script(byte[] channel_keys_id) {
+	public org.ldk.structs.Result_CVec_u8ZNoneZ get_destination_script(byte[] channel_keys_id) {
 		long ret = bindings.SignerProvider_get_destination_script(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(channel_keys_id, 32)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(channel_keys_id);
@@ -219,7 +219,7 @@ public class SignerProvider : CommonBase {
 	 * This method should return a different value each time it is called, to avoid linking
 	 * on-chain funds across channels as controlled to the same user.
 	 */
-	public Result_ShutdownScriptNoneZ get_shutdown_scriptpubkey() {
+	public org.ldk.structs.Result_ShutdownScriptNoneZ get_shutdown_scriptpubkey() {
 		long ret = bindings.SignerProvider_get_shutdown_scriptpubkey(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -33,7 +33,7 @@ public class PhantomKeysManager : CommonBase {
 	 * Constructs a new EntropySource which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned EntropySource must be freed before this_arg is
 	 */
-	public EntropySource as_EntropySource() {
+	public org.ldk.structs.EntropySource as_EntropySource() {
 		long ret = bindings.PhantomKeysManager_as_EntropySource(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -46,7 +46,7 @@ public class PhantomKeysManager : CommonBase {
 	 * Constructs a new NodeSigner which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned NodeSigner must be freed before this_arg is
 	 */
-	public NodeSigner as_NodeSigner() {
+	public org.ldk.structs.NodeSigner as_NodeSigner() {
 		long ret = bindings.PhantomKeysManager_as_NodeSigner(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -59,7 +59,7 @@ public class PhantomKeysManager : CommonBase {
 	 * Constructs a new OutputSpender which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned OutputSpender must be freed before this_arg is
 	 */
-	public OutputSpender as_OutputSpender() {
+	public org.ldk.structs.OutputSpender as_OutputSpender() {
 		long ret = bindings.PhantomKeysManager_as_OutputSpender(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -72,7 +72,7 @@ public class PhantomKeysManager : CommonBase {
 	 * Constructs a new SignerProvider which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned SignerProvider must be freed before this_arg is
 	 */
-	public SignerProvider as_SignerProvider() {
+	public org.ldk.structs.SignerProvider as_SignerProvider() {
 		long ret = bindings.PhantomKeysManager_as_SignerProvider(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -94,7 +94,7 @@ public class PhantomKeysManager : CommonBase {
 	 * 
 	 * [phantom node payments]: PhantomKeysManager
 	 */
-	public static PhantomKeysManager of(byte[] seed, long starting_time_secs, int starting_time_nanos, byte[] cross_node_seed) {
+	public static org.ldk.structs.PhantomKeysManager of(byte[] seed, long starting_time_secs, int starting_time_nanos, byte[] cross_node_seed) {
 		long ret = bindings.PhantomKeysManager_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(seed, 32)), starting_time_secs, starting_time_nanos, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(cross_node_seed, 32)));
 		GC.KeepAlive(seed);
 		GC.KeepAlive(starting_time_secs);
@@ -109,7 +109,7 @@ public class PhantomKeysManager : CommonBase {
 	/**
 	 * See [`KeysManager::derive_channel_keys`] for documentation on this method.
 	 */
-	public InMemorySigner derive_channel_keys(long channel_value_satoshis, byte[] _params) {
+	public org.ldk.structs.InMemorySigner derive_channel_keys(long channel_value_satoshis, byte[] _params) {
 		long ret = bindings.PhantomKeysManager_derive_channel_keys(this.ptr, channel_value_satoshis, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(_params, 32)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(channel_value_satoshis);

@@ -39,7 +39,7 @@ public class Option_OutboundHTLCStateDetailsZ : CommonBase {
 	/**
 	 * Constructs a new COption_OutboundHTLCStateDetailsZ containing a crate::lightning::ln::channel_state::OutboundHTLCStateDetails
 	 */
-	public static Option_OutboundHTLCStateDetailsZ some(OutboundHTLCStateDetails o) {
+	public static org.ldk.structs.Option_OutboundHTLCStateDetailsZ some(OutboundHTLCStateDetails o) {
 		long ret = bindings.COption_OutboundHTLCStateDetailsZ_some(o);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -51,7 +51,7 @@ public class Option_OutboundHTLCStateDetailsZ : CommonBase {
 	/**
 	 * Constructs a new COption_OutboundHTLCStateDetailsZ containing nothing
 	 */
-	public static Option_OutboundHTLCStateDetailsZ none() {
+	public static org.ldk.structs.Option_OutboundHTLCStateDetailsZ none() {
 		long ret = bindings.COption_OutboundHTLCStateDetailsZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_OutboundHTLCStateDetailsZ ret_hu_conv = org.ldk.structs.Option_OutboundHTLCStateDetailsZ.constr_from_ptr(ret);
@@ -69,7 +69,7 @@ public class Option_OutboundHTLCStateDetailsZ : CommonBase {
 	 * Creates a new COption_OutboundHTLCStateDetailsZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_OutboundHTLCStateDetailsZ clone() {
+	public org.ldk.structs.Option_OutboundHTLCStateDetailsZ clone() {
 		long ret = bindings.COption_OutboundHTLCStateDetailsZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

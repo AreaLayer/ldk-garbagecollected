@@ -36,7 +36,7 @@ public class Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ in the success state.
 	 */
-	public static Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ ok(org.ldk.structs.TwoTuple_ThirtyTwoBytesThirtyTwoBytesZ o) {
+	public static org.ldk.structs.Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ ok(org.ldk.structs.TwoTuple_ThirtyTwoBytesThirtyTwoBytesZ o) {
 		long ret = bindings.CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -47,7 +47,7 @@ public class Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ in the error state.
 	 */
-	public static Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ err() {
+	public static org.ldk.structs.Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ err() {
 		long ret = bindings.CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ_err();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ ret_hu_conv = Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ.constr_from_ptr(ret);
@@ -73,7 +73,7 @@ public class Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ : CommonBase {
 	 * Creates a new CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ clone() {
+	public org.ldk.structs.Result_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ clone() {
 		long ret = bindings.CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

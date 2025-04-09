@@ -36,7 +36,7 @@ public class Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ : CommonBas
 	/**
 	 * Creates a new CResult_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ in the success state.
 	 */
-	public static Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ ok(org.ldk.structs.TwoTuple_ECDSASignatureCVec_ECDSASignatureZZ o) {
+	public static org.ldk.structs.Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ ok(org.ldk.structs.TwoTuple_ECDSASignatureCVec_ECDSASignatureZZ o) {
 		long ret = bindings.CResult_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -47,7 +47,7 @@ public class Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ : CommonBas
 	/**
 	 * Creates a new CResult_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ in the error state.
 	 */
-	public static Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ err() {
+	public static org.ldk.structs.Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ err() {
 		long ret = bindings.CResult_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ_err();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ ret_hu_conv = Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ.constr_from_ptr(ret);
@@ -73,7 +73,7 @@ public class Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ : CommonBas
 	 * Creates a new CResult_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ clone() {
+	public org.ldk.structs.Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ clone() {
 		long ret = bindings.CResult_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

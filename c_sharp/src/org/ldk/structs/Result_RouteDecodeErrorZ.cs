@@ -41,7 +41,7 @@ public class Result_RouteDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_RouteDecodeErrorZ in the success state.
 	 */
-	public static Result_RouteDecodeErrorZ ok(org.ldk.structs.Route o) {
+	public static org.ldk.structs.Result_RouteDecodeErrorZ ok(org.ldk.structs.Route o) {
 		long ret = bindings.CResult_RouteDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_RouteDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_RouteDecodeErrorZ in the error state.
 	 */
-	public static Result_RouteDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_RouteDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_RouteDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_RouteDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_RouteDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_RouteDecodeErrorZ clone() {
+	public org.ldk.structs.Result_RouteDecodeErrorZ clone() {
 		long ret = bindings.CResult_RouteDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

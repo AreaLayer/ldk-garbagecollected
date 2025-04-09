@@ -34,7 +34,7 @@ public class ChannelMonitor : CommonBase {
 	/**
 	 * Creates a copy of the ChannelMonitor
 	 */
-	public ChannelMonitor clone() {
+	public org.ldk.structs.ChannelMonitor clone() {
 		long ret = bindings.ChannelMonitor_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -60,7 +60,7 @@ public class ChannelMonitor : CommonBase {
 	 * 
 	 * panics if the given update is not the next update by update_id.
 	 */
-	public Result_NoneNoneZ update_monitor(org.ldk.structs.ChannelMonitorUpdate updates, org.ldk.structs.BroadcasterInterface broadcaster, org.ldk.structs.FeeEstimator fee_estimator, org.ldk.structs.Logger logger) {
+	public org.ldk.structs.Result_NoneNoneZ update_monitor(org.ldk.structs.ChannelMonitorUpdate updates, org.ldk.structs.BroadcasterInterface broadcaster, org.ldk.structs.FeeEstimator fee_estimator, org.ldk.structs.Logger logger) {
 		long ret = bindings.ChannelMonitor_update_monitor(this.ptr, updates.ptr, broadcaster.ptr, fee_estimator.ptr, logger.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(updates);
@@ -91,7 +91,7 @@ public class ChannelMonitor : CommonBase {
 	/**
 	 * Gets the funding transaction outpoint of the channel this ChannelMonitor is monitoring for.
 	 */
-	public TwoTuple_OutPointCVec_u8ZZ get_funding_txo() {
+	public org.ldk.structs.TwoTuple_OutPointCVec_u8ZZ get_funding_txo() {
 		long ret = bindings.ChannelMonitor_get_funding_txo(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -103,7 +103,7 @@ public class ChannelMonitor : CommonBase {
 	/**
 	 * Gets the channel_id of the channel this ChannelMonitor is monitoring for.
 	 */
-	public ChannelId channel_id() {
+	public org.ldk.structs.ChannelId channel_id() {
 		long ret = bindings.ChannelMonitor_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -183,7 +183,7 @@ public class ChannelMonitor : CommonBase {
 	 * [`SpendableOutputs`]: crate::events::Event::SpendableOutputs
 	 * [`BumpTransaction`]: crate::events::Event::BumpTransaction
 	 */
-	public Result_NoneReplayEventZ process_pending_events(org.ldk.structs.EventHandler handler, org.ldk.structs.Logger logger) {
+	public org.ldk.structs.Result_NoneReplayEventZ process_pending_events(org.ldk.structs.EventHandler handler, org.ldk.structs.Logger logger) {
 		long ret = bindings.ChannelMonitor_process_pending_events(this.ptr, handler.ptr, logger.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(handler);
@@ -211,7 +211,7 @@ public class ChannelMonitor : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public CommitmentTransaction initial_counterparty_commitment_tx() {
+	public org.ldk.structs.CommitmentTransaction initial_counterparty_commitment_tx() {
 		long ret = bindings.ChannelMonitor_initial_counterparty_commitment_tx(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -279,7 +279,7 @@ public class ChannelMonitor : CommonBase {
 	 * [`EcdsaChannelSigner::sign_justice_revoked_output`]: crate::sign::ecdsa::EcdsaChannelSigner::sign_justice_revoked_output
 	 * [`Persist`]: crate::chain::chainmonitor::Persist
 	 */
-	public Result_TransactionNoneZ sign_to_local_justice_tx(byte[] justice_tx, long input_idx, long value, long commitment_number) {
+	public org.ldk.structs.Result_TransactionNoneZ sign_to_local_justice_tx(byte[] justice_tx, long input_idx, long value, long commitment_number) {
 		long ret = bindings.ChannelMonitor_sign_to_local_justice_tx(this.ptr, InternalUtils.encodeUint8Array(justice_tx), input_idx, value, commitment_number);
 		GC.KeepAlive(this);
 		GC.KeepAlive(justice_tx);
@@ -494,7 +494,7 @@ public class ChannelMonitor : CommonBase {
 	 * Gets the latest best block which was connected either via the [`chain::Listen`] or
 	 * [`chain::Confirm`] interfaces.
 	 */
-	public BestBlock current_best_block() {
+	public org.ldk.structs.BestBlock current_best_block() {
 		long ret = bindings.ChannelMonitor_current_best_block(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -599,7 +599,7 @@ public class ChannelMonitor : CommonBase {
 	 * least [`ARCHIVAL_DELAY_BLOCKS`] blocks as an additional protection against any bugs
 	 * resulting in spuriously empty balance sets.
 	 */
-	public TwoTuple_boolboolZ check_and_update_full_resolution_status(org.ldk.structs.Logger logger) {
+	public org.ldk.structs.TwoTuple_boolboolZ check_and_update_full_resolution_status(org.ldk.structs.Logger logger) {
 		long ret = bindings.ChannelMonitor_check_and_update_full_resolution_status(this.ptr, logger.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(logger);

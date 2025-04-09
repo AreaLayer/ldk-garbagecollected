@@ -35,7 +35,7 @@ public class NodeAlias : CommonBase {
 	/**
 	 * Constructs a new NodeAlias given each field
 	 */
-	public static NodeAlias of(byte[] a_arg) {
+	public static org.ldk.structs.NodeAlias of(byte[] a_arg) {
 		long ret = bindings.NodeAlias_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a_arg, 32)));
 		GC.KeepAlive(a_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -53,7 +53,7 @@ public class NodeAlias : CommonBase {
 	/**
 	 * Creates a copy of the NodeAlias
 	 */
-	public NodeAlias clone() {
+	public org.ldk.structs.NodeAlias clone() {
 		long ret = bindings.NodeAlias_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -116,7 +116,7 @@ public class NodeAlias : CommonBase {
 	/**
 	 * Read a NodeAlias from a byte array, created by NodeAlias_write
 	 */
-	public static Result_NodeAliasDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_NodeAliasDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.NodeAlias_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

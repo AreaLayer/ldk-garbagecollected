@@ -26,7 +26,7 @@ public class InvoiceError : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ErroneousField get_erroneous_field() {
+	public org.ldk.structs.ErroneousField get_erroneous_field() {
 		long ret = bindings.InvoiceError_get_erroneous_field(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class InvoiceError : CommonBase {
 	/**
 	 * An explanation of the error.
 	 */
-	public UntrustedString get_message() {
+	public org.ldk.structs.UntrustedString get_message() {
 		long ret = bindings.InvoiceError_get_message(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -75,7 +75,7 @@ public class InvoiceError : CommonBase {
 	 * 
 	 * Note that erroneous_field_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static InvoiceError of(org.ldk.structs.ErroneousField erroneous_field_arg, org.ldk.structs.UntrustedString message_arg) {
+	public static org.ldk.structs.InvoiceError of(org.ldk.structs.ErroneousField erroneous_field_arg, org.ldk.structs.UntrustedString message_arg) {
 		long ret = bindings.InvoiceError_new(erroneous_field_arg == null ? 0 : erroneous_field_arg.ptr, message_arg.ptr);
 		GC.KeepAlive(erroneous_field_arg);
 		GC.KeepAlive(message_arg);
@@ -94,7 +94,7 @@ public class InvoiceError : CommonBase {
 	/**
 	 * Creates a copy of the InvoiceError
 	 */
-	public InvoiceError clone() {
+	public org.ldk.structs.InvoiceError clone() {
 		long ret = bindings.InvoiceError_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -106,7 +106,7 @@ public class InvoiceError : CommonBase {
 	/**
 	 * Creates an [`InvoiceError`] with the given message.
 	 */
-	public static InvoiceError from_string(string s) {
+	public static org.ldk.structs.InvoiceError from_string(string s) {
 		long ret = bindings.InvoiceError_from_string(InternalUtils.encodeString(s));
 		GC.KeepAlive(s);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -140,7 +140,7 @@ public class InvoiceError : CommonBase {
 	/**
 	 * Read a InvoiceError from a byte array, created by InvoiceError_write
 	 */
-	public static Result_InvoiceErrorDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_InvoiceErrorDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.InvoiceError_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

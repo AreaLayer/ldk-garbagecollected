@@ -45,7 +45,7 @@ public class Result_CVec_C3Tuple_StrStrStrZZIOErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_CVec_C3Tuple_StrStrStrZZIOErrorZ in the success state.
 	 */
-	public static Result_CVec_C3Tuple_StrStrStrZZIOErrorZ ok(ThreeTuple_StrStrStrZ[] o) {
+	public static org.ldk.structs.Result_CVec_C3Tuple_StrStrStrZZIOErrorZ ok(ThreeTuple_StrStrStrZ[] o) {
 		long ret = bindings.CResult_CVec_C3Tuple_StrStrStrZZIOErrorZ_ok(InternalUtils.encodeUint64Array(InternalUtils.mapArray(o, o_conv_23 => o_conv_23.ptr)));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -56,7 +56,7 @@ public class Result_CVec_C3Tuple_StrStrStrZZIOErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_CVec_C3Tuple_StrStrStrZZIOErrorZ in the error state.
 	 */
-	public static Result_CVec_C3Tuple_StrStrStrZZIOErrorZ err(IOError e) {
+	public static org.ldk.structs.Result_CVec_C3Tuple_StrStrStrZZIOErrorZ err(IOError e) {
 		long ret = bindings.CResult_CVec_C3Tuple_StrStrStrZZIOErrorZ_err(e);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -83,7 +83,7 @@ public class Result_CVec_C3Tuple_StrStrStrZZIOErrorZ : CommonBase {
 	 * Creates a new CResult_CVec_C3Tuple_StrStrStrZZIOErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_CVec_C3Tuple_StrStrStrZZIOErrorZ clone() {
+	public org.ldk.structs.Result_CVec_C3Tuple_StrStrStrZZIOErrorZ clone() {
 		long ret = bindings.CResult_CVec_C3Tuple_StrStrStrZZIOErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

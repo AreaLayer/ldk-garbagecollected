@@ -24,7 +24,7 @@ public class NodeId : CommonBase {
 	/**
 	 * Creates a copy of the NodeId
 	 */
-	public NodeId clone() {
+	public org.ldk.structs.NodeId clone() {
 		long ret = bindings.NodeId_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -53,7 +53,7 @@ public class NodeId : CommonBase {
 	/**
 	 * Create a new NodeId from a public key
 	 */
-	public static NodeId from_pubkey(byte[] pubkey) {
+	public static org.ldk.structs.NodeId from_pubkey(byte[] pubkey) {
 		long ret = bindings.NodeId_from_pubkey(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(pubkey, 33)));
 		GC.KeepAlive(pubkey);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -65,7 +65,7 @@ public class NodeId : CommonBase {
 	/**
 	 * Create a new NodeId from a slice of bytes
 	 */
-	public static Result_NodeIdDecodeErrorZ from_slice(byte[] bytes) {
+	public static org.ldk.structs.Result_NodeIdDecodeErrorZ from_slice(byte[] bytes) {
 		long ret = bindings.NodeId_from_slice(InternalUtils.encodeUint8Array(bytes));
 		GC.KeepAlive(bytes);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -98,7 +98,7 @@ public class NodeId : CommonBase {
 	/**
 	 * Get the public key from this NodeId
 	 */
-	public Result_PublicKeySecp256k1ErrorZ as_pubkey() {
+	public org.ldk.structs.Result_PublicKeySecp256k1ErrorZ as_pubkey() {
 		long ret = bindings.NodeId_as_pubkey(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -143,7 +143,7 @@ public class NodeId : CommonBase {
 	/**
 	 * Read a NodeId from a byte array, created by NodeId_write
 	 */
-	public static Result_NodeIdDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_NodeIdDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.NodeId_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

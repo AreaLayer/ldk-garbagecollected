@@ -89,7 +89,7 @@ public class BackgroundProcessor : CommonBase {
 	 * [`NetworkGraph`]: lightning::routing::gossip::NetworkGraph
 	 * [`NetworkGraph::write`]: lightning::routing::gossip::NetworkGraph#impl-Writeable
 	 */
-	public static BackgroundProcessor start(org.ldk.structs.Persister persister, org.ldk.structs.EventHandler event_handler, org.ldk.structs.ChainMonitor chain_monitor, org.ldk.structs.ChannelManager channel_manager, org.ldk.structs.OnionMessenger onion_messenger, org.ldk.structs.GossipSync gossip_sync, org.ldk.structs.PeerManager peer_manager, org.ldk.structs.Logger logger, org.ldk.structs.Option_WriteableScoreZ scorer) {
+	public static org.ldk.structs.BackgroundProcessor start(org.ldk.structs.Persister persister, org.ldk.structs.EventHandler event_handler, org.ldk.structs.ChainMonitor chain_monitor, org.ldk.structs.ChannelManager channel_manager, org.ldk.structs.OnionMessenger onion_messenger, org.ldk.structs.GossipSync gossip_sync, org.ldk.structs.PeerManager peer_manager, org.ldk.structs.Logger logger, org.ldk.structs.Option_WriteableScoreZ scorer) {
 		long ret = bindings.BackgroundProcessor_start(persister.ptr, event_handler.ptr, chain_monitor.ptr, channel_manager.ptr, onion_messenger.ptr, gossip_sync.ptr, peer_manager.ptr, logger.ptr, scorer.ptr);
 		GC.KeepAlive(persister);
 		GC.KeepAlive(event_handler);
@@ -126,7 +126,7 @@ public class BackgroundProcessor : CommonBase {
 	 * 
 	 * [`ChannelManager`]: lightning::ln::channelmanager::ChannelManager
 	 */
-	public Result_NoneIOErrorZ join() {
+	public org.ldk.structs.Result_NoneIOErrorZ join() {
 		long ret = bindings.BackgroundProcessor_join(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -154,7 +154,7 @@ public class BackgroundProcessor : CommonBase {
 	 * 
 	 * [`ChannelManager`]: lightning::ln::channelmanager::ChannelManager
 	 */
-	public Result_NoneIOErrorZ stop() {
+	public org.ldk.structs.Result_NoneIOErrorZ stop() {
 		long ret = bindings.BackgroundProcessor_stop(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -27,7 +27,7 @@ public interface PersistInterface {
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 * [`Writeable::write`]: crate::util::ser::Writeable::write
 	 */
-	ChannelMonitorUpdateStatus persist_new_channel(OutPoint channel_funding_outpoint, ChannelMonitor monitor);
+	ChannelMonitorUpdateStatus persist_new_channel(org.ldk.structs.OutPoint channel_funding_outpoint, org.ldk.structs.ChannelMonitor monitor);
 	/**Update one channel's data. The provided [`ChannelMonitor`] has already applied the given
 	 * update.
 	 * 
@@ -68,7 +68,7 @@ public interface PersistInterface {
 	 * 
 	 * Note that monitor_update (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	ChannelMonitorUpdateStatus update_persisted_channel(OutPoint channel_funding_outpoint, ChannelMonitorUpdate monitor_update, ChannelMonitor monitor);
+	ChannelMonitorUpdateStatus update_persisted_channel(org.ldk.structs.OutPoint channel_funding_outpoint, org.ldk.structs.ChannelMonitorUpdate monitor_update, org.ldk.structs.ChannelMonitor monitor);
 	/**Prevents the channel monitor from being loaded on startup.
 	 * 
 	 * Archiving the data in a backup location (rather than deleting it fully) is useful for
@@ -81,7 +81,7 @@ public interface PersistInterface {
 	 * restart, this method must in that case be idempotent, ensuring it can handle scenarios where
 	 * the monitor already exists in the archive.
 	 */
-	void archive_persisted_channel(OutPoint channel_funding_outpoint);
+	void archive_persisted_channel(org.ldk.structs.OutPoint channel_funding_outpoint);
 }
 
 /**

@@ -21,7 +21,7 @@ public class TxInitRbf : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.TxInitRbf_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class TxInitRbf : CommonBase {
 	 * The number of satoshis the sender will contribute to or, if negative, remove from
 	 * (e.g. splice-out) the funding output of the transaction
 	 */
-	public Option_i64Z get_funding_output_contribution() {
+	public org.ldk.structs.Option_i64Z get_funding_output_contribution() {
 		long ret = bindings.TxInitRbf_get_funding_output_contribution(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -101,7 +101,7 @@ public class TxInitRbf : CommonBase {
 	/**
 	 * Constructs a new TxInitRbf given each field
 	 */
-	public static TxInitRbf of(org.ldk.structs.ChannelId channel_id_arg, int locktime_arg, int feerate_sat_per_1000_weight_arg, org.ldk.structs.Option_i64Z funding_output_contribution_arg) {
+	public static org.ldk.structs.TxInitRbf of(org.ldk.structs.ChannelId channel_id_arg, int locktime_arg, int feerate_sat_per_1000_weight_arg, org.ldk.structs.Option_i64Z funding_output_contribution_arg) {
 		long ret = bindings.TxInitRbf_new(channel_id_arg.ptr, locktime_arg, feerate_sat_per_1000_weight_arg, funding_output_contribution_arg.ptr);
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(locktime_arg);
@@ -122,7 +122,7 @@ public class TxInitRbf : CommonBase {
 	/**
 	 * Creates a copy of the TxInitRbf
 	 */
-	public TxInitRbf clone() {
+	public org.ldk.structs.TxInitRbf clone() {
 		long ret = bindings.TxInitRbf_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -174,7 +174,7 @@ public class TxInitRbf : CommonBase {
 	/**
 	 * Read a TxInitRbf from a byte array, created by TxInitRbf_write
 	 */
-	public static Result_TxInitRbfDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_TxInitRbfDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.TxInitRbf_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -36,7 +36,7 @@ public class ErrorAction : CommonBase {
 		 * 
 		 * Note that this (or a relevant inner pointer) may be NULL or all-0s to represent None
 		 */
-		public ErrorMessage msg;
+		public org.ldk.structs.ErrorMessage msg;
 		internal ErrorAction_DisconnectPeer(long ptr) : base(null, ptr) {
 			long msg = bindings.LDKErrorAction_DisconnectPeer_get_msg(ptr);
 			org.ldk.structs.ErrorMessage msg_hu_conv = null; if (msg < 0 || msg > 4096) { msg_hu_conv = new org.ldk.structs.ErrorMessage(null, msg); }
@@ -49,7 +49,7 @@ public class ErrorAction : CommonBase {
 		/**
 		 * A warning message which we should make an effort to send before we disconnect.
 		 */
-		public WarningMessage msg;
+		public org.ldk.structs.WarningMessage msg;
 		internal ErrorAction_DisconnectPeerWithWarning(long ptr) : base(null, ptr) {
 			long msg = bindings.LDKErrorAction_DisconnectPeerWithWarning_get_msg(ptr);
 			org.ldk.structs.WarningMessage msg_hu_conv = null; if (msg < 0 || msg > 4096) { msg_hu_conv = new org.ldk.structs.WarningMessage(null, msg); }
@@ -79,7 +79,7 @@ public class ErrorAction : CommonBase {
 		/**
 		 * The message to send.
 		 */
-		public ErrorMessage msg;
+		public org.ldk.structs.ErrorMessage msg;
 		internal ErrorAction_SendErrorMessage(long ptr) : base(null, ptr) {
 			long msg = bindings.LDKErrorAction_SendErrorMessage_get_msg(ptr);
 			org.ldk.structs.ErrorMessage msg_hu_conv = null; if (msg < 0 || msg > 4096) { msg_hu_conv = new org.ldk.structs.ErrorMessage(null, msg); }
@@ -92,7 +92,7 @@ public class ErrorAction : CommonBase {
 		/**
 		 * The message to send.
 		 */
-		public WarningMessage msg;
+		public org.ldk.structs.WarningMessage msg;
 		/**
 		 * The peer may have done something harmless that we weren't able to meaningfully process,
 		 * though we should still tell them about it.
@@ -116,7 +116,7 @@ public class ErrorAction : CommonBase {
 	/**
 	 * Creates a copy of the ErrorAction
 	 */
-	public ErrorAction clone() {
+	public org.ldk.structs.ErrorAction clone() {
 		long ret = bindings.ErrorAction_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -128,7 +128,7 @@ public class ErrorAction : CommonBase {
 	/**
 	 * Utility method to constructs a new DisconnectPeer-variant ErrorAction
 	 */
-	public static ErrorAction disconnect_peer(org.ldk.structs.ErrorMessage msg) {
+	public static org.ldk.structs.ErrorAction disconnect_peer(org.ldk.structs.ErrorMessage msg) {
 		long ret = bindings.ErrorAction_disconnect_peer(msg.ptr);
 		GC.KeepAlive(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -140,7 +140,7 @@ public class ErrorAction : CommonBase {
 	/**
 	 * Utility method to constructs a new DisconnectPeerWithWarning-variant ErrorAction
 	 */
-	public static ErrorAction disconnect_peer_with_warning(org.ldk.structs.WarningMessage msg) {
+	public static org.ldk.structs.ErrorAction disconnect_peer_with_warning(org.ldk.structs.WarningMessage msg) {
 		long ret = bindings.ErrorAction_disconnect_peer_with_warning(msg.ptr);
 		GC.KeepAlive(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -152,7 +152,7 @@ public class ErrorAction : CommonBase {
 	/**
 	 * Utility method to constructs a new IgnoreError-variant ErrorAction
 	 */
-	public static ErrorAction ignore_error() {
+	public static org.ldk.structs.ErrorAction ignore_error() {
 		long ret = bindings.ErrorAction_ignore_error();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ErrorAction ret_hu_conv = org.ldk.structs.ErrorAction.constr_from_ptr(ret);
@@ -163,7 +163,7 @@ public class ErrorAction : CommonBase {
 	/**
 	 * Utility method to constructs a new IgnoreAndLog-variant ErrorAction
 	 */
-	public static ErrorAction ignore_and_log(Level a) {
+	public static org.ldk.structs.ErrorAction ignore_and_log(Level a) {
 		long ret = bindings.ErrorAction_ignore_and_log(a);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -175,7 +175,7 @@ public class ErrorAction : CommonBase {
 	/**
 	 * Utility method to constructs a new IgnoreDuplicateGossip-variant ErrorAction
 	 */
-	public static ErrorAction ignore_duplicate_gossip() {
+	public static org.ldk.structs.ErrorAction ignore_duplicate_gossip() {
 		long ret = bindings.ErrorAction_ignore_duplicate_gossip();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ErrorAction ret_hu_conv = org.ldk.structs.ErrorAction.constr_from_ptr(ret);
@@ -186,7 +186,7 @@ public class ErrorAction : CommonBase {
 	/**
 	 * Utility method to constructs a new SendErrorMessage-variant ErrorAction
 	 */
-	public static ErrorAction send_error_message(org.ldk.structs.ErrorMessage msg) {
+	public static org.ldk.structs.ErrorAction send_error_message(org.ldk.structs.ErrorMessage msg) {
 		long ret = bindings.ErrorAction_send_error_message(msg.ptr);
 		GC.KeepAlive(msg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -198,7 +198,7 @@ public class ErrorAction : CommonBase {
 	/**
 	 * Utility method to constructs a new SendWarningMessage-variant ErrorAction
 	 */
-	public static ErrorAction send_warning_message(org.ldk.structs.WarningMessage msg, Level log_level) {
+	public static org.ldk.structs.ErrorAction send_warning_message(org.ldk.structs.WarningMessage msg, Level log_level) {
 		long ret = bindings.ErrorAction_send_warning_message(msg.ptr, log_level);
 		GC.KeepAlive(msg);
 		GC.KeepAlive(log_level);

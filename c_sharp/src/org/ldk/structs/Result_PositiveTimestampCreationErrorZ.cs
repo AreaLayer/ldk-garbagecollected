@@ -38,7 +38,7 @@ public class Result_PositiveTimestampCreationErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_PositiveTimestampCreationErrorZ in the success state.
 	 */
-	public static Result_PositiveTimestampCreationErrorZ ok(org.ldk.structs.PositiveTimestamp o) {
+	public static org.ldk.structs.Result_PositiveTimestampCreationErrorZ ok(org.ldk.structs.PositiveTimestamp o) {
 		long ret = bindings.CResult_PositiveTimestampCreationErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -49,7 +49,7 @@ public class Result_PositiveTimestampCreationErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_PositiveTimestampCreationErrorZ in the error state.
 	 */
-	public static Result_PositiveTimestampCreationErrorZ err(CreationError e) {
+	public static org.ldk.structs.Result_PositiveTimestampCreationErrorZ err(CreationError e) {
 		long ret = bindings.CResult_PositiveTimestampCreationErrorZ_err(e);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -76,7 +76,7 @@ public class Result_PositiveTimestampCreationErrorZ : CommonBase {
 	 * Creates a new CResult_PositiveTimestampCreationErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_PositiveTimestampCreationErrorZ clone() {
+	public org.ldk.structs.Result_PositiveTimestampCreationErrorZ clone() {
 		long ret = bindings.CResult_PositiveTimestampCreationErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -44,7 +44,7 @@ public class PublicHopCandidate : CommonBase {
 	/**
 	 * Creates a copy of the PublicHopCandidate
 	 */
-	public PublicHopCandidate clone() {
+	public org.ldk.structs.PublicHopCandidate clone() {
 		long ret = bindings.PublicHopCandidate_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

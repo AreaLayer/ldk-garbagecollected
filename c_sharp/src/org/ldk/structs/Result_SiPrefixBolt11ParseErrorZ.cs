@@ -38,7 +38,7 @@ public class Result_SiPrefixBolt11ParseErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_SiPrefixBolt11ParseErrorZ in the success state.
 	 */
-	public static Result_SiPrefixBolt11ParseErrorZ ok(SiPrefix o) {
+	public static org.ldk.structs.Result_SiPrefixBolt11ParseErrorZ ok(SiPrefix o) {
 		long ret = bindings.CResult_SiPrefixBolt11ParseErrorZ_ok(o);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -49,7 +49,7 @@ public class Result_SiPrefixBolt11ParseErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_SiPrefixBolt11ParseErrorZ in the error state.
 	 */
-	public static Result_SiPrefixBolt11ParseErrorZ err(org.ldk.structs.Bolt11ParseError e) {
+	public static org.ldk.structs.Result_SiPrefixBolt11ParseErrorZ err(org.ldk.structs.Bolt11ParseError e) {
 		long ret = bindings.CResult_SiPrefixBolt11ParseErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -76,7 +76,7 @@ public class Result_SiPrefixBolt11ParseErrorZ : CommonBase {
 	 * Creates a new CResult_SiPrefixBolt11ParseErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_SiPrefixBolt11ParseErrorZ clone() {
+	public org.ldk.structs.Result_SiPrefixBolt11ParseErrorZ clone() {
 		long ret = bindings.CResult_SiPrefixBolt11ParseErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

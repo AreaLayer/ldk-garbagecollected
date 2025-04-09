@@ -36,7 +36,7 @@ public class Result_TransactionU16LenLimitedNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_TransactionU16LenLimitedNoneZ in the success state.
 	 */
-	public static Result_TransactionU16LenLimitedNoneZ ok(org.ldk.structs.TransactionU16LenLimited o) {
+	public static org.ldk.structs.Result_TransactionU16LenLimitedNoneZ ok(org.ldk.structs.TransactionU16LenLimited o) {
 		long ret = bindings.CResult_TransactionU16LenLimitedNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -47,7 +47,7 @@ public class Result_TransactionU16LenLimitedNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_TransactionU16LenLimitedNoneZ in the error state.
 	 */
-	public static Result_TransactionU16LenLimitedNoneZ err() {
+	public static org.ldk.structs.Result_TransactionU16LenLimitedNoneZ err() {
 		long ret = bindings.CResult_TransactionU16LenLimitedNoneZ_err();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_TransactionU16LenLimitedNoneZ ret_hu_conv = Result_TransactionU16LenLimitedNoneZ.constr_from_ptr(ret);
@@ -73,7 +73,7 @@ public class Result_TransactionU16LenLimitedNoneZ : CommonBase {
 	 * Creates a new CResult_TransactionU16LenLimitedNoneZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_TransactionU16LenLimitedNoneZ clone() {
+	public org.ldk.structs.Result_TransactionU16LenLimitedNoneZ clone() {
 		long ret = bindings.CResult_TransactionU16LenLimitedNoneZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

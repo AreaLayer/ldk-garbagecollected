@@ -18,7 +18,7 @@ public class ReleaseHeldHtlc : CommonBase {
 	/**
 	 * Constructs a new ReleaseHeldHtlc given each field
 	 */
-	public static ReleaseHeldHtlc of() {
+	public static org.ldk.structs.ReleaseHeldHtlc of() {
 		long ret = bindings.ReleaseHeldHtlc_new();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ReleaseHeldHtlc ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ReleaseHeldHtlc(null, ret); }
@@ -35,7 +35,7 @@ public class ReleaseHeldHtlc : CommonBase {
 	/**
 	 * Creates a copy of the ReleaseHeldHtlc
 	 */
-	public ReleaseHeldHtlc clone() {
+	public org.ldk.structs.ReleaseHeldHtlc clone() {
 		long ret = bindings.ReleaseHeldHtlc_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -48,7 +48,7 @@ public class ReleaseHeldHtlc : CommonBase {
 	 * Constructs a new OnionMessageContents which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned OnionMessageContents must be freed before this_arg is
 	 */
-	public OnionMessageContents as_OnionMessageContents() {
+	public org.ldk.structs.OnionMessageContents as_OnionMessageContents() {
 		long ret = bindings.ReleaseHeldHtlc_as_OnionMessageContents(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -71,7 +71,7 @@ public class ReleaseHeldHtlc : CommonBase {
 	/**
 	 * Read a ReleaseHeldHtlc from a byte array, created by ReleaseHeldHtlc_write
 	 */
-	public static Result_ReleaseHeldHtlcDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ReleaseHeldHtlcDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.ReleaseHeldHtlc_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

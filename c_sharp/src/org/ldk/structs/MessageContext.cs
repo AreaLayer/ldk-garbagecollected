@@ -32,7 +32,7 @@ public class MessageContext : CommonBase {
 
 	/** A MessageContext of type Offers */
 	public class MessageContext_Offers : MessageContext {
-		public OffersContext offers;
+		public org.ldk.structs.OffersContext offers;
 		internal MessageContext_Offers(long ptr) : base(null, ptr) {
 			long offers = bindings.LDKMessageContext_Offers_get_offers(ptr);
 			org.ldk.structs.OffersContext offers_hu_conv = org.ldk.structs.OffersContext.constr_from_ptr(offers);
@@ -42,7 +42,7 @@ public class MessageContext : CommonBase {
 	}
 	/** A MessageContext of type AsyncPayments */
 	public class MessageContext_AsyncPayments : MessageContext {
-		public AsyncPaymentsContext async_payments;
+		public org.ldk.structs.AsyncPaymentsContext async_payments;
 		internal MessageContext_AsyncPayments(long ptr) : base(null, ptr) {
 			long async_payments = bindings.LDKMessageContext_AsyncPayments_get_async_payments(ptr);
 			org.ldk.structs.AsyncPaymentsContext async_payments_hu_conv = org.ldk.structs.AsyncPaymentsContext.constr_from_ptr(async_payments);
@@ -52,7 +52,7 @@ public class MessageContext : CommonBase {
 	}
 	/** A MessageContext of type DNSResolver */
 	public class MessageContext_DNSResolver : MessageContext {
-		public DNSResolverContext dns_resolver;
+		public org.ldk.structs.DNSResolverContext dns_resolver;
 		internal MessageContext_DNSResolver(long ptr) : base(null, ptr) {
 			long dns_resolver = bindings.LDKMessageContext_DNSResolver_get_dns_resolver(ptr);
 			org.ldk.structs.DNSResolverContext dns_resolver_hu_conv = null; if (dns_resolver < 0 || dns_resolver > 4096) { dns_resolver_hu_conv = new org.ldk.structs.DNSResolverContext(null, dns_resolver); }
@@ -78,7 +78,7 @@ public class MessageContext : CommonBase {
 	/**
 	 * Creates a copy of the MessageContext
 	 */
-	public MessageContext clone() {
+	public org.ldk.structs.MessageContext clone() {
 		long ret = bindings.MessageContext_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -90,7 +90,7 @@ public class MessageContext : CommonBase {
 	/**
 	 * Utility method to constructs a new Offers-variant MessageContext
 	 */
-	public static MessageContext offers(org.ldk.structs.OffersContext a) {
+	public static org.ldk.structs.MessageContext offers(org.ldk.structs.OffersContext a) {
 		long ret = bindings.MessageContext_offers(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -102,7 +102,7 @@ public class MessageContext : CommonBase {
 	/**
 	 * Utility method to constructs a new AsyncPayments-variant MessageContext
 	 */
-	public static MessageContext async_payments(org.ldk.structs.AsyncPaymentsContext a) {
+	public static org.ldk.structs.MessageContext async_payments(org.ldk.structs.AsyncPaymentsContext a) {
 		long ret = bindings.MessageContext_async_payments(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -114,7 +114,7 @@ public class MessageContext : CommonBase {
 	/**
 	 * Utility method to constructs a new DNSResolver-variant MessageContext
 	 */
-	public static MessageContext dnsresolver(org.ldk.structs.DNSResolverContext a) {
+	public static org.ldk.structs.MessageContext dnsresolver(org.ldk.structs.DNSResolverContext a) {
 		long ret = bindings.MessageContext_dnsresolver(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -126,7 +126,7 @@ public class MessageContext : CommonBase {
 	/**
 	 * Utility method to constructs a new Custom-variant MessageContext
 	 */
-	public static MessageContext custom(byte[] a) {
+	public static org.ldk.structs.MessageContext custom(byte[] a) {
 		long ret = bindings.MessageContext_custom(InternalUtils.encodeUint8Array(a));
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -149,7 +149,7 @@ public class MessageContext : CommonBase {
 	/**
 	 * Read a MessageContext from a byte array, created by MessageContext_write
 	 */
-	public static Result_MessageContextDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_MessageContextDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.MessageContext_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

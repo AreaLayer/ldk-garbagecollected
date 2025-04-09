@@ -36,7 +36,7 @@ public class Result_HumanReadableNameNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_HumanReadableNameNoneZ in the success state.
 	 */
-	public static Result_HumanReadableNameNoneZ ok(org.ldk.structs.HumanReadableName o) {
+	public static org.ldk.structs.Result_HumanReadableNameNoneZ ok(org.ldk.structs.HumanReadableName o) {
 		long ret = bindings.CResult_HumanReadableNameNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -47,7 +47,7 @@ public class Result_HumanReadableNameNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_HumanReadableNameNoneZ in the error state.
 	 */
-	public static Result_HumanReadableNameNoneZ err() {
+	public static org.ldk.structs.Result_HumanReadableNameNoneZ err() {
 		long ret = bindings.CResult_HumanReadableNameNoneZ_err();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_HumanReadableNameNoneZ ret_hu_conv = Result_HumanReadableNameNoneZ.constr_from_ptr(ret);
@@ -73,7 +73,7 @@ public class Result_HumanReadableNameNoneZ : CommonBase {
 	 * Creates a new CResult_HumanReadableNameNoneZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_HumanReadableNameNoneZ clone() {
+	public org.ldk.structs.Result_HumanReadableNameNoneZ clone() {
 		long ret = bindings.CResult_HumanReadableNameNoneZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -18,7 +18,7 @@ public class RawDataPart : CommonBase {
 	/**
 	 * generation time of the invoice
 	 */
-	public PositiveTimestamp get_timestamp() {
+	public org.ldk.structs.PositiveTimestamp get_timestamp() {
 		long ret = bindings.RawDataPart_get_timestamp(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -62,7 +62,7 @@ public class RawDataPart : CommonBase {
 	/**
 	 * Creates a copy of the RawDataPart
 	 */
-	public RawDataPart clone() {
+	public org.ldk.structs.RawDataPart clone() {
 		long ret = bindings.RawDataPart_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

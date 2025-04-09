@@ -518,7 +518,7 @@ public class ChannelHandshakeConfig : CommonBase {
 	/**
 	 * Constructs a new ChannelHandshakeConfig given each field
 	 */
-	public static ChannelHandshakeConfig of(int minimum_depth_arg, short our_to_self_delay_arg, long our_htlc_minimum_msat_arg, byte max_inbound_htlc_value_in_flight_percent_of_channel_arg, bool negotiate_scid_privacy_arg, bool announce_for_forwarding_arg, bool commit_upfront_shutdown_pubkey_arg, int their_channel_reserve_proportional_millionths_arg, bool negotiate_anchors_zero_fee_htlc_tx_arg, short our_max_accepted_htlcs_arg) {
+	public static org.ldk.structs.ChannelHandshakeConfig of(int minimum_depth_arg, short our_to_self_delay_arg, long our_htlc_minimum_msat_arg, byte max_inbound_htlc_value_in_flight_percent_of_channel_arg, bool negotiate_scid_privacy_arg, bool announce_for_forwarding_arg, bool commit_upfront_shutdown_pubkey_arg, int their_channel_reserve_proportional_millionths_arg, bool negotiate_anchors_zero_fee_htlc_tx_arg, short our_max_accepted_htlcs_arg) {
 		long ret = bindings.ChannelHandshakeConfig_new(minimum_depth_arg, our_to_self_delay_arg, our_htlc_minimum_msat_arg, max_inbound_htlc_value_in_flight_percent_of_channel_arg, negotiate_scid_privacy_arg, announce_for_forwarding_arg, commit_upfront_shutdown_pubkey_arg, their_channel_reserve_proportional_millionths_arg, negotiate_anchors_zero_fee_htlc_tx_arg, our_max_accepted_htlcs_arg);
 		GC.KeepAlive(minimum_depth_arg);
 		GC.KeepAlive(our_to_self_delay_arg);
@@ -545,7 +545,7 @@ public class ChannelHandshakeConfig : CommonBase {
 	/**
 	 * Creates a copy of the ChannelHandshakeConfig
 	 */
-	public ChannelHandshakeConfig clone() {
+	public org.ldk.structs.ChannelHandshakeConfig clone() {
 		long ret = bindings.ChannelHandshakeConfig_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -557,7 +557,7 @@ public class ChannelHandshakeConfig : CommonBase {
 	/**
 	 * Creates a "default" ChannelHandshakeConfig. See struct and individual field documentaiton for details on which values are used.
 	 */
-	public static ChannelHandshakeConfig with_default() {
+	public static org.ldk.structs.ChannelHandshakeConfig with_default() {
 		long ret = bindings.ChannelHandshakeConfig_default();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ChannelHandshakeConfig ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelHandshakeConfig(null, ret); }

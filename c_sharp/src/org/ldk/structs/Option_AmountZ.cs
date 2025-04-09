@@ -26,7 +26,7 @@ public class Option_AmountZ : CommonBase {
 
 	/** A Option_AmountZ of type Some */
 	public class Option_AmountZ_Some : Option_AmountZ {
-		public Amount some;
+		public org.ldk.structs.Amount some;
 		internal Option_AmountZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_AmountZ_Some_get_some(ptr);
 			org.ldk.structs.Amount some_hu_conv = org.ldk.structs.Amount.constr_from_ptr(some);
@@ -42,7 +42,7 @@ public class Option_AmountZ : CommonBase {
 	/**
 	 * Constructs a new COption_AmountZ containing a crate::lightning::offers::offer::Amount
 	 */
-	public static Option_AmountZ some(org.ldk.structs.Amount o) {
+	public static org.ldk.structs.Option_AmountZ some(org.ldk.structs.Amount o) {
 		long ret = bindings.COption_AmountZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class Option_AmountZ : CommonBase {
 	/**
 	 * Constructs a new COption_AmountZ containing nothing
 	 */
-	public static Option_AmountZ none() {
+	public static org.ldk.structs.Option_AmountZ none() {
 		long ret = bindings.COption_AmountZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_AmountZ ret_hu_conv = org.ldk.structs.Option_AmountZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Option_AmountZ : CommonBase {
 	 * Creates a new COption_AmountZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_AmountZ clone() {
+	public org.ldk.structs.Option_AmountZ clone() {
 		long ret = bindings.COption_AmountZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

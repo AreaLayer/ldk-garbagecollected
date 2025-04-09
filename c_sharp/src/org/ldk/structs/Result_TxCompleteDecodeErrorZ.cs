@@ -41,7 +41,7 @@ public class Result_TxCompleteDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_TxCompleteDecodeErrorZ in the success state.
 	 */
-	public static Result_TxCompleteDecodeErrorZ ok(org.ldk.structs.TxComplete o) {
+	public static org.ldk.structs.Result_TxCompleteDecodeErrorZ ok(org.ldk.structs.TxComplete o) {
 		long ret = bindings.CResult_TxCompleteDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_TxCompleteDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_TxCompleteDecodeErrorZ in the error state.
 	 */
-	public static Result_TxCompleteDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_TxCompleteDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_TxCompleteDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_TxCompleteDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_TxCompleteDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_TxCompleteDecodeErrorZ clone() {
+	public org.ldk.structs.Result_TxCompleteDecodeErrorZ clone() {
 		long ret = bindings.CResult_TxCompleteDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -35,7 +35,7 @@ public class Result_TransactionNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_TransactionNoneZ in the success state.
 	 */
-	public static Result_TransactionNoneZ ok(byte[] o) {
+	public static org.ldk.structs.Result_TransactionNoneZ ok(byte[] o) {
 		long ret = bindings.CResult_TransactionNoneZ_ok(InternalUtils.encodeUint8Array(o));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -46,7 +46,7 @@ public class Result_TransactionNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_TransactionNoneZ in the error state.
 	 */
-	public static Result_TransactionNoneZ err() {
+	public static org.ldk.structs.Result_TransactionNoneZ err() {
 		long ret = bindings.CResult_TransactionNoneZ_err();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_TransactionNoneZ ret_hu_conv = Result_TransactionNoneZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Result_TransactionNoneZ : CommonBase {
 	 * Creates a new CResult_TransactionNoneZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_TransactionNoneZ clone() {
+	public org.ldk.structs.Result_TransactionNoneZ clone() {
 		long ret = bindings.CResult_TransactionNoneZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

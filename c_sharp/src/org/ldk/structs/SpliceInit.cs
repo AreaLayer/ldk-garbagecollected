@@ -18,7 +18,7 @@ public class SpliceInit : CommonBase {
 	/**
 	 * The channel ID where splicing is intended
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.SpliceInit_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -133,7 +133,7 @@ public class SpliceInit : CommonBase {
 	/**
 	 * Constructs a new SpliceInit given each field
 	 */
-	public static SpliceInit of(org.ldk.structs.ChannelId channel_id_arg, long funding_contribution_satoshis_arg, int funding_feerate_perkw_arg, int locktime_arg, byte[] funding_pubkey_arg, COption_NoneZ require_confirmed_inputs_arg) {
+	public static org.ldk.structs.SpliceInit of(org.ldk.structs.ChannelId channel_id_arg, long funding_contribution_satoshis_arg, int funding_feerate_perkw_arg, int locktime_arg, byte[] funding_pubkey_arg, COption_NoneZ require_confirmed_inputs_arg) {
 		long ret = bindings.SpliceInit_new(channel_id_arg.ptr, funding_contribution_satoshis_arg, funding_feerate_perkw_arg, locktime_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(funding_pubkey_arg, 33)), require_confirmed_inputs_arg);
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(funding_contribution_satoshis_arg);
@@ -156,7 +156,7 @@ public class SpliceInit : CommonBase {
 	/**
 	 * Creates a copy of the SpliceInit
 	 */
-	public SpliceInit clone() {
+	public org.ldk.structs.SpliceInit clone() {
 		long ret = bindings.SpliceInit_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -196,7 +196,7 @@ public class SpliceInit : CommonBase {
 	/**
 	 * Read a SpliceInit from a byte array, created by SpliceInit_write
 	 */
-	public static Result_SpliceInitDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_SpliceInitDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.SpliceInit_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

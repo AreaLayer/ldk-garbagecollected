@@ -42,7 +42,7 @@ public class OnionPacket : CommonBase {
 	 * 
 	 * Returns a copy of the field.
 	 */
-	public Result_PublicKeySecp256k1ErrorZ get_public_key() {
+	public org.ldk.structs.Result_PublicKeySecp256k1ErrorZ get_public_key() {
 		long ret = bindings.OnionPacket_get_public_key(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -92,7 +92,7 @@ public class OnionPacket : CommonBase {
 	/**
 	 * Creates a copy of the OnionPacket
 	 */
-	public OnionPacket clone() {
+	public org.ldk.structs.OnionPacket clone() {
 		long ret = bindings.OnionPacket_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -144,7 +144,7 @@ public class OnionPacket : CommonBase {
 	/**
 	 * Read a OnionPacket from a byte array, created by OnionPacket_write
 	 */
-	public static Result_OnionPacketDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_OnionPacketDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.OnionPacket_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

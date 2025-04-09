@@ -24,7 +24,7 @@ public class Sha256 : CommonBase {
 	/**
 	 * Creates a copy of the Sha256
 	 */
-	public Sha256 clone() {
+	public org.ldk.structs.Sha256 clone() {
 		long ret = bindings.Sha256_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -66,7 +66,7 @@ public class Sha256 : CommonBase {
 	 * Constructs a new [`Sha256`] from the given bytes, which are assumed to be the output of a
 	 * single sha256 hash.
 	 */
-	public static Sha256 from_bytes(byte[] bytes) {
+	public static org.ldk.structs.Sha256 from_bytes(byte[] bytes) {
 		long ret = bindings.Sha256_from_bytes(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(bytes, 32)));
 		GC.KeepAlive(bytes);
 		if (ret >= 0 && ret <= 4096) { return null; }

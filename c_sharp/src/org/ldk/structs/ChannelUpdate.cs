@@ -40,7 +40,7 @@ public class ChannelUpdate : CommonBase {
 	/**
 	 * The actual channel update
 	 */
-	public UnsignedChannelUpdate get_contents() {
+	public org.ldk.structs.UnsignedChannelUpdate get_contents() {
 		long ret = bindings.ChannelUpdate_get_contents(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -61,7 +61,7 @@ public class ChannelUpdate : CommonBase {
 	/**
 	 * Constructs a new ChannelUpdate given each field
 	 */
-	public static ChannelUpdate of(byte[] signature_arg, org.ldk.structs.UnsignedChannelUpdate contents_arg) {
+	public static org.ldk.structs.ChannelUpdate of(byte[] signature_arg, org.ldk.structs.UnsignedChannelUpdate contents_arg) {
 		long ret = bindings.ChannelUpdate_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(signature_arg, 64)), contents_arg.ptr);
 		GC.KeepAlive(signature_arg);
 		GC.KeepAlive(contents_arg);
@@ -80,7 +80,7 @@ public class ChannelUpdate : CommonBase {
 	/**
 	 * Creates a copy of the ChannelUpdate
 	 */
-	public ChannelUpdate clone() {
+	public org.ldk.structs.ChannelUpdate clone() {
 		long ret = bindings.ChannelUpdate_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -132,7 +132,7 @@ public class ChannelUpdate : CommonBase {
 	/**
 	 * Read a ChannelUpdate from a byte array, created by ChannelUpdate_write
 	 */
-	public static Result_ChannelUpdateDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ChannelUpdateDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.ChannelUpdate_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

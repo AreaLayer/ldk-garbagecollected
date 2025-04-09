@@ -20,7 +20,7 @@ public class UpdateFulfillHTLC : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.UpdateFulfillHTLC_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class UpdateFulfillHTLC : CommonBase {
 	/**
 	 * Constructs a new UpdateFulfillHTLC given each field
 	 */
-	public static UpdateFulfillHTLC of(org.ldk.structs.ChannelId channel_id_arg, long htlc_id_arg, byte[] payment_preimage_arg) {
+	public static org.ldk.structs.UpdateFulfillHTLC of(org.ldk.structs.ChannelId channel_id_arg, long htlc_id_arg, byte[] payment_preimage_arg) {
 		long ret = bindings.UpdateFulfillHTLC_new(channel_id_arg.ptr, htlc_id_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_preimage_arg, 32)));
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(htlc_id_arg);
@@ -99,7 +99,7 @@ public class UpdateFulfillHTLC : CommonBase {
 	/**
 	 * Creates a copy of the UpdateFulfillHTLC
 	 */
-	public UpdateFulfillHTLC clone() {
+	public org.ldk.structs.UpdateFulfillHTLC clone() {
 		long ret = bindings.UpdateFulfillHTLC_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -151,7 +151,7 @@ public class UpdateFulfillHTLC : CommonBase {
 	/**
 	 * Read a UpdateFulfillHTLC from a byte array, created by UpdateFulfillHTLC_write
 	 */
-	public static Result_UpdateFulfillHTLCDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_UpdateFulfillHTLCDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.UpdateFulfillHTLC_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

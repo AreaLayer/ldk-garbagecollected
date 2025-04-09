@@ -24,7 +24,7 @@ public class OneHopBlindedPathCandidate : CommonBase {
 	/**
 	 * Creates a copy of the OneHopBlindedPathCandidate
 	 */
-	public OneHopBlindedPathCandidate clone() {
+	public org.ldk.structs.OneHopBlindedPathCandidate clone() {
 		long ret = bindings.OneHopBlindedPathCandidate_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

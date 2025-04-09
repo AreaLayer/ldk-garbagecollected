@@ -31,11 +31,11 @@ public class MessageSendInstructions : CommonBase {
 		/**
 		 * The destination where we need to send our message.
 		 */
-		public Destination destination;
+		public org.ldk.structs.Destination destination;
 		/**
 		 * The reply path which should be included in the message.
 		 */
-		public BlindedMessagePath reply_path;
+		public org.ldk.structs.BlindedMessagePath reply_path;
 		internal MessageSendInstructions_WithSpecifiedReplyPath(long ptr) : base(null, ptr) {
 			long destination = bindings.LDKMessageSendInstructions_WithSpecifiedReplyPath_get_destination(ptr);
 			org.ldk.structs.Destination destination_hu_conv = org.ldk.structs.Destination.constr_from_ptr(destination);
@@ -52,12 +52,12 @@ public class MessageSendInstructions : CommonBase {
 		/**
 		 * The destination where we need to send our message.
 		 */
-		public Destination destination;
+		public org.ldk.structs.Destination destination;
 		/**
 		 * The context to include in the reply path we'll give the recipient so they can respond
 		 * to us.
 		 */
-		public MessageContext context;
+		public org.ldk.structs.MessageContext context;
 		internal MessageSendInstructions_WithReplyPath(long ptr) : base(null, ptr) {
 			long destination = bindings.LDKMessageSendInstructions_WithReplyPath_get_destination(ptr);
 			org.ldk.structs.Destination destination_hu_conv = org.ldk.structs.Destination.constr_from_ptr(destination);
@@ -74,7 +74,7 @@ public class MessageSendInstructions : CommonBase {
 		/**
 		 * The destination where we need to send our message.
 		 */
-		public Destination destination;
+		public org.ldk.structs.Destination destination;
 		internal MessageSendInstructions_WithoutReplyPath(long ptr) : base(null, ptr) {
 			long destination = bindings.LDKMessageSendInstructions_WithoutReplyPath_get_destination(ptr);
 			org.ldk.structs.Destination destination_hu_conv = org.ldk.structs.Destination.constr_from_ptr(destination);
@@ -87,7 +87,7 @@ public class MessageSendInstructions : CommonBase {
 		/**
 		 * The instructions provided by the [`Responder`].
 		 */
-		public ResponseInstruction instructions;
+		public org.ldk.structs.ResponseInstruction instructions;
 		internal MessageSendInstructions_ForReply(long ptr) : base(null, ptr) {
 			long instructions = bindings.LDKMessageSendInstructions_ForReply_get_instructions(ptr);
 			org.ldk.structs.ResponseInstruction instructions_hu_conv = null; if (instructions < 0 || instructions > 4096) { instructions_hu_conv = new org.ldk.structs.ResponseInstruction(null, instructions); }
@@ -104,7 +104,7 @@ public class MessageSendInstructions : CommonBase {
 	/**
 	 * Creates a copy of the MessageSendInstructions
 	 */
-	public MessageSendInstructions clone() {
+	public org.ldk.structs.MessageSendInstructions clone() {
 		long ret = bindings.MessageSendInstructions_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -116,7 +116,7 @@ public class MessageSendInstructions : CommonBase {
 	/**
 	 * Utility method to constructs a new WithSpecifiedReplyPath-variant MessageSendInstructions
 	 */
-	public static MessageSendInstructions with_specified_reply_path(org.ldk.structs.Destination destination, org.ldk.structs.BlindedMessagePath reply_path) {
+	public static org.ldk.structs.MessageSendInstructions with_specified_reply_path(org.ldk.structs.Destination destination, org.ldk.structs.BlindedMessagePath reply_path) {
 		long ret = bindings.MessageSendInstructions_with_specified_reply_path(destination.ptr, reply_path.ptr);
 		GC.KeepAlive(destination);
 		GC.KeepAlive(reply_path);
@@ -129,7 +129,7 @@ public class MessageSendInstructions : CommonBase {
 	/**
 	 * Utility method to constructs a new WithReplyPath-variant MessageSendInstructions
 	 */
-	public static MessageSendInstructions with_reply_path(org.ldk.structs.Destination destination, org.ldk.structs.MessageContext context) {
+	public static org.ldk.structs.MessageSendInstructions with_reply_path(org.ldk.structs.Destination destination, org.ldk.structs.MessageContext context) {
 		long ret = bindings.MessageSendInstructions_with_reply_path(destination.ptr, context.ptr);
 		GC.KeepAlive(destination);
 		GC.KeepAlive(context);
@@ -142,7 +142,7 @@ public class MessageSendInstructions : CommonBase {
 	/**
 	 * Utility method to constructs a new WithoutReplyPath-variant MessageSendInstructions
 	 */
-	public static MessageSendInstructions without_reply_path(org.ldk.structs.Destination destination) {
+	public static org.ldk.structs.MessageSendInstructions without_reply_path(org.ldk.structs.Destination destination) {
 		long ret = bindings.MessageSendInstructions_without_reply_path(destination.ptr);
 		GC.KeepAlive(destination);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -154,7 +154,7 @@ public class MessageSendInstructions : CommonBase {
 	/**
 	 * Utility method to constructs a new ForReply-variant MessageSendInstructions
 	 */
-	public static MessageSendInstructions for_reply(org.ldk.structs.ResponseInstruction instructions) {
+	public static org.ldk.structs.MessageSendInstructions for_reply(org.ldk.structs.ResponseInstruction instructions) {
 		long ret = bindings.MessageSendInstructions_for_reply(instructions.ptr);
 		GC.KeepAlive(instructions);
 		if (ret >= 0 && ret <= 4096) { return null; }

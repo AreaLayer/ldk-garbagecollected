@@ -28,7 +28,7 @@ public class CounterpartyCommitmentSecrets : CommonBase {
 	/**
 	 * Creates a copy of the CounterpartyCommitmentSecrets
 	 */
-	public CounterpartyCommitmentSecrets clone() {
+	public org.ldk.structs.CounterpartyCommitmentSecrets clone() {
 		long ret = bindings.CounterpartyCommitmentSecrets_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -40,7 +40,7 @@ public class CounterpartyCommitmentSecrets : CommonBase {
 	/**
 	 * Creates a new empty `CounterpartyCommitmentSecrets` structure.
 	 */
-	public static CounterpartyCommitmentSecrets of() {
+	public static org.ldk.structs.CounterpartyCommitmentSecrets of() {
 		long ret = bindings.CounterpartyCommitmentSecrets_new();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.CounterpartyCommitmentSecrets ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.CounterpartyCommitmentSecrets(null, ret); }
@@ -62,7 +62,7 @@ public class CounterpartyCommitmentSecrets : CommonBase {
 	 * Inserts the `secret` at `idx`. Returns `Ok(())` if the secret
 	 * was generated in accordance with BOLT 3 and is consistent with previous secrets.
 	 */
-	public Result_NoneNoneZ provide_secret(long idx, byte[] secret) {
+	public org.ldk.structs.Result_NoneNoneZ provide_secret(long idx, byte[] secret) {
 		long ret = bindings.CounterpartyCommitmentSecrets_provide_secret(this.ptr, idx, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(secret, 32)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(idx);
@@ -101,7 +101,7 @@ public class CounterpartyCommitmentSecrets : CommonBase {
 	/**
 	 * Read a CounterpartyCommitmentSecrets from a byte array, created by CounterpartyCommitmentSecrets_write
 	 */
-	public static Result_CounterpartyCommitmentSecretsDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_CounterpartyCommitmentSecretsDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.CounterpartyCommitmentSecrets_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

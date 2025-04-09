@@ -21,7 +21,7 @@ public class UserConfig : CommonBase {
 	/**
 	 * Channel handshake config that we propose to our counterparty.
 	 */
-	public ChannelHandshakeConfig get_channel_handshake_config() {
+	public org.ldk.structs.ChannelHandshakeConfig get_channel_handshake_config() {
 		long ret = bindings.UserConfig_get_channel_handshake_config(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -42,7 +42,7 @@ public class UserConfig : CommonBase {
 	/**
 	 * Limits applied to our counterparty's proposed channel handshake config settings.
 	 */
-	public ChannelHandshakeLimits get_channel_handshake_limits() {
+	public org.ldk.structs.ChannelHandshakeLimits get_channel_handshake_limits() {
 		long ret = bindings.UserConfig_get_channel_handshake_limits(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -63,7 +63,7 @@ public class UserConfig : CommonBase {
 	/**
 	 * Channel config which affects behavior during channel lifetime.
 	 */
-	public ChannelConfig get_channel_config() {
+	public org.ldk.structs.ChannelConfig get_channel_config() {
 		long ret = bindings.UserConfig_get_channel_config(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -274,7 +274,7 @@ public class UserConfig : CommonBase {
 	/**
 	 * Constructs a new UserConfig given each field
 	 */
-	public static UserConfig of(org.ldk.structs.ChannelHandshakeConfig channel_handshake_config_arg, org.ldk.structs.ChannelHandshakeLimits channel_handshake_limits_arg, org.ldk.structs.ChannelConfig channel_config_arg, bool accept_forwards_to_priv_channels_arg, bool accept_inbound_channels_arg, bool manually_accept_inbound_channels_arg, bool accept_intercept_htlcs_arg, bool manually_handle_bolt12_invoices_arg) {
+	public static org.ldk.structs.UserConfig of(org.ldk.structs.ChannelHandshakeConfig channel_handshake_config_arg, org.ldk.structs.ChannelHandshakeLimits channel_handshake_limits_arg, org.ldk.structs.ChannelConfig channel_config_arg, bool accept_forwards_to_priv_channels_arg, bool accept_inbound_channels_arg, bool manually_accept_inbound_channels_arg, bool accept_intercept_htlcs_arg, bool manually_handle_bolt12_invoices_arg) {
 		long ret = bindings.UserConfig_new(channel_handshake_config_arg.ptr, channel_handshake_limits_arg.ptr, channel_config_arg.ptr, accept_forwards_to_priv_channels_arg, accept_inbound_channels_arg, manually_accept_inbound_channels_arg, accept_intercept_htlcs_arg, manually_handle_bolt12_invoices_arg);
 		GC.KeepAlive(channel_handshake_config_arg);
 		GC.KeepAlive(channel_handshake_limits_arg);
@@ -299,7 +299,7 @@ public class UserConfig : CommonBase {
 	/**
 	 * Creates a copy of the UserConfig
 	 */
-	public UserConfig clone() {
+	public org.ldk.structs.UserConfig clone() {
 		long ret = bindings.UserConfig_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -311,7 +311,7 @@ public class UserConfig : CommonBase {
 	/**
 	 * Creates a "default" UserConfig. See struct and individual field documentaiton for details on which values are used.
 	 */
-	public static UserConfig with_default() {
+	public static org.ldk.structs.UserConfig with_default() {
 		long ret = bindings.UserConfig_default();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.UserConfig ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.UserConfig(null, ret); }

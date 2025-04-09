@@ -38,7 +38,7 @@ public class ExpandedKey : CommonBase {
 	/**
 	 * Creates a copy of the ExpandedKey
 	 */
-	public ExpandedKey clone() {
+	public org.ldk.structs.ExpandedKey clone() {
 		long ret = bindings.ExpandedKey_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -69,7 +69,7 @@ public class ExpandedKey : CommonBase {
 	 * 
 	 * It is recommended to cache this value and not regenerate it for each new inbound payment.
 	 */
-	public static ExpandedKey of(byte[] key_material) {
+	public static org.ldk.structs.ExpandedKey of(byte[] key_material) {
 		long ret = bindings.ExpandedKey_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(key_material, 32)));
 		GC.KeepAlive(key_material);
 		if (ret >= 0 && ret <= 4096) { return null; }

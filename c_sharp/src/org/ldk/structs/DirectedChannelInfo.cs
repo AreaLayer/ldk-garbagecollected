@@ -25,7 +25,7 @@ public class DirectedChannelInfo : CommonBase {
 	/**
 	 * Creates a copy of the DirectedChannelInfo
 	 */
-	public DirectedChannelInfo clone() {
+	public org.ldk.structs.DirectedChannelInfo clone() {
 		long ret = bindings.DirectedChannelInfo_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -37,7 +37,7 @@ public class DirectedChannelInfo : CommonBase {
 	/**
 	 * Returns information for the channel.
 	 */
-	public ChannelInfo channel() {
+	public org.ldk.structs.ChannelInfo channel() {
 		long ret = bindings.DirectedChannelInfo_channel(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -53,7 +53,7 @@ public class DirectedChannelInfo : CommonBase {
 	 * `htlc_maximum_msat` for the direction as advertised by the gossip network, if known,
 	 * otherwise.
 	 */
-	public EffectiveCapacity effective_capacity() {
+	public org.ldk.structs.EffectiveCapacity effective_capacity() {
 		long ret = bindings.DirectedChannelInfo_effective_capacity(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -67,7 +67,7 @@ public class DirectedChannelInfo : CommonBase {
 	 * 
 	 * Refers to the `node_id` forwarding the payment to the next hop.
 	 */
-	public NodeId source() {
+	public org.ldk.structs.NodeId source() {
 		long ret = bindings.DirectedChannelInfo_source(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -81,7 +81,7 @@ public class DirectedChannelInfo : CommonBase {
 	 * 
 	 * Refers to the `node_id` receiving the payment from the previous hop.
 	 */
-	public NodeId target() {
+	public org.ldk.structs.NodeId target() {
 		long ret = bindings.DirectedChannelInfo_target(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

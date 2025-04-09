@@ -65,7 +65,7 @@ public class FinalOnionHopData : CommonBase {
 	/**
 	 * Constructs a new FinalOnionHopData given each field
 	 */
-	public static FinalOnionHopData of(byte[] payment_secret_arg, long total_msat_arg) {
+	public static org.ldk.structs.FinalOnionHopData of(byte[] payment_secret_arg, long total_msat_arg) {
 		long ret = bindings.FinalOnionHopData_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_secret_arg, 32)), total_msat_arg);
 		GC.KeepAlive(payment_secret_arg);
 		GC.KeepAlive(total_msat_arg);
@@ -84,7 +84,7 @@ public class FinalOnionHopData : CommonBase {
 	/**
 	 * Creates a copy of the FinalOnionHopData
 	 */
-	public FinalOnionHopData clone() {
+	public org.ldk.structs.FinalOnionHopData clone() {
 		long ret = bindings.FinalOnionHopData_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -124,7 +124,7 @@ public class FinalOnionHopData : CommonBase {
 	/**
 	 * Read a FinalOnionHopData from a byte array, created by FinalOnionHopData_write
 	 */
-	public static Result_FinalOnionHopDataDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_FinalOnionHopDataDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.FinalOnionHopData_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

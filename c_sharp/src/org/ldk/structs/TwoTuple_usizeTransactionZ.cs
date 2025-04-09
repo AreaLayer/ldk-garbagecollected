@@ -45,7 +45,7 @@ public class TwoTuple_usizeTransactionZ : CommonBase {
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public TwoTuple_usizeTransactionZ clone() {
+	public org.ldk.structs.TwoTuple_usizeTransactionZ clone() {
 		long ret = bindings.C2Tuple_usizeTransactionZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -57,7 +57,7 @@ public class TwoTuple_usizeTransactionZ : CommonBase {
 	/**
 	 * Creates a new C2Tuple_usizeTransactionZ from the contained elements.
 	 */
-	public static TwoTuple_usizeTransactionZ of(long a, byte[] b) {
+	public static org.ldk.structs.TwoTuple_usizeTransactionZ of(long a, byte[] b) {
 		long ret = bindings.C2Tuple_usizeTransactionZ_new(a, InternalUtils.encodeUint8Array(b));
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

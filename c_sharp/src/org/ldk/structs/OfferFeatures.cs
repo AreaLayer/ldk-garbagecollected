@@ -41,7 +41,7 @@ public class OfferFeatures : CommonBase {
 	/**
 	 * Creates a copy of the OfferFeatures
 	 */
-	public OfferFeatures clone() {
+	public org.ldk.structs.OfferFeatures clone() {
 		long ret = bindings.OfferFeatures_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -65,7 +65,7 @@ public class OfferFeatures : CommonBase {
 	/**
 	 * Create a blank Features with no features set
 	 */
-	public static OfferFeatures empty() {
+	public static org.ldk.structs.OfferFeatures empty() {
 		long ret = bindings.OfferFeatures_empty();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.OfferFeatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.OfferFeatures(null, ret); }
@@ -146,7 +146,7 @@ public class OfferFeatures : CommonBase {
 	 * 
 	 * [BOLT 9]: https://github.com/lightning/bolts/blob/master/09-features.md
 	 */
-	public Result_NoneNoneZ set_required_feature_bit(long bit) {
+	public org.ldk.structs.Result_NoneNoneZ set_required_feature_bit(long bit) {
 		long ret = bindings.OfferFeatures_set_required_feature_bit(this.ptr, bit);
 		GC.KeepAlive(this);
 		GC.KeepAlive(bit);
@@ -164,7 +164,7 @@ public class OfferFeatures : CommonBase {
 	 * 
 	 * [BOLT 9]: https://github.com/lightning/bolts/blob/master/09-features.md
 	 */
-	public Result_NoneNoneZ set_optional_feature_bit(long bit) {
+	public org.ldk.structs.Result_NoneNoneZ set_optional_feature_bit(long bit) {
 		long ret = bindings.OfferFeatures_set_optional_feature_bit(this.ptr, bit);
 		GC.KeepAlive(this);
 		GC.KeepAlive(bit);
@@ -182,7 +182,7 @@ public class OfferFeatures : CommonBase {
 	 * 
 	 * [bLIP 2]: https://github.com/lightning/blips/blob/master/blip-0002.md#feature-bits
 	 */
-	public Result_NoneNoneZ set_required_custom_bit(long bit) {
+	public org.ldk.structs.Result_NoneNoneZ set_required_custom_bit(long bit) {
 		long ret = bindings.OfferFeatures_set_required_custom_bit(this.ptr, bit);
 		GC.KeepAlive(this);
 		GC.KeepAlive(bit);
@@ -200,7 +200,7 @@ public class OfferFeatures : CommonBase {
 	 * 
 	 * [bLIP 2]: https://github.com/lightning/blips/blob/master/blip-0002.md#feature-bits
 	 */
-	public Result_NoneNoneZ set_optional_custom_bit(long bit) {
+	public org.ldk.structs.Result_NoneNoneZ set_optional_custom_bit(long bit) {
 		long ret = bindings.OfferFeatures_set_optional_custom_bit(this.ptr, bit);
 		GC.KeepAlive(this);
 		GC.KeepAlive(bit);

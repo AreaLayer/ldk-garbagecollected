@@ -20,7 +20,7 @@ public class Init : CommonBase {
 	/**
 	 * The relevant features which the sender supports.
 	 */
-	public InitFeatures get_features() {
+	public org.ldk.structs.InitFeatures get_features() {
 		long ret = bindings.Init_get_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -45,7 +45,7 @@ public class Init : CommonBase {
 	 * 
 	 * Returns a copy of the field.
 	 */
-	public Option_CVec_ThirtyTwoBytesZZ get_networks() {
+	public org.ldk.structs.Option_CVec_ThirtyTwoBytesZZ get_networks() {
 		long ret = bindings.Init_get_networks(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -73,7 +73,7 @@ public class Init : CommonBase {
 	 * public IPv4 address (NAT) and use that for a [`NodeAnnouncement`] update message containing
 	 * the new address.
 	 */
-	public Option_SocketAddressZ get_remote_network_address() {
+	public org.ldk.structs.Option_SocketAddressZ get_remote_network_address() {
 		long ret = bindings.Init_get_remote_network_address(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -99,7 +99,7 @@ public class Init : CommonBase {
 	/**
 	 * Constructs a new Init given each field
 	 */
-	public static Init of(org.ldk.structs.InitFeatures features_arg, org.ldk.structs.Option_CVec_ThirtyTwoBytesZZ networks_arg, org.ldk.structs.Option_SocketAddressZ remote_network_address_arg) {
+	public static org.ldk.structs.Init of(org.ldk.structs.InitFeatures features_arg, org.ldk.structs.Option_CVec_ThirtyTwoBytesZZ networks_arg, org.ldk.structs.Option_SocketAddressZ remote_network_address_arg) {
 		long ret = bindings.Init_new(features_arg.ptr, networks_arg.ptr, remote_network_address_arg.ptr);
 		GC.KeepAlive(features_arg);
 		GC.KeepAlive(networks_arg);
@@ -119,7 +119,7 @@ public class Init : CommonBase {
 	/**
 	 * Creates a copy of the Init
 	 */
-	public Init clone() {
+	public org.ldk.structs.Init clone() {
 		long ret = bindings.Init_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -171,7 +171,7 @@ public class Init : CommonBase {
 	/**
 	 * Read a Init from a byte array, created by Init_write
 	 */
-	public static Result_InitDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_InitDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.Init_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

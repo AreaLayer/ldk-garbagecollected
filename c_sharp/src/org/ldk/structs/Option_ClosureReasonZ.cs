@@ -26,7 +26,7 @@ public class Option_ClosureReasonZ : CommonBase {
 
 	/** A Option_ClosureReasonZ of type Some */
 	public class Option_ClosureReasonZ_Some : Option_ClosureReasonZ {
-		public ClosureReason some;
+		public org.ldk.structs.ClosureReason some;
 		internal Option_ClosureReasonZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_ClosureReasonZ_Some_get_some(ptr);
 			org.ldk.structs.ClosureReason some_hu_conv = org.ldk.structs.ClosureReason.constr_from_ptr(some);
@@ -42,7 +42,7 @@ public class Option_ClosureReasonZ : CommonBase {
 	/**
 	 * Constructs a new COption_ClosureReasonZ containing a crate::lightning::events::ClosureReason
 	 */
-	public static Option_ClosureReasonZ some(org.ldk.structs.ClosureReason o) {
+	public static org.ldk.structs.Option_ClosureReasonZ some(org.ldk.structs.ClosureReason o) {
 		long ret = bindings.COption_ClosureReasonZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class Option_ClosureReasonZ : CommonBase {
 	/**
 	 * Constructs a new COption_ClosureReasonZ containing nothing
 	 */
-	public static Option_ClosureReasonZ none() {
+	public static org.ldk.structs.Option_ClosureReasonZ none() {
 		long ret = bindings.COption_ClosureReasonZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_ClosureReasonZ ret_hu_conv = org.ldk.structs.Option_ClosureReasonZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Option_ClosureReasonZ : CommonBase {
 	 * Creates a new COption_ClosureReasonZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_ClosureReasonZ clone() {
+	public org.ldk.structs.Option_ClosureReasonZ clone() {
 		long ret = bindings.COption_ClosureReasonZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -19,7 +19,7 @@ public class UnauthenticatedReceiveTlvs : CommonBase {
 	 * Constructs a new Verification which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned Verification must be freed before this_arg is
 	 */
-	public Verification as_Verification() {
+	public org.ldk.structs.Verification as_Verification() {
 		long ret = bindings.UnauthenticatedReceiveTlvs_as_Verification(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -51,7 +51,7 @@ public class UnauthenticatedReceiveTlvs : CommonBase {
 	/**
 	 * Constraints for the receiver of this payment.
 	 */
-	public PaymentConstraints get_payment_constraints() {
+	public org.ldk.structs.PaymentConstraints get_payment_constraints() {
 		long ret = bindings.UnauthenticatedReceiveTlvs_get_payment_constraints(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -72,7 +72,7 @@ public class UnauthenticatedReceiveTlvs : CommonBase {
 	/**
 	 * Context for the receiver of this payment.
 	 */
-	public PaymentContext get_payment_context() {
+	public org.ldk.structs.PaymentContext get_payment_context() {
 		long ret = bindings.UnauthenticatedReceiveTlvs_get_payment_context(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -93,7 +93,7 @@ public class UnauthenticatedReceiveTlvs : CommonBase {
 	/**
 	 * Constructs a new UnauthenticatedReceiveTlvs given each field
 	 */
-	public static UnauthenticatedReceiveTlvs of(byte[] payment_secret_arg, org.ldk.structs.PaymentConstraints payment_constraints_arg, org.ldk.structs.PaymentContext payment_context_arg) {
+	public static org.ldk.structs.UnauthenticatedReceiveTlvs of(byte[] payment_secret_arg, org.ldk.structs.PaymentConstraints payment_constraints_arg, org.ldk.structs.PaymentContext payment_context_arg) {
 		long ret = bindings.UnauthenticatedReceiveTlvs_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_secret_arg, 32)), payment_constraints_arg.ptr, payment_context_arg.ptr);
 		GC.KeepAlive(payment_secret_arg);
 		GC.KeepAlive(payment_constraints_arg);
@@ -113,7 +113,7 @@ public class UnauthenticatedReceiveTlvs : CommonBase {
 	/**
 	 * Creates a copy of the UnauthenticatedReceiveTlvs
 	 */
-	public UnauthenticatedReceiveTlvs clone() {
+	public org.ldk.structs.UnauthenticatedReceiveTlvs clone() {
 		long ret = bindings.UnauthenticatedReceiveTlvs_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -126,7 +126,7 @@ public class UnauthenticatedReceiveTlvs : CommonBase {
 	 * Creates an authenticated [`ReceiveTlvs`], which includes an HMAC and the provide [`Nonce`]
 	 * that can be use later to verify it authenticity.
 	 */
-	public ReceiveTlvs authenticate(org.ldk.structs.Nonce nonce, org.ldk.structs.ExpandedKey expanded_key) {
+	public org.ldk.structs.ReceiveTlvs authenticate(org.ldk.structs.Nonce nonce, org.ldk.structs.ExpandedKey expanded_key) {
 		long ret = bindings.UnauthenticatedReceiveTlvs_authenticate(this.ptr, nonce.ptr, expanded_key.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(nonce);

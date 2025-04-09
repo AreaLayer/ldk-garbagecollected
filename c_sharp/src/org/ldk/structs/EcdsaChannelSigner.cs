@@ -29,7 +29,7 @@ public interface EcdsaChannelSignerInterface {
 	 * 
 	 * [`ChannelManager::signer_unblocked`]: crate::ln::channelmanager::ChannelManager::signer_unblocked
 	 */
-	Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ sign_counterparty_commitment(CommitmentTransaction commitment_tx, byte[][] inbound_htlc_preimages, byte[][] outbound_htlc_preimages);
+	Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ sign_counterparty_commitment(org.ldk.structs.CommitmentTransaction commitment_tx, byte[][] inbound_htlc_preimages, byte[][] outbound_htlc_preimages);
 	/**Creates a signature for a holder's commitment transaction.
 	 * 
 	 * This will be called
@@ -48,7 +48,7 @@ public interface EcdsaChannelSignerInterface {
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
 	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
-	Result_ECDSASignatureNoneZ sign_holder_commitment(HolderCommitmentTransaction commitment_tx);
+	Result_ECDSASignatureNoneZ sign_holder_commitment(org.ldk.structs.HolderCommitmentTransaction commitment_tx);
 	/**Create a signature for the given input in a transaction spending an HTLC transaction output
 	 * or a commitment transaction `to_local` output when our counterparty broadcasts an old state.
 	 * 
@@ -100,7 +100,7 @@ public interface EcdsaChannelSignerInterface {
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
 	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
-	Result_ECDSASignatureNoneZ sign_justice_revoked_htlc(byte[] justice_tx, long input, long amount, byte[] per_commitment_key, HTLCOutputInCommitment htlc);
+	Result_ECDSASignatureNoneZ sign_justice_revoked_htlc(byte[] justice_tx, long input, long amount, byte[] per_commitment_key, org.ldk.structs.HTLCOutputInCommitment htlc);
 	/**Computes the signature for a commitment transaction's HTLC output used as an input within
 	 * `htlc_tx`, which spends the commitment transaction at index `input`. The signature returned
 	 * must be be computed using [`EcdsaSighashType::All`].
@@ -119,7 +119,7 @@ public interface EcdsaChannelSignerInterface {
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
 	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
-	Result_ECDSASignatureNoneZ sign_holder_htlc_transaction(byte[] htlc_tx, long input, HTLCDescriptor htlc_descriptor);
+	Result_ECDSASignatureNoneZ sign_holder_htlc_transaction(byte[] htlc_tx, long input, org.ldk.structs.HTLCDescriptor htlc_descriptor);
 	/**Create a signature for a claiming transaction for a HTLC output on a counterparty's commitment
 	 * transaction, either offered or received.
 	 * 
@@ -146,7 +146,7 @@ public interface EcdsaChannelSignerInterface {
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
 	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
-	Result_ECDSASignatureNoneZ sign_counterparty_htlc_transaction(byte[] htlc_tx, long input, long amount, byte[] per_commitment_point, HTLCOutputInCommitment htlc);
+	Result_ECDSASignatureNoneZ sign_counterparty_htlc_transaction(byte[] htlc_tx, long input, long amount, byte[] per_commitment_point, org.ldk.structs.HTLCOutputInCommitment htlc);
 	/**Create a signature for a (proposed) closing transaction.
 	 * 
 	 * Note that, due to rounding, there may be one \"missing\" satoshi, and either party may have
@@ -158,7 +158,7 @@ public interface EcdsaChannelSignerInterface {
 	 * 
 	 * [`ChannelManager::signer_unblocked`]: crate::ln::channelmanager::ChannelManager::signer_unblocked
 	 */
-	Result_ECDSASignatureNoneZ sign_closing_transaction(ClosingTransaction closing_tx);
+	Result_ECDSASignatureNoneZ sign_closing_transaction(org.ldk.structs.ClosingTransaction closing_tx);
 	/**Computes the signature for a commitment transaction's anchor output used as an
 	 * input within `anchor_tx`, which spends the commitment transaction, at index `input`.
 	 * 
@@ -183,7 +183,7 @@ public interface EcdsaChannelSignerInterface {
 	 * 
 	 * [`NodeSigner::sign_gossip_message`]: crate::sign::NodeSigner::sign_gossip_message
 	 */
-	Result_ECDSASignatureNoneZ sign_channel_announcement_with_funding_key(UnsignedChannelAnnouncement msg);
+	Result_ECDSASignatureNoneZ sign_channel_announcement_with_funding_key(org.ldk.structs.UnsignedChannelAnnouncement msg);
 	/**Signs the input of a splicing funding transaction with our funding key.
 	 * 
 	 * In splicing, the previous funding transaction output is spent as the input of
@@ -360,7 +360,7 @@ public class EcdsaChannelSigner : CommonBase {
 	 * 
 	 * [`ChannelManager::signer_unblocked`]: crate::ln::channelmanager::ChannelManager::signer_unblocked
 	 */
-	public Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ sign_counterparty_commitment(org.ldk.structs.CommitmentTransaction commitment_tx, byte[][] inbound_htlc_preimages, byte[][] outbound_htlc_preimages) {
+	public org.ldk.structs.Result_C2Tuple_ECDSASignatureCVec_ECDSASignatureZZNoneZ sign_counterparty_commitment(org.ldk.structs.CommitmentTransaction commitment_tx, byte[][] inbound_htlc_preimages, byte[][] outbound_htlc_preimages) {
 		long ret = bindings.EcdsaChannelSigner_sign_counterparty_commitment(this.ptr, commitment_tx.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(inbound_htlc_preimages, inbound_htlc_preimages_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(inbound_htlc_preimages_conv_8, 32)))), InternalUtils.encodeUint64Array(InternalUtils.mapArray(outbound_htlc_preimages, outbound_htlc_preimages_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(outbound_htlc_preimages_conv_8, 32)))));
 		GC.KeepAlive(this);
 		GC.KeepAlive(commitment_tx);
@@ -391,7 +391,7 @@ public class EcdsaChannelSigner : CommonBase {
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
 	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
-	public Result_ECDSASignatureNoneZ sign_holder_commitment(org.ldk.structs.HolderCommitmentTransaction commitment_tx) {
+	public org.ldk.structs.Result_ECDSASignatureNoneZ sign_holder_commitment(org.ldk.structs.HolderCommitmentTransaction commitment_tx) {
 		long ret = bindings.EcdsaChannelSigner_sign_holder_commitment(this.ptr, commitment_tx.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(commitment_tx);
@@ -425,7 +425,7 @@ public class EcdsaChannelSigner : CommonBase {
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
 	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
-	public Result_ECDSASignatureNoneZ sign_justice_revoked_output(byte[] justice_tx, long input, long amount, byte[] per_commitment_key) {
+	public org.ldk.structs.Result_ECDSASignatureNoneZ sign_justice_revoked_output(byte[] justice_tx, long input, long amount, byte[] per_commitment_key) {
 		long ret = bindings.EcdsaChannelSigner_sign_justice_revoked_output(this.ptr, InternalUtils.encodeUint8Array(justice_tx), input, amount, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(per_commitment_key, 32)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(justice_tx);
@@ -465,7 +465,7 @@ public class EcdsaChannelSigner : CommonBase {
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
 	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
-	public Result_ECDSASignatureNoneZ sign_justice_revoked_htlc(byte[] justice_tx, long input, long amount, byte[] per_commitment_key, org.ldk.structs.HTLCOutputInCommitment htlc) {
+	public org.ldk.structs.Result_ECDSASignatureNoneZ sign_justice_revoked_htlc(byte[] justice_tx, long input, long amount, byte[] per_commitment_key, org.ldk.structs.HTLCOutputInCommitment htlc) {
 		long ret = bindings.EcdsaChannelSigner_sign_justice_revoked_htlc(this.ptr, InternalUtils.encodeUint8Array(justice_tx), input, amount, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(per_commitment_key, 32)), htlc.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(justice_tx);
@@ -498,7 +498,7 @@ public class EcdsaChannelSigner : CommonBase {
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
 	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
-	public Result_ECDSASignatureNoneZ sign_holder_htlc_transaction(byte[] htlc_tx, long input, org.ldk.structs.HTLCDescriptor htlc_descriptor) {
+	public org.ldk.structs.Result_ECDSASignatureNoneZ sign_holder_htlc_transaction(byte[] htlc_tx, long input, org.ldk.structs.HTLCDescriptor htlc_descriptor) {
 		long ret = bindings.EcdsaChannelSigner_sign_holder_htlc_transaction(this.ptr, InternalUtils.encodeUint8Array(htlc_tx), input, htlc_descriptor.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(htlc_tx);
@@ -537,7 +537,7 @@ public class EcdsaChannelSigner : CommonBase {
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
 	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
-	public Result_ECDSASignatureNoneZ sign_counterparty_htlc_transaction(byte[] htlc_tx, long input, long amount, byte[] per_commitment_point, org.ldk.structs.HTLCOutputInCommitment htlc) {
+	public org.ldk.structs.Result_ECDSASignatureNoneZ sign_counterparty_htlc_transaction(byte[] htlc_tx, long input, long amount, byte[] per_commitment_point, org.ldk.structs.HTLCOutputInCommitment htlc) {
 		long ret = bindings.EcdsaChannelSigner_sign_counterparty_htlc_transaction(this.ptr, InternalUtils.encodeUint8Array(htlc_tx), input, amount, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(per_commitment_point, 33)), htlc.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(htlc_tx);
@@ -563,7 +563,7 @@ public class EcdsaChannelSigner : CommonBase {
 	 * 
 	 * [`ChannelManager::signer_unblocked`]: crate::ln::channelmanager::ChannelManager::signer_unblocked
 	 */
-	public Result_ECDSASignatureNoneZ sign_closing_transaction(org.ldk.structs.ClosingTransaction closing_tx) {
+	public org.ldk.structs.Result_ECDSASignatureNoneZ sign_closing_transaction(org.ldk.structs.ClosingTransaction closing_tx) {
 		long ret = bindings.EcdsaChannelSigner_sign_closing_transaction(this.ptr, closing_tx.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(closing_tx);
@@ -585,7 +585,7 @@ public class EcdsaChannelSigner : CommonBase {
 	 * [`ChannelMonitor::signer_unblocked`]: crate::chain::channelmonitor::ChannelMonitor::signer_unblocked
 	 * [`ChainMonitor::signer_unblocked`]: crate::chain::chainmonitor::ChainMonitor::signer_unblocked
 	 */
-	public Result_ECDSASignatureNoneZ sign_holder_anchor_input(byte[] anchor_tx, long input) {
+	public org.ldk.structs.Result_ECDSASignatureNoneZ sign_holder_anchor_input(byte[] anchor_tx, long input) {
 		long ret = bindings.EcdsaChannelSigner_sign_holder_anchor_input(this.ptr, InternalUtils.encodeUint8Array(anchor_tx), input);
 		GC.KeepAlive(this);
 		GC.KeepAlive(anchor_tx);
@@ -608,7 +608,7 @@ public class EcdsaChannelSigner : CommonBase {
 	 * 
 	 * [`NodeSigner::sign_gossip_message`]: crate::sign::NodeSigner::sign_gossip_message
 	 */
-	public Result_ECDSASignatureNoneZ sign_channel_announcement_with_funding_key(org.ldk.structs.UnsignedChannelAnnouncement msg) {
+	public org.ldk.structs.Result_ECDSASignatureNoneZ sign_channel_announcement_with_funding_key(org.ldk.structs.UnsignedChannelAnnouncement msg) {
 		long ret = bindings.EcdsaChannelSigner_sign_channel_announcement_with_funding_key(this.ptr, msg.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(msg);
@@ -632,7 +632,7 @@ public class EcdsaChannelSigner : CommonBase {
 	 * This method is *not* asynchronous. If an `Err` is returned, the channel will be immediately
 	 * closed.
 	 */
-	public Result_ECDSASignatureNoneZ sign_splicing_funding_input(byte[] tx, long input_index, long input_value) {
+	public org.ldk.structs.Result_ECDSASignatureNoneZ sign_splicing_funding_input(byte[] tx, long input_index, long input_value) {
 		long ret = bindings.EcdsaChannelSigner_sign_splicing_funding_input(this.ptr, InternalUtils.encodeUint8Array(tx), input_index, input_value);
 		GC.KeepAlive(this);
 		GC.KeepAlive(tx);
@@ -652,7 +652,7 @@ public class EcdsaChannelSigner : CommonBase {
 	/**
 	 * Creates a copy of a EcdsaChannelSigner
 	 */
-	public EcdsaChannelSigner clone() {
+	public org.ldk.structs.EcdsaChannelSigner clone() {
 		long ret = bindings.EcdsaChannelSigner_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

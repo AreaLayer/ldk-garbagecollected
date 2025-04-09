@@ -21,7 +21,7 @@ public class TxComplete : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.TxComplete_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -42,7 +42,7 @@ public class TxComplete : CommonBase {
 	/**
 	 * Constructs a new TxComplete given each field
 	 */
-	public static TxComplete of(org.ldk.structs.ChannelId channel_id_arg) {
+	public static org.ldk.structs.TxComplete of(org.ldk.structs.ChannelId channel_id_arg) {
 		long ret = bindings.TxComplete_new(channel_id_arg.ptr);
 		GC.KeepAlive(channel_id_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -60,7 +60,7 @@ public class TxComplete : CommonBase {
 	/**
 	 * Creates a copy of the TxComplete
 	 */
-	public TxComplete clone() {
+	public org.ldk.structs.TxComplete clone() {
 		long ret = bindings.TxComplete_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -112,7 +112,7 @@ public class TxComplete : CommonBase {
 	/**
 	 * Read a TxComplete from a byte array, created by TxComplete_write
 	 */
-	public static Result_TxCompleteDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_TxCompleteDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.TxComplete_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -19,7 +19,7 @@ public class ChannelInfo : CommonBase {
 	/**
 	 * Protocol features of a channel communicated during its announcement
 	 */
-	public ChannelFeatures get_features() {
+	public org.ldk.structs.ChannelFeatures get_features() {
 		long ret = bindings.ChannelInfo_get_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -40,7 +40,7 @@ public class ChannelInfo : CommonBase {
 	/**
 	 * Source node of the first direction of a channel
 	 */
-	public NodeId get_node_one() {
+	public org.ldk.structs.NodeId get_node_one() {
 		long ret = bindings.ChannelInfo_get_node_one(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -61,7 +61,7 @@ public class ChannelInfo : CommonBase {
 	/**
 	 * Source node of the second direction of a channel
 	 */
-	public NodeId get_node_two() {
+	public org.ldk.structs.NodeId get_node_two() {
 		long ret = bindings.ChannelInfo_get_node_two(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -82,7 +82,7 @@ public class ChannelInfo : CommonBase {
 	/**
 	 * The channel capacity as seen on-chain, if chain lookup is available.
 	 */
-	public Option_u64Z get_capacity_sats() {
+	public org.ldk.structs.Option_u64Z get_capacity_sats() {
 		long ret = bindings.ChannelInfo_get_capacity_sats(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -105,7 +105,7 @@ public class ChannelInfo : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ChannelUpdateInfo get_one_to_two() {
+	public org.ldk.structs.ChannelUpdateInfo get_one_to_two() {
 		long ret = bindings.ChannelInfo_get_one_to_two(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -130,7 +130,7 @@ public class ChannelInfo : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ChannelUpdateInfo get_two_to_one() {
+	public org.ldk.structs.ChannelUpdateInfo get_two_to_one() {
 		long ret = bindings.ChannelInfo_get_two_to_one(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -158,7 +158,7 @@ public class ChannelInfo : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ChannelAnnouncement get_announcement_message() {
+	public org.ldk.structs.ChannelAnnouncement get_announcement_message() {
 		long ret = bindings.ChannelInfo_get_announcement_message(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -190,7 +190,7 @@ public class ChannelInfo : CommonBase {
 	/**
 	 * Creates a copy of the ChannelInfo
 	 */
-	public ChannelInfo clone() {
+	public org.ldk.structs.ChannelInfo clone() {
 		long ret = bindings.ChannelInfo_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -221,7 +221,7 @@ public class ChannelInfo : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ChannelUpdateInfo get_directional_info(byte channel_flags) {
+	public org.ldk.structs.ChannelUpdateInfo get_directional_info(byte channel_flags) {
 		long ret = bindings.ChannelInfo_get_directional_info(this.ptr, channel_flags);
 		GC.KeepAlive(this);
 		GC.KeepAlive(channel_flags);
@@ -256,7 +256,7 @@ public class ChannelInfo : CommonBase {
 	/**
 	 * Read a ChannelInfo from a byte array, created by ChannelInfo_write
 	 */
-	public static Result_ChannelInfoDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ChannelInfoDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.ChannelInfo_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

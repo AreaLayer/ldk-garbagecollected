@@ -21,7 +21,7 @@ public class TxAckRbf : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.TxAckRbf_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -43,7 +43,7 @@ public class TxAckRbf : CommonBase {
 	 * The number of satoshis the sender will contribute to or, if negative, remove from
 	 * (e.g. splice-out) the funding output of the transaction
 	 */
-	public Option_i64Z get_funding_output_contribution() {
+	public org.ldk.structs.Option_i64Z get_funding_output_contribution() {
 		long ret = bindings.TxAckRbf_get_funding_output_contribution(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -65,7 +65,7 @@ public class TxAckRbf : CommonBase {
 	/**
 	 * Constructs a new TxAckRbf given each field
 	 */
-	public static TxAckRbf of(org.ldk.structs.ChannelId channel_id_arg, org.ldk.structs.Option_i64Z funding_output_contribution_arg) {
+	public static org.ldk.structs.TxAckRbf of(org.ldk.structs.ChannelId channel_id_arg, org.ldk.structs.Option_i64Z funding_output_contribution_arg) {
 		long ret = bindings.TxAckRbf_new(channel_id_arg.ptr, funding_output_contribution_arg.ptr);
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(funding_output_contribution_arg);
@@ -84,7 +84,7 @@ public class TxAckRbf : CommonBase {
 	/**
 	 * Creates a copy of the TxAckRbf
 	 */
-	public TxAckRbf clone() {
+	public org.ldk.structs.TxAckRbf clone() {
 		long ret = bindings.TxAckRbf_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -136,7 +136,7 @@ public class TxAckRbf : CommonBase {
 	/**
 	 * Read a TxAckRbf from a byte array, created by TxAckRbf_write
 	 */
-	public static Result_TxAckRbfDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_TxAckRbfDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.TxAckRbf_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

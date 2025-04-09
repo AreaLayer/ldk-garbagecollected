@@ -26,7 +26,7 @@ public class Option_TxOutZ : CommonBase {
 
 	/** A Option_TxOutZ of type Some */
 	public class Option_TxOutZ_Some : Option_TxOutZ {
-		public TxOut some;
+		public org.ldk.structs.TxOut some;
 		internal Option_TxOutZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_TxOutZ_Some_get_some(ptr);
 			TxOut some_conv = new TxOut(null, some);
@@ -41,7 +41,7 @@ public class Option_TxOutZ : CommonBase {
 	/**
 	 * Constructs a new COption_TxOutZ containing a crate::c_types::TxOut
 	 */
-	public static Option_TxOutZ some(org.ldk.structs.TxOut o) {
+	public static org.ldk.structs.Option_TxOutZ some(org.ldk.structs.TxOut o) {
 		long ret = bindings.COption_TxOutZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -53,7 +53,7 @@ public class Option_TxOutZ : CommonBase {
 	/**
 	 * Constructs a new COption_TxOutZ containing nothing
 	 */
-	public static Option_TxOutZ none() {
+	public static org.ldk.structs.Option_TxOutZ none() {
 		long ret = bindings.COption_TxOutZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_TxOutZ ret_hu_conv = org.ldk.structs.Option_TxOutZ.constr_from_ptr(ret);
@@ -71,7 +71,7 @@ public class Option_TxOutZ : CommonBase {
 	 * Creates a new COption_TxOutZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_TxOutZ clone() {
+	public org.ldk.structs.Option_TxOutZ clone() {
 		long ret = bindings.COption_TxOutZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

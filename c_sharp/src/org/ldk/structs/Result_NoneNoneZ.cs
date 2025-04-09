@@ -31,7 +31,7 @@ public class Result_NoneNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_NoneNoneZ in the success state.
 	 */
-	public static Result_NoneNoneZ ok() {
+	public static org.ldk.structs.Result_NoneNoneZ ok() {
 		long ret = bindings.CResult_NoneNoneZ_ok();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneNoneZ ret_hu_conv = Result_NoneNoneZ.constr_from_ptr(ret);
@@ -41,7 +41,7 @@ public class Result_NoneNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_NoneNoneZ in the error state.
 	 */
-	public static Result_NoneNoneZ err() {
+	public static org.ldk.structs.Result_NoneNoneZ err() {
 		long ret = bindings.CResult_NoneNoneZ_err();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneNoneZ ret_hu_conv = Result_NoneNoneZ.constr_from_ptr(ret);
@@ -67,7 +67,7 @@ public class Result_NoneNoneZ : CommonBase {
 	 * Creates a new CResult_NoneNoneZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_NoneNoneZ clone() {
+	public org.ldk.structs.Result_NoneNoneZ clone() {
 		long ret = bindings.CResult_NoneNoneZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -41,7 +41,7 @@ public class Result_C2Tuple_BestBlockOutputSweeperZDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_C2Tuple_BestBlockOutputSweeperZDecodeErrorZ in the success state.
 	 */
-	public static Result_C2Tuple_BestBlockOutputSweeperZDecodeErrorZ ok(org.ldk.structs.TwoTuple_BestBlockOutputSweeperZ o) {
+	public static org.ldk.structs.Result_C2Tuple_BestBlockOutputSweeperZDecodeErrorZ ok(org.ldk.structs.TwoTuple_BestBlockOutputSweeperZ o) {
 		long ret = bindings.CResult_C2Tuple_BestBlockOutputSweeperZDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -53,7 +53,7 @@ public class Result_C2Tuple_BestBlockOutputSweeperZDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_C2Tuple_BestBlockOutputSweeperZDecodeErrorZ in the error state.
 	 */
-	public static Result_C2Tuple_BestBlockOutputSweeperZDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_C2Tuple_BestBlockOutputSweeperZDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_C2Tuple_BestBlockOutputSweeperZDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -38,7 +38,7 @@ public class LightningError : CommonBase {
 	/**
 	 * The action which should be taken against the offending peer.
 	 */
-	public ErrorAction get_action() {
+	public org.ldk.structs.ErrorAction get_action() {
 		long ret = bindings.LightningError_get_action(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -59,7 +59,7 @@ public class LightningError : CommonBase {
 	/**
 	 * Constructs a new LightningError given each field
 	 */
-	public static LightningError of(string err_arg, org.ldk.structs.ErrorAction action_arg) {
+	public static org.ldk.structs.LightningError of(string err_arg, org.ldk.structs.ErrorAction action_arg) {
 		long ret = bindings.LightningError_new(InternalUtils.encodeString(err_arg), action_arg.ptr);
 		GC.KeepAlive(err_arg);
 		GC.KeepAlive(action_arg);
@@ -78,7 +78,7 @@ public class LightningError : CommonBase {
 	/**
 	 * Creates a copy of the LightningError
 	 */
-	public LightningError clone() {
+	public org.ldk.structs.LightningError clone() {
 		long ret = bindings.LightningError_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

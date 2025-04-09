@@ -41,7 +41,7 @@ public class Result_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSe
 	/**
 	 * Creates a new CResult_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ in the success state.
 	 */
-	public static Result_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ ok(org.ldk.structs.ThreeTuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ o) {
+	public static org.ldk.structs.Result_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ ok(org.ldk.structs.ThreeTuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ o) {
 		long ret = bindings.CResult_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSe
 	/**
 	 * Creates a new CResult_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ in the error state.
 	 */
-	public static Result_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ err(org.ldk.structs.SendError e) {
+	public static org.ldk.structs.Result_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ err(org.ldk.structs.SendError e) {
 		long ret = bindings.CResult_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSe
 	 * Creates a new CResult_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ clone() {
+	public org.ldk.structs.Result_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ clone() {
 		long ret = bindings.CResult_C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZSendErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

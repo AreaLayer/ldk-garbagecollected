@@ -54,7 +54,7 @@ public class SpendingDelay : CommonBase {
 	/**
 	 * Creates a copy of the SpendingDelay
 	 */
-	public SpendingDelay clone() {
+	public org.ldk.structs.SpendingDelay clone() {
 		long ret = bindings.SpendingDelay_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -66,7 +66,7 @@ public class SpendingDelay : CommonBase {
 	/**
 	 * Utility method to constructs a new Relative-variant SpendingDelay
 	 */
-	public static SpendingDelay relative(int num_blocks) {
+	public static org.ldk.structs.SpendingDelay relative(int num_blocks) {
 		long ret = bindings.SpendingDelay_relative(num_blocks);
 		GC.KeepAlive(num_blocks);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -78,7 +78,7 @@ public class SpendingDelay : CommonBase {
 	/**
 	 * Utility method to constructs a new Absolute-variant SpendingDelay
 	 */
-	public static SpendingDelay absolute(int height) {
+	public static org.ldk.structs.SpendingDelay absolute(int height) {
 		long ret = bindings.SpendingDelay_absolute(height);
 		GC.KeepAlive(height);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -36,7 +36,7 @@ public class Result_RecipientOnionFieldsNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_RecipientOnionFieldsNoneZ in the success state.
 	 */
-	public static Result_RecipientOnionFieldsNoneZ ok(org.ldk.structs.RecipientOnionFields o) {
+	public static org.ldk.structs.Result_RecipientOnionFieldsNoneZ ok(org.ldk.structs.RecipientOnionFields o) {
 		long ret = bindings.CResult_RecipientOnionFieldsNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -47,7 +47,7 @@ public class Result_RecipientOnionFieldsNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_RecipientOnionFieldsNoneZ in the error state.
 	 */
-	public static Result_RecipientOnionFieldsNoneZ err() {
+	public static org.ldk.structs.Result_RecipientOnionFieldsNoneZ err() {
 		long ret = bindings.CResult_RecipientOnionFieldsNoneZ_err();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_RecipientOnionFieldsNoneZ ret_hu_conv = Result_RecipientOnionFieldsNoneZ.constr_from_ptr(ret);
@@ -73,7 +73,7 @@ public class Result_RecipientOnionFieldsNoneZ : CommonBase {
 	 * Creates a new CResult_RecipientOnionFieldsNoneZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_RecipientOnionFieldsNoneZ clone() {
+	public org.ldk.structs.Result_RecipientOnionFieldsNoneZ clone() {
 		long ret = bindings.CResult_RecipientOnionFieldsNoneZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

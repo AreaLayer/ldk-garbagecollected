@@ -41,7 +41,7 @@ public class Result_BlindedMessagePathDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_BlindedMessagePathDecodeErrorZ in the success state.
 	 */
-	public static Result_BlindedMessagePathDecodeErrorZ ok(org.ldk.structs.BlindedMessagePath o) {
+	public static org.ldk.structs.Result_BlindedMessagePathDecodeErrorZ ok(org.ldk.structs.BlindedMessagePath o) {
 		long ret = bindings.CResult_BlindedMessagePathDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_BlindedMessagePathDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_BlindedMessagePathDecodeErrorZ in the error state.
 	 */
-	public static Result_BlindedMessagePathDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_BlindedMessagePathDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_BlindedMessagePathDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_BlindedMessagePathDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_BlindedMessagePathDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_BlindedMessagePathDecodeErrorZ clone() {
+	public org.ldk.structs.Result_BlindedMessagePathDecodeErrorZ clone() {
 		long ret = bindings.CResult_BlindedMessagePathDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

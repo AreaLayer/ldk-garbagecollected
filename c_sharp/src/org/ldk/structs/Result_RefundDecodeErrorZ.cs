@@ -41,7 +41,7 @@ public class Result_RefundDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_RefundDecodeErrorZ in the success state.
 	 */
-	public static Result_RefundDecodeErrorZ ok(org.ldk.structs.Refund o) {
+	public static org.ldk.structs.Result_RefundDecodeErrorZ ok(org.ldk.structs.Refund o) {
 		long ret = bindings.CResult_RefundDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_RefundDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_RefundDecodeErrorZ in the error state.
 	 */
-	public static Result_RefundDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_RefundDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_RefundDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_RefundDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_RefundDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_RefundDecodeErrorZ clone() {
+	public org.ldk.structs.Result_RefundDecodeErrorZ clone() {
 		long ret = bindings.CResult_RefundDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

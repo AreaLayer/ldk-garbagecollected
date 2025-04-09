@@ -60,6 +60,8 @@ public class bindings {
 	static { HTLCClaim.values(); /* Force enum statics to run */ }
 	static { IOError.values(); /* Force enum statics to run */ }
 	static { InboundHTLCStateDetails.values(); /* Force enum statics to run */ }
+	static { LSPS1OrderState.values(); /* Force enum statics to run */ }
+	static { LSPS1PaymentState.values(); /* Force enum statics to run */ }
 	static { Level.values(); /* Force enum statics to run */ }
 	static { Network.values(); /* Force enum statics to run */ }
 	static { OutboundHTLCStateDetails.values(); /* Force enum statics to run */ }
@@ -71,6 +73,19 @@ public class bindings {
 	static { SiPrefix.values(); /* Force enum statics to run */ }
 	static { SocketAddressParseError.values(); /* Force enum statics to run */ }
 	static { UtxoLookupError.values(); /* Force enum statics to run */ }
+	public static class LDKCOption_AddressZ {
+		private LDKCOption_AddressZ() {}
+		public final static class Some extends LDKCOption_AddressZ {
+			public long some;
+			Some(long some) { this.some = some; }
+		}
+		public final static class None extends LDKCOption_AddressZ {
+			None() { }
+		}
+		static native void init();
+	}
+	static { LDKCOption_AddressZ.init(); }
+	public static native LDKCOption_AddressZ LDKCOption_AddressZ_ref_from_ptr(long ptr);
 	// struct LDKThirtyTwoBytes BigEndianScalar_get_bytes (struct LDKBigEndianScalar* thing)
 	public static native byte[] BigEndianScalar_get_bytes(long thing);
 	// static void BigEndianScalar_free (struct LDKBigEndianScalar thing)
@@ -1007,6 +1022,53 @@ public class bindings {
 	public static native long[] C4Tuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ_get_c(long owner);
 	// struct LDKPublicKey C4Tuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ_get_d(LDKC4Tuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ *NONNULL_PTR owner);
 	public static native byte[] C4Tuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ_get_d(long owner);
+	public static class LDKCOption_StrZ {
+		private LDKCOption_StrZ() {}
+		public final static class Some extends LDKCOption_StrZ {
+			public java.lang.String some;
+			Some(java.lang.String some) { this.some = some; }
+		}
+		public final static class None extends LDKCOption_StrZ {
+			None() { }
+		}
+		static native void init();
+	}
+	static { LDKCOption_StrZ.init(); }
+	public static native LDKCOption_StrZ LDKCOption_StrZ_ref_from_ptr(long ptr);
+	public static class LDKAPIError {
+		private LDKAPIError() {}
+		public final static class APIMisuseError extends LDKAPIError {
+			public java.lang.String err;
+			APIMisuseError(java.lang.String err) { this.err = err; }
+		}
+		public final static class FeeRateTooHigh extends LDKAPIError {
+			public java.lang.String err;
+			public int feerate;
+			FeeRateTooHigh(java.lang.String err, int feerate) { this.err = err; this.feerate = feerate; }
+		}
+		public final static class InvalidRoute extends LDKAPIError {
+			public java.lang.String err;
+			InvalidRoute(java.lang.String err) { this.err = err; }
+		}
+		public final static class ChannelUnavailable extends LDKAPIError {
+			public java.lang.String err;
+			ChannelUnavailable(java.lang.String err) { this.err = err; }
+		}
+		public final static class MonitorUpdateInProgress extends LDKAPIError {
+			MonitorUpdateInProgress() { }
+		}
+		public final static class IncompatibleShutdownScript extends LDKAPIError {
+			public long script;
+			IncompatibleShutdownScript(long script) { this.script = script; }
+		}
+		static native void init();
+	}
+	static { LDKAPIError.init(); }
+	public static native LDKAPIError LDKAPIError_ref_from_ptr(long ptr);
+	// struct LDKLSPSRequestId CResult_LSPSRequestIdAPIErrorZ_get_ok(LDKCResult_LSPSRequestIdAPIErrorZ *NONNULL_PTR owner);
+	public static native long CResult_LSPSRequestIdAPIErrorZ_get_ok(long owner);
+	// struct LDKAPIError CResult_LSPSRequestIdAPIErrorZ_get_err(LDKCResult_LSPSRequestIdAPIErrorZ *NONNULL_PTR owner);
+	public static native long CResult_LSPSRequestIdAPIErrorZ_get_err(long owner);
 	// struct LDKOfferId CResult_OfferIdDecodeErrorZ_get_ok(LDKCResult_OfferIdDecodeErrorZ *NONNULL_PTR owner);
 	public static native long CResult_OfferIdDecodeErrorZ_get_ok(long owner);
 	// struct LDKDecodeError CResult_OfferIdDecodeErrorZ_get_err(LDKCResult_OfferIdDecodeErrorZ *NONNULL_PTR owner);
@@ -1527,36 +1589,6 @@ public class bindings {
 	}
 	static { LDKCOption_C2Tuple_u64u16ZZ.init(); }
 	public static native LDKCOption_C2Tuple_u64u16ZZ LDKCOption_C2Tuple_u64u16ZZ_ref_from_ptr(long ptr);
-	public static class LDKAPIError {
-		private LDKAPIError() {}
-		public final static class APIMisuseError extends LDKAPIError {
-			public java.lang.String err;
-			APIMisuseError(java.lang.String err) { this.err = err; }
-		}
-		public final static class FeeRateTooHigh extends LDKAPIError {
-			public java.lang.String err;
-			public int feerate;
-			FeeRateTooHigh(java.lang.String err, int feerate) { this.err = err; this.feerate = feerate; }
-		}
-		public final static class InvalidRoute extends LDKAPIError {
-			public java.lang.String err;
-			InvalidRoute(java.lang.String err) { this.err = err; }
-		}
-		public final static class ChannelUnavailable extends LDKAPIError {
-			public java.lang.String err;
-			ChannelUnavailable(java.lang.String err) { this.err = err; }
-		}
-		public final static class MonitorUpdateInProgress extends LDKAPIError {
-			MonitorUpdateInProgress() { }
-		}
-		public final static class IncompatibleShutdownScript extends LDKAPIError {
-			public long script;
-			IncompatibleShutdownScript(long script) { this.script = script; }
-		}
-		static native void init();
-	}
-	static { LDKAPIError.init(); }
-	public static native LDKAPIError LDKAPIError_ref_from_ptr(long ptr);
 	// struct LDKChannelId CResult_ChannelIdAPIErrorZ_get_ok(LDKCResult_ChannelIdAPIErrorZ *NONNULL_PTR owner);
 	public static native long CResult_ChannelIdAPIErrorZ_get_ok(long owner);
 	// struct LDKAPIError CResult_ChannelIdAPIErrorZ_get_err(LDKCResult_ChannelIdAPIErrorZ *NONNULL_PTR owner);
@@ -1705,19 +1737,6 @@ public class bindings {
 	public static native long CResult_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ_get_ok(long owner);
 	// enum LDKBolt12SemanticError CResult_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ_get_err(LDKCResult_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ *NONNULL_PTR owner);
 	public static native Bolt12SemanticError CResult_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ_get_err(long owner);
-	public static class LDKCOption_StrZ {
-		private LDKCOption_StrZ() {}
-		public final static class Some extends LDKCOption_StrZ {
-			public java.lang.String some;
-			Some(java.lang.String some) { this.some = some; }
-		}
-		public final static class None extends LDKCOption_StrZ {
-			None() { }
-		}
-		static native void init();
-	}
-	static { LDKCOption_StrZ.init(); }
-	public static native LDKCOption_StrZ LDKCOption_StrZ_ref_from_ptr(long ptr);
 	// struct LDKC2Tuple_ThirtyTwoBytesThirtyTwoBytesZ CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ_get_ok(LDKCResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ *NONNULL_PTR owner);
 	public static native long CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ_get_ok(long owner);
 	// void CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ_get_err(LDKCResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ *NONNULL_PTR owner);
@@ -2638,6 +2657,14 @@ public class bindings {
 	public static native ChannelShutdownState CResult_ChannelShutdownStateDecodeErrorZ_get_ok(long owner);
 	// struct LDKDecodeError CResult_ChannelShutdownStateDecodeErrorZ_get_err(LDKCResult_ChannelShutdownStateDecodeErrorZ *NONNULL_PTR owner);
 	public static native long CResult_ChannelShutdownStateDecodeErrorZ_get_err(long owner);
+	// struct LDKRawLSPSMessage CResult_RawLSPSMessageDecodeErrorZ_get_ok(LDKCResult_RawLSPSMessageDecodeErrorZ *NONNULL_PTR owner);
+	public static native long CResult_RawLSPSMessageDecodeErrorZ_get_ok(long owner);
+	// struct LDKDecodeError CResult_RawLSPSMessageDecodeErrorZ_get_err(LDKCResult_RawLSPSMessageDecodeErrorZ *NONNULL_PTR owner);
+	public static native long CResult_RawLSPSMessageDecodeErrorZ_get_err(long owner);
+	// struct LDKLSPSDateTime CResult_LSPSDateTimeNoneZ_get_ok(LDKCResult_LSPSDateTimeNoneZ *NONNULL_PTR owner);
+	public static native long CResult_LSPSDateTimeNoneZ_get_ok(long owner);
+	// void CResult_LSPSDateTimeNoneZ_get_err(LDKCResult_LSPSDateTimeNoneZ *NONNULL_PTR owner);
+	public static native void CResult_LSPSDateTimeNoneZ_get_err(long owner);
 	// struct LDKHeldHtlcAvailable CResult_HeldHtlcAvailableDecodeErrorZ_get_ok(LDKCResult_HeldHtlcAvailableDecodeErrorZ *NONNULL_PTR owner);
 	public static native long CResult_HeldHtlcAvailableDecodeErrorZ_get_ok(long owner);
 	// struct LDKDecodeError CResult_HeldHtlcAvailableDecodeErrorZ_get_err(LDKCResult_HeldHtlcAvailableDecodeErrorZ *NONNULL_PTR owner);
@@ -2736,6 +2763,10 @@ public class bindings {
 	public static native long CResult_ShutdownScriptInvalidShutdownScriptZ_get_ok(long owner);
 	// struct LDKInvalidShutdownScript CResult_ShutdownScriptInvalidShutdownScriptZ_get_err(LDKCResult_ShutdownScriptInvalidShutdownScriptZ *NONNULL_PTR owner);
 	public static native long CResult_ShutdownScriptInvalidShutdownScriptZ_get_err(long owner);
+	// uint64_t CResult_u64NoneZ_get_ok(LDKCResult_u64NoneZ *NONNULL_PTR owner);
+	public static native long CResult_u64NoneZ_get_ok(long owner);
+	// void CResult_u64NoneZ_get_err(LDKCResult_u64NoneZ *NONNULL_PTR owner);
+	public static native void CResult_u64NoneZ_get_err(long owner);
 	public static class LDKFundingInfo {
 		private LDKFundingInfo() {}
 		public final static class Tx extends LDKFundingInfo {
@@ -4166,6 +4197,305 @@ public class bindings {
 	}
 	static { LDKFallback.init(); }
 	public static native LDKFallback LDKFallback_ref_from_ptr(long ptr);
+	public static class LDKLSPS0ClientEvent {
+		private LDKLSPS0ClientEvent() {}
+		public final static class ListProtocolsResponse extends LDKLSPS0ClientEvent {
+			public byte[] counterparty_node_id;
+			public short[] protocols;
+			ListProtocolsResponse(byte[] counterparty_node_id, short[] protocols) { this.counterparty_node_id = counterparty_node_id; this.protocols = protocols; }
+		}
+		static native void init();
+	}
+	static { LDKLSPS0ClientEvent.init(); }
+	public static native LDKLSPS0ClientEvent LDKLSPS0ClientEvent_ref_from_ptr(long ptr);
+	public static class LDKLSPS1ClientEvent {
+		private LDKLSPS1ClientEvent() {}
+		public final static class SupportedOptionsReady extends LDKLSPS1ClientEvent {
+			public long request_id;
+			public byte[] counterparty_node_id;
+			public long supported_options;
+			SupportedOptionsReady(long request_id, byte[] counterparty_node_id, long supported_options) { this.request_id = request_id; this.counterparty_node_id = counterparty_node_id; this.supported_options = supported_options; }
+		}
+		public final static class SupportedOptionsRequestFailed extends LDKLSPS1ClientEvent {
+			public long request_id;
+			public byte[] counterparty_node_id;
+			public long error;
+			SupportedOptionsRequestFailed(long request_id, byte[] counterparty_node_id, long error) { this.request_id = request_id; this.counterparty_node_id = counterparty_node_id; this.error = error; }
+		}
+		public final static class OrderCreated extends LDKLSPS1ClientEvent {
+			public long request_id;
+			public byte[] counterparty_node_id;
+			public long order_id;
+			public long order;
+			public long payment;
+			public long channel;
+			OrderCreated(long request_id, byte[] counterparty_node_id, long order_id, long order, long payment, long channel) { this.request_id = request_id; this.counterparty_node_id = counterparty_node_id; this.order_id = order_id; this.order = order; this.payment = payment; this.channel = channel; }
+		}
+		public final static class OrderStatus extends LDKLSPS1ClientEvent {
+			public long request_id;
+			public byte[] counterparty_node_id;
+			public long order_id;
+			public long order;
+			public long payment;
+			public long channel;
+			OrderStatus(long request_id, byte[] counterparty_node_id, long order_id, long order, long payment, long channel) { this.request_id = request_id; this.counterparty_node_id = counterparty_node_id; this.order_id = order_id; this.order = order; this.payment = payment; this.channel = channel; }
+		}
+		public final static class OrderRequestFailed extends LDKLSPS1ClientEvent {
+			public long request_id;
+			public byte[] counterparty_node_id;
+			public long error;
+			OrderRequestFailed(long request_id, byte[] counterparty_node_id, long error) { this.request_id = request_id; this.counterparty_node_id = counterparty_node_id; this.error = error; }
+		}
+		static native void init();
+	}
+	static { LDKLSPS1ClientEvent.init(); }
+	public static native LDKLSPS1ClientEvent LDKLSPS1ClientEvent_ref_from_ptr(long ptr);
+	public static class LDKLSPS2ClientEvent {
+		private LDKLSPS2ClientEvent() {}
+		public final static class OpeningParametersReady extends LDKLSPS2ClientEvent {
+			public long request_id;
+			public byte[] counterparty_node_id;
+			public long[] opening_fee_params_menu;
+			OpeningParametersReady(long request_id, byte[] counterparty_node_id, long[] opening_fee_params_menu) { this.request_id = request_id; this.counterparty_node_id = counterparty_node_id; this.opening_fee_params_menu = opening_fee_params_menu; }
+		}
+		public final static class InvoiceParametersReady extends LDKLSPS2ClientEvent {
+			public long request_id;
+			public byte[] counterparty_node_id;
+			public long intercept_scid;
+			public int cltv_expiry_delta;
+			public long payment_size_msat;
+			InvoiceParametersReady(long request_id, byte[] counterparty_node_id, long intercept_scid, int cltv_expiry_delta, long payment_size_msat) { this.request_id = request_id; this.counterparty_node_id = counterparty_node_id; this.intercept_scid = intercept_scid; this.cltv_expiry_delta = cltv_expiry_delta; this.payment_size_msat = payment_size_msat; }
+		}
+		static native void init();
+	}
+	static { LDKLSPS2ClientEvent.init(); }
+	public static native LDKLSPS2ClientEvent LDKLSPS2ClientEvent_ref_from_ptr(long ptr);
+	public static class LDKLSPS2ServiceEvent {
+		private LDKLSPS2ServiceEvent() {}
+		public final static class GetInfo extends LDKLSPS2ServiceEvent {
+			public long request_id;
+			public byte[] counterparty_node_id;
+			public long token;
+			GetInfo(long request_id, byte[] counterparty_node_id, long token) { this.request_id = request_id; this.counterparty_node_id = counterparty_node_id; this.token = token; }
+		}
+		public final static class BuyRequest extends LDKLSPS2ServiceEvent {
+			public long request_id;
+			public byte[] counterparty_node_id;
+			public long opening_fee_params;
+			public long payment_size_msat;
+			BuyRequest(long request_id, byte[] counterparty_node_id, long opening_fee_params, long payment_size_msat) { this.request_id = request_id; this.counterparty_node_id = counterparty_node_id; this.opening_fee_params = opening_fee_params; this.payment_size_msat = payment_size_msat; }
+		}
+		public final static class OpenChannel extends LDKLSPS2ServiceEvent {
+			public byte[] their_network_key;
+			public long amt_to_forward_msat;
+			public long opening_fee_msat;
+			public byte[] user_channel_id;
+			public long intercept_scid;
+			OpenChannel(byte[] their_network_key, long amt_to_forward_msat, long opening_fee_msat, byte[] user_channel_id, long intercept_scid) { this.their_network_key = their_network_key; this.amt_to_forward_msat = amt_to_forward_msat; this.opening_fee_msat = opening_fee_msat; this.user_channel_id = user_channel_id; this.intercept_scid = intercept_scid; }
+		}
+		static native void init();
+	}
+	static { LDKLSPS2ServiceEvent.init(); }
+	public static native LDKLSPS2ServiceEvent LDKLSPS2ServiceEvent_ref_from_ptr(long ptr);
+	public static class LDKLiquidityEvent {
+		private LDKLiquidityEvent() {}
+		public final static class LSPS0Client extends LDKLiquidityEvent {
+			LSPS0Client() { }
+		}
+		public final static class LSPS1Client extends LDKLiquidityEvent {
+			LSPS1Client() { }
+		}
+		public final static class LSPS2Client extends LDKLiquidityEvent {
+			LSPS2Client() { }
+		}
+		public final static class LSPS2Service extends LDKLiquidityEvent {
+			LSPS2Service() { }
+		}
+		static native void init();
+	}
+	static { LDKLiquidityEvent.init(); }
+	public static native LDKLiquidityEvent LDKLiquidityEvent_ref_from_ptr(long ptr);
+	public static class LDKLSPS0Request {
+		private LDKLSPS0Request() {}
+		public final static class ListProtocols extends LDKLSPS0Request {
+			public long list_protocols;
+			ListProtocols(long list_protocols) { this.list_protocols = list_protocols; }
+		}
+		static native void init();
+	}
+	static { LDKLSPS0Request.init(); }
+	public static native LDKLSPS0Request LDKLSPS0Request_ref_from_ptr(long ptr);
+	public static class LDKLSPS0Response {
+		private LDKLSPS0Response() {}
+		public final static class ListProtocols extends LDKLSPS0Response {
+			public long list_protocols;
+			ListProtocols(long list_protocols) { this.list_protocols = list_protocols; }
+		}
+		public final static class ListProtocolsError extends LDKLSPS0Response {
+			public long list_protocols_error;
+			ListProtocolsError(long list_protocols_error) { this.list_protocols_error = list_protocols_error; }
+		}
+		static native void init();
+	}
+	static { LDKLSPS0Response.init(); }
+	public static native LDKLSPS0Response LDKLSPS0Response_ref_from_ptr(long ptr);
+	public static class LDKLSPS0Message {
+		private LDKLSPS0Message() {}
+		public final static class Request extends LDKLSPS0Message {
+			public long _0;
+			public long _1;
+			Request(long _0, long _1) { this._0 = _0; this._1 = _1; }
+		}
+		public final static class Response extends LDKLSPS0Message {
+			public long _0;
+			public long _1;
+			Response(long _0, long _1) { this._0 = _0; this._1 = _1; }
+		}
+		static native void init();
+	}
+	static { LDKLSPS0Message.init(); }
+	public static native LDKLSPS0Message LDKLSPS0Message_ref_from_ptr(long ptr);
+	public static class LDKLSPS1Request {
+		private LDKLSPS1Request() {}
+		public final static class GetInfo extends LDKLSPS1Request {
+			public long get_info;
+			GetInfo(long get_info) { this.get_info = get_info; }
+		}
+		public final static class CreateOrder extends LDKLSPS1Request {
+			public long create_order;
+			CreateOrder(long create_order) { this.create_order = create_order; }
+		}
+		public final static class GetOrder extends LDKLSPS1Request {
+			public long get_order;
+			GetOrder(long get_order) { this.get_order = get_order; }
+		}
+		static native void init();
+	}
+	static { LDKLSPS1Request.init(); }
+	public static native LDKLSPS1Request LDKLSPS1Request_ref_from_ptr(long ptr);
+	public static class LDKLSPS1Response {
+		private LDKLSPS1Response() {}
+		public final static class GetInfo extends LDKLSPS1Response {
+			public long get_info;
+			GetInfo(long get_info) { this.get_info = get_info; }
+		}
+		public final static class GetInfoError extends LDKLSPS1Response {
+			public long get_info_error;
+			GetInfoError(long get_info_error) { this.get_info_error = get_info_error; }
+		}
+		public final static class CreateOrder extends LDKLSPS1Response {
+			public long create_order;
+			CreateOrder(long create_order) { this.create_order = create_order; }
+		}
+		public final static class CreateOrderError extends LDKLSPS1Response {
+			public long create_order_error;
+			CreateOrderError(long create_order_error) { this.create_order_error = create_order_error; }
+		}
+		public final static class GetOrder extends LDKLSPS1Response {
+			public long get_order;
+			GetOrder(long get_order) { this.get_order = get_order; }
+		}
+		public final static class GetOrderError extends LDKLSPS1Response {
+			public long get_order_error;
+			GetOrderError(long get_order_error) { this.get_order_error = get_order_error; }
+		}
+		static native void init();
+	}
+	static { LDKLSPS1Response.init(); }
+	public static native LDKLSPS1Response LDKLSPS1Response_ref_from_ptr(long ptr);
+	public static class LDKLSPS1Message {
+		private LDKLSPS1Message() {}
+		public final static class Request extends LDKLSPS1Message {
+			public long _0;
+			public long _1;
+			Request(long _0, long _1) { this._0 = _0; this._1 = _1; }
+		}
+		public final static class Response extends LDKLSPS1Message {
+			public long _0;
+			public long _1;
+			Response(long _0, long _1) { this._0 = _0; this._1 = _1; }
+		}
+		static native void init();
+	}
+	static { LDKLSPS1Message.init(); }
+	public static native LDKLSPS1Message LDKLSPS1Message_ref_from_ptr(long ptr);
+	public static class LDKLSPS2Request {
+		private LDKLSPS2Request() {}
+		public final static class GetInfo extends LDKLSPS2Request {
+			public long get_info;
+			GetInfo(long get_info) { this.get_info = get_info; }
+		}
+		public final static class Buy extends LDKLSPS2Request {
+			public long buy;
+			Buy(long buy) { this.buy = buy; }
+		}
+		static native void init();
+	}
+	static { LDKLSPS2Request.init(); }
+	public static native LDKLSPS2Request LDKLSPS2Request_ref_from_ptr(long ptr);
+	public static class LDKLSPS2Response {
+		private LDKLSPS2Response() {}
+		public final static class GetInfo extends LDKLSPS2Response {
+			public long get_info;
+			GetInfo(long get_info) { this.get_info = get_info; }
+		}
+		public final static class GetInfoError extends LDKLSPS2Response {
+			public long get_info_error;
+			GetInfoError(long get_info_error) { this.get_info_error = get_info_error; }
+		}
+		public final static class Buy extends LDKLSPS2Response {
+			public long buy;
+			Buy(long buy) { this.buy = buy; }
+		}
+		public final static class BuyError extends LDKLSPS2Response {
+			public long buy_error;
+			BuyError(long buy_error) { this.buy_error = buy_error; }
+		}
+		static native void init();
+	}
+	static { LDKLSPS2Response.init(); }
+	public static native LDKLSPS2Response LDKLSPS2Response_ref_from_ptr(long ptr);
+	public static class LDKLSPS2Message {
+		private LDKLSPS2Message() {}
+		public final static class Request extends LDKLSPS2Message {
+			public long _0;
+			public long _1;
+			Request(long _0, long _1) { this._0 = _0; this._1 = _1; }
+		}
+		public final static class Response extends LDKLSPS2Message {
+			public long _0;
+			public long _1;
+			Response(long _0, long _1) { this._0 = _0; this._1 = _1; }
+		}
+		static native void init();
+	}
+	static { LDKLSPS2Message.init(); }
+	public static native LDKLSPS2Message LDKLSPS2Message_ref_from_ptr(long ptr);
+	public static class LDKLSPSMessage {
+		private LDKLSPSMessage() {}
+		public final static class Invalid extends LDKLSPSMessage {
+			public long invalid;
+			Invalid(long invalid) { this.invalid = invalid; }
+		}
+		public final static class LSPS0 extends LDKLSPSMessage {
+			LSPS0() { }
+		}
+		public final static class LSPS1 extends LDKLSPSMessage {
+			LSPS1() { }
+		}
+		public final static class LSPS2 extends LDKLSPSMessage {
+			LSPS2() { }
+		}
+		static native void init();
+	}
+	static { LDKLSPSMessage.init(); }
+	public static native LDKLSPSMessage LDKLSPSMessage_ref_from_ptr(long ptr);
+	public interface LDKProcessMessagesCallback {
+		 void call();
+	}
+	public static native long LDKProcessMessagesCallback_new(LDKProcessMessagesCallback impl);
+	// void ProcessMessagesCallback_call LDKProcessMessagesCallback *NONNULL_PTR this_arg
+	public static native void ProcessMessagesCallback_call(long this_arg);
 	// struct LDKStr _ldk_get_compiled_version(void);
 	public static native String _ldk_get_compiled_version();
 	// struct LDKStr _ldk_c_bindings_get_compiled_version(void);
@@ -4186,6 +4516,16 @@ public class bindings {
 	public static native long WitnessProgram_clone(long orig);
 	// void WitnessProgram_free(struct LDKWitnessProgram o);
 	public static native void WitnessProgram_free(long o);
+	// struct LDKStr Address_to_string(const struct LDKAddress *NONNULL_PTR addr);
+	public static native String Address_to_string(long addr);
+	// struct LDKCOption_AddressZ Address_new(struct LDKStr s);
+	public static native long Address_new(String s);
+	// void Address_free(struct LDKAddress o);
+	public static native void Address_free(long o);
+	// uint64_t Address_clone_ptr(LDKAddress *NONNULL_PTR arg);
+	public static native long Address_clone_ptr(long arg);
+	// struct LDKAddress Address_clone(const struct LDKAddress *NONNULL_PTR orig);
+	public static native long Address_clone(long orig);
 	// struct LDKBigEndianScalar BigEndianScalar_new(struct LDKThirtyTwoBytes big_endian_bytes);
 	public static native long BigEndianScalar_new(byte[] big_endian_bytes);
 	// uint64_t BigEndianScalar_clone_ptr(LDKBigEndianScalar *NONNULL_PTR arg);
@@ -4526,8 +4866,8 @@ public class bindings {
 	public static native long CResult_SchnorrSignatureNoneZ_clone(long orig);
 	// void CVec_BlindedPaymentPathZ_free(struct LDKCVec_BlindedPaymentPathZ _res);
 	public static native void CVec_BlindedPaymentPathZ_free(long[] _res);
-	// void CVec_StrZ_free(struct LDKCVec_StrZ _res);
-	public static native void CVec_StrZ_free(String[] _res);
+	// void CVec_AddressZ_free(struct LDKCVec_AddressZ _res);
+	public static native void CVec_AddressZ_free(long[] _res);
 	// void CVec_ThirtyTwoBytesZ_free(struct LDKCVec_ThirtyTwoBytesZ _res);
 	public static native void CVec_ThirtyTwoBytesZ_free(byte[][] _res);
 	// struct LDKCOption_CVec_ThirtyTwoBytesZZ COption_CVec_ThirtyTwoBytesZZ_some(struct LDKCVec_ThirtyTwoBytesZ o);
@@ -5034,6 +5374,8 @@ public class bindings {
 	public static native long CResult_RouteHintHopDecodeErrorZ_clone(long orig);
 	// void CVec_PublicKeyZ_free(struct LDKCVec_PublicKeyZ _res);
 	public static native void CVec_PublicKeyZ_free(byte[][] _res);
+	// void CVec_u16Z_free(struct LDKCVec_u16Z _res);
+	public static native void CVec_u16Z_free(short[] _res);
 	// struct LDKCResult_FixedPenaltyScorerDecodeErrorZ CResult_FixedPenaltyScorerDecodeErrorZ_ok(struct LDKFixedPenaltyScorer o);
 	public static native long CResult_FixedPenaltyScorerDecodeErrorZ_ok(long o);
 	// struct LDKCResult_FixedPenaltyScorerDecodeErrorZ CResult_FixedPenaltyScorerDecodeErrorZ_err(struct LDKDecodeError e);
@@ -5154,6 +5496,36 @@ public class bindings {
 	public static native void C4Tuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZ_free(long _res);
 	// void CVec_C4Tuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZZ_free(struct LDKCVec_C4Tuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZZ _res);
 	public static native void CVec_C4Tuple_OutPointChannelIdCVec_MonitorEventZPublicKeyZZ_free(long[] _res);
+	// struct LDKCOption_AddressZ COption_AddressZ_some(struct LDKAddress o);
+	public static native long COption_AddressZ_some(long o);
+	// struct LDKCOption_AddressZ COption_AddressZ_none(void);
+	public static native long COption_AddressZ_none();
+	// void COption_AddressZ_free(struct LDKCOption_AddressZ _res);
+	public static native void COption_AddressZ_free(long _res);
+	// struct LDKCOption_StrZ COption_StrZ_some(struct LDKStr o);
+	public static native long COption_StrZ_some(String o);
+	// struct LDKCOption_StrZ COption_StrZ_none(void);
+	public static native long COption_StrZ_none();
+	// void COption_StrZ_free(struct LDKCOption_StrZ _res);
+	public static native void COption_StrZ_free(long _res);
+	// uint64_t COption_StrZ_clone_ptr(LDKCOption_StrZ *NONNULL_PTR arg);
+	public static native long COption_StrZ_clone_ptr(long arg);
+	// struct LDKCOption_StrZ COption_StrZ_clone(const struct LDKCOption_StrZ *NONNULL_PTR orig);
+	public static native long COption_StrZ_clone(long orig);
+	// struct LDKCResult_LSPSRequestIdAPIErrorZ CResult_LSPSRequestIdAPIErrorZ_ok(struct LDKLSPSRequestId o);
+	public static native long CResult_LSPSRequestIdAPIErrorZ_ok(long o);
+	// struct LDKCResult_LSPSRequestIdAPIErrorZ CResult_LSPSRequestIdAPIErrorZ_err(struct LDKAPIError e);
+	public static native long CResult_LSPSRequestIdAPIErrorZ_err(long e);
+	// bool CResult_LSPSRequestIdAPIErrorZ_is_ok(const struct LDKCResult_LSPSRequestIdAPIErrorZ *NONNULL_PTR o);
+	public static native boolean CResult_LSPSRequestIdAPIErrorZ_is_ok(long o);
+	// void CResult_LSPSRequestIdAPIErrorZ_free(struct LDKCResult_LSPSRequestIdAPIErrorZ _res);
+	public static native void CResult_LSPSRequestIdAPIErrorZ_free(long _res);
+	// uint64_t CResult_LSPSRequestIdAPIErrorZ_clone_ptr(LDKCResult_LSPSRequestIdAPIErrorZ *NONNULL_PTR arg);
+	public static native long CResult_LSPSRequestIdAPIErrorZ_clone_ptr(long arg);
+	// struct LDKCResult_LSPSRequestIdAPIErrorZ CResult_LSPSRequestIdAPIErrorZ_clone(const struct LDKCResult_LSPSRequestIdAPIErrorZ *NONNULL_PTR orig);
+	public static native long CResult_LSPSRequestIdAPIErrorZ_clone(long orig);
+	// void CVec_LSPS2OpeningFeeParamsZ_free(struct LDKCVec_LSPS2OpeningFeeParamsZ _res);
+	public static native void CVec_LSPS2OpeningFeeParamsZ_free(long[] _res);
 	// struct LDKCResult_OfferIdDecodeErrorZ CResult_OfferIdDecodeErrorZ_ok(struct LDKOfferId o);
 	public static native long CResult_OfferIdDecodeErrorZ_ok(long o);
 	// struct LDKCResult_OfferIdDecodeErrorZ CResult_OfferIdDecodeErrorZ_err(struct LDKDecodeError e);
@@ -5670,16 +6042,6 @@ public class bindings {
 	public static native long CResult_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ_clone_ptr(long arg);
 	// struct LDKCResult_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ CResult_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ_clone(const struct LDKCResult_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ *NONNULL_PTR orig);
 	public static native long CResult_OfferWithDerivedMetadataBuilderBolt12SemanticErrorZ_clone(long orig);
-	// struct LDKCOption_StrZ COption_StrZ_some(struct LDKStr o);
-	public static native long COption_StrZ_some(String o);
-	// struct LDKCOption_StrZ COption_StrZ_none(void);
-	public static native long COption_StrZ_none();
-	// void COption_StrZ_free(struct LDKCOption_StrZ _res);
-	public static native void COption_StrZ_free(long _res);
-	// uint64_t COption_StrZ_clone_ptr(LDKCOption_StrZ *NONNULL_PTR arg);
-	public static native long COption_StrZ_clone_ptr(long arg);
-	// struct LDKCOption_StrZ COption_StrZ_clone(const struct LDKCOption_StrZ *NONNULL_PTR orig);
-	public static native long COption_StrZ_clone(long orig);
 	// void CVec_DestinationZ_free(struct LDKCVec_DestinationZ _res);
 	public static native void CVec_DestinationZ_free(long[] _res);
 	// struct LDKCResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ CResult_C2Tuple_ThirtyTwoBytesThirtyTwoBytesZNoneZ_ok(struct LDKC2Tuple_ThirtyTwoBytesThirtyTwoBytesZ o);
@@ -5892,6 +6254,8 @@ public class bindings {
 	public static native long CResult_COption_APIErrorZDecodeErrorZ_clone_ptr(long arg);
 	// struct LDKCResult_COption_APIErrorZDecodeErrorZ CResult_COption_APIErrorZDecodeErrorZ_clone(const struct LDKCResult_COption_APIErrorZDecodeErrorZ *NONNULL_PTR orig);
 	public static native long CResult_COption_APIErrorZDecodeErrorZ_clone(long orig);
+	// void CVec_LSPS2RawOpeningFeeParamsZ_free(struct LDKCVec_LSPS2RawOpeningFeeParamsZ _res);
+	public static native void CVec_LSPS2RawOpeningFeeParamsZ_free(long[] _res);
 	// struct LDKCResult_ChannelMonitorUpdateDecodeErrorZ CResult_ChannelMonitorUpdateDecodeErrorZ_ok(struct LDKChannelMonitorUpdate o);
 	public static native long CResult_ChannelMonitorUpdateDecodeErrorZ_ok(long o);
 	// struct LDKCResult_ChannelMonitorUpdateDecodeErrorZ CResult_ChannelMonitorUpdateDecodeErrorZ_err(struct LDKDecodeError e);
@@ -6180,6 +6544,8 @@ public class bindings {
 	public static native long CResult_CVec_u8ZIOErrorZ_clone_ptr(long arg);
 	// struct LDKCResult_CVec_u8ZIOErrorZ CResult_CVec_u8ZIOErrorZ_clone(const struct LDKCResult_CVec_u8ZIOErrorZ *NONNULL_PTR orig);
 	public static native long CResult_CVec_u8ZIOErrorZ_clone(long orig);
+	// void CVec_StrZ_free(struct LDKCVec_StrZ _res);
+	public static native void CVec_StrZ_free(String[] _res);
 	// struct LDKCResult_CVec_StrZIOErrorZ CResult_CVec_StrZIOErrorZ_ok(struct LDKCVec_StrZ o);
 	public static native long CResult_CVec_StrZIOErrorZ_ok(String[] o);
 	// struct LDKCResult_CVec_StrZIOErrorZ CResult_CVec_StrZIOErrorZ_err(enum LDKIOError e);
@@ -7136,6 +7502,30 @@ public class bindings {
 	public static native long CResult_ChannelShutdownStateDecodeErrorZ_clone(long orig);
 	// void CVec_FutureZ_free(struct LDKCVec_FutureZ _res);
 	public static native void CVec_FutureZ_free(long[] _res);
+	// struct LDKCResult_RawLSPSMessageDecodeErrorZ CResult_RawLSPSMessageDecodeErrorZ_ok(struct LDKRawLSPSMessage o);
+	public static native long CResult_RawLSPSMessageDecodeErrorZ_ok(long o);
+	// struct LDKCResult_RawLSPSMessageDecodeErrorZ CResult_RawLSPSMessageDecodeErrorZ_err(struct LDKDecodeError e);
+	public static native long CResult_RawLSPSMessageDecodeErrorZ_err(long e);
+	// bool CResult_RawLSPSMessageDecodeErrorZ_is_ok(const struct LDKCResult_RawLSPSMessageDecodeErrorZ *NONNULL_PTR o);
+	public static native boolean CResult_RawLSPSMessageDecodeErrorZ_is_ok(long o);
+	// void CResult_RawLSPSMessageDecodeErrorZ_free(struct LDKCResult_RawLSPSMessageDecodeErrorZ _res);
+	public static native void CResult_RawLSPSMessageDecodeErrorZ_free(long _res);
+	// uint64_t CResult_RawLSPSMessageDecodeErrorZ_clone_ptr(LDKCResult_RawLSPSMessageDecodeErrorZ *NONNULL_PTR arg);
+	public static native long CResult_RawLSPSMessageDecodeErrorZ_clone_ptr(long arg);
+	// struct LDKCResult_RawLSPSMessageDecodeErrorZ CResult_RawLSPSMessageDecodeErrorZ_clone(const struct LDKCResult_RawLSPSMessageDecodeErrorZ *NONNULL_PTR orig);
+	public static native long CResult_RawLSPSMessageDecodeErrorZ_clone(long orig);
+	// struct LDKCResult_LSPSDateTimeNoneZ CResult_LSPSDateTimeNoneZ_ok(struct LDKLSPSDateTime o);
+	public static native long CResult_LSPSDateTimeNoneZ_ok(long o);
+	// struct LDKCResult_LSPSDateTimeNoneZ CResult_LSPSDateTimeNoneZ_err(void);
+	public static native long CResult_LSPSDateTimeNoneZ_err();
+	// bool CResult_LSPSDateTimeNoneZ_is_ok(const struct LDKCResult_LSPSDateTimeNoneZ *NONNULL_PTR o);
+	public static native boolean CResult_LSPSDateTimeNoneZ_is_ok(long o);
+	// void CResult_LSPSDateTimeNoneZ_free(struct LDKCResult_LSPSDateTimeNoneZ _res);
+	public static native void CResult_LSPSDateTimeNoneZ_free(long _res);
+	// uint64_t CResult_LSPSDateTimeNoneZ_clone_ptr(LDKCResult_LSPSDateTimeNoneZ *NONNULL_PTR arg);
+	public static native long CResult_LSPSDateTimeNoneZ_clone_ptr(long arg);
+	// struct LDKCResult_LSPSDateTimeNoneZ CResult_LSPSDateTimeNoneZ_clone(const struct LDKCResult_LSPSDateTimeNoneZ *NONNULL_PTR orig);
+	public static native long CResult_LSPSDateTimeNoneZ_clone(long orig);
 	// struct LDKCResult_HeldHtlcAvailableDecodeErrorZ CResult_HeldHtlcAvailableDecodeErrorZ_ok(struct LDKHeldHtlcAvailable o);
 	public static native long CResult_HeldHtlcAvailableDecodeErrorZ_ok(long o);
 	// struct LDKCResult_HeldHtlcAvailableDecodeErrorZ CResult_HeldHtlcAvailableDecodeErrorZ_err(struct LDKDecodeError e);
@@ -7362,6 +7752,18 @@ public class bindings {
 	public static native long CResult_ShutdownScriptInvalidShutdownScriptZ_clone(long orig);
 	// void CVec_TransactionZ_free(struct LDKCVec_TransactionZ _res);
 	public static native void CVec_TransactionZ_free(byte[][] _res);
+	// struct LDKCResult_u64NoneZ CResult_u64NoneZ_ok(uint64_t o);
+	public static native long CResult_u64NoneZ_ok(long o);
+	// struct LDKCResult_u64NoneZ CResult_u64NoneZ_err(void);
+	public static native long CResult_u64NoneZ_err();
+	// bool CResult_u64NoneZ_is_ok(const struct LDKCResult_u64NoneZ *NONNULL_PTR o);
+	public static native boolean CResult_u64NoneZ_is_ok(long o);
+	// void CResult_u64NoneZ_free(struct LDKCResult_u64NoneZ _res);
+	public static native void CResult_u64NoneZ_free(long _res);
+	// uint64_t CResult_u64NoneZ_clone_ptr(LDKCResult_u64NoneZ *NONNULL_PTR arg);
+	public static native long CResult_u64NoneZ_clone_ptr(long arg);
+	// struct LDKCResult_u64NoneZ CResult_u64NoneZ_clone(const struct LDKCResult_u64NoneZ *NONNULL_PTR orig);
+	public static native long CResult_u64NoneZ_clone(long orig);
 	// struct LDKCResult_FundingInfoDecodeErrorZ CResult_FundingInfoDecodeErrorZ_ok(struct LDKFundingInfo o);
 	public static native long CResult_FundingInfoDecodeErrorZ_ok(long o);
 	// struct LDKCResult_FundingInfoDecodeErrorZ CResult_FundingInfoDecodeErrorZ_err(struct LDKDecodeError e);
@@ -12812,8 +13214,8 @@ public class bindings {
 	public static native long UnsignedBolt12Invoice_relative_expiry(long this_arg);
 	// MUST_USE_RES bool UnsignedBolt12Invoice_is_expired(const struct LDKUnsignedBolt12Invoice *NONNULL_PTR this_arg);
 	public static native boolean UnsignedBolt12Invoice_is_expired(long this_arg);
-	// MUST_USE_RES struct LDKCVec_StrZ UnsignedBolt12Invoice_fallbacks(const struct LDKUnsignedBolt12Invoice *NONNULL_PTR this_arg);
-	public static native String[] UnsignedBolt12Invoice_fallbacks(long this_arg);
+	// MUST_USE_RES struct LDKCVec_AddressZ UnsignedBolt12Invoice_fallbacks(const struct LDKUnsignedBolt12Invoice *NONNULL_PTR this_arg);
+	public static native long[] UnsignedBolt12Invoice_fallbacks(long this_arg);
 	// MUST_USE_RES struct LDKBolt12InvoiceFeatures UnsignedBolt12Invoice_invoice_features(const struct LDKUnsignedBolt12Invoice *NONNULL_PTR this_arg);
 	public static native long UnsignedBolt12Invoice_invoice_features(long this_arg);
 	// MUST_USE_RES struct LDKPublicKey UnsignedBolt12Invoice_signing_pubkey(const struct LDKUnsignedBolt12Invoice *NONNULL_PTR this_arg);
@@ -12862,8 +13264,8 @@ public class bindings {
 	public static native long Bolt12Invoice_relative_expiry(long this_arg);
 	// MUST_USE_RES bool Bolt12Invoice_is_expired(const struct LDKBolt12Invoice *NONNULL_PTR this_arg);
 	public static native boolean Bolt12Invoice_is_expired(long this_arg);
-	// MUST_USE_RES struct LDKCVec_StrZ Bolt12Invoice_fallbacks(const struct LDKBolt12Invoice *NONNULL_PTR this_arg);
-	public static native String[] Bolt12Invoice_fallbacks(long this_arg);
+	// MUST_USE_RES struct LDKCVec_AddressZ Bolt12Invoice_fallbacks(const struct LDKBolt12Invoice *NONNULL_PTR this_arg);
+	public static native long[] Bolt12Invoice_fallbacks(long this_arg);
 	// MUST_USE_RES struct LDKBolt12InvoiceFeatures Bolt12Invoice_invoice_features(const struct LDKBolt12Invoice *NONNULL_PTR this_arg);
 	public static native long Bolt12Invoice_invoice_features(long this_arg);
 	// MUST_USE_RES struct LDKPublicKey Bolt12Invoice_signing_pubkey(const struct LDKBolt12Invoice *NONNULL_PTR this_arg);
@@ -17014,8 +17416,8 @@ public class bindings {
 	public static native boolean Bolt11Invoice_would_expire(long this_arg, long at_time);
 	// MUST_USE_RES uint64_t Bolt11Invoice_min_final_cltv_expiry_delta(const struct LDKBolt11Invoice *NONNULL_PTR this_arg);
 	public static native long Bolt11Invoice_min_final_cltv_expiry_delta(long this_arg);
-	// MUST_USE_RES struct LDKCVec_StrZ Bolt11Invoice_fallback_addresses(const struct LDKBolt11Invoice *NONNULL_PTR this_arg);
-	public static native String[] Bolt11Invoice_fallback_addresses(long this_arg);
+	// MUST_USE_RES struct LDKCVec_AddressZ Bolt11Invoice_fallback_addresses(const struct LDKBolt11Invoice *NONNULL_PTR this_arg);
+	public static native long[] Bolt11Invoice_fallback_addresses(long this_arg);
 	// MUST_USE_RES struct LDKCVec_PrivateRouteZ Bolt11Invoice_private_routes(const struct LDKBolt11Invoice *NONNULL_PTR this_arg);
 	public static native long[] Bolt11Invoice_private_routes(long this_arg);
 	// MUST_USE_RES struct LDKCVec_RouteHintZ Bolt11Invoice_route_hints(const struct LDKBolt11Invoice *NONNULL_PTR this_arg);
@@ -17144,4 +17546,878 @@ public class bindings {
 	public static native long RapidGossipSync_update_network_graph_no_std(long this_arg, byte[] update_data, long current_time_unix);
 	// MUST_USE_RES bool RapidGossipSync_is_initial_sync_complete(const struct LDKRapidGossipSync *NONNULL_PTR this_arg);
 	public static native boolean RapidGossipSync_is_initial_sync_complete(long this_arg);
+	// void LiquidityEvent_free(struct LDKLiquidityEvent this_ptr);
+	public static native void LiquidityEvent_free(long this_ptr);
+	// uint64_t LiquidityEvent_clone_ptr(LDKLiquidityEvent *NONNULL_PTR arg);
+	public static native long LiquidityEvent_clone_ptr(long arg);
+	// struct LDKLiquidityEvent LiquidityEvent_clone(const struct LDKLiquidityEvent *NONNULL_PTR orig);
+	public static native long LiquidityEvent_clone(long orig);
+	// struct LDKLiquidityEvent LiquidityEvent_lsps0_client(struct LDKLSPS0ClientEvent a);
+	public static native long LiquidityEvent_lsps0_client(long a);
+	// struct LDKLiquidityEvent LiquidityEvent_lsps1_client(struct LDKLSPS1ClientEvent a);
+	public static native long LiquidityEvent_lsps1_client(long a);
+	// struct LDKLiquidityEvent LiquidityEvent_lsps2_client(struct LDKLSPS2ClientEvent a);
+	public static native long LiquidityEvent_lsps2_client(long a);
+	// struct LDKLiquidityEvent LiquidityEvent_lsps2_service(struct LDKLSPS2ServiceEvent a);
+	public static native long LiquidityEvent_lsps2_service(long a);
+	// bool LiquidityEvent_eq(const struct LDKLiquidityEvent *NONNULL_PTR a, const struct LDKLiquidityEvent *NONNULL_PTR b);
+	public static native boolean LiquidityEvent_eq(long a, long b);
+	// void LSPS0ClientHandler_free(struct LDKLSPS0ClientHandler this_obj);
+	public static native void LSPS0ClientHandler_free(long this_obj);
+	// void LSPS0ClientHandler_list_protocols(const struct LDKLSPS0ClientHandler *NONNULL_PTR this_arg, struct LDKPublicKey counterparty_node_id);
+	public static native void LSPS0ClientHandler_list_protocols(long this_arg, byte[] counterparty_node_id);
+	// void LSPS0ClientEvent_free(struct LDKLSPS0ClientEvent this_ptr);
+	public static native void LSPS0ClientEvent_free(long this_ptr);
+	// uint64_t LSPS0ClientEvent_clone_ptr(LDKLSPS0ClientEvent *NONNULL_PTR arg);
+	public static native long LSPS0ClientEvent_clone_ptr(long arg);
+	// struct LDKLSPS0ClientEvent LSPS0ClientEvent_clone(const struct LDKLSPS0ClientEvent *NONNULL_PTR orig);
+	public static native long LSPS0ClientEvent_clone(long orig);
+	// struct LDKLSPS0ClientEvent LSPS0ClientEvent_list_protocols_response(struct LDKPublicKey counterparty_node_id, struct LDKCVec_u16Z protocols);
+	public static native long LSPS0ClientEvent_list_protocols_response(byte[] counterparty_node_id, short[] protocols);
+	// bool LSPS0ClientEvent_eq(const struct LDKLSPS0ClientEvent *NONNULL_PTR a, const struct LDKLSPS0ClientEvent *NONNULL_PTR b);
+	public static native boolean LSPS0ClientEvent_eq(long a, long b);
+	// void LSPS0ListProtocolsRequest_free(struct LDKLSPS0ListProtocolsRequest this_obj);
+	public static native void LSPS0ListProtocolsRequest_free(long this_obj);
+	// MUST_USE_RES struct LDKLSPS0ListProtocolsRequest LSPS0ListProtocolsRequest_new(void);
+	public static native long LSPS0ListProtocolsRequest_new();
+	// uint64_t LSPS0ListProtocolsRequest_clone_ptr(LDKLSPS0ListProtocolsRequest *NONNULL_PTR arg);
+	public static native long LSPS0ListProtocolsRequest_clone_ptr(long arg);
+	// struct LDKLSPS0ListProtocolsRequest LSPS0ListProtocolsRequest_clone(const struct LDKLSPS0ListProtocolsRequest *NONNULL_PTR orig);
+	public static native long LSPS0ListProtocolsRequest_clone(long orig);
+	// bool LSPS0ListProtocolsRequest_eq(const struct LDKLSPS0ListProtocolsRequest *NONNULL_PTR a, const struct LDKLSPS0ListProtocolsRequest *NONNULL_PTR b);
+	public static native boolean LSPS0ListProtocolsRequest_eq(long a, long b);
+	// void LSPS0ListProtocolsResponse_free(struct LDKLSPS0ListProtocolsResponse this_obj);
+	public static native void LSPS0ListProtocolsResponse_free(long this_obj);
+	// struct LDKCVec_u16Z LSPS0ListProtocolsResponse_get_protocols(const struct LDKLSPS0ListProtocolsResponse *NONNULL_PTR this_ptr);
+	public static native short[] LSPS0ListProtocolsResponse_get_protocols(long this_ptr);
+	// void LSPS0ListProtocolsResponse_set_protocols(struct LDKLSPS0ListProtocolsResponse *NONNULL_PTR this_ptr, struct LDKCVec_u16Z val);
+	public static native void LSPS0ListProtocolsResponse_set_protocols(long this_ptr, short[] val);
+	// MUST_USE_RES struct LDKLSPS0ListProtocolsResponse LSPS0ListProtocolsResponse_new(struct LDKCVec_u16Z protocols_arg);
+	public static native long LSPS0ListProtocolsResponse_new(short[] protocols_arg);
+	// uint64_t LSPS0ListProtocolsResponse_clone_ptr(LDKLSPS0ListProtocolsResponse *NONNULL_PTR arg);
+	public static native long LSPS0ListProtocolsResponse_clone_ptr(long arg);
+	// struct LDKLSPS0ListProtocolsResponse LSPS0ListProtocolsResponse_clone(const struct LDKLSPS0ListProtocolsResponse *NONNULL_PTR orig);
+	public static native long LSPS0ListProtocolsResponse_clone(long orig);
+	// bool LSPS0ListProtocolsResponse_eq(const struct LDKLSPS0ListProtocolsResponse *NONNULL_PTR a, const struct LDKLSPS0ListProtocolsResponse *NONNULL_PTR b);
+	public static native boolean LSPS0ListProtocolsResponse_eq(long a, long b);
+	// void LSPS0Request_free(struct LDKLSPS0Request this_ptr);
+	public static native void LSPS0Request_free(long this_ptr);
+	// uint64_t LSPS0Request_clone_ptr(LDKLSPS0Request *NONNULL_PTR arg);
+	public static native long LSPS0Request_clone_ptr(long arg);
+	// struct LDKLSPS0Request LSPS0Request_clone(const struct LDKLSPS0Request *NONNULL_PTR orig);
+	public static native long LSPS0Request_clone(long orig);
+	// struct LDKLSPS0Request LSPS0Request_list_protocols(struct LDKLSPS0ListProtocolsRequest a);
+	public static native long LSPS0Request_list_protocols(long a);
+	// bool LSPS0Request_eq(const struct LDKLSPS0Request *NONNULL_PTR a, const struct LDKLSPS0Request *NONNULL_PTR b);
+	public static native boolean LSPS0Request_eq(long a, long b);
+	// MUST_USE_RES struct LDKStr LSPS0Request_method(const struct LDKLSPS0Request *NONNULL_PTR this_arg);
+	public static native String LSPS0Request_method(long this_arg);
+	// void LSPS0Response_free(struct LDKLSPS0Response this_ptr);
+	public static native void LSPS0Response_free(long this_ptr);
+	// uint64_t LSPS0Response_clone_ptr(LDKLSPS0Response *NONNULL_PTR arg);
+	public static native long LSPS0Response_clone_ptr(long arg);
+	// struct LDKLSPS0Response LSPS0Response_clone(const struct LDKLSPS0Response *NONNULL_PTR orig);
+	public static native long LSPS0Response_clone(long orig);
+	// struct LDKLSPS0Response LSPS0Response_list_protocols(struct LDKLSPS0ListProtocolsResponse a);
+	public static native long LSPS0Response_list_protocols(long a);
+	// struct LDKLSPS0Response LSPS0Response_list_protocols_error(struct LDKLSPSResponseError a);
+	public static native long LSPS0Response_list_protocols_error(long a);
+	// bool LSPS0Response_eq(const struct LDKLSPS0Response *NONNULL_PTR a, const struct LDKLSPS0Response *NONNULL_PTR b);
+	public static native boolean LSPS0Response_eq(long a, long b);
+	// void LSPS0Message_free(struct LDKLSPS0Message this_ptr);
+	public static native void LSPS0Message_free(long this_ptr);
+	// uint64_t LSPS0Message_clone_ptr(LDKLSPS0Message *NONNULL_PTR arg);
+	public static native long LSPS0Message_clone_ptr(long arg);
+	// struct LDKLSPS0Message LSPS0Message_clone(const struct LDKLSPS0Message *NONNULL_PTR orig);
+	public static native long LSPS0Message_clone(long orig);
+	// struct LDKLSPS0Message LSPS0Message_request(struct LDKLSPSRequestId a, struct LDKLSPS0Request b);
+	public static native long LSPS0Message_request(long a, long b);
+	// struct LDKLSPS0Message LSPS0Message_response(struct LDKLSPSRequestId a, struct LDKLSPS0Response b);
+	public static native long LSPS0Message_response(long a, long b);
+	// bool LSPS0Message_eq(const struct LDKLSPS0Message *NONNULL_PTR a, const struct LDKLSPS0Message *NONNULL_PTR b);
+	public static native boolean LSPS0Message_eq(long a, long b);
+	// void RawLSPSMessage_free(struct LDKRawLSPSMessage this_obj);
+	public static native void RawLSPSMessage_free(long this_obj);
+	// struct LDKStr RawLSPSMessage_get_payload(const struct LDKRawLSPSMessage *NONNULL_PTR this_ptr);
+	public static native String RawLSPSMessage_get_payload(long this_ptr);
+	// void RawLSPSMessage_set_payload(struct LDKRawLSPSMessage *NONNULL_PTR this_ptr, struct LDKStr val);
+	public static native void RawLSPSMessage_set_payload(long this_ptr, String val);
+	// MUST_USE_RES struct LDKRawLSPSMessage RawLSPSMessage_new(struct LDKStr payload_arg);
+	public static native long RawLSPSMessage_new(String payload_arg);
+	// uint64_t RawLSPSMessage_clone_ptr(LDKRawLSPSMessage *NONNULL_PTR arg);
+	public static native long RawLSPSMessage_clone_ptr(long arg);
+	// struct LDKRawLSPSMessage RawLSPSMessage_clone(const struct LDKRawLSPSMessage *NONNULL_PTR orig);
+	public static native long RawLSPSMessage_clone(long orig);
+	// bool RawLSPSMessage_eq(const struct LDKRawLSPSMessage *NONNULL_PTR a, const struct LDKRawLSPSMessage *NONNULL_PTR b);
+	public static native boolean RawLSPSMessage_eq(long a, long b);
+	// struct LDKCVec_u8Z RawLSPSMessage_write(const struct LDKRawLSPSMessage *NONNULL_PTR obj);
+	public static native byte[] RawLSPSMessage_write(long obj);
+	// struct LDKCResult_RawLSPSMessageDecodeErrorZ RawLSPSMessage_read(struct LDKu8slice ser);
+	public static native long RawLSPSMessage_read(byte[] ser);
+	// struct LDKType RawLSPSMessage_as_Type(const struct LDKRawLSPSMessage *NONNULL_PTR this_arg);
+	public static native long RawLSPSMessage_as_Type(long this_arg);
+	// void LSPSRequestId_free(struct LDKLSPSRequestId this_obj);
+	public static native void LSPSRequestId_free(long this_obj);
+	// struct LDKStr LSPSRequestId_get_a(const struct LDKLSPSRequestId *NONNULL_PTR this_ptr);
+	public static native String LSPSRequestId_get_a(long this_ptr);
+	// void LSPSRequestId_set_a(struct LDKLSPSRequestId *NONNULL_PTR this_ptr, struct LDKStr val);
+	public static native void LSPSRequestId_set_a(long this_ptr, String val);
+	// MUST_USE_RES struct LDKLSPSRequestId LSPSRequestId_new(struct LDKStr a_arg);
+	public static native long LSPSRequestId_new(String a_arg);
+	// uint64_t LSPSRequestId_clone_ptr(LDKLSPSRequestId *NONNULL_PTR arg);
+	public static native long LSPSRequestId_clone_ptr(long arg);
+	// struct LDKLSPSRequestId LSPSRequestId_clone(const struct LDKLSPSRequestId *NONNULL_PTR orig);
+	public static native long LSPSRequestId_clone(long orig);
+	// bool LSPSRequestId_eq(const struct LDKLSPSRequestId *NONNULL_PTR a, const struct LDKLSPSRequestId *NONNULL_PTR b);
+	public static native boolean LSPSRequestId_eq(long a, long b);
+	// uint64_t LSPSRequestId_hash(const struct LDKLSPSRequestId *NONNULL_PTR o);
+	public static native long LSPSRequestId_hash(long o);
+	// void LSPSDateTime_free(struct LDKLSPSDateTime this_obj);
+	public static native void LSPSDateTime_free(long this_obj);
+	// uint64_t LSPSDateTime_clone_ptr(LDKLSPSDateTime *NONNULL_PTR arg);
+	public static native long LSPSDateTime_clone_ptr(long arg);
+	// struct LDKLSPSDateTime LSPSDateTime_clone(const struct LDKLSPSDateTime *NONNULL_PTR orig);
+	public static native long LSPSDateTime_clone(long orig);
+	// bool LSPSDateTime_eq(const struct LDKLSPSDateTime *NONNULL_PTR a, const struct LDKLSPSDateTime *NONNULL_PTR b);
+	public static native boolean LSPSDateTime_eq(long a, long b);
+	// uint64_t LSPSDateTime_hash(const struct LDKLSPSDateTime *NONNULL_PTR o);
+	public static native long LSPSDateTime_hash(long o);
+	// MUST_USE_RES struct LDKStr LSPSDateTime_to_rfc3339(const struct LDKLSPSDateTime *NONNULL_PTR this_arg);
+	public static native String LSPSDateTime_to_rfc3339(long this_arg);
+	// MUST_USE_RES bool LSPSDateTime_is_past(const struct LDKLSPSDateTime *NONNULL_PTR this_arg);
+	public static native boolean LSPSDateTime_is_past(long this_arg);
+	// struct LDKCResult_LSPSDateTimeNoneZ LSPSDateTime_from_str(struct LDKStr s);
+	public static native long LSPSDateTime_from_str(String s);
+	// struct LDKStr LSPSDateTime_to_str(const struct LDKLSPSDateTime *NONNULL_PTR o);
+	public static native String LSPSDateTime_to_str(long o);
+	// void LSPSResponseError_free(struct LDKLSPSResponseError this_obj);
+	public static native void LSPSResponseError_free(long this_obj);
+	// struct LDKStr LSPSResponseError_get_message(const struct LDKLSPSResponseError *NONNULL_PTR this_ptr);
+	public static native String LSPSResponseError_get_message(long this_ptr);
+	// void LSPSResponseError_set_message(struct LDKLSPSResponseError *NONNULL_PTR this_ptr, struct LDKStr val);
+	public static native void LSPSResponseError_set_message(long this_ptr, String val);
+	// struct LDKCOption_StrZ LSPSResponseError_get_data(const struct LDKLSPSResponseError *NONNULL_PTR this_ptr);
+	public static native long LSPSResponseError_get_data(long this_ptr);
+	// void LSPSResponseError_set_data(struct LDKLSPSResponseError *NONNULL_PTR this_ptr, struct LDKCOption_StrZ val);
+	public static native void LSPSResponseError_set_data(long this_ptr, long val);
+	// uint64_t LSPSResponseError_clone_ptr(LDKLSPSResponseError *NONNULL_PTR arg);
+	public static native long LSPSResponseError_clone_ptr(long arg);
+	// struct LDKLSPSResponseError LSPSResponseError_clone(const struct LDKLSPSResponseError *NONNULL_PTR orig);
+	public static native long LSPSResponseError_clone(long orig);
+	// bool LSPSResponseError_eq(const struct LDKLSPSResponseError *NONNULL_PTR a, const struct LDKLSPSResponseError *NONNULL_PTR b);
+	public static native boolean LSPSResponseError_eq(long a, long b);
+	// void LSPSMessage_free(struct LDKLSPSMessage this_ptr);
+	public static native void LSPSMessage_free(long this_ptr);
+	// uint64_t LSPSMessage_clone_ptr(LDKLSPSMessage *NONNULL_PTR arg);
+	public static native long LSPSMessage_clone_ptr(long arg);
+	// struct LDKLSPSMessage LSPSMessage_clone(const struct LDKLSPSMessage *NONNULL_PTR orig);
+	public static native long LSPSMessage_clone(long orig);
+	// struct LDKLSPSMessage LSPSMessage_invalid(struct LDKLSPSResponseError a);
+	public static native long LSPSMessage_invalid(long a);
+	// struct LDKLSPSMessage LSPSMessage_lsps0(struct LDKLSPS0Message a);
+	public static native long LSPSMessage_lsps0(long a);
+	// struct LDKLSPSMessage LSPSMessage_lsps1(struct LDKLSPS1Message a);
+	public static native long LSPSMessage_lsps1(long a);
+	// struct LDKLSPSMessage LSPSMessage_lsps2(struct LDKLSPS2Message a);
+	public static native long LSPSMessage_lsps2(long a);
+	// bool LSPSMessage_eq(const struct LDKLSPSMessage *NONNULL_PTR a, const struct LDKLSPSMessage *NONNULL_PTR b);
+	public static native boolean LSPSMessage_eq(long a, long b);
+	// void LSPS0ServiceHandler_free(struct LDKLSPS0ServiceHandler this_obj);
+	public static native void LSPS0ServiceHandler_free(long this_obj);
+	// void LSPS1ClientConfig_free(struct LDKLSPS1ClientConfig this_obj);
+	public static native void LSPS1ClientConfig_free(long this_obj);
+	// struct LDKCOption_u64Z LSPS1ClientConfig_get_max_channel_fees_msat(const struct LDKLSPS1ClientConfig *NONNULL_PTR this_ptr);
+	public static native long LSPS1ClientConfig_get_max_channel_fees_msat(long this_ptr);
+	// void LSPS1ClientConfig_set_max_channel_fees_msat(struct LDKLSPS1ClientConfig *NONNULL_PTR this_ptr, struct LDKCOption_u64Z val);
+	public static native void LSPS1ClientConfig_set_max_channel_fees_msat(long this_ptr, long val);
+	// MUST_USE_RES struct LDKLSPS1ClientConfig LSPS1ClientConfig_new(struct LDKCOption_u64Z max_channel_fees_msat_arg);
+	public static native long LSPS1ClientConfig_new(long max_channel_fees_msat_arg);
+	// uint64_t LSPS1ClientConfig_clone_ptr(LDKLSPS1ClientConfig *NONNULL_PTR arg);
+	public static native long LSPS1ClientConfig_clone_ptr(long arg);
+	// struct LDKLSPS1ClientConfig LSPS1ClientConfig_clone(const struct LDKLSPS1ClientConfig *NONNULL_PTR orig);
+	public static native long LSPS1ClientConfig_clone(long orig);
+	// void LSPS1ClientHandler_free(struct LDKLSPS1ClientHandler this_obj);
+	public static native void LSPS1ClientHandler_free(long this_obj);
+	// MUST_USE_RES struct LDKLSPSRequestId LSPS1ClientHandler_request_supported_options(const struct LDKLSPS1ClientHandler *NONNULL_PTR this_arg, struct LDKPublicKey counterparty_node_id);
+	public static native long LSPS1ClientHandler_request_supported_options(long this_arg, byte[] counterparty_node_id);
+	// MUST_USE_RES struct LDKLSPSRequestId LSPS1ClientHandler_create_order(const struct LDKLSPS1ClientHandler *NONNULL_PTR this_arg, struct LDKPublicKey counterparty_node_id, struct LDKLSPS1OrderParams order, struct LDKCOption_AddressZ refund_onchain_address);
+	public static native long LSPS1ClientHandler_create_order(long this_arg, byte[] counterparty_node_id, long order, long refund_onchain_address);
+	// MUST_USE_RES struct LDKLSPSRequestId LSPS1ClientHandler_check_order_status(const struct LDKLSPS1ClientHandler *NONNULL_PTR this_arg, struct LDKPublicKey counterparty_node_id, struct LDKLSPS1OrderId order_id);
+	public static native long LSPS1ClientHandler_check_order_status(long this_arg, byte[] counterparty_node_id, long order_id);
+	// void LSPS1ClientEvent_free(struct LDKLSPS1ClientEvent this_ptr);
+	public static native void LSPS1ClientEvent_free(long this_ptr);
+	// uint64_t LSPS1ClientEvent_clone_ptr(LDKLSPS1ClientEvent *NONNULL_PTR arg);
+	public static native long LSPS1ClientEvent_clone_ptr(long arg);
+	// struct LDKLSPS1ClientEvent LSPS1ClientEvent_clone(const struct LDKLSPS1ClientEvent *NONNULL_PTR orig);
+	public static native long LSPS1ClientEvent_clone(long orig);
+	// struct LDKLSPS1ClientEvent LSPS1ClientEvent_supported_options_ready(struct LDKLSPSRequestId request_id, struct LDKPublicKey counterparty_node_id, struct LDKLSPS1Options supported_options);
+	public static native long LSPS1ClientEvent_supported_options_ready(long request_id, byte[] counterparty_node_id, long supported_options);
+	// struct LDKLSPS1ClientEvent LSPS1ClientEvent_supported_options_request_failed(struct LDKLSPSRequestId request_id, struct LDKPublicKey counterparty_node_id, struct LDKLSPSResponseError error);
+	public static native long LSPS1ClientEvent_supported_options_request_failed(long request_id, byte[] counterparty_node_id, long error);
+	// struct LDKLSPS1ClientEvent LSPS1ClientEvent_order_created(struct LDKLSPSRequestId request_id, struct LDKPublicKey counterparty_node_id, struct LDKLSPS1OrderId order_id, struct LDKLSPS1OrderParams order, struct LDKLSPS1PaymentInfo payment, struct LDKLSPS1ChannelInfo channel);
+	public static native long LSPS1ClientEvent_order_created(long request_id, byte[] counterparty_node_id, long order_id, long order, long payment, long channel);
+	// struct LDKLSPS1ClientEvent LSPS1ClientEvent_order_status(struct LDKLSPSRequestId request_id, struct LDKPublicKey counterparty_node_id, struct LDKLSPS1OrderId order_id, struct LDKLSPS1OrderParams order, struct LDKLSPS1PaymentInfo payment, struct LDKLSPS1ChannelInfo channel);
+	public static native long LSPS1ClientEvent_order_status(long request_id, byte[] counterparty_node_id, long order_id, long order, long payment, long channel);
+	// struct LDKLSPS1ClientEvent LSPS1ClientEvent_order_request_failed(struct LDKLSPSRequestId request_id, struct LDKPublicKey counterparty_node_id, struct LDKLSPSResponseError error);
+	public static native long LSPS1ClientEvent_order_request_failed(long request_id, byte[] counterparty_node_id, long error);
+	// bool LSPS1ClientEvent_eq(const struct LDKLSPS1ClientEvent *NONNULL_PTR a, const struct LDKLSPS1ClientEvent *NONNULL_PTR b);
+	public static native boolean LSPS1ClientEvent_eq(long a, long b);
+	// void LSPS1OrderId_free(struct LDKLSPS1OrderId this_obj);
+	public static native void LSPS1OrderId_free(long this_obj);
+	// struct LDKStr LSPS1OrderId_get_a(const struct LDKLSPS1OrderId *NONNULL_PTR this_ptr);
+	public static native String LSPS1OrderId_get_a(long this_ptr);
+	// void LSPS1OrderId_set_a(struct LDKLSPS1OrderId *NONNULL_PTR this_ptr, struct LDKStr val);
+	public static native void LSPS1OrderId_set_a(long this_ptr, String val);
+	// MUST_USE_RES struct LDKLSPS1OrderId LSPS1OrderId_new(struct LDKStr a_arg);
+	public static native long LSPS1OrderId_new(String a_arg);
+	// uint64_t LSPS1OrderId_clone_ptr(LDKLSPS1OrderId *NONNULL_PTR arg);
+	public static native long LSPS1OrderId_clone_ptr(long arg);
+	// struct LDKLSPS1OrderId LSPS1OrderId_clone(const struct LDKLSPS1OrderId *NONNULL_PTR orig);
+	public static native long LSPS1OrderId_clone(long orig);
+	// bool LSPS1OrderId_eq(const struct LDKLSPS1OrderId *NONNULL_PTR a, const struct LDKLSPS1OrderId *NONNULL_PTR b);
+	public static native boolean LSPS1OrderId_eq(long a, long b);
+	// uint64_t LSPS1OrderId_hash(const struct LDKLSPS1OrderId *NONNULL_PTR o);
+	public static native long LSPS1OrderId_hash(long o);
+	// void LSPS1GetInfoRequest_free(struct LDKLSPS1GetInfoRequest this_obj);
+	public static native void LSPS1GetInfoRequest_free(long this_obj);
+	// MUST_USE_RES struct LDKLSPS1GetInfoRequest LSPS1GetInfoRequest_new(void);
+	public static native long LSPS1GetInfoRequest_new();
+	// uint64_t LSPS1GetInfoRequest_clone_ptr(LDKLSPS1GetInfoRequest *NONNULL_PTR arg);
+	public static native long LSPS1GetInfoRequest_clone_ptr(long arg);
+	// struct LDKLSPS1GetInfoRequest LSPS1GetInfoRequest_clone(const struct LDKLSPS1GetInfoRequest *NONNULL_PTR orig);
+	public static native long LSPS1GetInfoRequest_clone(long orig);
+	// bool LSPS1GetInfoRequest_eq(const struct LDKLSPS1GetInfoRequest *NONNULL_PTR a, const struct LDKLSPS1GetInfoRequest *NONNULL_PTR b);
+	public static native boolean LSPS1GetInfoRequest_eq(long a, long b);
+	// void LSPS1Options_free(struct LDKLSPS1Options this_obj);
+	public static native void LSPS1Options_free(long this_obj);
+	// uint16_t LSPS1Options_get_min_required_channel_confirmations(const struct LDKLSPS1Options *NONNULL_PTR this_ptr);
+	public static native short LSPS1Options_get_min_required_channel_confirmations(long this_ptr);
+	// void LSPS1Options_set_min_required_channel_confirmations(struct LDKLSPS1Options *NONNULL_PTR this_ptr, uint16_t val);
+	public static native void LSPS1Options_set_min_required_channel_confirmations(long this_ptr, short val);
+	// uint16_t LSPS1Options_get_min_funding_confirms_within_blocks(const struct LDKLSPS1Options *NONNULL_PTR this_ptr);
+	public static native short LSPS1Options_get_min_funding_confirms_within_blocks(long this_ptr);
+	// void LSPS1Options_set_min_funding_confirms_within_blocks(struct LDKLSPS1Options *NONNULL_PTR this_ptr, uint16_t val);
+	public static native void LSPS1Options_set_min_funding_confirms_within_blocks(long this_ptr, short val);
+	// bool LSPS1Options_get_supports_zero_channel_reserve(const struct LDKLSPS1Options *NONNULL_PTR this_ptr);
+	public static native boolean LSPS1Options_get_supports_zero_channel_reserve(long this_ptr);
+	// void LSPS1Options_set_supports_zero_channel_reserve(struct LDKLSPS1Options *NONNULL_PTR this_ptr, bool val);
+	public static native void LSPS1Options_set_supports_zero_channel_reserve(long this_ptr, boolean val);
+	// uint32_t LSPS1Options_get_max_channel_expiry_blocks(const struct LDKLSPS1Options *NONNULL_PTR this_ptr);
+	public static native int LSPS1Options_get_max_channel_expiry_blocks(long this_ptr);
+	// void LSPS1Options_set_max_channel_expiry_blocks(struct LDKLSPS1Options *NONNULL_PTR this_ptr, uint32_t val);
+	public static native void LSPS1Options_set_max_channel_expiry_blocks(long this_ptr, int val);
+	// uint64_t LSPS1Options_get_min_initial_client_balance_sat(const struct LDKLSPS1Options *NONNULL_PTR this_ptr);
+	public static native long LSPS1Options_get_min_initial_client_balance_sat(long this_ptr);
+	// void LSPS1Options_set_min_initial_client_balance_sat(struct LDKLSPS1Options *NONNULL_PTR this_ptr, uint64_t val);
+	public static native void LSPS1Options_set_min_initial_client_balance_sat(long this_ptr, long val);
+	// uint64_t LSPS1Options_get_max_initial_client_balance_sat(const struct LDKLSPS1Options *NONNULL_PTR this_ptr);
+	public static native long LSPS1Options_get_max_initial_client_balance_sat(long this_ptr);
+	// void LSPS1Options_set_max_initial_client_balance_sat(struct LDKLSPS1Options *NONNULL_PTR this_ptr, uint64_t val);
+	public static native void LSPS1Options_set_max_initial_client_balance_sat(long this_ptr, long val);
+	// uint64_t LSPS1Options_get_min_initial_lsp_balance_sat(const struct LDKLSPS1Options *NONNULL_PTR this_ptr);
+	public static native long LSPS1Options_get_min_initial_lsp_balance_sat(long this_ptr);
+	// void LSPS1Options_set_min_initial_lsp_balance_sat(struct LDKLSPS1Options *NONNULL_PTR this_ptr, uint64_t val);
+	public static native void LSPS1Options_set_min_initial_lsp_balance_sat(long this_ptr, long val);
+	// uint64_t LSPS1Options_get_max_initial_lsp_balance_sat(const struct LDKLSPS1Options *NONNULL_PTR this_ptr);
+	public static native long LSPS1Options_get_max_initial_lsp_balance_sat(long this_ptr);
+	// void LSPS1Options_set_max_initial_lsp_balance_sat(struct LDKLSPS1Options *NONNULL_PTR this_ptr, uint64_t val);
+	public static native void LSPS1Options_set_max_initial_lsp_balance_sat(long this_ptr, long val);
+	// uint64_t LSPS1Options_get_min_channel_balance_sat(const struct LDKLSPS1Options *NONNULL_PTR this_ptr);
+	public static native long LSPS1Options_get_min_channel_balance_sat(long this_ptr);
+	// void LSPS1Options_set_min_channel_balance_sat(struct LDKLSPS1Options *NONNULL_PTR this_ptr, uint64_t val);
+	public static native void LSPS1Options_set_min_channel_balance_sat(long this_ptr, long val);
+	// uint64_t LSPS1Options_get_max_channel_balance_sat(const struct LDKLSPS1Options *NONNULL_PTR this_ptr);
+	public static native long LSPS1Options_get_max_channel_balance_sat(long this_ptr);
+	// void LSPS1Options_set_max_channel_balance_sat(struct LDKLSPS1Options *NONNULL_PTR this_ptr, uint64_t val);
+	public static native void LSPS1Options_set_max_channel_balance_sat(long this_ptr, long val);
+	// MUST_USE_RES struct LDKLSPS1Options LSPS1Options_new(uint16_t min_required_channel_confirmations_arg, uint16_t min_funding_confirms_within_blocks_arg, bool supports_zero_channel_reserve_arg, uint32_t max_channel_expiry_blocks_arg, uint64_t min_initial_client_balance_sat_arg, uint64_t max_initial_client_balance_sat_arg, uint64_t min_initial_lsp_balance_sat_arg, uint64_t max_initial_lsp_balance_sat_arg, uint64_t min_channel_balance_sat_arg, uint64_t max_channel_balance_sat_arg);
+	public static native long LSPS1Options_new(short min_required_channel_confirmations_arg, short min_funding_confirms_within_blocks_arg, boolean supports_zero_channel_reserve_arg, int max_channel_expiry_blocks_arg, long min_initial_client_balance_sat_arg, long max_initial_client_balance_sat_arg, long min_initial_lsp_balance_sat_arg, long max_initial_lsp_balance_sat_arg, long min_channel_balance_sat_arg, long max_channel_balance_sat_arg);
+	// uint64_t LSPS1Options_clone_ptr(LDKLSPS1Options *NONNULL_PTR arg);
+	public static native long LSPS1Options_clone_ptr(long arg);
+	// struct LDKLSPS1Options LSPS1Options_clone(const struct LDKLSPS1Options *NONNULL_PTR orig);
+	public static native long LSPS1Options_clone(long orig);
+	// bool LSPS1Options_eq(const struct LDKLSPS1Options *NONNULL_PTR a, const struct LDKLSPS1Options *NONNULL_PTR b);
+	public static native boolean LSPS1Options_eq(long a, long b);
+	// void LSPS1GetInfoResponse_free(struct LDKLSPS1GetInfoResponse this_obj);
+	public static native void LSPS1GetInfoResponse_free(long this_obj);
+	// struct LDKLSPS1Options LSPS1GetInfoResponse_get_options(const struct LDKLSPS1GetInfoResponse *NONNULL_PTR this_ptr);
+	public static native long LSPS1GetInfoResponse_get_options(long this_ptr);
+	// void LSPS1GetInfoResponse_set_options(struct LDKLSPS1GetInfoResponse *NONNULL_PTR this_ptr, struct LDKLSPS1Options val);
+	public static native void LSPS1GetInfoResponse_set_options(long this_ptr, long val);
+	// MUST_USE_RES struct LDKLSPS1GetInfoResponse LSPS1GetInfoResponse_new(struct LDKLSPS1Options options_arg);
+	public static native long LSPS1GetInfoResponse_new(long options_arg);
+	// uint64_t LSPS1GetInfoResponse_clone_ptr(LDKLSPS1GetInfoResponse *NONNULL_PTR arg);
+	public static native long LSPS1GetInfoResponse_clone_ptr(long arg);
+	// struct LDKLSPS1GetInfoResponse LSPS1GetInfoResponse_clone(const struct LDKLSPS1GetInfoResponse *NONNULL_PTR orig);
+	public static native long LSPS1GetInfoResponse_clone(long orig);
+	// bool LSPS1GetInfoResponse_eq(const struct LDKLSPS1GetInfoResponse *NONNULL_PTR a, const struct LDKLSPS1GetInfoResponse *NONNULL_PTR b);
+	public static native boolean LSPS1GetInfoResponse_eq(long a, long b);
+	// void LSPS1CreateOrderRequest_free(struct LDKLSPS1CreateOrderRequest this_obj);
+	public static native void LSPS1CreateOrderRequest_free(long this_obj);
+	// struct LDKLSPS1OrderParams LSPS1CreateOrderRequest_get_order(const struct LDKLSPS1CreateOrderRequest *NONNULL_PTR this_ptr);
+	public static native long LSPS1CreateOrderRequest_get_order(long this_ptr);
+	// void LSPS1CreateOrderRequest_set_order(struct LDKLSPS1CreateOrderRequest *NONNULL_PTR this_ptr, struct LDKLSPS1OrderParams val);
+	public static native void LSPS1CreateOrderRequest_set_order(long this_ptr, long val);
+	// struct LDKCOption_AddressZ LSPS1CreateOrderRequest_get_refund_onchain_address(const struct LDKLSPS1CreateOrderRequest *NONNULL_PTR this_ptr);
+	public static native long LSPS1CreateOrderRequest_get_refund_onchain_address(long this_ptr);
+	// void LSPS1CreateOrderRequest_set_refund_onchain_address(struct LDKLSPS1CreateOrderRequest *NONNULL_PTR this_ptr, struct LDKCOption_AddressZ val);
+	public static native void LSPS1CreateOrderRequest_set_refund_onchain_address(long this_ptr, long val);
+	// MUST_USE_RES struct LDKLSPS1CreateOrderRequest LSPS1CreateOrderRequest_new(struct LDKLSPS1OrderParams order_arg, struct LDKCOption_AddressZ refund_onchain_address_arg);
+	public static native long LSPS1CreateOrderRequest_new(long order_arg, long refund_onchain_address_arg);
+	// uint64_t LSPS1CreateOrderRequest_clone_ptr(LDKLSPS1CreateOrderRequest *NONNULL_PTR arg);
+	public static native long LSPS1CreateOrderRequest_clone_ptr(long arg);
+	// struct LDKLSPS1CreateOrderRequest LSPS1CreateOrderRequest_clone(const struct LDKLSPS1CreateOrderRequest *NONNULL_PTR orig);
+	public static native long LSPS1CreateOrderRequest_clone(long orig);
+	// bool LSPS1CreateOrderRequest_eq(const struct LDKLSPS1CreateOrderRequest *NONNULL_PTR a, const struct LDKLSPS1CreateOrderRequest *NONNULL_PTR b);
+	public static native boolean LSPS1CreateOrderRequest_eq(long a, long b);
+	// void LSPS1OrderParams_free(struct LDKLSPS1OrderParams this_obj);
+	public static native void LSPS1OrderParams_free(long this_obj);
+	// uint64_t LSPS1OrderParams_get_lsp_balance_sat(const struct LDKLSPS1OrderParams *NONNULL_PTR this_ptr);
+	public static native long LSPS1OrderParams_get_lsp_balance_sat(long this_ptr);
+	// void LSPS1OrderParams_set_lsp_balance_sat(struct LDKLSPS1OrderParams *NONNULL_PTR this_ptr, uint64_t val);
+	public static native void LSPS1OrderParams_set_lsp_balance_sat(long this_ptr, long val);
+	// uint64_t LSPS1OrderParams_get_client_balance_sat(const struct LDKLSPS1OrderParams *NONNULL_PTR this_ptr);
+	public static native long LSPS1OrderParams_get_client_balance_sat(long this_ptr);
+	// void LSPS1OrderParams_set_client_balance_sat(struct LDKLSPS1OrderParams *NONNULL_PTR this_ptr, uint64_t val);
+	public static native void LSPS1OrderParams_set_client_balance_sat(long this_ptr, long val);
+	// uint16_t LSPS1OrderParams_get_required_channel_confirmations(const struct LDKLSPS1OrderParams *NONNULL_PTR this_ptr);
+	public static native short LSPS1OrderParams_get_required_channel_confirmations(long this_ptr);
+	// void LSPS1OrderParams_set_required_channel_confirmations(struct LDKLSPS1OrderParams *NONNULL_PTR this_ptr, uint16_t val);
+	public static native void LSPS1OrderParams_set_required_channel_confirmations(long this_ptr, short val);
+	// uint16_t LSPS1OrderParams_get_funding_confirms_within_blocks(const struct LDKLSPS1OrderParams *NONNULL_PTR this_ptr);
+	public static native short LSPS1OrderParams_get_funding_confirms_within_blocks(long this_ptr);
+	// void LSPS1OrderParams_set_funding_confirms_within_blocks(struct LDKLSPS1OrderParams *NONNULL_PTR this_ptr, uint16_t val);
+	public static native void LSPS1OrderParams_set_funding_confirms_within_blocks(long this_ptr, short val);
+	// uint32_t LSPS1OrderParams_get_channel_expiry_blocks(const struct LDKLSPS1OrderParams *NONNULL_PTR this_ptr);
+	public static native int LSPS1OrderParams_get_channel_expiry_blocks(long this_ptr);
+	// void LSPS1OrderParams_set_channel_expiry_blocks(struct LDKLSPS1OrderParams *NONNULL_PTR this_ptr, uint32_t val);
+	public static native void LSPS1OrderParams_set_channel_expiry_blocks(long this_ptr, int val);
+	// struct LDKCOption_StrZ LSPS1OrderParams_get_token(const struct LDKLSPS1OrderParams *NONNULL_PTR this_ptr);
+	public static native long LSPS1OrderParams_get_token(long this_ptr);
+	// void LSPS1OrderParams_set_token(struct LDKLSPS1OrderParams *NONNULL_PTR this_ptr, struct LDKCOption_StrZ val);
+	public static native void LSPS1OrderParams_set_token(long this_ptr, long val);
+	// bool LSPS1OrderParams_get_announce_channel(const struct LDKLSPS1OrderParams *NONNULL_PTR this_ptr);
+	public static native boolean LSPS1OrderParams_get_announce_channel(long this_ptr);
+	// void LSPS1OrderParams_set_announce_channel(struct LDKLSPS1OrderParams *NONNULL_PTR this_ptr, bool val);
+	public static native void LSPS1OrderParams_set_announce_channel(long this_ptr, boolean val);
+	// MUST_USE_RES struct LDKLSPS1OrderParams LSPS1OrderParams_new(uint64_t lsp_balance_sat_arg, uint64_t client_balance_sat_arg, uint16_t required_channel_confirmations_arg, uint16_t funding_confirms_within_blocks_arg, uint32_t channel_expiry_blocks_arg, struct LDKCOption_StrZ token_arg, bool announce_channel_arg);
+	public static native long LSPS1OrderParams_new(long lsp_balance_sat_arg, long client_balance_sat_arg, short required_channel_confirmations_arg, short funding_confirms_within_blocks_arg, int channel_expiry_blocks_arg, long token_arg, boolean announce_channel_arg);
+	// uint64_t LSPS1OrderParams_clone_ptr(LDKLSPS1OrderParams *NONNULL_PTR arg);
+	public static native long LSPS1OrderParams_clone_ptr(long arg);
+	// struct LDKLSPS1OrderParams LSPS1OrderParams_clone(const struct LDKLSPS1OrderParams *NONNULL_PTR orig);
+	public static native long LSPS1OrderParams_clone(long orig);
+	// bool LSPS1OrderParams_eq(const struct LDKLSPS1OrderParams *NONNULL_PTR a, const struct LDKLSPS1OrderParams *NONNULL_PTR b);
+	public static native boolean LSPS1OrderParams_eq(long a, long b);
+	// void LSPS1CreateOrderResponse_free(struct LDKLSPS1CreateOrderResponse this_obj);
+	public static native void LSPS1CreateOrderResponse_free(long this_obj);
+	// struct LDKLSPS1OrderId LSPS1CreateOrderResponse_get_order_id(const struct LDKLSPS1CreateOrderResponse *NONNULL_PTR this_ptr);
+	public static native long LSPS1CreateOrderResponse_get_order_id(long this_ptr);
+	// void LSPS1CreateOrderResponse_set_order_id(struct LDKLSPS1CreateOrderResponse *NONNULL_PTR this_ptr, struct LDKLSPS1OrderId val);
+	public static native void LSPS1CreateOrderResponse_set_order_id(long this_ptr, long val);
+	// struct LDKLSPS1OrderParams LSPS1CreateOrderResponse_get_order(const struct LDKLSPS1CreateOrderResponse *NONNULL_PTR this_ptr);
+	public static native long LSPS1CreateOrderResponse_get_order(long this_ptr);
+	// void LSPS1CreateOrderResponse_set_order(struct LDKLSPS1CreateOrderResponse *NONNULL_PTR this_ptr, struct LDKLSPS1OrderParams val);
+	public static native void LSPS1CreateOrderResponse_set_order(long this_ptr, long val);
+	// struct LDKLSPSDateTime LSPS1CreateOrderResponse_get_created_at(const struct LDKLSPS1CreateOrderResponse *NONNULL_PTR this_ptr);
+	public static native long LSPS1CreateOrderResponse_get_created_at(long this_ptr);
+	// void LSPS1CreateOrderResponse_set_created_at(struct LDKLSPS1CreateOrderResponse *NONNULL_PTR this_ptr, struct LDKLSPSDateTime val);
+	public static native void LSPS1CreateOrderResponse_set_created_at(long this_ptr, long val);
+	// enum LDKLSPS1OrderState LSPS1CreateOrderResponse_get_order_state(const struct LDKLSPS1CreateOrderResponse *NONNULL_PTR this_ptr);
+	public static native LSPS1OrderState LSPS1CreateOrderResponse_get_order_state(long this_ptr);
+	// void LSPS1CreateOrderResponse_set_order_state(struct LDKLSPS1CreateOrderResponse *NONNULL_PTR this_ptr, enum LDKLSPS1OrderState val);
+	public static native void LSPS1CreateOrderResponse_set_order_state(long this_ptr, LSPS1OrderState val);
+	// struct LDKLSPS1PaymentInfo LSPS1CreateOrderResponse_get_payment(const struct LDKLSPS1CreateOrderResponse *NONNULL_PTR this_ptr);
+	public static native long LSPS1CreateOrderResponse_get_payment(long this_ptr);
+	// void LSPS1CreateOrderResponse_set_payment(struct LDKLSPS1CreateOrderResponse *NONNULL_PTR this_ptr, struct LDKLSPS1PaymentInfo val);
+	public static native void LSPS1CreateOrderResponse_set_payment(long this_ptr, long val);
+	// struct LDKLSPS1ChannelInfo LSPS1CreateOrderResponse_get_channel(const struct LDKLSPS1CreateOrderResponse *NONNULL_PTR this_ptr);
+	public static native long LSPS1CreateOrderResponse_get_channel(long this_ptr);
+	// void LSPS1CreateOrderResponse_set_channel(struct LDKLSPS1CreateOrderResponse *NONNULL_PTR this_ptr, struct LDKLSPS1ChannelInfo val);
+	public static native void LSPS1CreateOrderResponse_set_channel(long this_ptr, long val);
+	// MUST_USE_RES struct LDKLSPS1CreateOrderResponse LSPS1CreateOrderResponse_new(struct LDKLSPS1OrderId order_id_arg, struct LDKLSPS1OrderParams order_arg, struct LDKLSPSDateTime created_at_arg, enum LDKLSPS1OrderState order_state_arg, struct LDKLSPS1PaymentInfo payment_arg, struct LDKLSPS1ChannelInfo channel_arg);
+	public static native long LSPS1CreateOrderResponse_new(long order_id_arg, long order_arg, long created_at_arg, LSPS1OrderState order_state_arg, long payment_arg, long channel_arg);
+	// uint64_t LSPS1CreateOrderResponse_clone_ptr(LDKLSPS1CreateOrderResponse *NONNULL_PTR arg);
+	public static native long LSPS1CreateOrderResponse_clone_ptr(long arg);
+	// struct LDKLSPS1CreateOrderResponse LSPS1CreateOrderResponse_clone(const struct LDKLSPS1CreateOrderResponse *NONNULL_PTR orig);
+	public static native long LSPS1CreateOrderResponse_clone(long orig);
+	// bool LSPS1CreateOrderResponse_eq(const struct LDKLSPS1CreateOrderResponse *NONNULL_PTR a, const struct LDKLSPS1CreateOrderResponse *NONNULL_PTR b);
+	public static native boolean LSPS1CreateOrderResponse_eq(long a, long b);
+	// enum LDKLSPS1OrderState LSPS1OrderState_clone(const enum LDKLSPS1OrderState *NONNULL_PTR orig);
+	public static native LSPS1OrderState LSPS1OrderState_clone(long orig);
+	// enum LDKLSPS1OrderState LSPS1OrderState_created(void);
+	public static native LSPS1OrderState LSPS1OrderState_created();
+	// enum LDKLSPS1OrderState LSPS1OrderState_completed(void);
+	public static native LSPS1OrderState LSPS1OrderState_completed();
+	// enum LDKLSPS1OrderState LSPS1OrderState_failed(void);
+	public static native LSPS1OrderState LSPS1OrderState_failed();
+	// bool LSPS1OrderState_eq(const enum LDKLSPS1OrderState *NONNULL_PTR a, const enum LDKLSPS1OrderState *NONNULL_PTR b);
+	public static native boolean LSPS1OrderState_eq(long a, long b);
+	// void LSPS1PaymentInfo_free(struct LDKLSPS1PaymentInfo this_obj);
+	public static native void LSPS1PaymentInfo_free(long this_obj);
+	// struct LDKLSPS1Bolt11PaymentInfo LSPS1PaymentInfo_get_bolt11(const struct LDKLSPS1PaymentInfo *NONNULL_PTR this_ptr);
+	public static native long LSPS1PaymentInfo_get_bolt11(long this_ptr);
+	// void LSPS1PaymentInfo_set_bolt11(struct LDKLSPS1PaymentInfo *NONNULL_PTR this_ptr, struct LDKLSPS1Bolt11PaymentInfo val);
+	public static native void LSPS1PaymentInfo_set_bolt11(long this_ptr, long val);
+	// struct LDKLSPS1OnchainPaymentInfo LSPS1PaymentInfo_get_onchain(const struct LDKLSPS1PaymentInfo *NONNULL_PTR this_ptr);
+	public static native long LSPS1PaymentInfo_get_onchain(long this_ptr);
+	// void LSPS1PaymentInfo_set_onchain(struct LDKLSPS1PaymentInfo *NONNULL_PTR this_ptr, struct LDKLSPS1OnchainPaymentInfo val);
+	public static native void LSPS1PaymentInfo_set_onchain(long this_ptr, long val);
+	// MUST_USE_RES struct LDKLSPS1PaymentInfo LSPS1PaymentInfo_new(struct LDKLSPS1Bolt11PaymentInfo bolt11_arg, struct LDKLSPS1OnchainPaymentInfo onchain_arg);
+	public static native long LSPS1PaymentInfo_new(long bolt11_arg, long onchain_arg);
+	// uint64_t LSPS1PaymentInfo_clone_ptr(LDKLSPS1PaymentInfo *NONNULL_PTR arg);
+	public static native long LSPS1PaymentInfo_clone_ptr(long arg);
+	// struct LDKLSPS1PaymentInfo LSPS1PaymentInfo_clone(const struct LDKLSPS1PaymentInfo *NONNULL_PTR orig);
+	public static native long LSPS1PaymentInfo_clone(long orig);
+	// bool LSPS1PaymentInfo_eq(const struct LDKLSPS1PaymentInfo *NONNULL_PTR a, const struct LDKLSPS1PaymentInfo *NONNULL_PTR b);
+	public static native boolean LSPS1PaymentInfo_eq(long a, long b);
+	// void LSPS1Bolt11PaymentInfo_free(struct LDKLSPS1Bolt11PaymentInfo this_obj);
+	public static native void LSPS1Bolt11PaymentInfo_free(long this_obj);
+	// enum LDKLSPS1PaymentState LSPS1Bolt11PaymentInfo_get_state(const struct LDKLSPS1Bolt11PaymentInfo *NONNULL_PTR this_ptr);
+	public static native LSPS1PaymentState LSPS1Bolt11PaymentInfo_get_state(long this_ptr);
+	// void LSPS1Bolt11PaymentInfo_set_state(struct LDKLSPS1Bolt11PaymentInfo *NONNULL_PTR this_ptr, enum LDKLSPS1PaymentState val);
+	public static native void LSPS1Bolt11PaymentInfo_set_state(long this_ptr, LSPS1PaymentState val);
+	// struct LDKLSPSDateTime LSPS1Bolt11PaymentInfo_get_expires_at(const struct LDKLSPS1Bolt11PaymentInfo *NONNULL_PTR this_ptr);
+	public static native long LSPS1Bolt11PaymentInfo_get_expires_at(long this_ptr);
+	// void LSPS1Bolt11PaymentInfo_set_expires_at(struct LDKLSPS1Bolt11PaymentInfo *NONNULL_PTR this_ptr, struct LDKLSPSDateTime val);
+	public static native void LSPS1Bolt11PaymentInfo_set_expires_at(long this_ptr, long val);
+	// uint64_t LSPS1Bolt11PaymentInfo_get_fee_total_sat(const struct LDKLSPS1Bolt11PaymentInfo *NONNULL_PTR this_ptr);
+	public static native long LSPS1Bolt11PaymentInfo_get_fee_total_sat(long this_ptr);
+	// void LSPS1Bolt11PaymentInfo_set_fee_total_sat(struct LDKLSPS1Bolt11PaymentInfo *NONNULL_PTR this_ptr, uint64_t val);
+	public static native void LSPS1Bolt11PaymentInfo_set_fee_total_sat(long this_ptr, long val);
+	// uint64_t LSPS1Bolt11PaymentInfo_get_order_total_sat(const struct LDKLSPS1Bolt11PaymentInfo *NONNULL_PTR this_ptr);
+	public static native long LSPS1Bolt11PaymentInfo_get_order_total_sat(long this_ptr);
+	// void LSPS1Bolt11PaymentInfo_set_order_total_sat(struct LDKLSPS1Bolt11PaymentInfo *NONNULL_PTR this_ptr, uint64_t val);
+	public static native void LSPS1Bolt11PaymentInfo_set_order_total_sat(long this_ptr, long val);
+	// struct LDKBolt11Invoice LSPS1Bolt11PaymentInfo_get_invoice(const struct LDKLSPS1Bolt11PaymentInfo *NONNULL_PTR this_ptr);
+	public static native long LSPS1Bolt11PaymentInfo_get_invoice(long this_ptr);
+	// void LSPS1Bolt11PaymentInfo_set_invoice(struct LDKLSPS1Bolt11PaymentInfo *NONNULL_PTR this_ptr, struct LDKBolt11Invoice val);
+	public static native void LSPS1Bolt11PaymentInfo_set_invoice(long this_ptr, long val);
+	// MUST_USE_RES struct LDKLSPS1Bolt11PaymentInfo LSPS1Bolt11PaymentInfo_new(enum LDKLSPS1PaymentState state_arg, struct LDKLSPSDateTime expires_at_arg, uint64_t fee_total_sat_arg, uint64_t order_total_sat_arg, struct LDKBolt11Invoice invoice_arg);
+	public static native long LSPS1Bolt11PaymentInfo_new(LSPS1PaymentState state_arg, long expires_at_arg, long fee_total_sat_arg, long order_total_sat_arg, long invoice_arg);
+	// uint64_t LSPS1Bolt11PaymentInfo_clone_ptr(LDKLSPS1Bolt11PaymentInfo *NONNULL_PTR arg);
+	public static native long LSPS1Bolt11PaymentInfo_clone_ptr(long arg);
+	// struct LDKLSPS1Bolt11PaymentInfo LSPS1Bolt11PaymentInfo_clone(const struct LDKLSPS1Bolt11PaymentInfo *NONNULL_PTR orig);
+	public static native long LSPS1Bolt11PaymentInfo_clone(long orig);
+	// bool LSPS1Bolt11PaymentInfo_eq(const struct LDKLSPS1Bolt11PaymentInfo *NONNULL_PTR a, const struct LDKLSPS1Bolt11PaymentInfo *NONNULL_PTR b);
+	public static native boolean LSPS1Bolt11PaymentInfo_eq(long a, long b);
+	// void LSPS1OnchainPaymentInfo_free(struct LDKLSPS1OnchainPaymentInfo this_obj);
+	public static native void LSPS1OnchainPaymentInfo_free(long this_obj);
+	// enum LDKLSPS1PaymentState LSPS1OnchainPaymentInfo_get_state(const struct LDKLSPS1OnchainPaymentInfo *NONNULL_PTR this_ptr);
+	public static native LSPS1PaymentState LSPS1OnchainPaymentInfo_get_state(long this_ptr);
+	// void LSPS1OnchainPaymentInfo_set_state(struct LDKLSPS1OnchainPaymentInfo *NONNULL_PTR this_ptr, enum LDKLSPS1PaymentState val);
+	public static native void LSPS1OnchainPaymentInfo_set_state(long this_ptr, LSPS1PaymentState val);
+	// struct LDKLSPSDateTime LSPS1OnchainPaymentInfo_get_expires_at(const struct LDKLSPS1OnchainPaymentInfo *NONNULL_PTR this_ptr);
+	public static native long LSPS1OnchainPaymentInfo_get_expires_at(long this_ptr);
+	// void LSPS1OnchainPaymentInfo_set_expires_at(struct LDKLSPS1OnchainPaymentInfo *NONNULL_PTR this_ptr, struct LDKLSPSDateTime val);
+	public static native void LSPS1OnchainPaymentInfo_set_expires_at(long this_ptr, long val);
+	// uint64_t LSPS1OnchainPaymentInfo_get_fee_total_sat(const struct LDKLSPS1OnchainPaymentInfo *NONNULL_PTR this_ptr);
+	public static native long LSPS1OnchainPaymentInfo_get_fee_total_sat(long this_ptr);
+	// void LSPS1OnchainPaymentInfo_set_fee_total_sat(struct LDKLSPS1OnchainPaymentInfo *NONNULL_PTR this_ptr, uint64_t val);
+	public static native void LSPS1OnchainPaymentInfo_set_fee_total_sat(long this_ptr, long val);
+	// uint64_t LSPS1OnchainPaymentInfo_get_order_total_sat(const struct LDKLSPS1OnchainPaymentInfo *NONNULL_PTR this_ptr);
+	public static native long LSPS1OnchainPaymentInfo_get_order_total_sat(long this_ptr);
+	// void LSPS1OnchainPaymentInfo_set_order_total_sat(struct LDKLSPS1OnchainPaymentInfo *NONNULL_PTR this_ptr, uint64_t val);
+	public static native void LSPS1OnchainPaymentInfo_set_order_total_sat(long this_ptr, long val);
+	// struct LDKAddress LSPS1OnchainPaymentInfo_get_address(const struct LDKLSPS1OnchainPaymentInfo *NONNULL_PTR this_ptr);
+	public static native long LSPS1OnchainPaymentInfo_get_address(long this_ptr);
+	// void LSPS1OnchainPaymentInfo_set_address(struct LDKLSPS1OnchainPaymentInfo *NONNULL_PTR this_ptr, struct LDKAddress val);
+	public static native void LSPS1OnchainPaymentInfo_set_address(long this_ptr, long val);
+	// struct LDKCOption_u16Z LSPS1OnchainPaymentInfo_get_min_onchain_payment_confirmations(const struct LDKLSPS1OnchainPaymentInfo *NONNULL_PTR this_ptr);
+	public static native long LSPS1OnchainPaymentInfo_get_min_onchain_payment_confirmations(long this_ptr);
+	// void LSPS1OnchainPaymentInfo_set_min_onchain_payment_confirmations(struct LDKLSPS1OnchainPaymentInfo *NONNULL_PTR this_ptr, struct LDKCOption_u16Z val);
+	public static native void LSPS1OnchainPaymentInfo_set_min_onchain_payment_confirmations(long this_ptr, long val);
+	// struct LDKCOption_AddressZ LSPS1OnchainPaymentInfo_get_refund_onchain_address(const struct LDKLSPS1OnchainPaymentInfo *NONNULL_PTR this_ptr);
+	public static native long LSPS1OnchainPaymentInfo_get_refund_onchain_address(long this_ptr);
+	// void LSPS1OnchainPaymentInfo_set_refund_onchain_address(struct LDKLSPS1OnchainPaymentInfo *NONNULL_PTR this_ptr, struct LDKCOption_AddressZ val);
+	public static native void LSPS1OnchainPaymentInfo_set_refund_onchain_address(long this_ptr, long val);
+	// uint64_t LSPS1OnchainPaymentInfo_clone_ptr(LDKLSPS1OnchainPaymentInfo *NONNULL_PTR arg);
+	public static native long LSPS1OnchainPaymentInfo_clone_ptr(long arg);
+	// struct LDKLSPS1OnchainPaymentInfo LSPS1OnchainPaymentInfo_clone(const struct LDKLSPS1OnchainPaymentInfo *NONNULL_PTR orig);
+	public static native long LSPS1OnchainPaymentInfo_clone(long orig);
+	// bool LSPS1OnchainPaymentInfo_eq(const struct LDKLSPS1OnchainPaymentInfo *NONNULL_PTR a, const struct LDKLSPS1OnchainPaymentInfo *NONNULL_PTR b);
+	public static native boolean LSPS1OnchainPaymentInfo_eq(long a, long b);
+	// enum LDKLSPS1PaymentState LSPS1PaymentState_clone(const enum LDKLSPS1PaymentState *NONNULL_PTR orig);
+	public static native LSPS1PaymentState LSPS1PaymentState_clone(long orig);
+	// enum LDKLSPS1PaymentState LSPS1PaymentState_expect_payment(void);
+	public static native LSPS1PaymentState LSPS1PaymentState_expect_payment();
+	// enum LDKLSPS1PaymentState LSPS1PaymentState_paid(void);
+	public static native LSPS1PaymentState LSPS1PaymentState_paid();
+	// enum LDKLSPS1PaymentState LSPS1PaymentState_refunded(void);
+	public static native LSPS1PaymentState LSPS1PaymentState_refunded();
+	// bool LSPS1PaymentState_eq(const enum LDKLSPS1PaymentState *NONNULL_PTR a, const enum LDKLSPS1PaymentState *NONNULL_PTR b);
+	public static native boolean LSPS1PaymentState_eq(long a, long b);
+	// void LSPS1OnchainPayment_free(struct LDKLSPS1OnchainPayment this_obj);
+	public static native void LSPS1OnchainPayment_free(long this_obj);
+	// struct LDKStr LSPS1OnchainPayment_get_outpoint(const struct LDKLSPS1OnchainPayment *NONNULL_PTR this_ptr);
+	public static native String LSPS1OnchainPayment_get_outpoint(long this_ptr);
+	// void LSPS1OnchainPayment_set_outpoint(struct LDKLSPS1OnchainPayment *NONNULL_PTR this_ptr, struct LDKStr val);
+	public static native void LSPS1OnchainPayment_set_outpoint(long this_ptr, String val);
+	// uint64_t LSPS1OnchainPayment_get_sat(const struct LDKLSPS1OnchainPayment *NONNULL_PTR this_ptr);
+	public static native long LSPS1OnchainPayment_get_sat(long this_ptr);
+	// void LSPS1OnchainPayment_set_sat(struct LDKLSPS1OnchainPayment *NONNULL_PTR this_ptr, uint64_t val);
+	public static native void LSPS1OnchainPayment_set_sat(long this_ptr, long val);
+	// bool LSPS1OnchainPayment_get_confirmed(const struct LDKLSPS1OnchainPayment *NONNULL_PTR this_ptr);
+	public static native boolean LSPS1OnchainPayment_get_confirmed(long this_ptr);
+	// void LSPS1OnchainPayment_set_confirmed(struct LDKLSPS1OnchainPayment *NONNULL_PTR this_ptr, bool val);
+	public static native void LSPS1OnchainPayment_set_confirmed(long this_ptr, boolean val);
+	// MUST_USE_RES struct LDKLSPS1OnchainPayment LSPS1OnchainPayment_new(struct LDKStr outpoint_arg, uint64_t sat_arg, bool confirmed_arg);
+	public static native long LSPS1OnchainPayment_new(String outpoint_arg, long sat_arg, boolean confirmed_arg);
+	// uint64_t LSPS1OnchainPayment_clone_ptr(LDKLSPS1OnchainPayment *NONNULL_PTR arg);
+	public static native long LSPS1OnchainPayment_clone_ptr(long arg);
+	// struct LDKLSPS1OnchainPayment LSPS1OnchainPayment_clone(const struct LDKLSPS1OnchainPayment *NONNULL_PTR orig);
+	public static native long LSPS1OnchainPayment_clone(long orig);
+	// bool LSPS1OnchainPayment_eq(const struct LDKLSPS1OnchainPayment *NONNULL_PTR a, const struct LDKLSPS1OnchainPayment *NONNULL_PTR b);
+	public static native boolean LSPS1OnchainPayment_eq(long a, long b);
+	// void LSPS1ChannelInfo_free(struct LDKLSPS1ChannelInfo this_obj);
+	public static native void LSPS1ChannelInfo_free(long this_obj);
+	// struct LDKLSPSDateTime LSPS1ChannelInfo_get_funded_at(const struct LDKLSPS1ChannelInfo *NONNULL_PTR this_ptr);
+	public static native long LSPS1ChannelInfo_get_funded_at(long this_ptr);
+	// void LSPS1ChannelInfo_set_funded_at(struct LDKLSPS1ChannelInfo *NONNULL_PTR this_ptr, struct LDKLSPSDateTime val);
+	public static native void LSPS1ChannelInfo_set_funded_at(long this_ptr, long val);
+	// struct LDKOutPoint LSPS1ChannelInfo_get_funding_outpoint(const struct LDKLSPS1ChannelInfo *NONNULL_PTR this_ptr);
+	public static native long LSPS1ChannelInfo_get_funding_outpoint(long this_ptr);
+	// void LSPS1ChannelInfo_set_funding_outpoint(struct LDKLSPS1ChannelInfo *NONNULL_PTR this_ptr, struct LDKOutPoint val);
+	public static native void LSPS1ChannelInfo_set_funding_outpoint(long this_ptr, long val);
+	// struct LDKLSPSDateTime LSPS1ChannelInfo_get_expires_at(const struct LDKLSPS1ChannelInfo *NONNULL_PTR this_ptr);
+	public static native long LSPS1ChannelInfo_get_expires_at(long this_ptr);
+	// void LSPS1ChannelInfo_set_expires_at(struct LDKLSPS1ChannelInfo *NONNULL_PTR this_ptr, struct LDKLSPSDateTime val);
+	public static native void LSPS1ChannelInfo_set_expires_at(long this_ptr, long val);
+	// MUST_USE_RES struct LDKLSPS1ChannelInfo LSPS1ChannelInfo_new(struct LDKLSPSDateTime funded_at_arg, struct LDKOutPoint funding_outpoint_arg, struct LDKLSPSDateTime expires_at_arg);
+	public static native long LSPS1ChannelInfo_new(long funded_at_arg, long funding_outpoint_arg, long expires_at_arg);
+	// uint64_t LSPS1ChannelInfo_clone_ptr(LDKLSPS1ChannelInfo *NONNULL_PTR arg);
+	public static native long LSPS1ChannelInfo_clone_ptr(long arg);
+	// struct LDKLSPS1ChannelInfo LSPS1ChannelInfo_clone(const struct LDKLSPS1ChannelInfo *NONNULL_PTR orig);
+	public static native long LSPS1ChannelInfo_clone(long orig);
+	// bool LSPS1ChannelInfo_eq(const struct LDKLSPS1ChannelInfo *NONNULL_PTR a, const struct LDKLSPS1ChannelInfo *NONNULL_PTR b);
+	public static native boolean LSPS1ChannelInfo_eq(long a, long b);
+	// void LSPS1GetOrderRequest_free(struct LDKLSPS1GetOrderRequest this_obj);
+	public static native void LSPS1GetOrderRequest_free(long this_obj);
+	// struct LDKLSPS1OrderId LSPS1GetOrderRequest_get_order_id(const struct LDKLSPS1GetOrderRequest *NONNULL_PTR this_ptr);
+	public static native long LSPS1GetOrderRequest_get_order_id(long this_ptr);
+	// void LSPS1GetOrderRequest_set_order_id(struct LDKLSPS1GetOrderRequest *NONNULL_PTR this_ptr, struct LDKLSPS1OrderId val);
+	public static native void LSPS1GetOrderRequest_set_order_id(long this_ptr, long val);
+	// MUST_USE_RES struct LDKLSPS1GetOrderRequest LSPS1GetOrderRequest_new(struct LDKLSPS1OrderId order_id_arg);
+	public static native long LSPS1GetOrderRequest_new(long order_id_arg);
+	// uint64_t LSPS1GetOrderRequest_clone_ptr(LDKLSPS1GetOrderRequest *NONNULL_PTR arg);
+	public static native long LSPS1GetOrderRequest_clone_ptr(long arg);
+	// struct LDKLSPS1GetOrderRequest LSPS1GetOrderRequest_clone(const struct LDKLSPS1GetOrderRequest *NONNULL_PTR orig);
+	public static native long LSPS1GetOrderRequest_clone(long orig);
+	// bool LSPS1GetOrderRequest_eq(const struct LDKLSPS1GetOrderRequest *NONNULL_PTR a, const struct LDKLSPS1GetOrderRequest *NONNULL_PTR b);
+	public static native boolean LSPS1GetOrderRequest_eq(long a, long b);
+	// void LSPS1Request_free(struct LDKLSPS1Request this_ptr);
+	public static native void LSPS1Request_free(long this_ptr);
+	// uint64_t LSPS1Request_clone_ptr(LDKLSPS1Request *NONNULL_PTR arg);
+	public static native long LSPS1Request_clone_ptr(long arg);
+	// struct LDKLSPS1Request LSPS1Request_clone(const struct LDKLSPS1Request *NONNULL_PTR orig);
+	public static native long LSPS1Request_clone(long orig);
+	// struct LDKLSPS1Request LSPS1Request_get_info(struct LDKLSPS1GetInfoRequest a);
+	public static native long LSPS1Request_get_info(long a);
+	// struct LDKLSPS1Request LSPS1Request_create_order(struct LDKLSPS1CreateOrderRequest a);
+	public static native long LSPS1Request_create_order(long a);
+	// struct LDKLSPS1Request LSPS1Request_get_order(struct LDKLSPS1GetOrderRequest a);
+	public static native long LSPS1Request_get_order(long a);
+	// bool LSPS1Request_eq(const struct LDKLSPS1Request *NONNULL_PTR a, const struct LDKLSPS1Request *NONNULL_PTR b);
+	public static native boolean LSPS1Request_eq(long a, long b);
+	// void LSPS1Response_free(struct LDKLSPS1Response this_ptr);
+	public static native void LSPS1Response_free(long this_ptr);
+	// uint64_t LSPS1Response_clone_ptr(LDKLSPS1Response *NONNULL_PTR arg);
+	public static native long LSPS1Response_clone_ptr(long arg);
+	// struct LDKLSPS1Response LSPS1Response_clone(const struct LDKLSPS1Response *NONNULL_PTR orig);
+	public static native long LSPS1Response_clone(long orig);
+	// struct LDKLSPS1Response LSPS1Response_get_info(struct LDKLSPS1GetInfoResponse a);
+	public static native long LSPS1Response_get_info(long a);
+	// struct LDKLSPS1Response LSPS1Response_get_info_error(struct LDKLSPSResponseError a);
+	public static native long LSPS1Response_get_info_error(long a);
+	// struct LDKLSPS1Response LSPS1Response_create_order(struct LDKLSPS1CreateOrderResponse a);
+	public static native long LSPS1Response_create_order(long a);
+	// struct LDKLSPS1Response LSPS1Response_create_order_error(struct LDKLSPSResponseError a);
+	public static native long LSPS1Response_create_order_error(long a);
+	// struct LDKLSPS1Response LSPS1Response_get_order(struct LDKLSPS1CreateOrderResponse a);
+	public static native long LSPS1Response_get_order(long a);
+	// struct LDKLSPS1Response LSPS1Response_get_order_error(struct LDKLSPSResponseError a);
+	public static native long LSPS1Response_get_order_error(long a);
+	// bool LSPS1Response_eq(const struct LDKLSPS1Response *NONNULL_PTR a, const struct LDKLSPS1Response *NONNULL_PTR b);
+	public static native boolean LSPS1Response_eq(long a, long b);
+	// void LSPS1Message_free(struct LDKLSPS1Message this_ptr);
+	public static native void LSPS1Message_free(long this_ptr);
+	// uint64_t LSPS1Message_clone_ptr(LDKLSPS1Message *NONNULL_PTR arg);
+	public static native long LSPS1Message_clone_ptr(long arg);
+	// struct LDKLSPS1Message LSPS1Message_clone(const struct LDKLSPS1Message *NONNULL_PTR orig);
+	public static native long LSPS1Message_clone(long orig);
+	// struct LDKLSPS1Message LSPS1Message_request(struct LDKLSPSRequestId a, struct LDKLSPS1Request b);
+	public static native long LSPS1Message_request(long a, long b);
+	// struct LDKLSPS1Message LSPS1Message_response(struct LDKLSPSRequestId a, struct LDKLSPS1Response b);
+	public static native long LSPS1Message_response(long a, long b);
+	// bool LSPS1Message_eq(const struct LDKLSPS1Message *NONNULL_PTR a, const struct LDKLSPS1Message *NONNULL_PTR b);
+	public static native boolean LSPS1Message_eq(long a, long b);
+	// void LSPS2ClientConfig_free(struct LDKLSPS2ClientConfig this_obj);
+	public static native void LSPS2ClientConfig_free(long this_obj);
+	// MUST_USE_RES struct LDKLSPS2ClientConfig LSPS2ClientConfig_new(void);
+	public static native long LSPS2ClientConfig_new();
+	// uint64_t LSPS2ClientConfig_clone_ptr(LDKLSPS2ClientConfig *NONNULL_PTR arg);
+	public static native long LSPS2ClientConfig_clone_ptr(long arg);
+	// struct LDKLSPS2ClientConfig LSPS2ClientConfig_clone(const struct LDKLSPS2ClientConfig *NONNULL_PTR orig);
+	public static native long LSPS2ClientConfig_clone(long orig);
+	// void LSPS2ClientHandler_free(struct LDKLSPS2ClientHandler this_obj);
+	public static native void LSPS2ClientHandler_free(long this_obj);
+	// MUST_USE_RES struct LDKLSPSRequestId LSPS2ClientHandler_request_opening_params(const struct LDKLSPS2ClientHandler *NONNULL_PTR this_arg, struct LDKPublicKey counterparty_node_id, struct LDKCOption_StrZ token);
+	public static native long LSPS2ClientHandler_request_opening_params(long this_arg, byte[] counterparty_node_id, long token);
+	// MUST_USE_RES struct LDKCResult_LSPSRequestIdAPIErrorZ LSPS2ClientHandler_select_opening_params(const struct LDKLSPS2ClientHandler *NONNULL_PTR this_arg, struct LDKPublicKey counterparty_node_id, struct LDKCOption_u64Z payment_size_msat, struct LDKLSPS2OpeningFeeParams opening_fee_params);
+	public static native long LSPS2ClientHandler_select_opening_params(long this_arg, byte[] counterparty_node_id, long payment_size_msat, long opening_fee_params);
+	// void LSPS2ClientEvent_free(struct LDKLSPS2ClientEvent this_ptr);
+	public static native void LSPS2ClientEvent_free(long this_ptr);
+	// uint64_t LSPS2ClientEvent_clone_ptr(LDKLSPS2ClientEvent *NONNULL_PTR arg);
+	public static native long LSPS2ClientEvent_clone_ptr(long arg);
+	// struct LDKLSPS2ClientEvent LSPS2ClientEvent_clone(const struct LDKLSPS2ClientEvent *NONNULL_PTR orig);
+	public static native long LSPS2ClientEvent_clone(long orig);
+	// struct LDKLSPS2ClientEvent LSPS2ClientEvent_opening_parameters_ready(struct LDKLSPSRequestId request_id, struct LDKPublicKey counterparty_node_id, struct LDKCVec_LSPS2OpeningFeeParamsZ opening_fee_params_menu);
+	public static native long LSPS2ClientEvent_opening_parameters_ready(long request_id, byte[] counterparty_node_id, long[] opening_fee_params_menu);
+	// struct LDKLSPS2ClientEvent LSPS2ClientEvent_invoice_parameters_ready(struct LDKLSPSRequestId request_id, struct LDKPublicKey counterparty_node_id, uint64_t intercept_scid, uint32_t cltv_expiry_delta, struct LDKCOption_u64Z payment_size_msat);
+	public static native long LSPS2ClientEvent_invoice_parameters_ready(long request_id, byte[] counterparty_node_id, long intercept_scid, int cltv_expiry_delta, long payment_size_msat);
+	// bool LSPS2ClientEvent_eq(const struct LDKLSPS2ClientEvent *NONNULL_PTR a, const struct LDKLSPS2ClientEvent *NONNULL_PTR b);
+	public static native boolean LSPS2ClientEvent_eq(long a, long b);
+	// void LSPS2ServiceEvent_free(struct LDKLSPS2ServiceEvent this_ptr);
+	public static native void LSPS2ServiceEvent_free(long this_ptr);
+	// uint64_t LSPS2ServiceEvent_clone_ptr(LDKLSPS2ServiceEvent *NONNULL_PTR arg);
+	public static native long LSPS2ServiceEvent_clone_ptr(long arg);
+	// struct LDKLSPS2ServiceEvent LSPS2ServiceEvent_clone(const struct LDKLSPS2ServiceEvent *NONNULL_PTR orig);
+	public static native long LSPS2ServiceEvent_clone(long orig);
+	// struct LDKLSPS2ServiceEvent LSPS2ServiceEvent_get_info(struct LDKLSPSRequestId request_id, struct LDKPublicKey counterparty_node_id, struct LDKCOption_StrZ token);
+	public static native long LSPS2ServiceEvent_get_info(long request_id, byte[] counterparty_node_id, long token);
+	// struct LDKLSPS2ServiceEvent LSPS2ServiceEvent_buy_request(struct LDKLSPSRequestId request_id, struct LDKPublicKey counterparty_node_id, struct LDKLSPS2OpeningFeeParams opening_fee_params, struct LDKCOption_u64Z payment_size_msat);
+	public static native long LSPS2ServiceEvent_buy_request(long request_id, byte[] counterparty_node_id, long opening_fee_params, long payment_size_msat);
+	// struct LDKLSPS2ServiceEvent LSPS2ServiceEvent_open_channel(struct LDKPublicKey their_network_key, uint64_t amt_to_forward_msat, uint64_t opening_fee_msat, struct LDKU128 user_channel_id, uint64_t intercept_scid);
+	public static native long LSPS2ServiceEvent_open_channel(byte[] their_network_key, long amt_to_forward_msat, long opening_fee_msat, byte[] user_channel_id, long intercept_scid);
+	// bool LSPS2ServiceEvent_eq(const struct LDKLSPS2ServiceEvent *NONNULL_PTR a, const struct LDKLSPS2ServiceEvent *NONNULL_PTR b);
+	public static native boolean LSPS2ServiceEvent_eq(long a, long b);
+	// void LSPS2GetInfoRequest_free(struct LDKLSPS2GetInfoRequest this_obj);
+	public static native void LSPS2GetInfoRequest_free(long this_obj);
+	// struct LDKCOption_StrZ LSPS2GetInfoRequest_get_token(const struct LDKLSPS2GetInfoRequest *NONNULL_PTR this_ptr);
+	public static native long LSPS2GetInfoRequest_get_token(long this_ptr);
+	// void LSPS2GetInfoRequest_set_token(struct LDKLSPS2GetInfoRequest *NONNULL_PTR this_ptr, struct LDKCOption_StrZ val);
+	public static native void LSPS2GetInfoRequest_set_token(long this_ptr, long val);
+	// MUST_USE_RES struct LDKLSPS2GetInfoRequest LSPS2GetInfoRequest_new(struct LDKCOption_StrZ token_arg);
+	public static native long LSPS2GetInfoRequest_new(long token_arg);
+	// uint64_t LSPS2GetInfoRequest_clone_ptr(LDKLSPS2GetInfoRequest *NONNULL_PTR arg);
+	public static native long LSPS2GetInfoRequest_clone_ptr(long arg);
+	// struct LDKLSPS2GetInfoRequest LSPS2GetInfoRequest_clone(const struct LDKLSPS2GetInfoRequest *NONNULL_PTR orig);
+	public static native long LSPS2GetInfoRequest_clone(long orig);
+	// bool LSPS2GetInfoRequest_eq(const struct LDKLSPS2GetInfoRequest *NONNULL_PTR a, const struct LDKLSPS2GetInfoRequest *NONNULL_PTR b);
+	public static native boolean LSPS2GetInfoRequest_eq(long a, long b);
+	// void LSPS2RawOpeningFeeParams_free(struct LDKLSPS2RawOpeningFeeParams this_obj);
+	public static native void LSPS2RawOpeningFeeParams_free(long this_obj);
+	// uint64_t LSPS2RawOpeningFeeParams_get_min_fee_msat(const struct LDKLSPS2RawOpeningFeeParams *NONNULL_PTR this_ptr);
+	public static native long LSPS2RawOpeningFeeParams_get_min_fee_msat(long this_ptr);
+	// void LSPS2RawOpeningFeeParams_set_min_fee_msat(struct LDKLSPS2RawOpeningFeeParams *NONNULL_PTR this_ptr, uint64_t val);
+	public static native void LSPS2RawOpeningFeeParams_set_min_fee_msat(long this_ptr, long val);
+	// uint32_t LSPS2RawOpeningFeeParams_get_proportional(const struct LDKLSPS2RawOpeningFeeParams *NONNULL_PTR this_ptr);
+	public static native int LSPS2RawOpeningFeeParams_get_proportional(long this_ptr);
+	// void LSPS2RawOpeningFeeParams_set_proportional(struct LDKLSPS2RawOpeningFeeParams *NONNULL_PTR this_ptr, uint32_t val);
+	public static native void LSPS2RawOpeningFeeParams_set_proportional(long this_ptr, int val);
+	// struct LDKLSPSDateTime LSPS2RawOpeningFeeParams_get_valid_until(const struct LDKLSPS2RawOpeningFeeParams *NONNULL_PTR this_ptr);
+	public static native long LSPS2RawOpeningFeeParams_get_valid_until(long this_ptr);
+	// void LSPS2RawOpeningFeeParams_set_valid_until(struct LDKLSPS2RawOpeningFeeParams *NONNULL_PTR this_ptr, struct LDKLSPSDateTime val);
+	public static native void LSPS2RawOpeningFeeParams_set_valid_until(long this_ptr, long val);
+	// uint32_t LSPS2RawOpeningFeeParams_get_min_lifetime(const struct LDKLSPS2RawOpeningFeeParams *NONNULL_PTR this_ptr);
+	public static native int LSPS2RawOpeningFeeParams_get_min_lifetime(long this_ptr);
+	// void LSPS2RawOpeningFeeParams_set_min_lifetime(struct LDKLSPS2RawOpeningFeeParams *NONNULL_PTR this_ptr, uint32_t val);
+	public static native void LSPS2RawOpeningFeeParams_set_min_lifetime(long this_ptr, int val);
+	// uint32_t LSPS2RawOpeningFeeParams_get_max_client_to_self_delay(const struct LDKLSPS2RawOpeningFeeParams *NONNULL_PTR this_ptr);
+	public static native int LSPS2RawOpeningFeeParams_get_max_client_to_self_delay(long this_ptr);
+	// void LSPS2RawOpeningFeeParams_set_max_client_to_self_delay(struct LDKLSPS2RawOpeningFeeParams *NONNULL_PTR this_ptr, uint32_t val);
+	public static native void LSPS2RawOpeningFeeParams_set_max_client_to_self_delay(long this_ptr, int val);
+	// uint64_t LSPS2RawOpeningFeeParams_get_min_payment_size_msat(const struct LDKLSPS2RawOpeningFeeParams *NONNULL_PTR this_ptr);
+	public static native long LSPS2RawOpeningFeeParams_get_min_payment_size_msat(long this_ptr);
+	// void LSPS2RawOpeningFeeParams_set_min_payment_size_msat(struct LDKLSPS2RawOpeningFeeParams *NONNULL_PTR this_ptr, uint64_t val);
+	public static native void LSPS2RawOpeningFeeParams_set_min_payment_size_msat(long this_ptr, long val);
+	// uint64_t LSPS2RawOpeningFeeParams_get_max_payment_size_msat(const struct LDKLSPS2RawOpeningFeeParams *NONNULL_PTR this_ptr);
+	public static native long LSPS2RawOpeningFeeParams_get_max_payment_size_msat(long this_ptr);
+	// void LSPS2RawOpeningFeeParams_set_max_payment_size_msat(struct LDKLSPS2RawOpeningFeeParams *NONNULL_PTR this_ptr, uint64_t val);
+	public static native void LSPS2RawOpeningFeeParams_set_max_payment_size_msat(long this_ptr, long val);
+	// MUST_USE_RES struct LDKLSPS2RawOpeningFeeParams LSPS2RawOpeningFeeParams_new(uint64_t min_fee_msat_arg, uint32_t proportional_arg, struct LDKLSPSDateTime valid_until_arg, uint32_t min_lifetime_arg, uint32_t max_client_to_self_delay_arg, uint64_t min_payment_size_msat_arg, uint64_t max_payment_size_msat_arg);
+	public static native long LSPS2RawOpeningFeeParams_new(long min_fee_msat_arg, int proportional_arg, long valid_until_arg, int min_lifetime_arg, int max_client_to_self_delay_arg, long min_payment_size_msat_arg, long max_payment_size_msat_arg);
+	// void LSPS2OpeningFeeParams_free(struct LDKLSPS2OpeningFeeParams this_obj);
+	public static native void LSPS2OpeningFeeParams_free(long this_obj);
+	// uint64_t LSPS2OpeningFeeParams_get_min_fee_msat(const struct LDKLSPS2OpeningFeeParams *NONNULL_PTR this_ptr);
+	public static native long LSPS2OpeningFeeParams_get_min_fee_msat(long this_ptr);
+	// void LSPS2OpeningFeeParams_set_min_fee_msat(struct LDKLSPS2OpeningFeeParams *NONNULL_PTR this_ptr, uint64_t val);
+	public static native void LSPS2OpeningFeeParams_set_min_fee_msat(long this_ptr, long val);
+	// uint32_t LSPS2OpeningFeeParams_get_proportional(const struct LDKLSPS2OpeningFeeParams *NONNULL_PTR this_ptr);
+	public static native int LSPS2OpeningFeeParams_get_proportional(long this_ptr);
+	// void LSPS2OpeningFeeParams_set_proportional(struct LDKLSPS2OpeningFeeParams *NONNULL_PTR this_ptr, uint32_t val);
+	public static native void LSPS2OpeningFeeParams_set_proportional(long this_ptr, int val);
+	// struct LDKLSPSDateTime LSPS2OpeningFeeParams_get_valid_until(const struct LDKLSPS2OpeningFeeParams *NONNULL_PTR this_ptr);
+	public static native long LSPS2OpeningFeeParams_get_valid_until(long this_ptr);
+	// void LSPS2OpeningFeeParams_set_valid_until(struct LDKLSPS2OpeningFeeParams *NONNULL_PTR this_ptr, struct LDKLSPSDateTime val);
+	public static native void LSPS2OpeningFeeParams_set_valid_until(long this_ptr, long val);
+	// uint32_t LSPS2OpeningFeeParams_get_min_lifetime(const struct LDKLSPS2OpeningFeeParams *NONNULL_PTR this_ptr);
+	public static native int LSPS2OpeningFeeParams_get_min_lifetime(long this_ptr);
+	// void LSPS2OpeningFeeParams_set_min_lifetime(struct LDKLSPS2OpeningFeeParams *NONNULL_PTR this_ptr, uint32_t val);
+	public static native void LSPS2OpeningFeeParams_set_min_lifetime(long this_ptr, int val);
+	// uint32_t LSPS2OpeningFeeParams_get_max_client_to_self_delay(const struct LDKLSPS2OpeningFeeParams *NONNULL_PTR this_ptr);
+	public static native int LSPS2OpeningFeeParams_get_max_client_to_self_delay(long this_ptr);
+	// void LSPS2OpeningFeeParams_set_max_client_to_self_delay(struct LDKLSPS2OpeningFeeParams *NONNULL_PTR this_ptr, uint32_t val);
+	public static native void LSPS2OpeningFeeParams_set_max_client_to_self_delay(long this_ptr, int val);
+	// uint64_t LSPS2OpeningFeeParams_get_min_payment_size_msat(const struct LDKLSPS2OpeningFeeParams *NONNULL_PTR this_ptr);
+	public static native long LSPS2OpeningFeeParams_get_min_payment_size_msat(long this_ptr);
+	// void LSPS2OpeningFeeParams_set_min_payment_size_msat(struct LDKLSPS2OpeningFeeParams *NONNULL_PTR this_ptr, uint64_t val);
+	public static native void LSPS2OpeningFeeParams_set_min_payment_size_msat(long this_ptr, long val);
+	// uint64_t LSPS2OpeningFeeParams_get_max_payment_size_msat(const struct LDKLSPS2OpeningFeeParams *NONNULL_PTR this_ptr);
+	public static native long LSPS2OpeningFeeParams_get_max_payment_size_msat(long this_ptr);
+	// void LSPS2OpeningFeeParams_set_max_payment_size_msat(struct LDKLSPS2OpeningFeeParams *NONNULL_PTR this_ptr, uint64_t val);
+	public static native void LSPS2OpeningFeeParams_set_max_payment_size_msat(long this_ptr, long val);
+	// struct LDKStr LSPS2OpeningFeeParams_get_promise(const struct LDKLSPS2OpeningFeeParams *NONNULL_PTR this_ptr);
+	public static native String LSPS2OpeningFeeParams_get_promise(long this_ptr);
+	// void LSPS2OpeningFeeParams_set_promise(struct LDKLSPS2OpeningFeeParams *NONNULL_PTR this_ptr, struct LDKStr val);
+	public static native void LSPS2OpeningFeeParams_set_promise(long this_ptr, String val);
+	// MUST_USE_RES struct LDKLSPS2OpeningFeeParams LSPS2OpeningFeeParams_new(uint64_t min_fee_msat_arg, uint32_t proportional_arg, struct LDKLSPSDateTime valid_until_arg, uint32_t min_lifetime_arg, uint32_t max_client_to_self_delay_arg, uint64_t min_payment_size_msat_arg, uint64_t max_payment_size_msat_arg, struct LDKStr promise_arg);
+	public static native long LSPS2OpeningFeeParams_new(long min_fee_msat_arg, int proportional_arg, long valid_until_arg, int min_lifetime_arg, int max_client_to_self_delay_arg, long min_payment_size_msat_arg, long max_payment_size_msat_arg, String promise_arg);
+	// uint64_t LSPS2OpeningFeeParams_clone_ptr(LDKLSPS2OpeningFeeParams *NONNULL_PTR arg);
+	public static native long LSPS2OpeningFeeParams_clone_ptr(long arg);
+	// struct LDKLSPS2OpeningFeeParams LSPS2OpeningFeeParams_clone(const struct LDKLSPS2OpeningFeeParams *NONNULL_PTR orig);
+	public static native long LSPS2OpeningFeeParams_clone(long orig);
+	// bool LSPS2OpeningFeeParams_eq(const struct LDKLSPS2OpeningFeeParams *NONNULL_PTR a, const struct LDKLSPS2OpeningFeeParams *NONNULL_PTR b);
+	public static native boolean LSPS2OpeningFeeParams_eq(long a, long b);
+	// void LSPS2GetInfoResponse_free(struct LDKLSPS2GetInfoResponse this_obj);
+	public static native void LSPS2GetInfoResponse_free(long this_obj);
+	// struct LDKCVec_LSPS2OpeningFeeParamsZ LSPS2GetInfoResponse_get_opening_fee_params_menu(const struct LDKLSPS2GetInfoResponse *NONNULL_PTR this_ptr);
+	public static native long[] LSPS2GetInfoResponse_get_opening_fee_params_menu(long this_ptr);
+	// void LSPS2GetInfoResponse_set_opening_fee_params_menu(struct LDKLSPS2GetInfoResponse *NONNULL_PTR this_ptr, struct LDKCVec_LSPS2OpeningFeeParamsZ val);
+	public static native void LSPS2GetInfoResponse_set_opening_fee_params_menu(long this_ptr, long[] val);
+	// MUST_USE_RES struct LDKLSPS2GetInfoResponse LSPS2GetInfoResponse_new(struct LDKCVec_LSPS2OpeningFeeParamsZ opening_fee_params_menu_arg);
+	public static native long LSPS2GetInfoResponse_new(long[] opening_fee_params_menu_arg);
+	// uint64_t LSPS2GetInfoResponse_clone_ptr(LDKLSPS2GetInfoResponse *NONNULL_PTR arg);
+	public static native long LSPS2GetInfoResponse_clone_ptr(long arg);
+	// struct LDKLSPS2GetInfoResponse LSPS2GetInfoResponse_clone(const struct LDKLSPS2GetInfoResponse *NONNULL_PTR orig);
+	public static native long LSPS2GetInfoResponse_clone(long orig);
+	// bool LSPS2GetInfoResponse_eq(const struct LDKLSPS2GetInfoResponse *NONNULL_PTR a, const struct LDKLSPS2GetInfoResponse *NONNULL_PTR b);
+	public static native boolean LSPS2GetInfoResponse_eq(long a, long b);
+	// void LSPS2BuyRequest_free(struct LDKLSPS2BuyRequest this_obj);
+	public static native void LSPS2BuyRequest_free(long this_obj);
+	// struct LDKLSPS2OpeningFeeParams LSPS2BuyRequest_get_opening_fee_params(const struct LDKLSPS2BuyRequest *NONNULL_PTR this_ptr);
+	public static native long LSPS2BuyRequest_get_opening_fee_params(long this_ptr);
+	// void LSPS2BuyRequest_set_opening_fee_params(struct LDKLSPS2BuyRequest *NONNULL_PTR this_ptr, struct LDKLSPS2OpeningFeeParams val);
+	public static native void LSPS2BuyRequest_set_opening_fee_params(long this_ptr, long val);
+	// struct LDKCOption_u64Z LSPS2BuyRequest_get_payment_size_msat(const struct LDKLSPS2BuyRequest *NONNULL_PTR this_ptr);
+	public static native long LSPS2BuyRequest_get_payment_size_msat(long this_ptr);
+	// void LSPS2BuyRequest_set_payment_size_msat(struct LDKLSPS2BuyRequest *NONNULL_PTR this_ptr, struct LDKCOption_u64Z val);
+	public static native void LSPS2BuyRequest_set_payment_size_msat(long this_ptr, long val);
+	// MUST_USE_RES struct LDKLSPS2BuyRequest LSPS2BuyRequest_new(struct LDKLSPS2OpeningFeeParams opening_fee_params_arg, struct LDKCOption_u64Z payment_size_msat_arg);
+	public static native long LSPS2BuyRequest_new(long opening_fee_params_arg, long payment_size_msat_arg);
+	// uint64_t LSPS2BuyRequest_clone_ptr(LDKLSPS2BuyRequest *NONNULL_PTR arg);
+	public static native long LSPS2BuyRequest_clone_ptr(long arg);
+	// struct LDKLSPS2BuyRequest LSPS2BuyRequest_clone(const struct LDKLSPS2BuyRequest *NONNULL_PTR orig);
+	public static native long LSPS2BuyRequest_clone(long orig);
+	// bool LSPS2BuyRequest_eq(const struct LDKLSPS2BuyRequest *NONNULL_PTR a, const struct LDKLSPS2BuyRequest *NONNULL_PTR b);
+	public static native boolean LSPS2BuyRequest_eq(long a, long b);
+	// void LSPS2InterceptScid_free(struct LDKLSPS2InterceptScid this_obj);
+	public static native void LSPS2InterceptScid_free(long this_obj);
+	// uint64_t LSPS2InterceptScid_clone_ptr(LDKLSPS2InterceptScid *NONNULL_PTR arg);
+	public static native long LSPS2InterceptScid_clone_ptr(long arg);
+	// struct LDKLSPS2InterceptScid LSPS2InterceptScid_clone(const struct LDKLSPS2InterceptScid *NONNULL_PTR orig);
+	public static native long LSPS2InterceptScid_clone(long orig);
+	// bool LSPS2InterceptScid_eq(const struct LDKLSPS2InterceptScid *NONNULL_PTR a, const struct LDKLSPS2InterceptScid *NONNULL_PTR b);
+	public static native boolean LSPS2InterceptScid_eq(long a, long b);
+	// MUST_USE_RES struct LDKCResult_u64NoneZ LSPS2InterceptScid_to_scid(const struct LDKLSPS2InterceptScid *NONNULL_PTR this_arg);
+	public static native long LSPS2InterceptScid_to_scid(long this_arg);
+	// void LSPS2BuyResponse_free(struct LDKLSPS2BuyResponse this_obj);
+	public static native void LSPS2BuyResponse_free(long this_obj);
+	// struct LDKLSPS2InterceptScid LSPS2BuyResponse_get_jit_channel_scid(const struct LDKLSPS2BuyResponse *NONNULL_PTR this_ptr);
+	public static native long LSPS2BuyResponse_get_jit_channel_scid(long this_ptr);
+	// void LSPS2BuyResponse_set_jit_channel_scid(struct LDKLSPS2BuyResponse *NONNULL_PTR this_ptr, struct LDKLSPS2InterceptScid val);
+	public static native void LSPS2BuyResponse_set_jit_channel_scid(long this_ptr, long val);
+	// uint32_t LSPS2BuyResponse_get_lsp_cltv_expiry_delta(const struct LDKLSPS2BuyResponse *NONNULL_PTR this_ptr);
+	public static native int LSPS2BuyResponse_get_lsp_cltv_expiry_delta(long this_ptr);
+	// void LSPS2BuyResponse_set_lsp_cltv_expiry_delta(struct LDKLSPS2BuyResponse *NONNULL_PTR this_ptr, uint32_t val);
+	public static native void LSPS2BuyResponse_set_lsp_cltv_expiry_delta(long this_ptr, int val);
+	// bool LSPS2BuyResponse_get_client_trusts_lsp(const struct LDKLSPS2BuyResponse *NONNULL_PTR this_ptr);
+	public static native boolean LSPS2BuyResponse_get_client_trusts_lsp(long this_ptr);
+	// void LSPS2BuyResponse_set_client_trusts_lsp(struct LDKLSPS2BuyResponse *NONNULL_PTR this_ptr, bool val);
+	public static native void LSPS2BuyResponse_set_client_trusts_lsp(long this_ptr, boolean val);
+	// MUST_USE_RES struct LDKLSPS2BuyResponse LSPS2BuyResponse_new(struct LDKLSPS2InterceptScid jit_channel_scid_arg, uint32_t lsp_cltv_expiry_delta_arg, bool client_trusts_lsp_arg);
+	public static native long LSPS2BuyResponse_new(long jit_channel_scid_arg, int lsp_cltv_expiry_delta_arg, boolean client_trusts_lsp_arg);
+	// uint64_t LSPS2BuyResponse_clone_ptr(LDKLSPS2BuyResponse *NONNULL_PTR arg);
+	public static native long LSPS2BuyResponse_clone_ptr(long arg);
+	// struct LDKLSPS2BuyResponse LSPS2BuyResponse_clone(const struct LDKLSPS2BuyResponse *NONNULL_PTR orig);
+	public static native long LSPS2BuyResponse_clone(long orig);
+	// bool LSPS2BuyResponse_eq(const struct LDKLSPS2BuyResponse *NONNULL_PTR a, const struct LDKLSPS2BuyResponse *NONNULL_PTR b);
+	public static native boolean LSPS2BuyResponse_eq(long a, long b);
+	// void LSPS2Request_free(struct LDKLSPS2Request this_ptr);
+	public static native void LSPS2Request_free(long this_ptr);
+	// uint64_t LSPS2Request_clone_ptr(LDKLSPS2Request *NONNULL_PTR arg);
+	public static native long LSPS2Request_clone_ptr(long arg);
+	// struct LDKLSPS2Request LSPS2Request_clone(const struct LDKLSPS2Request *NONNULL_PTR orig);
+	public static native long LSPS2Request_clone(long orig);
+	// struct LDKLSPS2Request LSPS2Request_get_info(struct LDKLSPS2GetInfoRequest a);
+	public static native long LSPS2Request_get_info(long a);
+	// struct LDKLSPS2Request LSPS2Request_buy(struct LDKLSPS2BuyRequest a);
+	public static native long LSPS2Request_buy(long a);
+	// bool LSPS2Request_eq(const struct LDKLSPS2Request *NONNULL_PTR a, const struct LDKLSPS2Request *NONNULL_PTR b);
+	public static native boolean LSPS2Request_eq(long a, long b);
+	// void LSPS2Response_free(struct LDKLSPS2Response this_ptr);
+	public static native void LSPS2Response_free(long this_ptr);
+	// uint64_t LSPS2Response_clone_ptr(LDKLSPS2Response *NONNULL_PTR arg);
+	public static native long LSPS2Response_clone_ptr(long arg);
+	// struct LDKLSPS2Response LSPS2Response_clone(const struct LDKLSPS2Response *NONNULL_PTR orig);
+	public static native long LSPS2Response_clone(long orig);
+	// struct LDKLSPS2Response LSPS2Response_get_info(struct LDKLSPS2GetInfoResponse a);
+	public static native long LSPS2Response_get_info(long a);
+	// struct LDKLSPS2Response LSPS2Response_get_info_error(struct LDKLSPSResponseError a);
+	public static native long LSPS2Response_get_info_error(long a);
+	// struct LDKLSPS2Response LSPS2Response_buy(struct LDKLSPS2BuyResponse a);
+	public static native long LSPS2Response_buy(long a);
+	// struct LDKLSPS2Response LSPS2Response_buy_error(struct LDKLSPSResponseError a);
+	public static native long LSPS2Response_buy_error(long a);
+	// bool LSPS2Response_eq(const struct LDKLSPS2Response *NONNULL_PTR a, const struct LDKLSPS2Response *NONNULL_PTR b);
+	public static native boolean LSPS2Response_eq(long a, long b);
+	// void LSPS2Message_free(struct LDKLSPS2Message this_ptr);
+	public static native void LSPS2Message_free(long this_ptr);
+	// uint64_t LSPS2Message_clone_ptr(LDKLSPS2Message *NONNULL_PTR arg);
+	public static native long LSPS2Message_clone_ptr(long arg);
+	// struct LDKLSPS2Message LSPS2Message_clone(const struct LDKLSPS2Message *NONNULL_PTR orig);
+	public static native long LSPS2Message_clone(long orig);
+	// struct LDKLSPS2Message LSPS2Message_request(struct LDKLSPSRequestId a, struct LDKLSPS2Request b);
+	public static native long LSPS2Message_request(long a, long b);
+	// struct LDKLSPS2Message LSPS2Message_response(struct LDKLSPSRequestId a, struct LDKLSPS2Response b);
+	public static native long LSPS2Message_response(long a, long b);
+	// bool LSPS2Message_eq(const struct LDKLSPS2Message *NONNULL_PTR a, const struct LDKLSPS2Message *NONNULL_PTR b);
+	public static native boolean LSPS2Message_eq(long a, long b);
+	// void LSPS2ServiceConfig_free(struct LDKLSPS2ServiceConfig this_obj);
+	public static native void LSPS2ServiceConfig_free(long this_obj);
+	// const uint8_t (*LSPS2ServiceConfig_get_promise_secret(const struct LDKLSPS2ServiceConfig *NONNULL_PTR this_ptr))[32];
+	public static native byte[] LSPS2ServiceConfig_get_promise_secret(long this_ptr);
+	// void LSPS2ServiceConfig_set_promise_secret(struct LDKLSPS2ServiceConfig *NONNULL_PTR this_ptr, struct LDKThirtyTwoBytes val);
+	public static native void LSPS2ServiceConfig_set_promise_secret(long this_ptr, byte[] val);
+	// MUST_USE_RES struct LDKLSPS2ServiceConfig LSPS2ServiceConfig_new(struct LDKThirtyTwoBytes promise_secret_arg);
+	public static native long LSPS2ServiceConfig_new(byte[] promise_secret_arg);
+	// uint64_t LSPS2ServiceConfig_clone_ptr(LDKLSPS2ServiceConfig *NONNULL_PTR arg);
+	public static native long LSPS2ServiceConfig_clone_ptr(long arg);
+	// struct LDKLSPS2ServiceConfig LSPS2ServiceConfig_clone(const struct LDKLSPS2ServiceConfig *NONNULL_PTR orig);
+	public static native long LSPS2ServiceConfig_clone(long orig);
+	// void LSPS2ServiceHandler_free(struct LDKLSPS2ServiceHandler this_obj);
+	public static native void LSPS2ServiceHandler_free(long this_obj);
+	// MUST_USE_RES struct LDKCResult_NoneAPIErrorZ LSPS2ServiceHandler_invalid_token_provided(const struct LDKLSPS2ServiceHandler *NONNULL_PTR this_arg, struct LDKPublicKey counterparty_node_id, struct LDKLSPSRequestId request_id);
+	public static native long LSPS2ServiceHandler_invalid_token_provided(long this_arg, byte[] counterparty_node_id, long request_id);
+	// MUST_USE_RES struct LDKCResult_NoneAPIErrorZ LSPS2ServiceHandler_opening_fee_params_generated(const struct LDKLSPS2ServiceHandler *NONNULL_PTR this_arg, struct LDKPublicKey counterparty_node_id, struct LDKLSPSRequestId request_id, struct LDKCVec_LSPS2RawOpeningFeeParamsZ opening_fee_params_menu);
+	public static native long LSPS2ServiceHandler_opening_fee_params_generated(long this_arg, byte[] counterparty_node_id, long request_id, long[] opening_fee_params_menu);
+	// MUST_USE_RES struct LDKCResult_NoneAPIErrorZ LSPS2ServiceHandler_invoice_parameters_generated(const struct LDKLSPS2ServiceHandler *NONNULL_PTR this_arg, struct LDKPublicKey counterparty_node_id, struct LDKLSPSRequestId request_id, uint64_t intercept_scid, uint32_t cltv_expiry_delta, bool client_trusts_lsp, struct LDKU128 user_channel_id);
+	public static native long LSPS2ServiceHandler_invoice_parameters_generated(long this_arg, byte[] counterparty_node_id, long request_id, long intercept_scid, int cltv_expiry_delta, boolean client_trusts_lsp, byte[] user_channel_id);
+	// MUST_USE_RES struct LDKCResult_NoneAPIErrorZ LSPS2ServiceHandler_htlc_intercepted(const struct LDKLSPS2ServiceHandler *NONNULL_PTR this_arg, uint64_t intercept_scid, struct LDKThirtyTwoBytes intercept_id, uint64_t expected_outbound_amount_msat, struct LDKThirtyTwoBytes payment_hash);
+	public static native long LSPS2ServiceHandler_htlc_intercepted(long this_arg, long intercept_scid, byte[] intercept_id, long expected_outbound_amount_msat, byte[] payment_hash);
+	// MUST_USE_RES struct LDKCResult_NoneAPIErrorZ LSPS2ServiceHandler_htlc_handling_failed(const struct LDKLSPS2ServiceHandler *NONNULL_PTR this_arg, struct LDKHTLCDestination failed_next_destination);
+	public static native long LSPS2ServiceHandler_htlc_handling_failed(long this_arg, long failed_next_destination);
+	// MUST_USE_RES struct LDKCResult_NoneAPIErrorZ LSPS2ServiceHandler_payment_forwarded(const struct LDKLSPS2ServiceHandler *NONNULL_PTR this_arg, struct LDKChannelId next_channel_id);
+	public static native long LSPS2ServiceHandler_payment_forwarded(long this_arg, long next_channel_id);
+	// MUST_USE_RES struct LDKCResult_NoneAPIErrorZ LSPS2ServiceHandler_channel_ready(const struct LDKLSPS2ServiceHandler *NONNULL_PTR this_arg, struct LDKU128 user_channel_id, const struct LDKChannelId *NONNULL_PTR channel_id, struct LDKPublicKey counterparty_node_id);
+	public static native long LSPS2ServiceHandler_channel_ready(long this_arg, byte[] user_channel_id, long channel_id, byte[] counterparty_node_id);
+	// bool is_valid_opening_fee_params(const struct LDKLSPS2OpeningFeeParams *NONNULL_PTR fee_params, const uint8_t (*promise_secret)[32]);
+	public static native boolean is_valid_opening_fee_params(long fee_params, byte[] promise_secret);
+	// bool is_expired_opening_fee_params(const struct LDKLSPS2OpeningFeeParams *NONNULL_PTR fee_params);
+	public static native boolean is_expired_opening_fee_params(long fee_params);
+	// struct LDKCOption_u64Z compute_opening_fee(uint64_t payment_size_msat, uint64_t opening_fee_min_fee_msat, uint64_t opening_fee_proportional);
+	public static native long compute_opening_fee(long payment_size_msat, long opening_fee_min_fee_msat, long opening_fee_proportional);
+	// void MessageQueue_free(struct LDKMessageQueue this_obj);
+	public static native void MessageQueue_free(long this_obj);
+	// void ProcessMessagesCallback_free(struct LDKProcessMessagesCallback this_ptr);
+	public static native void ProcessMessagesCallback_free(long this_ptr);
 }

@@ -45,7 +45,7 @@ public class TwoTuple_u64CVec_u8ZZ : CommonBase {
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public TwoTuple_u64CVec_u8ZZ clone() {
+	public org.ldk.structs.TwoTuple_u64CVec_u8ZZ clone() {
 		long ret = bindings.C2Tuple_u64CVec_u8ZZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -57,7 +57,7 @@ public class TwoTuple_u64CVec_u8ZZ : CommonBase {
 	/**
 	 * Creates a new C2Tuple_u64CVec_u8ZZ from the contained elements.
 	 */
-	public static TwoTuple_u64CVec_u8ZZ of(long a, byte[] b) {
+	public static org.ldk.structs.TwoTuple_u64CVec_u8ZZ of(long a, byte[] b) {
 		long ret = bindings.C2Tuple_u64CVec_u8ZZ_new(a, InternalUtils.encodeUint8Array(b));
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

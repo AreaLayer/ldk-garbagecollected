@@ -41,7 +41,7 @@ public class Result_BlindedPayInfoDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_BlindedPayInfoDecodeErrorZ in the success state.
 	 */
-	public static Result_BlindedPayInfoDecodeErrorZ ok(org.ldk.structs.BlindedPayInfo o) {
+	public static org.ldk.structs.Result_BlindedPayInfoDecodeErrorZ ok(org.ldk.structs.BlindedPayInfo o) {
 		long ret = bindings.CResult_BlindedPayInfoDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_BlindedPayInfoDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_BlindedPayInfoDecodeErrorZ in the error state.
 	 */
-	public static Result_BlindedPayInfoDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_BlindedPayInfoDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_BlindedPayInfoDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_BlindedPayInfoDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_BlindedPayInfoDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_BlindedPayInfoDecodeErrorZ clone() {
+	public org.ldk.structs.Result_BlindedPayInfoDecodeErrorZ clone() {
 		long ret = bindings.CResult_BlindedPayInfoDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

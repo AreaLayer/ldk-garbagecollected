@@ -171,7 +171,7 @@ namespace tests {
 			node_a.messenger.as_OnionMessageHandler().peer_connected(node_b.manager.get_our_node_id(), init_msg, false);
 			node_b.messenger.as_OnionMessageHandler().peer_connected(node_a.manager.get_our_node_id(), init_msg, false);
 
-			Result_ChannelIdAPIErrorZ res = node_a.manager.create_channel(node_b.manager.get_our_node_id(), 100000, 42, new UInt128(43), null, null);
+			Result_ChannelIdAPIErrorZ res = node_a.manager.create_channel(node_b.manager.get_our_node_id(), 100000, 42, new org.ldk.util.UInt128(43), null, null);
 			Assert(res.is_ok(), 4);
 
 			MessageSendEvent[] msgs = node_a.manager.as_MessageSendEventsProvider().get_and_clear_pending_msg_events();
@@ -182,7 +182,7 @@ namespace tests {
 			Event inbound_chan = get_event(node_b.manager);
 			Assert(inbound_chan is Event.Event_OpenChannelRequest, 7);
 			Event.Event_OpenChannelRequest chan_request = (Event.Event_OpenChannelRequest)inbound_chan;
-			Result_NoneAPIErrorZ accept_res = node_b.manager.accept_inbound_channel_from_trusted_peer_0conf(chan_request.temporary_channel_id, chan_request.counterparty_node_id, new UInt128(42));
+			Result_NoneAPIErrorZ accept_res = node_b.manager.accept_inbound_channel_from_trusted_peer_0conf(chan_request.temporary_channel_id, chan_request.counterparty_node_id, new org.ldk.util.UInt128(42));
 			Assert(accept_res.is_ok(), 8);
 
 			MessageSendEvent[] response_msgs = node_b.manager.as_MessageSendEventsProvider().get_and_clear_pending_msg_events();
@@ -427,11 +427,21 @@ namespace tests {
 			Assert(inv_res.is_ok(), 200);
 		}
 
+		static void SimpleAddressTest() {
+			// Test parsing Address
+			String valid_addr = "bc1qprzyshqx2qlyrur5pyx9s3tg6y4m5lfwkcls38";
+			Assert(Address.from_string(valid_addr).address == valid_addr, 300);
+			try {
+				Address.from_string("");
+				Assert(false, 301);
+			} catch (ArgumentException e) {}
+		}
+
 		static void GCLoop() {
 			while (Thread.CurrentThread.IsAlive) {
 				System.GC.Collect();
-				GC.WaitForPendingFinalizers();
 				try {
+					GC.WaitForPendingFinalizers();
 					Thread.Sleep(new TimeSpan(1));
 				} catch (ThreadInterruptedException _) {
 					break;
@@ -451,6 +461,7 @@ namespace tests {
 			SimpleTraitTest();
 			NodeTest();
 			Bolt12ParseTest();
+			SimpleAddressTest();
 
 			if (!RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) {
 				gc_thread.Interrupt();

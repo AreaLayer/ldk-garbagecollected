@@ -49,7 +49,7 @@ public class Option_CVec_SocketAddressZZ : CommonBase {
 	/**
 	 * Constructs a new COption_CVec_SocketAddressZZ containing a crate::c_types::derived::CVec_SocketAddressZ
 	 */
-	public static Option_CVec_SocketAddressZZ some(SocketAddress[] o) {
+	public static org.ldk.structs.Option_CVec_SocketAddressZZ some(SocketAddress[] o) {
 		long ret = bindings.COption_CVec_SocketAddressZZ_some(InternalUtils.encodeUint64Array(InternalUtils.mapArray(o, o_conv_15 => o_conv_15.ptr)));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -61,7 +61,7 @@ public class Option_CVec_SocketAddressZZ : CommonBase {
 	/**
 	 * Constructs a new COption_CVec_SocketAddressZZ containing nothing
 	 */
-	public static Option_CVec_SocketAddressZZ none() {
+	public static org.ldk.structs.Option_CVec_SocketAddressZZ none() {
 		long ret = bindings.COption_CVec_SocketAddressZZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_CVec_SocketAddressZZ ret_hu_conv = org.ldk.structs.Option_CVec_SocketAddressZZ.constr_from_ptr(ret);
@@ -79,7 +79,7 @@ public class Option_CVec_SocketAddressZZ : CommonBase {
 	 * Creates a new COption_CVec_SocketAddressZZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_CVec_SocketAddressZZ clone() {
+	public org.ldk.structs.Option_CVec_SocketAddressZZ clone() {
 		long ret = bindings.COption_CVec_SocketAddressZZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

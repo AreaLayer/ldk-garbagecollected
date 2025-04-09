@@ -38,7 +38,7 @@ public class Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ :
 	/**
 	 * Creates a new CResult_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ in the success state.
 	 */
-	public static Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ ok(org.ldk.structs.InvoiceWithDerivedSigningPubkeyBuilder o) {
+	public static org.ldk.structs.Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ ok(org.ldk.structs.InvoiceWithDerivedSigningPubkeyBuilder o) {
 		long ret = bindings.CResult_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -58,7 +58,7 @@ public class Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ :
 	/**
 	 * Creates a new CResult_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ in the error state.
 	 */
-	public static Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ err(Bolt12SemanticError e) {
+	public static org.ldk.structs.Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ err(Bolt12SemanticError e) {
 		long ret = bindings.CResult_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ_err(e);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }

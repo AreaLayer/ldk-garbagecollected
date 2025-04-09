@@ -23,7 +23,7 @@ public class OutboundHTLCDetails : CommonBase {
 	 * 
 	 * Not present when we are awaiting a remote revocation and the HTLC is not added yet.
 	 */
-	public Option_u64Z get_htlc_id() {
+	public org.ldk.structs.Option_u64Z get_htlc_id() {
 		long ret = bindings.OutboundHTLCDetails_get_htlc_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -113,7 +113,7 @@ public class OutboundHTLCDetails : CommonBase {
 	 * LDK will always fill this field in, but when downgrading to prior versions of LDK, new
 	 * states may result in `None` here.
 	 */
-	public Option_OutboundHTLCStateDetailsZ get_state() {
+	public org.ldk.structs.Option_OutboundHTLCStateDetailsZ get_state() {
 		long ret = bindings.OutboundHTLCDetails_get_state(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -142,7 +142,7 @@ public class OutboundHTLCDetails : CommonBase {
 	/**
 	 * The extra fee being skimmed off the top of this HTLC.
 	 */
-	public Option_u64Z get_skimmed_fee_msat() {
+	public org.ldk.structs.Option_u64Z get_skimmed_fee_msat() {
 		long ret = bindings.OutboundHTLCDetails_get_skimmed_fee_msat(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -201,7 +201,7 @@ public class OutboundHTLCDetails : CommonBase {
 	/**
 	 * Constructs a new OutboundHTLCDetails given each field
 	 */
-	public static OutboundHTLCDetails of(org.ldk.structs.Option_u64Z htlc_id_arg, long amount_msat_arg, int cltv_expiry_arg, byte[] payment_hash_arg, org.ldk.structs.Option_OutboundHTLCStateDetailsZ state_arg, org.ldk.structs.Option_u64Z skimmed_fee_msat_arg, bool is_dust_arg) {
+	public static org.ldk.structs.OutboundHTLCDetails of(org.ldk.structs.Option_u64Z htlc_id_arg, long amount_msat_arg, int cltv_expiry_arg, byte[] payment_hash_arg, org.ldk.structs.Option_OutboundHTLCStateDetailsZ state_arg, org.ldk.structs.Option_u64Z skimmed_fee_msat_arg, bool is_dust_arg) {
 		long ret = bindings.OutboundHTLCDetails_new(htlc_id_arg.ptr, amount_msat_arg, cltv_expiry_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash_arg, 32)), state_arg.ptr, skimmed_fee_msat_arg.ptr, is_dust_arg);
 		GC.KeepAlive(htlc_id_arg);
 		GC.KeepAlive(amount_msat_arg);
@@ -225,7 +225,7 @@ public class OutboundHTLCDetails : CommonBase {
 	/**
 	 * Creates a copy of the OutboundHTLCDetails
 	 */
-	public OutboundHTLCDetails clone() {
+	public org.ldk.structs.OutboundHTLCDetails clone() {
 		long ret = bindings.OutboundHTLCDetails_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -248,7 +248,7 @@ public class OutboundHTLCDetails : CommonBase {
 	/**
 	 * Read a OutboundHTLCDetails from a byte array, created by OutboundHTLCDetails_write
 	 */
-	public static Result_OutboundHTLCDetailsDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_OutboundHTLCDetailsDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.OutboundHTLCDetails_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

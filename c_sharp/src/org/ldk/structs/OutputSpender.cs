@@ -23,7 +23,7 @@ public interface OutputSpenderInterface {
 	 * if a descriptor was duplicated, or if an output descriptor `script_pubkey`
 	 * does not match the one we can spend.
 	 */
-	Result_TransactionNoneZ spend_spendable_outputs(SpendableOutputDescriptor[] descriptors, TxOut[] outputs, byte[] change_destination_script, int feerate_sat_per_1000_weight, Option_u32Z locktime);
+	Result_TransactionNoneZ spend_spendable_outputs(SpendableOutputDescriptor[] descriptors, TxOut[] outputs, byte[] change_destination_script, int feerate_sat_per_1000_weight, org.ldk.structs.Option_u32Z locktime);
 }
 
 /**
@@ -98,7 +98,7 @@ public class OutputSpender : CommonBase {
 	 * if a descriptor was duplicated, or if an output descriptor `script_pubkey`
 	 * does not match the one we can spend.
 	 */
-	public Result_TransactionNoneZ spend_spendable_outputs(SpendableOutputDescriptor[] descriptors, TxOut[] outputs, byte[] change_destination_script, int feerate_sat_per_1000_weight, org.ldk.structs.Option_u32Z locktime) {
+	public org.ldk.structs.Result_TransactionNoneZ spend_spendable_outputs(SpendableOutputDescriptor[] descriptors, TxOut[] outputs, byte[] change_destination_script, int feerate_sat_per_1000_weight, org.ldk.structs.Option_u32Z locktime) {
 		long ret = bindings.OutputSpender_spend_spendable_outputs(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(descriptors, descriptors_conv_27 => descriptors_conv_27.ptr)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(outputs, outputs_conv_7 => outputs_conv_7.ptr)), InternalUtils.encodeUint8Array(change_destination_script), feerate_sat_per_1000_weight, locktime.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(descriptors);

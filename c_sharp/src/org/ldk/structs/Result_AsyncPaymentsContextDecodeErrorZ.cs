@@ -41,7 +41,7 @@ public class Result_AsyncPaymentsContextDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_AsyncPaymentsContextDecodeErrorZ in the success state.
 	 */
-	public static Result_AsyncPaymentsContextDecodeErrorZ ok(org.ldk.structs.AsyncPaymentsContext o) {
+	public static org.ldk.structs.Result_AsyncPaymentsContextDecodeErrorZ ok(org.ldk.structs.AsyncPaymentsContext o) {
 		long ret = bindings.CResult_AsyncPaymentsContextDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_AsyncPaymentsContextDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_AsyncPaymentsContextDecodeErrorZ in the error state.
 	 */
-	public static Result_AsyncPaymentsContextDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_AsyncPaymentsContextDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_AsyncPaymentsContextDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_AsyncPaymentsContextDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_AsyncPaymentsContextDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_AsyncPaymentsContextDecodeErrorZ clone() {
+	public org.ldk.structs.Result_AsyncPaymentsContextDecodeErrorZ clone() {
 		long ret = bindings.CResult_AsyncPaymentsContextDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

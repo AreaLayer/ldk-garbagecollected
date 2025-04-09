@@ -133,6 +133,32 @@ class CommonBase {
 	}
 }"""
 
+        self.address_defn = """public class Address extends CommonBase {
+	/** The address in string form */
+	public final String address;
+
+	Address(java.lang.Object _dummy, long ptr) {
+		super(ptr);
+		this.address = bindings.Address_to_string(ptr);
+	}
+	public static Address from_string(String address) throws IllegalArgumentException {
+		long ptr = bindings.Address_new(address);
+		Option_AddressZ res = Option_AddressZ.constr_from_ptr(ptr);
+		if (res instanceof Option_AddressZ.Some) {
+			long addr_ptr = ((Option_AddressZ.Some) res).some.ptr;
+			return new Address(null, bindings.Address_clone(addr_ptr));
+		} else {
+			throw new IllegalArgumentException("Invalid address");
+		}
+	}
+
+	@Override @SuppressWarnings(\"deprecation\")
+	protected void finalize() throws Throwable {
+		super.finalize();
+		if (ptr != 0) { bindings.Address_free(ptr); }
+	}
+}"""
+
         self.txin_defn = """public class TxIn extends CommonBase {
 	/** The witness in this input, in serialized form */
 	public final byte[] witness;
@@ -217,7 +243,6 @@ class CommonBase {
         self.c_file_pfx = """#include <jni.h>
 // On OSX jlong (ie long long) is not equivalent to int64_t, so we override here
 #define int64_t jlong
-#include \"org_ldk_impl_bindings.h\"
 #include <lightning.h>
 #include <string.h>
 #include <stdatomic.h>
@@ -489,8 +514,11 @@ _Static_assert(sizeof(jbyte) == sizeof(char), "We assume that j-types are the sa
 _Static_assert(sizeof(void*) <= 8, "Pointers must fit into 64 bits");
 
 typedef jlongArray int64_tArray;
+typedef jlongArray uint64_tArray;
 typedef jbyteArray int8_tArray;
+typedef jbyteArray uint8_tArray;
 typedef jshortArray int16_tArray;
+typedef jshortArray uint16_tArray;
 
 static inline jstring str_ref_to_java(JNIEnv *env, const unsigned char* chars, size_t len) {
 	// Java uses "Modified UTF-8" rather than UTF-8. This requires special
@@ -553,6 +581,12 @@ static inline LDKStr java_to_owned_str(JNIEnv *env, jstring str) {
 	uint64_t str_len = (*env)->GetStringUTFLength(env, str);
 	// Java uses "Modified UTF-8" rather than UTF-8. This requires special
 	// handling for codepoints above 0xFFFF, which we implement below.
+
+	if (str_len == 0) {
+		LDKStr res = { .chars = NULL, .len = 0, .chars_is_owned = false };
+		return res;
+	}
+
 	unsigned char* newchars = MALLOC(str_len, "String chars");
 	unsigned char* next_newchar = newchars;
 	uint64_t utf8_len = 0;
@@ -687,7 +721,7 @@ import javax.annotation.Nullable;
             return "(*env)->ReleasePrimitiveArrayCritical(env, " + arr_var + ", " + arr_ptr_var + ", 0)"
         return None
     def create_native_arr_call(self, arr_len, ty_info):
-        if ty_info.c_ty == "int8_tArray":
+        if ty_info.c_ty == "uint8_tArray":
             return "(*env)->NewByteArray(env, " + arr_len + ")"
         elif ty_info.subty.c_ty.endswith("Array"):
             clz_var = ty_info.java_fn_ty_arg[1:].replace("[", "arr_of_")
@@ -698,17 +732,17 @@ import javax.annotation.Nullable;
         else:
             return "(*env)->New" + ty_info.java_ty.strip("[]").title() + "Array(env, " + arr_len + ")"
     def set_native_arr_contents(self, arr_name, arr_len, ty_info):
-        if ty_info.c_ty == "int8_tArray":
+        if ty_info.c_ty == "uint8_tArray":
             return ("(*env)->SetByteArrayRegion(env, " + arr_name + ", 0, " + arr_len + ", ", ")")
-        elif ty_info.c_ty == "int16_tArray":
+        elif ty_info.c_ty == "uint16_tArray":
             return ("(*env)->SetShortArrayRegion(env, " + arr_name + ", 0, " + arr_len + ", ", ")")
         else:
             assert False
     def get_native_arr_contents(self, arr_name, dest_name, arr_len, ty_info, copy):
         if "String" in ty_info.java_ty:
             return None
-        if ty_info.c_ty == "int8_tArray" or ty_info.c_ty == "int16_tArray":
-            fn_ty = "Byte" if ty_info.c_ty == "int8_tArray" else "Short"
+        if ty_info.c_ty == "uint8_tArray" or ty_info.c_ty == "uint16_tArray":
+            fn_ty = "Byte" if ty_info.c_ty == "uint8_tArray" else "Short"
             if copy:
                 return "(*env)->Get" + fn_ty + "ArrayRegion(env, " + arr_name + ", 0, " + arr_len + ", " + dest_name + ")"
             else:
@@ -731,7 +765,7 @@ import javax.annotation.Nullable;
             return None
         return "(*env)->SetObjectArrayElement(env, " + arr_name + ", " + idxc + ", " + entry_access + ")"
     def cleanup_native_arr_ref_contents(self, arr_name, dest_name, arr_len, ty_info):
-        if ty_info.c_ty == "int8_tArray":
+        if ty_info.c_ty == "uint8_tArray":
             return "(*env)->ReleaseByteArrayElements(env, " + arr_name + ", (int8_t*)" + dest_name + ", 0);"
         else:
             return "(*env)->Release" + ty_info.java_ty.strip("[]").title() + "ArrayElements(env, " + arr_name + ", " + dest_name + ", 0)"

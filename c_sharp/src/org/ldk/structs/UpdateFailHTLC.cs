@@ -20,7 +20,7 @@ public class UpdateFailHTLC : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.UpdateFailHTLC_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -65,7 +65,7 @@ public class UpdateFailHTLC : CommonBase {
 	/**
 	 * Creates a copy of the UpdateFailHTLC
 	 */
-	public UpdateFailHTLC clone() {
+	public org.ldk.structs.UpdateFailHTLC clone() {
 		long ret = bindings.UpdateFailHTLC_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -117,7 +117,7 @@ public class UpdateFailHTLC : CommonBase {
 	/**
 	 * Read a UpdateFailHTLC from a byte array, created by UpdateFailHTLC_write
 	 */
-	public static Result_UpdateFailHTLCDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_UpdateFailHTLCDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.UpdateFailHTLC_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

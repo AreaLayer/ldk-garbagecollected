@@ -25,7 +25,7 @@ public class Responder : CommonBase {
 	/**
 	 * Creates a copy of the Responder
 	 */
-	public Responder clone() {
+	public org.ldk.structs.Responder clone() {
 		long ret = bindings.Responder_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -65,7 +65,7 @@ public class Responder : CommonBase {
 	/**
 	 * Read a Responder from a byte array, created by Responder_write
 	 */
-	public static Result_ResponderDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ResponderDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.Responder_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -78,7 +78,7 @@ public class Responder : CommonBase {
 	 * 
 	 * Use when the recipient doesn't need to send back a reply to us.
 	 */
-	public ResponseInstruction respond() {
+	public org.ldk.structs.ResponseInstruction respond() {
 		long ret = bindings.Responder_respond(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -93,7 +93,7 @@ public class Responder : CommonBase {
 	 * 
 	 * Use when the recipient needs to send back a reply to us.
 	 */
-	public ResponseInstruction respond_with_reply_path(org.ldk.structs.MessageContext context) {
+	public org.ldk.structs.ResponseInstruction respond_with_reply_path(org.ldk.structs.MessageContext context) {
 		long ret = bindings.Responder_respond_with_reply_path(this.ptr, context.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(context);

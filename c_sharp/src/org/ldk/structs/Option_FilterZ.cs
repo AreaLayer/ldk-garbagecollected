@@ -26,7 +26,7 @@ public class Option_FilterZ : CommonBase {
 
 	/** A Option_FilterZ of type Some */
 	public class Option_FilterZ_Some : Option_FilterZ {
-		public Filter some;
+		public org.ldk.structs.Filter some;
 		internal Option_FilterZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_FilterZ_Some_get_some(ptr);
 			Filter ret_hu_conv = new Filter(null, some);
@@ -42,7 +42,7 @@ public class Option_FilterZ : CommonBase {
 	/**
 	 * Constructs a new COption_FilterZ containing a crate::lightning::chain::Filter
 	 */
-	public static Option_FilterZ some(org.ldk.structs.Filter o) {
+	public static org.ldk.structs.Option_FilterZ some(org.ldk.structs.Filter o) {
 		long ret = bindings.COption_FilterZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -55,7 +55,7 @@ public class Option_FilterZ : CommonBase {
 	/**
 	 * Constructs a new COption_FilterZ containing nothing
 	 */
-	public static Option_FilterZ none() {
+	public static org.ldk.structs.Option_FilterZ none() {
 		long ret = bindings.COption_FilterZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_FilterZ ret_hu_conv = org.ldk.structs.Option_FilterZ.constr_from_ptr(ret);

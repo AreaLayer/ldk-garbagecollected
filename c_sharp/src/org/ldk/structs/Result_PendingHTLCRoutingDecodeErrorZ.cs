@@ -41,7 +41,7 @@ public class Result_PendingHTLCRoutingDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_PendingHTLCRoutingDecodeErrorZ in the success state.
 	 */
-	public static Result_PendingHTLCRoutingDecodeErrorZ ok(org.ldk.structs.PendingHTLCRouting o) {
+	public static org.ldk.structs.Result_PendingHTLCRoutingDecodeErrorZ ok(org.ldk.structs.PendingHTLCRouting o) {
 		long ret = bindings.CResult_PendingHTLCRoutingDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_PendingHTLCRoutingDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_PendingHTLCRoutingDecodeErrorZ in the error state.
 	 */
-	public static Result_PendingHTLCRoutingDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_PendingHTLCRoutingDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_PendingHTLCRoutingDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_PendingHTLCRoutingDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_PendingHTLCRoutingDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_PendingHTLCRoutingDecodeErrorZ clone() {
+	public org.ldk.structs.Result_PendingHTLCRoutingDecodeErrorZ clone() {
 		long ret = bindings.CResult_PendingHTLCRoutingDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

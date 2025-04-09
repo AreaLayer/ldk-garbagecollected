@@ -19,7 +19,7 @@ public class PaymentForwardNode : CommonBase {
 	 * The TLVs for this node's [`BlindedHop`], where the fee parameters contained within are also
 	 * used for [`BlindedPayInfo`] construction.
 	 */
-	public ForwardTlvs get_tlvs() {
+	public org.ldk.structs.ForwardTlvs get_tlvs() {
 		long ret = bindings.PaymentForwardNode_get_tlvs(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class PaymentForwardNode : CommonBase {
 	/**
 	 * Constructs a new PaymentForwardNode given each field
 	 */
-	public static PaymentForwardNode of(org.ldk.structs.ForwardTlvs tlvs_arg, byte[] node_id_arg, long htlc_maximum_msat_arg) {
+	public static org.ldk.structs.PaymentForwardNode of(org.ldk.structs.ForwardTlvs tlvs_arg, byte[] node_id_arg, long htlc_maximum_msat_arg) {
 		long ret = bindings.PaymentForwardNode_new(tlvs_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id_arg, 33)), htlc_maximum_msat_arg);
 		GC.KeepAlive(tlvs_arg);
 		GC.KeepAlive(node_id_arg);
@@ -99,7 +99,7 @@ public class PaymentForwardNode : CommonBase {
 	/**
 	 * Creates a copy of the PaymentForwardNode
 	 */
-	public PaymentForwardNode clone() {
+	public org.ldk.structs.PaymentForwardNode clone() {
 		long ret = bindings.PaymentForwardNode_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

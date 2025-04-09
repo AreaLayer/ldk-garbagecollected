@@ -22,7 +22,7 @@ public class WarningMessage : CommonBase {
 	 * 
 	 * All-0s indicates a warning unrelated to a specific channel.
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.WarningMessage_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -73,7 +73,7 @@ public class WarningMessage : CommonBase {
 	/**
 	 * Constructs a new WarningMessage given each field
 	 */
-	public static WarningMessage of(org.ldk.structs.ChannelId channel_id_arg, string data_arg) {
+	public static org.ldk.structs.WarningMessage of(org.ldk.structs.ChannelId channel_id_arg, string data_arg) {
 		long ret = bindings.WarningMessage_new(channel_id_arg.ptr, InternalUtils.encodeString(data_arg));
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(data_arg);
@@ -92,7 +92,7 @@ public class WarningMessage : CommonBase {
 	/**
 	 * Creates a copy of the WarningMessage
 	 */
-	public WarningMessage clone() {
+	public org.ldk.structs.WarningMessage clone() {
 		long ret = bindings.WarningMessage_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -144,7 +144,7 @@ public class WarningMessage : CommonBase {
 	/**
 	 * Read a WarningMessage from a byte array, created by WarningMessage_write
 	 */
-	public static Result_WarningMessageDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_WarningMessageDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.WarningMessage_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -38,7 +38,7 @@ public interface NodeSignerInterface {
 	 * 
 	 * Errors if the [`Recipient`] variant is not supported by the implementation.
 	 */
-	Result_ThirtyTwoBytesNoneZ ecdh(Recipient recipient, byte[] other_key, Option_BigEndianScalarZ tweak);
+	Result_ThirtyTwoBytesNoneZ ecdh(Recipient recipient, byte[] other_key, org.ldk.structs.Option_BigEndianScalarZ tweak);
 	/**Sign an invoice.
 	 * 
 	 * By parameterizing by the raw invoice bytes instead of the hash, we allow implementors of
@@ -51,7 +51,7 @@ public interface NodeSignerInterface {
 	 * 
 	 * Errors if the [`Recipient`] variant is not supported by the implementation.
 	 */
-	Result_RecoverableSignatureNoneZ sign_invoice(RawBolt11Invoice invoice, Recipient recipient);
+	Result_RecoverableSignatureNoneZ sign_invoice(org.ldk.structs.RawBolt11Invoice invoice, Recipient recipient);
 	/**Signs the [`TaggedHash`] of a BOLT 12 invoice.
 	 * 
 	 * Implementors may check that the `invoice` is expected rather than blindly signing the tagged
@@ -61,7 +61,7 @@ public interface NodeSignerInterface {
 	 * 
 	 * [`TaggedHash`]: crate::offers::merkle::TaggedHash
 	 */
-	Result_SchnorrSignatureNoneZ sign_bolt12_invoice(UnsignedBolt12Invoice invoice);
+	Result_SchnorrSignatureNoneZ sign_bolt12_invoice(org.ldk.structs.UnsignedBolt12Invoice invoice);
 	/**Sign a gossip message.
 	 * 
 	 * Note that if this fails, LDK may panic and the message will not be broadcast to the network
@@ -69,7 +69,7 @@ public interface NodeSignerInterface {
 	 * message to be broadcast, as otherwise it may prevent one from receiving funds over the
 	 * corresponding channel.
 	 */
-	Result_ECDSASignatureNoneZ sign_gossip_message(UnsignedGossipMessage msg);
+	Result_ECDSASignatureNoneZ sign_gossip_message(org.ldk.structs.UnsignedGossipMessage msg);
 }
 
 /**
@@ -157,7 +157,7 @@ public class NodeSigner : CommonBase {
 	 * 
 	 * [phantom node payments]: PhantomKeysManager
 	 */
-	public ExpandedKey get_inbound_payment_key() {
+	public org.ldk.structs.ExpandedKey get_inbound_payment_key() {
 		long ret = bindings.NodeSigner_get_inbound_payment_key(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -174,7 +174,7 @@ public class NodeSigner : CommonBase {
 	 * 
 	 * Errors if the [`Recipient`] variant is not supported by the implementation.
 	 */
-	public Result_PublicKeyNoneZ get_node_id(Recipient recipient) {
+	public org.ldk.structs.Result_PublicKeyNoneZ get_node_id(Recipient recipient) {
 		long ret = bindings.NodeSigner_get_node_id(this.ptr, recipient);
 		GC.KeepAlive(this);
 		GC.KeepAlive(recipient);
@@ -193,7 +193,7 @@ public class NodeSigner : CommonBase {
 	 * 
 	 * Errors if the [`Recipient`] variant is not supported by the implementation.
 	 */
-	public Result_ThirtyTwoBytesNoneZ ecdh(Recipient recipient, byte[] other_key, org.ldk.structs.Option_BigEndianScalarZ tweak) {
+	public org.ldk.structs.Result_ThirtyTwoBytesNoneZ ecdh(Recipient recipient, byte[] other_key, org.ldk.structs.Option_BigEndianScalarZ tweak) {
 		long ret = bindings.NodeSigner_ecdh(this.ptr, recipient, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(other_key, 33)), tweak.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(recipient);
@@ -217,7 +217,7 @@ public class NodeSigner : CommonBase {
 	 * 
 	 * Errors if the [`Recipient`] variant is not supported by the implementation.
 	 */
-	public Result_RecoverableSignatureNoneZ sign_invoice(org.ldk.structs.RawBolt11Invoice invoice, Recipient recipient) {
+	public org.ldk.structs.Result_RecoverableSignatureNoneZ sign_invoice(org.ldk.structs.RawBolt11Invoice invoice, Recipient recipient) {
 		long ret = bindings.NodeSigner_sign_invoice(this.ptr, invoice.ptr, recipient);
 		GC.KeepAlive(this);
 		GC.KeepAlive(invoice);
@@ -238,7 +238,7 @@ public class NodeSigner : CommonBase {
 	 * 
 	 * [`TaggedHash`]: crate::offers::merkle::TaggedHash
 	 */
-	public Result_SchnorrSignatureNoneZ sign_bolt12_invoice(org.ldk.structs.UnsignedBolt12Invoice invoice) {
+	public org.ldk.structs.Result_SchnorrSignatureNoneZ sign_bolt12_invoice(org.ldk.structs.UnsignedBolt12Invoice invoice) {
 		long ret = bindings.NodeSigner_sign_bolt12_invoice(this.ptr, invoice.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(invoice);
@@ -256,7 +256,7 @@ public class NodeSigner : CommonBase {
 	 * message to be broadcast, as otherwise it may prevent one from receiving funds over the
 	 * corresponding channel.
 	 */
-	public Result_ECDSASignatureNoneZ sign_gossip_message(org.ldk.structs.UnsignedGossipMessage msg) {
+	public org.ldk.structs.Result_ECDSASignatureNoneZ sign_gossip_message(org.ldk.structs.UnsignedGossipMessage msg) {
 		long ret = bindings.NodeSigner_sign_gossip_message(this.ptr, msg.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(msg);

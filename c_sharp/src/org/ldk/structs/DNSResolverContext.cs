@@ -48,7 +48,7 @@ public class DNSResolverContext : CommonBase {
 	/**
 	 * Constructs a new DNSResolverContext given each field
 	 */
-	public static DNSResolverContext of(byte[] nonce_arg) {
+	public static org.ldk.structs.DNSResolverContext of(byte[] nonce_arg) {
 		long ret = bindings.DNSResolverContext_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(nonce_arg, 16)));
 		GC.KeepAlive(nonce_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -66,7 +66,7 @@ public class DNSResolverContext : CommonBase {
 	/**
 	 * Creates a copy of the DNSResolverContext
 	 */
-	public DNSResolverContext clone() {
+	public org.ldk.structs.DNSResolverContext clone() {
 		long ret = bindings.DNSResolverContext_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -118,7 +118,7 @@ public class DNSResolverContext : CommonBase {
 	/**
 	 * Read a DNSResolverContext from a byte array, created by DNSResolverContext_write
 	 */
-	public static Result_DNSResolverContextDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_DNSResolverContextDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.DNSResolverContext_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -26,7 +26,7 @@ public class Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ : CommonBase {
 
 	/** A Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ of type Some */
 	public class Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ_Some : Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ {
-		public TwoTuple_ReleaseHeldHtlcResponseInstructionZ some;
+		public org.ldk.structs.TwoTuple_ReleaseHeldHtlcResponseInstructionZ some;
 		internal Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ_Some_get_some(ptr);
 			TwoTuple_ReleaseHeldHtlcResponseInstructionZ some_hu_conv = new TwoTuple_ReleaseHeldHtlcResponseInstructionZ(null, some);
@@ -42,7 +42,7 @@ public class Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ : CommonBase {
 	/**
 	 * Constructs a new COption_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ containing a crate::c_types::derived::C2Tuple_ReleaseHeldHtlcResponseInstructionZ
 	 */
-	public static Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ some(org.ldk.structs.TwoTuple_ReleaseHeldHtlcResponseInstructionZ o) {
+	public static org.ldk.structs.Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ some(org.ldk.structs.TwoTuple_ReleaseHeldHtlcResponseInstructionZ o) {
 		long ret = bindings.COption_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ : CommonBase {
 	/**
 	 * Constructs a new COption_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ containing nothing
 	 */
-	public static Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ none() {
+	public static org.ldk.structs.Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ none() {
 		long ret = bindings.COption_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ ret_hu_conv = org.ldk.structs.Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ : CommonBase {
 	 * Creates a new COption_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ clone() {
+	public org.ldk.structs.Option_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ clone() {
 		long ret = bindings.COption_C2Tuple_ReleaseHeldHtlcResponseInstructionZZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

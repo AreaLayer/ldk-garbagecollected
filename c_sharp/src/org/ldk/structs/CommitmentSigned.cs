@@ -20,7 +20,7 @@ public class CommitmentSigned : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.CommitmentSigned_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -92,7 +92,7 @@ public class CommitmentSigned : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public CommitmentSignedBatch get_batch() {
+	public org.ldk.structs.CommitmentSignedBatch get_batch() {
 		long ret = bindings.CommitmentSigned_get_batch(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -117,7 +117,7 @@ public class CommitmentSigned : CommonBase {
 	 * 
 	 * Note that batch_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static CommitmentSigned of(org.ldk.structs.ChannelId channel_id_arg, byte[] signature_arg, byte[][] htlc_signatures_arg, org.ldk.structs.CommitmentSignedBatch batch_arg) {
+	public static org.ldk.structs.CommitmentSigned of(org.ldk.structs.ChannelId channel_id_arg, byte[] signature_arg, byte[][] htlc_signatures_arg, org.ldk.structs.CommitmentSignedBatch batch_arg) {
 		long ret = bindings.CommitmentSigned_new(channel_id_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(signature_arg, 64)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(htlc_signatures_arg, htlc_signatures_arg_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(htlc_signatures_arg_conv_8, 64)))), batch_arg == null ? 0 : batch_arg.ptr);
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(signature_arg);
@@ -138,7 +138,7 @@ public class CommitmentSigned : CommonBase {
 	/**
 	 * Creates a copy of the CommitmentSigned
 	 */
-	public CommitmentSigned clone() {
+	public org.ldk.structs.CommitmentSigned clone() {
 		long ret = bindings.CommitmentSigned_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -190,7 +190,7 @@ public class CommitmentSigned : CommonBase {
 	/**
 	 * Read a CommitmentSigned from a byte array, created by CommitmentSigned_write
 	 */
-	public static Result_CommitmentSignedDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_CommitmentSignedDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.CommitmentSigned_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

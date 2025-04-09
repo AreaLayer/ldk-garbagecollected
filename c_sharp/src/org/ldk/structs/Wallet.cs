@@ -21,7 +21,7 @@ public class Wallet : CommonBase {
 	 * Returns a new instance backed by the given [`WalletSource`] that serves as an implementation
 	 * of [`CoinSelectionSource`].
 	 */
-	public static Wallet of(org.ldk.structs.WalletSource source, org.ldk.structs.Logger logger) {
+	public static org.ldk.structs.Wallet of(org.ldk.structs.WalletSource source, org.ldk.structs.Logger logger) {
 		long ret = bindings.Wallet_new(source.ptr, logger.ptr);
 		GC.KeepAlive(source);
 		GC.KeepAlive(logger);
@@ -37,7 +37,7 @@ public class Wallet : CommonBase {
 	 * Constructs a new CoinSelectionSource which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned CoinSelectionSource must be freed before this_arg is
 	 */
-	public CoinSelectionSource as_CoinSelectionSource() {
+	public org.ldk.structs.CoinSelectionSource as_CoinSelectionSource() {
 		long ret = bindings.Wallet_as_CoinSelectionSource(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

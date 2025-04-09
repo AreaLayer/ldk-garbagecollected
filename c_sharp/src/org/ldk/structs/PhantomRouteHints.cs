@@ -88,7 +88,7 @@ public class PhantomRouteHints : CommonBase {
 	/**
 	 * Constructs a new PhantomRouteHints given each field
 	 */
-	public static PhantomRouteHints of(ChannelDetails[] channels_arg, long phantom_scid_arg, byte[] real_node_pubkey_arg) {
+	public static org.ldk.structs.PhantomRouteHints of(ChannelDetails[] channels_arg, long phantom_scid_arg, byte[] real_node_pubkey_arg) {
 		long ret = bindings.PhantomRouteHints_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(channels_arg, channels_arg_conv_16 => channels_arg_conv_16.ptr)), phantom_scid_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(real_node_pubkey_arg, 33)));
 		GC.KeepAlive(channels_arg);
 		GC.KeepAlive(phantom_scid_arg);
@@ -108,7 +108,7 @@ public class PhantomRouteHints : CommonBase {
 	/**
 	 * Creates a copy of the PhantomRouteHints
 	 */
-	public PhantomRouteHints clone() {
+	public org.ldk.structs.PhantomRouteHints clone() {
 		long ret = bindings.PhantomRouteHints_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -131,7 +131,7 @@ public class PhantomRouteHints : CommonBase {
 	/**
 	 * Read a PhantomRouteHints from a byte array, created by PhantomRouteHints_write
 	 */
-	public static Result_PhantomRouteHintsDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_PhantomRouteHintsDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.PhantomRouteHints_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

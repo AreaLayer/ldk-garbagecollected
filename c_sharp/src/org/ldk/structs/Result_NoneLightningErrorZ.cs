@@ -36,7 +36,7 @@ public class Result_NoneLightningErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_NoneLightningErrorZ in the success state.
 	 */
-	public static Result_NoneLightningErrorZ ok() {
+	public static org.ldk.structs.Result_NoneLightningErrorZ ok() {
 		long ret = bindings.CResult_NoneLightningErrorZ_ok();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneLightningErrorZ ret_hu_conv = Result_NoneLightningErrorZ.constr_from_ptr(ret);
@@ -46,7 +46,7 @@ public class Result_NoneLightningErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_NoneLightningErrorZ in the error state.
 	 */
-	public static Result_NoneLightningErrorZ err(org.ldk.structs.LightningError e) {
+	public static org.ldk.structs.Result_NoneLightningErrorZ err(org.ldk.structs.LightningError e) {
 		long ret = bindings.CResult_NoneLightningErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -73,7 +73,7 @@ public class Result_NoneLightningErrorZ : CommonBase {
 	 * Creates a new CResult_NoneLightningErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_NoneLightningErrorZ clone() {
+	public org.ldk.structs.Result_NoneLightningErrorZ clone() {
 		long ret = bindings.CResult_NoneLightningErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

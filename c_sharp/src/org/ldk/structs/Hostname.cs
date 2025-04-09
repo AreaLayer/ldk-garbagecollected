@@ -30,7 +30,7 @@ public class Hostname : CommonBase {
 	/**
 	 * Creates a copy of the Hostname
 	 */
-	public Hostname clone() {
+	public org.ldk.structs.Hostname clone() {
 		long ret = bindings.Hostname_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -102,7 +102,7 @@ public class Hostname : CommonBase {
 	/**
 	 * Read a Hostname from a byte array, created by Hostname_write
 	 */
-	public static Result_HostnameDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_HostnameDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.Hostname_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

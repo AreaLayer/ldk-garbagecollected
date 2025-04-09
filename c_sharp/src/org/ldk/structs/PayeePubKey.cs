@@ -32,7 +32,7 @@ public class PayeePubKey : CommonBase {
 	/**
 	 * Constructs a new PayeePubKey given each field
 	 */
-	public static PayeePubKey of(byte[] a_arg) {
+	public static org.ldk.structs.PayeePubKey of(byte[] a_arg) {
 		long ret = bindings.PayeePubKey_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a_arg, 33)));
 		GC.KeepAlive(a_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -50,7 +50,7 @@ public class PayeePubKey : CommonBase {
 	/**
 	 * Creates a copy of the PayeePubKey
 	 */
-	public PayeePubKey clone() {
+	public org.ldk.structs.PayeePubKey clone() {
 		long ret = bindings.PayeePubKey_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

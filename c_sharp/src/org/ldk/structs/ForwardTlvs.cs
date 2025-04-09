@@ -36,7 +36,7 @@ public class ForwardTlvs : CommonBase {
 	/**
 	 * Payment parameters for relaying over [`Self::short_channel_id`].
 	 */
-	public PaymentRelay get_payment_relay() {
+	public org.ldk.structs.PaymentRelay get_payment_relay() {
 		long ret = bindings.ForwardTlvs_get_payment_relay(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -57,7 +57,7 @@ public class ForwardTlvs : CommonBase {
 	/**
 	 * Payment constraints for relaying over [`Self::short_channel_id`].
 	 */
-	public PaymentConstraints get_payment_constraints() {
+	public org.ldk.structs.PaymentConstraints get_payment_constraints() {
 		long ret = bindings.ForwardTlvs_get_payment_constraints(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -81,7 +81,7 @@ public class ForwardTlvs : CommonBase {
 	 * 
 	 * [`BlindedHop::encrypted_payload`]: crate::blinded_path::BlindedHop::encrypted_payload
 	 */
-	public BlindedHopFeatures get_features() {
+	public org.ldk.structs.BlindedHopFeatures get_features() {
 		long ret = bindings.ForwardTlvs_get_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -133,7 +133,7 @@ public class ForwardTlvs : CommonBase {
 	 * 
 	 * Note that next_blinding_override_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static ForwardTlvs of(long short_channel_id_arg, org.ldk.structs.PaymentRelay payment_relay_arg, org.ldk.structs.PaymentConstraints payment_constraints_arg, org.ldk.structs.BlindedHopFeatures features_arg, byte[] next_blinding_override_arg) {
+	public static org.ldk.structs.ForwardTlvs of(long short_channel_id_arg, org.ldk.structs.PaymentRelay payment_relay_arg, org.ldk.structs.PaymentConstraints payment_constraints_arg, org.ldk.structs.BlindedHopFeatures features_arg, byte[] next_blinding_override_arg) {
 		long ret = bindings.ForwardTlvs_new(short_channel_id_arg, payment_relay_arg.ptr, payment_constraints_arg.ptr, features_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(next_blinding_override_arg, 33)));
 		GC.KeepAlive(short_channel_id_arg);
 		GC.KeepAlive(payment_relay_arg);
@@ -155,7 +155,7 @@ public class ForwardTlvs : CommonBase {
 	/**
 	 * Creates a copy of the ForwardTlvs
 	 */
-	public ForwardTlvs clone() {
+	public org.ldk.structs.ForwardTlvs clone() {
 		long ret = bindings.ForwardTlvs_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

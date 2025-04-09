@@ -79,7 +79,7 @@ public class QueryChannelRange : CommonBase {
 	/**
 	 * Constructs a new QueryChannelRange given each field
 	 */
-	public static QueryChannelRange of(byte[] chain_hash_arg, int first_blocknum_arg, int number_of_blocks_arg) {
+	public static org.ldk.structs.QueryChannelRange of(byte[] chain_hash_arg, int first_blocknum_arg, int number_of_blocks_arg) {
 		long ret = bindings.QueryChannelRange_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(chain_hash_arg, 32)), first_blocknum_arg, number_of_blocks_arg);
 		GC.KeepAlive(chain_hash_arg);
 		GC.KeepAlive(first_blocknum_arg);
@@ -99,7 +99,7 @@ public class QueryChannelRange : CommonBase {
 	/**
 	 * Creates a copy of the QueryChannelRange
 	 */
-	public QueryChannelRange clone() {
+	public org.ldk.structs.QueryChannelRange clone() {
 		long ret = bindings.QueryChannelRange_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -162,7 +162,7 @@ public class QueryChannelRange : CommonBase {
 	/**
 	 * Read a QueryChannelRange from a byte array, created by QueryChannelRange_write
 	 */
-	public static Result_QueryChannelRangeDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_QueryChannelRangeDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.QueryChannelRange_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

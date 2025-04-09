@@ -19,7 +19,7 @@ public interface ScoreLookUpInterface {
 	 * [`u64::max_value`] is given to indicate sufficient capacity for the invoice's full amount.
 	 * Thus, implementations should be overflow-safe.
 	 */
-	long channel_penalty_msat(CandidateRouteHop candidate, ChannelUsage usage, ProbabilisticScoringFeeParameters score_params);
+	long channel_penalty_msat(org.ldk.structs.CandidateRouteHop candidate, org.ldk.structs.ChannelUsage usage, org.ldk.structs.ProbabilisticScoringFeeParameters score_params);
 }
 
 /**

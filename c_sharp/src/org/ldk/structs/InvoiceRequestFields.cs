@@ -40,7 +40,7 @@ public class InvoiceRequestFields : CommonBase {
 	/**
 	 * The quantity of the offer's item conforming to [`Offer::is_valid_quantity`].
 	 */
-	public Option_u64Z get_quantity() {
+	public org.ldk.structs.Option_u64Z get_quantity() {
 		long ret = bindings.InvoiceRequestFields_get_quantity(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -64,7 +64,7 @@ public class InvoiceRequestFields : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public UntrustedString get_payer_note_truncated() {
+	public org.ldk.structs.UntrustedString get_payer_note_truncated() {
 		long ret = bindings.InvoiceRequestFields_get_payer_note_truncated(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -90,7 +90,7 @@ public class InvoiceRequestFields : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public HumanReadableName get_human_readable_name() {
+	public org.ldk.structs.HumanReadableName get_human_readable_name() {
 		long ret = bindings.InvoiceRequestFields_get_human_readable_name(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -116,7 +116,7 @@ public class InvoiceRequestFields : CommonBase {
 	 * Note that payer_note_truncated_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 * Note that human_readable_name_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static InvoiceRequestFields of(byte[] payer_signing_pubkey_arg, org.ldk.structs.Option_u64Z quantity_arg, org.ldk.structs.UntrustedString payer_note_truncated_arg, org.ldk.structs.HumanReadableName human_readable_name_arg) {
+	public static org.ldk.structs.InvoiceRequestFields of(byte[] payer_signing_pubkey_arg, org.ldk.structs.Option_u64Z quantity_arg, org.ldk.structs.UntrustedString payer_note_truncated_arg, org.ldk.structs.HumanReadableName human_readable_name_arg) {
 		long ret = bindings.InvoiceRequestFields_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payer_signing_pubkey_arg, 33)), quantity_arg.ptr, payer_note_truncated_arg == null ? 0 : payer_note_truncated_arg.ptr, human_readable_name_arg == null ? 0 : human_readable_name_arg.ptr);
 		GC.KeepAlive(payer_signing_pubkey_arg);
 		GC.KeepAlive(quantity_arg);
@@ -137,7 +137,7 @@ public class InvoiceRequestFields : CommonBase {
 	/**
 	 * Creates a copy of the InvoiceRequestFields
 	 */
-	public InvoiceRequestFields clone() {
+	public org.ldk.structs.InvoiceRequestFields clone() {
 		long ret = bindings.InvoiceRequestFields_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -177,7 +177,7 @@ public class InvoiceRequestFields : CommonBase {
 	/**
 	 * Read a InvoiceRequestFields from a byte array, created by InvoiceRequestFields_write
 	 */
-	public static Result_InvoiceRequestFieldsDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_InvoiceRequestFieldsDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.InvoiceRequestFields_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

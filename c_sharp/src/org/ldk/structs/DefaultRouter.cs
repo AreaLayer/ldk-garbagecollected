@@ -25,7 +25,7 @@ public class DefaultRouter : CommonBase {
 	/**
 	 * Creates a new router.
 	 */
-	public static DefaultRouter of(org.ldk.structs.NetworkGraph network_graph, org.ldk.structs.Logger logger, org.ldk.structs.EntropySource entropy_source, org.ldk.structs.LockableScore scorer, org.ldk.structs.ProbabilisticScoringFeeParameters score_params) {
+	public static org.ldk.structs.DefaultRouter of(org.ldk.structs.NetworkGraph network_graph, org.ldk.structs.Logger logger, org.ldk.structs.EntropySource entropy_source, org.ldk.structs.LockableScore scorer, org.ldk.structs.ProbabilisticScoringFeeParameters score_params) {
 		long ret = bindings.DefaultRouter_new(network_graph.ptr, logger.ptr, entropy_source.ptr, scorer.ptr, score_params.ptr);
 		GC.KeepAlive(network_graph);
 		GC.KeepAlive(logger);
@@ -46,7 +46,7 @@ public class DefaultRouter : CommonBase {
 	 * Constructs a new Router which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned Router must be freed before this_arg is
 	 */
-	public Router as_Router() {
+	public org.ldk.structs.Router as_Router() {
 		long ret = bindings.DefaultRouter_as_Router(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

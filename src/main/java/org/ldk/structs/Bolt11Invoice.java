@@ -306,10 +306,17 @@ public class Bolt11Invoice extends CommonBase {
 	/**
 	 * Returns a list of all fallback addresses as [`Address`]es
 	 */
-	public String[] fallback_addresses() {
-		String[] ret = bindings.Bolt11Invoice_fallback_addresses(this.ptr);
+	public Address[] fallback_addresses() {
+		long[] ret = bindings.Bolt11Invoice_fallback_addresses(this.ptr);
 		Reference.reachabilityFence(this);
-		return ret;
+		int ret_conv_9_len = ret.length;
+		Address[] ret_conv_9_arr = new Address[ret_conv_9_len];
+		for (int j = 0; j < ret_conv_9_len; j++) {
+			long ret_conv_9 = ret[j];
+			Address ret_conv_9_conv = new Address(null, ret_conv_9);
+			ret_conv_9_arr[j] = ret_conv_9_conv;
+		}
+		return ret_conv_9_arr;
 	}
 
 	/**

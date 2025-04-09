@@ -18,7 +18,7 @@ public class TwoTuple_BestBlockOutputSweeperZ : CommonBase {
 	/**
 	 * 
 	 */
-	public BestBlock get_a() {
+	public org.ldk.structs.BestBlock get_a() {
 		long ret = bindings.C2Tuple_BestBlockOutputSweeperZ_get_a(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -30,7 +30,7 @@ public class TwoTuple_BestBlockOutputSweeperZ : CommonBase {
 	/**
 	 * 
 	 */
-	public OutputSweeper get_b() {
+	public org.ldk.structs.OutputSweeper get_b() {
 		long ret = bindings.C2Tuple_BestBlockOutputSweeperZ_get_b(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -42,7 +42,7 @@ public class TwoTuple_BestBlockOutputSweeperZ : CommonBase {
 	/**
 	 * Creates a new C2Tuple_BestBlockOutputSweeperZ from the contained elements.
 	 */
-	public static TwoTuple_BestBlockOutputSweeperZ of(org.ldk.structs.BestBlock a, BestBlock b_best_block, BroadcasterInterface b_broadcaster, FeeEstimator b_fee_estimator, Option_FilterZ b_chain_data_source, OutputSpender b_output_spender, ChangeDestinationSource b_change_destination_source, KVStore b_kv_store, Logger b_logger) {
+	public static org.ldk.structs.TwoTuple_BestBlockOutputSweeperZ of(org.ldk.structs.BestBlock a, BestBlock b_best_block, BroadcasterInterface b_broadcaster, FeeEstimator b_fee_estimator, Option_FilterZ b_chain_data_source, OutputSpender b_output_spender, ChangeDestinationSource b_change_destination_source, KVStore b_kv_store, Logger b_logger) {
 		long ret = bindings.C2Tuple_BestBlockOutputSweeperZ_new(a.ptr, bindings.OutputSweeper_new(b_best_block.ptr, b_broadcaster.ptr, b_fee_estimator.ptr, b_chain_data_source.ptr, b_output_spender.ptr, b_change_destination_source.ptr, b_kv_store.ptr, b_logger.ptr));
 		GC.KeepAlive(a);
 		GC.KeepAlive(b_best_block);

@@ -26,7 +26,7 @@ public class Option_BigEndianScalarZ : CommonBase {
 
 	/** A Option_BigEndianScalarZ of type Some */
 	public class Option_BigEndianScalarZ_Some : Option_BigEndianScalarZ {
-		public BigEndianScalar some;
+		public org.ldk.structs.BigEndianScalar some;
 		internal Option_BigEndianScalarZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_BigEndianScalarZ_Some_get_some(ptr);
 			BigEndianScalar some_conv = new BigEndianScalar(null, some);
@@ -41,7 +41,7 @@ public class Option_BigEndianScalarZ : CommonBase {
 	/**
 	 * Constructs a new COption_BigEndianScalarZ containing a crate::c_types::BigEndianScalar
 	 */
-	public static Option_BigEndianScalarZ some(org.ldk.structs.BigEndianScalar o) {
+	public static org.ldk.structs.Option_BigEndianScalarZ some(org.ldk.structs.BigEndianScalar o) {
 		long ret = bindings.COption_BigEndianScalarZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -53,7 +53,7 @@ public class Option_BigEndianScalarZ : CommonBase {
 	/**
 	 * Constructs a new COption_BigEndianScalarZ containing nothing
 	 */
-	public static Option_BigEndianScalarZ none() {
+	public static org.ldk.structs.Option_BigEndianScalarZ none() {
 		long ret = bindings.COption_BigEndianScalarZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_BigEndianScalarZ ret_hu_conv = org.ldk.structs.Option_BigEndianScalarZ.constr_from_ptr(ret);
@@ -71,7 +71,7 @@ public class Option_BigEndianScalarZ : CommonBase {
 	 * Creates a new COption_BigEndianScalarZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_BigEndianScalarZ clone() {
+	public org.ldk.structs.Option_BigEndianScalarZ clone() {
 		long ret = bindings.COption_BigEndianScalarZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

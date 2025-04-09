@@ -70,7 +70,7 @@ public class MigratableKVStore : CommonBase {
 	 * Must exhaustively return all entries known to the store to ensure no data is missed, but
 	 * may return the items in arbitrary order.
 	 */
-	public Result_CVec_C3Tuple_StrStrStrZZIOErrorZ list_all_keys() {
+	public org.ldk.structs.Result_CVec_C3Tuple_StrStrStrZZIOErrorZ list_all_keys() {
 		long ret = bindings.MigratableKVStore_list_all_keys(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

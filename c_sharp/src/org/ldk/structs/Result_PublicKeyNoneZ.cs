@@ -35,7 +35,7 @@ public class Result_PublicKeyNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_PublicKeyNoneZ in the success state.
 	 */
-	public static Result_PublicKeyNoneZ ok(byte[] o) {
+	public static org.ldk.structs.Result_PublicKeyNoneZ ok(byte[] o) {
 		long ret = bindings.CResult_PublicKeyNoneZ_ok(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(o, 33)));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -46,7 +46,7 @@ public class Result_PublicKeyNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_PublicKeyNoneZ in the error state.
 	 */
-	public static Result_PublicKeyNoneZ err() {
+	public static org.ldk.structs.Result_PublicKeyNoneZ err() {
 		long ret = bindings.CResult_PublicKeyNoneZ_err();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_PublicKeyNoneZ ret_hu_conv = Result_PublicKeyNoneZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Result_PublicKeyNoneZ : CommonBase {
 	 * Creates a new CResult_PublicKeyNoneZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_PublicKeyNoneZ clone() {
+	public org.ldk.structs.Result_PublicKeyNoneZ clone() {
 		long ret = bindings.CResult_PublicKeyNoneZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -26,7 +26,7 @@ public class Option_MonitorEventZ : CommonBase {
 
 	/** A Option_MonitorEventZ of type Some */
 	public class Option_MonitorEventZ_Some : Option_MonitorEventZ {
-		public MonitorEvent some;
+		public org.ldk.structs.MonitorEvent some;
 		internal Option_MonitorEventZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_MonitorEventZ_Some_get_some(ptr);
 			org.ldk.structs.MonitorEvent some_hu_conv = org.ldk.structs.MonitorEvent.constr_from_ptr(some);
@@ -42,7 +42,7 @@ public class Option_MonitorEventZ : CommonBase {
 	/**
 	 * Constructs a new COption_MonitorEventZ containing a crate::lightning::chain::channelmonitor::MonitorEvent
 	 */
-	public static Option_MonitorEventZ some(org.ldk.structs.MonitorEvent o) {
+	public static org.ldk.structs.Option_MonitorEventZ some(org.ldk.structs.MonitorEvent o) {
 		long ret = bindings.COption_MonitorEventZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class Option_MonitorEventZ : CommonBase {
 	/**
 	 * Constructs a new COption_MonitorEventZ containing nothing
 	 */
-	public static Option_MonitorEventZ none() {
+	public static org.ldk.structs.Option_MonitorEventZ none() {
 		long ret = bindings.COption_MonitorEventZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_MonitorEventZ ret_hu_conv = org.ldk.structs.Option_MonitorEventZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Option_MonitorEventZ : CommonBase {
 	 * Creates a new COption_MonitorEventZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_MonitorEventZ clone() {
+	public org.ldk.structs.Option_MonitorEventZ clone() {
 		long ret = bindings.COption_MonitorEventZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

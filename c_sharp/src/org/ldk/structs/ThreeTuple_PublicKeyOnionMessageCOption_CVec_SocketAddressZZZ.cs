@@ -29,7 +29,7 @@ public class ThreeTuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ : Com
 	/**
 	 * 
 	 */
-	public OnionMessage get_b() {
+	public org.ldk.structs.OnionMessage get_b() {
 		long ret = bindings.C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ_get_b(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -41,7 +41,7 @@ public class ThreeTuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ : Com
 	/**
 	 * 
 	 */
-	public Option_CVec_SocketAddressZZ get_c() {
+	public org.ldk.structs.Option_CVec_SocketAddressZZ get_c() {
 		long ret = bindings.C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ_get_c(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -60,7 +60,7 @@ public class ThreeTuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ : Com
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public ThreeTuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ clone() {
+	public org.ldk.structs.ThreeTuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ clone() {
 		long ret = bindings.C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -72,7 +72,7 @@ public class ThreeTuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ : Com
 	/**
 	 * Creates a new C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ from the contained elements.
 	 */
-	public static ThreeTuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ of(byte[] a, org.ldk.structs.OnionMessage b, org.ldk.structs.Option_CVec_SocketAddressZZ c) {
+	public static org.ldk.structs.ThreeTuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ of(byte[] a, org.ldk.structs.OnionMessage b, org.ldk.structs.Option_CVec_SocketAddressZZ c) {
 		long ret = bindings.C3Tuple_PublicKeyOnionMessageCOption_CVec_SocketAddressZZZ_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 33)), b.ptr, c.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

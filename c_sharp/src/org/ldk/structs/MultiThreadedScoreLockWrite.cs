@@ -30,7 +30,7 @@ public class MultiThreadedScoreLockWrite : CommonBase {
 	 * Constructs a new ScoreUpdate which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned ScoreUpdate must be freed before this_arg is
 	 */
-	public ScoreUpdate as_ScoreUpdate() {
+	public org.ldk.structs.ScoreUpdate as_ScoreUpdate() {
 		long ret = bindings.MultiThreadedScoreLockWrite_as_ScoreUpdate(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

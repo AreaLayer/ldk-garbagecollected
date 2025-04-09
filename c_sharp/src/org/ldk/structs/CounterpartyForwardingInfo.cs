@@ -76,7 +76,7 @@ public class CounterpartyForwardingInfo : CommonBase {
 	/**
 	 * Constructs a new CounterpartyForwardingInfo given each field
 	 */
-	public static CounterpartyForwardingInfo of(int fee_base_msat_arg, int fee_proportional_millionths_arg, short cltv_expiry_delta_arg) {
+	public static org.ldk.structs.CounterpartyForwardingInfo of(int fee_base_msat_arg, int fee_proportional_millionths_arg, short cltv_expiry_delta_arg) {
 		long ret = bindings.CounterpartyForwardingInfo_new(fee_base_msat_arg, fee_proportional_millionths_arg, cltv_expiry_delta_arg);
 		GC.KeepAlive(fee_base_msat_arg);
 		GC.KeepAlive(fee_proportional_millionths_arg);
@@ -96,7 +96,7 @@ public class CounterpartyForwardingInfo : CommonBase {
 	/**
 	 * Creates a copy of the CounterpartyForwardingInfo
 	 */
-	public CounterpartyForwardingInfo clone() {
+	public org.ldk.structs.CounterpartyForwardingInfo clone() {
 		long ret = bindings.CounterpartyForwardingInfo_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -119,7 +119,7 @@ public class CounterpartyForwardingInfo : CommonBase {
 	/**
 	 * Read a CounterpartyForwardingInfo from a byte array, created by CounterpartyForwardingInfo_write
 	 */
-	public static Result_CounterpartyForwardingInfoDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_CounterpartyForwardingInfoDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.CounterpartyForwardingInfo_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

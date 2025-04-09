@@ -38,7 +38,7 @@ public class Result_MonitorNameIOErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_MonitorNameIOErrorZ in the success state.
 	 */
-	public static Result_MonitorNameIOErrorZ ok(org.ldk.structs.MonitorName o) {
+	public static org.ldk.structs.Result_MonitorNameIOErrorZ ok(org.ldk.structs.MonitorName o) {
 		long ret = bindings.CResult_MonitorNameIOErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -58,7 +58,7 @@ public class Result_MonitorNameIOErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_MonitorNameIOErrorZ in the error state.
 	 */
-	public static Result_MonitorNameIOErrorZ err(IOError e) {
+	public static org.ldk.structs.Result_MonitorNameIOErrorZ err(IOError e) {
 		long ret = bindings.CResult_MonitorNameIOErrorZ_err(e);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }

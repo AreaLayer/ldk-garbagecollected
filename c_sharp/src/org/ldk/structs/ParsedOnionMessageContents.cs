@@ -29,7 +29,7 @@ public class ParsedOnionMessageContents : CommonBase {
 
 	/** A ParsedOnionMessageContents of type Offers */
 	public class ParsedOnionMessageContents_Offers : ParsedOnionMessageContents {
-		public OffersMessage offers;
+		public org.ldk.structs.OffersMessage offers;
 		internal ParsedOnionMessageContents_Offers(long ptr) : base(null, ptr) {
 			long offers = bindings.LDKParsedOnionMessageContents_Offers_get_offers(ptr);
 			org.ldk.structs.OffersMessage offers_hu_conv = org.ldk.structs.OffersMessage.constr_from_ptr(offers);
@@ -39,7 +39,7 @@ public class ParsedOnionMessageContents : CommonBase {
 	}
 	/** A ParsedOnionMessageContents of type DNSResolver */
 	public class ParsedOnionMessageContents_DNSResolver : ParsedOnionMessageContents {
-		public DNSResolverMessage dns_resolver;
+		public org.ldk.structs.DNSResolverMessage dns_resolver;
 		internal ParsedOnionMessageContents_DNSResolver(long ptr) : base(null, ptr) {
 			long dns_resolver = bindings.LDKParsedOnionMessageContents_DNSResolver_get_dns_resolver(ptr);
 			org.ldk.structs.DNSResolverMessage dns_resolver_hu_conv = org.ldk.structs.DNSResolverMessage.constr_from_ptr(dns_resolver);
@@ -49,7 +49,7 @@ public class ParsedOnionMessageContents : CommonBase {
 	}
 	/** A ParsedOnionMessageContents of type Custom */
 	public class ParsedOnionMessageContents_Custom : ParsedOnionMessageContents {
-		public OnionMessageContents custom;
+		public org.ldk.structs.OnionMessageContents custom;
 		internal ParsedOnionMessageContents_Custom(long ptr) : base(null, ptr) {
 			long custom = bindings.LDKParsedOnionMessageContents_Custom_get_custom(ptr);
 			OnionMessageContents ret_hu_conv = new OnionMessageContents(null, custom);
@@ -66,7 +66,7 @@ public class ParsedOnionMessageContents : CommonBase {
 	/**
 	 * Creates a copy of the ParsedOnionMessageContents
 	 */
-	public ParsedOnionMessageContents clone() {
+	public org.ldk.structs.ParsedOnionMessageContents clone() {
 		long ret = bindings.ParsedOnionMessageContents_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -78,7 +78,7 @@ public class ParsedOnionMessageContents : CommonBase {
 	/**
 	 * Utility method to constructs a new Offers-variant ParsedOnionMessageContents
 	 */
-	public static ParsedOnionMessageContents offers(org.ldk.structs.OffersMessage a) {
+	public static org.ldk.structs.ParsedOnionMessageContents offers(org.ldk.structs.OffersMessage a) {
 		long ret = bindings.ParsedOnionMessageContents_offers(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -90,7 +90,7 @@ public class ParsedOnionMessageContents : CommonBase {
 	/**
 	 * Utility method to constructs a new DNSResolver-variant ParsedOnionMessageContents
 	 */
-	public static ParsedOnionMessageContents dnsresolver(org.ldk.structs.DNSResolverMessage a) {
+	public static org.ldk.structs.ParsedOnionMessageContents dnsresolver(org.ldk.structs.DNSResolverMessage a) {
 		long ret = bindings.ParsedOnionMessageContents_dnsresolver(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -102,7 +102,7 @@ public class ParsedOnionMessageContents : CommonBase {
 	/**
 	 * Utility method to constructs a new Custom-variant ParsedOnionMessageContents
 	 */
-	public static ParsedOnionMessageContents custom(org.ldk.structs.OnionMessageContents a) {
+	public static org.ldk.structs.ParsedOnionMessageContents custom(org.ldk.structs.OnionMessageContents a) {
 		long ret = bindings.ParsedOnionMessageContents_custom(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -116,7 +116,7 @@ public class ParsedOnionMessageContents : CommonBase {
 	 * Constructs a new OnionMessageContents which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned OnionMessageContents must be freed before this_arg is
 	 */
-	public OnionMessageContents as_OnionMessageContents() {
+	public org.ldk.structs.OnionMessageContents as_OnionMessageContents() {
 		long ret = bindings.ParsedOnionMessageContents_as_OnionMessageContents(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

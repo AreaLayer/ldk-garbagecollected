@@ -27,7 +27,7 @@ public class TwoTuple_u32TxOutZ : CommonBase {
 	/**
 	 * 
 	 */
-	public TxOut get_b() {
+	public org.ldk.structs.TxOut get_b() {
 		long ret = bindings.C2Tuple_u32TxOutZ_get_b(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -45,7 +45,7 @@ public class TwoTuple_u32TxOutZ : CommonBase {
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public TwoTuple_u32TxOutZ clone() {
+	public org.ldk.structs.TwoTuple_u32TxOutZ clone() {
 		long ret = bindings.C2Tuple_u32TxOutZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -57,7 +57,7 @@ public class TwoTuple_u32TxOutZ : CommonBase {
 	/**
 	 * Creates a new C2Tuple_u32TxOutZ from the contained elements.
 	 */
-	public static TwoTuple_u32TxOutZ of(int a, org.ldk.structs.TxOut b) {
+	public static org.ldk.structs.TwoTuple_u32TxOutZ of(int a, org.ldk.structs.TxOut b) {
 		long ret = bindings.C2Tuple_u32TxOutZ_new(a, b.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

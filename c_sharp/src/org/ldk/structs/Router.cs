@@ -17,7 +17,7 @@ public interface RouterInterface {
 	 * 
 	 * Note that first_hops (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	Result_RouteLightningErrorZ find_route(byte[] payer, RouteParameters route_params, ChannelDetails[] first_hops, InFlightHtlcs inflight_htlcs);
+	Result_RouteLightningErrorZ find_route(byte[] payer, org.ldk.structs.RouteParameters route_params, ChannelDetails[] first_hops, org.ldk.structs.InFlightHtlcs inflight_htlcs);
 	/**Finds a [`Route`] for a payment between the given `payer` and a payee.
 	 * 
 	 * The `payee` and the payment's value are given in [`RouteParameters::payment_params`]
@@ -28,12 +28,12 @@ public interface RouterInterface {
 	 * 
 	 * Note that first_hops (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	Result_RouteLightningErrorZ find_route_with_id(byte[] payer, RouteParameters route_params, ChannelDetails[] first_hops, InFlightHtlcs inflight_htlcs, byte[] _payment_hash, byte[] _payment_id);
+	Result_RouteLightningErrorZ find_route_with_id(byte[] payer, org.ldk.structs.RouteParameters route_params, ChannelDetails[] first_hops, org.ldk.structs.InFlightHtlcs inflight_htlcs, byte[] _payment_hash, byte[] _payment_id);
 	/**Creates [`BlindedPaymentPath`]s for payment to the `recipient` node. The channels in `first_hops`
 	 * are assumed to be with the `recipient`'s peers. The payment secret and any constraints are
 	 * given in `tlvs`.
 	 */
-	Result_CVec_BlindedPaymentPathZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, ReceiveTlvs tlvs, long amount_msats);
+	Result_CVec_BlindedPaymentPathZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, org.ldk.structs.ReceiveTlvs tlvs, long amount_msats);
 }
 
 /**
@@ -137,7 +137,7 @@ public class Router : CommonBase {
 	 * 
 	 * Note that first_hops (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public Result_RouteLightningErrorZ find_route(byte[] payer, org.ldk.structs.RouteParameters route_params, ChannelDetails[] first_hops, org.ldk.structs.InFlightHtlcs inflight_htlcs) {
+	public org.ldk.structs.Result_RouteLightningErrorZ find_route(byte[] payer, org.ldk.structs.RouteParameters route_params, ChannelDetails[] first_hops, org.ldk.structs.InFlightHtlcs inflight_htlcs) {
 		long ret = bindings.Router_find_route(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payer, 33)), route_params.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(first_hops, first_hops_conv_16 => first_hops_conv_16.ptr)), inflight_htlcs.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(payer);
@@ -162,7 +162,7 @@ public class Router : CommonBase {
 	 * 
 	 * Note that first_hops (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public Result_RouteLightningErrorZ find_route_with_id(byte[] payer, org.ldk.structs.RouteParameters route_params, ChannelDetails[] first_hops, org.ldk.structs.InFlightHtlcs inflight_htlcs, byte[] _payment_hash, byte[] _payment_id) {
+	public org.ldk.structs.Result_RouteLightningErrorZ find_route_with_id(byte[] payer, org.ldk.structs.RouteParameters route_params, ChannelDetails[] first_hops, org.ldk.structs.InFlightHtlcs inflight_htlcs, byte[] _payment_hash, byte[] _payment_id) {
 		long ret = bindings.Router_find_route_with_id(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payer, 33)), route_params.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(first_hops, first_hops_conv_16 => first_hops_conv_16.ptr)), inflight_htlcs.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(_payment_hash, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(_payment_id, 32)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(payer);
@@ -183,7 +183,7 @@ public class Router : CommonBase {
 	 * are assumed to be with the `recipient`'s peers. The payment secret and any constraints are
 	 * given in `tlvs`.
 	 */
-	public Result_CVec_BlindedPaymentPathZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, org.ldk.structs.ReceiveTlvs tlvs, long amount_msats) {
+	public org.ldk.structs.Result_CVec_BlindedPaymentPathZNoneZ create_blinded_payment_paths(byte[] recipient, ChannelDetails[] first_hops, org.ldk.structs.ReceiveTlvs tlvs, long amount_msats) {
 		long ret = bindings.Router_create_blinded_payment_paths(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(recipient, 33)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(first_hops, first_hops_conv_16 => first_hops_conv_16.ptr)), tlvs.ptr, amount_msats);
 		GC.KeepAlive(this);
 		GC.KeepAlive(recipient);

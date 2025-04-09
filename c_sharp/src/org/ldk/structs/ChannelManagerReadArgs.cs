@@ -52,7 +52,7 @@ public class ChannelManagerReadArgs : CommonBase {
 	/**
 	 * A cryptographically secure source of entropy.
 	 */
-	public EntropySource get_entropy_source() {
+	public org.ldk.structs.EntropySource get_entropy_source() {
 		long ret = bindings.ChannelManagerReadArgs_get_entropy_source(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -74,7 +74,7 @@ public class ChannelManagerReadArgs : CommonBase {
 	/**
 	 * A signer that is able to perform node-scoped cryptographic operations.
 	 */
-	public NodeSigner get_node_signer() {
+	public org.ldk.structs.NodeSigner get_node_signer() {
 		long ret = bindings.ChannelManagerReadArgs_get_node_signer(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -98,7 +98,7 @@ public class ChannelManagerReadArgs : CommonBase {
 	 * deserialization and KeysInterface::read_chan_signer will be used to read per-Channel
 	 * signing data.
 	 */
-	public SignerProvider get_signer_provider() {
+	public org.ldk.structs.SignerProvider get_signer_provider() {
 		long ret = bindings.ChannelManagerReadArgs_get_signer_provider(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -124,7 +124,7 @@ public class ChannelManagerReadArgs : CommonBase {
 	 * 
 	 * No calls to the FeeEstimator will be made during deserialization.
 	 */
-	public FeeEstimator get_fee_estimator() {
+	public org.ldk.structs.FeeEstimator get_fee_estimator() {
 		long ret = bindings.ChannelManagerReadArgs_get_fee_estimator(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -152,7 +152,7 @@ public class ChannelManagerReadArgs : CommonBase {
 	 * you have deserialized ChannelMonitors separately and will add them to your
 	 * chain::Watch after deserializing this ChannelManager.
 	 */
-	public Watch get_chain_monitor() {
+	public org.ldk.structs.Watch get_chain_monitor() {
 		long ret = bindings.ChannelManagerReadArgs_get_chain_monitor(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -180,7 +180,7 @@ public class ChannelManagerReadArgs : CommonBase {
 	 * used to broadcast the latest local commitment transactions of channels which must be
 	 * force-closed during deserialization.
 	 */
-	public BroadcasterInterface get_tx_broadcaster() {
+	public org.ldk.structs.BroadcasterInterface get_tx_broadcaster() {
 		long ret = bindings.ChannelManagerReadArgs_get_tx_broadcaster(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -207,7 +207,7 @@ public class ChannelManagerReadArgs : CommonBase {
 	 * 
 	 * No calls to the router will be made during deserialization.
 	 */
-	public Router get_router() {
+	public org.ldk.structs.Router get_router() {
 		long ret = bindings.ChannelManagerReadArgs_get_router(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -233,7 +233,7 @@ public class ChannelManagerReadArgs : CommonBase {
 	 * The [`MessageRouter`] used for constructing [`BlindedMessagePath`]s for [`Offer`]s,
 	 * [`Refund`]s, and any reply paths.
 	 */
-	public MessageRouter get_message_router() {
+	public org.ldk.structs.MessageRouter get_message_router() {
 		long ret = bindings.ChannelManagerReadArgs_get_message_router(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -257,7 +257,7 @@ public class ChannelManagerReadArgs : CommonBase {
 	 * The Logger for use in the ChannelManager and which may be used to log information during
 	 * deserialization.
 	 */
-	public Logger get_logger() {
+	public org.ldk.structs.Logger get_logger() {
 		long ret = bindings.ChannelManagerReadArgs_get_logger(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -281,7 +281,7 @@ public class ChannelManagerReadArgs : CommonBase {
 	 * Default settings used for new channels. Any existing channels will continue to use the
 	 * runtime settings which were stored when the ChannelManager was serialized.
 	 */
-	public UserConfig get_default_config() {
+	public org.ldk.structs.UserConfig get_default_config() {
 		long ret = bindings.ChannelManagerReadArgs_get_default_config(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -305,7 +305,7 @@ public class ChannelManagerReadArgs : CommonBase {
 	 * HashMap for you. This is primarily useful for C bindings where it is not practical to
 	 * populate a HashMap directly from C.
 	 */
-	public static ChannelManagerReadArgs of(org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.SignerProvider signer_provider, org.ldk.structs.FeeEstimator fee_estimator, org.ldk.structs.Watch chain_monitor, org.ldk.structs.BroadcasterInterface tx_broadcaster, org.ldk.structs.Router router, org.ldk.structs.MessageRouter message_router, org.ldk.structs.Logger logger, org.ldk.structs.UserConfig default_config, ChannelMonitor[] channel_monitors) {
+	public static org.ldk.structs.ChannelManagerReadArgs of(org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.SignerProvider signer_provider, org.ldk.structs.FeeEstimator fee_estimator, org.ldk.structs.Watch chain_monitor, org.ldk.structs.BroadcasterInterface tx_broadcaster, org.ldk.structs.Router router, org.ldk.structs.MessageRouter message_router, org.ldk.structs.Logger logger, org.ldk.structs.UserConfig default_config, ChannelMonitor[] channel_monitors) {
 		long ret = bindings.ChannelManagerReadArgs_new(entropy_source.ptr, node_signer.ptr, signer_provider.ptr, fee_estimator.ptr, chain_monitor.ptr, tx_broadcaster.ptr, router.ptr, message_router.ptr, logger.ptr, default_config.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(channel_monitors, channel_monitors_conv_16 => channel_monitors_conv_16.ptr)));
 		GC.KeepAlive(entropy_source);
 		GC.KeepAlive(node_signer);

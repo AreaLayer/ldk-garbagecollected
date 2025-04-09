@@ -22,7 +22,7 @@ public class AcceptChannelV2 : CommonBase {
 	/**
 	 * Common fields of `accept_channel(2)`-like messages
 	 */
-	public CommonAcceptChannelFields get_common_fields() {
+	public org.ldk.structs.CommonAcceptChannelFields get_common_fields() {
 		long ret = bindings.AcceptChannelV2_get_common_fields(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -99,7 +99,7 @@ public class AcceptChannelV2 : CommonBase {
 	/**
 	 * Constructs a new AcceptChannelV2 given each field
 	 */
-	public static AcceptChannelV2 of(org.ldk.structs.CommonAcceptChannelFields common_fields_arg, long funding_satoshis_arg, byte[] second_per_commitment_point_arg, COption_NoneZ require_confirmed_inputs_arg) {
+	public static org.ldk.structs.AcceptChannelV2 of(org.ldk.structs.CommonAcceptChannelFields common_fields_arg, long funding_satoshis_arg, byte[] second_per_commitment_point_arg, COption_NoneZ require_confirmed_inputs_arg) {
 		long ret = bindings.AcceptChannelV2_new(common_fields_arg.ptr, funding_satoshis_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(second_per_commitment_point_arg, 33)), require_confirmed_inputs_arg);
 		GC.KeepAlive(common_fields_arg);
 		GC.KeepAlive(funding_satoshis_arg);
@@ -120,7 +120,7 @@ public class AcceptChannelV2 : CommonBase {
 	/**
 	 * Creates a copy of the AcceptChannelV2
 	 */
-	public AcceptChannelV2 clone() {
+	public org.ldk.structs.AcceptChannelV2 clone() {
 		long ret = bindings.AcceptChannelV2_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -172,7 +172,7 @@ public class AcceptChannelV2 : CommonBase {
 	/**
 	 * Read a AcceptChannelV2 from a byte array, created by AcceptChannelV2_write
 	 */
-	public static Result_AcceptChannelV2DecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_AcceptChannelV2DecodeErrorZ read(byte[] ser) {
 		long ret = bindings.AcceptChannelV2_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

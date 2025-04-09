@@ -38,7 +38,7 @@ public class Result_u32GraphSyncErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_u32GraphSyncErrorZ in the success state.
 	 */
-	public static Result_u32GraphSyncErrorZ ok(int o) {
+	public static org.ldk.structs.Result_u32GraphSyncErrorZ ok(int o) {
 		long ret = bindings.CResult_u32GraphSyncErrorZ_ok(o);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -49,7 +49,7 @@ public class Result_u32GraphSyncErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_u32GraphSyncErrorZ in the error state.
 	 */
-	public static Result_u32GraphSyncErrorZ err(org.ldk.structs.GraphSyncError e) {
+	public static org.ldk.structs.Result_u32GraphSyncErrorZ err(org.ldk.structs.GraphSyncError e) {
 		long ret = bindings.CResult_u32GraphSyncErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }

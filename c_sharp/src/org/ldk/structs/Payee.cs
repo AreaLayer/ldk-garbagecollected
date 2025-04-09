@@ -40,7 +40,7 @@ public class Payee : CommonBase {
 		 * 
 		 * Note that this (or a relevant inner pointer) may be NULL or all-0s to represent None
 		 */
-		public Bolt12InvoiceFeatures features;
+		public org.ldk.structs.Bolt12InvoiceFeatures features;
 		internal Payee_Blinded(long ptr) : base(null, ptr) {
 			long route_hints = bindings.LDKPayee_Blinded_get_route_hints(ptr);
 			int route_hints_conv_20_len = InternalUtils.getArrayLength(route_hints);
@@ -79,7 +79,7 @@ public class Payee : CommonBase {
 		 * 
 		 * Note that this (or a relevant inner pointer) may be NULL or all-0s to represent None
 		 */
-		public Bolt11InvoiceFeatures features;
+		public org.ldk.structs.Bolt11InvoiceFeatures features;
 		/**
 		 * The minimum CLTV delta at the end of the route. This value must not be zero.
 		 */
@@ -115,7 +115,7 @@ public class Payee : CommonBase {
 	/**
 	 * Creates a copy of the Payee
 	 */
-	public Payee clone() {
+	public org.ldk.structs.Payee clone() {
 		long ret = bindings.Payee_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -127,7 +127,7 @@ public class Payee : CommonBase {
 	/**
 	 * Utility method to constructs a new Blinded-variant Payee
 	 */
-	public static Payee blinded(BlindedPaymentPath[] route_hints, org.ldk.structs.Bolt12InvoiceFeatures features) {
+	public static org.ldk.structs.Payee blinded(BlindedPaymentPath[] route_hints, org.ldk.structs.Bolt12InvoiceFeatures features) {
 		long ret = bindings.Payee_blinded(InternalUtils.encodeUint64Array(InternalUtils.mapArray(route_hints, route_hints_conv_20 => route_hints_conv_20.ptr)), features.ptr);
 		GC.KeepAlive(route_hints);
 		GC.KeepAlive(features);
@@ -140,7 +140,7 @@ public class Payee : CommonBase {
 	/**
 	 * Utility method to constructs a new Clear-variant Payee
 	 */
-	public static Payee clear(byte[] node_id, RouteHint[] route_hints, org.ldk.structs.Bolt11InvoiceFeatures features, int final_cltv_expiry_delta) {
+	public static org.ldk.structs.Payee clear(byte[] node_id, RouteHint[] route_hints, org.ldk.structs.Bolt11InvoiceFeatures features, int final_cltv_expiry_delta) {
 		long ret = bindings.Payee_clear(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(route_hints, route_hints_conv_11 => route_hints_conv_11.ptr)), features.ptr, final_cltv_expiry_delta);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(route_hints);

@@ -20,7 +20,7 @@ public class Bolt11InvoiceParameters : CommonBase {
 	/**
 	 * The amount for the invoice, if any.
 	 */
-	public Option_u64Z get_amount_msats() {
+	public org.ldk.structs.Option_u64Z get_amount_msats() {
 		long ret = bindings.Bolt11InvoiceParameters_get_amount_msats(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -41,7 +41,7 @@ public class Bolt11InvoiceParameters : CommonBase {
 	/**
 	 * The description for what the invoice is for, or hash of such description.
 	 */
-	public Bolt11InvoiceDescription get_description() {
+	public org.ldk.structs.Bolt11InvoiceDescription get_description() {
 		long ret = bindings.Bolt11InvoiceParameters_get_description(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -67,7 +67,7 @@ public class Bolt11InvoiceParameters : CommonBase {
 	 * builds, the highest block timestamp seen is used instead. In the latter case, use a long
 	 * enough expiry to account for the average block time.
 	 */
-	public Option_u32Z get_invoice_expiry_delta_secs() {
+	public org.ldk.structs.Option_u32Z get_invoice_expiry_delta_secs() {
 		long ret = bindings.Bolt11InvoiceParameters_get_invoice_expiry_delta_secs(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -97,7 +97,7 @@ public class Bolt11InvoiceParameters : CommonBase {
 	 * If set, must be at least [`MIN_FINAL_CLTV_EXPIRY_DELTA`], and a three-block buffer will be
 	 * added as well to allow for up to a few new block confirmations during routing.
 	 */
-	public Option_u16Z get_min_final_cltv_expiry_delta() {
+	public org.ldk.structs.Option_u16Z get_min_final_cltv_expiry_delta() {
 		long ret = bindings.Bolt11InvoiceParameters_get_min_final_cltv_expiry_delta(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -127,7 +127,7 @@ public class Bolt11InvoiceParameters : CommonBase {
 	 * involving another protocol where the payment hash is also involved outside the scope of
 	 * lightning.
 	 */
-	public Option_ThirtyTwoBytesZ get_payment_hash() {
+	public org.ldk.structs.Option_ThirtyTwoBytesZ get_payment_hash() {
 		long ret = bindings.Bolt11InvoiceParameters_get_payment_hash(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -153,7 +153,7 @@ public class Bolt11InvoiceParameters : CommonBase {
 	/**
 	 * Constructs a new Bolt11InvoiceParameters given each field
 	 */
-	public static Bolt11InvoiceParameters of(org.ldk.structs.Option_u64Z amount_msats_arg, org.ldk.structs.Bolt11InvoiceDescription description_arg, org.ldk.structs.Option_u32Z invoice_expiry_delta_secs_arg, org.ldk.structs.Option_u16Z min_final_cltv_expiry_delta_arg, org.ldk.structs.Option_ThirtyTwoBytesZ payment_hash_arg) {
+	public static org.ldk.structs.Bolt11InvoiceParameters of(org.ldk.structs.Option_u64Z amount_msats_arg, org.ldk.structs.Bolt11InvoiceDescription description_arg, org.ldk.structs.Option_u32Z invoice_expiry_delta_secs_arg, org.ldk.structs.Option_u16Z min_final_cltv_expiry_delta_arg, org.ldk.structs.Option_ThirtyTwoBytesZ payment_hash_arg) {
 		long ret = bindings.Bolt11InvoiceParameters_new(amount_msats_arg.ptr, description_arg.ptr, invoice_expiry_delta_secs_arg.ptr, min_final_cltv_expiry_delta_arg.ptr, payment_hash_arg.ptr);
 		GC.KeepAlive(amount_msats_arg);
 		GC.KeepAlive(description_arg);
@@ -169,7 +169,7 @@ public class Bolt11InvoiceParameters : CommonBase {
 	/**
 	 * Creates a "default" Bolt11InvoiceParameters. See struct and individual field documentaiton for details on which values are used.
 	 */
-	public static Bolt11InvoiceParameters with_default() {
+	public static org.ldk.structs.Bolt11InvoiceParameters with_default() {
 		long ret = bindings.Bolt11InvoiceParameters_default();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Bolt11InvoiceParameters ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Bolt11InvoiceParameters(null, ret); }

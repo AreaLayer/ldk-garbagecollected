@@ -38,7 +38,7 @@ public class Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ : 
 	/**
 	 * Creates a new CResult_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ in the success state.
 	 */
-	public static Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ ok(org.ldk.structs.RefundMaybeWithDerivedMetadataBuilder o) {
+	public static org.ldk.structs.Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ ok(org.ldk.structs.RefundMaybeWithDerivedMetadataBuilder o) {
 		long ret = bindings.CResult_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -49,7 +49,7 @@ public class Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ : 
 	/**
 	 * Creates a new CResult_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ in the error state.
 	 */
-	public static Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ err(Bolt12SemanticError e) {
+	public static org.ldk.structs.Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ err(Bolt12SemanticError e) {
 		long ret = bindings.CResult_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ_err(e);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -76,7 +76,7 @@ public class Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ : 
 	 * Creates a new CResult_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ clone() {
+	public org.ldk.structs.Result_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ clone() {
 		long ret = bindings.CResult_RefundMaybeWithDerivedMetadataBuilderBolt12SemanticErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

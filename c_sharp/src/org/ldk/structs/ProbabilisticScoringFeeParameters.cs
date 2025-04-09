@@ -482,7 +482,7 @@ public class ProbabilisticScoringFeeParameters : CommonBase {
 	/**
 	 * Creates a copy of the ProbabilisticScoringFeeParameters
 	 */
-	public ProbabilisticScoringFeeParameters clone() {
+	public org.ldk.structs.ProbabilisticScoringFeeParameters clone() {
 		long ret = bindings.ProbabilisticScoringFeeParameters_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -494,7 +494,7 @@ public class ProbabilisticScoringFeeParameters : CommonBase {
 	/**
 	 * Creates a "default" ProbabilisticScoringFeeParameters. See struct and individual field documentaiton for details on which values are used.
 	 */
-	public static ProbabilisticScoringFeeParameters with_default() {
+	public static org.ldk.structs.ProbabilisticScoringFeeParameters with_default() {
 		long ret = bindings.ProbabilisticScoringFeeParameters_default();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ProbabilisticScoringFeeParameters ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ProbabilisticScoringFeeParameters(null, ret); }

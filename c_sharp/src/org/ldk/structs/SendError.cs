@@ -99,7 +99,7 @@ public class SendError : CommonBase {
 	/**
 	 * Creates a copy of the SendError
 	 */
-	public SendError clone() {
+	public org.ldk.structs.SendError clone() {
 		long ret = bindings.SendError_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -111,7 +111,7 @@ public class SendError : CommonBase {
 	/**
 	 * Utility method to constructs a new Secp256k1-variant SendError
 	 */
-	public static SendError secp256k1(Secp256k1Error a) {
+	public static org.ldk.structs.SendError secp256k1(Secp256k1Error a) {
 		long ret = bindings.SendError_secp256k1(a);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -123,7 +123,7 @@ public class SendError : CommonBase {
 	/**
 	 * Utility method to constructs a new TooBigPacket-variant SendError
 	 */
-	public static SendError too_big_packet() {
+	public static org.ldk.structs.SendError too_big_packet() {
 		long ret = bindings.SendError_too_big_packet();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.SendError ret_hu_conv = org.ldk.structs.SendError.constr_from_ptr(ret);
@@ -134,7 +134,7 @@ public class SendError : CommonBase {
 	/**
 	 * Utility method to constructs a new TooFewBlindedHops-variant SendError
 	 */
-	public static SendError too_few_blinded_hops() {
+	public static org.ldk.structs.SendError too_few_blinded_hops() {
 		long ret = bindings.SendError_too_few_blinded_hops();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.SendError ret_hu_conv = org.ldk.structs.SendError.constr_from_ptr(ret);
@@ -145,7 +145,7 @@ public class SendError : CommonBase {
 	/**
 	 * Utility method to constructs a new InvalidFirstHop-variant SendError
 	 */
-	public static SendError invalid_first_hop(byte[] a) {
+	public static org.ldk.structs.SendError invalid_first_hop(byte[] a) {
 		long ret = bindings.SendError_invalid_first_hop(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 33)));
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -157,7 +157,7 @@ public class SendError : CommonBase {
 	/**
 	 * Utility method to constructs a new PathNotFound-variant SendError
 	 */
-	public static SendError path_not_found() {
+	public static org.ldk.structs.SendError path_not_found() {
 		long ret = bindings.SendError_path_not_found();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.SendError ret_hu_conv = org.ldk.structs.SendError.constr_from_ptr(ret);
@@ -168,7 +168,7 @@ public class SendError : CommonBase {
 	/**
 	 * Utility method to constructs a new InvalidMessage-variant SendError
 	 */
-	public static SendError invalid_message() {
+	public static org.ldk.structs.SendError invalid_message() {
 		long ret = bindings.SendError_invalid_message();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.SendError ret_hu_conv = org.ldk.structs.SendError.constr_from_ptr(ret);
@@ -179,7 +179,7 @@ public class SendError : CommonBase {
 	/**
 	 * Utility method to constructs a new BufferFull-variant SendError
 	 */
-	public static SendError buffer_full() {
+	public static org.ldk.structs.SendError buffer_full() {
 		long ret = bindings.SendError_buffer_full();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.SendError ret_hu_conv = org.ldk.structs.SendError.constr_from_ptr(ret);
@@ -190,7 +190,7 @@ public class SendError : CommonBase {
 	/**
 	 * Utility method to constructs a new GetNodeIdFailed-variant SendError
 	 */
-	public static SendError get_node_id_failed() {
+	public static org.ldk.structs.SendError get_node_id_failed() {
 		long ret = bindings.SendError_get_node_id_failed();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.SendError ret_hu_conv = org.ldk.structs.SendError.constr_from_ptr(ret);
@@ -201,7 +201,7 @@ public class SendError : CommonBase {
 	/**
 	 * Utility method to constructs a new UnresolvedIntroductionNode-variant SendError
 	 */
-	public static SendError unresolved_introduction_node() {
+	public static org.ldk.structs.SendError unresolved_introduction_node() {
 		long ret = bindings.SendError_unresolved_introduction_node();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.SendError ret_hu_conv = org.ldk.structs.SendError.constr_from_ptr(ret);
@@ -212,7 +212,7 @@ public class SendError : CommonBase {
 	/**
 	 * Utility method to constructs a new BlindedPathAdvanceFailed-variant SendError
 	 */
-	public static SendError blinded_path_advance_failed() {
+	public static org.ldk.structs.SendError blinded_path_advance_failed() {
 		long ret = bindings.SendError_blinded_path_advance_failed();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.SendError ret_hu_conv = org.ldk.structs.SendError.constr_from_ptr(ret);

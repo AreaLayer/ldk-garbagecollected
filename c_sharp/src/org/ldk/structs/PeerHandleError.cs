@@ -20,7 +20,7 @@ public class PeerHandleError : CommonBase {
 	/**
 	 * Constructs a new PeerHandleError given each field
 	 */
-	public static PeerHandleError of() {
+	public static org.ldk.structs.PeerHandleError of() {
 		long ret = bindings.PeerHandleError_new();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.PeerHandleError ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.PeerHandleError(null, ret); }
@@ -37,7 +37,7 @@ public class PeerHandleError : CommonBase {
 	/**
 	 * Creates a copy of the PeerHandleError
 	 */
-	public PeerHandleError clone() {
+	public org.ldk.structs.PeerHandleError clone() {
 		long ret = bindings.PeerHandleError_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

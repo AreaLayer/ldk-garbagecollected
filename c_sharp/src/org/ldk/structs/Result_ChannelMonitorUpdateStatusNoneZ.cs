@@ -33,7 +33,7 @@ public class Result_ChannelMonitorUpdateStatusNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_ChannelMonitorUpdateStatusNoneZ in the success state.
 	 */
-	public static Result_ChannelMonitorUpdateStatusNoneZ ok(ChannelMonitorUpdateStatus o) {
+	public static org.ldk.structs.Result_ChannelMonitorUpdateStatusNoneZ ok(ChannelMonitorUpdateStatus o) {
 		long ret = bindings.CResult_ChannelMonitorUpdateStatusNoneZ_ok(o);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -44,7 +44,7 @@ public class Result_ChannelMonitorUpdateStatusNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_ChannelMonitorUpdateStatusNoneZ in the error state.
 	 */
-	public static Result_ChannelMonitorUpdateStatusNoneZ err() {
+	public static org.ldk.structs.Result_ChannelMonitorUpdateStatusNoneZ err() {
 		long ret = bindings.CResult_ChannelMonitorUpdateStatusNoneZ_err();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ChannelMonitorUpdateStatusNoneZ ret_hu_conv = Result_ChannelMonitorUpdateStatusNoneZ.constr_from_ptr(ret);
@@ -70,7 +70,7 @@ public class Result_ChannelMonitorUpdateStatusNoneZ : CommonBase {
 	 * Creates a new CResult_ChannelMonitorUpdateStatusNoneZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_ChannelMonitorUpdateStatusNoneZ clone() {
+	public org.ldk.structs.Result_ChannelMonitorUpdateStatusNoneZ clone() {
 		long ret = bindings.CResult_ChannelMonitorUpdateStatusNoneZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

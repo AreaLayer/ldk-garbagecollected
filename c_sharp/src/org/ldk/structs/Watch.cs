@@ -26,7 +26,7 @@ public interface WatchInterface {
 	 * [`block_connected`]: channelmonitor::ChannelMonitor::block_connected
 	 * [`block_disconnected`]: channelmonitor::ChannelMonitor::block_disconnected
 	 */
-	Result_ChannelMonitorUpdateStatusNoneZ watch_channel(OutPoint funding_txo, ChannelMonitor monitor);
+	Result_ChannelMonitorUpdateStatusNoneZ watch_channel(org.ldk.structs.OutPoint funding_txo, org.ldk.structs.ChannelMonitor monitor);
 	/**Updates a channel identified by `funding_txo` by applying `update` to its monitor.
 	 * 
 	 * Implementations must call [`ChannelMonitor::update_monitor`] with the given update. This
@@ -43,7 +43,7 @@ public interface WatchInterface {
 	 * 
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 */
-	ChannelMonitorUpdateStatus update_channel(OutPoint funding_txo, ChannelMonitorUpdate update);
+	ChannelMonitorUpdateStatus update_channel(org.ldk.structs.OutPoint funding_txo, org.ldk.structs.ChannelMonitorUpdate update);
 	/**Returns any monitor events since the last call. Subsequent calls must only return new
 	 * events.
 	 * 
@@ -138,7 +138,7 @@ public class Watch : CommonBase {
 	 * [`block_connected`]: channelmonitor::ChannelMonitor::block_connected
 	 * [`block_disconnected`]: channelmonitor::ChannelMonitor::block_disconnected
 	 */
-	public Result_ChannelMonitorUpdateStatusNoneZ watch_channel(org.ldk.structs.OutPoint funding_txo, org.ldk.structs.ChannelMonitor monitor) {
+	public org.ldk.structs.Result_ChannelMonitorUpdateStatusNoneZ watch_channel(org.ldk.structs.OutPoint funding_txo, org.ldk.structs.ChannelMonitor monitor) {
 		long ret = bindings.Watch_watch_channel(this.ptr, funding_txo.ptr, monitor.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(funding_txo);

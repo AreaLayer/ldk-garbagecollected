@@ -140,7 +140,7 @@ public class CoinSelectionSource : CommonBase {
 	 * which UTXOs to double spend is left to the implementation, but it must strive to keep the
 	 * set of other claims being double spent to a minimum.
 	 */
-	public Result_CoinSelectionNoneZ select_confirmed_utxos(byte[] claim_id, Input[] must_spend, TxOut[] must_pay_to, int target_feerate_sat_per_1000_weight) {
+	public org.ldk.structs.Result_CoinSelectionNoneZ select_confirmed_utxos(byte[] claim_id, Input[] must_spend, TxOut[] must_pay_to, int target_feerate_sat_per_1000_weight) {
 		long ret = bindings.CoinSelectionSource_select_confirmed_utxos(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(claim_id, 32)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(must_spend, must_spend_conv_7 => must_spend_conv_7.ptr)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(must_pay_to, must_pay_to_conv_7 => must_pay_to_conv_7.ptr)), target_feerate_sat_per_1000_weight);
 		GC.KeepAlive(this);
 		GC.KeepAlive(claim_id);
@@ -159,7 +159,7 @@ public class CoinSelectionSource : CommonBase {
 	 * If your wallet does not support signing PSBTs you can call `psbt.extract_tx()` to get the
 	 * unsigned transaction and then sign it with your wallet.
 	 */
-	public Result_TransactionNoneZ sign_psbt(byte[] psbt) {
+	public org.ldk.structs.Result_TransactionNoneZ sign_psbt(byte[] psbt) {
 		long ret = bindings.CoinSelectionSource_sign_psbt(this.ptr, InternalUtils.encodeUint8Array(psbt));
 		GC.KeepAlive(this);
 		GC.KeepAlive(psbt);

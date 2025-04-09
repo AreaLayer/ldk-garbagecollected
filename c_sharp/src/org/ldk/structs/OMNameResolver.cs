@@ -25,7 +25,7 @@ public class OMNameResolver : CommonBase {
 	/**
 	 * Builds a new [`OMNameResolver`].
 	 */
-	public static OMNameResolver of(int latest_block_time, int latest_block_height) {
+	public static org.ldk.structs.OMNameResolver of(int latest_block_time, int latest_block_height) {
 		long ret = bindings.OMNameResolver_new(latest_block_time, latest_block_height);
 		GC.KeepAlive(latest_block_time);
 		GC.KeepAlive(latest_block_height);
@@ -54,7 +54,7 @@ public class OMNameResolver : CommonBase {
 	 * Returns a [`DNSSECQuery`] onion message and a [`DNSResolverContext`] which should be sent
 	 * to a resolver (with the context used to generate the blinded response path) on success.
 	 */
-	public Result_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ resolve_name(byte[] payment_id, org.ldk.structs.HumanReadableName name, org.ldk.structs.EntropySource entropy_source) {
+	public org.ldk.structs.Result_C2Tuple_DNSSECQueryDNSResolverContextZNoneZ resolve_name(byte[] payment_id, org.ldk.structs.HumanReadableName name, org.ldk.structs.EntropySource entropy_source) {
 		long ret = bindings.OMNameResolver_resolve_name(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), name.ptr, entropy_source.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(payment_id);
@@ -79,7 +79,7 @@ public class OMNameResolver : CommonBase {
 	 * If an [`Offer`] is found, it, as well as the [`PaymentId`] and original `name` passed to
 	 * [`Self::resolve_name`] are returned.
 	 */
-	public Option_C2Tuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZOfferZZ handle_dnssec_proof_for_offer(org.ldk.structs.DNSSECProof msg, org.ldk.structs.DNSResolverContext context) {
+	public org.ldk.structs.Option_C2Tuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZOfferZZ handle_dnssec_proof_for_offer(org.ldk.structs.DNSSECProof msg, org.ldk.structs.DNSResolverContext context) {
 		long ret = bindings.OMNameResolver_handle_dnssec_proof_for_offer(this.ptr, msg.ptr, context.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(msg);
@@ -103,7 +103,7 @@ public class OMNameResolver : CommonBase {
 	 * This method is useful for those who handle bitcoin: URIs already, handling more than just
 	 * BOLT12 [`Offer`]s.
 	 */
-	public Option_C2Tuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZStrZZ handle_dnssec_proof_for_uri(org.ldk.structs.DNSSECProof msg, org.ldk.structs.DNSResolverContext context) {
+	public org.ldk.structs.Option_C2Tuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZStrZZ handle_dnssec_proof_for_uri(org.ldk.structs.DNSSECProof msg, org.ldk.structs.DNSResolverContext context) {
 		long ret = bindings.OMNameResolver_handle_dnssec_proof_for_uri(this.ptr, msg.ptr, context.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(msg);

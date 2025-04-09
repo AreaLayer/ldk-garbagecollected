@@ -44,7 +44,7 @@ public class PeerManager : CommonBase {
 	 * timestamp, however if it is not available a persistent counter that increases once per
 	 * minute should suffice.
 	 */
-	public static PeerManager of(ChannelMessageHandler message_handler_chan_handler_arg, RoutingMessageHandler message_handler_route_handler_arg, OnionMessageHandler message_handler_onion_message_handler_arg, CustomMessageHandler message_handler_custom_message_handler_arg, int current_time, byte[] ephemeral_random_data, org.ldk.structs.Logger logger, org.ldk.structs.NodeSigner node_signer) {
+	public static org.ldk.structs.PeerManager of(ChannelMessageHandler message_handler_chan_handler_arg, RoutingMessageHandler message_handler_route_handler_arg, OnionMessageHandler message_handler_onion_message_handler_arg, CustomMessageHandler message_handler_custom_message_handler_arg, int current_time, byte[] ephemeral_random_data, org.ldk.structs.Logger logger, org.ldk.structs.NodeSigner node_signer) {
 		long ret = bindings.PeerManager_new(bindings.MessageHandler_new(message_handler_chan_handler_arg.ptr, message_handler_route_handler_arg.ptr, message_handler_onion_message_handler_arg.ptr, message_handler_custom_message_handler_arg.ptr), current_time, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(ephemeral_random_data, 32)), logger.ptr, node_signer.ptr);
 		GC.KeepAlive(message_handler_chan_handler_arg);
 		GC.KeepAlive(message_handler_route_handler_arg);
@@ -93,7 +93,7 @@ public class PeerManager : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public PeerDetails peer_by_node_id(byte[] their_node_id) {
+	public org.ldk.structs.PeerDetails peer_by_node_id(byte[] their_node_id) {
 		long ret = bindings.PeerManager_peer_by_node_id(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(their_node_id);
@@ -120,7 +120,7 @@ public class PeerManager : CommonBase {
 	 * 
 	 * [`socket_disconnected`]: PeerManager::socket_disconnected
 	 */
-	public Result_CVec_u8ZPeerHandleErrorZ new_outbound_connection(byte[] their_node_id, org.ldk.structs.SocketDescriptor descriptor, org.ldk.structs.Option_SocketAddressZ remote_network_address) {
+	public org.ldk.structs.Result_CVec_u8ZPeerHandleErrorZ new_outbound_connection(byte[] their_node_id, org.ldk.structs.SocketDescriptor descriptor, org.ldk.structs.Option_SocketAddressZ remote_network_address) {
 		long ret = bindings.PeerManager_new_outbound_connection(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)), descriptor.ptr, remote_network_address.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(their_node_id);
@@ -149,7 +149,7 @@ public class PeerManager : CommonBase {
 	 * 
 	 * [`socket_disconnected`]: PeerManager::socket_disconnected
 	 */
-	public Result_NonePeerHandleErrorZ new_inbound_connection(org.ldk.structs.SocketDescriptor descriptor, org.ldk.structs.Option_SocketAddressZ remote_network_address) {
+	public org.ldk.structs.Result_NonePeerHandleErrorZ new_inbound_connection(org.ldk.structs.SocketDescriptor descriptor, org.ldk.structs.Option_SocketAddressZ remote_network_address) {
 		long ret = bindings.PeerManager_new_inbound_connection(this.ptr, descriptor.ptr, remote_network_address.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(descriptor);
@@ -174,7 +174,7 @@ public class PeerManager : CommonBase {
 	 * [`send_data`]: SocketDescriptor::send_data
 	 * [`write_buffer_space_avail`]: PeerManager::write_buffer_space_avail
 	 */
-	public Result_NonePeerHandleErrorZ write_buffer_space_avail(org.ldk.structs.SocketDescriptor descriptor) {
+	public org.ldk.structs.Result_NonePeerHandleErrorZ write_buffer_space_avail(org.ldk.structs.SocketDescriptor descriptor) {
 		long ret = bindings.PeerManager_write_buffer_space_avail(this.ptr, descriptor.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(descriptor);
@@ -202,7 +202,7 @@ public class PeerManager : CommonBase {
 	 * [`send_data`]: SocketDescriptor::send_data
 	 * [`process_events`]: PeerManager::process_events
 	 */
-	public Result_boolPeerHandleErrorZ read_event(org.ldk.structs.SocketDescriptor peer_descriptor, byte[] data) {
+	public org.ldk.structs.Result_boolPeerHandleErrorZ read_event(org.ldk.structs.SocketDescriptor peer_descriptor, byte[] data) {
 		long ret = bindings.PeerManager_read_event(this.ptr, peer_descriptor.ptr, InternalUtils.encodeUint8Array(data));
 		GC.KeepAlive(this);
 		GC.KeepAlive(peer_descriptor);

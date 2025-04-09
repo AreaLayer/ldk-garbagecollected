@@ -41,7 +41,7 @@ public class Result_NodeAliasDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_NodeAliasDecodeErrorZ in the success state.
 	 */
-	public static Result_NodeAliasDecodeErrorZ ok(org.ldk.structs.NodeAlias o) {
+	public static org.ldk.structs.Result_NodeAliasDecodeErrorZ ok(org.ldk.structs.NodeAlias o) {
 		long ret = bindings.CResult_NodeAliasDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_NodeAliasDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_NodeAliasDecodeErrorZ in the error state.
 	 */
-	public static Result_NodeAliasDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_NodeAliasDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_NodeAliasDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_NodeAliasDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_NodeAliasDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_NodeAliasDecodeErrorZ clone() {
+	public org.ldk.structs.Result_NodeAliasDecodeErrorZ clone() {
 		long ret = bindings.CResult_NodeAliasDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

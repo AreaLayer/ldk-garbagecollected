@@ -41,7 +41,7 @@ public class Result_ProbabilisticScorerDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_ProbabilisticScorerDecodeErrorZ in the success state.
 	 */
-	public static Result_ProbabilisticScorerDecodeErrorZ ok(ProbabilisticScoringDecayParameters o_decay_params, NetworkGraph o_network_graph, Logger o_logger) {
+	public static org.ldk.structs.Result_ProbabilisticScorerDecodeErrorZ ok(ProbabilisticScoringDecayParameters o_decay_params, NetworkGraph o_network_graph, Logger o_logger) {
 		long ret = bindings.CResult_ProbabilisticScorerDecodeErrorZ_ok(bindings.ProbabilisticScorer_new(o_decay_params.ptr, o_network_graph.ptr, o_logger.ptr));
 		GC.KeepAlive(o_decay_params);
 		GC.KeepAlive(o_network_graph);
@@ -57,7 +57,7 @@ public class Result_ProbabilisticScorerDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_ProbabilisticScorerDecodeErrorZ in the error state.
 	 */
-	public static Result_ProbabilisticScorerDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_ProbabilisticScorerDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_ProbabilisticScorerDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }

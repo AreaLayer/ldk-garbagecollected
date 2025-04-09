@@ -19,7 +19,7 @@ public class PendingHTLCInfo : CommonBase {
 	/**
 	 * Further routing details based on whether the HTLC is being forwarded or received.
 	 */
-	public PendingHTLCRouting get_routing() {
+	public org.ldk.structs.PendingHTLCRouting get_routing() {
 		long ret = bindings.PendingHTLCInfo_get_routing(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -87,7 +87,7 @@ public class PendingHTLCInfo : CommonBase {
 	 * This field was added in LDK 0.0.113 and will be `None` for objects written by prior
 	 * versions.
 	 */
-	public Option_u64Z get_incoming_amt_msat() {
+	public org.ldk.structs.Option_u64Z get_incoming_amt_msat() {
 		long ret = bindings.PendingHTLCInfo_get_incoming_amt_msat(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -177,7 +177,7 @@ public class PendingHTLCInfo : CommonBase {
 	 * This is used to allow LSPs to take fees as a part of payments, without the sender having to
 	 * shoulder them.
 	 */
-	public Option_u64Z get_skimmed_fee_msat() {
+	public org.ldk.structs.Option_u64Z get_skimmed_fee_msat() {
 		long ret = bindings.PendingHTLCInfo_get_skimmed_fee_msat(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -206,7 +206,7 @@ public class PendingHTLCInfo : CommonBase {
 	/**
 	 * Constructs a new PendingHTLCInfo given each field
 	 */
-	public static PendingHTLCInfo of(org.ldk.structs.PendingHTLCRouting routing_arg, byte[] incoming_shared_secret_arg, byte[] payment_hash_arg, org.ldk.structs.Option_u64Z incoming_amt_msat_arg, long outgoing_amt_msat_arg, int outgoing_cltv_value_arg, org.ldk.structs.Option_u64Z skimmed_fee_msat_arg) {
+	public static org.ldk.structs.PendingHTLCInfo of(org.ldk.structs.PendingHTLCRouting routing_arg, byte[] incoming_shared_secret_arg, byte[] payment_hash_arg, org.ldk.structs.Option_u64Z incoming_amt_msat_arg, long outgoing_amt_msat_arg, int outgoing_cltv_value_arg, org.ldk.structs.Option_u64Z skimmed_fee_msat_arg) {
 		long ret = bindings.PendingHTLCInfo_new(routing_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(incoming_shared_secret_arg, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash_arg, 32)), incoming_amt_msat_arg.ptr, outgoing_amt_msat_arg, outgoing_cltv_value_arg, skimmed_fee_msat_arg.ptr);
 		GC.KeepAlive(routing_arg);
 		GC.KeepAlive(incoming_shared_secret_arg);
@@ -230,7 +230,7 @@ public class PendingHTLCInfo : CommonBase {
 	/**
 	 * Creates a copy of the PendingHTLCInfo
 	 */
-	public PendingHTLCInfo clone() {
+	public org.ldk.structs.PendingHTLCInfo clone() {
 		long ret = bindings.PendingHTLCInfo_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -253,7 +253,7 @@ public class PendingHTLCInfo : CommonBase {
 	/**
 	 * Read a PendingHTLCInfo from a byte array, created by PendingHTLCInfo_write
 	 */
-	public static Result_PendingHTLCInfoDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_PendingHTLCInfoDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.PendingHTLCInfo_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

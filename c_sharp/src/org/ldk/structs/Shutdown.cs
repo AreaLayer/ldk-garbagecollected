@@ -20,7 +20,7 @@ public class Shutdown : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.Shutdown_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -65,7 +65,7 @@ public class Shutdown : CommonBase {
 	/**
 	 * Constructs a new Shutdown given each field
 	 */
-	public static Shutdown of(org.ldk.structs.ChannelId channel_id_arg, byte[] scriptpubkey_arg) {
+	public static org.ldk.structs.Shutdown of(org.ldk.structs.ChannelId channel_id_arg, byte[] scriptpubkey_arg) {
 		long ret = bindings.Shutdown_new(channel_id_arg.ptr, InternalUtils.encodeUint8Array(scriptpubkey_arg));
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(scriptpubkey_arg);
@@ -84,7 +84,7 @@ public class Shutdown : CommonBase {
 	/**
 	 * Creates a copy of the Shutdown
 	 */
-	public Shutdown clone() {
+	public org.ldk.structs.Shutdown clone() {
 		long ret = bindings.Shutdown_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -136,7 +136,7 @@ public class Shutdown : CommonBase {
 	/**
 	 * Read a Shutdown from a byte array, created by Shutdown_write
 	 */
-	public static Result_ShutdownDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ShutdownDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.Shutdown_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

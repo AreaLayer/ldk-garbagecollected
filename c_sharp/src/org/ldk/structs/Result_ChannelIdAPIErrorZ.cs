@@ -41,7 +41,7 @@ public class Result_ChannelIdAPIErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_ChannelIdAPIErrorZ in the success state.
 	 */
-	public static Result_ChannelIdAPIErrorZ ok(org.ldk.structs.ChannelId o) {
+	public static org.ldk.structs.Result_ChannelIdAPIErrorZ ok(org.ldk.structs.ChannelId o) {
 		long ret = bindings.CResult_ChannelIdAPIErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_ChannelIdAPIErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_ChannelIdAPIErrorZ in the error state.
 	 */
-	public static Result_ChannelIdAPIErrorZ err(org.ldk.structs.APIError e) {
+	public static org.ldk.structs.Result_ChannelIdAPIErrorZ err(org.ldk.structs.APIError e) {
 		long ret = bindings.CResult_ChannelIdAPIErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_ChannelIdAPIErrorZ : CommonBase {
 	 * Creates a new CResult_ChannelIdAPIErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_ChannelIdAPIErrorZ clone() {
+	public org.ldk.structs.Result_ChannelIdAPIErrorZ clone() {
 		long ret = bindings.CResult_ChannelIdAPIErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

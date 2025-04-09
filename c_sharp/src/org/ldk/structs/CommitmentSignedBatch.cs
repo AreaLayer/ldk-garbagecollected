@@ -56,7 +56,7 @@ public class CommitmentSignedBatch : CommonBase {
 	/**
 	 * Constructs a new CommitmentSignedBatch given each field
 	 */
-	public static CommitmentSignedBatch of(short batch_size_arg, byte[] funding_txid_arg) {
+	public static org.ldk.structs.CommitmentSignedBatch of(short batch_size_arg, byte[] funding_txid_arg) {
 		long ret = bindings.CommitmentSignedBatch_new(batch_size_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(funding_txid_arg, 32)));
 		GC.KeepAlive(batch_size_arg);
 		GC.KeepAlive(funding_txid_arg);
@@ -75,7 +75,7 @@ public class CommitmentSignedBatch : CommonBase {
 	/**
 	 * Creates a copy of the CommitmentSignedBatch
 	 */
-	public CommitmentSignedBatch clone() {
+	public org.ldk.structs.CommitmentSignedBatch clone() {
 		long ret = bindings.CommitmentSignedBatch_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -127,7 +127,7 @@ public class CommitmentSignedBatch : CommonBase {
 	/**
 	 * Read a CommitmentSignedBatch from a byte array, created by CommitmentSignedBatch_write
 	 */
-	public static Result_CommitmentSignedBatchDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_CommitmentSignedBatchDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.CommitmentSignedBatch_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

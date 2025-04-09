@@ -41,7 +41,7 @@ public class Result_FundingInfoDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_FundingInfoDecodeErrorZ in the success state.
 	 */
-	public static Result_FundingInfoDecodeErrorZ ok(org.ldk.structs.FundingInfo o) {
+	public static org.ldk.structs.Result_FundingInfoDecodeErrorZ ok(org.ldk.structs.FundingInfo o) {
 		long ret = bindings.CResult_FundingInfoDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_FundingInfoDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_FundingInfoDecodeErrorZ in the error state.
 	 */
-	public static Result_FundingInfoDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_FundingInfoDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_FundingInfoDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_FundingInfoDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_FundingInfoDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_FundingInfoDecodeErrorZ clone() {
+	public org.ldk.structs.Result_FundingInfoDecodeErrorZ clone() {
 		long ret = bindings.CResult_FundingInfoDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

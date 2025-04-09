@@ -18,7 +18,7 @@ public class TwoTuple_OffersMessageResponseInstructionZ : CommonBase {
 	/**
 	 * 
 	 */
-	public OffersMessage get_a() {
+	public org.ldk.structs.OffersMessage get_a() {
 		long ret = bindings.C2Tuple_OffersMessageResponseInstructionZ_get_a(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -30,7 +30,7 @@ public class TwoTuple_OffersMessageResponseInstructionZ : CommonBase {
 	/**
 	 * 
 	 */
-	public ResponseInstruction get_b() {
+	public org.ldk.structs.ResponseInstruction get_b() {
 		long ret = bindings.C2Tuple_OffersMessageResponseInstructionZ_get_b(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -49,7 +49,7 @@ public class TwoTuple_OffersMessageResponseInstructionZ : CommonBase {
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public TwoTuple_OffersMessageResponseInstructionZ clone() {
+	public org.ldk.structs.TwoTuple_OffersMessageResponseInstructionZ clone() {
 		long ret = bindings.C2Tuple_OffersMessageResponseInstructionZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -61,7 +61,7 @@ public class TwoTuple_OffersMessageResponseInstructionZ : CommonBase {
 	/**
 	 * Creates a new C2Tuple_OffersMessageResponseInstructionZ from the contained elements.
 	 */
-	public static TwoTuple_OffersMessageResponseInstructionZ of(org.ldk.structs.OffersMessage a, org.ldk.structs.ResponseInstruction b) {
+	public static org.ldk.structs.TwoTuple_OffersMessageResponseInstructionZ of(org.ldk.structs.OffersMessage a, org.ldk.structs.ResponseInstruction b) {
 		long ret = bindings.C2Tuple_OffersMessageResponseInstructionZ_new(a.ptr, b.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

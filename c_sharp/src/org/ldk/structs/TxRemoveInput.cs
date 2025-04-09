@@ -20,7 +20,7 @@ public class TxRemoveInput : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.TxRemoveInput_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -59,7 +59,7 @@ public class TxRemoveInput : CommonBase {
 	/**
 	 * Constructs a new TxRemoveInput given each field
 	 */
-	public static TxRemoveInput of(org.ldk.structs.ChannelId channel_id_arg, long serial_id_arg) {
+	public static org.ldk.structs.TxRemoveInput of(org.ldk.structs.ChannelId channel_id_arg, long serial_id_arg) {
 		long ret = bindings.TxRemoveInput_new(channel_id_arg.ptr, serial_id_arg);
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(serial_id_arg);
@@ -78,7 +78,7 @@ public class TxRemoveInput : CommonBase {
 	/**
 	 * Creates a copy of the TxRemoveInput
 	 */
-	public TxRemoveInput clone() {
+	public org.ldk.structs.TxRemoveInput clone() {
 		long ret = bindings.TxRemoveInput_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -130,7 +130,7 @@ public class TxRemoveInput : CommonBase {
 	/**
 	 * Read a TxRemoveInput from a byte array, created by TxRemoveInput_write
 	 */
-	public static Result_TxRemoveInputDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_TxRemoveInputDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.TxRemoveInput_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

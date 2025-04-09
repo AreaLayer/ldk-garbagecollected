@@ -45,7 +45,7 @@ public class Result_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ : Common
 	/**
 	 * Creates a new CResult_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ in the success state.
 	 */
-	public static Result_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ ok(TwoTuple_ThirtyTwoBytesChannelMonitorZ[] o) {
+	public static org.ldk.structs.Result_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ ok(TwoTuple_ThirtyTwoBytesChannelMonitorZ[] o) {
 		long ret = bindings.CResult_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ_ok(InternalUtils.encodeUint64Array(InternalUtils.mapArray(o, o_conv_40 => o_conv_40.ptr)));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -56,7 +56,7 @@ public class Result_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ : Common
 	/**
 	 * Creates a new CResult_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ in the error state.
 	 */
-	public static Result_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ err(IOError e) {
+	public static org.ldk.structs.Result_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ err(IOError e) {
 		long ret = bindings.CResult_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ_err(e);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -83,7 +83,7 @@ public class Result_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ : Common
 	 * Creates a new CResult_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ clone() {
+	public org.ldk.structs.Result_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ clone() {
 		long ret = bindings.CResult_CVec_C2Tuple_ThirtyTwoBytesChannelMonitorZZIOErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

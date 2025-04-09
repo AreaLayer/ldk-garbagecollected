@@ -41,7 +41,7 @@ public class Result_Bolt11InvoiceParseOrSemanticErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_Bolt11InvoiceParseOrSemanticErrorZ in the success state.
 	 */
-	public static Result_Bolt11InvoiceParseOrSemanticErrorZ ok(org.ldk.structs.Bolt11Invoice o) {
+	public static org.ldk.structs.Result_Bolt11InvoiceParseOrSemanticErrorZ ok(org.ldk.structs.Bolt11Invoice o) {
 		long ret = bindings.CResult_Bolt11InvoiceParseOrSemanticErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_Bolt11InvoiceParseOrSemanticErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_Bolt11InvoiceParseOrSemanticErrorZ in the error state.
 	 */
-	public static Result_Bolt11InvoiceParseOrSemanticErrorZ err(org.ldk.structs.ParseOrSemanticError e) {
+	public static org.ldk.structs.Result_Bolt11InvoiceParseOrSemanticErrorZ err(org.ldk.structs.ParseOrSemanticError e) {
 		long ret = bindings.CResult_Bolt11InvoiceParseOrSemanticErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_Bolt11InvoiceParseOrSemanticErrorZ : CommonBase {
 	 * Creates a new CResult_Bolt11InvoiceParseOrSemanticErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_Bolt11InvoiceParseOrSemanticErrorZ clone() {
+	public org.ldk.structs.Result_Bolt11InvoiceParseOrSemanticErrorZ clone() {
 		long ret = bindings.CResult_Bolt11InvoiceParseOrSemanticErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

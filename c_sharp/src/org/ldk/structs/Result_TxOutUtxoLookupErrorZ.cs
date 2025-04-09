@@ -37,7 +37,7 @@ public class Result_TxOutUtxoLookupErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_TxOutUtxoLookupErrorZ in the success state.
 	 */
-	public static Result_TxOutUtxoLookupErrorZ ok(org.ldk.structs.TxOut o) {
+	public static org.ldk.structs.Result_TxOutUtxoLookupErrorZ ok(org.ldk.structs.TxOut o) {
 		long ret = bindings.CResult_TxOutUtxoLookupErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -48,7 +48,7 @@ public class Result_TxOutUtxoLookupErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_TxOutUtxoLookupErrorZ in the error state.
 	 */
-	public static Result_TxOutUtxoLookupErrorZ err(UtxoLookupError e) {
+	public static org.ldk.structs.Result_TxOutUtxoLookupErrorZ err(UtxoLookupError e) {
 		long ret = bindings.CResult_TxOutUtxoLookupErrorZ_err(e);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -75,7 +75,7 @@ public class Result_TxOutUtxoLookupErrorZ : CommonBase {
 	 * Creates a new CResult_TxOutUtxoLookupErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_TxOutUtxoLookupErrorZ clone() {
+	public org.ldk.structs.Result_TxOutUtxoLookupErrorZ clone() {
 		long ret = bindings.CResult_TxOutUtxoLookupErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

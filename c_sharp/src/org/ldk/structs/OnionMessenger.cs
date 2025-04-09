@@ -136,7 +136,7 @@ public class OnionMessenger : CommonBase {
 	 * Constructs a new `OnionMessenger` to send, forward, and delegate received onion messages to
 	 * their respective handlers.
 	 */
-	public static OnionMessenger of(org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.Logger logger, org.ldk.structs.NodeIdLookUp node_id_lookup, org.ldk.structs.MessageRouter message_router, org.ldk.structs.OffersMessageHandler offers_handler, org.ldk.structs.AsyncPaymentsMessageHandler async_payments_handler, org.ldk.structs.DNSResolverMessageHandler dns_resolver, org.ldk.structs.CustomOnionMessageHandler custom_handler) {
+	public static org.ldk.structs.OnionMessenger of(org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.Logger logger, org.ldk.structs.NodeIdLookUp node_id_lookup, org.ldk.structs.MessageRouter message_router, org.ldk.structs.OffersMessageHandler offers_handler, org.ldk.structs.AsyncPaymentsMessageHandler async_payments_handler, org.ldk.structs.DNSResolverMessageHandler dns_resolver, org.ldk.structs.CustomOnionMessageHandler custom_handler) {
 		long ret = bindings.OnionMessenger_new(entropy_source.ptr, node_signer.ptr, logger.ptr, node_id_lookup.ptr, message_router.ptr, offers_handler.ptr, async_payments_handler.ptr, dns_resolver.ptr, custom_handler.ptr);
 		GC.KeepAlive(entropy_source);
 		GC.KeepAlive(node_signer);
@@ -185,7 +185,7 @@ public class OnionMessenger : CommonBase {
 	 * onion messages are persisted and only persist onion messages for relevant
 	 * peers.
 	 */
-	public static OnionMessenger new_with_offline_peer_interception(org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.Logger logger, org.ldk.structs.NodeIdLookUp node_id_lookup, org.ldk.structs.MessageRouter message_router, org.ldk.structs.OffersMessageHandler offers_handler, org.ldk.structs.AsyncPaymentsMessageHandler async_payments_handler, org.ldk.structs.DNSResolverMessageHandler dns_resolver, org.ldk.structs.CustomOnionMessageHandler custom_handler) {
+	public static org.ldk.structs.OnionMessenger new_with_offline_peer_interception(org.ldk.structs.EntropySource entropy_source, org.ldk.structs.NodeSigner node_signer, org.ldk.structs.Logger logger, org.ldk.structs.NodeIdLookUp node_id_lookup, org.ldk.structs.MessageRouter message_router, org.ldk.structs.OffersMessageHandler offers_handler, org.ldk.structs.AsyncPaymentsMessageHandler async_payments_handler, org.ldk.structs.DNSResolverMessageHandler dns_resolver, org.ldk.structs.CustomOnionMessageHandler custom_handler) {
 		long ret = bindings.OnionMessenger_new_with_offline_peer_interception(entropy_source.ptr, node_signer.ptr, logger.ptr, node_id_lookup.ptr, message_router.ptr, offers_handler.ptr, async_payments_handler.ptr, dns_resolver.ptr, custom_handler.ptr);
 		GC.KeepAlive(entropy_source);
 		GC.KeepAlive(node_signer);
@@ -214,7 +214,7 @@ public class OnionMessenger : CommonBase {
 	/**
 	 * Sends an [`OnionMessage`] based on its [`MessageSendInstructions`].
 	 */
-	public Result_SendSuccessSendErrorZ send_onion_message(org.ldk.structs.OnionMessageContents contents, org.ldk.structs.MessageSendInstructions instructions) {
+	public org.ldk.structs.Result_SendSuccessSendErrorZ send_onion_message(org.ldk.structs.OnionMessageContents contents, org.ldk.structs.MessageSendInstructions instructions) {
 		long ret = bindings.OnionMessenger_send_onion_message(this.ptr, contents.ptr, instructions.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(contents);
@@ -231,7 +231,7 @@ public class OnionMessenger : CommonBase {
 	 * and want to forward a previously intercepted onion message to a peer that
 	 * has just come online.
 	 */
-	public Result_NoneSendErrorZ forward_onion_message(org.ldk.structs.OnionMessage message, byte[] peer_node_id) {
+	public org.ldk.structs.Result_NoneSendErrorZ forward_onion_message(org.ldk.structs.OnionMessage message, byte[] peer_node_id) {
 		long ret = bindings.OnionMessenger_forward_onion_message(this.ptr, message.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(peer_node_id, 33)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(message);
@@ -251,7 +251,7 @@ public class OnionMessenger : CommonBase {
 	 * generating the response asynchronously. Subsequently, when the response is prepared and
 	 * ready for sending, that task can invoke this method to enqueue the response for delivery.
 	 */
-	public Result_SendSuccessSendErrorZ handle_onion_message_response(org.ldk.structs.OnionMessageContents response, org.ldk.structs.ResponseInstruction instructions) {
+	public org.ldk.structs.Result_SendSuccessSendErrorZ handle_onion_message_response(org.ldk.structs.OnionMessageContents response, org.ldk.structs.ResponseInstruction instructions) {
 		long ret = bindings.OnionMessenger_handle_onion_message_response(this.ptr, response.ptr, instructions.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(response);
@@ -271,7 +271,7 @@ public class OnionMessenger : CommonBase {
 	 * 
 	 * [`EventsProvider::process_pending_events`]: crate::events::EventsProvider::process_pending_events
 	 */
-	public Future get_update_future() {
+	public org.ldk.structs.Future get_update_future() {
 		long ret = bindings.OnionMessenger_get_update_future(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -284,7 +284,7 @@ public class OnionMessenger : CommonBase {
 	 * Constructs a new EventsProvider which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned EventsProvider must be freed before this_arg is
 	 */
-	public EventsProvider as_EventsProvider() {
+	public org.ldk.structs.EventsProvider as_EventsProvider() {
 		long ret = bindings.OnionMessenger_as_EventsProvider(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -297,7 +297,7 @@ public class OnionMessenger : CommonBase {
 	 * Constructs a new OnionMessageHandler which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned OnionMessageHandler must be freed before this_arg is
 	 */
-	public OnionMessageHandler as_OnionMessageHandler() {
+	public org.ldk.structs.OnionMessageHandler as_OnionMessageHandler() {
 		long ret = bindings.OnionMessenger_as_OnionMessageHandler(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

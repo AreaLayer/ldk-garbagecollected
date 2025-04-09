@@ -36,7 +36,7 @@ public class Result_NoneAPIErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_NoneAPIErrorZ in the success state.
 	 */
-	public static Result_NoneAPIErrorZ ok() {
+	public static org.ldk.structs.Result_NoneAPIErrorZ ok() {
 		long ret = bindings.CResult_NoneAPIErrorZ_ok();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneAPIErrorZ ret_hu_conv = Result_NoneAPIErrorZ.constr_from_ptr(ret);
@@ -46,7 +46,7 @@ public class Result_NoneAPIErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_NoneAPIErrorZ in the error state.
 	 */
-	public static Result_NoneAPIErrorZ err(org.ldk.structs.APIError e) {
+	public static org.ldk.structs.Result_NoneAPIErrorZ err(org.ldk.structs.APIError e) {
 		long ret = bindings.CResult_NoneAPIErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -73,7 +73,7 @@ public class Result_NoneAPIErrorZ : CommonBase {
 	 * Creates a new CResult_NoneAPIErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_NoneAPIErrorZ clone() {
+	public org.ldk.structs.Result_NoneAPIErrorZ clone() {
 		long ret = bindings.CResult_NoneAPIErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

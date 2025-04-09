@@ -92,7 +92,7 @@ public class APIError : CommonBase {
 		/**
 		 * The incompatible shutdown script.
 		 */
-		public ShutdownScript script;
+		public org.ldk.structs.ShutdownScript script;
 		internal APIError_IncompatibleShutdownScript(long ptr) : base(null, ptr) {
 			long script = bindings.LDKAPIError_IncompatibleShutdownScript_get_script(ptr);
 			org.ldk.structs.ShutdownScript script_hu_conv = null; if (script < 0 || script > 4096) { script_hu_conv = new org.ldk.structs.ShutdownScript(null, script); }
@@ -109,7 +109,7 @@ public class APIError : CommonBase {
 	/**
 	 * Creates a copy of the APIError
 	 */
-	public APIError clone() {
+	public org.ldk.structs.APIError clone() {
 		long ret = bindings.APIError_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -121,7 +121,7 @@ public class APIError : CommonBase {
 	/**
 	 * Utility method to constructs a new APIMisuseError-variant APIError
 	 */
-	public static APIError apimisuse_error(string err) {
+	public static org.ldk.structs.APIError apimisuse_error(string err) {
 		long ret = bindings.APIError_apimisuse_error(InternalUtils.encodeString(err));
 		GC.KeepAlive(err);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -133,7 +133,7 @@ public class APIError : CommonBase {
 	/**
 	 * Utility method to constructs a new FeeRateTooHigh-variant APIError
 	 */
-	public static APIError fee_rate_too_high(string err, int feerate) {
+	public static org.ldk.structs.APIError fee_rate_too_high(string err, int feerate) {
 		long ret = bindings.APIError_fee_rate_too_high(InternalUtils.encodeString(err), feerate);
 		GC.KeepAlive(err);
 		GC.KeepAlive(feerate);
@@ -146,7 +146,7 @@ public class APIError : CommonBase {
 	/**
 	 * Utility method to constructs a new InvalidRoute-variant APIError
 	 */
-	public static APIError invalid_route(string err) {
+	public static org.ldk.structs.APIError invalid_route(string err) {
 		long ret = bindings.APIError_invalid_route(InternalUtils.encodeString(err));
 		GC.KeepAlive(err);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -158,7 +158,7 @@ public class APIError : CommonBase {
 	/**
 	 * Utility method to constructs a new ChannelUnavailable-variant APIError
 	 */
-	public static APIError channel_unavailable(string err) {
+	public static org.ldk.structs.APIError channel_unavailable(string err) {
 		long ret = bindings.APIError_channel_unavailable(InternalUtils.encodeString(err));
 		GC.KeepAlive(err);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -170,7 +170,7 @@ public class APIError : CommonBase {
 	/**
 	 * Utility method to constructs a new MonitorUpdateInProgress-variant APIError
 	 */
-	public static APIError monitor_update_in_progress() {
+	public static org.ldk.structs.APIError monitor_update_in_progress() {
 		long ret = bindings.APIError_monitor_update_in_progress();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.APIError ret_hu_conv = org.ldk.structs.APIError.constr_from_ptr(ret);
@@ -181,7 +181,7 @@ public class APIError : CommonBase {
 	/**
 	 * Utility method to constructs a new IncompatibleShutdownScript-variant APIError
 	 */
-	public static APIError incompatible_shutdown_script(org.ldk.structs.ShutdownScript script) {
+	public static org.ldk.structs.APIError incompatible_shutdown_script(org.ldk.structs.ShutdownScript script) {
 		long ret = bindings.APIError_incompatible_shutdown_script(script.ptr);
 		GC.KeepAlive(script);
 		if (ret >= 0 && ret <= 4096) { return null; }

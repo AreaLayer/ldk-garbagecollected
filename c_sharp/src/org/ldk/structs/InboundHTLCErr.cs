@@ -78,7 +78,7 @@ public class InboundHTLCErr : CommonBase {
 	/**
 	 * Constructs a new InboundHTLCErr given each field
 	 */
-	public static InboundHTLCErr of(short err_code_arg, byte[] err_data_arg, string msg_arg) {
+	public static org.ldk.structs.InboundHTLCErr of(short err_code_arg, byte[] err_data_arg, string msg_arg) {
 		long ret = bindings.InboundHTLCErr_new(err_code_arg, InternalUtils.encodeUint8Array(err_data_arg), InternalUtils.encodeString(msg_arg));
 		GC.KeepAlive(err_code_arg);
 		GC.KeepAlive(err_data_arg);
@@ -98,7 +98,7 @@ public class InboundHTLCErr : CommonBase {
 	/**
 	 * Creates a copy of the InboundHTLCErr
 	 */
-	public InboundHTLCErr clone() {
+	public org.ldk.structs.InboundHTLCErr clone() {
 		long ret = bindings.InboundHTLCErr_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

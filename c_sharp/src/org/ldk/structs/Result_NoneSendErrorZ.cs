@@ -36,7 +36,7 @@ public class Result_NoneSendErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_NoneSendErrorZ in the success state.
 	 */
-	public static Result_NoneSendErrorZ ok() {
+	public static org.ldk.structs.Result_NoneSendErrorZ ok() {
 		long ret = bindings.CResult_NoneSendErrorZ_ok();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneSendErrorZ ret_hu_conv = Result_NoneSendErrorZ.constr_from_ptr(ret);
@@ -46,7 +46,7 @@ public class Result_NoneSendErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_NoneSendErrorZ in the error state.
 	 */
-	public static Result_NoneSendErrorZ err(org.ldk.structs.SendError e) {
+	public static org.ldk.structs.Result_NoneSendErrorZ err(org.ldk.structs.SendError e) {
 		long ret = bindings.CResult_NoneSendErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -73,7 +73,7 @@ public class Result_NoneSendErrorZ : CommonBase {
 	 * Creates a new CResult_NoneSendErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_NoneSendErrorZ clone() {
+	public org.ldk.structs.Result_NoneSendErrorZ clone() {
 		long ret = bindings.CResult_NoneSendErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

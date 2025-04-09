@@ -29,7 +29,7 @@ public class TwoTuple_PublicKeyTypeZ : CommonBase {
 	/**
 	 * 
 	 */
-	public Type get_b() {
+	public org.ldk.structs.Type get_b() {
 		long ret = bindings.C2Tuple_PublicKeyTypeZ_get_b(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -48,7 +48,7 @@ public class TwoTuple_PublicKeyTypeZ : CommonBase {
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public TwoTuple_PublicKeyTypeZ clone() {
+	public org.ldk.structs.TwoTuple_PublicKeyTypeZ clone() {
 		long ret = bindings.C2Tuple_PublicKeyTypeZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -60,7 +60,7 @@ public class TwoTuple_PublicKeyTypeZ : CommonBase {
 	/**
 	 * Creates a new C2Tuple_PublicKeyTypeZ from the contained elements.
 	 */
-	public static TwoTuple_PublicKeyTypeZ of(byte[] a, org.ldk.structs.Type b) {
+	public static org.ldk.structs.TwoTuple_PublicKeyTypeZ of(byte[] a, org.ldk.structs.Type b) {
 		long ret = bindings.C2Tuple_PublicKeyTypeZ_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 33)), b.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

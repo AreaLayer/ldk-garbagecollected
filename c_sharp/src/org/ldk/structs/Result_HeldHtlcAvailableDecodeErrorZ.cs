@@ -41,7 +41,7 @@ public class Result_HeldHtlcAvailableDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_HeldHtlcAvailableDecodeErrorZ in the success state.
 	 */
-	public static Result_HeldHtlcAvailableDecodeErrorZ ok(org.ldk.structs.HeldHtlcAvailable o) {
+	public static org.ldk.structs.Result_HeldHtlcAvailableDecodeErrorZ ok(org.ldk.structs.HeldHtlcAvailable o) {
 		long ret = bindings.CResult_HeldHtlcAvailableDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_HeldHtlcAvailableDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_HeldHtlcAvailableDecodeErrorZ in the error state.
 	 */
-	public static Result_HeldHtlcAvailableDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_HeldHtlcAvailableDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_HeldHtlcAvailableDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_HeldHtlcAvailableDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_HeldHtlcAvailableDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_HeldHtlcAvailableDecodeErrorZ clone() {
+	public org.ldk.structs.Result_HeldHtlcAvailableDecodeErrorZ clone() {
 		long ret = bindings.CResult_HeldHtlcAvailableDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

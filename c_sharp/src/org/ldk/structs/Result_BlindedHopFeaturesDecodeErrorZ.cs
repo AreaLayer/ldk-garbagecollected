@@ -41,7 +41,7 @@ public class Result_BlindedHopFeaturesDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_BlindedHopFeaturesDecodeErrorZ in the success state.
 	 */
-	public static Result_BlindedHopFeaturesDecodeErrorZ ok(org.ldk.structs.BlindedHopFeatures o) {
+	public static org.ldk.structs.Result_BlindedHopFeaturesDecodeErrorZ ok(org.ldk.structs.BlindedHopFeatures o) {
 		long ret = bindings.CResult_BlindedHopFeaturesDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_BlindedHopFeaturesDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_BlindedHopFeaturesDecodeErrorZ in the error state.
 	 */
-	public static Result_BlindedHopFeaturesDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_BlindedHopFeaturesDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_BlindedHopFeaturesDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_BlindedHopFeaturesDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_BlindedHopFeaturesDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_BlindedHopFeaturesDecodeErrorZ clone() {
+	public org.ldk.structs.Result_BlindedHopFeaturesDecodeErrorZ clone() {
 		long ret = bindings.CResult_BlindedHopFeaturesDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

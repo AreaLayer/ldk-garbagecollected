@@ -47,7 +47,7 @@ public class TwoTuple_ThirtyTwoBytesThirtyTwoBytesZ : CommonBase {
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public TwoTuple_ThirtyTwoBytesThirtyTwoBytesZ clone() {
+	public org.ldk.structs.TwoTuple_ThirtyTwoBytesThirtyTwoBytesZ clone() {
 		long ret = bindings.C2Tuple_ThirtyTwoBytesThirtyTwoBytesZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -59,7 +59,7 @@ public class TwoTuple_ThirtyTwoBytesThirtyTwoBytesZ : CommonBase {
 	/**
 	 * Creates a new C2Tuple_ThirtyTwoBytesThirtyTwoBytesZ from the contained elements.
 	 */
-	public static TwoTuple_ThirtyTwoBytesThirtyTwoBytesZ of(byte[] a, byte[] b) {
+	public static org.ldk.structs.TwoTuple_ThirtyTwoBytesThirtyTwoBytesZ of(byte[] a, byte[] b) {
 		long ret = bindings.C2Tuple_ThirtyTwoBytesThirtyTwoBytesZ_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(b, 32)));
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

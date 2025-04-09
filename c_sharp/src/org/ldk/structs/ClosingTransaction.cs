@@ -28,7 +28,7 @@ public class ClosingTransaction : CommonBase {
 	/**
 	 * Creates a copy of the ClosingTransaction
 	 */
-	public ClosingTransaction clone() {
+	public org.ldk.structs.ClosingTransaction clone() {
 		long ret = bindings.ClosingTransaction_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -69,7 +69,7 @@ public class ClosingTransaction : CommonBase {
 	/**
 	 * Construct an object of the class
 	 */
-	public static ClosingTransaction of(long to_holder_value_sat, long to_counterparty_value_sat, byte[] to_holder_script, byte[] to_counterparty_script, org.ldk.structs.OutPoint funding_outpoint) {
+	public static org.ldk.structs.ClosingTransaction of(long to_holder_value_sat, long to_counterparty_value_sat, byte[] to_holder_script, byte[] to_counterparty_script, org.ldk.structs.OutPoint funding_outpoint) {
 		long ret = bindings.ClosingTransaction_new(to_holder_value_sat, to_counterparty_value_sat, InternalUtils.encodeUint8Array(to_holder_script), InternalUtils.encodeUint8Array(to_counterparty_script), funding_outpoint.ptr);
 		GC.KeepAlive(to_holder_value_sat);
 		GC.KeepAlive(to_counterparty_value_sat);
@@ -90,7 +90,7 @@ public class ClosingTransaction : CommonBase {
 	 * This should only be used if you fully trust the builder of this object. It should not
 	 * be used by an external signer - instead use the verify function.
 	 */
-	public TrustedClosingTransaction trust() {
+	public org.ldk.structs.TrustedClosingTransaction trust() {
 		long ret = bindings.ClosingTransaction_trust(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -107,7 +107,7 @@ public class ClosingTransaction : CommonBase {
 	 * An external validating signer must call this method before signing
 	 * or using the built transaction.
 	 */
-	public Result_TrustedClosingTransactionNoneZ verify(org.ldk.structs.OutPoint funding_outpoint) {
+	public org.ldk.structs.Result_TrustedClosingTransactionNoneZ verify(org.ldk.structs.OutPoint funding_outpoint) {
 		long ret = bindings.ClosingTransaction_verify(this.ptr, funding_outpoint.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(funding_outpoint);

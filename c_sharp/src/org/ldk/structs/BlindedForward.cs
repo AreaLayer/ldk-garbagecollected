@@ -92,7 +92,7 @@ public class BlindedForward : CommonBase {
 	 * 
 	 * Note that next_blinding_override_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static BlindedForward of(byte[] inbound_blinding_point_arg, BlindedFailure failure_arg, byte[] next_blinding_override_arg) {
+	public static org.ldk.structs.BlindedForward of(byte[] inbound_blinding_point_arg, BlindedFailure failure_arg, byte[] next_blinding_override_arg) {
 		long ret = bindings.BlindedForward_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(inbound_blinding_point_arg, 33)), failure_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(next_blinding_override_arg, 33)));
 		GC.KeepAlive(inbound_blinding_point_arg);
 		GC.KeepAlive(failure_arg);
@@ -112,7 +112,7 @@ public class BlindedForward : CommonBase {
 	/**
 	 * Creates a copy of the BlindedForward
 	 */
-	public BlindedForward clone() {
+	public org.ldk.structs.BlindedForward clone() {
 		long ret = bindings.BlindedForward_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -164,7 +164,7 @@ public class BlindedForward : CommonBase {
 	/**
 	 * Read a BlindedForward from a byte array, created by BlindedForward_write
 	 */
-	public static Result_BlindedForwardDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_BlindedForwardDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.BlindedForward_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

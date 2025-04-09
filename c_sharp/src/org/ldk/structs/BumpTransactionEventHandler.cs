@@ -24,7 +24,7 @@ public class BumpTransactionEventHandler : CommonBase {
 	 * 
 	 * [`Event::BumpTransaction`]: crate::events::Event::BumpTransaction
 	 */
-	public static BumpTransactionEventHandler of(org.ldk.structs.BroadcasterInterface broadcaster, org.ldk.structs.CoinSelectionSource utxo_source, org.ldk.structs.SignerProvider signer_provider, org.ldk.structs.Logger logger) {
+	public static org.ldk.structs.BumpTransactionEventHandler of(org.ldk.structs.BroadcasterInterface broadcaster, org.ldk.structs.CoinSelectionSource utxo_source, org.ldk.structs.SignerProvider signer_provider, org.ldk.structs.Logger logger) {
 		long ret = bindings.BumpTransactionEventHandler_new(broadcaster.ptr, utxo_source.ptr, signer_provider.ptr, logger.ptr);
 		GC.KeepAlive(broadcaster);
 		GC.KeepAlive(utxo_source);

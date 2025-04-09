@@ -18,7 +18,7 @@ public class ClaimedHTLC : CommonBase {
 	/**
 	 * The `channel_id` of the channel over which the HTLC was received.
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.ClaimedHTLC_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -51,7 +51,7 @@ public class ClaimedHTLC : CommonBase {
 	 * [`ChannelManager::accept_inbound_channel`]: crate::ln::channelmanager::ChannelManager::accept_inbound_channel
 	 * [`UserConfig::manually_accept_inbound_channels`]: crate::util::config::UserConfig::manually_accept_inbound_channels
 	 */
-	public UInt128 get_user_channel_id() {
+	public org.ldk.util.UInt128 get_user_channel_id() {
 		long ret = bindings.ClaimedHTLC_get_user_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -144,7 +144,7 @@ public class ClaimedHTLC : CommonBase {
 	/**
 	 * Constructs a new ClaimedHTLC given each field
 	 */
-	public static ClaimedHTLC of(org.ldk.structs.ChannelId channel_id_arg, org.ldk.util.UInt128 user_channel_id_arg, int cltv_expiry_arg, long value_msat_arg, long counterparty_skimmed_fee_msat_arg) {
+	public static org.ldk.structs.ClaimedHTLC of(org.ldk.structs.ChannelId channel_id_arg, org.ldk.util.UInt128 user_channel_id_arg, int cltv_expiry_arg, long value_msat_arg, long counterparty_skimmed_fee_msat_arg) {
 		long ret = bindings.ClaimedHTLC_new(channel_id_arg.ptr, InternalUtils.encodeUint8Array(user_channel_id_arg.getLEBytes()), cltv_expiry_arg, value_msat_arg, counterparty_skimmed_fee_msat_arg);
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(user_channel_id_arg);
@@ -166,7 +166,7 @@ public class ClaimedHTLC : CommonBase {
 	/**
 	 * Creates a copy of the ClaimedHTLC
 	 */
-	public ClaimedHTLC clone() {
+	public org.ldk.structs.ClaimedHTLC clone() {
 		long ret = bindings.ClaimedHTLC_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -206,7 +206,7 @@ public class ClaimedHTLC : CommonBase {
 	/**
 	 * Read a ClaimedHTLC from a byte array, created by ClaimedHTLC_write
 	 */
-	public static Result_ClaimedHTLCDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ClaimedHTLCDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.ClaimedHTLC_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

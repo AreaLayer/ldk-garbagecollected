@@ -41,7 +41,7 @@ public class Result_MaxDustHTLCExposureDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_MaxDustHTLCExposureDecodeErrorZ in the success state.
 	 */
-	public static Result_MaxDustHTLCExposureDecodeErrorZ ok(org.ldk.structs.MaxDustHTLCExposure o) {
+	public static org.ldk.structs.Result_MaxDustHTLCExposureDecodeErrorZ ok(org.ldk.structs.MaxDustHTLCExposure o) {
 		long ret = bindings.CResult_MaxDustHTLCExposureDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_MaxDustHTLCExposureDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_MaxDustHTLCExposureDecodeErrorZ in the error state.
 	 */
-	public static Result_MaxDustHTLCExposureDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_MaxDustHTLCExposureDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_MaxDustHTLCExposureDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_MaxDustHTLCExposureDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_MaxDustHTLCExposureDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_MaxDustHTLCExposureDecodeErrorZ clone() {
+	public org.ldk.structs.Result_MaxDustHTLCExposureDecodeErrorZ clone() {
 		long ret = bindings.CResult_MaxDustHTLCExposureDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

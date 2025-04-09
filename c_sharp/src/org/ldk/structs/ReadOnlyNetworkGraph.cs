@@ -20,7 +20,7 @@ public class ReadOnlyNetworkGraph : CommonBase, IDisposable {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ChannelInfo channel(long short_channel_id) {
+	public org.ldk.structs.ChannelInfo channel(long short_channel_id) {
 		long ret = bindings.ReadOnlyNetworkGraph_channel(this.ptr, short_channel_id);
 		GC.KeepAlive(this);
 		GC.KeepAlive(short_channel_id);
@@ -46,7 +46,7 @@ public class ReadOnlyNetworkGraph : CommonBase, IDisposable {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public NodeInfo node(org.ldk.structs.NodeId node_id) {
+	public org.ldk.structs.NodeInfo node(org.ldk.structs.NodeId node_id) {
 		long ret = bindings.ReadOnlyNetworkGraph_node(this.ptr, node_id.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(node_id);
@@ -81,7 +81,7 @@ public class ReadOnlyNetworkGraph : CommonBase, IDisposable {
 	 * Returns None if the requested node is completely unknown,
 	 * or if node announcement for the node was never received.
 	 */
-	public Option_CVec_SocketAddressZZ get_addresses(byte[] pubkey) {
+	public org.ldk.structs.Option_CVec_SocketAddressZZ get_addresses(byte[] pubkey) {
 		long ret = bindings.ReadOnlyNetworkGraph_get_addresses(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(pubkey, 33)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(pubkey);

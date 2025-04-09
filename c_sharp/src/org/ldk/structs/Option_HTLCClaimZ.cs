@@ -39,7 +39,7 @@ public class Option_HTLCClaimZ : CommonBase {
 	/**
 	 * Constructs a new COption_HTLCClaimZ containing a crate::lightning::ln::chan_utils::HTLCClaim
 	 */
-	public static Option_HTLCClaimZ some(HTLCClaim o) {
+	public static org.ldk.structs.Option_HTLCClaimZ some(HTLCClaim o) {
 		long ret = bindings.COption_HTLCClaimZ_some(o);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -51,7 +51,7 @@ public class Option_HTLCClaimZ : CommonBase {
 	/**
 	 * Constructs a new COption_HTLCClaimZ containing nothing
 	 */
-	public static Option_HTLCClaimZ none() {
+	public static org.ldk.structs.Option_HTLCClaimZ none() {
 		long ret = bindings.COption_HTLCClaimZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_HTLCClaimZ ret_hu_conv = org.ldk.structs.Option_HTLCClaimZ.constr_from_ptr(ret);

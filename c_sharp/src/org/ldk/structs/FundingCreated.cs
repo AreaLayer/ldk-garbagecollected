@@ -22,7 +22,7 @@ public class FundingCreated : CommonBase {
 	/**
 	 * A temporary channel ID, until the funding is established
 	 */
-	public ChannelId get_temporary_channel_id() {
+	public org.ldk.structs.ChannelId get_temporary_channel_id() {
 		long ret = bindings.FundingCreated_get_temporary_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -101,7 +101,7 @@ public class FundingCreated : CommonBase {
 	/**
 	 * Constructs a new FundingCreated given each field
 	 */
-	public static FundingCreated of(org.ldk.structs.ChannelId temporary_channel_id_arg, byte[] funding_txid_arg, short funding_output_index_arg, byte[] signature_arg) {
+	public static org.ldk.structs.FundingCreated of(org.ldk.structs.ChannelId temporary_channel_id_arg, byte[] funding_txid_arg, short funding_output_index_arg, byte[] signature_arg) {
 		long ret = bindings.FundingCreated_new(temporary_channel_id_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(funding_txid_arg, 32)), funding_output_index_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(signature_arg, 64)));
 		GC.KeepAlive(temporary_channel_id_arg);
 		GC.KeepAlive(funding_txid_arg);
@@ -122,7 +122,7 @@ public class FundingCreated : CommonBase {
 	/**
 	 * Creates a copy of the FundingCreated
 	 */
-	public FundingCreated clone() {
+	public org.ldk.structs.FundingCreated clone() {
 		long ret = bindings.FundingCreated_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -174,7 +174,7 @@ public class FundingCreated : CommonBase {
 	/**
 	 * Read a FundingCreated from a byte array, created by FundingCreated_write
 	 */
-	public static Result_FundingCreatedDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_FundingCreatedDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.FundingCreated_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

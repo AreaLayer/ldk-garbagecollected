@@ -29,7 +29,7 @@ public class UnsignedInvoiceRequest : CommonBase {
 	/**
 	 * Creates a copy of the UnsignedInvoiceRequest
 	 */
-	public UnsignedInvoiceRequest clone() {
+	public org.ldk.structs.UnsignedInvoiceRequest clone() {
 		long ret = bindings.UnsignedInvoiceRequest_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -41,7 +41,7 @@ public class UnsignedInvoiceRequest : CommonBase {
 	/**
 	 * Returns the [`TaggedHash`] of the invoice to sign.
 	 */
-	public TaggedHash tagged_hash() {
+	public org.ldk.structs.TaggedHash tagged_hash() {
 		long ret = bindings.UnsignedInvoiceRequest_tagged_hash(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -74,7 +74,7 @@ public class UnsignedInvoiceRequest : CommonBase {
 	 * Opaque bytes set by the originator. Useful for authentication and validating fields since it
 	 * is reflected in `invoice_request` messages along with all the other fields from the `offer`.
 	 */
-	public Option_CVec_u8ZZ metadata() {
+	public org.ldk.structs.Option_CVec_u8ZZ metadata() {
 		long ret = bindings.UnsignedInvoiceRequest_metadata(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -86,7 +86,7 @@ public class UnsignedInvoiceRequest : CommonBase {
 	/**
 	 * The minimum amount required for a successful payment of a single item.
 	 */
-	public Option_AmountZ amount() {
+	public org.ldk.structs.Option_AmountZ amount() {
 		long ret = bindings.UnsignedInvoiceRequest_amount(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -101,7 +101,7 @@ public class UnsignedInvoiceRequest : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public PrintableString description() {
+	public org.ldk.structs.PrintableString description() {
 		long ret = bindings.UnsignedInvoiceRequest_description(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -113,7 +113,7 @@ public class UnsignedInvoiceRequest : CommonBase {
 	/**
 	 * Features pertaining to the offer.
 	 */
-	public OfferFeatures offer_features() {
+	public org.ldk.structs.OfferFeatures offer_features() {
 		long ret = bindings.UnsignedInvoiceRequest_offer_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -127,7 +127,7 @@ public class UnsignedInvoiceRequest : CommonBase {
 	 * 
 	 * If `None`, the offer does not expire.
 	 */
-	public Option_u64Z absolute_expiry() {
+	public org.ldk.structs.Option_u64Z absolute_expiry() {
 		long ret = bindings.UnsignedInvoiceRequest_absolute_expiry(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -142,7 +142,7 @@ public class UnsignedInvoiceRequest : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public PrintableString issuer() {
+	public org.ldk.structs.PrintableString issuer() {
 		long ret = bindings.UnsignedInvoiceRequest_issuer(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -174,7 +174,7 @@ public class UnsignedInvoiceRequest : CommonBase {
 	/**
 	 * The quantity of items supported.
 	 */
-	public Quantity supported_quantity() {
+	public org.ldk.structs.Quantity supported_quantity() {
 		long ret = bindings.UnsignedInvoiceRequest_supported_quantity(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -237,7 +237,7 @@ public class UnsignedInvoiceRequest : CommonBase {
 	 * 
 	 * [`chain`]: Self::chain
 	 */
-	public Option_u64Z amount_msats() {
+	public org.ldk.structs.Option_u64Z amount_msats() {
 		long ret = bindings.UnsignedInvoiceRequest_amount_msats(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -262,7 +262,7 @@ public class UnsignedInvoiceRequest : CommonBase {
 	/**
 	 * Features pertaining to requesting an invoice.
 	 */
-	public InvoiceRequestFeatures invoice_request_features() {
+	public org.ldk.structs.InvoiceRequestFeatures invoice_request_features() {
 		long ret = bindings.UnsignedInvoiceRequest_invoice_request_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -274,7 +274,7 @@ public class UnsignedInvoiceRequest : CommonBase {
 	/**
 	 * The quantity of the offer's item conforming to [`Offer::is_valid_quantity`].
 	 */
-	public Option_u64Z quantity() {
+	public org.ldk.structs.Option_u64Z quantity() {
 		long ret = bindings.UnsignedInvoiceRequest_quantity(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -300,7 +300,7 @@ public class UnsignedInvoiceRequest : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public PrintableString payer_note() {
+	public org.ldk.structs.PrintableString payer_note() {
 		long ret = bindings.UnsignedInvoiceRequest_payer_note(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -315,7 +315,7 @@ public class UnsignedInvoiceRequest : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public HumanReadableName offer_from_hrn() {
+	public org.ldk.structs.HumanReadableName offer_from_hrn() {
 		long ret = bindings.UnsignedInvoiceRequest_offer_from_hrn(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

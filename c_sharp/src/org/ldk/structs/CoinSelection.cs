@@ -52,7 +52,7 @@ public class CoinSelection : CommonBase {
 	 * spent until the transaction it belongs to confirms to ensure mempool descendant limits are
 	 * not met. This implies no other party should be able to spend it except us.
 	 */
-	public Option_TxOutZ get_change_output() {
+	public org.ldk.structs.Option_TxOutZ get_change_output() {
 		long ret = bindings.CoinSelection_get_change_output(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -76,7 +76,7 @@ public class CoinSelection : CommonBase {
 	/**
 	 * Constructs a new CoinSelection given each field
 	 */
-	public static CoinSelection of(Utxo[] confirmed_utxos_arg, org.ldk.structs.Option_TxOutZ change_output_arg) {
+	public static org.ldk.structs.CoinSelection of(Utxo[] confirmed_utxos_arg, org.ldk.structs.Option_TxOutZ change_output_arg) {
 		long ret = bindings.CoinSelection_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(confirmed_utxos_arg, confirmed_utxos_arg_conv_6 => confirmed_utxos_arg_conv_6.ptr)), change_output_arg.ptr);
 		GC.KeepAlive(confirmed_utxos_arg);
 		GC.KeepAlive(change_output_arg);
@@ -95,7 +95,7 @@ public class CoinSelection : CommonBase {
 	/**
 	 * Creates a copy of the CoinSelection
 	 */
-	public CoinSelection clone() {
+	public org.ldk.structs.CoinSelection clone() {
 		long ret = bindings.CoinSelection_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -41,7 +41,7 @@ public class Result_CounterpartyCommitmentSecretsDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_CounterpartyCommitmentSecretsDecodeErrorZ in the success state.
 	 */
-	public static Result_CounterpartyCommitmentSecretsDecodeErrorZ ok(org.ldk.structs.CounterpartyCommitmentSecrets o) {
+	public static org.ldk.structs.Result_CounterpartyCommitmentSecretsDecodeErrorZ ok(org.ldk.structs.CounterpartyCommitmentSecrets o) {
 		long ret = bindings.CResult_CounterpartyCommitmentSecretsDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_CounterpartyCommitmentSecretsDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_CounterpartyCommitmentSecretsDecodeErrorZ in the error state.
 	 */
-	public static Result_CounterpartyCommitmentSecretsDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_CounterpartyCommitmentSecretsDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_CounterpartyCommitmentSecretsDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_CounterpartyCommitmentSecretsDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_CounterpartyCommitmentSecretsDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_CounterpartyCommitmentSecretsDecodeErrorZ clone() {
+	public org.ldk.structs.Result_CounterpartyCommitmentSecretsDecodeErrorZ clone() {
 		long ret = bindings.CResult_CounterpartyCommitmentSecretsDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

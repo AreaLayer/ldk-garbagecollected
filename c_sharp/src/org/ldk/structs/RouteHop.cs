@@ -40,7 +40,7 @@ public class RouteHop : CommonBase {
 	 * The node_announcement features of the node at this hop. For the last hop, these may be
 	 * amended to match the features present in the invoice this node generated.
 	 */
-	public NodeFeatures get_node_features() {
+	public org.ldk.structs.NodeFeatures get_node_features() {
 		long ret = bindings.RouteHop_get_node_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -81,7 +81,7 @@ public class RouteHop : CommonBase {
 	 * The channel_announcement features of the channel that should be used from the previous hop
 	 * to reach this node.
 	 */
-	public ChannelFeatures get_channel_features() {
+	public org.ldk.structs.ChannelFeatures get_channel_features() {
 		long ret = bindings.RouteHop_get_channel_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -187,7 +187,7 @@ public class RouteHop : CommonBase {
 	/**
 	 * Constructs a new RouteHop given each field
 	 */
-	public static RouteHop of(byte[] pubkey_arg, org.ldk.structs.NodeFeatures node_features_arg, long short_channel_id_arg, org.ldk.structs.ChannelFeatures channel_features_arg, long fee_msat_arg, int cltv_expiry_delta_arg, bool maybe_announced_channel_arg) {
+	public static org.ldk.structs.RouteHop of(byte[] pubkey_arg, org.ldk.structs.NodeFeatures node_features_arg, long short_channel_id_arg, org.ldk.structs.ChannelFeatures channel_features_arg, long fee_msat_arg, int cltv_expiry_delta_arg, bool maybe_announced_channel_arg) {
 		long ret = bindings.RouteHop_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(pubkey_arg, 33)), node_features_arg.ptr, short_channel_id_arg, channel_features_arg.ptr, fee_msat_arg, cltv_expiry_delta_arg, maybe_announced_channel_arg);
 		GC.KeepAlive(pubkey_arg);
 		GC.KeepAlive(node_features_arg);
@@ -211,7 +211,7 @@ public class RouteHop : CommonBase {
 	/**
 	 * Creates a copy of the RouteHop
 	 */
-	public RouteHop clone() {
+	public org.ldk.structs.RouteHop clone() {
 		long ret = bindings.RouteHop_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -263,7 +263,7 @@ public class RouteHop : CommonBase {
 	/**
 	 * Read a RouteHop from a byte array, created by RouteHop_write
 	 */
-	public static Result_RouteHopDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_RouteHopDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.RouteHop_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

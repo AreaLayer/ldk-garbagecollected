@@ -41,7 +41,7 @@ public class Result_Bolt11InvoiceSignOrCreationErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_Bolt11InvoiceSignOrCreationErrorZ in the success state.
 	 */
-	public static Result_Bolt11InvoiceSignOrCreationErrorZ ok(org.ldk.structs.Bolt11Invoice o) {
+	public static org.ldk.structs.Result_Bolt11InvoiceSignOrCreationErrorZ ok(org.ldk.structs.Bolt11Invoice o) {
 		long ret = bindings.CResult_Bolt11InvoiceSignOrCreationErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_Bolt11InvoiceSignOrCreationErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_Bolt11InvoiceSignOrCreationErrorZ in the error state.
 	 */
-	public static Result_Bolt11InvoiceSignOrCreationErrorZ err(org.ldk.structs.SignOrCreationError e) {
+	public static org.ldk.structs.Result_Bolt11InvoiceSignOrCreationErrorZ err(org.ldk.structs.SignOrCreationError e) {
 		long ret = bindings.CResult_Bolt11InvoiceSignOrCreationErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_Bolt11InvoiceSignOrCreationErrorZ : CommonBase {
 	 * Creates a new CResult_Bolt11InvoiceSignOrCreationErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_Bolt11InvoiceSignOrCreationErrorZ clone() {
+	public org.ldk.structs.Result_Bolt11InvoiceSignOrCreationErrorZ clone() {
 		long ret = bindings.CResult_Bolt11InvoiceSignOrCreationErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

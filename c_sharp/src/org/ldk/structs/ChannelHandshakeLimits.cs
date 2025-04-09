@@ -316,7 +316,7 @@ public class ChannelHandshakeLimits : CommonBase {
 	/**
 	 * Constructs a new ChannelHandshakeLimits given each field
 	 */
-	public static ChannelHandshakeLimits of(long min_funding_satoshis_arg, long max_funding_satoshis_arg, long max_htlc_minimum_msat_arg, long min_max_htlc_value_in_flight_msat_arg, long max_channel_reserve_satoshis_arg, short min_max_accepted_htlcs_arg, int max_minimum_depth_arg, bool trust_own_funding_0conf_arg, bool force_announced_channel_preference_arg, short their_to_self_delay_arg) {
+	public static org.ldk.structs.ChannelHandshakeLimits of(long min_funding_satoshis_arg, long max_funding_satoshis_arg, long max_htlc_minimum_msat_arg, long min_max_htlc_value_in_flight_msat_arg, long max_channel_reserve_satoshis_arg, short min_max_accepted_htlcs_arg, int max_minimum_depth_arg, bool trust_own_funding_0conf_arg, bool force_announced_channel_preference_arg, short their_to_self_delay_arg) {
 		long ret = bindings.ChannelHandshakeLimits_new(min_funding_satoshis_arg, max_funding_satoshis_arg, max_htlc_minimum_msat_arg, min_max_htlc_value_in_flight_msat_arg, max_channel_reserve_satoshis_arg, min_max_accepted_htlcs_arg, max_minimum_depth_arg, trust_own_funding_0conf_arg, force_announced_channel_preference_arg, their_to_self_delay_arg);
 		GC.KeepAlive(min_funding_satoshis_arg);
 		GC.KeepAlive(max_funding_satoshis_arg);
@@ -343,7 +343,7 @@ public class ChannelHandshakeLimits : CommonBase {
 	/**
 	 * Creates a copy of the ChannelHandshakeLimits
 	 */
-	public ChannelHandshakeLimits clone() {
+	public org.ldk.structs.ChannelHandshakeLimits clone() {
 		long ret = bindings.ChannelHandshakeLimits_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -355,7 +355,7 @@ public class ChannelHandshakeLimits : CommonBase {
 	/**
 	 * Creates a "default" ChannelHandshakeLimits. See struct and individual field documentaiton for details on which values are used.
 	 */
-	public static ChannelHandshakeLimits with_default() {
+	public static org.ldk.structs.ChannelHandshakeLimits with_default() {
 		long ret = bindings.ChannelHandshakeLimits_default();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ChannelHandshakeLimits ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ChannelHandshakeLimits(null, ret); }

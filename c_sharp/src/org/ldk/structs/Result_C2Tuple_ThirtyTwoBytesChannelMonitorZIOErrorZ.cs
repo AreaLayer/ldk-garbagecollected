@@ -38,7 +38,7 @@ public class Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ in the success state.
 	 */
-	public static Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ ok(org.ldk.structs.TwoTuple_ThirtyTwoBytesChannelMonitorZ o) {
+	public static org.ldk.structs.Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ ok(org.ldk.structs.TwoTuple_ThirtyTwoBytesChannelMonitorZ o) {
 		long ret = bindings.CResult_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -49,7 +49,7 @@ public class Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ in the error state.
 	 */
-	public static Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ err(IOError e) {
+	public static org.ldk.structs.Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ err(IOError e) {
 		long ret = bindings.CResult_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ_err(e);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -76,7 +76,7 @@ public class Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ : CommonBase {
 	 * Creates a new CResult_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ clone() {
+	public org.ldk.structs.Result_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ clone() {
 		long ret = bindings.CResult_C2Tuple_ThirtyTwoBytesChannelMonitorZIOErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

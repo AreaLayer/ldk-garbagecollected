@@ -51,7 +51,7 @@ public class NextMessageHop : CommonBase {
 	/**
 	 * Creates a copy of the NextMessageHop
 	 */
-	public NextMessageHop clone() {
+	public org.ldk.structs.NextMessageHop clone() {
 		long ret = bindings.NextMessageHop_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -63,7 +63,7 @@ public class NextMessageHop : CommonBase {
 	/**
 	 * Utility method to constructs a new NodeId-variant NextMessageHop
 	 */
-	public static NextMessageHop node_id(byte[] a) {
+	public static org.ldk.structs.NextMessageHop node_id(byte[] a) {
 		long ret = bindings.NextMessageHop_node_id(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 33)));
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -75,7 +75,7 @@ public class NextMessageHop : CommonBase {
 	/**
 	 * Utility method to constructs a new ShortChannelId-variant NextMessageHop
 	 */
-	public static NextMessageHop short_channel_id(long a) {
+	public static org.ldk.structs.NextMessageHop short_channel_id(long a) {
 		long ret = bindings.NextMessageHop_short_channel_id(a);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }

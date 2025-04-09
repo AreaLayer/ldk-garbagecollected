@@ -41,7 +41,7 @@ public class Result_ChannelTypeFeaturesDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_ChannelTypeFeaturesDecodeErrorZ in the success state.
 	 */
-	public static Result_ChannelTypeFeaturesDecodeErrorZ ok(org.ldk.structs.ChannelTypeFeatures o) {
+	public static org.ldk.structs.Result_ChannelTypeFeaturesDecodeErrorZ ok(org.ldk.structs.ChannelTypeFeatures o) {
 		long ret = bindings.CResult_ChannelTypeFeaturesDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_ChannelTypeFeaturesDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_ChannelTypeFeaturesDecodeErrorZ in the error state.
 	 */
-	public static Result_ChannelTypeFeaturesDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_ChannelTypeFeaturesDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_ChannelTypeFeaturesDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_ChannelTypeFeaturesDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_ChannelTypeFeaturesDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_ChannelTypeFeaturesDecodeErrorZ clone() {
+	public org.ldk.structs.Result_ChannelTypeFeaturesDecodeErrorZ clone() {
 		long ret = bindings.CResult_ChannelTypeFeaturesDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

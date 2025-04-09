@@ -37,7 +37,7 @@ public class TwoTuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZOfferZ : Com
 	/**
 	 * 
 	 */
-	public Offer get_b() {
+	public org.ldk.structs.Offer get_b() {
 		long ret = bindings.C2Tuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZOfferZ_get_b(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -56,7 +56,7 @@ public class TwoTuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZOfferZ : Com
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public TwoTuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZOfferZ clone() {
+	public org.ldk.structs.TwoTuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZOfferZ clone() {
 		long ret = bindings.C2Tuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZOfferZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -68,7 +68,7 @@ public class TwoTuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZOfferZ : Com
 	/**
 	 * Creates a new C2Tuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZOfferZ from the contained elements.
 	 */
-	public static TwoTuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZOfferZ of(TwoTuple_HumanReadableNameThirtyTwoBytesZ[] a, org.ldk.structs.Offer b) {
+	public static org.ldk.structs.TwoTuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZOfferZ of(TwoTuple_HumanReadableNameThirtyTwoBytesZ[] a, org.ldk.structs.Offer b) {
 		long ret = bindings.C2Tuple_CVec_C2Tuple_HumanReadableNameThirtyTwoBytesZZOfferZ_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(a, a_conv_43 => a_conv_43.ptr)), b.ptr);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

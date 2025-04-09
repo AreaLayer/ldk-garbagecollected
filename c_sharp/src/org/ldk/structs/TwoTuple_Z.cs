@@ -40,7 +40,7 @@ public class TwoTuple_Z : CommonBase {
 	/**
 	 * Creates a new C2Tuple_Z from the contained elements.
 	 */
-	public static TwoTuple_Z of(short[] a, short[] b) {
+	public static org.ldk.structs.TwoTuple_Z of(short[] a, short[] b) {
 		long ret = bindings.C2Tuple_Z_new(InternalUtils.encodeUint16Array(InternalUtils.check_arr_len(a, 32)), InternalUtils.encodeUint16Array(InternalUtils.check_arr_len(b, 32)));
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

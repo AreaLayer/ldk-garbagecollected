@@ -39,7 +39,7 @@ public class Option_PaymentFailureReasonZ : CommonBase {
 	/**
 	 * Constructs a new COption_PaymentFailureReasonZ containing a crate::lightning::events::PaymentFailureReason
 	 */
-	public static Option_PaymentFailureReasonZ some(PaymentFailureReason o) {
+	public static org.ldk.structs.Option_PaymentFailureReasonZ some(PaymentFailureReason o) {
 		long ret = bindings.COption_PaymentFailureReasonZ_some(o);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -51,7 +51,7 @@ public class Option_PaymentFailureReasonZ : CommonBase {
 	/**
 	 * Constructs a new COption_PaymentFailureReasonZ containing nothing
 	 */
-	public static Option_PaymentFailureReasonZ none() {
+	public static org.ldk.structs.Option_PaymentFailureReasonZ none() {
 		long ret = bindings.COption_PaymentFailureReasonZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_PaymentFailureReasonZ ret_hu_conv = org.ldk.structs.Option_PaymentFailureReasonZ.constr_from_ptr(ret);
@@ -69,7 +69,7 @@ public class Option_PaymentFailureReasonZ : CommonBase {
 	 * Creates a new COption_PaymentFailureReasonZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_PaymentFailureReasonZ clone() {
+	public org.ldk.structs.Option_PaymentFailureReasonZ clone() {
 		long ret = bindings.COption_PaymentFailureReasonZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

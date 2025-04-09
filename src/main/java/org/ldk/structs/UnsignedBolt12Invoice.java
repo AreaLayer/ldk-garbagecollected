@@ -110,10 +110,17 @@ public class UnsignedBolt12Invoice extends CommonBase {
 	 * Fallback addresses for paying the invoice on-chain, in order of most-preferred to
 	 * least-preferred.
 	 */
-	public String[] fallbacks() {
-		String[] ret = bindings.UnsignedBolt12Invoice_fallbacks(this.ptr);
+	public Address[] fallbacks() {
+		long[] ret = bindings.UnsignedBolt12Invoice_fallbacks(this.ptr);
 		Reference.reachabilityFence(this);
-		return ret;
+		int ret_conv_9_len = ret.length;
+		Address[] ret_conv_9_arr = new Address[ret_conv_9_len];
+		for (int j = 0; j < ret_conv_9_len; j++) {
+			long ret_conv_9 = ret[j];
+			Address ret_conv_9_conv = new Address(null, ret_conv_9);
+			ret_conv_9_arr[j] = ret_conv_9_conv;
+		}
+		return ret_conv_9_arr;
 	}
 
 	/**

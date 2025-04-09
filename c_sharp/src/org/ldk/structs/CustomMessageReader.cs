@@ -63,7 +63,7 @@ public class CustomMessageReader : CommonBase {
 	 * message type is unknown to the implementation, must return `Ok(None)`. If a decoding error
 	 * occur, must return `Err(DecodeError::X)` where `X` details the encountered error.
 	 */
-	public Result_COption_TypeZDecodeErrorZ read(short message_type, byte[] buffer) {
+	public org.ldk.structs.Result_COption_TypeZDecodeErrorZ read(short message_type, byte[] buffer) {
 		long ret = bindings.CustomMessageReader_read(this.ptr, message_type, InternalUtils.encodeUint8Array(buffer));
 		GC.KeepAlive(this);
 		GC.KeepAlive(message_type);

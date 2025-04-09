@@ -20,7 +20,7 @@ public class VerifiedInvoiceRequest : CommonBase {
 	/**
 	 * The identifier of the [`Offer`] for which the [`InvoiceRequest`] was made.
 	 */
-	public OfferId get_offer_id() {
+	public org.ldk.structs.OfferId get_offer_id() {
 		long ret = bindings.VerifiedInvoiceRequest_get_offer_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -47,7 +47,7 @@ public class VerifiedInvoiceRequest : CommonBase {
 	/**
 	 * Creates a copy of the VerifiedInvoiceRequest
 	 */
-	public VerifiedInvoiceRequest clone() {
+	public org.ldk.structs.VerifiedInvoiceRequest clone() {
 		long ret = bindings.VerifiedInvoiceRequest_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -80,7 +80,7 @@ public class VerifiedInvoiceRequest : CommonBase {
 	 * Opaque bytes set by the originator. Useful for authentication and validating fields since it
 	 * is reflected in `invoice_request` messages along with all the other fields from the `offer`.
 	 */
-	public Option_CVec_u8ZZ metadata() {
+	public org.ldk.structs.Option_CVec_u8ZZ metadata() {
 		long ret = bindings.VerifiedInvoiceRequest_metadata(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -92,7 +92,7 @@ public class VerifiedInvoiceRequest : CommonBase {
 	/**
 	 * The minimum amount required for a successful payment of a single item.
 	 */
-	public Option_AmountZ amount() {
+	public org.ldk.structs.Option_AmountZ amount() {
 		long ret = bindings.VerifiedInvoiceRequest_amount(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -107,7 +107,7 @@ public class VerifiedInvoiceRequest : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public PrintableString description() {
+	public org.ldk.structs.PrintableString description() {
 		long ret = bindings.VerifiedInvoiceRequest_description(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -119,7 +119,7 @@ public class VerifiedInvoiceRequest : CommonBase {
 	/**
 	 * Features pertaining to the offer.
 	 */
-	public OfferFeatures offer_features() {
+	public org.ldk.structs.OfferFeatures offer_features() {
 		long ret = bindings.VerifiedInvoiceRequest_offer_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -133,7 +133,7 @@ public class VerifiedInvoiceRequest : CommonBase {
 	 * 
 	 * If `None`, the offer does not expire.
 	 */
-	public Option_u64Z absolute_expiry() {
+	public org.ldk.structs.Option_u64Z absolute_expiry() {
 		long ret = bindings.VerifiedInvoiceRequest_absolute_expiry(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -148,7 +148,7 @@ public class VerifiedInvoiceRequest : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public PrintableString issuer() {
+	public org.ldk.structs.PrintableString issuer() {
 		long ret = bindings.VerifiedInvoiceRequest_issuer(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -180,7 +180,7 @@ public class VerifiedInvoiceRequest : CommonBase {
 	/**
 	 * The quantity of items supported.
 	 */
-	public Quantity supported_quantity() {
+	public org.ldk.structs.Quantity supported_quantity() {
 		long ret = bindings.VerifiedInvoiceRequest_supported_quantity(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -243,7 +243,7 @@ public class VerifiedInvoiceRequest : CommonBase {
 	 * 
 	 * [`chain`]: Self::chain
 	 */
-	public Option_u64Z amount_msats() {
+	public org.ldk.structs.Option_u64Z amount_msats() {
 		long ret = bindings.VerifiedInvoiceRequest_amount_msats(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -268,7 +268,7 @@ public class VerifiedInvoiceRequest : CommonBase {
 	/**
 	 * Features pertaining to requesting an invoice.
 	 */
-	public InvoiceRequestFeatures invoice_request_features() {
+	public org.ldk.structs.InvoiceRequestFeatures invoice_request_features() {
 		long ret = bindings.VerifiedInvoiceRequest_invoice_request_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -280,7 +280,7 @@ public class VerifiedInvoiceRequest : CommonBase {
 	/**
 	 * The quantity of the offer's item conforming to [`Offer::is_valid_quantity`].
 	 */
-	public Option_u64Z quantity() {
+	public org.ldk.structs.Option_u64Z quantity() {
 		long ret = bindings.VerifiedInvoiceRequest_quantity(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -306,7 +306,7 @@ public class VerifiedInvoiceRequest : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public PrintableString payer_note() {
+	public org.ldk.structs.PrintableString payer_note() {
 		long ret = bindings.VerifiedInvoiceRequest_payer_note(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -321,7 +321,7 @@ public class VerifiedInvoiceRequest : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public HumanReadableName offer_from_hrn() {
+	public org.ldk.structs.HumanReadableName offer_from_hrn() {
 		long ret = bindings.VerifiedInvoiceRequest_offer_from_hrn(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -339,7 +339,7 @@ public class VerifiedInvoiceRequest : CommonBase {
 	 * 
 	 * [`Duration`]: core::time::Duration
 	 */
-	public Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ respond_with(BlindedPaymentPath[] payment_paths, byte[] payment_hash) {
+	public org.ldk.structs.Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ respond_with(BlindedPaymentPath[] payment_paths, byte[] payment_hash) {
 		long ret = bindings.VerifiedInvoiceRequest_respond_with(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(payment_paths, payment_paths_conv_20 => payment_paths_conv_20.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(payment_paths);
@@ -376,7 +376,7 @@ public class VerifiedInvoiceRequest : CommonBase {
 	 * [`Bolt12Invoice::created_at`]: crate::offers::invoice::Bolt12Invoice::created_at
 	 * [`OfferBuilder::deriving_signing_pubkey`]: crate::offers::offer::OfferBuilder::deriving_signing_pubkey
 	 */
-	public Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ respond_with_no_std(BlindedPaymentPath[] payment_paths, byte[] payment_hash, long created_at) {
+	public org.ldk.structs.Result_InvoiceWithExplicitSigningPubkeyBuilderBolt12SemanticErrorZ respond_with_no_std(BlindedPaymentPath[] payment_paths, byte[] payment_hash, long created_at) {
 		long ret = bindings.VerifiedInvoiceRequest_respond_with_no_std(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(payment_paths, payment_paths_conv_20 => payment_paths_conv_20.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), created_at);
 		GC.KeepAlive(this);
 		GC.KeepAlive(payment_paths);
@@ -396,7 +396,7 @@ public class VerifiedInvoiceRequest : CommonBase {
 	 * 
 	 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
 	 */
-	public Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ respond_using_derived_keys(BlindedPaymentPath[] payment_paths, byte[] payment_hash) {
+	public org.ldk.structs.Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ respond_using_derived_keys(BlindedPaymentPath[] payment_paths, byte[] payment_hash) {
 		long ret = bindings.VerifiedInvoiceRequest_respond_using_derived_keys(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(payment_paths, payment_paths_conv_20 => payment_paths_conv_20.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(payment_paths);
@@ -415,7 +415,7 @@ public class VerifiedInvoiceRequest : CommonBase {
 	 * 
 	 * [`Bolt12Invoice`]: crate::offers::invoice::Bolt12Invoice
 	 */
-	public Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ respond_using_derived_keys_no_std(BlindedPaymentPath[] payment_paths, byte[] payment_hash, long created_at) {
+	public org.ldk.structs.Result_InvoiceWithDerivedSigningPubkeyBuilderBolt12SemanticErrorZ respond_using_derived_keys_no_std(BlindedPaymentPath[] payment_paths, byte[] payment_hash, long created_at) {
 		long ret = bindings.VerifiedInvoiceRequest_respond_using_derived_keys_no_std(this.ptr, InternalUtils.encodeUint64Array(InternalUtils.mapArray(payment_paths, payment_paths_conv_20 => payment_paths_conv_20.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), created_at);
 		GC.KeepAlive(this);
 		GC.KeepAlive(payment_paths);

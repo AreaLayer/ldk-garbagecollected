@@ -14,7 +14,7 @@ public interface EventsProviderInterface {
 	 * 
 	 * See the trait-level documentation for requirements.
 	 */
-	void process_pending_events(EventHandler handler);
+	void process_pending_events(org.ldk.structs.EventHandler handler);
 }
 
 /**

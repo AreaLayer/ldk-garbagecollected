@@ -41,7 +41,7 @@ public class Result_UntrustedStringDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_UntrustedStringDecodeErrorZ in the success state.
 	 */
-	public static Result_UntrustedStringDecodeErrorZ ok(org.ldk.structs.UntrustedString o) {
+	public static org.ldk.structs.Result_UntrustedStringDecodeErrorZ ok(org.ldk.structs.UntrustedString o) {
 		long ret = bindings.CResult_UntrustedStringDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_UntrustedStringDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_UntrustedStringDecodeErrorZ in the error state.
 	 */
-	public static Result_UntrustedStringDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_UntrustedStringDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_UntrustedStringDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_UntrustedStringDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_UntrustedStringDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_UntrustedStringDecodeErrorZ clone() {
+	public org.ldk.structs.Result_UntrustedStringDecodeErrorZ clone() {
 		long ret = bindings.CResult_UntrustedStringDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

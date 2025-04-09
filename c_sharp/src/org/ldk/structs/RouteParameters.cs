@@ -20,7 +20,7 @@ public class RouteParameters : CommonBase {
 	/**
 	 * The parameters of the failed payment path.
 	 */
-	public PaymentParameters get_payment_params() {
+	public org.ldk.structs.PaymentParameters get_payment_params() {
 		long ret = bindings.RouteParameters_get_payment_params(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -64,7 +64,7 @@ public class RouteParameters : CommonBase {
 	 * 
 	 * Note that values below a few sats may result in some paths being spuriously ignored.
 	 */
-	public Option_u64Z get_max_total_routing_fee_msat() {
+	public org.ldk.structs.Option_u64Z get_max_total_routing_fee_msat() {
 		long ret = bindings.RouteParameters_get_max_total_routing_fee_msat(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -90,7 +90,7 @@ public class RouteParameters : CommonBase {
 	/**
 	 * Constructs a new RouteParameters given each field
 	 */
-	public static RouteParameters of(org.ldk.structs.PaymentParameters payment_params_arg, long final_value_msat_arg, org.ldk.structs.Option_u64Z max_total_routing_fee_msat_arg) {
+	public static org.ldk.structs.RouteParameters of(org.ldk.structs.PaymentParameters payment_params_arg, long final_value_msat_arg, org.ldk.structs.Option_u64Z max_total_routing_fee_msat_arg) {
 		long ret = bindings.RouteParameters_new(payment_params_arg.ptr, final_value_msat_arg, max_total_routing_fee_msat_arg.ptr);
 		GC.KeepAlive(payment_params_arg);
 		GC.KeepAlive(final_value_msat_arg);
@@ -110,7 +110,7 @@ public class RouteParameters : CommonBase {
 	/**
 	 * Creates a copy of the RouteParameters
 	 */
-	public RouteParameters clone() {
+	public org.ldk.structs.RouteParameters clone() {
 		long ret = bindings.RouteParameters_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -153,7 +153,7 @@ public class RouteParameters : CommonBase {
 	 * 
 	 * [`Self::max_total_routing_fee_msat`] defaults to 1% of the payment amount + 50 sats
 	 */
-	public static RouteParameters from_payment_params_and_value(org.ldk.structs.PaymentParameters payment_params, long final_value_msat) {
+	public static org.ldk.structs.RouteParameters from_payment_params_and_value(org.ldk.structs.PaymentParameters payment_params, long final_value_msat) {
 		long ret = bindings.RouteParameters_from_payment_params_and_value(payment_params.ptr, final_value_msat);
 		GC.KeepAlive(payment_params);
 		GC.KeepAlive(final_value_msat);
@@ -167,7 +167,7 @@ public class RouteParameters : CommonBase {
 	 * Sets the maximum number of hops that can be included in a payment path, based on the provided
 	 * [`RecipientOnionFields`] and blinded paths.
 	 */
-	public Result_NoneNoneZ set_max_path_length(org.ldk.structs.RecipientOnionFields recipient_onion, bool is_keysend, int best_block_height) {
+	public org.ldk.structs.Result_NoneNoneZ set_max_path_length(org.ldk.structs.RecipientOnionFields recipient_onion, bool is_keysend, int best_block_height) {
 		long ret = bindings.RouteParameters_set_max_path_length(this.ptr, recipient_onion.ptr, is_keysend, best_block_height);
 		GC.KeepAlive(this);
 		GC.KeepAlive(recipient_onion);
@@ -193,7 +193,7 @@ public class RouteParameters : CommonBase {
 	/**
 	 * Read a RouteParameters from a byte array, created by RouteParameters_write
 	 */
-	public static Result_RouteParametersDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_RouteParametersDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.RouteParameters_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

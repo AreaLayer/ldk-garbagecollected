@@ -20,7 +20,7 @@ public class Bolt12RefundContext : CommonBase {
 	/**
 	 * Constructs a new Bolt12RefundContext given each field
 	 */
-	public static Bolt12RefundContext of() {
+	public static org.ldk.structs.Bolt12RefundContext of() {
 		long ret = bindings.Bolt12RefundContext_new();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Bolt12RefundContext ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.Bolt12RefundContext(null, ret); }
@@ -37,7 +37,7 @@ public class Bolt12RefundContext : CommonBase {
 	/**
 	 * Creates a copy of the Bolt12RefundContext
 	 */
-	public Bolt12RefundContext clone() {
+	public org.ldk.structs.Bolt12RefundContext clone() {
 		long ret = bindings.Bolt12RefundContext_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -77,7 +77,7 @@ public class Bolt12RefundContext : CommonBase {
 	/**
 	 * Read a Bolt12RefundContext from a byte array, created by Bolt12RefundContext_write
 	 */
-	public static Result_Bolt12RefundContextDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_Bolt12RefundContextDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.Bolt12RefundContext_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

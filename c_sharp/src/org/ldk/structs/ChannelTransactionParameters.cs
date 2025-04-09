@@ -22,7 +22,7 @@ public class ChannelTransactionParameters : CommonBase {
 	/**
 	 * Holder public keys
 	 */
-	public ChannelPublicKeys get_holder_pubkeys() {
+	public org.ldk.structs.ChannelPublicKeys get_holder_pubkeys() {
 		long ret = bindings.ChannelTransactionParameters_get_holder_pubkeys(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -84,7 +84,7 @@ public class ChannelTransactionParameters : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public CounterpartyChannelTransactionParameters get_counterparty_parameters() {
+	public org.ldk.structs.CounterpartyChannelTransactionParameters get_counterparty_parameters() {
 		long ret = bindings.ChannelTransactionParameters_get_counterparty_parameters(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -110,7 +110,7 @@ public class ChannelTransactionParameters : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public OutPoint get_funding_outpoint() {
+	public org.ldk.structs.OutPoint get_funding_outpoint() {
 		long ret = bindings.ChannelTransactionParameters_get_funding_outpoint(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -134,7 +134,7 @@ public class ChannelTransactionParameters : CommonBase {
 	 * This channel's type, as negotiated during channel open. For old objects where this field
 	 * wasn't serialized, it will default to static_remote_key at deserialization.
 	 */
-	public ChannelTypeFeatures get_channel_type_features() {
+	public org.ldk.structs.ChannelTypeFeatures get_channel_type_features() {
 		long ret = bindings.ChannelTransactionParameters_get_channel_type_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -159,7 +159,7 @@ public class ChannelTransactionParameters : CommonBase {
 	 * Note that counterparty_parameters_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 * Note that funding_outpoint_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static ChannelTransactionParameters of(org.ldk.structs.ChannelPublicKeys holder_pubkeys_arg, short holder_selected_contest_delay_arg, bool is_outbound_from_holder_arg, org.ldk.structs.CounterpartyChannelTransactionParameters counterparty_parameters_arg, org.ldk.structs.OutPoint funding_outpoint_arg, org.ldk.structs.ChannelTypeFeatures channel_type_features_arg) {
+	public static org.ldk.structs.ChannelTransactionParameters of(org.ldk.structs.ChannelPublicKeys holder_pubkeys_arg, short holder_selected_contest_delay_arg, bool is_outbound_from_holder_arg, org.ldk.structs.CounterpartyChannelTransactionParameters counterparty_parameters_arg, org.ldk.structs.OutPoint funding_outpoint_arg, org.ldk.structs.ChannelTypeFeatures channel_type_features_arg) {
 		long ret = bindings.ChannelTransactionParameters_new(holder_pubkeys_arg.ptr, holder_selected_contest_delay_arg, is_outbound_from_holder_arg, counterparty_parameters_arg == null ? 0 : counterparty_parameters_arg.ptr, funding_outpoint_arg == null ? 0 : funding_outpoint_arg.ptr, channel_type_features_arg.ptr);
 		GC.KeepAlive(holder_pubkeys_arg);
 		GC.KeepAlive(holder_selected_contest_delay_arg);
@@ -182,7 +182,7 @@ public class ChannelTransactionParameters : CommonBase {
 	/**
 	 * Creates a copy of the ChannelTransactionParameters
 	 */
-	public ChannelTransactionParameters clone() {
+	public org.ldk.structs.ChannelTransactionParameters clone() {
 		long ret = bindings.ChannelTransactionParameters_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -235,7 +235,7 @@ public class ChannelTransactionParameters : CommonBase {
 	 * 
 	 * self.is_populated() must be true before calling this function.
 	 */
-	public DirectedChannelTransactionParameters as_holder_broadcastable() {
+	public org.ldk.structs.DirectedChannelTransactionParameters as_holder_broadcastable() {
 		long ret = bindings.ChannelTransactionParameters_as_holder_broadcastable(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -250,7 +250,7 @@ public class ChannelTransactionParameters : CommonBase {
 	 * 
 	 * self.is_populated() must be true before calling this function.
 	 */
-	public DirectedChannelTransactionParameters as_counterparty_broadcastable() {
+	public org.ldk.structs.DirectedChannelTransactionParameters as_counterparty_broadcastable() {
 		long ret = bindings.ChannelTransactionParameters_as_counterparty_broadcastable(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -273,7 +273,7 @@ public class ChannelTransactionParameters : CommonBase {
 	/**
 	 * Read a ChannelTransactionParameters from a byte array, created by ChannelTransactionParameters_write
 	 */
-	public static Result_ChannelTransactionParametersDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ChannelTransactionParametersDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.ChannelTransactionParameters_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

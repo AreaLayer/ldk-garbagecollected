@@ -41,7 +41,7 @@ public class Result_RouteLightningErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_RouteLightningErrorZ in the success state.
 	 */
-	public static Result_RouteLightningErrorZ ok(org.ldk.structs.Route o) {
+	public static org.ldk.structs.Result_RouteLightningErrorZ ok(org.ldk.structs.Route o) {
 		long ret = bindings.CResult_RouteLightningErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_RouteLightningErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_RouteLightningErrorZ in the error state.
 	 */
-	public static Result_RouteLightningErrorZ err(org.ldk.structs.LightningError e) {
+	public static org.ldk.structs.Result_RouteLightningErrorZ err(org.ldk.structs.LightningError e) {
 		long ret = bindings.CResult_RouteLightningErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_RouteLightningErrorZ : CommonBase {
 	 * Creates a new CResult_RouteLightningErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_RouteLightningErrorZ clone() {
+	public org.ldk.structs.Result_RouteLightningErrorZ clone() {
 		long ret = bindings.CResult_RouteLightningErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -22,7 +22,7 @@ public class DirectedChannelTransactionParameters : CommonBase {
 	/**
 	 * Get the channel pubkeys for the broadcaster
 	 */
-	public ChannelPublicKeys broadcaster_pubkeys() {
+	public org.ldk.structs.ChannelPublicKeys broadcaster_pubkeys() {
 		long ret = bindings.DirectedChannelTransactionParameters_broadcaster_pubkeys(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -34,7 +34,7 @@ public class DirectedChannelTransactionParameters : CommonBase {
 	/**
 	 * Get the channel pubkeys for the countersignatory
 	 */
-	public ChannelPublicKeys countersignatory_pubkeys() {
+	public org.ldk.structs.ChannelPublicKeys countersignatory_pubkeys() {
 		long ret = bindings.DirectedChannelTransactionParameters_countersignatory_pubkeys(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -68,7 +68,7 @@ public class DirectedChannelTransactionParameters : CommonBase {
 	/**
 	 * The funding outpoint
 	 */
-	public OutPoint funding_outpoint() {
+	public org.ldk.structs.OutPoint funding_outpoint() {
 		long ret = bindings.DirectedChannelTransactionParameters_funding_outpoint(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -80,7 +80,7 @@ public class DirectedChannelTransactionParameters : CommonBase {
 	/**
 	 * Whether to use anchors for this channel
 	 */
-	public ChannelTypeFeatures channel_type_features() {
+	public org.ldk.structs.ChannelTypeFeatures channel_type_features() {
 		long ret = bindings.DirectedChannelTransactionParameters_channel_type_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -41,7 +41,7 @@ public class Result_TxSignaturesDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_TxSignaturesDecodeErrorZ in the success state.
 	 */
-	public static Result_TxSignaturesDecodeErrorZ ok(org.ldk.structs.TxSignatures o) {
+	public static org.ldk.structs.Result_TxSignaturesDecodeErrorZ ok(org.ldk.structs.TxSignatures o) {
 		long ret = bindings.CResult_TxSignaturesDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_TxSignaturesDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_TxSignaturesDecodeErrorZ in the error state.
 	 */
-	public static Result_TxSignaturesDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_TxSignaturesDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_TxSignaturesDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_TxSignaturesDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_TxSignaturesDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_TxSignaturesDecodeErrorZ clone() {
+	public org.ldk.structs.Result_TxSignaturesDecodeErrorZ clone() {
 		long ret = bindings.CResult_TxSignaturesDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

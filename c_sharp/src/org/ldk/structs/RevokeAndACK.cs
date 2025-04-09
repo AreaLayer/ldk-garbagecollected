@@ -20,7 +20,7 @@ public class RevokeAndACK : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.RevokeAndACK_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -81,7 +81,7 @@ public class RevokeAndACK : CommonBase {
 	/**
 	 * Constructs a new RevokeAndACK given each field
 	 */
-	public static RevokeAndACK of(org.ldk.structs.ChannelId channel_id_arg, byte[] per_commitment_secret_arg, byte[] next_per_commitment_point_arg) {
+	public static org.ldk.structs.RevokeAndACK of(org.ldk.structs.ChannelId channel_id_arg, byte[] per_commitment_secret_arg, byte[] next_per_commitment_point_arg) {
 		long ret = bindings.RevokeAndACK_new(channel_id_arg.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(per_commitment_secret_arg, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(next_per_commitment_point_arg, 33)));
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(per_commitment_secret_arg);
@@ -101,7 +101,7 @@ public class RevokeAndACK : CommonBase {
 	/**
 	 * Creates a copy of the RevokeAndACK
 	 */
-	public RevokeAndACK clone() {
+	public org.ldk.structs.RevokeAndACK clone() {
 		long ret = bindings.RevokeAndACK_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -153,7 +153,7 @@ public class RevokeAndACK : CommonBase {
 	/**
 	 * Read a RevokeAndACK from a byte array, created by RevokeAndACK_write
 	 */
-	public static Result_RevokeAndACKDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_RevokeAndACKDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.RevokeAndACK_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

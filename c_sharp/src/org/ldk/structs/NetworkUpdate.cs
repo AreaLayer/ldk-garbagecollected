@@ -70,7 +70,7 @@ public class NetworkUpdate : CommonBase {
 	/**
 	 * Creates a copy of the NetworkUpdate
 	 */
-	public NetworkUpdate clone() {
+	public org.ldk.structs.NetworkUpdate clone() {
 		long ret = bindings.NetworkUpdate_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -82,7 +82,7 @@ public class NetworkUpdate : CommonBase {
 	/**
 	 * Utility method to constructs a new ChannelFailure-variant NetworkUpdate
 	 */
-	public static NetworkUpdate channel_failure(long short_channel_id, bool is_permanent) {
+	public static org.ldk.structs.NetworkUpdate channel_failure(long short_channel_id, bool is_permanent) {
 		long ret = bindings.NetworkUpdate_channel_failure(short_channel_id, is_permanent);
 		GC.KeepAlive(short_channel_id);
 		GC.KeepAlive(is_permanent);
@@ -95,7 +95,7 @@ public class NetworkUpdate : CommonBase {
 	/**
 	 * Utility method to constructs a new NodeFailure-variant NetworkUpdate
 	 */
-	public static NetworkUpdate node_failure(byte[] node_id, bool is_permanent) {
+	public static org.ldk.structs.NetworkUpdate node_failure(byte[] node_id, bool is_permanent) {
 		long ret = bindings.NetworkUpdate_node_failure(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id, 33)), is_permanent);
 		GC.KeepAlive(node_id);
 		GC.KeepAlive(is_permanent);

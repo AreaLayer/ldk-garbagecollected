@@ -20,7 +20,7 @@ public class UpdateFee : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.UpdateFee_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -59,7 +59,7 @@ public class UpdateFee : CommonBase {
 	/**
 	 * Constructs a new UpdateFee given each field
 	 */
-	public static UpdateFee of(org.ldk.structs.ChannelId channel_id_arg, int feerate_per_kw_arg) {
+	public static org.ldk.structs.UpdateFee of(org.ldk.structs.ChannelId channel_id_arg, int feerate_per_kw_arg) {
 		long ret = bindings.UpdateFee_new(channel_id_arg.ptr, feerate_per_kw_arg);
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(feerate_per_kw_arg);
@@ -78,7 +78,7 @@ public class UpdateFee : CommonBase {
 	/**
 	 * Creates a copy of the UpdateFee
 	 */
-	public UpdateFee clone() {
+	public org.ldk.structs.UpdateFee clone() {
 		long ret = bindings.UpdateFee_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -130,7 +130,7 @@ public class UpdateFee : CommonBase {
 	/**
 	 * Read a UpdateFee from a byte array, created by UpdateFee_write
 	 */
-	public static Result_UpdateFeeDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_UpdateFeeDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.UpdateFee_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

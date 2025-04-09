@@ -41,7 +41,7 @@ public class Result_DNSResolverContextDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_DNSResolverContextDecodeErrorZ in the success state.
 	 */
-	public static Result_DNSResolverContextDecodeErrorZ ok(org.ldk.structs.DNSResolverContext o) {
+	public static org.ldk.structs.Result_DNSResolverContextDecodeErrorZ ok(org.ldk.structs.DNSResolverContext o) {
 		long ret = bindings.CResult_DNSResolverContextDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_DNSResolverContextDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_DNSResolverContextDecodeErrorZ in the error state.
 	 */
-	public static Result_DNSResolverContextDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_DNSResolverContextDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_DNSResolverContextDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_DNSResolverContextDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_DNSResolverContextDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_DNSResolverContextDecodeErrorZ clone() {
+	public org.ldk.structs.Result_DNSResolverContextDecodeErrorZ clone() {
 		long ret = bindings.CResult_DNSResolverContextDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

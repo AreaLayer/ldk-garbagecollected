@@ -18,7 +18,7 @@ public class CounterpartyChannelTransactionParameters : CommonBase {
 	/**
 	 * Counter-party public keys
 	 */
-	public ChannelPublicKeys get_pubkeys() {
+	public org.ldk.structs.ChannelPublicKeys get_pubkeys() {
 		long ret = bindings.CounterpartyChannelTransactionParameters_get_pubkeys(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -57,7 +57,7 @@ public class CounterpartyChannelTransactionParameters : CommonBase {
 	/**
 	 * Constructs a new CounterpartyChannelTransactionParameters given each field
 	 */
-	public static CounterpartyChannelTransactionParameters of(org.ldk.structs.ChannelPublicKeys pubkeys_arg, short selected_contest_delay_arg) {
+	public static org.ldk.structs.CounterpartyChannelTransactionParameters of(org.ldk.structs.ChannelPublicKeys pubkeys_arg, short selected_contest_delay_arg) {
 		long ret = bindings.CounterpartyChannelTransactionParameters_new(pubkeys_arg.ptr, selected_contest_delay_arg);
 		GC.KeepAlive(pubkeys_arg);
 		GC.KeepAlive(selected_contest_delay_arg);
@@ -76,7 +76,7 @@ public class CounterpartyChannelTransactionParameters : CommonBase {
 	/**
 	 * Creates a copy of the CounterpartyChannelTransactionParameters
 	 */
-	public CounterpartyChannelTransactionParameters clone() {
+	public org.ldk.structs.CounterpartyChannelTransactionParameters clone() {
 		long ret = bindings.CounterpartyChannelTransactionParameters_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -128,7 +128,7 @@ public class CounterpartyChannelTransactionParameters : CommonBase {
 	/**
 	 * Read a CounterpartyChannelTransactionParameters from a byte array, created by CounterpartyChannelTransactionParameters_write
 	 */
-	public static Result_CounterpartyChannelTransactionParametersDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_CounterpartyChannelTransactionParametersDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.CounterpartyChannelTransactionParameters_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

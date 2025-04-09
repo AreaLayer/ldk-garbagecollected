@@ -26,7 +26,7 @@ public class Option_TypeZ : CommonBase {
 
 	/** A Option_TypeZ of type Some */
 	public class Option_TypeZ_Some : Option_TypeZ {
-		public Type some;
+		public org.ldk.structs.Type some;
 		internal Option_TypeZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_TypeZ_Some_get_some(ptr);
 			Type ret_hu_conv = new Type(null, some);
@@ -42,7 +42,7 @@ public class Option_TypeZ : CommonBase {
 	/**
 	 * Constructs a new COption_TypeZ containing a crate::lightning::ln::wire::Type
 	 */
-	public static Option_TypeZ some(org.ldk.structs.Type o) {
+	public static org.ldk.structs.Option_TypeZ some(org.ldk.structs.Type o) {
 		long ret = bindings.COption_TypeZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -55,7 +55,7 @@ public class Option_TypeZ : CommonBase {
 	/**
 	 * Constructs a new COption_TypeZ containing nothing
 	 */
-	public static Option_TypeZ none() {
+	public static org.ldk.structs.Option_TypeZ none() {
 		long ret = bindings.COption_TypeZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_TypeZ ret_hu_conv = org.ldk.structs.Option_TypeZ.constr_from_ptr(ret);
@@ -73,7 +73,7 @@ public class Option_TypeZ : CommonBase {
 	 * Creates a new COption_TypeZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_TypeZ clone() {
+	public org.ldk.structs.Option_TypeZ clone() {
 		long ret = bindings.COption_TypeZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -45,7 +45,7 @@ public class SignError : CommonBase {
 	/**
 	 * Creates a copy of the SignError
 	 */
-	public SignError clone() {
+	public org.ldk.structs.SignError clone() {
 		long ret = bindings.SignError_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -57,7 +57,7 @@ public class SignError : CommonBase {
 	/**
 	 * Utility method to constructs a new Signing-variant SignError
 	 */
-	public static SignError signing() {
+	public static org.ldk.structs.SignError signing() {
 		long ret = bindings.SignError_signing();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.SignError ret_hu_conv = org.ldk.structs.SignError.constr_from_ptr(ret);
@@ -68,7 +68,7 @@ public class SignError : CommonBase {
 	/**
 	 * Utility method to constructs a new Verification-variant SignError
 	 */
-	public static SignError verification(Secp256k1Error a) {
+	public static org.ldk.structs.SignError verification(Secp256k1Error a) {
 		long ret = bindings.SignError_verification(a);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }

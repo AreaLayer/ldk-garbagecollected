@@ -27,7 +27,7 @@ public class TransactionU16LenLimited : CommonBase {
 	/**
 	 * Creates a copy of the TransactionU16LenLimited
 	 */
-	public TransactionU16LenLimited clone() {
+	public org.ldk.structs.TransactionU16LenLimited clone() {
 		long ret = bindings.TransactionU16LenLimited_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -69,7 +69,7 @@ public class TransactionU16LenLimited : CommonBase {
 	 * Constructs a new `TransactionU16LenLimited` from a `Transaction` only if it's consensus-
 	 * serialized length is <= u16::MAX.
 	 */
-	public static Result_TransactionU16LenLimitedNoneZ of(byte[] transaction) {
+	public static org.ldk.structs.Result_TransactionU16LenLimitedNoneZ of(byte[] transaction) {
 		long ret = bindings.TransactionU16LenLimited_new(InternalUtils.encodeUint8Array(transaction));
 		GC.KeepAlive(transaction);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -114,7 +114,7 @@ public class TransactionU16LenLimited : CommonBase {
 	/**
 	 * Read a TransactionU16LenLimited from a byte array, created by TransactionU16LenLimited_write
 	 */
-	public static Result_TransactionU16LenLimitedDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_TransactionU16LenLimitedDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.TransactionU16LenLimited_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

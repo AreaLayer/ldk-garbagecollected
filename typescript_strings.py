@@ -19,6 +19,7 @@ class Consts:
         self.c_type_map = dict(
             bool = ['boolean', 'boolean', 'XXX'],
             uint8_t = ['number', 'number', 'Uint8Array'],
+            int16_t = ['number', 'number', 'Int16Array'],
             uint16_t = ['number', 'number', 'Uint16Array'],
             uint32_t = ['number', 'number', 'Uint32Array'],
             int64_t = ['bigint', 'bigint', 'BigInt64Array'],
@@ -218,6 +219,15 @@ export function encodeUint64Array (inputArray: BigUint64Array|Array<bigint>|null
 	arrayMemoryView.set(inputArray, 1);
 	return cArrayPointer;
 }
+/* @internal */
+export function encodeInt64Array (inputArray: BigInt64Array|Array<bigint>|null): number {
+	if (inputArray == null) return 0;
+	const cArrayPointer = wasm.TS_malloc((inputArray.length + 1) * 8);
+	const arrayMemoryView = new BigInt64Array(wasm.memory.buffer, cArrayPointer, inputArray.length + 1);
+	arrayMemoryView[0] = BigInt(inputArray.length);
+	arrayMemoryView.set(inputArray, 1);
+	return cArrayPointer;
+}
 
 /* @internal */
 export function check_arr_len(arr: Uint8Array|null, len: number): Uint8Array|null {
@@ -280,7 +290,7 @@ export function decodeUint16Array (arrayPointer: number, free = true): Uint16Arr
 	return actualArray;
 }
 /* @internal */
-export function decodeUint64Array (arrayPointer: number, free = true): bigint[] {
+export function decodeUint64Array (arrayPointer: number, free = true): BigUint64Array {
 	const arraySize = getArrayLength(arrayPointer);
 	const actualArrayViewer = new BigUint64Array(
 		wasm.memory.buffer, // value
@@ -289,8 +299,23 @@ export function decodeUint64Array (arrayPointer: number, free = true): bigint[] 
 	);
 	// Clone the contents, TODO: In the future we should wrap the Viewer in a class that
 	// will free the underlying memory when it becomes unreachable instead of copying here.
-	const actualArray = new Array(arraySize);
-	for (var i = 0; i < arraySize; i++) actualArray[i] = actualArrayViewer[i];
+	const actualArray = actualArrayViewer.slice(0, arraySize);
+	if (free) {
+		wasm.TS_free(arrayPointer);
+	}
+	return actualArray;
+}
+/* @internal */
+export function decodeInt64Array (arrayPointer: number, free = true): BigInt64Array {
+	const arraySize = getArrayLength(arrayPointer);
+	const actualArrayViewer = new BigInt64Array(
+		wasm.memory.buffer, // value
+		arrayPointer + 8, // offset (ignoring length bytes)
+		arraySize // uint32 count
+	);
+	// Clone the contents, TODO: In the future we should wrap the Viewer in a class that
+	// will free the underlying memory when it becomes unreachable instead of copying here.
+	const actualArray = actualArrayViewer.slice(0, arraySize);
 	if (free) {
 		wasm.TS_free(arrayPointer);
 	}
@@ -446,6 +471,29 @@ export class UnqualifiedError {
 	}
 }"""
         self.obj_defined(["TxOut"], "structs")
+
+        self.address_defn = """export class Address extends CommonBase {
+	/** The address in string form */
+	public address: string;
+
+	/* @internal */
+	public constructor(_dummy: null, ptr: bigint) {
+		super(ptr, bindings.Address_free);
+		this.address = bindings.decodeString(bindings.Address_to_string(ptr));
+	}
+	public static constructor_new(address: string): Address|null {
+		var strbuf = bindings.encodeString(address);
+		var ptr = bindings.Address_new(strbuf);
+		bindings.freeWasmMemory(strbuf);
+		var res = Option_AddressZ.constr_from_ptr(ptr);
+		if (res instanceof Option_AddressZ_Some) {
+			return new Address(null, bindings.Address_clone(res.some.ptr));
+		} else {
+			return null;
+		}
+	}
+}"""
+        self.obj_defined(["Address"], "structs")
 
         self.txin_defn = """export class TxIn extends CommonBase {
 	/** The witness in this input, in serialized form */
@@ -709,7 +757,9 @@ _Static_assert(sizeof(void*) == 4, "Pointers mut be 32 bits");
 DECL_ARR_TYPE(int64_t, int64_t);
 DECL_ARR_TYPE(uint64_t, uint64_t);
 DECL_ARR_TYPE(int8_t, int8_t);
+DECL_ARR_TYPE(uint8_t, uint8_t);
 DECL_ARR_TYPE(int16_t, int16_t);
+DECL_ARR_TYPE(uint16_t, uint16_t);
 DECL_ARR_TYPE(uint32_t, uint32_t);
 DECL_ARR_TYPE(void*, ptr);
 DECL_ARR_TYPE(char, char);
@@ -721,15 +771,20 @@ static inline jstring str_ref_to_ts(const char* chars, size_t len) {
 	return arr;
 }
 static inline LDKStr str_ref_to_owned_c(const jstring str) {
-	char* newchars = MALLOC(str->arr_len + 1, "String chars");
-	memcpy(newchars, str->elems, str->arr_len);
-	newchars[str->arr_len] = 0;
-	LDKStr res = {
-		.chars = newchars,
-		.len = str->arr_len,
-		.chars_is_owned = true
-	};
-	return res;
+	if (str->arr_len == 0) {
+		LDKStr res = { .chars = NULL, .len = 0, .chars_is_owned = false };
+		return res;
+	} else {
+		char* newchars = MALLOC(str->arr_len + 1, "String chars");
+		memcpy(newchars, str->elems, str->arr_len);
+		newchars[str->arr_len] = 0;
+		LDKStr res = {
+			.chars = newchars,
+			.len = str->arr_len,
+			.chars_is_owned = true
+		};
+		return res;
+	}
 }
 
 typedef bool jboolean;
@@ -789,17 +844,17 @@ import * as bindings from '../bindings.mjs'
             assert ty_info.rust_obj == "LDKCVec_U5Z" or (ty_info.subty is not None and (ty_info.subty.c_ty.endswith("Array") or ty_info.subty.rust_obj == "LDKStr"))
         return "init_" + ty_info.c_ty + "(" + arr_len + ", __LINE__)"
     def set_native_arr_contents(self, arr_name, arr_len, ty_info):
-        if ty_info.c_ty == "int8_tArray":
+        if ty_info.c_ty == "uint8_tArray":
             return ("memcpy(" + arr_name + "->elems, ", ", " + arr_len + ")")
-        elif ty_info.c_ty == "int16_tArray":
+        elif ty_info.c_ty == "uint16_tArray":
             return ("memcpy(" + arr_name + "->elems, ", ", " + arr_len + " * 2)")
         else:
             assert False
     def get_native_arr_contents(self, arr_name, dest_name, arr_len, ty_info, copy):
-        if ty_info.c_ty == "int8_tArray" or ty_info.c_ty == "int16_tArray":
+        if ty_info.c_ty == "uint8_tArray" or ty_info.c_ty == "uint16_tArray":
             if copy:
                 byte_len = arr_len
-                if ty_info.c_ty == "int16_tArray":
+                if ty_info.c_ty == "uint16_tArray":
                     byte_len = arr_len + " * 2"
                 return "memcpy(" + dest_name + ", " + arr_name + "->elems, " + byte_len + "); FREE(" + arr_name + ")"
         assert not copy
@@ -816,7 +871,7 @@ import * as bindings from '../bindings.mjs'
     def get_native_arr_entry_call(self, ty_info, arr_name, idxc, entry_access):
         return None
     def cleanup_native_arr_ref_contents(self, arr_name, dest_name, arr_len, ty_info):
-        if ty_info.c_ty == "int8_tArray":
+        if ty_info.c_ty == "uint8_tArray":
             return "FREE(" + arr_name + ");"
         else:
             return "FREE(" + arr_name + ")"
@@ -883,7 +938,9 @@ import * as bindings from '../bindings.mjs'
             return ("bindings.encodeUint16Array(" + inner + ")", "")
         elif mapped_ty.c_ty == "uint32_t" or mapped_ty.rust_obj == "LDKStr":
             return ("bindings.encodeUint32Array(" + inner + ")", "")
-        elif mapped_ty.c_ty == "int64_t" or mapped_ty.c_ty == "uint64_t":
+        elif mapped_ty.c_ty == "int64_t":
+            return ("bindings.encodeInt64Array(" + inner + ")", "")
+        elif mapped_ty.c_ty == "uint64_t":
             return ("bindings.encodeUint64Array(" + inner + ")", "")
         else:
             print(mapped_ty.c_ty)
@@ -897,8 +954,10 @@ import * as bindings from '../bindings.mjs'
             return "const " + conv_name + ": Uint8Array = bindings.decodeUint8Array(" + arr_name + ");"
         elif mapped_ty.c_ty == "uint16_t" or mapped_ty.c_ty == "int16_t":
             return "const " + conv_name + ": Uint16Array = bindings.decodeUint16Array(" + arr_name + ");"
-        elif mapped_ty.c_ty == "uint64_t" or mapped_ty.c_ty == "int64_t":
-            return "const " + conv_name + ": bigint[] = bindings.decodeUint64Array(" + arr_name + ");"
+        elif mapped_ty.c_ty == "int64_t":
+            return "const " + conv_name + ": BigInt64Array = bindings.decodeInt64Array(" + arr_name + ");"
+        elif mapped_ty.c_ty == "uint64_t":
+            return "const " + conv_name + ": BigUint64Array = bindings.decodeUint64Array(" + arr_name + ");"
         else:
             assert False
 
@@ -1405,7 +1464,7 @@ export class {struct_name.replace("LDK","")} extends CommonBase {{
                 out_java += self.fn_call_body(fn_name, field_map.c_ty, field_map.java_ty, "ptr: bigint", "ptr")
         out_java_enum += java_hu_class
         self.struct_file_suffixes[java_hu_type] = java_hu_subclasses
-        self.obj_defined([java_hu_type], "structs")
+        self.obj_defined([java_hu_type] + [java_hu_type + "_" + var.var_name for var in variant_list], "structs")
         return (out_java, out_java_enum, out_c)
 
     def map_opaque_struct(self, struct_name, struct_doc_comment):

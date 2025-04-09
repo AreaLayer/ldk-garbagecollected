@@ -28,7 +28,7 @@ public class UtxoResult : CommonBase {
 
 	/** A UtxoResult of type Sync */
 	public class UtxoResult_Sync : UtxoResult {
-		public Result_TxOutUtxoLookupErrorZ sync;
+		public org.ldk.structs.Result_TxOutUtxoLookupErrorZ sync;
 		internal UtxoResult_Sync(long ptr) : base(null, ptr) {
 			long sync = bindings.LDKUtxoResult_Sync_get_sync(ptr);
 			Result_TxOutUtxoLookupErrorZ sync_hu_conv = Result_TxOutUtxoLookupErrorZ.constr_from_ptr(sync);
@@ -37,7 +37,7 @@ public class UtxoResult : CommonBase {
 	}
 	/** A UtxoResult of type Async */
 	public class UtxoResult_Async : UtxoResult {
-		public UtxoFuture async;
+		public org.ldk.structs.UtxoFuture async;
 		internal UtxoResult_Async(long ptr) : base(null, ptr) {
 			long async = bindings.LDKUtxoResult_Async_get_async(ptr);
 			org.ldk.structs.UtxoFuture async_hu_conv = null; if (async < 0 || async > 4096) { async_hu_conv = new org.ldk.structs.UtxoFuture(null, async); }
@@ -54,7 +54,7 @@ public class UtxoResult : CommonBase {
 	/**
 	 * Creates a copy of the UtxoResult
 	 */
-	public UtxoResult clone() {
+	public org.ldk.structs.UtxoResult clone() {
 		long ret = bindings.UtxoResult_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -66,7 +66,7 @@ public class UtxoResult : CommonBase {
 	/**
 	 * Utility method to constructs a new Sync-variant UtxoResult
 	 */
-	public static UtxoResult sync(org.ldk.structs.Result_TxOutUtxoLookupErrorZ a) {
+	public static org.ldk.structs.UtxoResult sync(org.ldk.structs.Result_TxOutUtxoLookupErrorZ a) {
 		long ret = bindings.UtxoResult_sync(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -78,7 +78,7 @@ public class UtxoResult : CommonBase {
 	/**
 	 * Utility method to constructs a new Async-variant UtxoResult
 	 */
-	public static UtxoResult async(org.ldk.structs.UtxoFuture a) {
+	public static org.ldk.structs.UtxoResult async(org.ldk.structs.UtxoFuture a) {
 		long ret = bindings.UtxoResult_async(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }

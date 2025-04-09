@@ -39,7 +39,7 @@ public class Option_boolZ : CommonBase {
 	/**
 	 * Constructs a new COption_boolZ containing a bool
 	 */
-	public static Option_boolZ some(bool o) {
+	public static org.ldk.structs.Option_boolZ some(bool o) {
 		long ret = bindings.COption_boolZ_some(o);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -51,7 +51,7 @@ public class Option_boolZ : CommonBase {
 	/**
 	 * Constructs a new COption_boolZ containing nothing
 	 */
-	public static Option_boolZ none() {
+	public static org.ldk.structs.Option_boolZ none() {
 		long ret = bindings.COption_boolZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_boolZ ret_hu_conv = org.ldk.structs.Option_boolZ.constr_from_ptr(ret);
@@ -69,7 +69,7 @@ public class Option_boolZ : CommonBase {
 	 * Creates a new COption_boolZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_boolZ clone() {
+	public org.ldk.structs.Option_boolZ clone() {
 		long ret = bindings.COption_boolZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

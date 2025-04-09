@@ -30,7 +30,7 @@ public class OutputSpendStatus : CommonBase {
 		/**
 		 * The height at which we will first generate and broadcast a spending transaction.
 		 */
-		public Option_u32Z delayed_until_height;
+		public org.ldk.structs.Option_u32Z delayed_until_height;
 		internal OutputSpendStatus_PendingInitialBroadcast(long ptr) : base(null, ptr) {
 			long delayed_until_height = bindings.LDKOutputSpendStatus_PendingInitialBroadcast_get_delayed_until_height(ptr);
 			org.ldk.structs.Option_u32Z delayed_until_height_hu_conv = org.ldk.structs.Option_u32Z.constr_from_ptr(delayed_until_height);
@@ -107,7 +107,7 @@ public class OutputSpendStatus : CommonBase {
 	/**
 	 * Creates a copy of the OutputSpendStatus
 	 */
-	public OutputSpendStatus clone() {
+	public org.ldk.structs.OutputSpendStatus clone() {
 		long ret = bindings.OutputSpendStatus_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -119,7 +119,7 @@ public class OutputSpendStatus : CommonBase {
 	/**
 	 * Utility method to constructs a new PendingInitialBroadcast-variant OutputSpendStatus
 	 */
-	public static OutputSpendStatus pending_initial_broadcast(org.ldk.structs.Option_u32Z delayed_until_height) {
+	public static org.ldk.structs.OutputSpendStatus pending_initial_broadcast(org.ldk.structs.Option_u32Z delayed_until_height) {
 		long ret = bindings.OutputSpendStatus_pending_initial_broadcast(delayed_until_height.ptr);
 		GC.KeepAlive(delayed_until_height);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -131,7 +131,7 @@ public class OutputSpendStatus : CommonBase {
 	/**
 	 * Utility method to constructs a new PendingFirstConfirmation-variant OutputSpendStatus
 	 */
-	public static OutputSpendStatus pending_first_confirmation(byte[] first_broadcast_hash, int latest_broadcast_height, byte[] latest_spending_tx) {
+	public static org.ldk.structs.OutputSpendStatus pending_first_confirmation(byte[] first_broadcast_hash, int latest_broadcast_height, byte[] latest_spending_tx) {
 		long ret = bindings.OutputSpendStatus_pending_first_confirmation(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(first_broadcast_hash, 32)), latest_broadcast_height, InternalUtils.encodeUint8Array(latest_spending_tx));
 		GC.KeepAlive(first_broadcast_hash);
 		GC.KeepAlive(latest_broadcast_height);
@@ -145,7 +145,7 @@ public class OutputSpendStatus : CommonBase {
 	/**
 	 * Utility method to constructs a new PendingThresholdConfirmations-variant OutputSpendStatus
 	 */
-	public static OutputSpendStatus pending_threshold_confirmations(byte[] first_broadcast_hash, int latest_broadcast_height, byte[] latest_spending_tx, int confirmation_height, byte[] confirmation_hash) {
+	public static org.ldk.structs.OutputSpendStatus pending_threshold_confirmations(byte[] first_broadcast_hash, int latest_broadcast_height, byte[] latest_spending_tx, int confirmation_height, byte[] confirmation_hash) {
 		long ret = bindings.OutputSpendStatus_pending_threshold_confirmations(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(first_broadcast_hash, 32)), latest_broadcast_height, InternalUtils.encodeUint8Array(latest_spending_tx), confirmation_height, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(confirmation_hash, 32)));
 		GC.KeepAlive(first_broadcast_hash);
 		GC.KeepAlive(latest_broadcast_height);
@@ -187,7 +187,7 @@ public class OutputSpendStatus : CommonBase {
 	/**
 	 * Read a OutputSpendStatus from a byte array, created by OutputSpendStatus_write
 	 */
-	public static Result_OutputSpendStatusDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_OutputSpendStatusDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.OutputSpendStatus_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

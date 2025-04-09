@@ -16,7 +16,7 @@ public interface CustomOnionMessageHandlerInterface {
 	 * 
 	 * Note that responder (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	Option_C2Tuple_OnionMessageContentsResponseInstructionZZ handle_custom_message(OnionMessageContents message, Option_CVec_u8ZZ context, Responder responder);
+	Option_C2Tuple_OnionMessageContentsResponseInstructionZZ handle_custom_message(org.ldk.structs.OnionMessageContents message, org.ldk.structs.Option_CVec_u8ZZ context, org.ldk.structs.Responder responder);
 	/**Read a custom message of type `message_type` from `buffer`, returning `Ok(None)` if the
 	 * message type is unknown.
 	 */
@@ -101,7 +101,7 @@ public class CustomOnionMessageHandler : CommonBase {
 	 * 
 	 * Note that responder (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public Option_C2Tuple_OnionMessageContentsResponseInstructionZZ handle_custom_message(org.ldk.structs.OnionMessageContents message, org.ldk.structs.Option_CVec_u8ZZ context, org.ldk.structs.Responder responder) {
+	public org.ldk.structs.Option_C2Tuple_OnionMessageContentsResponseInstructionZZ handle_custom_message(org.ldk.structs.OnionMessageContents message, org.ldk.structs.Option_CVec_u8ZZ context, org.ldk.structs.Responder responder) {
 		long ret = bindings.CustomOnionMessageHandler_handle_custom_message(this.ptr, message.ptr, context.ptr, responder == null ? 0 : responder.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(message);
@@ -118,7 +118,7 @@ public class CustomOnionMessageHandler : CommonBase {
 	 * Read a custom message of type `message_type` from `buffer`, returning `Ok(None)` if the
 	 * message type is unknown.
 	 */
-	public Result_COption_OnionMessageContentsZDecodeErrorZ read_custom_message(long message_type, byte[] buffer) {
+	public org.ldk.structs.Result_COption_OnionMessageContentsZDecodeErrorZ read_custom_message(long message_type, byte[] buffer) {
 		long ret = bindings.CustomOnionMessageHandler_read_custom_message(this.ptr, message_type, InternalUtils.encodeUint8Array(buffer));
 		GC.KeepAlive(this);
 		GC.KeepAlive(message_type);

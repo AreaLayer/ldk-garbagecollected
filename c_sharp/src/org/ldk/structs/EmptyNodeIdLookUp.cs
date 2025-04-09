@@ -18,7 +18,7 @@ public class EmptyNodeIdLookUp : CommonBase {
 	/**
 	 * Constructs a new EmptyNodeIdLookUp given each field
 	 */
-	public static EmptyNodeIdLookUp of() {
+	public static org.ldk.structs.EmptyNodeIdLookUp of() {
 		long ret = bindings.EmptyNodeIdLookUp_new();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.EmptyNodeIdLookUp ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.EmptyNodeIdLookUp(null, ret); }
@@ -30,7 +30,7 @@ public class EmptyNodeIdLookUp : CommonBase {
 	 * Constructs a new NodeIdLookUp which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned NodeIdLookUp must be freed before this_arg is
 	 */
-	public NodeIdLookUp as_NodeIdLookUp() {
+	public org.ldk.structs.NodeIdLookUp as_NodeIdLookUp() {
 		long ret = bindings.EmptyNodeIdLookUp_as_NodeIdLookUp(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

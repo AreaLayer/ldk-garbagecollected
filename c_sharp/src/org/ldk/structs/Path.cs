@@ -49,7 +49,7 @@ public class Path : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public BlindedTail get_blinded_tail() {
+	public org.ldk.structs.BlindedTail get_blinded_tail() {
 		long ret = bindings.Path_get_blinded_tail(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -74,7 +74,7 @@ public class Path : CommonBase {
 	 * 
 	 * Note that blinded_tail_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static Path of(RouteHop[] hops_arg, org.ldk.structs.BlindedTail blinded_tail_arg) {
+	public static org.ldk.structs.Path of(RouteHop[] hops_arg, org.ldk.structs.BlindedTail blinded_tail_arg) {
 		long ret = bindings.Path_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(hops_arg, hops_arg_conv_10 => hops_arg_conv_10.ptr)), blinded_tail_arg == null ? 0 : blinded_tail_arg.ptr);
 		GC.KeepAlive(hops_arg);
 		GC.KeepAlive(blinded_tail_arg);
@@ -93,7 +93,7 @@ public class Path : CommonBase {
 	/**
 	 * Creates a copy of the Path
 	 */
-	public Path clone() {
+	public org.ldk.structs.Path clone() {
 		long ret = bindings.Path_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -152,7 +152,7 @@ public class Path : CommonBase {
 	/**
 	 * Gets the final hop's CLTV expiry delta.
 	 */
-	public Option_u32Z final_cltv_expiry_delta() {
+	public org.ldk.structs.Option_u32Z final_cltv_expiry_delta() {
 		long ret = bindings.Path_final_cltv_expiry_delta(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

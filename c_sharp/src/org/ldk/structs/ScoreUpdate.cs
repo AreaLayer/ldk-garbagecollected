@@ -12,16 +12,16 @@ namespace org { namespace ldk { namespace structs {
 public interface ScoreUpdateInterface {
 	/**Handles updating channel penalties after failing to route through a channel.
 	 */
-	void payment_path_failed(Path path, long short_channel_id, long duration_since_epoch);
+	void payment_path_failed(org.ldk.structs.Path path, long short_channel_id, long duration_since_epoch);
 	/**Handles updating channel penalties after successfully routing along a path.
 	 */
-	void payment_path_successful(Path path, long duration_since_epoch);
+	void payment_path_successful(org.ldk.structs.Path path, long duration_since_epoch);
 	/**Handles updating channel penalties after a probe over the given path failed.
 	 */
-	void probe_failed(Path path, long short_channel_id, long duration_since_epoch);
+	void probe_failed(org.ldk.structs.Path path, long short_channel_id, long duration_since_epoch);
 	/**Handles updating channel penalties after a probe over the given path succeeded.
 	 */
-	void probe_successful(Path path, long duration_since_epoch);
+	void probe_successful(org.ldk.structs.Path path, long duration_since_epoch);
 	/**Scorers may wish to reduce their certainty of channel liquidity information over time.
 	 * Thus, this method is provided to allow scorers to observe the passage of time - the holder
 	 * of this object should call this method regularly (generally via the

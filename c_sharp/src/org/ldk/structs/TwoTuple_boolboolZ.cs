@@ -43,7 +43,7 @@ public class TwoTuple_boolboolZ : CommonBase {
 	 * Creates a new tuple which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public TwoTuple_boolboolZ clone() {
+	public org.ldk.structs.TwoTuple_boolboolZ clone() {
 		long ret = bindings.C2Tuple_boolboolZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -55,7 +55,7 @@ public class TwoTuple_boolboolZ : CommonBase {
 	/**
 	 * Creates a new C2Tuple_boolboolZ from the contained elements.
 	 */
-	public static TwoTuple_boolboolZ of(bool a, bool b) {
+	public static org.ldk.structs.TwoTuple_boolboolZ of(bool a, bool b) {
 		long ret = bindings.C2Tuple_boolboolZ_new(a, b);
 		GC.KeepAlive(a);
 		GC.KeepAlive(b);

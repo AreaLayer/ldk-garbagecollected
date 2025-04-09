@@ -35,7 +35,7 @@ public class Destination : CommonBase {
 	}
 	/** A Destination of type BlindedPath */
 	public class Destination_BlindedPath : Destination {
-		public BlindedMessagePath blinded_path;
+		public org.ldk.structs.BlindedMessagePath blinded_path;
 		internal Destination_BlindedPath(long ptr) : base(null, ptr) {
 			long blinded_path = bindings.LDKDestination_BlindedPath_get_blinded_path(ptr);
 			org.ldk.structs.BlindedMessagePath blinded_path_hu_conv = null; if (blinded_path < 0 || blinded_path > 4096) { blinded_path_hu_conv = new org.ldk.structs.BlindedMessagePath(null, blinded_path); }
@@ -52,7 +52,7 @@ public class Destination : CommonBase {
 	/**
 	 * Creates a copy of the Destination
 	 */
-	public Destination clone() {
+	public org.ldk.structs.Destination clone() {
 		long ret = bindings.Destination_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -64,7 +64,7 @@ public class Destination : CommonBase {
 	/**
 	 * Utility method to constructs a new Node-variant Destination
 	 */
-	public static Destination node(byte[] a) {
+	public static org.ldk.structs.Destination node(byte[] a) {
 		long ret = bindings.Destination_node(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(a, 33)));
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -76,7 +76,7 @@ public class Destination : CommonBase {
 	/**
 	 * Utility method to constructs a new BlindedPath-variant Destination
 	 */
-	public static Destination blinded_path(org.ldk.structs.BlindedMessagePath a) {
+	public static org.ldk.structs.Destination blinded_path(org.ldk.structs.BlindedMessagePath a) {
 		long ret = bindings.Destination_blinded_path(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }

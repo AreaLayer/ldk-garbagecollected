@@ -29,7 +29,7 @@ public class InitFeatures : CommonBase {
 	/**
 	 * Read a InitFeatures from a byte array, created by InitFeatures_write
 	 */
-	public static Result_InitFeaturesDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_InitFeaturesDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.InitFeatures_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -63,7 +63,7 @@ public class InitFeatures : CommonBase {
 	/**
 	 * Creates a copy of the InitFeatures
 	 */
-	public InitFeatures clone() {
+	public org.ldk.structs.InitFeatures clone() {
 		long ret = bindings.InitFeatures_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -87,7 +87,7 @@ public class InitFeatures : CommonBase {
 	/**
 	 * Create a blank Features with no features set
 	 */
-	public static InitFeatures empty() {
+	public static org.ldk.structs.InitFeatures empty() {
 		long ret = bindings.InitFeatures_empty();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.InitFeatures ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.InitFeatures(null, ret); }
@@ -168,7 +168,7 @@ public class InitFeatures : CommonBase {
 	 * 
 	 * [BOLT 9]: https://github.com/lightning/bolts/blob/master/09-features.md
 	 */
-	public Result_NoneNoneZ set_required_feature_bit(long bit) {
+	public org.ldk.structs.Result_NoneNoneZ set_required_feature_bit(long bit) {
 		long ret = bindings.InitFeatures_set_required_feature_bit(this.ptr, bit);
 		GC.KeepAlive(this);
 		GC.KeepAlive(bit);
@@ -186,7 +186,7 @@ public class InitFeatures : CommonBase {
 	 * 
 	 * [BOLT 9]: https://github.com/lightning/bolts/blob/master/09-features.md
 	 */
-	public Result_NoneNoneZ set_optional_feature_bit(long bit) {
+	public org.ldk.structs.Result_NoneNoneZ set_optional_feature_bit(long bit) {
 		long ret = bindings.InitFeatures_set_optional_feature_bit(this.ptr, bit);
 		GC.KeepAlive(this);
 		GC.KeepAlive(bit);
@@ -204,7 +204,7 @@ public class InitFeatures : CommonBase {
 	 * 
 	 * [bLIP 2]: https://github.com/lightning/blips/blob/master/blip-0002.md#feature-bits
 	 */
-	public Result_NoneNoneZ set_required_custom_bit(long bit) {
+	public org.ldk.structs.Result_NoneNoneZ set_required_custom_bit(long bit) {
 		long ret = bindings.InitFeatures_set_required_custom_bit(this.ptr, bit);
 		GC.KeepAlive(this);
 		GC.KeepAlive(bit);
@@ -222,7 +222,7 @@ public class InitFeatures : CommonBase {
 	 * 
 	 * [bLIP 2]: https://github.com/lightning/blips/blob/master/blip-0002.md#feature-bits
 	 */
-	public Result_NoneNoneZ set_optional_custom_bit(long bit) {
+	public org.ldk.structs.Result_NoneNoneZ set_optional_custom_bit(long bit) {
 		long ret = bindings.InitFeatures_set_optional_custom_bit(this.ptr, bit);
 		GC.KeepAlive(this);
 		GC.KeepAlive(bit);
@@ -234,7 +234,7 @@ public class InitFeatures : CommonBase {
 	/**
 	 * Unsets the `upfront_shutdown_script` feature
 	 */
-	public InitFeatures clear_upfront_shutdown_script() {
+	public org.ldk.structs.InitFeatures clear_upfront_shutdown_script() {
 		long ret = bindings.InitFeatures_clear_upfront_shutdown_script(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -247,7 +247,7 @@ public class InitFeatures : CommonBase {
 	/**
 	 * Unsets the `shutdown_anysegwit` feature
 	 */
-	public InitFeatures clear_shutdown_anysegwit() {
+	public org.ldk.structs.InitFeatures clear_shutdown_anysegwit() {
 		long ret = bindings.InitFeatures_clear_shutdown_anysegwit(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -260,7 +260,7 @@ public class InitFeatures : CommonBase {
 	/**
 	 * Unsets the `wumbo` feature
 	 */
-	public InitFeatures clear_wumbo() {
+	public org.ldk.structs.InitFeatures clear_wumbo() {
 		long ret = bindings.InitFeatures_clear_wumbo(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

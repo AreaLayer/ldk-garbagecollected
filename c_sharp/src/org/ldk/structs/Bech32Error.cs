@@ -77,7 +77,7 @@ public class Bech32Error : CommonBase {
 	/**
 	 * Creates a new Bech32Error which has the same data as `orig`
 	 */
-	public Bech32Error clone() {
+	public org.ldk.structs.Bech32Error clone() {
 		long ret = bindings.Bech32Error_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

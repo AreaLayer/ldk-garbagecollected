@@ -27,7 +27,7 @@ public class ReceiveTlvs : CommonBase {
 	/**
 	 * Creates a copy of the ReceiveTlvs
 	 */
-	public ReceiveTlvs clone() {
+	public org.ldk.structs.ReceiveTlvs clone() {
 		long ret = bindings.ReceiveTlvs_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -39,7 +39,7 @@ public class ReceiveTlvs : CommonBase {
 	/**
 	 * Returns the underlying TLVs.
 	 */
-	public UnauthenticatedReceiveTlvs tlvs() {
+	public org.ldk.structs.UnauthenticatedReceiveTlvs tlvs() {
 		long ret = bindings.ReceiveTlvs_tlvs(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

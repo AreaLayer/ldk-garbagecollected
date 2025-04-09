@@ -41,7 +41,7 @@ public class Result_UnsignedChannelUpdateDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_UnsignedChannelUpdateDecodeErrorZ in the success state.
 	 */
-	public static Result_UnsignedChannelUpdateDecodeErrorZ ok(org.ldk.structs.UnsignedChannelUpdate o) {
+	public static org.ldk.structs.Result_UnsignedChannelUpdateDecodeErrorZ ok(org.ldk.structs.UnsignedChannelUpdate o) {
 		long ret = bindings.CResult_UnsignedChannelUpdateDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_UnsignedChannelUpdateDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_UnsignedChannelUpdateDecodeErrorZ in the error state.
 	 */
-	public static Result_UnsignedChannelUpdateDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_UnsignedChannelUpdateDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_UnsignedChannelUpdateDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_UnsignedChannelUpdateDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_UnsignedChannelUpdateDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_UnsignedChannelUpdateDecodeErrorZ clone() {
+	public org.ldk.structs.Result_UnsignedChannelUpdateDecodeErrorZ clone() {
 		long ret = bindings.CResult_UnsignedChannelUpdateDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

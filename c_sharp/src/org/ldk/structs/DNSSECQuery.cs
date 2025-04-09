@@ -24,7 +24,7 @@ public class DNSSECQuery : CommonBase {
 	/**
 	 * Creates a copy of the DNSSECQuery
 	 */
-	public DNSSECQuery clone() {
+	public org.ldk.structs.DNSSECQuery clone() {
 		long ret = bindings.DNSSECQuery_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

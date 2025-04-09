@@ -22,7 +22,7 @@ public class RapidGossipSync : CommonBase {
 	/**
 	 * Instantiate a new [`RapidGossipSync`] instance.
 	 */
-	public static RapidGossipSync of(org.ldk.structs.NetworkGraph network_graph, org.ldk.structs.Logger logger) {
+	public static org.ldk.structs.RapidGossipSync of(org.ldk.structs.NetworkGraph network_graph, org.ldk.structs.Logger logger) {
 		long ret = bindings.RapidGossipSync_new(network_graph.ptr, logger.ptr);
 		GC.KeepAlive(network_graph);
 		GC.KeepAlive(logger);
@@ -42,7 +42,7 @@ public class RapidGossipSync : CommonBase {
 	 * 
 	 * `sync_path`: Path to the file where the gossip update data is located
 	 */
-	public Result_u32GraphSyncErrorZ sync_network_graph_with_file_path(string sync_path) {
+	public org.ldk.structs.Result_u32GraphSyncErrorZ sync_network_graph_with_file_path(string sync_path) {
 		long ret = bindings.RapidGossipSync_sync_network_graph_with_file_path(this.ptr, InternalUtils.encodeString(sync_path));
 		GC.KeepAlive(this);
 		GC.KeepAlive(sync_path);
@@ -57,7 +57,7 @@ public class RapidGossipSync : CommonBase {
 	 * 
 	 * `update_data`: `&[u8]` binary stream that comprises the update data
 	 */
-	public Result_u32GraphSyncErrorZ update_network_graph(byte[] update_data) {
+	public org.ldk.structs.Result_u32GraphSyncErrorZ update_network_graph(byte[] update_data) {
 		long ret = bindings.RapidGossipSync_update_network_graph(this.ptr, InternalUtils.encodeUint8Array(update_data));
 		GC.KeepAlive(this);
 		GC.KeepAlive(update_data);
@@ -73,7 +73,7 @@ public class RapidGossipSync : CommonBase {
 	 * `update_data`: `&[u8]` binary stream that comprises the update data
 	 * `current_time_unix`: `Option<u64>` optional current timestamp to verify data age
 	 */
-	public Result_u32GraphSyncErrorZ update_network_graph_no_std(byte[] update_data, org.ldk.structs.Option_u64Z current_time_unix) {
+	public org.ldk.structs.Result_u32GraphSyncErrorZ update_network_graph_no_std(byte[] update_data, org.ldk.structs.Option_u64Z current_time_unix) {
 		long ret = bindings.RapidGossipSync_update_network_graph_no_std(this.ptr, InternalUtils.encodeUint8Array(update_data), current_time_unix.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(update_data);

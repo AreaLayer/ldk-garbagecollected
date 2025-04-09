@@ -27,7 +27,7 @@ public class PrivateRoute : CommonBase {
 	/**
 	 * Creates a copy of the PrivateRoute
 	 */
-	public PrivateRoute clone() {
+	public org.ldk.structs.PrivateRoute clone() {
 		long ret = bindings.PrivateRoute_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -68,7 +68,7 @@ public class PrivateRoute : CommonBase {
 	/**
 	 * Creates a new (partial) route from a list of hops
 	 */
-	public static Result_PrivateRouteCreationErrorZ of(org.ldk.structs.RouteHint hops) {
+	public static org.ldk.structs.Result_PrivateRouteCreationErrorZ of(org.ldk.structs.RouteHint hops) {
 		long ret = bindings.PrivateRoute_new(hops.ptr);
 		GC.KeepAlive(hops);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class PrivateRoute : CommonBase {
 	/**
 	 * Returns the underlying list of hops
 	 */
-	public RouteHint into_inner() {
+	public org.ldk.structs.RouteHint into_inner() {
 		long ret = bindings.PrivateRoute_into_inner(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

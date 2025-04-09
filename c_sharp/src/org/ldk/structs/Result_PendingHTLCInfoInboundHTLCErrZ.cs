@@ -41,7 +41,7 @@ public class Result_PendingHTLCInfoInboundHTLCErrZ : CommonBase {
 	/**
 	 * Creates a new CResult_PendingHTLCInfoInboundHTLCErrZ in the success state.
 	 */
-	public static Result_PendingHTLCInfoInboundHTLCErrZ ok(org.ldk.structs.PendingHTLCInfo o) {
+	public static org.ldk.structs.Result_PendingHTLCInfoInboundHTLCErrZ ok(org.ldk.structs.PendingHTLCInfo o) {
 		long ret = bindings.CResult_PendingHTLCInfoInboundHTLCErrZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_PendingHTLCInfoInboundHTLCErrZ : CommonBase {
 	/**
 	 * Creates a new CResult_PendingHTLCInfoInboundHTLCErrZ in the error state.
 	 */
-	public static Result_PendingHTLCInfoInboundHTLCErrZ err(org.ldk.structs.InboundHTLCErr e) {
+	public static org.ldk.structs.Result_PendingHTLCInfoInboundHTLCErrZ err(org.ldk.structs.InboundHTLCErr e) {
 		long ret = bindings.CResult_PendingHTLCInfoInboundHTLCErrZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_PendingHTLCInfoInboundHTLCErrZ : CommonBase {
 	 * Creates a new CResult_PendingHTLCInfoInboundHTLCErrZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_PendingHTLCInfoInboundHTLCErrZ clone() {
+	public org.ldk.structs.Result_PendingHTLCInfoInboundHTLCErrZ clone() {
 		long ret = bindings.CResult_PendingHTLCInfoInboundHTLCErrZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

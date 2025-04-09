@@ -28,7 +28,7 @@ public class ParseOrSemanticError : CommonBase {
 
 	/** A ParseOrSemanticError of type ParseError */
 	public class ParseOrSemanticError_ParseError : ParseOrSemanticError {
-		public Bolt11ParseError parse_error;
+		public org.ldk.structs.Bolt11ParseError parse_error;
 		internal ParseOrSemanticError_ParseError(long ptr) : base(null, ptr) {
 			long parse_error = bindings.LDKParseOrSemanticError_ParseError_get_parse_error(ptr);
 			org.ldk.structs.Bolt11ParseError parse_error_hu_conv = null; if (parse_error < 0 || parse_error > 4096) { parse_error_hu_conv = new org.ldk.structs.Bolt11ParseError(null, parse_error); }
@@ -52,7 +52,7 @@ public class ParseOrSemanticError : CommonBase {
 	/**
 	 * Creates a copy of the ParseOrSemanticError
 	 */
-	public ParseOrSemanticError clone() {
+	public org.ldk.structs.ParseOrSemanticError clone() {
 		long ret = bindings.ParseOrSemanticError_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -64,7 +64,7 @@ public class ParseOrSemanticError : CommonBase {
 	/**
 	 * Utility method to constructs a new ParseError-variant ParseOrSemanticError
 	 */
-	public static ParseOrSemanticError parse_error(org.ldk.structs.Bolt11ParseError a) {
+	public static org.ldk.structs.ParseOrSemanticError parse_error(org.ldk.structs.Bolt11ParseError a) {
 		long ret = bindings.ParseOrSemanticError_parse_error(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -76,7 +76,7 @@ public class ParseOrSemanticError : CommonBase {
 	/**
 	 * Utility method to constructs a new SemanticError-variant ParseOrSemanticError
 	 */
-	public static ParseOrSemanticError semantic_error(Bolt11SemanticError a) {
+	public static org.ldk.structs.ParseOrSemanticError semantic_error(Bolt11SemanticError a) {
 		long ret = bindings.ParseOrSemanticError_semantic_error(a);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }

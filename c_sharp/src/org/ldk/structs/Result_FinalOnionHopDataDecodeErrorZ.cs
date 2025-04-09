@@ -41,7 +41,7 @@ public class Result_FinalOnionHopDataDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_FinalOnionHopDataDecodeErrorZ in the success state.
 	 */
-	public static Result_FinalOnionHopDataDecodeErrorZ ok(org.ldk.structs.FinalOnionHopData o) {
+	public static org.ldk.structs.Result_FinalOnionHopDataDecodeErrorZ ok(org.ldk.structs.FinalOnionHopData o) {
 		long ret = bindings.CResult_FinalOnionHopDataDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_FinalOnionHopDataDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_FinalOnionHopDataDecodeErrorZ in the error state.
 	 */
-	public static Result_FinalOnionHopDataDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_FinalOnionHopDataDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_FinalOnionHopDataDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_FinalOnionHopDataDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_FinalOnionHopDataDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_FinalOnionHopDataDecodeErrorZ clone() {
+	public org.ldk.structs.Result_FinalOnionHopDataDecodeErrorZ clone() {
 		long ret = bindings.CResult_FinalOnionHopDataDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

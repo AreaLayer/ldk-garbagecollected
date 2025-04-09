@@ -19,7 +19,7 @@ public interface OffersMessageHandlerInterface {
 	 * 
 	 * Note that responder (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	Option_C2Tuple_OffersMessageResponseInstructionZZ handle_message(OffersMessage message, Option_OffersContextZ context, Responder responder);
+	Option_C2Tuple_OffersMessageResponseInstructionZZ handle_message(org.ldk.structs.OffersMessage message, org.ldk.structs.Option_OffersContextZ context, org.ldk.structs.Responder responder);
 	/**Releases any [`OffersMessage`]s that need to be sent.
 	 * 
 	 * Typically, this is used for messages initiating a payment flow rather than in response to
@@ -89,7 +89,7 @@ public class OffersMessageHandler : CommonBase {
 	 * 
 	 * Note that responder (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public Option_C2Tuple_OffersMessageResponseInstructionZZ handle_message(org.ldk.structs.OffersMessage message, org.ldk.structs.Option_OffersContextZ context, org.ldk.structs.Responder responder) {
+	public org.ldk.structs.Option_C2Tuple_OffersMessageResponseInstructionZZ handle_message(org.ldk.structs.OffersMessage message, org.ldk.structs.Option_OffersContextZ context, org.ldk.structs.Responder responder) {
 		long ret = bindings.OffersMessageHandler_handle_message(this.ptr, message.ptr, context.ptr, responder == null ? 0 : responder.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(message);

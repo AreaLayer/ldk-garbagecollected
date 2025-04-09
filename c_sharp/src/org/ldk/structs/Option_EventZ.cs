@@ -26,7 +26,7 @@ public class Option_EventZ : CommonBase {
 
 	/** A Option_EventZ of type Some */
 	public class Option_EventZ_Some : Option_EventZ {
-		public Event some;
+		public org.ldk.structs.Event some;
 		internal Option_EventZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_EventZ_Some_get_some(ptr);
 			org.ldk.structs.Event some_hu_conv = org.ldk.structs.Event.constr_from_ptr(some);
@@ -42,7 +42,7 @@ public class Option_EventZ : CommonBase {
 	/**
 	 * Constructs a new COption_EventZ containing a crate::lightning::events::Event
 	 */
-	public static Option_EventZ some(org.ldk.structs.Event o) {
+	public static org.ldk.structs.Option_EventZ some(org.ldk.structs.Event o) {
 		long ret = bindings.COption_EventZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class Option_EventZ : CommonBase {
 	/**
 	 * Constructs a new COption_EventZ containing nothing
 	 */
-	public static Option_EventZ none() {
+	public static org.ldk.structs.Option_EventZ none() {
 		long ret = bindings.COption_EventZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_EventZ ret_hu_conv = org.ldk.structs.Option_EventZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Option_EventZ : CommonBase {
 	 * Creates a new COption_EventZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_EventZ clone() {
+	public org.ldk.structs.Option_EventZ clone() {
 		long ret = bindings.COption_EventZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

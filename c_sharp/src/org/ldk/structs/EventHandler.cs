@@ -14,7 +14,7 @@ public interface EventHandlerInterface {
 	 * 
 	 * See [`EventsProvider`] for details that must be considered when implementing this method.
 	 */
-	Result_NoneReplayEventZ handle_event(Event _event);
+	Result_NoneReplayEventZ handle_event(org.ldk.structs.Event _event);
 }
 
 /**
@@ -65,7 +65,7 @@ public class EventHandler : CommonBase {
 	 * 
 	 * See [`EventsProvider`] for details that must be considered when implementing this method.
 	 */
-	public Result_NoneReplayEventZ handle_event(org.ldk.structs.Event _event) {
+	public org.ldk.structs.Result_NoneReplayEventZ handle_event(org.ldk.structs.Event _event) {
 		long ret = bindings.EventHandler_handle_event(this.ptr, _event.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(_event);

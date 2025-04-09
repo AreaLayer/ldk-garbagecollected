@@ -40,7 +40,7 @@ public class Result_CVec_u8ZPeerHandleErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_CVec_u8ZPeerHandleErrorZ in the success state.
 	 */
-	public static Result_CVec_u8ZPeerHandleErrorZ ok(byte[] o) {
+	public static org.ldk.structs.Result_CVec_u8ZPeerHandleErrorZ ok(byte[] o) {
 		long ret = bindings.CResult_CVec_u8ZPeerHandleErrorZ_ok(InternalUtils.encodeUint8Array(o));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -51,7 +51,7 @@ public class Result_CVec_u8ZPeerHandleErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_CVec_u8ZPeerHandleErrorZ in the error state.
 	 */
-	public static Result_CVec_u8ZPeerHandleErrorZ err(org.ldk.structs.PeerHandleError e) {
+	public static org.ldk.structs.Result_CVec_u8ZPeerHandleErrorZ err(org.ldk.structs.PeerHandleError e) {
 		long ret = bindings.CResult_CVec_u8ZPeerHandleErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -78,7 +78,7 @@ public class Result_CVec_u8ZPeerHandleErrorZ : CommonBase {
 	 * Creates a new CResult_CVec_u8ZPeerHandleErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_CVec_u8ZPeerHandleErrorZ clone() {
+	public org.ldk.structs.Result_CVec_u8ZPeerHandleErrorZ clone() {
 		long ret = bindings.CResult_CVec_u8ZPeerHandleErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

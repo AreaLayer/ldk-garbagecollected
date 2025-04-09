@@ -20,7 +20,7 @@ public class ClosingSigned : CommonBase {
 	/**
 	 * The channel ID
 	 */
-	public ChannelId get_channel_id() {
+	public org.ldk.structs.ChannelId get_channel_id() {
 		long ret = bindings.ClosingSigned_get_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -82,7 +82,7 @@ public class ClosingSigned : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public ClosingSignedFeeRange get_fee_range() {
+	public org.ldk.structs.ClosingSignedFeeRange get_fee_range() {
 		long ret = bindings.ClosingSigned_get_fee_range(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -108,7 +108,7 @@ public class ClosingSigned : CommonBase {
 	 * 
 	 * Note that fee_range_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static ClosingSigned of(org.ldk.structs.ChannelId channel_id_arg, long fee_satoshis_arg, byte[] signature_arg, org.ldk.structs.ClosingSignedFeeRange fee_range_arg) {
+	public static org.ldk.structs.ClosingSigned of(org.ldk.structs.ChannelId channel_id_arg, long fee_satoshis_arg, byte[] signature_arg, org.ldk.structs.ClosingSignedFeeRange fee_range_arg) {
 		long ret = bindings.ClosingSigned_new(channel_id_arg.ptr, fee_satoshis_arg, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(signature_arg, 64)), fee_range_arg == null ? 0 : fee_range_arg.ptr);
 		GC.KeepAlive(channel_id_arg);
 		GC.KeepAlive(fee_satoshis_arg);
@@ -129,7 +129,7 @@ public class ClosingSigned : CommonBase {
 	/**
 	 * Creates a copy of the ClosingSigned
 	 */
-	public ClosingSigned clone() {
+	public org.ldk.structs.ClosingSigned clone() {
 		long ret = bindings.ClosingSigned_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -181,7 +181,7 @@ public class ClosingSigned : CommonBase {
 	/**
 	 * Read a ClosingSigned from a byte array, created by ClosingSigned_write
 	 */
-	public static Result_ClosingSignedDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ClosingSignedDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.ClosingSigned_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

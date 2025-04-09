@@ -49,7 +49,7 @@ public class ProbabilisticScorer : CommonBase {
 	 * Creates a new scorer using the given scoring parameters for sending payments from a node
 	 * through a network graph.
 	 */
-	public static ProbabilisticScorer of(org.ldk.structs.ProbabilisticScoringDecayParameters decay_params, org.ldk.structs.NetworkGraph network_graph, org.ldk.structs.Logger logger) {
+	public static org.ldk.structs.ProbabilisticScorer of(org.ldk.structs.ProbabilisticScoringDecayParameters decay_params, org.ldk.structs.NetworkGraph network_graph, org.ldk.structs.Logger logger) {
 		long ret = bindings.ProbabilisticScorer_new(decay_params.ptr, network_graph.ptr, logger.ptr);
 		GC.KeepAlive(decay_params);
 		GC.KeepAlive(network_graph);
@@ -77,7 +77,7 @@ public class ProbabilisticScorer : CommonBase {
 	 * Query the estimated minimum and maximum liquidity available for sending a payment over the
 	 * channel with `scid` towards the given `target` node.
 	 */
-	public Option_C2Tuple_u64u64ZZ estimated_channel_liquidity_range(long scid, org.ldk.structs.NodeId target) {
+	public org.ldk.structs.Option_C2Tuple_u64u64ZZ estimated_channel_liquidity_range(long scid, org.ldk.structs.NodeId target) {
 		long ret = bindings.ProbabilisticScorer_estimated_channel_liquidity_range(this.ptr, scid, target.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(scid);
@@ -117,7 +117,7 @@ public class ProbabilisticScorer : CommonBase {
 	 * In order to fetch a single success probability from the buckets provided here, as used in
 	 * the scoring model, see [`Self::historical_estimated_payment_success_probability`].
 	 */
-	public Option_C2Tuple_ThirtyTwoU16sThirtyTwoU16sZZ historical_estimated_channel_liquidity_probabilities(long scid, org.ldk.structs.NodeId target) {
+	public org.ldk.structs.Option_C2Tuple_ThirtyTwoU16sThirtyTwoU16sZZ historical_estimated_channel_liquidity_probabilities(long scid, org.ldk.structs.NodeId target) {
 		long ret = bindings.ProbabilisticScorer_historical_estimated_channel_liquidity_probabilities(this.ptr, scid, target.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(scid);
@@ -144,7 +144,7 @@ public class ProbabilisticScorer : CommonBase {
 	 * [`Self::historical_estimated_channel_liquidity_probabilities`] (but not those returned by
 	 * [`Self::estimated_channel_liquidity_range`]).
 	 */
-	public Option_f64Z historical_estimated_payment_success_probability(long scid, org.ldk.structs.NodeId target, long amount_msat, org.ldk.structs.ProbabilisticScoringFeeParameters _params, bool allow_fallback_estimation) {
+	public org.ldk.structs.Option_f64Z historical_estimated_payment_success_probability(long scid, org.ldk.structs.NodeId target, long amount_msat, org.ldk.structs.ProbabilisticScoringFeeParameters _params, bool allow_fallback_estimation) {
 		long ret = bindings.ProbabilisticScorer_historical_estimated_payment_success_probability(this.ptr, scid, target.ptr, amount_msat, _params.ptr, allow_fallback_estimation);
 		GC.KeepAlive(this);
 		GC.KeepAlive(scid);
@@ -167,7 +167,7 @@ public class ProbabilisticScorer : CommonBase {
 	 * This will return `Some` for any channel which is present in the [`NetworkGraph`], including
 	 * if we have no bound information beside the channel's capacity.
 	 */
-	public Option_f64Z live_estimated_payment_success_probability(long scid, org.ldk.structs.NodeId target, long amount_msat, org.ldk.structs.ProbabilisticScoringFeeParameters _params) {
+	public org.ldk.structs.Option_f64Z live_estimated_payment_success_probability(long scid, org.ldk.structs.NodeId target, long amount_msat, org.ldk.structs.ProbabilisticScoringFeeParameters _params) {
 		long ret = bindings.ProbabilisticScorer_live_estimated_payment_success_probability(this.ptr, scid, target.ptr, amount_msat, _params.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(scid);
@@ -186,7 +186,7 @@ public class ProbabilisticScorer : CommonBase {
 	 * Constructs a new ScoreLookUp which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned ScoreLookUp must be freed before this_arg is
 	 */
-	public ScoreLookUp as_ScoreLookUp() {
+	public org.ldk.structs.ScoreLookUp as_ScoreLookUp() {
 		long ret = bindings.ProbabilisticScorer_as_ScoreLookUp(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -199,7 +199,7 @@ public class ProbabilisticScorer : CommonBase {
 	 * Constructs a new ScoreUpdate which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned ScoreUpdate must be freed before this_arg is
 	 */
-	public ScoreUpdate as_ScoreUpdate() {
+	public org.ldk.structs.ScoreUpdate as_ScoreUpdate() {
 		long ret = bindings.ProbabilisticScorer_as_ScoreUpdate(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -212,7 +212,7 @@ public class ProbabilisticScorer : CommonBase {
 	 * Constructs a new Score which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned Score must be freed before this_arg is
 	 */
-	public Score as_Score() {
+	public org.ldk.structs.Score as_Score() {
 		long ret = bindings.ProbabilisticScorer_as_Score(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -235,7 +235,7 @@ public class ProbabilisticScorer : CommonBase {
 	/**
 	 * Read a ProbabilisticScorer from a byte array, created by ProbabilisticScorer_write
 	 */
-	public static Result_ProbabilisticScorerDecodeErrorZ read(byte[] ser, org.ldk.structs.ProbabilisticScoringDecayParameters arg_a, org.ldk.structs.NetworkGraph arg_b, org.ldk.structs.Logger arg_c) {
+	public static org.ldk.structs.Result_ProbabilisticScorerDecodeErrorZ read(byte[] ser, org.ldk.structs.ProbabilisticScoringDecayParameters arg_a, org.ldk.structs.NetworkGraph arg_b, org.ldk.structs.Logger arg_c) {
 		long ret = bindings.ProbabilisticScorer_read(InternalUtils.encodeUint8Array(ser), arg_a.ptr, arg_b.ptr, arg_c.ptr);
 		GC.KeepAlive(ser);
 		GC.KeepAlive(arg_a);

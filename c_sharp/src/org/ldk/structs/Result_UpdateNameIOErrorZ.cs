@@ -38,7 +38,7 @@ public class Result_UpdateNameIOErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_UpdateNameIOErrorZ in the success state.
 	 */
-	public static Result_UpdateNameIOErrorZ ok(org.ldk.structs.UpdateName o) {
+	public static org.ldk.structs.Result_UpdateNameIOErrorZ ok(org.ldk.structs.UpdateName o) {
 		long ret = bindings.CResult_UpdateNameIOErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -58,7 +58,7 @@ public class Result_UpdateNameIOErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_UpdateNameIOErrorZ in the error state.
 	 */
-	public static Result_UpdateNameIOErrorZ err(IOError e) {
+	public static org.ldk.structs.Result_UpdateNameIOErrorZ err(IOError e) {
 		long ret = bindings.CResult_UpdateNameIOErrorZ_err(e);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }

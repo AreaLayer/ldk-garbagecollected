@@ -30,7 +30,7 @@ public class MinFinalCltvExpiryDelta : CommonBase {
 	/**
 	 * Constructs a new MinFinalCltvExpiryDelta given each field
 	 */
-	public static MinFinalCltvExpiryDelta of(long a_arg) {
+	public static org.ldk.structs.MinFinalCltvExpiryDelta of(long a_arg) {
 		long ret = bindings.MinFinalCltvExpiryDelta_new(a_arg);
 		GC.KeepAlive(a_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -48,7 +48,7 @@ public class MinFinalCltvExpiryDelta : CommonBase {
 	/**
 	 * Creates a copy of the MinFinalCltvExpiryDelta
 	 */
-	public MinFinalCltvExpiryDelta clone() {
+	public org.ldk.structs.MinFinalCltvExpiryDelta clone() {
 		long ret = bindings.MinFinalCltvExpiryDelta_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -230,7 +230,7 @@ public class Balance : CommonBase {
 	/**
 	 * Creates a copy of the Balance
 	 */
-	public Balance clone() {
+	public org.ldk.structs.Balance clone() {
 		long ret = bindings.Balance_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -242,7 +242,7 @@ public class Balance : CommonBase {
 	/**
 	 * Utility method to constructs a new ClaimableOnChannelClose-variant Balance
 	 */
-	public static Balance claimable_on_channel_close(long amount_satoshis, long transaction_fee_satoshis, long outbound_payment_htlc_rounded_msat, long outbound_forwarded_htlc_rounded_msat, long inbound_claiming_htlc_rounded_msat, long inbound_htlc_rounded_msat) {
+	public static org.ldk.structs.Balance claimable_on_channel_close(long amount_satoshis, long transaction_fee_satoshis, long outbound_payment_htlc_rounded_msat, long outbound_forwarded_htlc_rounded_msat, long inbound_claiming_htlc_rounded_msat, long inbound_htlc_rounded_msat) {
 		long ret = bindings.Balance_claimable_on_channel_close(amount_satoshis, transaction_fee_satoshis, outbound_payment_htlc_rounded_msat, outbound_forwarded_htlc_rounded_msat, inbound_claiming_htlc_rounded_msat, inbound_htlc_rounded_msat);
 		GC.KeepAlive(amount_satoshis);
 		GC.KeepAlive(transaction_fee_satoshis);
@@ -259,7 +259,7 @@ public class Balance : CommonBase {
 	/**
 	 * Utility method to constructs a new ClaimableAwaitingConfirmations-variant Balance
 	 */
-	public static Balance claimable_awaiting_confirmations(long amount_satoshis, int confirmation_height, BalanceSource source) {
+	public static org.ldk.structs.Balance claimable_awaiting_confirmations(long amount_satoshis, int confirmation_height, BalanceSource source) {
 		long ret = bindings.Balance_claimable_awaiting_confirmations(amount_satoshis, confirmation_height, source);
 		GC.KeepAlive(amount_satoshis);
 		GC.KeepAlive(confirmation_height);
@@ -273,7 +273,7 @@ public class Balance : CommonBase {
 	/**
 	 * Utility method to constructs a new ContentiousClaimable-variant Balance
 	 */
-	public static Balance contentious_claimable(long amount_satoshis, int timeout_height, byte[] payment_hash, byte[] payment_preimage) {
+	public static org.ldk.structs.Balance contentious_claimable(long amount_satoshis, int timeout_height, byte[] payment_hash, byte[] payment_preimage) {
 		long ret = bindings.Balance_contentious_claimable(amount_satoshis, timeout_height, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_preimage, 32)));
 		GC.KeepAlive(amount_satoshis);
 		GC.KeepAlive(timeout_height);
@@ -288,7 +288,7 @@ public class Balance : CommonBase {
 	/**
 	 * Utility method to constructs a new MaybeTimeoutClaimableHTLC-variant Balance
 	 */
-	public static Balance maybe_timeout_claimable_htlc(long amount_satoshis, int claimable_height, byte[] payment_hash, bool outbound_payment) {
+	public static org.ldk.structs.Balance maybe_timeout_claimable_htlc(long amount_satoshis, int claimable_height, byte[] payment_hash, bool outbound_payment) {
 		long ret = bindings.Balance_maybe_timeout_claimable_htlc(amount_satoshis, claimable_height, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)), outbound_payment);
 		GC.KeepAlive(amount_satoshis);
 		GC.KeepAlive(claimable_height);
@@ -303,7 +303,7 @@ public class Balance : CommonBase {
 	/**
 	 * Utility method to constructs a new MaybePreimageClaimableHTLC-variant Balance
 	 */
-	public static Balance maybe_preimage_claimable_htlc(long amount_satoshis, int expiry_height, byte[] payment_hash) {
+	public static org.ldk.structs.Balance maybe_preimage_claimable_htlc(long amount_satoshis, int expiry_height, byte[] payment_hash) {
 		long ret = bindings.Balance_maybe_preimage_claimable_htlc(amount_satoshis, expiry_height, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_hash, 32)));
 		GC.KeepAlive(amount_satoshis);
 		GC.KeepAlive(expiry_height);
@@ -317,7 +317,7 @@ public class Balance : CommonBase {
 	/**
 	 * Utility method to constructs a new CounterpartyRevokedOutputClaimable-variant Balance
 	 */
-	public static Balance counterparty_revoked_output_claimable(long amount_satoshis) {
+	public static org.ldk.structs.Balance counterparty_revoked_output_claimable(long amount_satoshis) {
 		long ret = bindings.Balance_counterparty_revoked_output_claimable(amount_satoshis);
 		GC.KeepAlive(amount_satoshis);
 		if (ret >= 0 && ret <= 4096) { return null; }

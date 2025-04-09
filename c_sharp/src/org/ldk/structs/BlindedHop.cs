@@ -62,7 +62,7 @@ public class BlindedHop : CommonBase {
 	/**
 	 * Constructs a new BlindedHop given each field
 	 */
-	public static BlindedHop of(byte[] blinded_node_id_arg, byte[] encrypted_payload_arg) {
+	public static org.ldk.structs.BlindedHop of(byte[] blinded_node_id_arg, byte[] encrypted_payload_arg) {
 		long ret = bindings.BlindedHop_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(blinded_node_id_arg, 33)), InternalUtils.encodeUint8Array(encrypted_payload_arg));
 		GC.KeepAlive(blinded_node_id_arg);
 		GC.KeepAlive(encrypted_payload_arg);
@@ -81,7 +81,7 @@ public class BlindedHop : CommonBase {
 	/**
 	 * Creates a copy of the BlindedHop
 	 */
-	public BlindedHop clone() {
+	public org.ldk.structs.BlindedHop clone() {
 		long ret = bindings.BlindedHop_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -133,7 +133,7 @@ public class BlindedHop : CommonBase {
 	/**
 	 * Read a BlindedHop from a byte array, created by BlindedHop_write
 	 */
-	public static Result_BlindedHopDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_BlindedHopDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.BlindedHop_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

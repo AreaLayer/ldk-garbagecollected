@@ -33,7 +33,7 @@ public class PrintableString : CommonBase {
 	/**
 	 * Constructs a new PrintableString given each field
 	 */
-	public static PrintableString of(string a_arg) {
+	public static org.ldk.structs.PrintableString of(string a_arg) {
 		long ret = bindings.PrintableString_new(InternalUtils.encodeString(a_arg));
 		GC.KeepAlive(a_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }

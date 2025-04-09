@@ -36,7 +36,7 @@ public class Result_LockedChannelMonitorNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_LockedChannelMonitorNoneZ in the success state.
 	 */
-	public static Result_LockedChannelMonitorNoneZ ok(org.ldk.structs.LockedChannelMonitor o) {
+	public static org.ldk.structs.Result_LockedChannelMonitorNoneZ ok(org.ldk.structs.LockedChannelMonitor o) {
 		long ret = bindings.CResult_LockedChannelMonitorNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -56,7 +56,7 @@ public class Result_LockedChannelMonitorNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_LockedChannelMonitorNoneZ in the error state.
 	 */
-	public static Result_LockedChannelMonitorNoneZ err() {
+	public static org.ldk.structs.Result_LockedChannelMonitorNoneZ err() {
 		long ret = bindings.CResult_LockedChannelMonitorNoneZ_err();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_LockedChannelMonitorNoneZ ret_hu_conv = Result_LockedChannelMonitorNoneZ.constr_from_ptr(ret);

@@ -18,7 +18,7 @@ public class RandomBytes : CommonBase {
 	/**
 	 * Creates a new instance using the given seed.
 	 */
-	public static RandomBytes of(byte[] seed) {
+	public static org.ldk.structs.RandomBytes of(byte[] seed) {
 		long ret = bindings.RandomBytes_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(seed, 32)));
 		GC.KeepAlive(seed);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -31,7 +31,7 @@ public class RandomBytes : CommonBase {
 	 * Constructs a new EntropySource which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned EntropySource must be freed before this_arg is
 	 */
-	public EntropySource as_EntropySource() {
+	public org.ldk.structs.EntropySource as_EntropySource() {
 		long ret = bindings.RandomBytes_as_EntropySource(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

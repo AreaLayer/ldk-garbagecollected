@@ -41,7 +41,7 @@ public class AsyncPaymentsContext : CommonBase {
 		 * [`ReleaseHeldHtlc`]: crate::onion_message::async_payments::ReleaseHeldHtlc
 		 * [`HeldHtlcAvailable`]: crate::onion_message::async_payments::HeldHtlcAvailable
 		 */
-		public Nonce nonce;
+		public org.ldk.structs.Nonce nonce;
 		/**
 		 * Authentication code for the [`PaymentId`].
 		 * 
@@ -71,7 +71,7 @@ public class AsyncPaymentsContext : CommonBase {
 	/**
 	 * Creates a copy of the AsyncPaymentsContext
 	 */
-	public AsyncPaymentsContext clone() {
+	public org.ldk.structs.AsyncPaymentsContext clone() {
 		long ret = bindings.AsyncPaymentsContext_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -83,7 +83,7 @@ public class AsyncPaymentsContext : CommonBase {
 	/**
 	 * Utility method to constructs a new OutboundPayment-variant AsyncPaymentsContext
 	 */
-	public static AsyncPaymentsContext outbound_payment(byte[] payment_id, org.ldk.structs.Nonce nonce, byte[] hmac) {
+	public static org.ldk.structs.AsyncPaymentsContext outbound_payment(byte[] payment_id, org.ldk.structs.Nonce nonce, byte[] hmac) {
 		long ret = bindings.AsyncPaymentsContext_outbound_payment(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(payment_id, 32)), nonce.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(hmac, 32)));
 		GC.KeepAlive(payment_id);
 		GC.KeepAlive(nonce);
@@ -108,7 +108,7 @@ public class AsyncPaymentsContext : CommonBase {
 	/**
 	 * Read a AsyncPaymentsContext from a byte array, created by AsyncPaymentsContext_write
 	 */
-	public static Result_AsyncPaymentsContextDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_AsyncPaymentsContextDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.AsyncPaymentsContext_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

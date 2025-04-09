@@ -73,7 +73,7 @@ public class LockableScore : CommonBase {
 	/**
 	 * Returns read locked scorer.
 	 */
-	public ScoreLookUp read_lock() {
+	public org.ldk.structs.ScoreLookUp read_lock() {
 		long ret = bindings.LockableScore_read_lock(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -85,7 +85,7 @@ public class LockableScore : CommonBase {
 	/**
 	 * Returns write locked scorer.
 	 */
-	public ScoreUpdate write_lock() {
+	public org.ldk.structs.ScoreUpdate write_lock() {
 		long ret = bindings.LockableScore_write_lock(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

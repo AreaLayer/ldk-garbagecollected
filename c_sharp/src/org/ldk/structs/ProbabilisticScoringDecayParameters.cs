@@ -114,7 +114,7 @@ public class ProbabilisticScoringDecayParameters : CommonBase {
 	/**
 	 * Constructs a new ProbabilisticScoringDecayParameters given each field
 	 */
-	public static ProbabilisticScoringDecayParameters of(long historical_no_updates_half_life_arg, long liquidity_offset_half_life_arg) {
+	public static org.ldk.structs.ProbabilisticScoringDecayParameters of(long historical_no_updates_half_life_arg, long liquidity_offset_half_life_arg) {
 		long ret = bindings.ProbabilisticScoringDecayParameters_new(historical_no_updates_half_life_arg, liquidity_offset_half_life_arg);
 		GC.KeepAlive(historical_no_updates_half_life_arg);
 		GC.KeepAlive(liquidity_offset_half_life_arg);
@@ -133,7 +133,7 @@ public class ProbabilisticScoringDecayParameters : CommonBase {
 	/**
 	 * Creates a copy of the ProbabilisticScoringDecayParameters
 	 */
-	public ProbabilisticScoringDecayParameters clone() {
+	public org.ldk.structs.ProbabilisticScoringDecayParameters clone() {
 		long ret = bindings.ProbabilisticScoringDecayParameters_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -145,7 +145,7 @@ public class ProbabilisticScoringDecayParameters : CommonBase {
 	/**
 	 * Creates a "default" ProbabilisticScoringDecayParameters. See struct and individual field documentaiton for details on which values are used.
 	 */
-	public static ProbabilisticScoringDecayParameters with_default() {
+	public static org.ldk.structs.ProbabilisticScoringDecayParameters with_default() {
 		long ret = bindings.ProbabilisticScoringDecayParameters_default();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.ProbabilisticScoringDecayParameters ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.ProbabilisticScoringDecayParameters(null, ret); }

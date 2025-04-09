@@ -31,7 +31,7 @@ public class Nonce : CommonBase {
 	/**
 	 * Creates a copy of the Nonce
 	 */
-	public Nonce clone() {
+	public org.ldk.structs.Nonce clone() {
 		long ret = bindings.Nonce_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -60,7 +60,7 @@ public class Nonce : CommonBase {
 	/**
 	 * Creates a `Nonce` from the given [`EntropySource`].
 	 */
-	public static Nonce from_entropy_source(org.ldk.structs.EntropySource entropy_source) {
+	public static org.ldk.structs.Nonce from_entropy_source(org.ldk.structs.EntropySource entropy_source) {
 		long ret = bindings.Nonce_from_entropy_source(entropy_source.ptr);
 		GC.KeepAlive(entropy_source);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -95,7 +95,7 @@ public class Nonce : CommonBase {
 	/**
 	 * Read a Nonce from a byte array, created by Nonce_write
 	 */
-	public static Result_NonceDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_NonceDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.Nonce_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

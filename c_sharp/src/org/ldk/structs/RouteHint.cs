@@ -29,7 +29,7 @@ public class RouteHint : CommonBase {
 	/**
 	 * Read a RouteHint from a byte array, created by RouteHint_write
 	 */
-	public static Result_RouteHintDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_RouteHintDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.RouteHint_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -62,7 +62,7 @@ public class RouteHint : CommonBase {
 	/**
 	 * Constructs a new RouteHint given each field
 	 */
-	public static RouteHint of(RouteHintHop[] a_arg) {
+	public static org.ldk.structs.RouteHint of(RouteHintHop[] a_arg) {
 		long ret = bindings.RouteHint_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(a_arg, a_arg_conv_14 => a_arg_conv_14.ptr)));
 		GC.KeepAlive(a_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -80,7 +80,7 @@ public class RouteHint : CommonBase {
 	/**
 	 * Creates a copy of the RouteHint
 	 */
-	public RouteHint clone() {
+	public org.ldk.structs.RouteHint clone() {
 		long ret = bindings.RouteHint_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

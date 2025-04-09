@@ -18,7 +18,7 @@ public class FilesystemStore : CommonBase {
 	/**
 	 * Constructs a new [`FilesystemStore`].
 	 */
-	public static FilesystemStore of(string data_dir) {
+	public static org.ldk.structs.FilesystemStore of(string data_dir) {
 		long ret = bindings.FilesystemStore_new(InternalUtils.encodeString(data_dir));
 		GC.KeepAlive(data_dir);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -42,7 +42,7 @@ public class FilesystemStore : CommonBase {
 	 * Constructs a new KVStore which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned KVStore must be freed before this_arg is
 	 */
-	public KVStore as_KVStore() {
+	public org.ldk.structs.KVStore as_KVStore() {
 		long ret = bindings.FilesystemStore_as_KVStore(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -55,7 +55,7 @@ public class FilesystemStore : CommonBase {
 	 * Constructs a new MigratableKVStore which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned MigratableKVStore must be freed before this_arg is
 	 */
-	public MigratableKVStore as_MigratableKVStore() {
+	public org.ldk.structs.MigratableKVStore as_MigratableKVStore() {
 		long ret = bindings.FilesystemStore_as_MigratableKVStore(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -41,7 +41,7 @@ public class Result_Bolt12InvoiceDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_Bolt12InvoiceDecodeErrorZ in the success state.
 	 */
-	public static Result_Bolt12InvoiceDecodeErrorZ ok(org.ldk.structs.Bolt12Invoice o) {
+	public static org.ldk.structs.Result_Bolt12InvoiceDecodeErrorZ ok(org.ldk.structs.Bolt12Invoice o) {
 		long ret = bindings.CResult_Bolt12InvoiceDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_Bolt12InvoiceDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_Bolt12InvoiceDecodeErrorZ in the error state.
 	 */
-	public static Result_Bolt12InvoiceDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_Bolt12InvoiceDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_Bolt12InvoiceDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_Bolt12InvoiceDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_Bolt12InvoiceDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_Bolt12InvoiceDecodeErrorZ clone() {
+	public org.ldk.structs.Result_Bolt12InvoiceDecodeErrorZ clone() {
 		long ret = bindings.CResult_Bolt12InvoiceDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

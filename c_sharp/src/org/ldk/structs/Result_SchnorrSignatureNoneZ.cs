@@ -35,7 +35,7 @@ public class Result_SchnorrSignatureNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_SchnorrSignatureNoneZ in the success state.
 	 */
-	public static Result_SchnorrSignatureNoneZ ok(byte[] o) {
+	public static org.ldk.structs.Result_SchnorrSignatureNoneZ ok(byte[] o) {
 		long ret = bindings.CResult_SchnorrSignatureNoneZ_ok(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(o, 64)));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -46,7 +46,7 @@ public class Result_SchnorrSignatureNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_SchnorrSignatureNoneZ in the error state.
 	 */
-	public static Result_SchnorrSignatureNoneZ err() {
+	public static org.ldk.structs.Result_SchnorrSignatureNoneZ err() {
 		long ret = bindings.CResult_SchnorrSignatureNoneZ_err();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_SchnorrSignatureNoneZ ret_hu_conv = Result_SchnorrSignatureNoneZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Result_SchnorrSignatureNoneZ : CommonBase {
 	 * Creates a new CResult_SchnorrSignatureNoneZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_SchnorrSignatureNoneZ clone() {
+	public org.ldk.structs.Result_SchnorrSignatureNoneZ clone() {
 		long ret = bindings.CResult_SchnorrSignatureNoneZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

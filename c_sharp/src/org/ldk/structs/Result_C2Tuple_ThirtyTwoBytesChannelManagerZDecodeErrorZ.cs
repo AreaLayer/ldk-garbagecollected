@@ -41,7 +41,7 @@ public class Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ : CommonBa
 	/**
 	 * Creates a new CResult_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ in the success state.
 	 */
-	public static Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ ok(org.ldk.structs.TwoTuple_ThirtyTwoBytesChannelManagerZ o) {
+	public static org.ldk.structs.Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ ok(org.ldk.structs.TwoTuple_ThirtyTwoBytesChannelManagerZ o) {
 		long ret = bindings.CResult_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -53,7 +53,7 @@ public class Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ : CommonBa
 	/**
 	 * Creates a new CResult_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ in the error state.
 	 */
-	public static Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_C2Tuple_ThirtyTwoBytesChannelManagerZDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }

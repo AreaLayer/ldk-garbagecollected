@@ -41,7 +41,7 @@ public class Result_BlindedTailDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_BlindedTailDecodeErrorZ in the success state.
 	 */
-	public static Result_BlindedTailDecodeErrorZ ok(org.ldk.structs.BlindedTail o) {
+	public static org.ldk.structs.Result_BlindedTailDecodeErrorZ ok(org.ldk.structs.BlindedTail o) {
 		long ret = bindings.CResult_BlindedTailDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_BlindedTailDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_BlindedTailDecodeErrorZ in the error state.
 	 */
-	public static Result_BlindedTailDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_BlindedTailDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_BlindedTailDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_BlindedTailDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_BlindedTailDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_BlindedTailDecodeErrorZ clone() {
+	public org.ldk.structs.Result_BlindedTailDecodeErrorZ clone() {
 		long ret = bindings.CResult_BlindedTailDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

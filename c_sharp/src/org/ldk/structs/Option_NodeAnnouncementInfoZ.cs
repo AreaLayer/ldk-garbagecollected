@@ -26,7 +26,7 @@ public class Option_NodeAnnouncementInfoZ : CommonBase {
 
 	/** A Option_NodeAnnouncementInfoZ of type Some */
 	public class Option_NodeAnnouncementInfoZ_Some : Option_NodeAnnouncementInfoZ {
-		public NodeAnnouncementInfo some;
+		public org.ldk.structs.NodeAnnouncementInfo some;
 		internal Option_NodeAnnouncementInfoZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_NodeAnnouncementInfoZ_Some_get_some(ptr);
 			org.ldk.structs.NodeAnnouncementInfo some_hu_conv = org.ldk.structs.NodeAnnouncementInfo.constr_from_ptr(some);
@@ -42,7 +42,7 @@ public class Option_NodeAnnouncementInfoZ : CommonBase {
 	/**
 	 * Constructs a new COption_NodeAnnouncementInfoZ containing a crate::lightning::routing::gossip::NodeAnnouncementInfo
 	 */
-	public static Option_NodeAnnouncementInfoZ some(org.ldk.structs.NodeAnnouncementInfo o) {
+	public static org.ldk.structs.Option_NodeAnnouncementInfoZ some(org.ldk.structs.NodeAnnouncementInfo o) {
 		long ret = bindings.COption_NodeAnnouncementInfoZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class Option_NodeAnnouncementInfoZ : CommonBase {
 	/**
 	 * Constructs a new COption_NodeAnnouncementInfoZ containing nothing
 	 */
-	public static Option_NodeAnnouncementInfoZ none() {
+	public static org.ldk.structs.Option_NodeAnnouncementInfoZ none() {
 		long ret = bindings.COption_NodeAnnouncementInfoZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_NodeAnnouncementInfoZ ret_hu_conv = org.ldk.structs.Option_NodeAnnouncementInfoZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Option_NodeAnnouncementInfoZ : CommonBase {
 	 * Creates a new COption_NodeAnnouncementInfoZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_NodeAnnouncementInfoZ clone() {
+	public org.ldk.structs.Option_NodeAnnouncementInfoZ clone() {
 		long ret = bindings.COption_NodeAnnouncementInfoZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

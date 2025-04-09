@@ -41,7 +41,7 @@ public class Result_OnionMessageDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_OnionMessageDecodeErrorZ in the success state.
 	 */
-	public static Result_OnionMessageDecodeErrorZ ok(org.ldk.structs.OnionMessage o) {
+	public static org.ldk.structs.Result_OnionMessageDecodeErrorZ ok(org.ldk.structs.OnionMessage o) {
 		long ret = bindings.CResult_OnionMessageDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_OnionMessageDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_OnionMessageDecodeErrorZ in the error state.
 	 */
-	public static Result_OnionMessageDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_OnionMessageDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_OnionMessageDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_OnionMessageDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_OnionMessageDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_OnionMessageDecodeErrorZ clone() {
+	public org.ldk.structs.Result_OnionMessageDecodeErrorZ clone() {
 		long ret = bindings.CResult_OnionMessageDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

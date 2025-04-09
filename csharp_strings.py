@@ -145,6 +145,35 @@ public class CommonBase {
 	}
 }"""
 
+        self.address_defn = """public class Address : CommonBase {
+	/** The address in string form */
+	public readonly string address;
+
+	internal Address(object _dummy, long ptr) : base(ptr) {
+		this.address = InternalUtils.decodeString(bindings.Address_to_string(ptr));
+	}
+	public static Address from_string(string address) {
+		long str_ptr = InternalUtils.encodeString(address);
+		long ptr = bindings.Address_new(str_ptr);
+		bindings.free_buffer(str_ptr);
+		Option_AddressZ res = Option_AddressZ.constr_from_ptr(ptr);
+		if (res is Option_AddressZ.Option_AddressZ_Some) {
+			long addr_ptr = ((Option_AddressZ.Option_AddressZ_Some)res).some.ptr;
+			long cloned = bindings.Address_clone(addr_ptr);
+			Address rest = new Address(null, cloned);
+			return rest;
+		} else {
+			throw new ArgumentException("Invalid address", "address");
+		}
+	}
+
+	~Address() {
+		if (ptr != 0) { bindings.Address_free(ptr); }
+	}
+}"""
+
+
+
         self.scalar_defn = """public class BigEndianScalar : CommonBase {
 	/** The bytes of the scalar value, in big endian */
 	public readonly byte[] scalar_bytes;
@@ -428,7 +457,9 @@ _Static_assert(sizeof(int8_t) == 1, "stdints must be correct");
 DECL_ARR_TYPE(int64_t, int64_t);
 DECL_ARR_TYPE(uint64_t, uint64_t);
 DECL_ARR_TYPE(int8_t, int8_t);
+DECL_ARR_TYPE(uint8_t, uint8_t);
 DECL_ARR_TYPE(int16_t, int16_t);
+DECL_ARR_TYPE(uint16_t, uint16_t);
 DECL_ARR_TYPE(uint32_t, uint32_t);
 DECL_ARR_TYPE(void*, ptr);
 DECL_ARR_TYPE(char, char);
@@ -440,15 +471,20 @@ static inline jstring str_ref_to_cs(const char* chars, size_t len) {
 	return arr;
 }
 static inline LDKStr str_ref_to_owned_c(const jstring str) {
-	char* newchars = MALLOC(str->arr_len + 1, "String chars");
-	memcpy(newchars, str->elems, str->arr_len);
-	newchars[str->arr_len] = 0;
-	LDKStr res = {
-		.chars = newchars,
-		.len = str->arr_len,
-		.chars_is_owned = true
-	};
-	return res;
+	if (str->arr_len == 0) {
+		LDKStr res = { .chars = NULL, .len = 0, .chars_is_owned = false };
+		return res;
+	} else {
+		char* newchars = MALLOC(str->arr_len + 1, "String chars");
+		memcpy(newchars, str->elems, str->arr_len);
+		newchars[str->arr_len] = 0;
+		LDKStr res = {
+			.chars = newchars,
+			.len = str->arr_len,
+			.chars_is_owned = true
+		};
+		return res;
+	}
 }
 
 // The C# Bool marshalling is defined as 4 bytes, but the size of bool is platform-dependent
@@ -514,17 +550,17 @@ namespace org { namespace ldk { namespace structs {
             assert ty_info.rust_obj == "LDKCVec_U5Z" or (ty_info.subty is not None and (ty_info.subty.c_ty.endswith("Array") or ty_info.subty.rust_obj == "LDKStr"))
         return "init_" + ty_info.c_ty + "(" + arr_len + ", __LINE__)"
     def set_native_arr_contents(self, arr_name, arr_len, ty_info):
-        if ty_info.c_ty == "int8_tArray":
+        if ty_info.c_ty == "uint8_tArray":
             return ("memcpy(" + arr_name + "->elems, ", ", " + arr_len + ")")
-        elif ty_info.c_ty == "int16_tArray":
+        elif ty_info.c_ty == "uint16_tArray":
             return ("memcpy(" + arr_name + "->elems, ", ", " + arr_len + " * 2)")
         else:
             assert False
     def get_native_arr_contents(self, arr_name, dest_name, arr_len, ty_info, copy):
-        if ty_info.c_ty == "int8_tArray" or ty_info.c_ty == "int16_tArray":
+        if ty_info.c_ty == "uint8_tArray" or ty_info.c_ty == "uint16_tArray":
             if copy:
                 byte_len = arr_len
-                if ty_info.c_ty == "int16_tArray":
+                if ty_info.c_ty == "uint16_tArray":
                     byte_len = arr_len + " * 2"
                 return "memcpy(" + dest_name + ", " + arr_name + "->elems, " + byte_len + "); FREE(" + arr_name + ")"
         assert not copy
@@ -541,7 +577,7 @@ namespace org { namespace ldk { namespace structs {
     def get_native_arr_entry_call(self, ty_info, arr_name, idxc, entry_access):
         return None
     def cleanup_native_arr_ref_contents(self, arr_name, dest_name, arr_len, ty_info):
-        if ty_info.c_ty == "int8_tArray":
+        if ty_info.c_ty == "uint8_tArray":
             return "FREE(" + arr_name + ");"
         else:
             return "FREE(" + arr_name + ")"
@@ -837,7 +873,7 @@ int CS_LDK_register_{fn_suffix}_invoker(invoker_{fn_suffix} invoker) {{
                 for idx, arg_conv_info in enumerate(fn_line.args_ty):
                     if idx >= 1:
                         out_java_interface += ", "
-                    out_java_interface += f"{arg_conv_info.java_hu_ty} {safe_arg_name(arg_conv_info.arg_name)}"
+                    out_java_interface += f"{self.fully_qualified_hu_ty_path(arg_conv_info)} {safe_arg_name(arg_conv_info.arg_name)}"
                     java_method_descriptor += arg_conv_info.java_fn_ty_arg
                 out_java_interface += f");\n"
                 java_method_descriptor += ")" + fn_line.ret_ty_info.java_fn_ty_arg
@@ -1148,7 +1184,7 @@ public class {struct_name.replace("LDK","")} : CommonBase {{
                 arg_name = safe_arg_name(field_ty.arg_name)
                 if field_docs is not None:
                     java_hu_subclasses += "\t\t/**\n\t\t * " + field_docs.replace("\n", "\n\t\t * ") + "\n\t\t */\n"
-                java_hu_subclasses += f"\t\tpublic {field_ty.java_hu_ty} {arg_name};\n"
+                java_hu_subclasses += f"\t\tpublic {self.fully_qualified_hu_ty_path(field_ty)} {arg_name};\n"
                 if field_ty.to_hu_conv is not None:
                     hu_conv_body += f"\t\t\t{field_ty.java_ty} {arg_name} = bindings.{struct_name}_{var.var_name}_get_{field_ty.arg_name}(ptr);\n"
                     hu_conv_body += f"\t\t\t" + arg_name_repl(field_ty.to_hu_conv.replace("\n", "\n\t\t\t"), field_ty.arg_name) + "\n"
@@ -1287,7 +1323,7 @@ public class {struct_name.replace("LDK","")} : CommonBase {{
         else:
             if doc_comment is not None:
                 out_java_struct += "\t/**\n\t * " + doc_comment.replace("\n", "\n\t * ") + "\n\t */\n"
-            hu_ret_ty = return_type_info.java_hu_ty
+            hu_ret_ty = self.fully_qualified_hu_ty_path(return_type_info)
             if return_type_info.nullable:
                 #hu_ret_ty += "?" - apparently mono doesn't support the nullable stuff
                 pass

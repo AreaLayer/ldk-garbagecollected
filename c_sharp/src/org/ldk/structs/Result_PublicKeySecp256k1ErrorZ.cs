@@ -37,7 +37,7 @@ public class Result_PublicKeySecp256k1ErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_PublicKeySecp256k1ErrorZ in the success state.
 	 */
-	public static Result_PublicKeySecp256k1ErrorZ ok(byte[] o) {
+	public static org.ldk.structs.Result_PublicKeySecp256k1ErrorZ ok(byte[] o) {
 		long ret = bindings.CResult_PublicKeySecp256k1ErrorZ_ok(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(o, 33)));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -48,7 +48,7 @@ public class Result_PublicKeySecp256k1ErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_PublicKeySecp256k1ErrorZ in the error state.
 	 */
-	public static Result_PublicKeySecp256k1ErrorZ err(Secp256k1Error e) {
+	public static org.ldk.structs.Result_PublicKeySecp256k1ErrorZ err(Secp256k1Error e) {
 		long ret = bindings.CResult_PublicKeySecp256k1ErrorZ_err(e);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -75,7 +75,7 @@ public class Result_PublicKeySecp256k1ErrorZ : CommonBase {
 	 * Creates a new CResult_PublicKeySecp256k1ErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_PublicKeySecp256k1ErrorZ clone() {
+	public org.ldk.structs.Result_PublicKeySecp256k1ErrorZ clone() {
 		long ret = bindings.CResult_PublicKeySecp256k1ErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

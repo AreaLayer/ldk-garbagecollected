@@ -12,85 +12,85 @@ namespace org { namespace ldk { namespace structs {
 public interface ChannelMessageHandlerInterface {
 	/**Handle an incoming `open_channel` message from the given peer.
 	 */
-	void handle_open_channel(byte[] their_node_id, OpenChannel msg);
+	void handle_open_channel(byte[] their_node_id, org.ldk.structs.OpenChannel msg);
 	/**Handle an incoming `open_channel2` message from the given peer.
 	 */
-	void handle_open_channel_v2(byte[] their_node_id, OpenChannelV2 msg);
+	void handle_open_channel_v2(byte[] their_node_id, org.ldk.structs.OpenChannelV2 msg);
 	/**Handle an incoming `accept_channel` message from the given peer.
 	 */
-	void handle_accept_channel(byte[] their_node_id, AcceptChannel msg);
+	void handle_accept_channel(byte[] their_node_id, org.ldk.structs.AcceptChannel msg);
 	/**Handle an incoming `accept_channel2` message from the given peer.
 	 */
-	void handle_accept_channel_v2(byte[] their_node_id, AcceptChannelV2 msg);
+	void handle_accept_channel_v2(byte[] their_node_id, org.ldk.structs.AcceptChannelV2 msg);
 	/**Handle an incoming `funding_created` message from the given peer.
 	 */
-	void handle_funding_created(byte[] their_node_id, FundingCreated msg);
+	void handle_funding_created(byte[] their_node_id, org.ldk.structs.FundingCreated msg);
 	/**Handle an incoming `funding_signed` message from the given peer.
 	 */
-	void handle_funding_signed(byte[] their_node_id, FundingSigned msg);
+	void handle_funding_signed(byte[] their_node_id, org.ldk.structs.FundingSigned msg);
 	/**Handle an incoming `channel_ready` message from the given peer.
 	 */
-	void handle_channel_ready(byte[] their_node_id, ChannelReady msg);
+	void handle_channel_ready(byte[] their_node_id, org.ldk.structs.ChannelReady msg);
 	/**Handle an incoming `shutdown` message from the given peer.
 	 */
-	void handle_shutdown(byte[] their_node_id, Shutdown msg);
+	void handle_shutdown(byte[] their_node_id, org.ldk.structs.Shutdown msg);
 	/**Handle an incoming `closing_signed` message from the given peer.
 	 */
-	void handle_closing_signed(byte[] their_node_id, ClosingSigned msg);
+	void handle_closing_signed(byte[] their_node_id, org.ldk.structs.ClosingSigned msg);
 	/**Handle an incoming `stfu` message from the given peer.
 	 */
-	void handle_stfu(byte[] their_node_id, Stfu msg);
+	void handle_stfu(byte[] their_node_id, org.ldk.structs.Stfu msg);
 	/**Handle an incoming `tx_add_input message` from the given peer.
 	 */
-	void handle_tx_add_input(byte[] their_node_id, TxAddInput msg);
+	void handle_tx_add_input(byte[] their_node_id, org.ldk.structs.TxAddInput msg);
 	/**Handle an incoming `tx_add_output` message from the given peer.
 	 */
-	void handle_tx_add_output(byte[] their_node_id, TxAddOutput msg);
+	void handle_tx_add_output(byte[] their_node_id, org.ldk.structs.TxAddOutput msg);
 	/**Handle an incoming `tx_remove_input` message from the given peer.
 	 */
-	void handle_tx_remove_input(byte[] their_node_id, TxRemoveInput msg);
+	void handle_tx_remove_input(byte[] their_node_id, org.ldk.structs.TxRemoveInput msg);
 	/**Handle an incoming `tx_remove_output` message from the given peer.
 	 */
-	void handle_tx_remove_output(byte[] their_node_id, TxRemoveOutput msg);
+	void handle_tx_remove_output(byte[] their_node_id, org.ldk.structs.TxRemoveOutput msg);
 	/**Handle an incoming `tx_complete message` from the given peer.
 	 */
-	void handle_tx_complete(byte[] their_node_id, TxComplete msg);
+	void handle_tx_complete(byte[] their_node_id, org.ldk.structs.TxComplete msg);
 	/**Handle an incoming `tx_signatures` message from the given peer.
 	 */
-	void handle_tx_signatures(byte[] their_node_id, TxSignatures msg);
+	void handle_tx_signatures(byte[] their_node_id, org.ldk.structs.TxSignatures msg);
 	/**Handle an incoming `tx_init_rbf` message from the given peer.
 	 */
-	void handle_tx_init_rbf(byte[] their_node_id, TxInitRbf msg);
+	void handle_tx_init_rbf(byte[] their_node_id, org.ldk.structs.TxInitRbf msg);
 	/**Handle an incoming `tx_ack_rbf` message from the given peer.
 	 */
-	void handle_tx_ack_rbf(byte[] their_node_id, TxAckRbf msg);
+	void handle_tx_ack_rbf(byte[] their_node_id, org.ldk.structs.TxAckRbf msg);
 	/**Handle an incoming `tx_abort message` from the given peer.
 	 */
-	void handle_tx_abort(byte[] their_node_id, TxAbort msg);
+	void handle_tx_abort(byte[] their_node_id, org.ldk.structs.TxAbort msg);
 	/**Handle an incoming `update_add_htlc` message from the given peer.
 	 */
-	void handle_update_add_htlc(byte[] their_node_id, UpdateAddHTLC msg);
+	void handle_update_add_htlc(byte[] their_node_id, org.ldk.structs.UpdateAddHTLC msg);
 	/**Handle an incoming `update_fulfill_htlc` message from the given peer.
 	 */
-	void handle_update_fulfill_htlc(byte[] their_node_id, UpdateFulfillHTLC msg);
+	void handle_update_fulfill_htlc(byte[] their_node_id, org.ldk.structs.UpdateFulfillHTLC msg);
 	/**Handle an incoming `update_fail_htlc` message from the given peer.
 	 */
-	void handle_update_fail_htlc(byte[] their_node_id, UpdateFailHTLC msg);
+	void handle_update_fail_htlc(byte[] their_node_id, org.ldk.structs.UpdateFailHTLC msg);
 	/**Handle an incoming `update_fail_malformed_htlc` message from the given peer.
 	 */
-	void handle_update_fail_malformed_htlc(byte[] their_node_id, UpdateFailMalformedHTLC msg);
+	void handle_update_fail_malformed_htlc(byte[] their_node_id, org.ldk.structs.UpdateFailMalformedHTLC msg);
 	/**Handle an incoming `commitment_signed` message from the given peer.
 	 */
-	void handle_commitment_signed(byte[] their_node_id, CommitmentSigned msg);
+	void handle_commitment_signed(byte[] their_node_id, org.ldk.structs.CommitmentSigned msg);
 	/**Handle an incoming `revoke_and_ack` message from the given peer.
 	 */
-	void handle_revoke_and_ack(byte[] their_node_id, RevokeAndACK msg);
+	void handle_revoke_and_ack(byte[] their_node_id, org.ldk.structs.RevokeAndACK msg);
 	/**Handle an incoming `update_fee` message from the given peer.
 	 */
-	void handle_update_fee(byte[] their_node_id, UpdateFee msg);
+	void handle_update_fee(byte[] their_node_id, org.ldk.structs.UpdateFee msg);
 	/**Handle an incoming `announcement_signatures` message from the given peer.
 	 */
-	void handle_announcement_signatures(byte[] their_node_id, AnnouncementSignatures msg);
+	void handle_announcement_signatures(byte[] their_node_id, org.ldk.structs.AnnouncementSignatures msg);
 	/**Indicates a connection to the peer failed/an existing connection was lost.
 	 */
 	void peer_disconnected(byte[] their_node_id);
@@ -99,17 +99,19 @@ public interface ChannelMessageHandlerInterface {
 	 * May return an `Err(())` if the features the peer supports are not sufficient to communicate
 	 * with us. Implementors should be somewhat conservative about doing so, however, as other
 	 * message handlers may still wish to communicate with this peer.
+	 * 
+	 * [`Self::peer_disconnected`] will not be called if `Err(())` is returned.
 	 */
-	Result_NoneNoneZ peer_connected(byte[] their_node_id, Init msg, bool inbound);
+	Result_NoneNoneZ peer_connected(byte[] their_node_id, org.ldk.structs.Init msg, bool inbound);
 	/**Handle an incoming `channel_reestablish` message from the given peer.
 	 */
-	void handle_channel_reestablish(byte[] their_node_id, ChannelReestablish msg);
+	void handle_channel_reestablish(byte[] their_node_id, org.ldk.structs.ChannelReestablish msg);
 	/**Handle an incoming `channel_update` message from the given peer.
 	 */
-	void handle_channel_update(byte[] their_node_id, ChannelUpdate msg);
+	void handle_channel_update(byte[] their_node_id, org.ldk.structs.ChannelUpdate msg);
 	/**Handle an incoming `error` message from the given peer.
 	 */
-	void handle_error(byte[] their_node_id, ErrorMessage msg);
+	void handle_error(byte[] their_node_id, org.ldk.structs.ErrorMessage msg);
 	/**Gets the node feature flags which this handler itself supports. All available handlers are
 	 * queried similarly and their feature flags are OR'd together to form the [`NodeFeatures`]
 	 * which are broadcasted in our [`NodeAnnouncement`] message.
@@ -702,8 +704,10 @@ public class ChannelMessageHandler : CommonBase {
 	 * May return an `Err(())` if the features the peer supports are not sufficient to communicate
 	 * with us. Implementors should be somewhat conservative about doing so, however, as other
 	 * message handlers may still wish to communicate with this peer.
+	 * 
+	 * [`Self::peer_disconnected`] will not be called if `Err(())` is returned.
 	 */
-	public Result_NoneNoneZ peer_connected(byte[] their_node_id, org.ldk.structs.Init msg, bool inbound) {
+	public org.ldk.structs.Result_NoneNoneZ peer_connected(byte[] their_node_id, org.ldk.structs.Init msg, bool inbound) {
 		long ret = bindings.ChannelMessageHandler_peer_connected(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)), msg.ptr, inbound);
 		GC.KeepAlive(this);
 		GC.KeepAlive(their_node_id);
@@ -753,7 +757,7 @@ public class ChannelMessageHandler : CommonBase {
 	 * queried similarly and their feature flags are OR'd together to form the [`NodeFeatures`]
 	 * which are broadcasted in our [`NodeAnnouncement`] message.
 	 */
-	public NodeFeatures provided_node_features() {
+	public org.ldk.structs.NodeFeatures provided_node_features() {
 		long ret = bindings.ChannelMessageHandler_provided_node_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -769,7 +773,7 @@ public class ChannelMessageHandler : CommonBase {
 	 * 
 	 * Note that this method is called before [`Self::peer_connected`].
 	 */
-	public InitFeatures provided_init_features(byte[] their_node_id) {
+	public org.ldk.structs.InitFeatures provided_init_features(byte[] their_node_id) {
 		long ret = bindings.ChannelMessageHandler_provided_init_features(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(their_node_id);
@@ -785,7 +789,7 @@ public class ChannelMessageHandler : CommonBase {
 	 * If it's `None`, then no particular network chain hash compatibility will be enforced when
 	 * connecting to peers.
 	 */
-	public Option_CVec_ThirtyTwoBytesZZ get_chain_hashes() {
+	public org.ldk.structs.Option_CVec_ThirtyTwoBytesZZ get_chain_hashes() {
 		long ret = bindings.ChannelMessageHandler_get_chain_hashes(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -12,7 +12,7 @@ namespace org { namespace ldk { namespace structs {
 public interface OnionMessageHandlerInterface {
 	/**Handle an incoming `onion_message` message from the given peer.
 	 */
-	void handle_onion_message(byte[] peer_node_id, OnionMessage msg);
+	void handle_onion_message(byte[] peer_node_id, org.ldk.structs.OnionMessage msg);
 	/**Returns the next pending onion message for the peer with the given node id.
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
@@ -24,8 +24,10 @@ public interface OnionMessageHandlerInterface {
 	 * May return an `Err(())` if the features the peer supports are not sufficient to communicate
 	 * with us. Implementors should be somewhat conservative about doing so, however, as other
 	 * message handlers may still wish to communicate with this peer.
+	 * 
+	 * [`Self::peer_disconnected`] will not be called if `Err(())` is returned.
 	 */
-	Result_NoneNoneZ peer_connected(byte[] their_node_id, Init init, bool inbound);
+	Result_NoneNoneZ peer_connected(byte[] their_node_id, org.ldk.structs.Init init, bool inbound);
 	/**Indicates a connection to the peer failed/an existing connection was lost. Allows handlers to
 	 * drop and refuse to forward onion messages to this peer.
 	 */
@@ -138,7 +140,7 @@ public class OnionMessageHandler : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public OnionMessage next_onion_message_for_peer(byte[] peer_node_id) {
+	public org.ldk.structs.OnionMessage next_onion_message_for_peer(byte[] peer_node_id) {
 		long ret = bindings.OnionMessageHandler_next_onion_message_for_peer(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(peer_node_id, 33)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(peer_node_id);
@@ -155,8 +157,10 @@ public class OnionMessageHandler : CommonBase {
 	 * May return an `Err(())` if the features the peer supports are not sufficient to communicate
 	 * with us. Implementors should be somewhat conservative about doing so, however, as other
 	 * message handlers may still wish to communicate with this peer.
+	 * 
+	 * [`Self::peer_disconnected`] will not be called if `Err(())` is returned.
 	 */
-	public Result_NoneNoneZ peer_connected(byte[] their_node_id, org.ldk.structs.Init init, bool inbound) {
+	public org.ldk.structs.Result_NoneNoneZ peer_connected(byte[] their_node_id, org.ldk.structs.Init init, bool inbound) {
 		long ret = bindings.OnionMessageHandler_peer_connected(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)), init.ptr, inbound);
 		GC.KeepAlive(this);
 		GC.KeepAlive(their_node_id);
@@ -192,7 +196,7 @@ public class OnionMessageHandler : CommonBase {
 	 * queried similarly and their feature flags are OR'd together to form the [`NodeFeatures`]
 	 * which are broadcasted in our [`NodeAnnouncement`] message.
 	 */
-	public NodeFeatures provided_node_features() {
+	public org.ldk.structs.NodeFeatures provided_node_features() {
 		long ret = bindings.OnionMessageHandler_provided_node_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -208,7 +212,7 @@ public class OnionMessageHandler : CommonBase {
 	 * 
 	 * Note that this method is called before [`Self::peer_connected`].
 	 */
-	public InitFeatures provided_init_features(byte[] their_node_id) {
+	public org.ldk.structs.InitFeatures provided_init_features(byte[] their_node_id) {
 		long ret = bindings.OnionMessageHandler_provided_init_features(this.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(their_node_id, 33)));
 		GC.KeepAlive(this);
 		GC.KeepAlive(their_node_id);

@@ -35,7 +35,7 @@ public class Result_CVec_u8ZNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_CVec_u8ZNoneZ in the success state.
 	 */
-	public static Result_CVec_u8ZNoneZ ok(byte[] o) {
+	public static org.ldk.structs.Result_CVec_u8ZNoneZ ok(byte[] o) {
 		long ret = bindings.CResult_CVec_u8ZNoneZ_ok(InternalUtils.encodeUint8Array(o));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -46,7 +46,7 @@ public class Result_CVec_u8ZNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_CVec_u8ZNoneZ in the error state.
 	 */
-	public static Result_CVec_u8ZNoneZ err() {
+	public static org.ldk.structs.Result_CVec_u8ZNoneZ err() {
 		long ret = bindings.CResult_CVec_u8ZNoneZ_err();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_CVec_u8ZNoneZ ret_hu_conv = Result_CVec_u8ZNoneZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Result_CVec_u8ZNoneZ : CommonBase {
 	 * Creates a new CResult_CVec_u8ZNoneZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_CVec_u8ZNoneZ clone() {
+	public org.ldk.structs.Result_CVec_u8ZNoneZ clone() {
 		long ret = bindings.CResult_CVec_u8ZNoneZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

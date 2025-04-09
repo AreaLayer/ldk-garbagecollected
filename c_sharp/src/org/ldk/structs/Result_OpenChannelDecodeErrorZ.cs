@@ -41,7 +41,7 @@ public class Result_OpenChannelDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_OpenChannelDecodeErrorZ in the success state.
 	 */
-	public static Result_OpenChannelDecodeErrorZ ok(org.ldk.structs.OpenChannel o) {
+	public static org.ldk.structs.Result_OpenChannelDecodeErrorZ ok(org.ldk.structs.OpenChannel o) {
 		long ret = bindings.CResult_OpenChannelDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_OpenChannelDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_OpenChannelDecodeErrorZ in the error state.
 	 */
-	public static Result_OpenChannelDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_OpenChannelDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_OpenChannelDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_OpenChannelDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_OpenChannelDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_OpenChannelDecodeErrorZ clone() {
+	public org.ldk.structs.Result_OpenChannelDecodeErrorZ clone() {
 		long ret = bindings.CResult_OpenChannelDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

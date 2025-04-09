@@ -58,7 +58,7 @@ public class PaymentConstraints : CommonBase {
 	/**
 	 * Constructs a new PaymentConstraints given each field
 	 */
-	public static PaymentConstraints of(int max_cltv_expiry_arg, long htlc_minimum_msat_arg) {
+	public static org.ldk.structs.PaymentConstraints of(int max_cltv_expiry_arg, long htlc_minimum_msat_arg) {
 		long ret = bindings.PaymentConstraints_new(max_cltv_expiry_arg, htlc_minimum_msat_arg);
 		GC.KeepAlive(max_cltv_expiry_arg);
 		GC.KeepAlive(htlc_minimum_msat_arg);
@@ -77,7 +77,7 @@ public class PaymentConstraints : CommonBase {
 	/**
 	 * Creates a copy of the PaymentConstraints
 	 */
-	public PaymentConstraints clone() {
+	public org.ldk.structs.PaymentConstraints clone() {
 		long ret = bindings.PaymentConstraints_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -100,7 +100,7 @@ public class PaymentConstraints : CommonBase {
 	/**
 	 * Read a PaymentConstraints from a byte array, created by PaymentConstraints_write
 	 */
-	public static Result_PaymentConstraintsDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_PaymentConstraintsDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.PaymentConstraints_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

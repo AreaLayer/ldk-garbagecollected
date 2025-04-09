@@ -218,6 +218,30 @@ jobs:
           export MACOS_SDK="$PWD/Xcode-12.2-12B45b-extracted-SDK-with-libcxx-headers"
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
           CC=clang LDK_TARGET=aarch64-apple-darwin LDK_TARGET_CPU=apple-a14 ./genbindings.sh ./ldk-c-bindings/ c_sharp false false
+      - name: Install android NDK compilers
+        run: |
+          git config --global safe.directory '*'
+          curl https://dl.google.com/android/repository/android-ndk-r27c-linux.zip > android-ndk-r27c-linux.zip
+          if [ "$(sha256sum android-ndk-r27c-linux.zip | awk '{ print $1 }')" != "59c2f6dc96743b5daf5d1626684640b20a6bd2b1d85b13156b90333741bad5cc" ]; then
+            echo "Bad hash"
+            exit 1
+          fi
+          unzip android-ndk-r27c-linux.zip
+      - name: Build Android C# Bindings
+        run: |
+          # Clean up existing C bindings artifacts first
+          cd ldk-c-bindings
+          git clean -f -x -d
+          git reset --hard
+          cd ..
+          export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
+          export ANDROID_TOOLCHAIN="$(pwd)/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64"
+          export PATH="$PATH:$ANDROID_TOOLCHAIN/bin"
+          ./android-build.sh ./rust-lightning ./ldk-c-bindings/ c_sharp
+          mkdir -p c_sharp/packaging_artifacts/runtimes/{android-arm64,android-arm,android-x64}/native/
+          cp libldkcsharp_release_aarch64-linux-android.so c_sharp/packaging_artifacts/runtimes/android-arm64/native/libldkcsharp.so
+          cp libldkcsharp_release_armv7-linux-androideabi.so c_sharp/packaging_artifacts/runtimes/android-arm/native/libldkcsharp.so
+          cp libldkcsharp_release_x86_64-linux-android.so c_sharp/packaging_artifacts/runtimes/android-x64/native/libldkcsharp.so
       - name: Build Release NUPKG
         run: |
           cd c_sharp
@@ -226,6 +250,15 @@ jobs:
         with:
           name: org.ldk.nupkg
           path: c_sharp/org.ldk.nupkg
+      - name: Run test against C# release library
+        shell: bash
+        run: |
+          cd c_sharp
+          sed 's/net.\.0/net9.0/' -i tests.csproj
+          ln -s ./packaging_artifacts/runtimes/linux-x64/native/libldkcsharp.so ./
+          LD_LIBRARY_PATH=. dotnet run --project tests.csproj
+          LD_LIBRARY_PATH=. dotnet run --project tests.csproj --configuration Release
+          git checkout tests.csproj
       - name: Check latest auto-generated code is in git
         run: |
           # Checkout files that get updated with version information
@@ -251,16 +284,9 @@ jobs:
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
           if ! diff ldk-java-bins/"${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/"org.ldk.nupkg c_sharp/org.ldk.nupkg; then
             dnf -y install diffoscope mono-devel
-            diffoscope ldk-java-bins/"${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/"org.ldk.nupkg c_sharp/org.ldk.nupkg || echo
+            diffoscope --max-diff-input-lines 0 ldk-java-bins/"${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/"org.ldk.nupkg c_sharp/org.ldk.nupkg || echo
             exit 1
           fi
-      - name: Run test against C# release library
-        shell: bash
-        run: |
-          cd c_sharp
-          ln -s ./packaging_artifacts/runtimes/linux-x64/native/libldkcsharp.so ./
-          LD_LIBRARY_PATH=. dotnet run --project tests.csproj
-          LD_LIBRARY_PATH=. dotnet run --project tests.csproj --configuration Release
 
   osx_c_sharp:
     strategy:
@@ -351,7 +377,7 @@ jobs:
           cd ldk-c-bindings
           ./genbindings.sh ../rust-lightning true
       - name: Build Java Debug Bindings
-        run: ./genbindings.sh ./ldk-c-bindings/ "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/" true false
+        run: ./genbindings.sh ./ldk-c-bindings/ java true false "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/"
       - name: Run Java Tests against Debug Bindings
         run: |
           mv liblightningjni_debug_Linux-amd64.so liblightningjni.so
@@ -359,7 +385,7 @@ jobs:
           LD_PRELOAD=/usr/lib/llvm-14/lib/clang/14.0.6/lib/linux/libclang_rt.asan-x86_64.so LD_LIBRARY_PATH=. mvn test
       - name: Build Java Release Bindings
         run: |
-          ./genbindings.sh ./ldk-c-bindings/ "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/" false false
+          ./genbindings.sh ./ldk-c-bindings/ java false false "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/"
       - name: Check latest headers are in git
         run: |
           git checkout pom.xml
@@ -434,7 +460,7 @@ jobs:
       - name: Build Leaktracking Java Release Bindings
         run: |
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
-          ./genbindings.sh ./ldk-c-bindings/ "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/" leaks false
+          ./genbindings.sh ./ldk-c-bindings/ java leaks false "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/"
       - name: Build deterministic release jar
         run: |
           ./build-release-jar.sh
@@ -447,13 +473,13 @@ jobs:
       - name: Build Java leaktracking Bindings
         run: |
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
-          ./genbindings.sh ./ldk-c-bindings/ "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/" leaks false
+          ./genbindings.sh ./ldk-c-bindings/ java leaks false "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/"
           mkdir ldk-java-bins/new/
           cp src/main/resources/liblightningjni_Linux-amd64.nativelib ldk-java-bins/new/liblightningjni_Linux-amd64-leaktracking.nativelib
       - name: Build Java Release Bindings
         run: |
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
-          ./genbindings.sh ./ldk-c-bindings/ "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/" false false
+          ./genbindings.sh ./ldk-c-bindings/ java false false "-I/usr/lib/jvm/java-17-openjdk-amd64/include/ -I/usr/lib/jvm/java-17-openjdk-amd64/include/linux/"
       - name: Build deterministic release jar
         run: ./build-release-jar.sh
       - uses: actions/upload-artifact@v4
@@ -566,27 +592,27 @@ jobs:
           MACOS_SDK="$PWD/Xcode-12.2-12B45b-extracted-SDK-with-libcxx-headers"
           JAVA_HOME=jdk-aarch64/jdk-18.0.1.1.jdk/Contents/Home
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
-          CC=clang LDK_TARGET=aarch64-apple-darwin LDK_TARGET_CPU=apple-a14 ./genbindings.sh ./ldk-c-bindings/ "-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin -isysroot$MACOS_SDK" leaks false
+          CC=clang LDK_TARGET=aarch64-apple-darwin LDK_TARGET_CPU=apple-a14 ./genbindings.sh ./ldk-c-bindings/ java leaks false "-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin -isysroot$MACOS_SDK"
           mv src/main/resources/liblightningjni_MacOSX-aarch64.nativelib src/main/resources/liblightningjni_MacOSX-aarch64-leaktracking.nativelib
       - name: Build MacOS x86_64 Java leaktracking Release Bindings
         run: |
           MACOS_SDK="$PWD/Xcode-12.2-12B45b-extracted-SDK-with-libcxx-headers"
           JAVA_HOME=jdk-x86_64/jdk-18.0.1.1.jdk/Contents/Home
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
-          CC=clang LDK_TARGET=x86_64-apple-darwin LDK_TARGET_CPU=sandybridge ./genbindings.sh ./ldk-c-bindings/ "-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin -isysroot$MACOS_SDK" leaks false
+          CC=clang LDK_TARGET=x86_64-apple-darwin LDK_TARGET_CPU=sandybridge ./genbindings.sh ./ldk-c-bindings/ java leaks false "-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin -isysroot$MACOS_SDK"
           mv src/main/resources/liblightningjni_MacOSX-x86_64.nativelib src/main/resources/liblightningjni_MacOSX-x86_64-leaktracking.nativelib
       - name: Build MacOS aarch64 Java Release Bindings
         run: |
           MACOS_SDK="$PWD/Xcode-12.2-12B45b-extracted-SDK-with-libcxx-headers"
           JAVA_HOME=jdk-aarch64/jdk-18.0.1.1.jdk/Contents/Home
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
-          CC=clang LDK_TARGET=aarch64-apple-darwin LDK_TARGET_CPU=apple-a14 ./genbindings.sh ./ldk-c-bindings/ "-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin -isysroot$MACOS_SDK" false false
+          CC=clang LDK_TARGET=aarch64-apple-darwin LDK_TARGET_CPU=apple-a14 ./genbindings.sh ./ldk-c-bindings/ java false false "-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin -isysroot$MACOS_SDK"
       - name: Build MacOS x86_64 Java Release Bindings
         run: |
           MACOS_SDK="$PWD/Xcode-12.2-12B45b-extracted-SDK-with-libcxx-headers"
           JAVA_HOME=jdk-x86_64/jdk-18.0.1.1.jdk/Contents/Home
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
-          CC=clang LDK_TARGET=x86_64-apple-darwin LDK_TARGET_CPU=sandybridge ./genbindings.sh ./ldk-c-bindings/ "-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin -isysroot$MACOS_SDK" false false
+          CC=clang LDK_TARGET=x86_64-apple-darwin LDK_TARGET_CPU=sandybridge ./genbindings.sh ./ldk-c-bindings/ java false false "-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin -isysroot$MACOS_SDK"
       - name: Checkout latest binaries
         run: |
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
@@ -604,15 +630,18 @@ jobs:
         shell: bash
         run: |
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
+          SOME_DIFF=0
           for F in liblightningjni_MacOSX-{x86_64,aarch64}{,-leaktracking}.nativelib; do
             if ! diff "ldk-java-bins/${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/$F" "src/main/resources/$F"; then
               apt-get -y install diffoscope
               # Sadly these binaries are still non-deterministic, but only due
               # to a few-byte tag, thus we use diffoscope to ensure there
-              # aren't any "real" differences and move on.
+              # aren't any "real" differences but still fail the job.
               diffoscope "ldk-java-bins/${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/$F" "src/main/resources/$F" || echo
+              SOME_DIFF=1
             fi
           done
+          exit $SOME_DIFF
 
   android:
     runs-on: ubuntu-latest
@@ -625,18 +654,7 @@ jobs:
         run: |
           apt-get update
           apt-get -y dist-upgrade
-          apt-get -y install git g++ clang faketime zip unzip curl openjdk-17-jdk
-          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > rustup.sh
-          chmod +x ./rustup.sh
-          ./rustup.sh -y
-          . $HOME/.cargo/env
-          # Temporarily use 1.67.1 to fix https://github.com/rust-lang/rust/issues/108943
-          rustup install 1.67.1
-          rustup default 1.67.1
-          rustup target add armv7-linux-androideabi
-          rustup target add aarch64-linux-android
-          rustup target add i686-linux-android
-          rustup target add x86_64-linux-android
+          apt-get -y install cargo valgrind lld git g++ clang openjdk-17-jdk maven faketime zip unzip llvm curl rust-src
       - name: Checkout source code
         uses: actions/checkout@v2
         with:
@@ -644,15 +662,14 @@ jobs:
       - name: Install android NDK compilers
         run: |
           git config --global safe.directory '*'
-          curl https://dl.google.com/android/repository/android-ndk-r22b-linux-x86_64.zip > android-ndk-r22b-linux-x86_64.zip
-          if [ "$(sha256sum android-ndk-r22b-linux-x86_64.zip | awk '{ print $1 }')" != "ac3a0421e76f71dd330d0cd55f9d99b9ac864c4c034fc67e0d671d022d4e806b" ]; then
+          curl https://dl.google.com/android/repository/android-ndk-r27c-linux.zip > android-ndk-r27c-linux.zip
+          if [ "$(sha256sum android-ndk-r27c-linux.zip | awk '{ print $1 }')" != "59c2f6dc96743b5daf5d1626684640b20a6bd2b1d85b13156b90333741bad5cc" ]; then
             echo "Bad hash"
             exit 1
           fi
-          unzip android-ndk-r22b-linux-x86_64.zip
+          unzip android-ndk-r27c-linux.zip
       - name: Install cbindgen
         run: |
-          . $HOME/.cargo/env
           git clone https://github.com/eqrion/cbindgen
           cd cbindgen/
           git checkout v0.20.0
@@ -696,12 +713,14 @@ jobs:
           rm -r ldk-java-bins-*
       - name: Build Android aar
         run: |
-          . $HOME/.cargo/env
+          # rust-src doesn't distribute the rustlib Cargo.lock, but an empty
+          # file seems to suffice to make `-Zbuild-std` happy.
+          touch /usr/lib/rustlib/src/rust/Cargo.lock
           export LDK_GARBAGECOLLECTED_GIT_OVERRIDE="$(git describe --tag HEAD)"
           cp "ldk-java-bins/${LDK_GARBAGECOLLECTED_GIT_OVERRIDE}/ldk-java-classes.jar" ./
-          export ANDROID_TOOLCHAIN="$(pwd)/android-ndk-r22b/toolchains/llvm/prebuilt/linux-x86_64"
+          export ANDROID_TOOLCHAIN="$(pwd)/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64"
           export PATH="$PATH:$ANDROID_TOOLCHAIN/bin"
-          ./android-build.sh ./rust-lightning ./ldk-c-bindings/ ./ldk-java-bins/android-artifacts
+          ./android-build.sh ./rust-lightning ./ldk-c-bindings/ java ./ldk-java-bins/android-artifacts
       - uses: actions/upload-artifact@v4
         with:
           name: LDK-release.aar

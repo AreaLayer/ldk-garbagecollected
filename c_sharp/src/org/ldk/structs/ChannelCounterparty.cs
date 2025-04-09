@@ -41,7 +41,7 @@ public class ChannelCounterparty : CommonBase {
 	 * Useful for routing as it is the most up-to-date copy of the counterparty's features and
 	 * many routing-relevant features are present in the init context.
 	 */
-	public InitFeatures get_features() {
+	public org.ldk.structs.InitFeatures get_features() {
 		long ret = bindings.ChannelCounterparty_get_features(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -97,7 +97,7 @@ public class ChannelCounterparty : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public CounterpartyForwardingInfo get_forwarding_info() {
+	public org.ldk.structs.CounterpartyForwardingInfo get_forwarding_info() {
 		long ret = bindings.ChannelCounterparty_get_forwarding_info(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -123,7 +123,7 @@ public class ChannelCounterparty : CommonBase {
 	 * is only `None` before we have received either the `OpenChannel` or `AcceptChannel` message
 	 * from the remote peer, or for `ChannelCounterparty` objects serialized prior to LDK 0.0.107.
 	 */
-	public Option_u64Z get_outbound_htlc_minimum_msat() {
+	public org.ldk.structs.Option_u64Z get_outbound_htlc_minimum_msat() {
 		long ret = bindings.ChannelCounterparty_get_outbound_htlc_minimum_msat(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -146,7 +146,7 @@ public class ChannelCounterparty : CommonBase {
 	/**
 	 * The largest value HTLC (in msat) the remote peer currently will accept, for this channel.
 	 */
-	public Option_u64Z get_outbound_htlc_maximum_msat() {
+	public org.ldk.structs.Option_u64Z get_outbound_htlc_maximum_msat() {
 		long ret = bindings.ChannelCounterparty_get_outbound_htlc_maximum_msat(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -169,7 +169,7 @@ public class ChannelCounterparty : CommonBase {
 	 * 
 	 * Note that forwarding_info_arg (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public static ChannelCounterparty of(byte[] node_id_arg, org.ldk.structs.InitFeatures features_arg, long unspendable_punishment_reserve_arg, org.ldk.structs.CounterpartyForwardingInfo forwarding_info_arg, org.ldk.structs.Option_u64Z outbound_htlc_minimum_msat_arg, org.ldk.structs.Option_u64Z outbound_htlc_maximum_msat_arg) {
+	public static org.ldk.structs.ChannelCounterparty of(byte[] node_id_arg, org.ldk.structs.InitFeatures features_arg, long unspendable_punishment_reserve_arg, org.ldk.structs.CounterpartyForwardingInfo forwarding_info_arg, org.ldk.structs.Option_u64Z outbound_htlc_minimum_msat_arg, org.ldk.structs.Option_u64Z outbound_htlc_maximum_msat_arg) {
 		long ret = bindings.ChannelCounterparty_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id_arg, 33)), features_arg.ptr, unspendable_punishment_reserve_arg, forwarding_info_arg == null ? 0 : forwarding_info_arg.ptr, outbound_htlc_minimum_msat_arg.ptr, outbound_htlc_maximum_msat_arg.ptr);
 		GC.KeepAlive(node_id_arg);
 		GC.KeepAlive(features_arg);
@@ -192,7 +192,7 @@ public class ChannelCounterparty : CommonBase {
 	/**
 	 * Creates a copy of the ChannelCounterparty
 	 */
-	public ChannelCounterparty clone() {
+	public org.ldk.structs.ChannelCounterparty clone() {
 		long ret = bindings.ChannelCounterparty_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -215,7 +215,7 @@ public class ChannelCounterparty : CommonBase {
 	/**
 	 * Read a ChannelCounterparty from a byte array, created by ChannelCounterparty_write
 	 */
-	public static Result_ChannelCounterpartyDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ChannelCounterpartyDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.ChannelCounterparty_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

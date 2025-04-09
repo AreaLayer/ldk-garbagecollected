@@ -26,7 +26,7 @@ public class Option_U128Z : CommonBase {
 
 	/** A Option_U128Z of type Some */
 	public class Option_U128Z_Some : Option_U128Z {
-		public UInt128 some;
+		public org.ldk.util.UInt128 some;
 		internal Option_U128Z_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_U128Z_Some_get_some(ptr);
 			org.ldk.util.UInt128 some_conv = new org.ldk.util.UInt128(some);
@@ -42,7 +42,7 @@ public class Option_U128Z : CommonBase {
 	/**
 	 * Constructs a new COption_U128Z containing a crate::c_types::U128
 	 */
-	public static Option_U128Z some(org.ldk.util.UInt128 o) {
+	public static org.ldk.structs.Option_U128Z some(org.ldk.util.UInt128 o) {
 		long ret = bindings.COption_U128Z_some(InternalUtils.encodeUint8Array(o.getLEBytes()));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class Option_U128Z : CommonBase {
 	/**
 	 * Constructs a new COption_U128Z containing nothing
 	 */
-	public static Option_U128Z none() {
+	public static org.ldk.structs.Option_U128Z none() {
 		long ret = bindings.COption_U128Z_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_U128Z ret_hu_conv = org.ldk.structs.Option_U128Z.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Option_U128Z : CommonBase {
 	 * Creates a new COption_U128Z which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_U128Z clone() {
+	public org.ldk.structs.Option_U128Z clone() {
 		long ret = bindings.COption_U128Z_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

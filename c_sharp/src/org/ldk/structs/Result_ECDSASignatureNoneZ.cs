@@ -35,7 +35,7 @@ public class Result_ECDSASignatureNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_ECDSASignatureNoneZ in the success state.
 	 */
-	public static Result_ECDSASignatureNoneZ ok(byte[] o) {
+	public static org.ldk.structs.Result_ECDSASignatureNoneZ ok(byte[] o) {
 		long ret = bindings.CResult_ECDSASignatureNoneZ_ok(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(o, 64)));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -46,7 +46,7 @@ public class Result_ECDSASignatureNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_ECDSASignatureNoneZ in the error state.
 	 */
-	public static Result_ECDSASignatureNoneZ err() {
+	public static org.ldk.structs.Result_ECDSASignatureNoneZ err() {
 		long ret = bindings.CResult_ECDSASignatureNoneZ_err();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_ECDSASignatureNoneZ ret_hu_conv = Result_ECDSASignatureNoneZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Result_ECDSASignatureNoneZ : CommonBase {
 	 * Creates a new CResult_ECDSASignatureNoneZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_ECDSASignatureNoneZ clone() {
+	public org.ldk.structs.Result_ECDSASignatureNoneZ clone() {
 		long ret = bindings.CResult_ECDSASignatureNoneZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

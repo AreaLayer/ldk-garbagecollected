@@ -59,7 +59,7 @@ public class OutPoint : CommonBase {
 	/**
 	 * Constructs a new OutPoint given each field
 	 */
-	public static OutPoint of(byte[] txid_arg, short index_arg) {
+	public static org.ldk.structs.OutPoint of(byte[] txid_arg, short index_arg) {
 		long ret = bindings.OutPoint_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(txid_arg, 32)), index_arg);
 		GC.KeepAlive(txid_arg);
 		GC.KeepAlive(index_arg);
@@ -78,7 +78,7 @@ public class OutPoint : CommonBase {
 	/**
 	 * Creates a copy of the OutPoint
 	 */
-	public OutPoint clone() {
+	public org.ldk.structs.OutPoint clone() {
 		long ret = bindings.OutPoint_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -141,7 +141,7 @@ public class OutPoint : CommonBase {
 	/**
 	 * Read a OutPoint from a byte array, created by OutPoint_write
 	 */
-	public static Result_OutPointDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_OutPointDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.OutPoint_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

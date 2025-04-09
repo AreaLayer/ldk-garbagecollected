@@ -29,7 +29,7 @@ public class OffersMessage : CommonBase {
 
 	/** A OffersMessage of type InvoiceRequest */
 	public class OffersMessage_InvoiceRequest : OffersMessage {
-		public InvoiceRequest invoice_request;
+		public org.ldk.structs.InvoiceRequest invoice_request;
 		internal OffersMessage_InvoiceRequest(long ptr) : base(null, ptr) {
 			long invoice_request = bindings.LDKOffersMessage_InvoiceRequest_get_invoice_request(ptr);
 			org.ldk.structs.InvoiceRequest invoice_request_hu_conv = null; if (invoice_request < 0 || invoice_request > 4096) { invoice_request_hu_conv = new org.ldk.structs.InvoiceRequest(null, invoice_request); }
@@ -39,7 +39,7 @@ public class OffersMessage : CommonBase {
 	}
 	/** A OffersMessage of type Invoice */
 	public class OffersMessage_Invoice : OffersMessage {
-		public Bolt12Invoice invoice;
+		public org.ldk.structs.Bolt12Invoice invoice;
 		internal OffersMessage_Invoice(long ptr) : base(null, ptr) {
 			long invoice = bindings.LDKOffersMessage_Invoice_get_invoice(ptr);
 			org.ldk.structs.Bolt12Invoice invoice_hu_conv = null; if (invoice < 0 || invoice > 4096) { invoice_hu_conv = new org.ldk.structs.Bolt12Invoice(null, invoice); }
@@ -49,7 +49,7 @@ public class OffersMessage : CommonBase {
 	}
 	/** A OffersMessage of type InvoiceError */
 	public class OffersMessage_InvoiceError : OffersMessage {
-		public InvoiceError invoice_error;
+		public org.ldk.structs.InvoiceError invoice_error;
 		internal OffersMessage_InvoiceError(long ptr) : base(null, ptr) {
 			long invoice_error = bindings.LDKOffersMessage_InvoiceError_get_invoice_error(ptr);
 			org.ldk.structs.InvoiceError invoice_error_hu_conv = null; if (invoice_error < 0 || invoice_error > 4096) { invoice_error_hu_conv = new org.ldk.structs.InvoiceError(null, invoice_error); }
@@ -66,7 +66,7 @@ public class OffersMessage : CommonBase {
 	/**
 	 * Creates a copy of the OffersMessage
 	 */
-	public OffersMessage clone() {
+	public org.ldk.structs.OffersMessage clone() {
 		long ret = bindings.OffersMessage_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -78,7 +78,7 @@ public class OffersMessage : CommonBase {
 	/**
 	 * Utility method to constructs a new InvoiceRequest-variant OffersMessage
 	 */
-	public static OffersMessage invoice_request(org.ldk.structs.InvoiceRequest a) {
+	public static org.ldk.structs.OffersMessage invoice_request(org.ldk.structs.InvoiceRequest a) {
 		long ret = bindings.OffersMessage_invoice_request(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -90,7 +90,7 @@ public class OffersMessage : CommonBase {
 	/**
 	 * Utility method to constructs a new Invoice-variant OffersMessage
 	 */
-	public static OffersMessage invoice(org.ldk.structs.Bolt12Invoice a) {
+	public static org.ldk.structs.OffersMessage invoice(org.ldk.structs.Bolt12Invoice a) {
 		long ret = bindings.OffersMessage_invoice(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -102,7 +102,7 @@ public class OffersMessage : CommonBase {
 	/**
 	 * Utility method to constructs a new InvoiceError-variant OffersMessage
 	 */
-	public static OffersMessage invoice_error(org.ldk.structs.InvoiceError a) {
+	public static org.ldk.structs.OffersMessage invoice_error(org.ldk.structs.InvoiceError a) {
 		long ret = bindings.OffersMessage_invoice_error(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -115,7 +115,7 @@ public class OffersMessage : CommonBase {
 	 * Constructs a new OnionMessageContents which calls the relevant methods on this_arg.
 	 * This copies the `inner` pointer in this_arg and thus the returned OnionMessageContents must be freed before this_arg is
 	 */
-	public OnionMessageContents as_OnionMessageContents() {
+	public org.ldk.structs.OnionMessageContents as_OnionMessageContents() {
 		long ret = bindings.OffersMessage_as_OnionMessageContents(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -138,7 +138,7 @@ public class OffersMessage : CommonBase {
 	/**
 	 * Read a OffersMessage from a byte array, created by OffersMessage_write
 	 */
-	public static Result_OffersMessageDecodeErrorZ read(byte[] ser, long arg_a, org.ldk.structs.Logger arg_b) {
+	public static org.ldk.structs.Result_OffersMessageDecodeErrorZ read(byte[] ser, long arg_a, org.ldk.structs.Logger arg_b) {
 		long ret = bindings.OffersMessage_read(InternalUtils.encodeUint8Array(ser), arg_a, arg_b.ptr);
 		GC.KeepAlive(ser);
 		GC.KeepAlive(arg_a);

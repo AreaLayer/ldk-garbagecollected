@@ -36,7 +36,7 @@ public class Result_OnionMessagePathNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_OnionMessagePathNoneZ in the success state.
 	 */
-	public static Result_OnionMessagePathNoneZ ok(org.ldk.structs.OnionMessagePath o) {
+	public static org.ldk.structs.Result_OnionMessagePathNoneZ ok(org.ldk.structs.OnionMessagePath o) {
 		long ret = bindings.CResult_OnionMessagePathNoneZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -47,7 +47,7 @@ public class Result_OnionMessagePathNoneZ : CommonBase {
 	/**
 	 * Creates a new CResult_OnionMessagePathNoneZ in the error state.
 	 */
-	public static Result_OnionMessagePathNoneZ err() {
+	public static org.ldk.structs.Result_OnionMessagePathNoneZ err() {
 		long ret = bindings.CResult_OnionMessagePathNoneZ_err();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_OnionMessagePathNoneZ ret_hu_conv = Result_OnionMessagePathNoneZ.constr_from_ptr(ret);
@@ -73,7 +73,7 @@ public class Result_OnionMessagePathNoneZ : CommonBase {
 	 * Creates a new CResult_OnionMessagePathNoneZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_OnionMessagePathNoneZ clone() {
+	public org.ldk.structs.Result_OnionMessagePathNoneZ clone() {
 		long ret = bindings.CResult_OnionMessagePathNoneZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -41,7 +41,7 @@ public class Result_QueryShortChannelIdsDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_QueryShortChannelIdsDecodeErrorZ in the success state.
 	 */
-	public static Result_QueryShortChannelIdsDecodeErrorZ ok(org.ldk.structs.QueryShortChannelIds o) {
+	public static org.ldk.structs.Result_QueryShortChannelIdsDecodeErrorZ ok(org.ldk.structs.QueryShortChannelIds o) {
 		long ret = bindings.CResult_QueryShortChannelIdsDecodeErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_QueryShortChannelIdsDecodeErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_QueryShortChannelIdsDecodeErrorZ in the error state.
 	 */
-	public static Result_QueryShortChannelIdsDecodeErrorZ err(org.ldk.structs.DecodeError e) {
+	public static org.ldk.structs.Result_QueryShortChannelIdsDecodeErrorZ err(org.ldk.structs.DecodeError e) {
 		long ret = bindings.CResult_QueryShortChannelIdsDecodeErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_QueryShortChannelIdsDecodeErrorZ : CommonBase {
 	 * Creates a new CResult_QueryShortChannelIdsDecodeErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_QueryShortChannelIdsDecodeErrorZ clone() {
+	public org.ldk.structs.Result_QueryShortChannelIdsDecodeErrorZ clone() {
 		long ret = bindings.CResult_QueryShortChannelIdsDecodeErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

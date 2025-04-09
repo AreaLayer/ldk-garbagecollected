@@ -22,7 +22,7 @@ public class AcceptChannel : CommonBase {
 	/**
 	 * Common fields of `accept_channel(2)`-like messages
 	 */
-	public CommonAcceptChannelFields get_common_fields() {
+	public org.ldk.structs.CommonAcceptChannelFields get_common_fields() {
 		long ret = bindings.AcceptChannel_get_common_fields(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -61,7 +61,7 @@ public class AcceptChannel : CommonBase {
 	/**
 	 * Constructs a new AcceptChannel given each field
 	 */
-	public static AcceptChannel of(org.ldk.structs.CommonAcceptChannelFields common_fields_arg, long channel_reserve_satoshis_arg) {
+	public static org.ldk.structs.AcceptChannel of(org.ldk.structs.CommonAcceptChannelFields common_fields_arg, long channel_reserve_satoshis_arg) {
 		long ret = bindings.AcceptChannel_new(common_fields_arg.ptr, channel_reserve_satoshis_arg);
 		GC.KeepAlive(common_fields_arg);
 		GC.KeepAlive(channel_reserve_satoshis_arg);
@@ -80,7 +80,7 @@ public class AcceptChannel : CommonBase {
 	/**
 	 * Creates a copy of the AcceptChannel
 	 */
-	public AcceptChannel clone() {
+	public org.ldk.structs.AcceptChannel clone() {
 		long ret = bindings.AcceptChannel_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -132,7 +132,7 @@ public class AcceptChannel : CommonBase {
 	/**
 	 * Read a AcceptChannel from a byte array, created by AcceptChannel_write
 	 */
-	public static Result_AcceptChannelDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_AcceptChannelDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.AcceptChannel_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

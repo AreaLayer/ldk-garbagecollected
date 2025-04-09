@@ -26,7 +26,7 @@ public class Option_C2Tuple_DNSResolverMessageResponseInstructionZZ : CommonBase
 
 	/** A Option_C2Tuple_DNSResolverMessageResponseInstructionZZ of type Some */
 	public class Option_C2Tuple_DNSResolverMessageResponseInstructionZZ_Some : Option_C2Tuple_DNSResolverMessageResponseInstructionZZ {
-		public TwoTuple_DNSResolverMessageResponseInstructionZ some;
+		public org.ldk.structs.TwoTuple_DNSResolverMessageResponseInstructionZ some;
 		internal Option_C2Tuple_DNSResolverMessageResponseInstructionZZ_Some(long ptr) : base(null, ptr) {
 			long some = bindings.LDKCOption_C2Tuple_DNSResolverMessageResponseInstructionZZ_Some_get_some(ptr);
 			TwoTuple_DNSResolverMessageResponseInstructionZ some_hu_conv = new TwoTuple_DNSResolverMessageResponseInstructionZ(null, some);
@@ -42,7 +42,7 @@ public class Option_C2Tuple_DNSResolverMessageResponseInstructionZZ : CommonBase
 	/**
 	 * Constructs a new COption_C2Tuple_DNSResolverMessageResponseInstructionZZ containing a crate::c_types::derived::C2Tuple_DNSResolverMessageResponseInstructionZ
 	 */
-	public static Option_C2Tuple_DNSResolverMessageResponseInstructionZZ some(org.ldk.structs.TwoTuple_DNSResolverMessageResponseInstructionZ o) {
+	public static org.ldk.structs.Option_C2Tuple_DNSResolverMessageResponseInstructionZZ some(org.ldk.structs.TwoTuple_DNSResolverMessageResponseInstructionZ o) {
 		long ret = bindings.COption_C2Tuple_DNSResolverMessageResponseInstructionZZ_some(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class Option_C2Tuple_DNSResolverMessageResponseInstructionZZ : CommonBase
 	/**
 	 * Constructs a new COption_C2Tuple_DNSResolverMessageResponseInstructionZZ containing nothing
 	 */
-	public static Option_C2Tuple_DNSResolverMessageResponseInstructionZZ none() {
+	public static org.ldk.structs.Option_C2Tuple_DNSResolverMessageResponseInstructionZZ none() {
 		long ret = bindings.COption_C2Tuple_DNSResolverMessageResponseInstructionZZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_C2Tuple_DNSResolverMessageResponseInstructionZZ ret_hu_conv = org.ldk.structs.Option_C2Tuple_DNSResolverMessageResponseInstructionZZ.constr_from_ptr(ret);
@@ -72,7 +72,7 @@ public class Option_C2Tuple_DNSResolverMessageResponseInstructionZZ : CommonBase
 	 * Creates a new COption_C2Tuple_DNSResolverMessageResponseInstructionZZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_C2Tuple_DNSResolverMessageResponseInstructionZZ clone() {
+	public org.ldk.structs.Option_C2Tuple_DNSResolverMessageResponseInstructionZZ clone() {
 		long ret = bindings.COption_C2Tuple_DNSResolverMessageResponseInstructionZZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

@@ -12,7 +12,7 @@ namespace org { namespace ldk { namespace structs {
 public interface SignBolt12InvoiceFnInterface {
 	/**Signs a [`TaggedHash`] computed over the merkle root of `message`'s TLV stream.
 	 */
-	Result_SchnorrSignatureNoneZ sign_invoice(UnsignedBolt12Invoice message);
+	Result_SchnorrSignatureNoneZ sign_invoice(org.ldk.structs.UnsignedBolt12Invoice message);
 }
 
 /**
@@ -56,7 +56,7 @@ public class SignBolt12InvoiceFn : CommonBase {
 	/**
 	 * Signs a [`TaggedHash`] computed over the merkle root of `message`'s TLV stream.
 	 */
-	public Result_SchnorrSignatureNoneZ sign_invoice(org.ldk.structs.UnsignedBolt12Invoice message) {
+	public org.ldk.structs.Result_SchnorrSignatureNoneZ sign_invoice(org.ldk.structs.UnsignedBolt12Invoice message) {
 		long ret = bindings.SignBolt12InvoiceFn_sign_invoice(this.ptr, message.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(message);

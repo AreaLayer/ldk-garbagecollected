@@ -25,7 +25,7 @@ public class BlindedMessagePath : CommonBase {
 	/**
 	 * Creates a copy of the BlindedMessagePath
 	 */
-	public BlindedMessagePath clone() {
+	public org.ldk.structs.BlindedMessagePath clone() {
 		long ret = bindings.BlindedMessagePath_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -77,7 +77,7 @@ public class BlindedMessagePath : CommonBase {
 	/**
 	 * Read a BlindedMessagePath from a byte array, created by BlindedMessagePath_write
 	 */
-	public static Result_BlindedMessagePathDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_BlindedMessagePathDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.BlindedMessagePath_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -88,7 +88,7 @@ public class BlindedMessagePath : CommonBase {
 	/**
 	 * Create a one-hop blinded path for a message.
 	 */
-	public static Result_BlindedMessagePathNoneZ one_hop(byte[] recipient_node_id, org.ldk.structs.MessageContext context, org.ldk.structs.EntropySource entropy_source) {
+	public static org.ldk.structs.Result_BlindedMessagePathNoneZ one_hop(byte[] recipient_node_id, org.ldk.structs.MessageContext context, org.ldk.structs.EntropySource entropy_source) {
 		long ret = bindings.BlindedMessagePath_one_hop(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(recipient_node_id, 33)), context.ptr, entropy_source.ptr);
 		GC.KeepAlive(recipient_node_id);
 		GC.KeepAlive(context);
@@ -105,7 +105,7 @@ public class BlindedMessagePath : CommonBase {
 	 * 
 	 * Errors if no hops are provided or if `node_pk`(s) are invalid.
 	 */
-	public static Result_BlindedMessagePathNoneZ of(MessageForwardNode[] intermediate_nodes, byte[] recipient_node_id, org.ldk.structs.MessageContext context, org.ldk.structs.EntropySource entropy_source) {
+	public static org.ldk.structs.Result_BlindedMessagePathNoneZ of(MessageForwardNode[] intermediate_nodes, byte[] recipient_node_id, org.ldk.structs.MessageContext context, org.ldk.structs.EntropySource entropy_source) {
 		long ret = bindings.BlindedMessagePath_new(InternalUtils.encodeUint64Array(InternalUtils.mapArray(intermediate_nodes, intermediate_nodes_conv_20 => intermediate_nodes_conv_20.ptr)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(recipient_node_id, 33)), context.ptr, entropy_source.ptr);
 		GC.KeepAlive(intermediate_nodes);
 		GC.KeepAlive(recipient_node_id);
@@ -138,7 +138,7 @@ public class BlindedMessagePath : CommonBase {
 	 * 
 	 * Note that the return value (or a relevant inner pointer) may be NULL or all-0s to represent None
 	 */
-	public NodeId public_introduction_node_id(org.ldk.structs.ReadOnlyNetworkGraph network_graph) {
+	public org.ldk.structs.NodeId public_introduction_node_id(org.ldk.structs.ReadOnlyNetworkGraph network_graph) {
 		long ret = bindings.BlindedMessagePath_public_introduction_node_id(this.ptr, network_graph.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(network_graph);
@@ -152,7 +152,7 @@ public class BlindedMessagePath : CommonBase {
 	/**
 	 * The [`IntroductionNode`] of the blinded path.
 	 */
-	public IntroductionNode introduction_node() {
+	public org.ldk.structs.IntroductionNode introduction_node() {
 		long ret = bindings.BlindedMessagePath_introduction_node(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -199,7 +199,7 @@ public class BlindedMessagePath : CommonBase {
 	 * 
 	 * Will only modify `self` when returning `Ok`.
 	 */
-	public Result_NoneNoneZ advance_path_by_one(org.ldk.structs.NodeSigner node_signer, org.ldk.structs.NodeIdLookUp node_id_lookup) {
+	public org.ldk.structs.Result_NoneNoneZ advance_path_by_one(org.ldk.structs.NodeSigner node_signer, org.ldk.structs.NodeIdLookUp node_id_lookup) {
 		long ret = bindings.BlindedMessagePath_advance_path_by_one(this.ptr, node_signer.ptr, node_id_lookup.ptr);
 		GC.KeepAlive(this);
 		GC.KeepAlive(node_signer);

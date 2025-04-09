@@ -29,7 +29,7 @@ public class RoutingFees : CommonBase {
 	/**
 	 * Read a RoutingFees from a byte array, created by RoutingFees_write
 	 */
-	public static Result_RoutingFeesDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_RoutingFeesDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.RoutingFees_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -78,7 +78,7 @@ public class RoutingFees : CommonBase {
 	/**
 	 * Constructs a new RoutingFees given each field
 	 */
-	public static RoutingFees of(int base_msat_arg, int proportional_millionths_arg) {
+	public static org.ldk.structs.RoutingFees of(int base_msat_arg, int proportional_millionths_arg) {
 		long ret = bindings.RoutingFees_new(base_msat_arg, proportional_millionths_arg);
 		GC.KeepAlive(base_msat_arg);
 		GC.KeepAlive(proportional_millionths_arg);
@@ -114,7 +114,7 @@ public class RoutingFees : CommonBase {
 	/**
 	 * Creates a copy of the RoutingFees
 	 */
-	public RoutingFees clone() {
+	public org.ldk.structs.RoutingFees clone() {
 		long ret = bindings.RoutingFees_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

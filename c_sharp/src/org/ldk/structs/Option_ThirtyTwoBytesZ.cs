@@ -41,7 +41,7 @@ public class Option_ThirtyTwoBytesZ : CommonBase {
 	/**
 	 * Constructs a new COption_ThirtyTwoBytesZ containing a crate::c_types::ThirtyTwoBytes
 	 */
-	public static Option_ThirtyTwoBytesZ some(byte[] o) {
+	public static org.ldk.structs.Option_ThirtyTwoBytesZ some(byte[] o) {
 		long ret = bindings.COption_ThirtyTwoBytesZ_some(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(o, 32)));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -53,7 +53,7 @@ public class Option_ThirtyTwoBytesZ : CommonBase {
 	/**
 	 * Constructs a new COption_ThirtyTwoBytesZ containing nothing
 	 */
-	public static Option_ThirtyTwoBytesZ none() {
+	public static org.ldk.structs.Option_ThirtyTwoBytesZ none() {
 		long ret = bindings.COption_ThirtyTwoBytesZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_ThirtyTwoBytesZ ret_hu_conv = org.ldk.structs.Option_ThirtyTwoBytesZ.constr_from_ptr(ret);
@@ -71,7 +71,7 @@ public class Option_ThirtyTwoBytesZ : CommonBase {
 	 * Creates a new COption_ThirtyTwoBytesZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_ThirtyTwoBytesZ clone() {
+	public org.ldk.structs.Option_ThirtyTwoBytesZ clone() {
 		long ret = bindings.COption_ThirtyTwoBytesZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

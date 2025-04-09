@@ -41,7 +41,7 @@ public class Result_RefundBolt12ParseErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_RefundBolt12ParseErrorZ in the success state.
 	 */
-	public static Result_RefundBolt12ParseErrorZ ok(org.ldk.structs.Refund o) {
+	public static org.ldk.structs.Result_RefundBolt12ParseErrorZ ok(org.ldk.structs.Refund o) {
 		long ret = bindings.CResult_RefundBolt12ParseErrorZ_ok(o.ptr);
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -52,7 +52,7 @@ public class Result_RefundBolt12ParseErrorZ : CommonBase {
 	/**
 	 * Creates a new CResult_RefundBolt12ParseErrorZ in the error state.
 	 */
-	public static Result_RefundBolt12ParseErrorZ err(org.ldk.structs.Bolt12ParseError e) {
+	public static org.ldk.structs.Result_RefundBolt12ParseErrorZ err(org.ldk.structs.Bolt12ParseError e) {
 		long ret = bindings.CResult_RefundBolt12ParseErrorZ_err(e.ptr);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -79,7 +79,7 @@ public class Result_RefundBolt12ParseErrorZ : CommonBase {
 	 * Creates a new CResult_RefundBolt12ParseErrorZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_RefundBolt12ParseErrorZ clone() {
+	public org.ldk.structs.Result_RefundBolt12ParseErrorZ clone() {
 		long ret = bindings.CResult_RefundBolt12ParseErrorZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

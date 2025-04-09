@@ -21,7 +21,7 @@ public class MessageHandler : CommonBase {
 	 * 
 	 * [`ChannelManager`]: crate::ln::channelmanager::ChannelManager
 	 */
-	public ChannelMessageHandler get_chan_handler() {
+	public org.ldk.structs.ChannelMessageHandler get_chan_handler() {
 		long ret = bindings.MessageHandler_get_chan_handler(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -49,7 +49,7 @@ public class MessageHandler : CommonBase {
 	 * 
 	 * [`P2PGossipSync`]: crate::routing::gossip::P2PGossipSync
 	 */
-	public RoutingMessageHandler get_route_handler() {
+	public org.ldk.structs.RoutingMessageHandler get_route_handler() {
 		long ret = bindings.MessageHandler_get_route_handler(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -77,7 +77,7 @@ public class MessageHandler : CommonBase {
 	 * 
 	 * [`OnionMessenger`]: crate::onion_message::messenger::OnionMessenger
 	 */
-	public OnionMessageHandler get_onion_message_handler() {
+	public org.ldk.structs.OnionMessageHandler get_onion_message_handler() {
 		long ret = bindings.MessageHandler_get_onion_message_handler(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -103,7 +103,7 @@ public class MessageHandler : CommonBase {
 	 * A message handler which handles custom messages. The only LDK-provided implementation is
 	 * [`IgnoringMessageHandler`].
 	 */
-	public CustomMessageHandler get_custom_message_handler() {
+	public org.ldk.structs.CustomMessageHandler get_custom_message_handler() {
 		long ret = bindings.MessageHandler_get_custom_message_handler(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -126,7 +126,7 @@ public class MessageHandler : CommonBase {
 	/**
 	 * Constructs a new MessageHandler given each field
 	 */
-	public static MessageHandler of(org.ldk.structs.ChannelMessageHandler chan_handler_arg, org.ldk.structs.RoutingMessageHandler route_handler_arg, org.ldk.structs.OnionMessageHandler onion_message_handler_arg, org.ldk.structs.CustomMessageHandler custom_message_handler_arg) {
+	public static org.ldk.structs.MessageHandler of(org.ldk.structs.ChannelMessageHandler chan_handler_arg, org.ldk.structs.RoutingMessageHandler route_handler_arg, org.ldk.structs.OnionMessageHandler onion_message_handler_arg, org.ldk.structs.CustomMessageHandler custom_message_handler_arg) {
 		long ret = bindings.MessageHandler_new(chan_handler_arg.ptr, route_handler_arg.ptr, onion_message_handler_arg.ptr, custom_message_handler_arg.ptr);
 		GC.KeepAlive(chan_handler_arg);
 		GC.KeepAlive(route_handler_arg);

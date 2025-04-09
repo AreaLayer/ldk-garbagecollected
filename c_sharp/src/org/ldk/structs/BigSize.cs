@@ -36,7 +36,7 @@ public class BigSize : CommonBase {
 	/**
 	 * Constructs a new BigSize given each field
 	 */
-	public static BigSize of(long a_arg) {
+	public static org.ldk.structs.BigSize of(long a_arg) {
 		long ret = bindings.BigSize_new(a_arg);
 		GC.KeepAlive(a_arg);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -54,7 +54,7 @@ public class BigSize : CommonBase {
 	/**
 	 * Creates a copy of the BigSize
 	 */
-	public BigSize clone() {
+	public org.ldk.structs.BigSize clone() {
 		long ret = bindings.BigSize_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -106,7 +106,7 @@ public class BigSize : CommonBase {
 	/**
 	 * Read a BigSize from a byte array, created by BigSize_write
 	 */
-	public static Result_BigSizeDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_BigSizeDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.BigSize_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

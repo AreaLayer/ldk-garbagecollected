@@ -75,7 +75,7 @@ public class HolderCommitmentTransaction : CommonBase {
 	/**
 	 * Creates a copy of the HolderCommitmentTransaction
 	 */
-	public HolderCommitmentTransaction clone() {
+	public org.ldk.structs.HolderCommitmentTransaction clone() {
 		long ret = bindings.HolderCommitmentTransaction_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -98,7 +98,7 @@ public class HolderCommitmentTransaction : CommonBase {
 	/**
 	 * Read a HolderCommitmentTransaction from a byte array, created by HolderCommitmentTransaction_write
 	 */
-	public static Result_HolderCommitmentTransactionDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_HolderCommitmentTransactionDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.HolderCommitmentTransaction_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -110,7 +110,7 @@ public class HolderCommitmentTransaction : CommonBase {
 	 * Create a new holder transaction with the given counterparty signatures.
 	 * The funding keys are used to figure out which signature should go first when building the transaction for broadcast.
 	 */
-	public static HolderCommitmentTransaction of(org.ldk.structs.CommitmentTransaction commitment_tx, byte[] counterparty_sig, byte[][] counterparty_htlc_sigs, byte[] holder_funding_key, byte[] counterparty_funding_key) {
+	public static org.ldk.structs.HolderCommitmentTransaction of(org.ldk.structs.CommitmentTransaction commitment_tx, byte[] counterparty_sig, byte[][] counterparty_htlc_sigs, byte[] holder_funding_key, byte[] counterparty_funding_key) {
 		long ret = bindings.HolderCommitmentTransaction_new(commitment_tx.ptr, InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_sig, 64)), InternalUtils.encodeUint64Array(InternalUtils.mapArray(counterparty_htlc_sigs, counterparty_htlc_sigs_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_htlc_sigs_conv_8, 64)))), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(holder_funding_key, 33)), InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(counterparty_funding_key, 33)));
 		GC.KeepAlive(commitment_tx);
 		GC.KeepAlive(counterparty_sig);

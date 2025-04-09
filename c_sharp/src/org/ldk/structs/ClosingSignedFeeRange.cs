@@ -61,7 +61,7 @@ public class ClosingSignedFeeRange : CommonBase {
 	/**
 	 * Constructs a new ClosingSignedFeeRange given each field
 	 */
-	public static ClosingSignedFeeRange of(long min_fee_satoshis_arg, long max_fee_satoshis_arg) {
+	public static org.ldk.structs.ClosingSignedFeeRange of(long min_fee_satoshis_arg, long max_fee_satoshis_arg) {
 		long ret = bindings.ClosingSignedFeeRange_new(min_fee_satoshis_arg, max_fee_satoshis_arg);
 		GC.KeepAlive(min_fee_satoshis_arg);
 		GC.KeepAlive(max_fee_satoshis_arg);
@@ -80,7 +80,7 @@ public class ClosingSignedFeeRange : CommonBase {
 	/**
 	 * Creates a copy of the ClosingSignedFeeRange
 	 */
-	public ClosingSignedFeeRange clone() {
+	public org.ldk.structs.ClosingSignedFeeRange clone() {
 		long ret = bindings.ClosingSignedFeeRange_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -132,7 +132,7 @@ public class ClosingSignedFeeRange : CommonBase {
 	/**
 	 * Read a ClosingSignedFeeRange from a byte array, created by ClosingSignedFeeRange_write
 	 */
-	public static Result_ClosingSignedFeeRangeDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_ClosingSignedFeeRangeDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.ClosingSignedFeeRange_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

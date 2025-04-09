@@ -40,7 +40,7 @@ public class MessageForwardNode : CommonBase {
 	 * `encrypted_payload` will use this instead of the next [`MessageForwardNode::node_id`] for a
 	 * more compact representation.
 	 */
-	public Option_u64Z get_short_channel_id() {
+	public org.ldk.structs.Option_u64Z get_short_channel_id() {
 		long ret = bindings.MessageForwardNode_get_short_channel_id(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -63,7 +63,7 @@ public class MessageForwardNode : CommonBase {
 	/**
 	 * Constructs a new MessageForwardNode given each field
 	 */
-	public static MessageForwardNode of(byte[] node_id_arg, org.ldk.structs.Option_u64Z short_channel_id_arg) {
+	public static org.ldk.structs.MessageForwardNode of(byte[] node_id_arg, org.ldk.structs.Option_u64Z short_channel_id_arg) {
 		long ret = bindings.MessageForwardNode_new(InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(node_id_arg, 33)), short_channel_id_arg.ptr);
 		GC.KeepAlive(node_id_arg);
 		GC.KeepAlive(short_channel_id_arg);
@@ -82,7 +82,7 @@ public class MessageForwardNode : CommonBase {
 	/**
 	 * Creates a copy of the MessageForwardNode
 	 */
-	public MessageForwardNode clone() {
+	public org.ldk.structs.MessageForwardNode clone() {
 		long ret = bindings.MessageForwardNode_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

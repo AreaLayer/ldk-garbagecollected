@@ -25,7 +25,7 @@ public class InFlightHtlcs : CommonBase {
 	/**
 	 * Creates a copy of the InFlightHtlcs
 	 */
-	public InFlightHtlcs clone() {
+	public org.ldk.structs.InFlightHtlcs clone() {
 		long ret = bindings.InFlightHtlcs_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -37,7 +37,7 @@ public class InFlightHtlcs : CommonBase {
 	/**
 	 * Constructs an empty `InFlightHtlcs`.
 	 */
-	public static InFlightHtlcs of() {
+	public static org.ldk.structs.InFlightHtlcs of() {
 		long ret = bindings.InFlightHtlcs_new();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.InFlightHtlcs ret_hu_conv = null; if (ret < 0 || ret > 4096) { ret_hu_conv = new org.ldk.structs.InFlightHtlcs(null, ret); }
@@ -75,7 +75,7 @@ public class InFlightHtlcs : CommonBase {
 	 * Returns liquidity in msat given the public key of the HTLC source, target, and short channel
 	 * id.
 	 */
-	public Option_u64Z used_liquidity_msat(org.ldk.structs.NodeId source, org.ldk.structs.NodeId target, long channel_scid) {
+	public org.ldk.structs.Option_u64Z used_liquidity_msat(org.ldk.structs.NodeId source, org.ldk.structs.NodeId target, long channel_scid) {
 		long ret = bindings.InFlightHtlcs_used_liquidity_msat(this.ptr, source.ptr, target.ptr, channel_scid);
 		GC.KeepAlive(this);
 		GC.KeepAlive(source);
@@ -103,7 +103,7 @@ public class InFlightHtlcs : CommonBase {
 	/**
 	 * Read a InFlightHtlcs from a byte array, created by InFlightHtlcs_write
 	 */
-	public static Result_InFlightHtlcsDecodeErrorZ read(byte[] ser) {
+	public static org.ldk.structs.Result_InFlightHtlcsDecodeErrorZ read(byte[] ser) {
 		long ret = bindings.InFlightHtlcs_read(InternalUtils.encodeUint8Array(ser));
 		GC.KeepAlive(ser);
 		if (ret >= 0 && ret <= 4096) { return null; }

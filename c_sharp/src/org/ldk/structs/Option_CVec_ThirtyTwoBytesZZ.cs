@@ -48,7 +48,7 @@ public class Option_CVec_ThirtyTwoBytesZZ : CommonBase {
 	/**
 	 * Constructs a new COption_CVec_ThirtyTwoBytesZZ containing a crate::c_types::derived::CVec_ThirtyTwoBytesZ
 	 */
-	public static Option_CVec_ThirtyTwoBytesZZ some(byte[][] o) {
+	public static org.ldk.structs.Option_CVec_ThirtyTwoBytesZZ some(byte[][] o) {
 		long ret = bindings.COption_CVec_ThirtyTwoBytesZZ_some(InternalUtils.encodeUint64Array(InternalUtils.mapArray(o, o_conv_8 => InternalUtils.encodeUint8Array(InternalUtils.check_arr_len(o_conv_8, 32)))));
 		GC.KeepAlive(o);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -60,7 +60,7 @@ public class Option_CVec_ThirtyTwoBytesZZ : CommonBase {
 	/**
 	 * Constructs a new COption_CVec_ThirtyTwoBytesZZ containing nothing
 	 */
-	public static Option_CVec_ThirtyTwoBytesZZ none() {
+	public static org.ldk.structs.Option_CVec_ThirtyTwoBytesZZ none() {
 		long ret = bindings.COption_CVec_ThirtyTwoBytesZZ_none();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.Option_CVec_ThirtyTwoBytesZZ ret_hu_conv = org.ldk.structs.Option_CVec_ThirtyTwoBytesZZ.constr_from_ptr(ret);
@@ -78,7 +78,7 @@ public class Option_CVec_ThirtyTwoBytesZZ : CommonBase {
 	 * Creates a new COption_CVec_ThirtyTwoBytesZZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Option_CVec_ThirtyTwoBytesZZ clone() {
+	public org.ldk.structs.Option_CVec_ThirtyTwoBytesZZ clone() {
 		long ret = bindings.COption_CVec_ThirtyTwoBytesZZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

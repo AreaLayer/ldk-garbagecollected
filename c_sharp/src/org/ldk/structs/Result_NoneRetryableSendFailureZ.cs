@@ -33,7 +33,7 @@ public class Result_NoneRetryableSendFailureZ : CommonBase {
 	/**
 	 * Creates a new CResult_NoneRetryableSendFailureZ in the success state.
 	 */
-	public static Result_NoneRetryableSendFailureZ ok() {
+	public static org.ldk.structs.Result_NoneRetryableSendFailureZ ok() {
 		long ret = bindings.CResult_NoneRetryableSendFailureZ_ok();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		Result_NoneRetryableSendFailureZ ret_hu_conv = Result_NoneRetryableSendFailureZ.constr_from_ptr(ret);
@@ -43,7 +43,7 @@ public class Result_NoneRetryableSendFailureZ : CommonBase {
 	/**
 	 * Creates a new CResult_NoneRetryableSendFailureZ in the error state.
 	 */
-	public static Result_NoneRetryableSendFailureZ err(RetryableSendFailure e) {
+	public static org.ldk.structs.Result_NoneRetryableSendFailureZ err(RetryableSendFailure e) {
 		long ret = bindings.CResult_NoneRetryableSendFailureZ_err(e);
 		GC.KeepAlive(e);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -70,7 +70,7 @@ public class Result_NoneRetryableSendFailureZ : CommonBase {
 	 * Creates a new CResult_NoneRetryableSendFailureZ which has the same data as `orig`
 	 * but with all dynamically-allocated buffers duplicated in new buffers.
 	 */
-	public Result_NoneRetryableSendFailureZ clone() {
+	public org.ldk.structs.Result_NoneRetryableSendFailureZ clone() {
 		long ret = bindings.CResult_NoneRetryableSendFailureZ_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }

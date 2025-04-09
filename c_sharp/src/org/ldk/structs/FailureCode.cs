@@ -46,7 +46,7 @@ public class FailureCode : CommonBase {
 	}
 	/** A FailureCode of type InvalidOnionPayload */
 	public class FailureCode_InvalidOnionPayload : FailureCode {
-		public Option_C2Tuple_u64u16ZZ invalid_onion_payload;
+		public org.ldk.structs.Option_C2Tuple_u64u16ZZ invalid_onion_payload;
 		internal FailureCode_InvalidOnionPayload(long ptr) : base(null, ptr) {
 			long invalid_onion_payload = bindings.LDKFailureCode_InvalidOnionPayload_get_invalid_onion_payload(ptr);
 			org.ldk.structs.Option_C2Tuple_u64u16ZZ invalid_onion_payload_hu_conv = org.ldk.structs.Option_C2Tuple_u64u16ZZ.constr_from_ptr(invalid_onion_payload);
@@ -63,7 +63,7 @@ public class FailureCode : CommonBase {
 	/**
 	 * Creates a copy of the FailureCode
 	 */
-	public FailureCode clone() {
+	public org.ldk.structs.FailureCode clone() {
 		long ret = bindings.FailureCode_clone(this.ptr);
 		GC.KeepAlive(this);
 		if (ret >= 0 && ret <= 4096) { return null; }
@@ -75,7 +75,7 @@ public class FailureCode : CommonBase {
 	/**
 	 * Utility method to constructs a new TemporaryNodeFailure-variant FailureCode
 	 */
-	public static FailureCode temporary_node_failure() {
+	public static org.ldk.structs.FailureCode temporary_node_failure() {
 		long ret = bindings.FailureCode_temporary_node_failure();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.FailureCode ret_hu_conv = org.ldk.structs.FailureCode.constr_from_ptr(ret);
@@ -86,7 +86,7 @@ public class FailureCode : CommonBase {
 	/**
 	 * Utility method to constructs a new RequiredNodeFeatureMissing-variant FailureCode
 	 */
-	public static FailureCode required_node_feature_missing() {
+	public static org.ldk.structs.FailureCode required_node_feature_missing() {
 		long ret = bindings.FailureCode_required_node_feature_missing();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.FailureCode ret_hu_conv = org.ldk.structs.FailureCode.constr_from_ptr(ret);
@@ -97,7 +97,7 @@ public class FailureCode : CommonBase {
 	/**
 	 * Utility method to constructs a new IncorrectOrUnknownPaymentDetails-variant FailureCode
 	 */
-	public static FailureCode incorrect_or_unknown_payment_details() {
+	public static org.ldk.structs.FailureCode incorrect_or_unknown_payment_details() {
 		long ret = bindings.FailureCode_incorrect_or_unknown_payment_details();
 		if (ret >= 0 && ret <= 4096) { return null; }
 		org.ldk.structs.FailureCode ret_hu_conv = org.ldk.structs.FailureCode.constr_from_ptr(ret);
@@ -108,7 +108,7 @@ public class FailureCode : CommonBase {
 	/**
 	 * Utility method to constructs a new InvalidOnionPayload-variant FailureCode
 	 */
-	public static FailureCode invalid_onion_payload(org.ldk.structs.Option_C2Tuple_u64u16ZZ a) {
+	public static org.ldk.structs.FailureCode invalid_onion_payload(org.ldk.structs.Option_C2Tuple_u64u16ZZ a) {
 		long ret = bindings.FailureCode_invalid_onion_payload(a.ptr);
 		GC.KeepAlive(a);
 		if (ret >= 0 && ret <= 4096) { return null; }
